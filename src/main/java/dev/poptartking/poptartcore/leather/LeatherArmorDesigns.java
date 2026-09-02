@@ -21,13 +21,6 @@ public final class LeatherArmorDesigns {
     private LeatherArmorDesigns() {
     }
 
-    public static boolean isLeatherArmor(ItemStack stack) {
-        return stack.is(Items.LEATHER_HELMET)
-                || stack.is(Items.LEATHER_CHESTPLATE)
-                || stack.is(Items.LEATHER_LEGGINGS)
-                || stack.is(Items.LEATHER_BOOTS);
-    }
-
     public static boolean isLeatherArmor(ArmorItem item) {
         return item == Items.LEATHER_HELMET
                 || item == Items.LEATHER_CHESTPLATE
