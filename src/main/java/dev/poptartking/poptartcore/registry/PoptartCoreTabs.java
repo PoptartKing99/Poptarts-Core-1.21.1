@@ -20,6 +20,9 @@ public class PoptartCoreTabs {
                     .title(Component.translatable("creativetab.poptartcore.poptartcore_tab"))
                     .displayItems((parameters, output) -> {
                         output.accept(PoptartCoreItems.MINING_HELMET);
+                        output.accept(PoptartCoreItems.RAW_HIDE_HELMET);
+                        output.accept(PoptartCoreItems.RAW_HIDE_CHESTPLATE);
+                        output.accept(PoptartCoreItems.RAW_HIDE_LEGGINGS);
                     }).build());
 
     public static void register(IEventBus eventBus) {

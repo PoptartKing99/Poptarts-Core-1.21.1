@@ -15,7 +15,7 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 
-public class LodestoneArmorModel extends HumanoidModel<LivingEntity> {
+public class PoptartCoreArmorModel extends HumanoidModel<LivingEntity> {
     public EquipmentSlot slot;
     public ModelPart root;
     public ModelPart head;
@@ -32,7 +32,7 @@ public class LodestoneArmorModel extends HumanoidModel<LivingEntity> {
         LayerDefinition createArmorLayer(MeshDefinition meshDefinition, PartDefinition partDefinition, PartDefinition partDefinition2, PartDefinition partDefinition3, PartDefinition partDefinition4, PartDefinition partDefinition5, PartDefinition partDefinition6, PartDefinition partDefinition7, PartDefinition partDefinition8, PartDefinition partDefinition9, PartDefinition partDefinition10);
     }
 
-    public LodestoneArmorModel(ModelPart root) {
+    public PoptartCoreArmorModel(ModelPart root) {
         super(root);
         this.root = root;
         this.head = getPart("head");

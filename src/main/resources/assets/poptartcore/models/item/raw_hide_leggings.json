@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "poptartcore:item/raw_hide_leggings"
+  }
+}

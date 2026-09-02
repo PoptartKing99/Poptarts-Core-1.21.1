@@ -1,4 +1,7 @@
 {
   "item.poptartcore.mining_helmet" : "Mining Helmet",
+  "item.poptartcore.raw_hide_helmet" : "Raw Hide Helmet",
+  "item.poptartcore.raw_hide_chestplate" : "Raw Hide Chestplate",
+  "item.poptartcore.raw_hide_leggings" : "Raw Hide Leggings",
   "creativetab.poptartcore.poptartcore_tab" : "PoptartCore"
 }

@@ -10,20 +10,20 @@ import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 
 public class ArmorClientItemExtensions implements IClientItemExtensions {
 
-    private final Supplier<LodestoneArmorModel> model;
+    private final Supplier<PoptartCoreArmorModel> model;
 
-    public ArmorClientItemExtensions(Supplier<LodestoneArmorModel> model) {
+    public ArmorClientItemExtensions(Supplier<PoptartCoreArmorModel> model) {
         this.model = model;
     }
 
     @Override
-    public LodestoneArmorModel getHumanoidArmorModel(
+    public PoptartCoreArmorModel getHumanoidArmorModel(
             LivingEntity entity,
             ItemStack itemStack,
             EquipmentSlot armorSlot,
             HumanoidModel<?> original
     ) {
-        LodestoneArmorModel armorModel = this.model.get();
+        PoptartCoreArmorModel armorModel = this.model.get();
 
         armorModel.slot = armorSlot;
 

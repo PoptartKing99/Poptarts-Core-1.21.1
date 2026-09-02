@@ -10,12 +10,12 @@ import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
-public class MiningHelmetItem extends ArmorItem {
-    public MiningHelmetItem(Item.Properties properties) {
-        super(PoptartCoreArmorMaterials.MINING_ARMOR_MATERIAL, Type.HELMET, properties);
+public class RawHideArmorItem extends ArmorItem {
+    public RawHideArmorItem(ArmorItem.Type type, Item.Properties properties) {
+        super(PoptartCoreArmorMaterials.RAW_HIDE_ARMOR_MATERIAL, type, properties);
     }
 
     public ResourceLocation getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, ArmorMaterial.Layer layer, boolean innerModel) {
-        return PoptartCore.location("textures/armor/mining_helmet.png");
+        return PoptartCore.location("textures/armor/raw_hide_armor.png");
     }
 }
