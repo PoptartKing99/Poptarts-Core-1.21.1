@@ -4,15 +4,22 @@ import dev.poptartking.poptartcore.PoptartCore;
 import dev.poptartking.poptartcore.client.model.ArmorClientItemExtensions;
 import dev.poptartking.poptartcore.client.model.MiningHelmetModel;
 import dev.poptartking.poptartcore.registry.PoptartCoreItems;
+import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.Item;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 
 @EventBusSubscriber(modid = PoptartCore.MOD_ID, value = {Dist.CLIENT})
 public class ClientEvents {
+
+    @SubscribeEvent
+    public static void onClientTick(ClientTickEvent.Post event) {
+        MiningHelmetParticles.tick(Minecraft.getInstance());
+    }
 
     @SubscribeEvent
     public static void registerClientExtensions(RegisterClientExtensionsEvent event) {

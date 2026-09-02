@@ -15,9 +15,9 @@ public class PoptartCoreItems {
     public static final DeferredItem<MiningHelmetItem> MINING_HELMET =
             ITEMS.register(
                     "mining_helmet",
-                    () -> new MiningHelmetItem(
-                            new Item.Properties()
-                                    .durability(100)
+                    () -> new MiningHelmetItem(new Item.Properties()
+                            .durability(100)
+
                     )
             );
 

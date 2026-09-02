@@ -1,0 +1,10 @@
+{
+  "match": {
+    "equipment": {
+      "head": {
+        "items": "poptartcore:mining_helmet"
+      }
+    }
+  },
+  "luminance": 14
+}
