@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "dev.poptartking.poptartcore.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "armor.LeatherArmorTextureMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

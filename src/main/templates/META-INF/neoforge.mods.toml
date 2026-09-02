@@ -47,8 +47,8 @@ versionRange="[4.5.0,)"
 ordering="NONE"
 side="CLIENT"
 
-# [[mixins]]
-# config="${mod_id}.mixins.json"
+[[mixins]]
+config="poptartcore.mixins.json"
 
 # [[accessTransformers]]
 # file="META-INF/accesstransformer.cfg"
