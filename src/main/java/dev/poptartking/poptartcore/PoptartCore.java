@@ -1,4 +1,8 @@
-package dev.poptartking.poptart_core;
+package dev.poptartking.poptartcore;
+
+import dev.poptartking.poptartcore.registry.PoptartCoreItems;
+import dev.poptartking.poptartcore.registry.PoptartCoreTabs;
+import net.minecraft.resources.ResourceLocation;
 
 import org.slf4j.Logger;
 
@@ -19,14 +23,17 @@ import net.neoforged.neoforge.event.server.ServerStartingEvent;
 public class PoptartCore {
 
     public static final String MOD_ID = "poptartcore";
-
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public PoptartCore(IEventBus modEventBus, ModContainer modContainer) {
         modEventBus.addListener(this::commonSetup);
         NeoForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::addCreative);
-        modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+        modContainer.registerConfig(ModConfig.Type.COMMON, PoptartCoreConfig.SPEC);
+
+        PoptartCoreTabs.register(modEventBus);
+
+        PoptartCoreItems.register(modEventBus);
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
@@ -41,4 +48,9 @@ public class PoptartCore {
     public void onServerStarting(ServerStartingEvent event) {
 
     }
+
+    public static ResourceLocation location(String path) {
+        return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
+    }
+
 }
