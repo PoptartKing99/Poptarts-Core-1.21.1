@@ -1,0 +1,14 @@
+{
+  "type": "poptartcore:crucible_casting",
+  "fluid": {
+    "id": "poptartcore:molten_copper",
+    "amount": 250
+  },
+  "ingredient": {
+    "item": "poptartcore:ingot_mould"
+  },
+  "result": {
+    "id": "minecraft:copper_ingot",
+    "count": 1
+  }
+}

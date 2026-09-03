@@ -3,6 +3,8 @@
   "item.poptartcore.raw_hide_helmet" : "Raw Hide Helmet",
   "item.poptartcore.raw_hide_chestplate" : "Raw Hide Chestplate",
   "item.poptartcore.raw_hide_leggings" : "Raw Hide Leggings",
+  "item.poptartcore.unfired_ingot_mould" : "Unfired Ingot Mould",
+  "item.poptartcore.ingot_mould" : "Ingot Mould",
   "block.poptartcore.crucible" : "Crucible",
   "container.poptartcore.crucible" : "Crucible",
   "creativetab.poptartcore.poptartcore_tab" : "PoptartCore"

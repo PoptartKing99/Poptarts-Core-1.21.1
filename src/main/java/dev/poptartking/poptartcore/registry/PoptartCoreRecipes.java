@@ -1,6 +1,8 @@
 package dev.poptartking.poptartcore.registry;
 
 import dev.poptartking.poptartcore.PoptartCore;
+import dev.poptartking.poptartcore.crucible.casting.CastingRecipe;
+import dev.poptartking.poptartcore.crucible.casting.CastingRecipeSerializer;
 import dev.poptartking.poptartcore.crucible.melting.MeltingRecipe;
 import dev.poptartking.poptartcore.crucible.melting.MeltingRecipeSerializer;
 import net.minecraft.core.registries.Registries;
@@ -44,6 +46,29 @@ public class PoptartCoreRecipes {
                             ResourceLocation.fromNamespaceAndPath(
                                     PoptartCore.MOD_ID,
                                     "crucible_melting"
+                            )
+                    )
+            );
+
+    public static final DeferredHolder<
+            RecipeSerializer<?>,
+            CastingRecipeSerializer
+            > CRUCIBLE_CASTING_SERIALIZER =
+            RECIPE_SERIALIZERS.register(
+                    "crucible_casting",
+                    CastingRecipeSerializer::new
+            );
+
+    public static final DeferredHolder<
+            RecipeType<?>,
+            RecipeType<CastingRecipe>
+            > CRUCIBLE_CASTING_TYPE =
+            RECIPE_TYPES.register(
+                    "crucible_casting",
+                    () -> RecipeType.simple(
+                            ResourceLocation.fromNamespaceAndPath(
+                                    PoptartCore.MOD_ID,
+                                    "crucible_casting"
                             )
                     )
             );

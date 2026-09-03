@@ -24,6 +24,8 @@ public class PoptartCoreTabs {
                         output.accept(PoptartCoreItems.RAW_HIDE_CHESTPLATE);
                         output.accept(PoptartCoreItems.RAW_HIDE_LEGGINGS);
                         output.accept(PoptartCoreItems.CRUCIBLE);
+                        output.accept(PoptartCoreItems.UNFIRED_INGOT_MOULD);
+                        output.accept(PoptartCoreItems.INGOT_MOULD);
                     }).build());
 
     public static void register(IEventBus eventBus) {

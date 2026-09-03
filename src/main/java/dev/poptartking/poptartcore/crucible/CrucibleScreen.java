@@ -10,6 +10,14 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 import dev.poptartking.poptartcore.client.FluidTankRenderer;
 import net.neoforged.neoforge.fluids.FluidStack;
+import dev.poptartking.poptartcore.crucible.casting.CastingRecipe;
+import dev.poptartking.poptartcore.registry.PoptartCoreItems;
+import dev.poptartking.poptartcore.registry.PoptartCoreRecipes;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
+
+import java.util.Optional;
 
 public class CrucibleScreen extends AbstractContainerScreen<CrucibleMenu> {
 
@@ -76,6 +84,89 @@ public class CrucibleScreen extends AbstractContainerScreen<CrucibleMenu> {
         );
     }
 
+    private void renderCastingDisplay(
+            GuiGraphics guiGraphics,
+            int x,
+            int y
+    ) {
+        Minecraft minecraft = Minecraft.getInstance();
+
+        if (minecraft.level == null
+                || menu.getFluidAmount() <= 0) {
+            return;
+        }
+
+        FluidStack fluid =
+                new FluidStack(
+                        menu.getFluid(),
+                        menu.getFluidAmount()
+                );
+
+        ItemStack ingotMould =
+                PoptartCoreItems.INGOT_MOULD.get()
+                        .getDefaultInstance();
+
+        Optional<CastingRecipe> castingRecipe =
+                minecraft.level
+                        .getRecipeManager()
+                        .getAllRecipesFor(
+                                PoptartCoreRecipes.CRUCIBLE_CASTING_TYPE.get()
+                        )
+                        .stream()
+                        .map(RecipeHolder::value)
+                        .filter(recipe ->
+                                recipe.ingredient().test(ingotMould)
+                        )
+                        .filter(recipe ->
+                                FluidStack.isSameFluid(
+                                        fluid,
+                                        recipe.fluid()
+                                )
+                        )
+                        .findFirst();
+
+        if (castingRecipe.isEmpty()) {
+            return;
+        }
+
+        CastingRecipe recipe =
+                castingRecipe.get();
+
+        int pourCount =
+                Math.min(
+                        CrucibleBlockEntity.TANK_CAPACITY,
+                        menu.getFluidAmount()
+                ) / recipe.fluid().getAmount();
+
+        if (pourCount <= 0) {
+            return;
+        }
+
+        ItemStack display =
+                recipe.getResultItem(
+                        minecraft.level.registryAccess()
+                );
+
+        if (display.isEmpty()) {
+            return;
+        }
+
+        display.setCount(pourCount);
+
+        guiGraphics.renderItem(
+                display,
+                x + 105,
+                y + 32
+        );
+
+        guiGraphics.renderItemDecorations(
+                minecraft.font,
+                display,
+                x + 105,
+                y + 32
+        );
+    }
+
     @Override
     protected void init() {
         super.init();
@@ -123,6 +214,12 @@ public class CrucibleScreen extends AbstractContainerScreen<CrucibleMenu> {
                     3
             );
         }
+
+        renderCastingDisplay(
+                guiGraphics,
+                x,
+                y
+        );
 
         if (menu.isBurning()) {
             int flameHeight =

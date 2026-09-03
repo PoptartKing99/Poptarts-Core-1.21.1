@@ -1,5 +1,7 @@
 package dev.poptartking.poptartcore.crucible;
 
+import dev.poptartking.poptartcore.crucible.casting.CastingRecipe;
+import dev.poptartking.poptartcore.crucible.casting.CastingRecipeInput;
 import dev.poptartking.poptartcore.crucible.melting.MeltingRecipe;
 import dev.poptartking.poptartcore.crucible.melting.MeltingRecipeInput;
 import dev.poptartking.poptartcore.crucible.menu.CrucibleMenu;
@@ -8,8 +10,11 @@ import dev.poptartking.poptartcore.registry.PoptartCoreRecipes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -23,7 +28,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
-import net.minecraft.core.registries.BuiltInRegistries;
 
 import java.util.List;
 import java.util.Optional;
@@ -156,6 +160,18 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
             changed = true;
         }
 
+        Optional<RecipeHolder<CastingRecipe>> castingRecipe =
+                blockEntity.getCastingRecipe(level);
+
+        if (castingRecipe.isPresent()) {
+            if (blockEntity.performCasting(
+                    level,
+                    castingRecipe.get().value()
+            )) {
+                changed = true;
+            }
+        }
+
         boolean isLit = blockEntity.isBurning();
 
         if (wasLit != isLit) {
@@ -193,6 +209,23 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
         );
     }
 
+    private CastingRecipeInput getCastingInput() {
+        return new CastingRecipeInput(
+                items.get(CONTAINER_SLOT),
+                tank.getFluid()
+        );
+    }
+
+    private Optional<RecipeHolder<CastingRecipe>> getCastingRecipe(
+            Level level
+    ) {
+        return level.getRecipeManager().getRecipeFor(
+                PoptartCoreRecipes.CRUCIBLE_CASTING_TYPE.get(),
+                getCastingInput(),
+                level
+        );
+    }
+
     private boolean isBurning() {
         return burnTime > 0;
     }
@@ -203,22 +236,6 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
         }
 
         return fuel.getBurnTime(RecipeType.SMELTING);
-    }
-
-    public FluidStack getFluid() {
-        return tank.getFluid();
-    }
-
-    public int getFluidAmount() {
-        return tank.getFluidAmount();
-    }
-
-    public int getTankCapacity() {
-        return tank.getCapacity();
-    }
-
-    public int getFluidSpace() {
-        return tank.getSpace();
     }
 
     private int meltBatches(MeltingRecipe recipe) {
@@ -280,6 +297,73 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
                 stack.shrink(1);
                 melted++;
             }
+        }
+
+        return true;
+    }
+
+    private boolean performCasting(
+            Level level,
+            CastingRecipe recipe
+    ) {
+        ItemStack mould = items.get(CONTAINER_SLOT);
+        ItemStack result = items.get(RESULT_SLOT);
+
+        CastingRecipeInput input =
+                new CastingRecipeInput(
+                        mould,
+                        tank.getFluid()
+                );
+
+        ItemStack castingResult =
+                recipe.assemble(
+                        input,
+                        level.registryAccess()
+                );
+
+        if (castingResult.isEmpty()) {
+            return false;
+        }
+
+        boolean fits =
+                result.isEmpty()
+                        || ItemStack.isSameItemSameComponents(
+                        result,
+                        castingResult
+                )
+                        && result.getCount()
+                        + castingResult.getCount()
+                        <= result.getMaxStackSize();
+
+        if (!fits) {
+            return false;
+        }
+
+        tank.drain(
+                recipe.fluid().getAmount(),
+                IFluidHandler.FluidAction.EXECUTE
+        );
+
+        if (mould.isDamageableItem()) {
+            mould.hurtAndBreak(
+                    1,
+                    (ServerLevel) level,
+                    (ServerPlayer) null,
+                    item -> {}
+            );
+        } else {
+            mould.shrink(1);
+        }
+
+        if (result.isEmpty()) {
+            items.set(
+                    RESULT_SLOT,
+                    castingResult
+            );
+        } else {
+            result.grow(
+                    castingResult.getCount()
+            );
         }
 
         return true;

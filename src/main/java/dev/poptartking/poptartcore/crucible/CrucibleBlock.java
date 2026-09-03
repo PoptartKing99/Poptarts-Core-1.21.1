@@ -23,6 +23,8 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import dev.poptartking.poptartcore.registry.PoptartCoreBlockEntities;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.Containers;
+import net.minecraft.world.level.block.entity.BlockEntity;
 
 import javax.annotation.Nullable;
 
@@ -115,5 +117,39 @@ public class CrucibleBlock extends BaseEntityBlock {
     @Override
     protected MapCodec<? extends BaseEntityBlock> codec() {
         return simpleCodec(CrucibleBlock::new);
+    }
+
+    @Override
+    protected void onRemove(
+            BlockState state,
+            Level level,
+            BlockPos pos,
+            BlockState newState,
+            boolean movedByPiston
+    ) {
+        if (!state.is(newState.getBlock())) {
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+
+            if (blockEntity instanceof CrucibleBlockEntity crucible) {
+                Containers.dropContents(
+                        level,
+                        pos,
+                        crucible
+                );
+
+                level.updateNeighbourForOutputSignal(
+                        pos,
+                        this
+                );
+            }
+        }
+
+        super.onRemove(
+                state,
+                level,
+                pos,
+                newState,
+                movedByPiston
+        );
     }
 }
