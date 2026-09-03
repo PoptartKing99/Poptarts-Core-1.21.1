@@ -6,14 +6,15 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 
 public final class MiningHelmetParticles {
 
-    private MiningHelmetParticles() {}
+    private MiningHelmetParticles() {
+    }
 
     public static void tick(Minecraft minecraft) {
         ClientLevel level = minecraft.level;
@@ -22,10 +23,8 @@ public final class MiningHelmetParticles {
             return;
         }
 
-        for (Entity entity : level.entitiesForRendering()) {
-            if (entity instanceof LivingEntity wearer) {
-                spawn(level, wearer);
-            }
+        for (Player player : level.players()) {
+            spawn(level, player);
         }
     }
 

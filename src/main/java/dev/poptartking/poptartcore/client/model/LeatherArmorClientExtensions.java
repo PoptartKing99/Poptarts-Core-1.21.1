@@ -1,7 +1,7 @@
 package dev.poptartking.poptartcore.client.model;
 
 import dev.poptartking.poptartcore.client.PoptartCoreModelLayers;
-import dev.poptartking.poptartcore.leather.LeatherArmorDesigns;
+import dev.poptartking.poptartcore.leather.LeatherArmorTextures;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.util.Mth;
@@ -14,12 +14,7 @@ import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 public class LeatherArmorClientExtensions implements IClientItemExtensions {
 
     @Override
-    public HumanoidModel<?> getHumanoidArmorModel(
-            LivingEntity entity,
-            ItemStack itemStack,
-            EquipmentSlot armorSlot,
-            HumanoidModel<?> original
-    ) {
+    public HumanoidModel<?> getHumanoidArmorModel(LivingEntity entity, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel<?> original) {
         PoptartCoreArmorModel model = pick(armorSlot);
 
         if (model == null) {
@@ -45,24 +40,13 @@ public class LeatherArmorClientExtensions implements IClientItemExtensions {
     }
 
     @Override
-    public int getArmorLayerTintColor(
-            ItemStack stack,
-            LivingEntity entity,
-            ArmorMaterial.Layer layer,
-            int layerIdx,
-            int fallbackColor
-    ) {
-        if (!layer.dyeable() || !LeatherArmorDesigns.isDyed(stack)) {
+    public int getArmorLayerTintColor(ItemStack stack, LivingEntity entity, ArmorMaterial.Layer layer, int layerIdx, int fallbackColor)
+    {
+        if (!layer.dyeable() || !LeatherArmorTextures.isDyed(stack)) {
             return -1;
         }
 
-        return IClientItemExtensions.super.getArmorLayerTintColor(
-                stack,
-                entity,
-                layer,
-                layerIdx,
-                fallbackColor
-        );
+        return IClientItemExtensions.super.getArmorLayerTintColor(stack, entity, layer, layerIdx, fallbackColor);
     }
 
     private static PoptartCoreArmorModel pick(EquipmentSlot slot) {

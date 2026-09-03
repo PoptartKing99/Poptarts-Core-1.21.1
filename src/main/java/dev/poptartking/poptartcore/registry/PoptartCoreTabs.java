@@ -23,6 +23,7 @@ public class PoptartCoreTabs {
                         output.accept(PoptartCoreItems.RAW_HIDE_HELMET);
                         output.accept(PoptartCoreItems.RAW_HIDE_CHESTPLATE);
                         output.accept(PoptartCoreItems.RAW_HIDE_LEGGINGS);
+                        output.accept(PoptartCoreItems.CRUCIBLE);
                     }).build());
 
     public static void register(IEventBus eventBus) {

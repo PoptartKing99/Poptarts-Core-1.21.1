@@ -1,0 +1,11 @@
+{
+  "type": "poptartcore:crucible_melting",
+  "ingredient": {
+    "item": "minecraft:raw_copper"
+  },
+  "duration": 200,
+  "result": {
+    "id": "poptartcore:molten_copper",
+    "amount": 250
+  }
+}

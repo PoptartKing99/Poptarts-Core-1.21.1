@@ -7,7 +7,7 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
-public final class LeatherArmorDesigns {
+public final class LeatherArmorTextures {
 
     public static final ResourceLocation DYED_TEXTURE =
             PoptartCore.location("textures/armor/armor_leather.png");
@@ -18,7 +18,7 @@ public final class LeatherArmorDesigns {
     public static final ResourceLocation OVERLAY_TEXTURE =
             PoptartCore.location("textures/armor/armor_leather_overlay.png");
 
-    private LeatherArmorDesigns() {
+    private LeatherArmorTextures() {
     }
 
     public static boolean isLeatherArmor(ArmorItem item) {

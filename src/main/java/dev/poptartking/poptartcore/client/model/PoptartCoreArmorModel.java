@@ -114,17 +114,13 @@ public class PoptartCoreArmorModel extends HumanoidModel<LivingEntity> {
         this.head.copyFrom(model.head);
         this.leftArm.copyFrom(model.leftArm);
         this.rightArm.copyFrom(model.rightArm);
-        this.leftLegging.copyFrom(this.leftLeg);
-        this.rightLegging.copyFrom(this.rightLeg);
-        this.leftFoot.copyFrom(this.leftLeg);
-        this.rightFoot.copyFrom(this.rightLeg);
+        this.leftLegging.copyFrom(model.leftLeg);
+        this.rightLegging.copyFrom(model.rightLeg);
+        this.leftFoot.copyFrom(model.leftLeg);
+        this.rightFoot.copyFrom(model.rightLeg);
     }
 
     public static ModelPart getPart(ModelPart root, String name) {
-        try {
-            return root.getChild(name);
-        } catch (Exception e) {
-            return new ModelPart(Collections.emptyList(), Collections.emptyMap());
-        }
+        return root.getChild(name);
     }
 }

@@ -1,10 +1,15 @@
 {
   "match": {
+    "type": "minecraft:player",
     "equipment": {
       "head": {
         "items": "poptartcore:mining_helmet"
       }
     }
   },
-  "luminance": 14
+  "luminance": {
+    "type": "lambdynlights:water_sensitive",
+    "out_of_water": 14,
+    "in_water": 0
+  }
 }

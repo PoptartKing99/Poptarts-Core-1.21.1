@@ -2,7 +2,9 @@ package dev.poptartking.poptartcore.client;
 
 import dev.poptartking.poptartcore.PoptartCore;
 import dev.poptartking.poptartcore.client.model.*;
+import dev.poptartking.poptartcore.crucible.CrucibleScreen;
 import dev.poptartking.poptartcore.registry.PoptartCoreItems;
+import dev.poptartking.poptartcore.registry.PoptartCoreMenus;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -11,6 +13,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 
 @EventBusSubscriber(modid = PoptartCore.MOD_ID, value = {Dist.CLIENT})
@@ -60,4 +63,11 @@ public class ClientEvents {
         PoptartCoreModelLayers.LEATHER_BOOTS_MODEL = new PoptartCoreArmorModel(event.getEntityModels().bakeLayer(PoptartCoreModelLayers.LEATHER_BOOTS_LAYER));
     }
 
+    @SubscribeEvent
+    public static void registerScreens(RegisterMenuScreensEvent event) {
+        event.register(
+                PoptartCoreMenus.CRUCIBLE.get(),
+                CrucibleScreen::new
+        );
+    }
 }

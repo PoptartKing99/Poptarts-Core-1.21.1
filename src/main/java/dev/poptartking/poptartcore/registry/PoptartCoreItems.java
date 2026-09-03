@@ -1,6 +1,7 @@
 package dev.poptartking.poptartcore.registry;
 
 import dev.poptartking.poptartcore.PoptartCore;
+import dev.poptartking.poptartcore.crucible.CrucibleBlockItem;
 import dev.poptartking.poptartcore.item.MiningHelmetItem;
 import dev.poptartking.poptartcore.item.RawHideArmorItem;
 import net.minecraft.world.item.ArmorItem;
@@ -23,6 +24,15 @@ public class PoptartCoreItems {
             ITEMS.register("raw_hide_chestplate", () -> new RawHideArmorItem(ArmorItem.Type.CHESTPLATE, new Item.Properties().durability(140)));
     public static final DeferredItem<RawHideArmorItem> RAW_HIDE_LEGGINGS =
             ITEMS.register("raw_hide_leggings", () -> new RawHideArmorItem(ArmorItem.Type.LEGGINGS, new Item.Properties().durability(140)));
+
+    public static final DeferredItem<CrucibleBlockItem> CRUCIBLE =
+            ITEMS.register(
+                    "crucible",
+                    () -> new CrucibleBlockItem(
+                            PoptartCoreBlocks.CRUCIBLE.get(),
+                            new Item.Properties()
+                    )
+            );
 
     // Helper Functions
     private static DeferredItem<Item> registerItem(String name) {

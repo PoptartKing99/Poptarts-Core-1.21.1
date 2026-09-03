@@ -1,6 +1,6 @@
 package dev.poptartking.poptartcore.mixin.armor;
 
-import dev.poptartking.poptartcore.leather.LeatherArmorDesigns;
+import dev.poptartking.poptartcore.leather.LeatherArmorTextures;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -14,19 +14,12 @@ import org.spongepowered.asm.mixin.Mixin;
 public abstract class LeatherArmorTextureMixin {
 
     @Nullable
-    public ResourceLocation getArmorTexture(
-            ItemStack stack,
-            Entity entity,
-            EquipmentSlot slot,
-            ArmorMaterial.Layer layer,
-            boolean innerModel
-    ) {
-        if (LeatherArmorDesigns.isLeatherArmor((ArmorItem) (Object) this)) {
+    public ResourceLocation getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, ArmorMaterial.Layer layer, boolean innerModel) {
+        if (LeatherArmorTextures.isLeatherArmor((ArmorItem) (Object) this)) {
             return layer.dyeable()
-                    ? LeatherArmorDesigns.textureFor(stack)
-                    : LeatherArmorDesigns.OVERLAY_TEXTURE;
+                    ? LeatherArmorTextures.textureFor(stack)
+                    : LeatherArmorTextures.OVERLAY_TEXTURE;
         }
-
         return null;
     }
 }

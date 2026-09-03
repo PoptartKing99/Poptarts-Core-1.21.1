@@ -1,7 +1,6 @@
 package dev.poptartking.poptartcore;
 
-import dev.poptartking.poptartcore.registry.PoptartCoreItems;
-import dev.poptartking.poptartcore.registry.PoptartCoreTabs;
+import dev.poptartking.poptartcore.registry.*;
 import net.minecraft.resources.ResourceLocation;
 
 import org.slf4j.Logger;
@@ -31,9 +30,14 @@ public class PoptartCore {
         modEventBus.addListener(this::addCreative);
         modContainer.registerConfig(ModConfig.Type.COMMON, PoptartCoreConfig.SPEC);
 
+        PoptartCoreBlocks.register(modEventBus);
+        PoptartCoreItems.register(modEventBus);
+        PoptartCoreBlockEntities.register(modEventBus);
+        PoptartCoreMenus.register(modEventBus);
+        PoptartCoreFluids.register(modEventBus);
+        PoptartCoreRecipes.register(modEventBus);
         PoptartCoreTabs.register(modEventBus);
 
-        PoptartCoreItems.register(modEventBus);
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
