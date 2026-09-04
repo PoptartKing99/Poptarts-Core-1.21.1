@@ -15,6 +15,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Mth;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -63,8 +64,14 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
         @Override
         public int get(int index) {
             return switch (index) {
-                case 0 -> burnTime;
-                case 1 -> burnDuration;
+                case 0 -> burnDuration > Short.MAX_VALUE
+                        ? Mth.floor(
+                                (double) burnTime
+                                        / burnDuration
+                                        * Short.MAX_VALUE
+                        )
+                        : burnTime;
+                case 1 -> Math.min(burnDuration, Short.MAX_VALUE);
                 case 2 -> cookTime;
                 case 3 -> cookTimeTotal;
                 case 4 -> BuiltInRegistries.FLUID.getId(
@@ -126,7 +133,14 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
                 blockEntity.burnTime = burnDuration;
                 blockEntity.burnDuration = burnDuration;
 
-                fuel.shrink(1);
+                if (fuel.hasCraftingRemainingItem()) {
+                    blockEntity.items.set(
+                            FUEL_SLOT,
+                            fuel.getCraftingRemainingItem()
+                    );
+                } else {
+                    fuel.shrink(1);
+                }
                 changed = true;
             }
         }

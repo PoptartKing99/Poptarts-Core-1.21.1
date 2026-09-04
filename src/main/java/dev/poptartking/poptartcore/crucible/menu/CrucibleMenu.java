@@ -1,6 +1,7 @@
 package dev.poptartking.poptartcore.crucible.menu;
 
 import dev.poptartking.poptartcore.crucible.CrucibleBlockEntity;
+import dev.poptartking.poptartcore.registry.PoptartCoreItems;
 import dev.poptartking.poptartcore.registry.PoptartCoreMenus;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Container;
@@ -207,6 +208,15 @@ public class CrucibleMenu extends AbstractContainerMenu {
                 )) {
                     return ItemStack.EMPTY;
                 }
+            } else if (isMould(stack)) {
+                if (!moveItemStackTo(
+                        stack,
+                        4,
+                        5,
+                        false
+                )) {
+                    return ItemStack.EMPTY;
+                }
             } else {
                 if (!moveItemStackTo(
                         stack,
@@ -236,5 +246,9 @@ public class CrucibleMenu extends AbstractContainerMenu {
 
     protected boolean isFuel(ItemStack stack) {
         return stack.getBurnTime(RecipeType.SMELTING) > 0;
+    }
+
+    protected boolean isMould(ItemStack stack) {
+        return stack.is(PoptartCoreItems.INGOT_MOULD.get());
     }
 }
