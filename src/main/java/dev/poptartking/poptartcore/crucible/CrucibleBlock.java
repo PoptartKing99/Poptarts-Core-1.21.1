@@ -2,6 +2,10 @@ package dev.poptartking.poptartcore.crucible;
 
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
@@ -117,6 +121,58 @@ public class CrucibleBlock extends BaseEntityBlock {
     @Override
     protected MapCodec<? extends BaseEntityBlock> codec() {
         return simpleCodec(CrucibleBlock::new);
+    }
+
+    @Override
+    public void animateTick(
+            BlockState state,
+            Level level,
+            BlockPos pos,
+            RandomSource random
+    ) {
+        if (!state.getValue(LIT)) {
+            return;
+        }
+
+        double x = pos.getX() + 0.5D;
+        double y = pos.getY() + 1.0D;
+        double z = pos.getZ() + 0.5D;
+
+        if (random.nextFloat() < 0.1F) {
+            level.playLocalSound(
+                    x,
+                    y,
+                    z,
+                    SoundEvents.FURNACE_FIRE_CRACKLE,
+                    SoundSource.BLOCKS,
+                    1.0F,
+                    1.0F,
+                    false
+            );
+        }
+
+        double offsetX = random.nextFloat() * 0.6D - 0.3D;
+        double offsetY = random.nextFloat() * 6.0D / 16.0D;
+        double offsetZ = random.nextFloat() * 0.6D - 0.3D;
+
+        level.addParticle(
+                ParticleTypes.SMOKE,
+                x + offsetX,
+                y + offsetY,
+                z + offsetZ,
+                0.0D,
+                0.0D,
+                0.0D
+        );
+        level.addParticle(
+                ParticleTypes.FLAME,
+                x + offsetX,
+                y + offsetY,
+                z + offsetZ,
+                0.0D,
+                0.0D,
+                0.0D
+        );
     }
 
     @Override
