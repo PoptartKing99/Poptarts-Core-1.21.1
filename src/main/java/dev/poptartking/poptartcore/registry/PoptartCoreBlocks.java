@@ -16,7 +16,13 @@ public class PoptartCoreBlocks {
     public static final DeferredBlock<CrucibleBlock> CRUCIBLE = BLOCKS.register(
             "crucible",
             () -> new CrucibleBlock(
-                    BlockBehaviour.Properties.ofFullCopy(Blocks.CAMPFIRE).sound(SoundType.MUD_BRICKS)));
+                    BlockBehaviour.Properties.ofFullCopy(Blocks.CAMPFIRE)
+                            .sound(SoundType.MUD_BRICKS)
+                            .lightLevel(state ->
+                                    state.getValue(CrucibleBlock.LIT)
+                                                    || state.getValue(CrucibleBlock.FLUID_LEVEL) > 0
+                                            ? 15
+                                            : 0)));
 
     public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);
