@@ -9,8 +9,7 @@ import net.minecraft.world.item.Items;
 
 public final class LeatherArmorTextures {
 
-    public static final ResourceLocation DYED_TEXTURE =
-            PoptartCore.location("textures/armor/armor_leather.png");
+    public static final ResourceLocation DYED_TEXTURE = PoptartCore.location("textures/armor/armor_leather.png");
 
     public static final ResourceLocation UNDYED_TEXTURE =
             PoptartCore.location("textures/armor/armor_leather_brown.png");
@@ -18,8 +17,7 @@ public final class LeatherArmorTextures {
     public static final ResourceLocation OVERLAY_TEXTURE =
             PoptartCore.location("textures/armor/armor_leather_overlay.png");
 
-    private LeatherArmorTextures() {
-    }
+    private LeatherArmorTextures() {}
 
     public static boolean isLeatherArmor(ArmorItem item) {
         return item == Items.LEATHER_HELMET

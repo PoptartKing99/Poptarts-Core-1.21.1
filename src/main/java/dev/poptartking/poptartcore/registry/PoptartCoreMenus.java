@@ -15,13 +15,7 @@ public class PoptartCoreMenus {
             DeferredRegister.create(Registries.MENU, PoptartCore.MOD_ID);
 
     public static final DeferredHolder<MenuType<?>, MenuType<CrucibleMenu>> CRUCIBLE =
-            MENUS.register(
-                    "crucible",
-                    () -> new MenuType<>(
-                            CrucibleMenu::new,
-                            FeatureFlags.DEFAULT_FLAGS
-                    )
-            );
+            MENUS.register("crucible", () -> new MenuType<>(CrucibleMenu::new, FeatureFlags.DEFAULT_FLAGS));
 
     public static void register(IEventBus eventBus) {
         MENUS.register(eventBus);

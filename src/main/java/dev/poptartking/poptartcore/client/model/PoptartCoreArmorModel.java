@@ -3,7 +3,6 @@ package dev.poptartking.poptartcore.client.model;
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import java.util.Collections;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -29,7 +28,18 @@ public class PoptartCoreArmorModel extends HumanoidModel<LivingEntity> {
     public ModelPart rightFoot;
 
     public interface ILodestoneArmorModelBuilder {
-        LayerDefinition createArmorLayer(MeshDefinition meshDefinition, PartDefinition partDefinition, PartDefinition partDefinition2, PartDefinition partDefinition3, PartDefinition partDefinition4, PartDefinition partDefinition5, PartDefinition partDefinition6, PartDefinition partDefinition7, PartDefinition partDefinition8, PartDefinition partDefinition9, PartDefinition partDefinition10);
+        LayerDefinition createArmorLayer(
+                MeshDefinition meshDefinition,
+                PartDefinition partDefinition,
+                PartDefinition partDefinition2,
+                PartDefinition partDefinition3,
+                PartDefinition partDefinition4,
+                PartDefinition partDefinition5,
+                PartDefinition partDefinition6,
+                PartDefinition partDefinition7,
+                PartDefinition partDefinition8,
+                PartDefinition partDefinition9,
+                PartDefinition partDefinition10);
     }
 
     public PoptartCoreArmorModel(ModelPart root) {
@@ -76,7 +86,18 @@ public class PoptartCoreArmorModel extends HumanoidModel<LivingEntity> {
         PartDefinition left_legging = root.getChild("left_legging");
         PartDefinition right_foot = root.getChild("right_foot");
         PartDefinition left_foot = root.getChild("left_foot");
-        return modelBuilder.createArmorLayer(mesh, root, head, body, right_arm, left_arm, leggings, right_legging, left_legging, right_foot, left_foot);
+        return modelBuilder.createArmorLayer(
+                mesh,
+                root,
+                head,
+                body,
+                right_arm,
+                left_arm,
+                leggings,
+                right_legging,
+                left_legging,
+                right_foot,
+                left_foot);
     }
 
     protected Iterable<ModelPart> headParts() {
@@ -96,7 +117,8 @@ public class PoptartCoreArmorModel extends HumanoidModel<LivingEntity> {
         return ImmutableList.of();
     }
 
-    public void renderToBuffer(PoseStack matrixStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int p_350361_) {
+    public void renderToBuffer(
+            PoseStack matrixStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int p_350361_) {
         if (this.slot == EquipmentSlot.LEGS) {
             this.leggings.copyFrom(this.body);
             this.leftLegging.copyFrom(this.leftLeg);

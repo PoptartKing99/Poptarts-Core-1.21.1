@@ -14,11 +14,10 @@ import org.spongepowered.asm.mixin.Mixin;
 public abstract class LeatherArmorTextureMixin {
 
     @Nullable
-    public ResourceLocation getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, ArmorMaterial.Layer layer, boolean innerModel) {
+    public ResourceLocation getArmorTexture(
+            ItemStack stack, Entity entity, EquipmentSlot slot, ArmorMaterial.Layer layer, boolean innerModel) {
         if (LeatherArmorTextures.isLeatherArmor((ArmorItem) (Object) this)) {
-            return layer.dyeable()
-                    ? LeatherArmorTextures.textureFor(stack)
-                    : LeatherArmorTextures.OVERLAY_TEXTURE;
+            return layer.dyeable() ? LeatherArmorTextures.textureFor(stack) : LeatherArmorTextures.OVERLAY_TEXTURE;
         }
         return null;
     }

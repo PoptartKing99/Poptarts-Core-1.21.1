@@ -8,20 +8,13 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 
-@EventBusSubscriber(
-        modid = PoptartCore.MOD_ID
-)
+@EventBusSubscriber(modid = PoptartCore.MOD_ID)
 public class PoptartCoreClientExtensions {
 
     @SubscribeEvent
-    public static void registerClientExtensions(
-            RegisterClientExtensionsEvent event
-    ) {
+    public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
         ResourceLocation moltenCopperTexture =
-                ResourceLocation.fromNamespaceAndPath(
-                        PoptartCore.MOD_ID,
-                        "block/fluid/molten_copper"
-                );
+                ResourceLocation.fromNamespaceAndPath(PoptartCore.MOD_ID, "block/fluid/molten_copper");
 
         event.registerFluidType(
                 new IClientFluidTypeExtensions() {
@@ -36,7 +29,6 @@ public class PoptartCoreClientExtensions {
                         return moltenCopperTexture;
                     }
                 },
-                PoptartCoreFluids.MOLTEN_COPPER.type().get()
-        );
+                PoptartCoreFluids.MOLTEN_COPPER.type().get());
     }
 }

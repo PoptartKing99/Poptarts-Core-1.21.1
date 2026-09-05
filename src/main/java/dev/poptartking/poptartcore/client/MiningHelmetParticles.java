@@ -13,8 +13,7 @@ import net.minecraft.world.phys.Vec3;
 
 public final class MiningHelmetParticles {
 
-    private MiningHelmetParticles() {
-    }
+    private MiningHelmetParticles() {}
 
     public static void tick(Minecraft minecraft) {
         ClientLevel level = minecraft.level;
@@ -73,20 +72,12 @@ public final class MiningHelmetParticles {
 
         // Flame
         if (wearer.getRandom().nextFloat() < 0.5F) {
-            level.addParticle(
-                    ParticleTypes.SMALL_FLAME,
-                    x, y, z,
-                    0.0D, 0.0D, 0.0D
-            );
+            level.addParticle(ParticleTypes.SMALL_FLAME, x, y, z, 0.0D, 0.0D, 0.0D);
         }
 
         // Smoke
         if (wearer.getRandom().nextFloat() < 0.1F) {
-            level.addParticle(
-                    ParticleTypes.SMOKE,
-                    x, y + 0.05D, z,
-                    0.0D, 0.01D, 0.0D
-            );
+            level.addParticle(ParticleTypes.SMOKE, x, y + 0.05D, z, 0.0D, 0.01D, 0.0D);
         }
     }
 }

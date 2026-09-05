@@ -7,12 +7,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 
 public class CrucibleFuelSlot extends Slot {
 
-    public CrucibleFuelSlot(
-            Container container,
-            int slot,
-            int x,
-            int y
-    ) {
+    public CrucibleFuelSlot(Container container, int slot, int x, int y) {
         super(container, slot, x, y);
     }
 

@@ -11,18 +11,11 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.fluids.FluidStack;
 
-public record MeltingRecipe(
-        Ingredient ingredient,
-        int duration,
-        FluidStack result,
-        boolean blastFurnace
-) implements Recipe<MeltingRecipeInput> {
+public record MeltingRecipe(Ingredient ingredient, int duration, FluidStack result, boolean blastFurnace)
+        implements Recipe<MeltingRecipeInput> {
 
     @Override
-    public boolean matches(
-            MeltingRecipeInput input,
-            Level level
-    ) {
+    public boolean matches(MeltingRecipeInput input, Level level) {
         if (blastFurnace && !input.blastFurnace()) {
             return false;
         }
@@ -43,24 +36,15 @@ public record MeltingRecipe(
     }
 
     @Override
-    public ItemStack assemble(
-            MeltingRecipeInput input,
-            HolderLookup.Provider registries
-    ) {
+    public ItemStack assemble(MeltingRecipeInput input, HolderLookup.Provider registries) {
         return ItemStack.EMPTY;
     }
 
-    public FluidStack assembleFluid(
-            MeltingRecipeInput input
-    ) {
-        return result.copyWithAmount(
-                result.getAmount() * batchCount(input)
-        );
+    public FluidStack assembleFluid(MeltingRecipeInput input) {
+        return result.copyWithAmount(result.getAmount() * batchCount(input));
     }
 
-    public int batchCount(
-            MeltingRecipeInput input
-    ) {
+    public int batchCount(MeltingRecipeInput input) {
         int found = 0;
 
         for (ItemStack stack : input.stacks()) {
@@ -73,17 +57,12 @@ public record MeltingRecipe(
     }
 
     @Override
-    public boolean canCraftInDimensions(
-            int width,
-            int height
-    ) {
+    public boolean canCraftInDimensions(int width, int height) {
         return width * height > 0;
     }
 
     @Override
-    public ItemStack getResultItem(
-            HolderLookup.Provider registries
-    ) {
+    public ItemStack getResultItem(HolderLookup.Provider registries) {
         return ItemStack.EMPTY;
     }
 
@@ -108,9 +87,6 @@ public record MeltingRecipe(
 
     @Override
     public NonNullList<Ingredient> getIngredients() {
-        return NonNullList.of(
-                Ingredient.EMPTY,
-                ingredient
-        );
+        return NonNullList.of(Ingredient.EMPTY, ingredient);
     }
 }

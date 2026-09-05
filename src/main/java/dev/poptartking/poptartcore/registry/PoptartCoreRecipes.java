@@ -16,62 +16,29 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class PoptartCoreRecipes {
 
     public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS =
-            DeferredRegister.create(
-                    Registries.RECIPE_SERIALIZER,
-                    PoptartCore.MOD_ID
-            );
+            DeferredRegister.create(Registries.RECIPE_SERIALIZER, PoptartCore.MOD_ID);
 
     public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES =
-            DeferredRegister.create(
-                    Registries.RECIPE_TYPE,
-                    PoptartCore.MOD_ID
-            );
+            DeferredRegister.create(Registries.RECIPE_TYPE, PoptartCore.MOD_ID);
 
-    public static final DeferredHolder<
-            RecipeSerializer<?>,
-            RecipeSerializer<MeltingRecipe>
-            > CRUCIBLE_MELTING_SERIALIZER =
-            RECIPE_SERIALIZERS.register(
-                    "crucible_melting",
-                    () -> new MeltingRecipeSerializer(false)
-            );
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<MeltingRecipe>>
+            CRUCIBLE_MELTING_SERIALIZER =
+                    RECIPE_SERIALIZERS.register("crucible_melting", () -> new MeltingRecipeSerializer(false));
 
-    public static final DeferredHolder<
-            RecipeType<?>,
-            RecipeType<MeltingRecipe>
-            > CRUCIBLE_MELTING_TYPE =
+    public static final DeferredHolder<RecipeType<?>, RecipeType<MeltingRecipe>> CRUCIBLE_MELTING_TYPE =
             RECIPE_TYPES.register(
                     "crucible_melting",
                     () -> RecipeType.simple(
-                            ResourceLocation.fromNamespaceAndPath(
-                                    PoptartCore.MOD_ID,
-                                    "crucible_melting"
-                            )
-                    )
-            );
+                            ResourceLocation.fromNamespaceAndPath(PoptartCore.MOD_ID, "crucible_melting")));
 
-    public static final DeferredHolder<
-            RecipeSerializer<?>,
-            CastingRecipeSerializer
-            > CRUCIBLE_CASTING_SERIALIZER =
-            RECIPE_SERIALIZERS.register(
-                    "crucible_casting",
-                    CastingRecipeSerializer::new
-            );
+    public static final DeferredHolder<RecipeSerializer<?>, CastingRecipeSerializer> CRUCIBLE_CASTING_SERIALIZER =
+            RECIPE_SERIALIZERS.register("crucible_casting", CastingRecipeSerializer::new);
 
-    public static final DeferredHolder<
-            RecipeType<?>,
-            RecipeType<CastingRecipe>
-            > CRUCIBLE_CASTING_TYPE =
+    public static final DeferredHolder<RecipeType<?>, RecipeType<CastingRecipe>> CRUCIBLE_CASTING_TYPE =
             RECIPE_TYPES.register(
                     "crucible_casting",
                     () -> RecipeType.simple(
-                            ResourceLocation.fromNamespaceAndPath(
-                                    PoptartCore.MOD_ID,
-                                    "crucible_casting"
-                            )
-                    )
-            );
+                            ResourceLocation.fromNamespaceAndPath(PoptartCore.MOD_ID, "crucible_casting")));
 
     public static void register(IEventBus eventBus) {
         RECIPE_SERIALIZERS.register(eventBus);

@@ -14,13 +14,9 @@ public class PoptartCoreBlockEntities {
             DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, PoptartCore.MOD_ID);
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<CrucibleBlockEntity>> CRUCIBLE =
-            BLOCK_ENTITIES.register(
-                    "crucible",
-                    () -> BlockEntityType.Builder.of(
-                            CrucibleBlockEntity::new,
-                            PoptartCoreBlocks.CRUCIBLE.get()
-                    ).build(null)
-            );
+            BLOCK_ENTITIES.register("crucible", () -> BlockEntityType.Builder.of(
+                            CrucibleBlockEntity::new, PoptartCoreBlocks.CRUCIBLE.get())
+                    .build(null));
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);

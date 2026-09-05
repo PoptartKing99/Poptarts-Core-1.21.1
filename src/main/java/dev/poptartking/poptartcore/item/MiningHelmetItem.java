@@ -15,7 +15,8 @@ public class MiningHelmetItem extends ArmorItem {
         super(PoptartCoreArmorMaterials.MINING_ARMOR_MATERIAL, Type.HELMET, properties);
     }
 
-    public ResourceLocation getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, ArmorMaterial.Layer layer, boolean innerModel) {
+    public ResourceLocation getArmorTexture(
+            ItemStack stack, Entity entity, EquipmentSlot slot, ArmorMaterial.Layer layer, boolean innerModel) {
         return PoptartCore.location("textures/armor/mining_helmet.png");
     }
 }

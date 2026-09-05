@@ -2,7 +2,16 @@ plugins {
     id 'java-library'
     id 'maven-publish'
     id 'net.neoforged.moddev' version '2.0.144'
+    id 'com.diffplug.spotless' version '8.10.2'
     id 'idea'
+}
+
+spotless {
+    java {
+        target 'src/**/*.java'
+        palantirJavaFormat('2.80.0').formatJavadoc(false)
+        removeUnusedImports()
+    }
 }
 
 tasks.named('wrapper', Wrapper).configure {

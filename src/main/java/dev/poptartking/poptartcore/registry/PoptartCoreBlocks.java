@@ -11,17 +11,12 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class PoptartCoreBlocks {
 
-    public static final DeferredRegister.Blocks BLOCKS =
-            DeferredRegister.createBlocks(PoptartCore.MOD_ID);
+    public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(PoptartCore.MOD_ID);
 
-    public static final DeferredBlock<CrucibleBlock> CRUCIBLE =
-            BLOCKS.register(
-                    "crucible",
-                    () -> new CrucibleBlock(
-                            BlockBehaviour.Properties.ofFullCopy(Blocks.CAMPFIRE)
-                                    .sound(SoundType.MUD_BRICKS)
-                    )
-            );
+    public static final DeferredBlock<CrucibleBlock> CRUCIBLE = BLOCKS.register(
+            "crucible",
+            () -> new CrucibleBlock(
+                    BlockBehaviour.Properties.ofFullCopy(Blocks.CAMPFIRE).sound(SoundType.MUD_BRICKS)));
 
     public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);

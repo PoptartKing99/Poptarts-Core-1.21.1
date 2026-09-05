@@ -14,7 +14,8 @@ import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 public class LeatherArmorClientExtensions implements IClientItemExtensions {
 
     @Override
-    public HumanoidModel<?> getHumanoidArmorModel(LivingEntity entity, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel<?> original) {
+    public HumanoidModel<?> getHumanoidArmorModel(
+            LivingEntity entity, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel<?> original) {
         PoptartCoreArmorModel model = pick(armorSlot);
 
         if (model == null) {
@@ -33,15 +34,14 @@ public class LeatherArmorClientExtensions implements IClientItemExtensions {
                 entity.walkAnimation.speed(),
                 entity.tickCount + partialTick,
                 headRot - bodyRot,
-                Mth.lerp(partialTick, entity.xRotO, entity.getXRot())
-        );
+                Mth.lerp(partialTick, entity.xRotO, entity.getXRot()));
 
         return model;
     }
 
     @Override
-    public int getArmorLayerTintColor(ItemStack stack, LivingEntity entity, ArmorMaterial.Layer layer, int layerIdx, int fallbackColor)
-    {
+    public int getArmorLayerTintColor(
+            ItemStack stack, LivingEntity entity, ArmorMaterial.Layer layer, int layerIdx, int fallbackColor) {
         if (!layer.dyeable() || !LeatherArmorTextures.isDyed(stack)) {
             return -1;
         }

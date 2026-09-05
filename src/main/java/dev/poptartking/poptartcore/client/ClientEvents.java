@@ -16,7 +16,9 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 
-@EventBusSubscriber(modid = PoptartCore.MOD_ID, value = {Dist.CLIENT})
+@EventBusSubscriber(
+        modid = PoptartCore.MOD_ID,
+        value = {Dist.CLIENT})
 public class ClientEvents {
 
     @SubscribeEvent
@@ -28,17 +30,16 @@ public class ClientEvents {
     public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
         event.registerItem(
                 new ArmorClientItemExtensions(() -> PoptartCoreModelLayers.MINING_HELMET_MODEL),
-                PoptartCoreItems.MINING_HELMET.get()
-        );
+                PoptartCoreItems.MINING_HELMET.get());
 
         event.registerItem(
                 new ArmorClientItemExtensions(() -> PoptartCoreModelLayers.RAW_HIDE_ARMOR_MODEL),
                 PoptartCoreItems.RAW_HIDE_HELMET.get(),
                 PoptartCoreItems.RAW_HIDE_CHESTPLATE.get(),
-                PoptartCoreItems.RAW_HIDE_LEGGINGS.get()
-        );
-        event.registerItem(new LeatherArmorClientExtensions(), new Item[]{Items.LEATHER_HELMET, Items.LEATHER_CHESTPLATE, Items.LEATHER_LEGGINGS, Items.LEATHER_BOOTS});
-
+                PoptartCoreItems.RAW_HIDE_LEGGINGS.get());
+        event.registerItem(new LeatherArmorClientExtensions(), new Item[] {
+            Items.LEATHER_HELMET, Items.LEATHER_CHESTPLATE, Items.LEATHER_LEGGINGS, Items.LEATHER_BOOTS
+        });
     }
 
     @SubscribeEvent
@@ -46,28 +47,30 @@ public class ClientEvents {
         event.registerLayerDefinition(PoptartCoreModelLayers.MINING_HELMET_LAYER, MiningHelmetModel::createBodyLayer);
         event.registerLayerDefinition(PoptartCoreModelLayers.RAW_HIDE_ARMOR_LAYER, RawHideArmorModel::createBodyLayer);
         event.registerLayerDefinition(PoptartCoreModelLayers.LEATHER_HELM_LAYER, LeatherArmorModels::helm);
-        event.registerLayerDefinition(PoptartCoreModelLayers.LEATHER_TUNIC_SKIRTLESS_LAYER, LeatherArmorModels::tunicSkirtless);
+        event.registerLayerDefinition(
+                PoptartCoreModelLayers.LEATHER_TUNIC_SKIRTLESS_LAYER, LeatherArmorModels::tunicSkirtless);
         event.registerLayerDefinition(PoptartCoreModelLayers.LEATHER_PANTS_LAYER, LeatherArmorModels::pants);
         event.registerLayerDefinition(PoptartCoreModelLayers.LEATHER_BOOTS_LAYER, LeatherArmorModels::boots);
-
-
     }
 
     @SubscribeEvent
     public static void addLayers(EntityRenderersEvent.AddLayers event) {
-        PoptartCoreModelLayers.MINING_HELMET_MODEL = new MiningHelmetModel(event.getEntityModels().bakeLayer(PoptartCoreModelLayers.MINING_HELMET_LAYER));
-        PoptartCoreModelLayers.RAW_HIDE_ARMOR_MODEL = new RawHideArmorModel(event.getEntityModels().bakeLayer(PoptartCoreModelLayers.RAW_HIDE_ARMOR_LAYER));
-        PoptartCoreModelLayers.LEATHER_HELM_MODEL = new PoptartCoreArmorModel(event.getEntityModels().bakeLayer(PoptartCoreModelLayers.LEATHER_HELM_LAYER));
-        PoptartCoreModelLayers.LEATHER_TUNIC_SKIRTLESS_MODEL = new PoptartCoreArmorModel(event.getEntityModels().bakeLayer(PoptartCoreModelLayers.LEATHER_TUNIC_SKIRTLESS_LAYER));
-        PoptartCoreModelLayers.LEATHER_PANTS_MODEL = new PoptartCoreArmorModel(event.getEntityModels().bakeLayer(PoptartCoreModelLayers.LEATHER_PANTS_LAYER));
-        PoptartCoreModelLayers.LEATHER_BOOTS_MODEL = new PoptartCoreArmorModel(event.getEntityModels().bakeLayer(PoptartCoreModelLayers.LEATHER_BOOTS_LAYER));
+        PoptartCoreModelLayers.MINING_HELMET_MODEL =
+                new MiningHelmetModel(event.getEntityModels().bakeLayer(PoptartCoreModelLayers.MINING_HELMET_LAYER));
+        PoptartCoreModelLayers.RAW_HIDE_ARMOR_MODEL =
+                new RawHideArmorModel(event.getEntityModels().bakeLayer(PoptartCoreModelLayers.RAW_HIDE_ARMOR_LAYER));
+        PoptartCoreModelLayers.LEATHER_HELM_MODEL =
+                new PoptartCoreArmorModel(event.getEntityModels().bakeLayer(PoptartCoreModelLayers.LEATHER_HELM_LAYER));
+        PoptartCoreModelLayers.LEATHER_TUNIC_SKIRTLESS_MODEL = new PoptartCoreArmorModel(
+                event.getEntityModels().bakeLayer(PoptartCoreModelLayers.LEATHER_TUNIC_SKIRTLESS_LAYER));
+        PoptartCoreModelLayers.LEATHER_PANTS_MODEL = new PoptartCoreArmorModel(
+                event.getEntityModels().bakeLayer(PoptartCoreModelLayers.LEATHER_PANTS_LAYER));
+        PoptartCoreModelLayers.LEATHER_BOOTS_MODEL = new PoptartCoreArmorModel(
+                event.getEntityModels().bakeLayer(PoptartCoreModelLayers.LEATHER_BOOTS_LAYER));
     }
 
     @SubscribeEvent
     public static void registerScreens(RegisterMenuScreensEvent event) {
-        event.register(
-                PoptartCoreMenus.CRUCIBLE.get(),
-                CrucibleScreen::new
-        );
+        event.register(PoptartCoreMenus.CRUCIBLE.get(), CrucibleScreen::new);
     }
 }

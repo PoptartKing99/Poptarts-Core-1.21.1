@@ -15,7 +15,8 @@ public class RawHideArmorItem extends ArmorItem {
         super(PoptartCoreArmorMaterials.RAW_HIDE_ARMOR_MATERIAL, type, properties);
     }
 
-    public ResourceLocation getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, ArmorMaterial.Layer layer, boolean innerModel) {
+    public ResourceLocation getArmorTexture(
+            ItemStack stack, Entity entity, EquipmentSlot slot, ArmorMaterial.Layer layer, boolean innerModel) {
         return PoptartCore.location("textures/armor/raw_hide_armor.png");
     }
 }

@@ -6,12 +6,7 @@ import net.minecraft.world.item.ItemStack;
 
 public class CrucibleResultSlot extends Slot {
 
-    public CrucibleResultSlot(
-            Container container,
-            int slot,
-            int x,
-            int y
-    ) {
+    public CrucibleResultSlot(Container container, int slot, int x, int y) {
         super(container, slot, x, y);
     }
 

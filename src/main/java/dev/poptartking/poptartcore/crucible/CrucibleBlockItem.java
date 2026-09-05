@@ -24,14 +24,8 @@ public class CrucibleBlockItem extends BlockItem {
     @Override
     public InteractionResult useOn(UseOnContext context) {
         if (tryPlaceCrucible(context)) {
-            context.getLevel().playSound(
-                    null,
-                    context.getClickedPos(),
-                    SoundEvents.STONE_PLACE,
-                    SoundSource.BLOCKS,
-                    1.0F,
-                    1.0F
-            );
+            context.getLevel()
+                    .playSound(null, context.getClickedPos(), SoundEvents.STONE_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
 
             return InteractionResult.SUCCESS;
         }
@@ -45,22 +39,17 @@ public class CrucibleBlockItem extends BlockItem {
         Player player = context.getPlayer();
         BlockState state = level.getBlockState(pos);
 
-        if (player == null
-                || !state.is(Blocks.CAMPFIRE)
-                || state.getValue(CampfireBlock.WATERLOGGED)) {
+        if (player == null || !state.is(Blocks.CAMPFIRE) || state.getValue(CampfireBlock.WATERLOGGED)) {
             return false;
         }
 
         if (!level.isClientSide) {
             level.setBlockAndUpdate(
                     pos,
-                    PoptartCoreBlocks.CRUCIBLE.get()
+                    PoptartCoreBlocks.CRUCIBLE
+                            .get()
                             .defaultBlockState()
-                            .setValue(
-                                    CrucibleBlock.FACING,
-                                    state.getValue(CampfireBlock.FACING)
-                            )
-            );
+                            .setValue(CrucibleBlock.FACING, state.getValue(CampfireBlock.FACING)));
 
             context.getItemInHand().consume(1, player);
         }

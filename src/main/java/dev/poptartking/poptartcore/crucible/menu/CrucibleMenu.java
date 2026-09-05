@@ -3,6 +3,7 @@ package dev.poptartking.poptartcore.crucible.menu;
 import dev.poptartking.poptartcore.crucible.CrucibleBlockEntity;
 import dev.poptartking.poptartcore.registry.PoptartCoreItems;
 import dev.poptartking.poptartcore.registry.PoptartCoreMenus;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
@@ -14,7 +15,6 @@ import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.material.Fluid;
 
 public class CrucibleMenu extends AbstractContainerMenu {
@@ -22,24 +22,11 @@ public class CrucibleMenu extends AbstractContainerMenu {
     private final Container container;
     private final ContainerData data;
 
-    public CrucibleMenu(
-            int containerId,
-            Inventory playerInventory
-    ) {
-        this(
-                containerId,
-                playerInventory,
-                new SimpleContainer(6),
-                new SimpleContainerData(6)
-        );
+    public CrucibleMenu(int containerId, Inventory playerInventory) {
+        this(containerId, playerInventory, new SimpleContainer(6), new SimpleContainerData(6));
     }
 
-    public CrucibleMenu(
-            int containerId,
-            Inventory playerInventory,
-            Container container,
-            ContainerData data
-    ) {
+    public CrucibleMenu(int containerId, Inventory playerInventory, Container container, ContainerData data) {
         super(PoptartCoreMenus.CRUCIBLE.get(), containerId);
 
         checkContainerSize(container, 6);
@@ -51,65 +38,23 @@ public class CrucibleMenu extends AbstractContainerMenu {
         addDataSlots(data);
 
         for (int i = 0; i < 3; i++) {
-            addSlot(
-                    new Slot(
-                            container,
-                            i,
-                            17 + i * 18,
-                            1
-                    )
-            );
+            addSlot(new Slot(container, i, 17 + i * 18, 1));
         }
 
-        addSlot(
-                new CrucibleFuelSlot(
-                        container,
-                        3,
-                        35,
-                        37
-                )
-        );
+        addSlot(new CrucibleFuelSlot(container, 3, 35, 37));
 
-        addSlot(
-                new CrucibleContainerSlot(
-                        container,
-                        4,
-                        105,
-                        37
-                )
-        );
+        addSlot(new CrucibleContainerSlot(container, 4, 105, 37));
 
-        addSlot(
-                new CrucibleResultSlot(
-                        container,
-                        5,
-                        141,
-                        20
-                )
-        );
+        addSlot(new CrucibleResultSlot(container, 5, 141, 20));
 
         for (int row = 0; row < 3; row++) {
             for (int column = 0; column < 9; column++) {
-                addSlot(
-                        new Slot(
-                                playerInventory,
-                                column + row * 9 + 9,
-                                8 + column * 18,
-                                84 + row * 18
-                        )
-                );
+                addSlot(new Slot(playerInventory, column + row * 9 + 9, 8 + column * 18, 84 + row * 18));
             }
         }
 
         for (int column = 0; column < 9; column++) {
-            addSlot(
-                    new Slot(
-                            playerInventory,
-                            column,
-                            8 + column * 18,
-                            142
-                    )
-            );
+            addSlot(new Slot(playerInventory, column, 8 + column * 18, 142));
         }
     }
 
@@ -125,11 +70,7 @@ public class CrucibleMenu extends AbstractContainerMenu {
             burnDuration = 200;
         }
 
-        return Mth.clamp(
-                (float) burnTime / burnDuration,
-                0.0F,
-                1.0F
-        );
+        return Mth.clamp((float) burnTime / burnDuration, 0.0F, 1.0F);
     }
 
     public float getCookProgress() {
@@ -140,17 +81,11 @@ public class CrucibleMenu extends AbstractContainerMenu {
             return 0.0F;
         }
 
-        return Mth.clamp(
-                (float) cookTime / cookTimeTotal,
-                0.0F,
-                1.0F
-        );
+        return Mth.clamp((float) cookTime / cookTimeTotal, 0.0F, 1.0F);
     }
 
     public Fluid getFluid() {
-        return BuiltInRegistries.FLUID.byId(
-                data.get(4)
-        );
+        return BuiltInRegistries.FLUID.byId(data.get(4));
     }
 
     public int getFluidAmount() {
@@ -158,12 +93,7 @@ public class CrucibleMenu extends AbstractContainerMenu {
     }
 
     public float getFluidProgress() {
-        return Mth.clamp(
-                (float) getFluidAmount()
-                        / CrucibleBlockEntity.TANK_CAPACITY,
-                0.0F,
-                1.0F
-        );
+        return Mth.clamp((float) getFluidAmount() / CrucibleBlockEntity.TANK_CAPACITY, 0.0F, 1.0F);
     }
 
     @Override
@@ -172,10 +102,7 @@ public class CrucibleMenu extends AbstractContainerMenu {
     }
 
     @Override
-    public ItemStack quickMoveStack(
-            Player player,
-            int index
-    ) {
+    public ItemStack quickMoveStack(Player player, int index) {
         ItemStack copy = ItemStack.EMPTY;
         Slot slot = slots.get(index);
 
@@ -190,40 +117,20 @@ public class CrucibleMenu extends AbstractContainerMenu {
         int playerInventoryEnd = 42;
 
         if (index < 6) {
-            if (!moveItemStackTo(
-                    stack,
-                    playerInventoryStart,
-                    playerInventoryEnd,
-                    true
-            )) {
+            if (!moveItemStackTo(stack, playerInventoryStart, playerInventoryEnd, true)) {
                 return ItemStack.EMPTY;
             }
         } else {
             if (isFuel(stack)) {
-                if (!moveItemStackTo(
-                        stack,
-                        3,
-                        4,
-                        false
-                )) {
+                if (!moveItemStackTo(stack, 3, 4, false)) {
                     return ItemStack.EMPTY;
                 }
             } else if (isMould(stack)) {
-                if (!moveItemStackTo(
-                        stack,
-                        4,
-                        5,
-                        false
-                )) {
+                if (!moveItemStackTo(stack, 4, 5, false)) {
                     return ItemStack.EMPTY;
                 }
             } else {
-                if (!moveItemStackTo(
-                        stack,
-                        0,
-                        3,
-                        false
-                )) {
+                if (!moveItemStackTo(stack, 0, 3, false)) {
                     return ItemStack.EMPTY;
                 }
             }

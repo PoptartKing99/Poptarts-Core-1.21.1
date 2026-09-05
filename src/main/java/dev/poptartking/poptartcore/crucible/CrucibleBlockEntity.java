@@ -7,6 +7,8 @@ import dev.poptartking.poptartcore.crucible.melting.MeltingRecipeInput;
 import dev.poptartking.poptartcore.crucible.menu.CrucibleMenu;
 import dev.poptartking.poptartcore.registry.PoptartCoreBlockEntities;
 import dev.poptartking.poptartcore.registry.PoptartCoreRecipes;
+import java.util.List;
+import java.util.Optional;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
@@ -30,9 +32,6 @@ import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 
-import java.util.List;
-import java.util.Optional;
-
 public class CrucibleBlockEntity extends BaseContainerBlockEntity {
 
     public static final int INPUT_SLOT_1 = 0;
@@ -44,8 +43,7 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
 
     public static final int TANK_CAPACITY = 1000;
 
-    private NonNullList<ItemStack> items =
-            NonNullList.withSize(6, ItemStack.EMPTY);
+    private NonNullList<ItemStack> items = NonNullList.withSize(6, ItemStack.EMPTY);
 
     private final FluidTank tank = new FluidTank(TANK_CAPACITY) {
         @Override
@@ -64,19 +62,14 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
         @Override
         public int get(int index) {
             return switch (index) {
-                case 0 -> burnDuration > Short.MAX_VALUE
-                        ? Mth.floor(
-                                (double) burnTime
-                                        / burnDuration
-                                        * Short.MAX_VALUE
-                        )
-                        : burnTime;
+                case 0 ->
+                    burnDuration > Short.MAX_VALUE
+                            ? Mth.floor((double) burnTime / burnDuration * Short.MAX_VALUE)
+                            : burnTime;
                 case 1 -> Math.min(burnDuration, Short.MAX_VALUE);
                 case 2 -> cookTime;
                 case 3 -> cookTimeTotal;
-                case 4 -> BuiltInRegistries.FLUID.getId(
-                        tank.getFluid().getFluid()
-                );
+                case 4 -> BuiltInRegistries.FLUID.getId(tank.getFluid().getFluid());
                 case 5 -> tank.getFluidAmount();
                 default -> 0;
             };
@@ -102,22 +95,14 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
         super(PoptartCoreBlockEntities.CRUCIBLE.get(), pos, state);
     }
 
-    public static void serverTick(
-            Level level,
-            BlockPos pos,
-            BlockState state,
-            CrucibleBlockEntity blockEntity
-    ) {
+    public static void serverTick(Level level, BlockPos pos, BlockState state, CrucibleBlockEntity blockEntity) {
         boolean wasLit = blockEntity.isBurning();
         boolean changed = false;
 
-        Optional<RecipeHolder<MeltingRecipe>> meltingRecipe =
-                blockEntity.getMeltingRecipe(level);
+        Optional<RecipeHolder<MeltingRecipe>> meltingRecipe = blockEntity.getMeltingRecipe(level);
 
         boolean canMelt = meltingRecipe
-                .map(recipe ->
-                        blockEntity.meltBatches(recipe.value()) > 0
-                )
+                .map(recipe -> blockEntity.meltBatches(recipe.value()) > 0)
                 .orElse(false);
 
         if (blockEntity.burnTime > 0) {
@@ -134,10 +119,7 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
                 blockEntity.burnDuration = burnDuration;
 
                 if (fuel.hasCraftingRemainingItem()) {
-                    blockEntity.items.set(
-                            FUEL_SLOT,
-                            fuel.getCraftingRemainingItem()
-                    );
+                    blockEntity.items.set(FUEL_SLOT, fuel.getCraftingRemainingItem());
                 } else {
                     fuel.shrink(1);
                 }
@@ -149,11 +131,9 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
             MeltingRecipe recipe = meltingRecipe.get().value();
             int batches = blockEntity.meltBatches(recipe);
 
-            int cookTimeTotal =
-                    recipe.getCookingTime() * Math.max(1, batches);
+            int cookTimeTotal = recipe.getCookingTime() * Math.max(1, batches);
 
-            if (blockEntity.cookTime > 0
-                    && blockEntity.cookTimeTotal != cookTimeTotal) {
+            if (blockEntity.cookTime > 0 && blockEntity.cookTimeTotal != cookTimeTotal) {
                 blockEntity.cookTime = 0;
             }
 
@@ -174,14 +154,10 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
             changed = true;
         }
 
-        Optional<RecipeHolder<CastingRecipe>> castingRecipe =
-                blockEntity.getCastingRecipe(level);
+        Optional<RecipeHolder<CastingRecipe>> castingRecipe = blockEntity.getCastingRecipe(level);
 
         if (castingRecipe.isPresent()) {
-            if (blockEntity.performCasting(
-                    level,
-                    castingRecipe.get().value()
-            )) {
+            if (blockEntity.performCasting(level, castingRecipe.get().value())) {
                 changed = true;
             }
         }
@@ -189,11 +165,7 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
         boolean isLit = blockEntity.isBurning();
 
         if (wasLit != isLit) {
-            level.setBlock(
-                    pos,
-                    state.setValue(CrucibleBlock.LIT, isLit),
-                    3
-            );
+            level.setBlock(pos, state.setValue(CrucibleBlock.LIT, isLit), 3);
 
             changed = true;
         }
@@ -205,39 +177,21 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
 
     private MeltingRecipeInput getMeltingInput() {
         return new MeltingRecipeInput(
-                List.of(
-                        items.get(INPUT_SLOT_1),
-                        items.get(INPUT_SLOT_2),
-                        items.get(INPUT_SLOT_3)
-                )
-        );
+                List.of(items.get(INPUT_SLOT_1), items.get(INPUT_SLOT_2), items.get(INPUT_SLOT_3)));
     }
 
-    private Optional<RecipeHolder<MeltingRecipe>> getMeltingRecipe(
-            Level level
-    ) {
-        return level.getRecipeManager().getRecipeFor(
-                PoptartCoreRecipes.CRUCIBLE_MELTING_TYPE.get(),
-                getMeltingInput(),
-                level
-        );
+    private Optional<RecipeHolder<MeltingRecipe>> getMeltingRecipe(Level level) {
+        return level.getRecipeManager()
+                .getRecipeFor(PoptartCoreRecipes.CRUCIBLE_MELTING_TYPE.get(), getMeltingInput(), level);
     }
 
     private CastingRecipeInput getCastingInput() {
-        return new CastingRecipeInput(
-                items.get(CONTAINER_SLOT),
-                tank.getFluid()
-        );
+        return new CastingRecipeInput(items.get(CONTAINER_SLOT), tank.getFluid());
     }
 
-    private Optional<RecipeHolder<CastingRecipe>> getCastingRecipe(
-            Level level
-    ) {
-        return level.getRecipeManager().getRecipeFor(
-                PoptartCoreRecipes.CRUCIBLE_CASTING_TYPE.get(),
-                getCastingInput(),
-                level
-        );
+    private Optional<RecipeHolder<CastingRecipe>> getCastingRecipe(Level level) {
+        return level.getRecipeManager()
+                .getRecipeFor(PoptartCoreRecipes.CRUCIBLE_CASTING_TYPE.get(), getCastingInput(), level);
     }
 
     private boolean isBurning() {
@@ -261,8 +215,7 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
 
         FluidStack tankFluid = tank.getFluid();
 
-        if (!tankFluid.isEmpty()
-                && !FluidStack.isSameFluidSameComponents(tankFluid, result)) {
+        if (!tankFluid.isEmpty() && !FluidStack.isSameFluidSameComponents(tankFluid, result)) {
             return 0;
         }
 
@@ -292,18 +245,11 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
 
         FluidStack result = recipe.result();
 
-        tank.fill(
-                result.copyWithAmount(
-                        result.getAmount() * batches
-                ),
-                IFluidHandler.FluidAction.EXECUTE
-        );
+        tank.fill(result.copyWithAmount(result.getAmount() * batches), IFluidHandler.FluidAction.EXECUTE);
 
         int melted = 0;
 
-        for (int slot = INPUT_SLOT_1;
-             slot <= INPUT_SLOT_3 && melted < batches;
-             slot++) {
+        for (int slot = INPUT_SLOT_1; slot <= INPUT_SLOT_3 && melted < batches; slot++) {
 
             ItemStack stack = items.get(slot);
 
@@ -316,68 +262,38 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
         return true;
     }
 
-    private boolean performCasting(
-            Level level,
-            CastingRecipe recipe
-    ) {
+    private boolean performCasting(Level level, CastingRecipe recipe) {
         ItemStack mould = items.get(CONTAINER_SLOT);
         ItemStack result = items.get(RESULT_SLOT);
 
-        CastingRecipeInput input =
-                new CastingRecipeInput(
-                        mould,
-                        tank.getFluid()
-                );
+        CastingRecipeInput input = new CastingRecipeInput(mould, tank.getFluid());
 
-        ItemStack castingResult =
-                recipe.assemble(
-                        input,
-                        level.registryAccess()
-                );
+        ItemStack castingResult = recipe.assemble(input, level.registryAccess());
 
         if (castingResult.isEmpty()) {
             return false;
         }
 
-        boolean fits =
-                result.isEmpty()
-                        || ItemStack.isSameItemSameComponents(
-                        result,
-                        castingResult
-                )
-                        && result.getCount()
-                        + castingResult.getCount()
-                        <= result.getMaxStackSize();
+        boolean fits = result.isEmpty()
+                || ItemStack.isSameItemSameComponents(result, castingResult)
+                        && result.getCount() + castingResult.getCount() <= result.getMaxStackSize();
 
         if (!fits) {
             return false;
         }
 
-        tank.drain(
-                recipe.fluid().getAmount(),
-                IFluidHandler.FluidAction.EXECUTE
-        );
+        tank.drain(recipe.fluid().getAmount(), IFluidHandler.FluidAction.EXECUTE);
 
         if (mould.isDamageableItem()) {
-            mould.hurtAndBreak(
-                    1,
-                    (ServerLevel) level,
-                    (ServerPlayer) null,
-                    item -> {}
-            );
+            mould.hurtAndBreak(1, (ServerLevel) level, (ServerPlayer) null, item -> {});
         } else {
             mould.shrink(1);
         }
 
         if (result.isEmpty()) {
-            items.set(
-                    RESULT_SLOT,
-                    castingResult
-            );
+            items.set(RESULT_SLOT, castingResult);
         } else {
-            result.grow(
-                    castingResult.getCount()
-            );
+            result.grow(castingResult.getCount());
         }
 
         return true;
@@ -390,9 +306,7 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
 
     @Override
     protected Component getDefaultName() {
-        return Component.translatable(
-                "container.poptartcore.crucible"
-        );
+        return Component.translatable("container.poptartcore.crucible");
     }
 
     @Override
@@ -406,30 +320,15 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
     }
 
     @Override
-    protected AbstractContainerMenu createMenu(
-            int containerId,
-            Inventory inventory
-    ) {
-        return new CrucibleMenu(
-                containerId,
-                inventory,
-                this,
-                dataAccess
-        );
+    protected AbstractContainerMenu createMenu(int containerId, Inventory inventory) {
+        return new CrucibleMenu(containerId, inventory, this, dataAccess);
     }
 
     @Override
-    protected void saveAdditional(
-            CompoundTag tag,
-            HolderLookup.Provider registries
-    ) {
+    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
 
-        ContainerHelper.saveAllItems(
-                tag,
-                items,
-                registries
-        );
+        ContainerHelper.saveAllItems(tag, items, registries);
 
         tag.putInt("BurnTime", burnTime);
         tag.putInt("BurnDuration", burnDuration);
@@ -439,30 +338,17 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
         FluidStack fluid = tank.getFluid();
 
         if (!fluid.isEmpty()) {
-            tag.put(
-                    "Fluid",
-                    fluid.save(registries)
-            );
+            tag.put("Fluid", fluid.save(registries));
         }
     }
 
     @Override
-    protected void loadAdditional(
-            CompoundTag tag,
-            HolderLookup.Provider registries
-    ) {
+    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
 
-        items = NonNullList.withSize(
-                getContainerSize(),
-                ItemStack.EMPTY
-        );
+        items = NonNullList.withSize(getContainerSize(), ItemStack.EMPTY);
 
-        ContainerHelper.loadAllItems(
-                tag,
-                items,
-                registries
-        );
+        ContainerHelper.loadAllItems(tag, items, registries);
 
         burnTime = tag.getInt("BurnTime");
         burnDuration = tag.getInt("BurnDuration");
@@ -473,12 +359,7 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
         }
 
         if (tag.contains("Fluid")) {
-            tank.setFluid(
-                    FluidStack.parseOptional(
-                            registries,
-                            tag.getCompound("Fluid")
-                    )
-            );
+            tank.setFluid(FluidStack.parseOptional(registries, tag.getCompound("Fluid")));
         } else {
             tank.setFluid(FluidStack.EMPTY);
         }

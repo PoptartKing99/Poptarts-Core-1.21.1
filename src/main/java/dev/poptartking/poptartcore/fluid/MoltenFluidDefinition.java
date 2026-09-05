@@ -7,6 +7,4 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 public record MoltenFluidDefinition(
         DeferredHolder<FluidType, FluidType> type,
         DeferredHolder<net.minecraft.world.level.material.Fluid, FlowingFluid> source,
-        DeferredHolder<net.minecraft.world.level.material.Fluid, FlowingFluid> flowing
-) {
-}
+        DeferredHolder<net.minecraft.world.level.material.Fluid, FlowingFluid> flowing) {}

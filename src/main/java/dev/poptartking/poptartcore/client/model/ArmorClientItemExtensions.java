@@ -1,7 +1,6 @@
 package dev.poptartking.poptartcore.client.model;
 
 import java.util.function.Supplier;
-
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -18,11 +17,7 @@ public class ArmorClientItemExtensions implements IClientItemExtensions {
 
     @Override
     public PoptartCoreArmorModel getHumanoidArmorModel(
-            LivingEntity entity,
-            ItemStack itemStack,
-            EquipmentSlot armorSlot,
-            HumanoidModel<?> original
-    ) {
+            LivingEntity entity, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel<?> original) {
         PoptartCoreArmorModel armorModel = this.model.get();
 
         armorModel.slot = armorSlot;
