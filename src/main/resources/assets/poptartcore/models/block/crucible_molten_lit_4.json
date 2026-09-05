@@ -7,6 +7,7 @@
 		"4": "poptartcore:block/crucible/crucible_lit",
 		"particle": "block/campfire_log",
 		"log": "block/campfire_log",
+		"fire": "poptartcore:block/crucible/crucible_fire",
 		"lit_log": "block/campfire_log_lit"
 	},
 	"elements": [
@@ -149,11 +150,51 @@
 		},
 		{
 			"name": "bottom_inner_crucible",
-			"from": [5, 8, 5],
-			"to": [11, 8, 11],
-			"rotation": {"angle": 0, "axis": "y", "origin": [5, 8, 5]},
+			"from": [5, 9, 5],
+			"to": [11, 9, 11],
+			"rotation": {"angle": 0, "axis": "y", "origin": [5, 9, 5]},
 			"faces": {
 				"up": {"uv": [12, 12, 15, 15], "texture": "#4"}
+			}
+		},
+		{
+			"name": "north_fire",
+			"from": [3, 1, 3.01],
+			"to": [13, 20, 3],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 10.5, 8]},
+			"faces": {
+				"north": {"uv": [3, 0, 13, 16], "texture": "#fire"},
+				"south": {"uv": [13, 0, 3, 16], "texture": "#fire"}
+			}
+		},
+		{
+			"name": "east_fire",
+			"from": [13, 1, 13],
+			"to": [12.99, 20, 3],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 10.5, 8]},
+			"faces": {
+				"east": {"uv": [13, 0, 3, 16], "texture": "#fire"},
+				"west": {"uv": [3, 0, 13, 16], "texture": "#fire"}
+			}
+		},
+		{
+			"name": "south_fire",
+			"from": [3, 1, 13],
+			"to": [13, 20, 12.99],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 10.5, 8]},
+			"faces": {
+				"north": {"uv": [13, 0, 3, 16], "texture": "#fire"},
+				"south": {"uv": [3, 0, 13, 16], "texture": "#fire"}
+			}
+		},
+		{
+			"name": "west_fire",
+			"from": [3.01, 1, 13],
+			"to": [3, 20, 3],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 10.5, 8]},
+			"faces": {
+				"east": {"uv": [3, 0, 13, 16], "texture": "#fire"},
+				"west": {"uv": [13, 0, 3, 16], "texture": "#fire"}
 			}
 		}
 	],
@@ -176,6 +217,13 @@
 			"scope": 0,
 			"color": 0,
 			"children": [5, 6, 7, 8, 9, 10, 11]
+		},
+		{
+			"name": "fire",
+			"origin": [8, 10.5, 12.85],
+			"scope": 0,
+			"color": 0,
+			"children": [12, 13, 14, 15]
 		}
 	]
 }
