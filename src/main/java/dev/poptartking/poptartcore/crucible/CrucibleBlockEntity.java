@@ -96,7 +96,6 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
     }
 
     public static void serverTick(Level level, BlockPos pos, BlockState state, CrucibleBlockEntity blockEntity) {
-        boolean wasLit = blockEntity.isBurning();
         boolean changed = false;
 
         Optional<RecipeHolder<MeltingRecipe>> meltingRecipe = blockEntity.getMeltingRecipe(level);
@@ -162,10 +161,18 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
             }
         }
 
+        int fluidLevel = blockEntity.getFluidLevel();
         boolean isLit = blockEntity.isBurning();
+        BlockState currentState = level.getBlockState(pos);
 
-        if (wasLit != isLit) {
-            level.setBlock(pos, state.setValue(CrucibleBlock.LIT, isLit), 3);
+        if (currentState.getValue(CrucibleBlock.LIT) != isLit
+                || currentState.getValue(CrucibleBlock.FLUID_LEVEL) != fluidLevel) {
+            level.setBlock(
+                    pos,
+                    currentState
+                            .setValue(CrucibleBlock.LIT, isLit)
+                            .setValue(CrucibleBlock.FLUID_LEVEL, fluidLevel),
+                    3);
 
             changed = true;
         }
@@ -196,6 +203,16 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
 
     private boolean isBurning() {
         return burnTime > 0;
+    }
+
+    private int getFluidLevel() {
+        int amount = tank.getFluidAmount();
+
+        if (amount <= 0) {
+            return 0;
+        }
+
+        return Math.min(4, (amount + 249) / 250);
     }
 
     protected int getBurnDuration(ItemStack fuel) {
