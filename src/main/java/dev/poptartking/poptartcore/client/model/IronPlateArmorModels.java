@@ -67,7 +67,7 @@ public final class IronPlateArmorModels {
                                     .addBox(-4.5F, -0.5F, -2.5F, 9.0F, 14.0F, 5.0F, new CubeDeformation(0.01F)),
                             PartPose.ZERO);
 
-                    return LayerDefinition.create(mesh, 32, 32);
+                    return LayerDefinition.create(mesh, 64, 64);
                 });
     }
 
