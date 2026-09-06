@@ -1,17 +1,15 @@
 package dev.poptartking.poptartcore.client.model;
 
 import dev.poptartking.poptartcore.client.PoptartCoreModelLayers;
-import dev.poptartking.poptartcore.armor.LeatherArmorTextures;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 
-public class LeatherArmorClientExtensions implements IClientItemExtensions {
+public class IronArmorClientExtensions implements IClientItemExtensions {
 
     @Override
     public HumanoidModel<?> getHumanoidArmorModel(
@@ -39,22 +37,12 @@ public class LeatherArmorClientExtensions implements IClientItemExtensions {
         return model;
     }
 
-    @Override
-    public int getArmorLayerTintColor(
-            ItemStack stack, LivingEntity entity, ArmorMaterial.Layer layer, int layerIdx, int fallbackColor) {
-        if (!layer.dyeable() || !LeatherArmorTextures.isDyed(stack)) {
-            return -1;
-        }
-
-        return IClientItemExtensions.super.getArmorLayerTintColor(stack, entity, layer, layerIdx, fallbackColor);
-    }
-
     private static PoptartCoreArmorModel pick(EquipmentSlot slot) {
         return switch (slot) {
-            case HEAD -> PoptartCoreModelLayers.LEATHER_HELM_MODEL;
-            case CHEST -> PoptartCoreModelLayers.LEATHER_TUNIC_SKIRTLESS_MODEL;
-            case LEGS -> PoptartCoreModelLayers.LEATHER_PANTS_MODEL;
-            case FEET -> PoptartCoreModelLayers.LEATHER_BOOTS_MODEL;
+            case HEAD -> PoptartCoreModelLayers.IRON_PLATE_HELMET_MODEL;
+            case CHEST -> PoptartCoreModelLayers.IRON_PLATE_CHESTPLATE_MODEL;
+            case LEGS -> PoptartCoreModelLayers.IRON_PLATE_LEGGINGS_MODEL;
+            case FEET -> PoptartCoreModelLayers.IRON_PLATE_BOOTS_MODEL;
             default -> null;
         };
     }

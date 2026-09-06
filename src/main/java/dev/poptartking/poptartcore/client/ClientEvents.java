@@ -41,6 +41,10 @@ public class ClientEvents {
         event.registerItem(new LeatherArmorClientExtensions(), new Item[] {
             Items.LEATHER_HELMET, Items.LEATHER_CHESTPLATE, Items.LEATHER_LEGGINGS, Items.LEATHER_BOOTS
         });
+
+        event.registerItem(
+                new IronArmorClientExtensions(),
+                new Item[] {Items.IRON_HELMET, Items.IRON_CHESTPLATE, Items.IRON_LEGGINGS, Items.IRON_BOOTS});
     }
 
     @SubscribeEvent
@@ -51,6 +55,11 @@ public class ClientEvents {
             event.registerLayerDefinition(PoptartCoreModelLayers.LEATHER_TUNIC_SKIRTLESS_LAYER, LeatherArmorModels::tunicSkirtless);
             event.registerLayerDefinition(PoptartCoreModelLayers.LEATHER_PANTS_LAYER, LeatherArmorModels::pants);
             event.registerLayerDefinition(PoptartCoreModelLayers.LEATHER_BOOTS_LAYER, LeatherArmorModels::boots);
+        event.registerLayerDefinition(PoptartCoreModelLayers.IRON_PLATE_HELMET_LAYER, IronPlateArmorModels::helmet);
+        event.registerLayerDefinition(
+                PoptartCoreModelLayers.IRON_PLATE_CHESTPLATE_LAYER, IronPlateArmorModels::chestplate);
+        event.registerLayerDefinition(PoptartCoreModelLayers.IRON_PLATE_LEGGINGS_LAYER, IronPlateArmorModels::leggings);
+        event.registerLayerDefinition(PoptartCoreModelLayers.IRON_PLATE_BOOTS_LAYER, IronPlateArmorModels::boots);
     }
 
     @SubscribeEvent
@@ -72,6 +81,18 @@ public class ClientEvents {
 
         PoptartCoreModelLayers.LEATHER_BOOTS_MODEL = new PoptartCoreArmorModel(
                 event.getEntityModels().bakeLayer(PoptartCoreModelLayers.LEATHER_BOOTS_LAYER));
+
+        PoptartCoreModelLayers.IRON_PLATE_HELMET_MODEL = new PoptartCoreArmorModel(
+                event.getEntityModels().bakeLayer(PoptartCoreModelLayers.IRON_PLATE_HELMET_LAYER));
+
+        PoptartCoreModelLayers.IRON_PLATE_CHESTPLATE_MODEL = new PoptartCoreArmorModel(
+                event.getEntityModels().bakeLayer(PoptartCoreModelLayers.IRON_PLATE_CHESTPLATE_LAYER));
+
+        PoptartCoreModelLayers.IRON_PLATE_LEGGINGS_MODEL = new PoptartCoreArmorModel(
+                event.getEntityModels().bakeLayer(PoptartCoreModelLayers.IRON_PLATE_LEGGINGS_LAYER));
+
+        PoptartCoreModelLayers.IRON_PLATE_BOOTS_MODEL = new PoptartCoreArmorModel(
+                event.getEntityModels().bakeLayer(PoptartCoreModelLayers.IRON_PLATE_BOOTS_LAYER));
     }
 
     @SubscribeEvent

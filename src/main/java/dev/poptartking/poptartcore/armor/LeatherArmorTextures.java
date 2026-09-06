@@ -1,4 +1,4 @@
-package dev.poptartking.poptartcore.leather;
+package dev.poptartking.poptartcore.armor;
 
 import dev.poptartking.poptartcore.PoptartCore;
 import net.minecraft.core.component.DataComponents;

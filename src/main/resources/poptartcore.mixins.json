@@ -3,7 +3,7 @@
   "package": "dev.poptartking.poptartcore.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "armor.LeatherArmorTextureMixin"
+    "armor.ArmorTextureMixin"
   ],
   "injectors": {
     "defaultRequire": 1
