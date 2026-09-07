@@ -1,0 +1,15 @@
+package dev.poptartking.poptartcore.registry;
+
+import dev.poptartking.poptartcore.PoptartCore;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
+
+public final class PoptartCoreTags {
+    public static final TagKey<Item> BLAST_FURNACE_ALLOWED =
+            TagKey.create(Registries.ITEM, PoptartCore.location("blast_furnace_allowed"));
+    public static final TagKey<Item> BLAST_FURNACE_EFFICIENT =
+            TagKey.create(Registries.ITEM, PoptartCore.location("blast_furnace_efficient"));
+
+    private PoptartCoreTags() {}
+}

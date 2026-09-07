@@ -77,12 +77,16 @@ public record MeltingRecipe(Ingredient ingredient, int duration, FluidStack resu
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return PoptartCoreRecipes.CRUCIBLE_MELTING_SERIALIZER.get();
+        return blastFurnace
+                ? PoptartCoreRecipes.BLAST_FURNACE_MELTING_SERIALIZER.get()
+                : PoptartCoreRecipes.CRUCIBLE_MELTING_SERIALIZER.get();
     }
 
     @Override
     public RecipeType<?> getType() {
-        return PoptartCoreRecipes.CRUCIBLE_MELTING_TYPE.get();
+        return blastFurnace
+                ? PoptartCoreRecipes.BLAST_FURNACE_MELTING_TYPE.get()
+                : PoptartCoreRecipes.CRUCIBLE_MELTING_TYPE.get();
     }
 
     @Override

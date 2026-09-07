@@ -10,6 +10,7 @@
   "item.poptartcore.steel_ingot" : "Steel Ingot",
   "item.poptartcore.steel_nugget" : "Steel Nugget",
   "item.poptartcore.steel_plate" : "Steel Plate",
+  "item.poptartcore.coal_coke" : "Coal Coke",
   "item.poptartcore.bronze_ingot" : "Bronze Ingot",
   "item.poptartcore.bronze_nugget" : "Bronze Nugget",
   "item.poptartcore.bronze_plate" : "Bronze Plate",
@@ -26,7 +27,12 @@
   "item.poptartcore.steel_chestplate" : "Steel Chestplate",
   "item.poptartcore.steel_leggings" : "Steel Leggings",
   "item.poptartcore.steel_boots" : "Steel Boots",
+
   "block.poptartcore.crucible" : "Crucible",
+  "block.poptartcore.blast_furnace": "Blast Furnace",
+
   "container.poptartcore.crucible" : "Crucible",
+  "container.poptartcore.blast_furnace" : "Blast Furnace",
+
   "creativetab.poptartcore.poptartcore_tab" : "PoptartCore"
 }

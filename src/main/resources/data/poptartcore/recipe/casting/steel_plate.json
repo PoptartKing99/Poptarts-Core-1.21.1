@@ -1,0 +1,14 @@
+{
+  "type": "poptartcore:crucible_casting",
+  "fluid": {
+    "id": "poptartcore:molten_steel",
+    "amount": 250
+  },
+  "ingredient": {
+    "item": "poptartcore:plate_mould"
+  },
+  "result": {
+    "id": "poptartcore:steel_plate",
+    "count": 1
+  }
+}

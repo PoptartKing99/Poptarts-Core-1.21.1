@@ -1,0 +1,23 @@
+{
+	"render_type": "minecraft:cutout_mipped",
+	"credit": "Made by Farcr",
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "poptartcore:block/blast_furnace/blast_furnace_side_lit",
+		"1": "poptartcore:block/blast_furnace/blast_furnace_top_lit",
+		"particle": "poptartcore:block/blast_furnace/blast_furnace_side_lit"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 0],
+			"to": [16, 16, 16],
+			"faces": {
+				"north": {"uv": [0, 8, 8, 16], "texture": "#0"},
+				"east": {"uv": [16, 8, 8, 16], "texture": "#0"},
+				"south": {"uv": [8, 8, 16, 16], "texture": "#0"},
+				"west": {"uv": [8, 8, 16, 16], "texture": "#0"},
+				"down": {"uv": [0, 8, 8, 16], "texture": "#1"}
+			}
+		}
+	]
+}

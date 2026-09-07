@@ -3,6 +3,7 @@ package dev.poptartking.poptartcore.registry;
 import dev.poptartking.poptartcore.PoptartCore;
 import dev.poptartking.poptartcore.crucible.CrucibleBlockItem;
 import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.IEventBus;
@@ -40,6 +41,7 @@ public class PoptartCoreItems {
     public static final DeferredItem<Item> STEEL_INGOT = registerItem("steel_ingot");
     public static final DeferredItem<Item> STEEL_NUGGET = registerItem("steel_nugget");
     public static final DeferredItem<Item> STEEL_PLATE = registerItem("steel_plate");
+    public static final DeferredItem<Item> COAL_COKE = registerItem("coal_coke");
     public static final DeferredItem<Item> BRONZE_INGOT = registerItem("bronze_ingot");
     public static final DeferredItem<Item> BRONZE_NUGGET = registerItem("bronze_nugget");
     public static final DeferredItem<Item> BRONZE_PLATE = registerItem("bronze_plate");
@@ -78,6 +80,8 @@ public class PoptartCoreItems {
                     new Item.Properties().durability(325)));
     public static final DeferredItem<CrucibleBlockItem> CRUCIBLE = ITEMS.register(
             "crucible", () -> new CrucibleBlockItem(PoptartCoreBlocks.CRUCIBLE.get(), new Item.Properties()));
+    public static final DeferredItem<BlockItem> BLAST_FURNACE = ITEMS.register(
+            "blast_furnace", () -> new BlockItem(PoptartCoreBlocks.BLAST_FURNACE.get(), new Item.Properties()));
     public static final DeferredItem<Item> UNFIRED_INGOT_MOULD =
             ITEMS.register("unfired_ingot_mould", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> INGOT_MOULD =

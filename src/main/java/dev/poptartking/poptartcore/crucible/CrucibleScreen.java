@@ -127,17 +127,17 @@ public class CrucibleScreen extends AbstractContainerScreen<CrucibleMenu> {
 
         renderCastingDisplay(guiGraphics, x, y);
 
-        int castingProgressHeight = Mth.ceil(menu.getCastingProgress() * 13.0F);
+        int castingProgressHeight = Mth.ceil(menu.getCastingProgress() * 16.0F);
         if (castingProgressHeight > 0) {
             guiGraphics.blitSprite(
                     CASTING_PROGRESS_SPRITE,
-                    15,
-                    13,
+                    16,
+                    16,
                     0,
-                    13 - castingProgressHeight,
-                    x + 142,
-                    y + 25 + 13 - castingProgressHeight,
-                    15,
+                    16 - castingProgressHeight,
+                    x + 141,
+                    y + 38 - castingProgressHeight,
+                    16,
                     castingProgressHeight);
         }
 

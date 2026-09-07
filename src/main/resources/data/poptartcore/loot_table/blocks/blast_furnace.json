@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "poptartcore:blast_furnace"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "poptartcore:blast_furnace",
+          "properties": {
+            "half": "lower"
+          }
+        }
+      ]
+    }
+  ]
+}

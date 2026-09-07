@@ -1,0 +1,16 @@
+{
+  "type": "poptartcore:blast_furnace_alloying",
+  "ingredients": [
+    { "item": "minecraft:raw_iron" },
+    { "item": "minecraft:raw_iron" },
+    { "item": "poptartcore:coal_coke" },
+    { "item": "poptartcore:coal_coke" },
+    { "item": "poptartcore:coal_coke" },
+    { "item": "poptartcore:coal_coke" }
+  ],
+  "duration": 600,
+  "result": {
+    "id": "poptartcore:molten_steel",
+    "amount": 250
+  }
+}

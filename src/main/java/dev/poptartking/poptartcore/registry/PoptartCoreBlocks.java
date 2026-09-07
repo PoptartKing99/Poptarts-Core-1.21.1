@@ -1,6 +1,7 @@
 package dev.poptartking.poptartcore.registry;
 
 import dev.poptartking.poptartcore.PoptartCore;
+import dev.poptartking.poptartcore.blastfurnace.BlastFurnaceBlock;
 import dev.poptartking.poptartcore.crucible.CrucibleBlock;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
@@ -21,6 +22,11 @@ public class PoptartCoreBlocks {
                             state -> state.getValue(CrucibleBlock.LIT) || state.getValue(CrucibleBlock.FLUID_LEVEL) > 0
                                     ? 15
                                     : 0)));
+
+    public static final DeferredBlock<BlastFurnaceBlock> BLAST_FURNACE = BLOCKS.register(
+            "blast_furnace",
+            () -> new BlastFurnaceBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BLAST_FURNACE)
+                    .lightLevel(state -> state.getValue(BlastFurnaceBlock.LIT) ? 13 : 0)));
 
     public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);

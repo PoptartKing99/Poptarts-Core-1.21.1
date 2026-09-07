@@ -17,6 +17,7 @@ public class PoptartCoreClientExtensions {
         registerMoltenFluid(event, "copper", PoptartCoreFluids.MOLTEN_COPPER);
         registerMoltenFluid(event, "tin", PoptartCoreFluids.MOLTEN_TIN);
         registerMoltenFluid(event, "bronze", PoptartCoreFluids.MOLTEN_BRONZE);
+        registerMoltenFluid(event, "steel", PoptartCoreFluids.MOLTEN_STEEL);
     }
 
     private static void registerMoltenFluid(

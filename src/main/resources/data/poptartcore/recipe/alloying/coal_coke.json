@@ -1,0 +1,16 @@
+{
+  "type": "poptartcore:blast_furnace_alloying",
+  "ingredients": [
+    { "item": "minecraft:coal" },
+    { "item": "minecraft:coal" },
+    { "item": "minecraft:blaze_powder" },
+    { "item": "minecraft:blaze_powder" },
+    { "item": "minecraft:charcoal" },
+    { "item": "minecraft:charcoal" }
+  ],
+  "duration": 800,
+  "item_result": {
+    "id": "poptartcore:coal_coke",
+    "count": 1
+  }
+}

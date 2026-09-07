@@ -43,6 +43,22 @@ public class PoptartCoreRecipes {
                     () -> RecipeType.simple(
                             ResourceLocation.fromNamespaceAndPath(PoptartCore.MOD_ID, "crucible_alloying")));
 
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<MeltingRecipe>>
+            BLAST_FURNACE_MELTING_SERIALIZER =
+                    RECIPE_SERIALIZERS.register("blast_furnace_melting", () -> new MeltingRecipeSerializer(true));
+
+    public static final DeferredHolder<RecipeType<?>, RecipeType<MeltingRecipe>> BLAST_FURNACE_MELTING_TYPE =
+            RECIPE_TYPES.register(
+                    "blast_furnace_melting", () -> RecipeType.simple(PoptartCore.location("blast_furnace_melting")));
+
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<AlloyingRecipe>>
+            BLAST_FURNACE_ALLOYING_SERIALIZER =
+                    RECIPE_SERIALIZERS.register("blast_furnace_alloying", () -> new AlloyingRecipeSerializer(true));
+
+    public static final DeferredHolder<RecipeType<?>, RecipeType<AlloyingRecipe>> BLAST_FURNACE_ALLOYING_TYPE =
+            RECIPE_TYPES.register(
+                    "blast_furnace_alloying", () -> RecipeType.simple(PoptartCore.location("blast_furnace_alloying")));
+
     public static final DeferredHolder<RecipeSerializer<?>, CastingRecipeSerializer> CRUCIBLE_CASTING_SERIALIZER =
             RECIPE_SERIALIZERS.register("crucible_casting", CastingRecipeSerializer::new);
 

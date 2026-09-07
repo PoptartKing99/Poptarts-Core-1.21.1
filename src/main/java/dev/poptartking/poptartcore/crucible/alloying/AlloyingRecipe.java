@@ -159,12 +159,16 @@ public record AlloyingRecipe(
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return PoptartCoreRecipes.CRUCIBLE_ALLOYING_SERIALIZER.get();
+        return blastFurnace
+                ? PoptartCoreRecipes.BLAST_FURNACE_ALLOYING_SERIALIZER.get()
+                : PoptartCoreRecipes.CRUCIBLE_ALLOYING_SERIALIZER.get();
     }
 
     @Override
     public RecipeType<?> getType() {
-        return PoptartCoreRecipes.CRUCIBLE_ALLOYING_TYPE.get();
+        return blastFurnace
+                ? PoptartCoreRecipes.BLAST_FURNACE_ALLOYING_TYPE.get()
+                : PoptartCoreRecipes.CRUCIBLE_ALLOYING_TYPE.get();
     }
 
     @Override

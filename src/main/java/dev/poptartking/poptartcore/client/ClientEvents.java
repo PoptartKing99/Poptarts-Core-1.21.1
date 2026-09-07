@@ -1,6 +1,7 @@
 package dev.poptartking.poptartcore.client;
 
 import dev.poptartking.poptartcore.PoptartCore;
+import dev.poptartking.poptartcore.blastfurnace.BlastFurnaceScreen;
 import dev.poptartking.poptartcore.client.model.*;
 import dev.poptartking.poptartcore.crucible.CrucibleScreen;
 import dev.poptartking.poptartcore.registry.PoptartCoreItems;
@@ -121,5 +122,6 @@ public class ClientEvents {
     @SubscribeEvent
     public static void registerScreens(RegisterMenuScreensEvent event) {
         event.register(PoptartCoreMenus.CRUCIBLE.get(), CrucibleScreen::new);
+        event.register(PoptartCoreMenus.BLAST_FURNACE.get(), BlastFurnaceScreen::new);
     }
 }

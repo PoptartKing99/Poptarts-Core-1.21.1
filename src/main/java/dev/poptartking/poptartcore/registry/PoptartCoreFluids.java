@@ -23,6 +23,7 @@ public class PoptartCoreFluids {
     public static final MoltenFluidDefinition MOLTEN_COPPER = registerMoltenMetal("copper");
     public static final MoltenFluidDefinition MOLTEN_TIN = registerMoltenMetal("tin");
     public static final MoltenFluidDefinition MOLTEN_BRONZE = registerMoltenMetal("bronze");
+    public static final MoltenFluidDefinition MOLTEN_STEEL = registerMoltenMetal("steel");
 
     private static MoltenFluidDefinition registerMoltenMetal(String name) {
         String fluidName = "molten_" + name;

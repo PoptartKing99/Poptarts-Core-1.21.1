@@ -28,6 +28,7 @@ public class PoptartCoreTabs {
                         output.accept(PoptartCoreItems.STEEL_BOOTS);
 
                         output.accept(PoptartCoreItems.CRUCIBLE);
+                        output.accept(PoptartCoreItems.BLAST_FURNACE);
                         output.accept(PoptartCoreItems.INGOT_MOULD);
                         output.accept(PoptartCoreItems.UNFIRED_INGOT_MOULD);
                         output.accept(PoptartCoreItems.PLATE_MOULD);
@@ -52,6 +53,7 @@ public class PoptartCoreTabs {
                         output.accept(PoptartCoreItems.STEEL_INGOT);
                         output.accept(PoptartCoreItems.STEEL_NUGGET);
                         output.accept(PoptartCoreItems.STEEL_PLATE);
+                        output.accept(PoptartCoreItems.COAL_COKE);
                     })
                     .build());
 

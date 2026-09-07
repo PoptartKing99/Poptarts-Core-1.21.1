@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BBB",
+    "BFB",
+    "BBB"
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:brick"
+    },
+    "F": {
+      "item": "minecraft:furnace"
+    }
+  },
+  "result": {
+    "id": "poptartcore:blast_furnace",
+    "count": 1
+  }
+}

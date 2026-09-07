@@ -30,6 +30,7 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
@@ -47,14 +48,13 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
     public static final int TANK_CAPACITY = 1000;
     public static final int CASTING_TIME = 100;
 
-    private NonNullList<ItemStack> items = NonNullList.withSize(6, ItemStack.EMPTY);
-
-    private final FluidTank tank = new FluidTank(TANK_CAPACITY) {
-        @Override
-        protected void onContentsChanged() {
-            setChanged();
-        }
-    };
+    protected final int inputCount;
+    protected final int fuelSlot;
+    protected final int containerSlot;
+    protected final int resultSlot;
+    protected final int tankCapacity;
+    protected NonNullList<ItemStack> items;
+    protected final FluidTank tank;
 
     private int burnTime;
     private int burnDuration;
@@ -63,7 +63,7 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
     private int castingProgress;
     private int castingTimeTotal = CASTING_TIME;
 
-    private final ContainerData dataAccess = new ContainerData() {
+    protected final ContainerData dataAccess = new ContainerData() {
 
         @Override
         public int get(int index) {
@@ -102,7 +102,24 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
     };
 
     public CrucibleBlockEntity(BlockPos pos, BlockState state) {
-        super(PoptartCoreBlockEntities.CRUCIBLE.get(), pos, state);
+        this(PoptartCoreBlockEntities.CRUCIBLE.get(), pos, state, 3, TANK_CAPACITY);
+    }
+
+    protected CrucibleBlockEntity(
+            BlockEntityType<?> type, BlockPos pos, BlockState state, int inputCount, int tankCapacity) {
+        super(type, pos, state);
+        this.inputCount = inputCount;
+        this.fuelSlot = inputCount;
+        this.containerSlot = inputCount + 1;
+        this.resultSlot = inputCount + 2;
+        this.tankCapacity = tankCapacity;
+        this.items = NonNullList.withSize(inputCount + 3, ItemStack.EMPTY);
+        this.tank = new FluidTank(tankCapacity) {
+            @Override
+            protected void onContentsChanged() {
+                setChanged();
+            }
+        };
     }
 
     public static void serverTick(Level level, BlockPos pos, BlockState state, CrucibleBlockEntity blockEntity) {
@@ -129,7 +146,7 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
         }
 
         if (!blockEntity.isBurning() && canProcess) {
-            ItemStack fuel = blockEntity.items.get(FUEL_SLOT);
+            ItemStack fuel = blockEntity.items.get(blockEntity.fuelSlot);
             int burnDuration = blockEntity.getBurnDuration(fuel);
 
             if (burnDuration > 0) {
@@ -137,7 +154,7 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
                 blockEntity.burnDuration = burnDuration;
 
                 if (fuel.hasCraftingRemainingItem()) {
-                    blockEntity.items.set(FUEL_SLOT, fuel.getCraftingRemainingItem());
+                    blockEntity.items.set(blockEntity.fuelSlot, fuel.getCraftingRemainingItem());
                 } else {
                     fuel.shrink(1);
                 }
@@ -146,9 +163,10 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
         }
 
         if (blockEntity.isBurning() && canProcess) {
-            int cookTimeTotal = alloyPlan != null
-                    ? alloyingRecipe.getCookingTime() * alloyPlan.batches()
-                    : meltingRecipe.getCookingTime() * meltingBatches;
+            int cookTimeTotal = blockEntity.adjustCookTime(
+                    alloyPlan != null
+                            ? alloyingRecipe.getCookingTime() * alloyPlan.batches()
+                            : meltingRecipe.getCookingTime() * meltingBatches);
 
             if (blockEntity.cookTime > 0 && blockEntity.cookTimeTotal != cookTimeTotal) {
                 blockEntity.cookTime = 0;
@@ -198,17 +216,8 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
             changed = true;
         }
 
-        int fluidLevel = blockEntity.getFluidLevel();
         boolean isLit = blockEntity.isBurning();
-        BlockState currentState = level.getBlockState(pos);
-
-        if (currentState.getValue(CrucibleBlock.LIT) != isLit
-                || currentState.getValue(CrucibleBlock.FLUID_LEVEL) != fluidLevel) {
-            level.setBlock(
-                    pos,
-                    currentState.setValue(CrucibleBlock.LIT, isLit).setValue(CrucibleBlock.FLUID_LEVEL, fluidLevel),
-                    3);
-
+        if (blockEntity.updateBlockState(level, pos, isLit)) {
             changed = true;
         }
 
@@ -217,28 +226,36 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
         }
     }
 
-    private MeltingRecipeInput getMeltingInput() {
-        return new MeltingRecipeInput(
-                List.of(items.get(INPUT_SLOT_1), items.get(INPUT_SLOT_2), items.get(INPUT_SLOT_3)));
+    protected MeltingRecipeInput getMeltingInput() {
+        return new MeltingRecipeInput(getInputStacks(), isBlastFurnace());
     }
 
-    private Optional<RecipeHolder<MeltingRecipe>> getMeltingRecipe(Level level) {
-        return level.getRecipeManager()
-                .getRecipeFor(PoptartCoreRecipes.CRUCIBLE_MELTING_TYPE.get(), getMeltingInput(), level);
+    protected Optional<RecipeHolder<MeltingRecipe>> getMeltingRecipe(Level level) {
+        return findMelting(getMeltingInput(), level);
     }
 
-    private AlloyingRecipeInput getAlloyingInput() {
-        return new AlloyingRecipeInput(
-                List.of(items.get(INPUT_SLOT_1), items.get(INPUT_SLOT_2), items.get(INPUT_SLOT_3)), tank.getFluid());
+    protected Optional<RecipeHolder<MeltingRecipe>> findMelting(MeltingRecipeInput input, Level level) {
+        return level.getRecipeManager().getRecipeFor(PoptartCoreRecipes.CRUCIBLE_MELTING_TYPE.get(), input, level);
     }
 
-    private Optional<RecipeHolder<AlloyingRecipe>> getAlloyingRecipe(Level level) {
-        return level.getRecipeManager()
-                .getRecipeFor(PoptartCoreRecipes.CRUCIBLE_ALLOYING_TYPE.get(), getAlloyingInput(), level);
+    protected AlloyingRecipeInput getAlloyingInput() {
+        return new AlloyingRecipeInput(getInputStacks(), tank.getFluid(), isBlastFurnace());
+    }
+
+    protected Optional<RecipeHolder<AlloyingRecipe>> getAlloyingRecipe(Level level) {
+        return findAlloying(getAlloyingInput(), level);
+    }
+
+    protected Optional<RecipeHolder<AlloyingRecipe>> findAlloying(AlloyingRecipeInput input, Level level) {
+        return level.getRecipeManager().getRecipeFor(PoptartCoreRecipes.CRUCIBLE_ALLOYING_TYPE.get(), input, level);
+    }
+
+    private List<ItemStack> getInputStacks() {
+        return List.copyOf(items.subList(0, inputCount));
     }
 
     private CastingRecipeInput getCastingInput() {
-        return new CastingRecipeInput(items.get(CONTAINER_SLOT), tank.getFluid());
+        return new CastingRecipeInput(items.get(containerSlot), tank.getFluid());
     }
 
     private Optional<RecipeHolder<CastingRecipe>> getCastingRecipe(Level level) {
@@ -260,12 +277,40 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
         return Math.min(4, (amount + 249) / 250);
     }
 
+    protected boolean updateBlockState(Level level, BlockPos pos, boolean isLit) {
+        BlockState currentState = level.getBlockState(pos);
+        int fluidLevel = getFluidLevel();
+
+        if (currentState.getValue(CrucibleBlock.LIT) == isLit
+                && currentState.getValue(CrucibleBlock.FLUID_LEVEL) == fluidLevel) {
+            return false;
+        }
+
+        level.setBlock(
+                pos,
+                currentState.setValue(CrucibleBlock.LIT, isLit).setValue(CrucibleBlock.FLUID_LEVEL, fluidLevel),
+                3);
+        return true;
+    }
+
     protected int getBurnDuration(ItemStack fuel) {
         if (fuel.isEmpty()) {
             return 0;
         }
 
-        return fuel.getBurnTime(RecipeType.SMELTING);
+        return fuel.getBurnTime(RecipeType.SMELTING) * fuelSpeedMultiplier(fuel);
+    }
+
+    protected boolean isBlastFurnace() {
+        return false;
+    }
+
+    protected int adjustCookTime(int base) {
+        return base;
+    }
+
+    protected int fuelSpeedMultiplier(ItemStack fuel) {
+        return 1;
     }
 
     private int meltBatches(MeltingRecipe recipe) {
@@ -289,13 +334,17 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
 
         int filledSlots = 0;
 
-        for (int slot = INPUT_SLOT_1; slot <= INPUT_SLOT_3; slot++) {
+        for (int slot = 0; slot < inputCount; slot++) {
             if (!items.get(slot).isEmpty()) {
                 filledSlots++;
             }
         }
 
-        return Math.min(filledSlots, maxBySpace);
+        return limitMeltingBatches(Math.min(filledSlots, maxBySpace));
+    }
+
+    protected int limitMeltingBatches(int availableBatches) {
+        return availableBatches;
     }
 
     private boolean performMelting(MeltingRecipe recipe) {
@@ -311,7 +360,7 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
 
         int melted = 0;
 
-        for (int slot = INPUT_SLOT_1; slot <= INPUT_SLOT_3 && melted < batches; slot++) {
+        for (int slot = 0; slot < inputCount && melted < batches; slot++) {
 
             ItemStack stack = items.get(slot);
 
@@ -332,11 +381,11 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
             return null;
         }
 
-        int batches = 1;
+        int batches = limitAlloyingBatches(recipe, availableBatches);
 
         ItemStack itemResult = recipe.itemResult();
         if (!itemResult.isEmpty()) {
-            ItemStack resultSlot = items.get(RESULT_SLOT);
+            ItemStack resultSlot = items.get(this.resultSlot);
             int availableSpace;
 
             if (resultSlot.isEmpty()) {
@@ -355,10 +404,10 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
             batches = Math.min(batches, maxBatchesByItem);
         }
 
-        int[] meltAmountPerSlot = new int[FUEL_SLOT];
-        FluidStack[] meltFluidPerSlot = new FluidStack[FUEL_SLOT];
+        int[] meltAmountPerSlot = new int[inputCount];
+        FluidStack[] meltFluidPerSlot = new FluidStack[inputCount];
 
-        for (int slot = INPUT_SLOT_1; slot <= INPUT_SLOT_3; slot++) {
+        for (int slot = 0; slot < inputCount; slot++) {
             ItemStack stack = items.get(slot);
 
             if (!stack.isEmpty() && !recipe.usesAsItem(stack)) {
@@ -372,7 +421,7 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
         }
 
         while (batches > 0) {
-            int[] itemsToConsume = new int[FUEL_SLOT];
+            int[] itemsToConsume = new int[inputCount];
             int tankToDrain =
                     gatherIngredients(recipe, batches, meltFluidPerSlot, meltAmountPerSlot, tankFluid, itemsToConsume);
 
@@ -390,12 +439,15 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
         return null;
     }
 
+    protected int limitAlloyingBatches(AlloyingRecipe recipe, int availableBatches) {
+        return 1;
+    }
+
     private FluidStack tryMelt(ItemStack stack, Level level) {
         ItemStack singleItem = stack.copyWithCount(1);
-        MeltingRecipeInput input = new MeltingRecipeInput(List.of(singleItem));
+        MeltingRecipeInput input = new MeltingRecipeInput(List.of(singleItem), isBlastFurnace());
 
-        return level.getRecipeManager()
-                .getRecipeFor(PoptartCoreRecipes.CRUCIBLE_MELTING_TYPE.get(), input, level)
+        return findMelting(input, level)
                 .map(RecipeHolder::value)
                 .map(recipe -> recipe.assembleFluid(input))
                 .orElse(FluidStack.EMPTY);
@@ -408,9 +460,9 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
             int[] meltAmountPerSlot,
             FluidStack tankFluid,
             int[] itemsToConsume) {
-        int[] remainingItems = new int[FUEL_SLOT];
+        int[] remainingItems = new int[inputCount];
 
-        for (int slot = INPUT_SLOT_1; slot <= INPUT_SLOT_3; slot++) {
+        for (int slot = 0; slot < inputCount; slot++) {
             remainingItems[slot] = items.get(slot).getCount();
         }
 
@@ -426,7 +478,7 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
                     needed -= Math.max(0, taken);
                 }
 
-                for (int slot = INPUT_SLOT_1; slot <= INPUT_SLOT_3 && needed > 0; slot++) {
+                for (int slot = 0; slot < inputCount && needed > 0; slot++) {
                     FluidStack melted = meltFluidPerSlot[slot];
 
                     if (melted == null
@@ -450,7 +502,7 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
             } else if (!ingredient.item().isEmpty()) {
                 int needed = batches;
 
-                for (int slot = INPUT_SLOT_1; slot <= INPUT_SLOT_3 && needed > 0; slot++) {
+                for (int slot = 0; slot < inputCount && needed > 0; slot++) {
                     if (meltFluidPerSlot[slot] != null || remainingItems[slot] <= 0) {
                         continue;
                     }
@@ -491,7 +543,7 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
             tank.drain(plan.tankToDrain(), IFluidHandler.FluidAction.EXECUTE);
         }
 
-        for (int slot = INPUT_SLOT_1; slot <= INPUT_SLOT_3; slot++) {
+        for (int slot = 0; slot < inputCount; slot++) {
             if (plan.itemsToConsume()[slot] > 0) {
                 items.get(slot).shrink(plan.itemsToConsume()[slot]);
             }
@@ -503,13 +555,13 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
 
         ItemStack itemResult = recipe.itemResult();
         if (!itemResult.isEmpty()) {
-            ItemStack resultSlot = items.get(RESULT_SLOT);
+            ItemStack resultSlot = items.get(this.resultSlot);
             int amountProduced = itemResult.getCount() * plan.batches();
 
             if (resultSlot.isEmpty()) {
                 ItemStack output = itemResult.copy();
                 output.setCount(amountProduced);
-                items.set(RESULT_SLOT, output);
+                items.set(this.resultSlot, output);
             } else {
                 resultSlot.grow(amountProduced);
             }
@@ -519,8 +571,8 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
     }
 
     private boolean performCasting(Level level, CastingRecipe recipe) {
-        ItemStack mould = items.get(CONTAINER_SLOT);
-        ItemStack result = items.get(RESULT_SLOT);
+        ItemStack mould = items.get(containerSlot);
+        ItemStack result = items.get(resultSlot);
 
         CastingRecipeInput input = new CastingRecipeInput(mould, tank.getFluid());
 
@@ -547,7 +599,7 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
         }
 
         if (result.isEmpty()) {
-            items.set(RESULT_SLOT, castingResult);
+            items.set(resultSlot, castingResult);
         } else {
             result.grow(castingResult.getCount());
         }
@@ -557,7 +609,7 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
 
     private boolean canCast(Level level, CastingRecipe recipe) {
         ItemStack castingResult = recipe.assemble(getCastingInput(), level.registryAccess());
-        ItemStack result = items.get(RESULT_SLOT);
+        ItemStack result = items.get(resultSlot);
 
         return !castingResult.isEmpty()
                 && (result.isEmpty()
@@ -567,7 +619,7 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
 
     @Override
     public int getContainerSize() {
-        return 6;
+        return inputCount + 3;
     }
 
     @Override
