@@ -62,18 +62,18 @@ public class ClientEvents {
             event.registerLayerDefinition(PoptartCoreModelLayers.LEATHER_TUNIC_SKIRTLESS_LAYER, LeatherArmorModels::tunicSkirtless);
             event.registerLayerDefinition(PoptartCoreModelLayers.LEATHER_PANTS_LAYER, LeatherArmorModels::pants);
             event.registerLayerDefinition(PoptartCoreModelLayers.LEATHER_BOOTS_LAYER, LeatherArmorModels::boots);
-        event.registerLayerDefinition(PoptartCoreModelLayers.IRON_PLATE_HELMET_LAYER, IronPlateArmorModels::helmet);
+        event.registerLayerDefinition(PoptartCoreModelLayers.IRON_HELMET_LAYER, IronArmorModels::helmet);
         event.registerLayerDefinition(
-                PoptartCoreModelLayers.IRON_PLATE_CHESTPLATE_LAYER, IronPlateArmorModels::chestplate);
-        event.registerLayerDefinition(PoptartCoreModelLayers.IRON_PLATE_LEGGINGS_LAYER, IronPlateArmorModels::leggings);
-        event.registerLayerDefinition(PoptartCoreModelLayers.IRON_PLATE_BOOTS_LAYER, IronPlateArmorModels::boots);
+                PoptartCoreModelLayers.IRON_CHESTPLATE_LAYER, IronArmorModels::chestplate);
+        event.registerLayerDefinition(PoptartCoreModelLayers.IRON_LEGGINGS_LAYER, IronArmorModels::leggings);
+        event.registerLayerDefinition(PoptartCoreModelLayers.IRON_BOOTS_LAYER, IronArmorModels::boots);
         event.registerLayerDefinition(
-                PoptartCoreModelLayers.STEEL_PLATE_HELMET_LAYER, SteelPlateArmorModels::helmet);
+                PoptartCoreModelLayers.STEEL_HELMET_LAYER, SteelArmorModels::helmet);
         event.registerLayerDefinition(
-                PoptartCoreModelLayers.STEEL_PLATE_CHESTPLATE_LAYER, SteelPlateArmorModels::chestplate);
+                PoptartCoreModelLayers.STEEL_CHESTPLATE_LAYER, SteelArmorModels::chestplate);
         event.registerLayerDefinition(
-                PoptartCoreModelLayers.STEEL_PLATE_LEGGINGS_LAYER, SteelPlateArmorModels::leggings);
-        event.registerLayerDefinition(PoptartCoreModelLayers.STEEL_PLATE_BOOTS_LAYER, SteelPlateArmorModels::boots);
+                PoptartCoreModelLayers.STEEL_LEGGINGS_LAYER, SteelArmorModels::leggings);
+        event.registerLayerDefinition(PoptartCoreModelLayers.STEEL_BOOTS_LAYER, SteelArmorModels::boots);
     }
 
     @SubscribeEvent
@@ -96,29 +96,29 @@ public class ClientEvents {
         PoptartCoreModelLayers.LEATHER_BOOTS_MODEL = new PoptartCoreArmorModel(
                 event.getEntityModels().bakeLayer(PoptartCoreModelLayers.LEATHER_BOOTS_LAYER));
 
-        PoptartCoreModelLayers.IRON_PLATE_HELMET_MODEL = new PoptartCoreArmorModel(
-                event.getEntityModels().bakeLayer(PoptartCoreModelLayers.IRON_PLATE_HELMET_LAYER));
+        PoptartCoreModelLayers.IRON_HELMET_MODEL =
+                new PoptartCoreArmorModel(event.getEntityModels().bakeLayer(PoptartCoreModelLayers.IRON_HELMET_LAYER));
 
-        PoptartCoreModelLayers.IRON_PLATE_CHESTPLATE_MODEL = new PoptartCoreArmorModel(
-                event.getEntityModels().bakeLayer(PoptartCoreModelLayers.IRON_PLATE_CHESTPLATE_LAYER));
+        PoptartCoreModelLayers.IRON_CHESTPLATE_MODEL = new PoptartCoreArmorModel(
+                event.getEntityModels().bakeLayer(PoptartCoreModelLayers.IRON_CHESTPLATE_LAYER));
 
-        PoptartCoreModelLayers.IRON_PLATE_LEGGINGS_MODEL = new PoptartCoreArmorModel(
-                event.getEntityModels().bakeLayer(PoptartCoreModelLayers.IRON_PLATE_LEGGINGS_LAYER));
+        PoptartCoreModelLayers.IRON_LEGGINGS_MODEL = new PoptartCoreArmorModel(
+                event.getEntityModels().bakeLayer(PoptartCoreModelLayers.IRON_LEGGINGS_LAYER));
 
-        PoptartCoreModelLayers.IRON_PLATE_BOOTS_MODEL = new PoptartCoreArmorModel(
-                event.getEntityModels().bakeLayer(PoptartCoreModelLayers.IRON_PLATE_BOOTS_LAYER));
+        PoptartCoreModelLayers.IRON_BOOTS_MODEL =
+                new PoptartCoreArmorModel(event.getEntityModels().bakeLayer(PoptartCoreModelLayers.IRON_BOOTS_LAYER));
 
-        PoptartCoreModelLayers.STEEL_PLATE_HELMET_MODEL = new PoptartCoreArmorModel(
-                event.getEntityModels().bakeLayer(PoptartCoreModelLayers.STEEL_PLATE_HELMET_LAYER));
+        PoptartCoreModelLayers.STEEL_HELMET_MODEL = new PoptartCoreArmorModel(
+                event.getEntityModels().bakeLayer(PoptartCoreModelLayers.STEEL_HELMET_LAYER));
 
-        PoptartCoreModelLayers.STEEL_PLATE_CHESTPLATE_MODEL = new PoptartCoreArmorModel(
-                event.getEntityModels().bakeLayer(PoptartCoreModelLayers.STEEL_PLATE_CHESTPLATE_LAYER));
+        PoptartCoreModelLayers.STEEL_CHESTPLATE_MODEL = new PoptartCoreArmorModel(
+                event.getEntityModels().bakeLayer(PoptartCoreModelLayers.STEEL_CHESTPLATE_LAYER));
 
-        PoptartCoreModelLayers.STEEL_PLATE_LEGGINGS_MODEL = new PoptartCoreArmorModel(
-                event.getEntityModels().bakeLayer(PoptartCoreModelLayers.STEEL_PLATE_LEGGINGS_LAYER));
+        PoptartCoreModelLayers.STEEL_LEGGINGS_MODEL = new PoptartCoreArmorModel(
+                event.getEntityModels().bakeLayer(PoptartCoreModelLayers.STEEL_LEGGINGS_LAYER));
 
-        PoptartCoreModelLayers.STEEL_PLATE_BOOTS_MODEL = new PoptartCoreArmorModel(
-                event.getEntityModels().bakeLayer(PoptartCoreModelLayers.STEEL_PLATE_BOOTS_LAYER));
+        PoptartCoreModelLayers.STEEL_BOOTS_MODEL =
+                new PoptartCoreArmorModel(event.getEntityModels().bakeLayer(PoptartCoreModelLayers.STEEL_BOOTS_LAYER));
     }
 
     @SubscribeEvent

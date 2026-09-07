@@ -9,14 +9,14 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 
-public abstract class PlateArmorClientExtensions implements IClientItemExtensions {
+public abstract class ArmorClientExtensions implements IClientItemExtensions {
 
     private final Supplier<PoptartCoreArmorModel> helmetModel;
     private final Supplier<PoptartCoreArmorModel> chestplateModel;
     private final Supplier<PoptartCoreArmorModel> leggingsModel;
     private final Supplier<PoptartCoreArmorModel> bootsModel;
 
-    protected PlateArmorClientExtensions(
+    protected ArmorClientExtensions(
             Supplier<PoptartCoreArmorModel> helmetModel,
             Supplier<PoptartCoreArmorModel> chestplateModel,
             Supplier<PoptartCoreArmorModel> leggingsModel,

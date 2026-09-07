@@ -5,9 +5,9 @@ import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 
-public final class IronPlateArmorModels {
+public final class SteelArmorModels {
 
-    private IronPlateArmorModels() {}
+    private SteelArmorModels() {}
 
     public static LayerDefinition helmet() {
         return PoptartCoreArmorModel.createArmorModel(
@@ -23,7 +23,7 @@ public final class IronPlateArmorModels {
                         rightFoot,
                         leftFoot) -> {
                     head.addOrReplaceChild(
-                            "iron_plate_helmet",
+                            "steel_helmet",
                             CubeListBuilder.create()
                                     .texOffs(0, 0)
                                     .addBox(-4.5F, -9.0F, -4.5F, 9.0F, 10.0F, 9.0F, new CubeDeformation(0.3F))
@@ -49,19 +49,19 @@ public final class IronPlateArmorModels {
                         rightFoot,
                         leftFoot) -> {
                     leftArm.addOrReplaceChild(
-                            "iron_plate_left_arm",
+                            "steel_left_arm",
                             CubeListBuilder.create()
                                     .texOffs(21, 19)
                                     .addBox(-1.0F, -2.5F, -2.5F, 5.0F, 6.0F, 5.0F, new CubeDeformation(-0.1F)),
                             PartPose.ZERO);
                     rightArm.addOrReplaceChild(
-                            "iron_plate_right_arm",
+                            "steel_right_arm",
                             CubeListBuilder.create()
                                     .texOffs(0, 19)
                                     .addBox(-4.0F, -2.5F, -2.5F, 5.0F, 6.0F, 5.0F, new CubeDeformation(-0.1F)),
                             PartPose.ZERO);
                     body.addOrReplaceChild(
-                            "iron_plate_body",
+                            "steel_body",
                             CubeListBuilder.create()
                                     .texOffs(0, 0)
                                     .addBox(-4.5F, -0.5F, -2.5F, 9.0F, 14.0F, 5.0F, new CubeDeformation(0.01F)),
@@ -85,7 +85,7 @@ public final class IronPlateArmorModels {
                         rightFoot,
                         leftFoot) -> {
                     leftLegging.addOrReplaceChild(
-                            "iron_plate_left_leg",
+                            "steel_left_leg",
                             CubeListBuilder.create()
                                     .texOffs(0, 16)
                                     .mirror()
@@ -93,13 +93,13 @@ public final class IronPlateArmorModels {
                                     .mirror(false),
                             PartPose.ZERO);
                     rightLegging.addOrReplaceChild(
-                            "iron_plate_right_leg",
+                            "steel_right_leg",
                             CubeListBuilder.create()
                                     .texOffs(0, 16)
                                     .addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.35F)),
                             PartPose.ZERO);
                     leggings.addOrReplaceChild(
-                            "iron_plate_waist",
+                            "steel_waist",
                             CubeListBuilder.create()
                                     .texOffs(0, 0)
                                     .addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.4F)),
@@ -123,7 +123,7 @@ public final class IronPlateArmorModels {
                         rightFoot,
                         leftFoot) -> {
                     leftFoot.addOrReplaceChild(
-                            "iron_plate_left_boot",
+                            "steel_left_boot",
                             CubeListBuilder.create()
                                     .texOffs(0, 0)
                                     .mirror()
@@ -131,7 +131,7 @@ public final class IronPlateArmorModels {
                                     .mirror(false),
                             PartPose.ZERO);
                     rightFoot.addOrReplaceChild(
-                            "iron_plate_right_boot",
+                            "steel_right_boot",
                             CubeListBuilder.create()
                                     .texOffs(0, 0)
                                     .addBox(-2.6F, 1.3F, -2.5F, 5.0F, 11.0F, 5.0F, new CubeDeformation(0.0F)),

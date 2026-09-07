@@ -9,13 +9,13 @@ import org.jetbrains.annotations.Nullable;
 public final class SteelArmorTextures {
 
     private static final ResourceLocation HELMET_TEXTURE =
-            PoptartCore.location("textures/armor/steel_plate_helmet.png");
+            PoptartCore.location("textures/armor/steel_helmet.png");
     private static final ResourceLocation CHESTPLATE_TEXTURE =
-            PoptartCore.location("textures/armor/steel_plate_chestplate.png");
+            PoptartCore.location("textures/armor/steel_chestplate.png");
     private static final ResourceLocation LEGGINGS_TEXTURE =
-            PoptartCore.location("textures/armor/steel_plate_leggings.png");
+            PoptartCore.location("textures/armor/steel_leggings.png");
     private static final ResourceLocation BOOTS_TEXTURE =
-            PoptartCore.location("textures/armor/steel_plate_boots.png");
+            PoptartCore.location("textures/armor/steel_boots.png");
 
     private SteelArmorTextures() {}
 
