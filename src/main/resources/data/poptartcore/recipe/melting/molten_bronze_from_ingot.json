@@ -3,7 +3,7 @@
   "ingredient": {
     "item": "poptartcore:bronze_ingot"
   },
-  "duration": 600,
+  "duration": 500,
   "result": {
     "id": "poptartcore:molten_bronze",
     "amount": 250

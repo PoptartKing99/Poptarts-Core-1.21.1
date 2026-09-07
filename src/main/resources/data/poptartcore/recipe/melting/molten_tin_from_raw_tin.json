@@ -3,7 +3,7 @@
   "ingredient": {
     "item": "poptartcore:raw_tin"
   },
-  "duration": 600,
+  "duration": 500,
   "result": {
     "id": "poptartcore:molten_tin",
     "amount": 250

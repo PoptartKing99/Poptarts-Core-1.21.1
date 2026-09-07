@@ -3,7 +3,7 @@
   "ingredient": {
     "item": "minecraft:raw_copper"
   },
-  "duration": 200,
+  "duration": 500,
   "result": {
     "id": "poptartcore:molten_copper",
     "amount": 250
