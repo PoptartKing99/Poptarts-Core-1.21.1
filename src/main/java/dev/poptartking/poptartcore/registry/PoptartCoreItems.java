@@ -26,6 +26,11 @@ public class PoptartCoreItems {
             "raw_hide_leggings",
             () -> new RawHideArmorItem(ArmorItem.Type.LEGGINGS, new Item.Properties().durability(140)));
     public static final DeferredItem<Item> STEEL_INGOT = registerItem("steel_ingot");
+    public static final DeferredItem<Item> STEEL_NUGGET = registerItem("steel_nugget");
+    public static final DeferredItem<Item> STEEL_SHEET = registerItem("steel_sheet");
+    public static final DeferredItem<Item> BRONZE_INGOT = registerItem("bronze_ingot");
+    public static final DeferredItem<Item> BRONZE_NUGGET = registerItem("bronze_nugget");
+    public static final DeferredItem<Item> BRONZE_SHEET = registerItem("bronze_sheet");
     public static final DeferredItem<ArmorItem> STEEL_HELMET = ITEMS.register(
             "steel_helmet",
             () -> new ArmorItem(
