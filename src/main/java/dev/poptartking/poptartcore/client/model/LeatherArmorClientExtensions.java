@@ -1,7 +1,7 @@
 package dev.poptartking.poptartcore.client.model;
 
+import dev.poptartking.poptartcore.armor.ArmorTextures;
 import dev.poptartking.poptartcore.client.PoptartCoreModelLayers;
-import dev.poptartking.poptartcore.armor.LeatherArmorTextures;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.util.Mth;
@@ -42,7 +42,7 @@ public class LeatherArmorClientExtensions implements IClientItemExtensions {
     @Override
     public int getArmorLayerTintColor(
             ItemStack stack, LivingEntity entity, ArmorMaterial.Layer layer, int layerIdx, int fallbackColor) {
-        if (!layer.dyeable() || !LeatherArmorTextures.isDyed(stack)) {
+        if (!layer.dyeable() || !ArmorTextures.isDyedLeather(stack)) {
             return -1;
         }
 
