@@ -51,7 +51,7 @@ public final class IronPlateArmorModels {
                     leftArm.addOrReplaceChild(
                             "iron_plate_left_arm",
                             CubeListBuilder.create()
-                                    .texOffs(0, 19)
+                                    .texOffs(21, 19)
                                     .addBox(-1.0F, -2.5F, -2.5F, 5.0F, 6.0F, 5.0F, new CubeDeformation(-0.1F)),
                             PartPose.ZERO);
                     rightArm.addOrReplaceChild(
