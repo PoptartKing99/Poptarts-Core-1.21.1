@@ -20,6 +20,10 @@ public class PoptartCoreModelLayers {
     public static PoptartCoreArmorModel IRON_PLATE_CHESTPLATE_MODEL;
     public static PoptartCoreArmorModel IRON_PLATE_LEGGINGS_MODEL;
     public static PoptartCoreArmorModel IRON_PLATE_BOOTS_MODEL;
+    public static PoptartCoreArmorModel STEEL_PLATE_HELMET_MODEL;
+    public static PoptartCoreArmorModel STEEL_PLATE_CHESTPLATE_MODEL;
+    public static PoptartCoreArmorModel STEEL_PLATE_LEGGINGS_MODEL;
+    public static PoptartCoreArmorModel STEEL_PLATE_BOOTS_MODEL;
 
     public static final ModelLayerLocation MINING_HELMET_LAYER =
             new ModelLayerLocation(PoptartCore.location("mining_helmet"), "main");
@@ -41,4 +45,12 @@ public class PoptartCoreModelLayers {
             new ModelLayerLocation(PoptartCore.location("iron_plate_leggings"), "main");
     public static final ModelLayerLocation IRON_PLATE_BOOTS_LAYER =
             new ModelLayerLocation(PoptartCore.location("iron_plate_boots"), "main");
+    public static final ModelLayerLocation STEEL_PLATE_HELMET_LAYER =
+            new ModelLayerLocation(PoptartCore.location("steel_plate_helmet"), "main");
+    public static final ModelLayerLocation STEEL_PLATE_CHESTPLATE_LAYER =
+            new ModelLayerLocation(PoptartCore.location("steel_plate_chestplate"), "main");
+    public static final ModelLayerLocation STEEL_PLATE_LEGGINGS_LAYER =
+            new ModelLayerLocation(PoptartCore.location("steel_plate_leggings"), "main");
+    public static final ModelLayerLocation STEEL_PLATE_BOOTS_LAYER =
+            new ModelLayerLocation(PoptartCore.location("steel_plate_boots"), "main");
 }

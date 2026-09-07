@@ -24,6 +24,15 @@ public class PoptartCoreArmorMaterials {
     public static final Holder<ArmorMaterial> RAW_HIDE_ARMOR_MATERIAL = register(
             "raw_hide", protection(2, 4, 3, 2), 8, ARMOR_EQUIP_LEATHER, 0.0F, 0.0F, () -> Ingredient.of(LEATHER));
 
+    public static final Holder<ArmorMaterial> STEEL_ARMOR_MATERIAL = register(
+            "steel",
+            protection(3, 7, 6, 3),
+            12,
+            ARMOR_EQUIP_IRON,
+            1.5F,
+            0.0F,
+            () -> Ingredient.of(PoptartCoreItems.STEEL_INGOT.get()));
+
     private static EnumMap<ArmorItem.Type, Integer> protection(int helmet, int chestplate, int leggings, int boots) {
         return Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
             map.put(ArmorItem.Type.HELMET, helmet);

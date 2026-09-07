@@ -22,6 +22,11 @@ public class PoptartCoreTabs {
                         output.accept(PoptartCoreItems.RAW_HIDE_HELMET);
                         output.accept(PoptartCoreItems.RAW_HIDE_CHESTPLATE);
                         output.accept(PoptartCoreItems.RAW_HIDE_LEGGINGS);
+                        output.accept(PoptartCoreItems.STEEL_INGOT);
+                        output.accept(PoptartCoreItems.STEEL_HELMET);
+                        output.accept(PoptartCoreItems.STEEL_CHESTPLATE);
+                        output.accept(PoptartCoreItems.STEEL_LEGGINGS);
+                        output.accept(PoptartCoreItems.STEEL_BOOTS);
                         output.accept(PoptartCoreItems.CRUCIBLE);
                         output.accept(PoptartCoreItems.UNFIRED_INGOT_MOULD);
                         output.accept(PoptartCoreItems.INGOT_MOULD);

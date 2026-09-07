@@ -5,6 +5,11 @@
   "item.poptartcore.raw_hide_leggings" : "Raw Hide Leggings",
   "item.poptartcore.unfired_ingot_mould" : "Unfired Ingot Mould",
   "item.poptartcore.ingot_mould" : "Ingot Mould",
+  "item.poptartcore.steel_ingot" : "Steel Ingot",
+  "item.poptartcore.steel_helmet" : "Steel Plate Helmet",
+  "item.poptartcore.steel_chestplate" : "Steel Plate Chestplate",
+  "item.poptartcore.steel_leggings" : "Steel Plate Leggings",
+  "item.poptartcore.steel_boots" : "Steel Plate Boots",
   "block.poptartcore.crucible" : "Crucible",
   "container.poptartcore.crucible" : "Crucible",
   "creativetab.poptartcore.poptartcore_tab" : "PoptartCore"

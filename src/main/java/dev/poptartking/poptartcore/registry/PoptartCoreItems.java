@@ -25,6 +25,31 @@ public class PoptartCoreItems {
     public static final DeferredItem<RawHideArmorItem> RAW_HIDE_LEGGINGS = ITEMS.register(
             "raw_hide_leggings",
             () -> new RawHideArmorItem(ArmorItem.Type.LEGGINGS, new Item.Properties().durability(140)));
+    public static final DeferredItem<Item> STEEL_INGOT = registerItem("steel_ingot");
+    public static final DeferredItem<ArmorItem> STEEL_HELMET = ITEMS.register(
+            "steel_helmet",
+            () -> new ArmorItem(
+                    PoptartCoreArmorMaterials.STEEL_ARMOR_MATERIAL,
+                    ArmorItem.Type.HELMET,
+                    new Item.Properties().durability(275)));
+    public static final DeferredItem<ArmorItem> STEEL_CHESTPLATE = ITEMS.register(
+            "steel_chestplate",
+            () -> new ArmorItem(
+                    PoptartCoreArmorMaterials.STEEL_ARMOR_MATERIAL,
+                    ArmorItem.Type.CHESTPLATE,
+                    new Item.Properties().durability(400)));
+    public static final DeferredItem<ArmorItem> STEEL_LEGGINGS = ITEMS.register(
+            "steel_leggings",
+            () -> new ArmorItem(
+                    PoptartCoreArmorMaterials.STEEL_ARMOR_MATERIAL,
+                    ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().durability(375)));
+    public static final DeferredItem<ArmorItem> STEEL_BOOTS = ITEMS.register(
+            "steel_boots",
+            () -> new ArmorItem(
+                    PoptartCoreArmorMaterials.STEEL_ARMOR_MATERIAL,
+                    ArmorItem.Type.BOOTS,
+                    new Item.Properties().durability(325)));
     public static final DeferredItem<CrucibleBlockItem> CRUCIBLE = ITEMS.register(
             "crucible", () -> new CrucibleBlockItem(PoptartCoreBlocks.CRUCIBLE.get(), new Item.Properties()));
     public static final DeferredItem<Item> UNFIRED_INGOT_MOULD =
