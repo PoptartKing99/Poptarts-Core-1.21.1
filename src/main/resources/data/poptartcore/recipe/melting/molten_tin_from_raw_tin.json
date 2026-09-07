@@ -1,0 +1,11 @@
+{
+  "type": "poptartcore:crucible_melting",
+  "ingredient": {
+    "item": "poptartcore:raw_tin"
+  },
+  "duration": 600,
+  "result": {
+    "id": "poptartcore:molten_tin",
+    "amount": 250
+  }
+}

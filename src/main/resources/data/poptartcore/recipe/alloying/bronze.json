@@ -1,0 +1,18 @@
+{
+  "type": "poptartcore:crucible_alloying",
+  "ingredients": [
+    {
+      "id": "poptartcore:molten_copper",
+      "amount": 250
+    },
+    {
+      "id": "poptartcore:molten_tin",
+      "amount": 250
+    }
+  ],
+  "duration": 800,
+  "result": {
+    "id": "poptartcore:molten_bronze",
+    "amount": 250
+  }
+}

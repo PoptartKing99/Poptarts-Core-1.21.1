@@ -1,0 +1,11 @@
+{
+  "type": "poptartcore:crucible_melting",
+  "ingredient": {
+    "item": "poptartcore:bronze_ingot"
+  },
+  "duration": 600,
+  "result": {
+    "id": "poptartcore:molten_bronze",
+    "amount": 250
+  }
+}

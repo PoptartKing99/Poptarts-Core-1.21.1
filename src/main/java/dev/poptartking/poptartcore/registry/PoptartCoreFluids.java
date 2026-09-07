@@ -21,6 +21,8 @@ public class PoptartCoreFluids {
     public static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(Registries.FLUID, PoptartCore.MOD_ID);
 
     public static final MoltenFluidDefinition MOLTEN_COPPER = registerMoltenMetal("copper");
+    public static final MoltenFluidDefinition MOLTEN_TIN = registerMoltenMetal("tin");
+    public static final MoltenFluidDefinition MOLTEN_BRONZE = registerMoltenMetal("bronze");
 
     private static MoltenFluidDefinition registerMoltenMetal(String name) {
         String fluidName = "molten_" + name;

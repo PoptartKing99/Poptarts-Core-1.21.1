@@ -304,11 +304,13 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
 
     private AlloyPlan planAlloying(Level level, AlloyingRecipe recipe) {
         FluidStack tankFluid = tank.getFluid();
-        int batches = recipe.batchCount(getAlloyingInput(), level);
+        int availableBatches = recipe.batchCount(getAlloyingInput(), level);
 
-        if (batches <= 0) {
+        if (availableBatches <= 0) {
             return null;
         }
+
+        int batches = 1;
 
         ItemStack itemResult = recipe.itemResult();
         if (!itemResult.isEmpty()) {

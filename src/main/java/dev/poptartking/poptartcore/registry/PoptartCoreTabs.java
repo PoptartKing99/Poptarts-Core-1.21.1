@@ -15,35 +15,41 @@ public class PoptartCoreTabs {
 
     public static final Supplier<CreativeModeTab> POPTARTCORE_TAB =
             CREATIVE_MODE_TAB.register("poptartcore_tab", () -> CreativeModeTab.builder()
-                    .icon(() -> new ItemStack(PoptartCoreItems.MINING_HELMET.get()))
+                    .icon(() -> new ItemStack(PoptartCoreItems.CRUCIBLE.get()))
                     .title(Component.translatable("creativetab.poptartcore.poptartcore_tab"))
                     .displayItems((parameters, output) -> {
                         output.accept(PoptartCoreItems.MINING_HELMET);
                         output.accept(PoptartCoreItems.RAW_HIDE_HELMET);
                         output.accept(PoptartCoreItems.RAW_HIDE_CHESTPLATE);
                         output.accept(PoptartCoreItems.RAW_HIDE_LEGGINGS);
-                        output.accept(PoptartCoreItems.STEEL_INGOT);
-                        output.accept(PoptartCoreItems.STEEL_NUGGET);
-                        output.accept(PoptartCoreItems.STEEL_SHEET);
-                        output.accept(PoptartCoreItems.BRONZE_INGOT);
-                        output.accept(PoptartCoreItems.BRONZE_NUGGET);
-                        output.accept(PoptartCoreItems.BRONZE_SHEET);
-                        output.accept(PoptartCoreItems.TIN_INGOT);
-                        output.accept(PoptartCoreItems.TIN_NUGGET);
-                        output.accept(PoptartCoreItems.RAW_TIN);
-                        output.accept(PoptartCoreItems.LEAD_INGOT);
-                        output.accept(PoptartCoreItems.LEAD_NUGGET);
-                        output.accept(PoptartCoreItems.RAW_LEAD);
-                        output.accept(PoptartCoreItems.SILVER_INGOT);
-                        output.accept(PoptartCoreItems.SILVER_NUGGET);
-                        output.accept(PoptartCoreItems.RAW_SILVER);
                         output.accept(PoptartCoreItems.STEEL_HELMET);
                         output.accept(PoptartCoreItems.STEEL_CHESTPLATE);
                         output.accept(PoptartCoreItems.STEEL_LEGGINGS);
                         output.accept(PoptartCoreItems.STEEL_BOOTS);
+
                         output.accept(PoptartCoreItems.CRUCIBLE);
-                        output.accept(PoptartCoreItems.UNFIRED_INGOT_MOULD);
                         output.accept(PoptartCoreItems.INGOT_MOULD);
+                        output.accept(PoptartCoreItems.UNFIRED_INGOT_MOULD);
+
+                        output.accept(PoptartCoreItems.RAW_TIN);
+                        output.accept(PoptartCoreItems.TIN_INGOT);
+                        output.accept(PoptartCoreItems.TIN_NUGGET);
+
+                        output.accept(PoptartCoreItems.RAW_LEAD);
+                        output.accept(PoptartCoreItems.LEAD_INGOT);
+                        output.accept(PoptartCoreItems.LEAD_NUGGET);
+
+                        output.accept(PoptartCoreItems.RAW_SILVER);
+                        output.accept(PoptartCoreItems.SILVER_INGOT);
+                        output.accept(PoptartCoreItems.SILVER_NUGGET);
+
+                        output.accept(PoptartCoreItems.BRONZE_INGOT);
+                        output.accept(PoptartCoreItems.BRONZE_NUGGET);
+                        output.accept(PoptartCoreItems.BRONZE_SHEET);
+
+                        output.accept(PoptartCoreItems.STEEL_INGOT);
+                        output.accept(PoptartCoreItems.STEEL_NUGGET);
+                        output.accept(PoptartCoreItems.STEEL_SHEET);
                     })
                     .build());
 
