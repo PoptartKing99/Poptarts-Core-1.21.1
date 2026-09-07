@@ -5,9 +5,9 @@ import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 
-public final class SteelArmorModels {
+public final class MetalArmorModels {
 
-    private SteelArmorModels() {}
+    private MetalArmorModels() {}
 
     public static LayerDefinition helmet() {
         return PoptartCoreArmorModel.createArmorModel(
@@ -23,7 +23,7 @@ public final class SteelArmorModels {
                         rightFoot,
                         leftFoot) -> {
                     head.addOrReplaceChild(
-                            "steel_helmet",
+                            "metal_helmet",
                             CubeListBuilder.create()
                                     .texOffs(0, 0)
                                     .addBox(-4.5F, -9.0F, -4.5F, 9.0F, 10.0F, 9.0F, new CubeDeformation(0.3F))
@@ -49,19 +49,19 @@ public final class SteelArmorModels {
                         rightFoot,
                         leftFoot) -> {
                     leftArm.addOrReplaceChild(
-                            "steel_left_arm",
+                            "metal_left_arm",
                             CubeListBuilder.create()
                                     .texOffs(21, 19)
                                     .addBox(-1.0F, -2.5F, -2.5F, 5.0F, 6.0F, 5.0F, new CubeDeformation(-0.1F)),
                             PartPose.ZERO);
                     rightArm.addOrReplaceChild(
-                            "steel_right_arm",
+                            "metal_right_arm",
                             CubeListBuilder.create()
                                     .texOffs(0, 19)
                                     .addBox(-4.0F, -2.5F, -2.5F, 5.0F, 6.0F, 5.0F, new CubeDeformation(-0.1F)),
                             PartPose.ZERO);
                     body.addOrReplaceChild(
-                            "steel_body",
+                            "metal_body",
                             CubeListBuilder.create()
                                     .texOffs(0, 0)
                                     .addBox(-4.5F, -0.5F, -2.5F, 9.0F, 14.0F, 5.0F, new CubeDeformation(0.01F)),
@@ -85,7 +85,7 @@ public final class SteelArmorModels {
                         rightFoot,
                         leftFoot) -> {
                     leftLegging.addOrReplaceChild(
-                            "steel_left_leg",
+                            "metal_left_leg",
                             CubeListBuilder.create()
                                     .texOffs(0, 16)
                                     .mirror()
@@ -93,13 +93,13 @@ public final class SteelArmorModels {
                                     .mirror(false),
                             PartPose.ZERO);
                     rightLegging.addOrReplaceChild(
-                            "steel_right_leg",
+                            "metal_right_leg",
                             CubeListBuilder.create()
                                     .texOffs(0, 16)
                                     .addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.35F)),
                             PartPose.ZERO);
                     leggings.addOrReplaceChild(
-                            "steel_waist",
+                            "metal_waist",
                             CubeListBuilder.create()
                                     .texOffs(0, 0)
                                     .addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.4F)),
@@ -123,7 +123,7 @@ public final class SteelArmorModels {
                         rightFoot,
                         leftFoot) -> {
                     leftFoot.addOrReplaceChild(
-                            "steel_left_boot",
+                            "metal_left_boot",
                             CubeListBuilder.create()
                                     .texOffs(0, 0)
                                     .mirror()
@@ -131,7 +131,7 @@ public final class SteelArmorModels {
                                     .mirror(false),
                             PartPose.ZERO);
                     rightFoot.addOrReplaceChild(
-                            "steel_right_boot",
+                            "metal_right_boot",
                             CubeListBuilder.create()
                                     .texOffs(0, 0)
                                     .addBox(-2.6F, 1.3F, -2.5F, 5.0F, 11.0F, 5.0F, new CubeDeformation(0.0F)),

@@ -43,11 +43,11 @@ public class ClientEvents {
         });
 
         event.registerItem(
-                new IronArmorClientExtensions(),
+                ArmorClientExtensions.iron(),
                 new Item[] {Items.IRON_HELMET, Items.IRON_CHESTPLATE, Items.IRON_LEGGINGS, Items.IRON_BOOTS});
 
         event.registerItem(
-                new SteelArmorClientExtensions(),
+                ArmorClientExtensions.steel(),
                 PoptartCoreItems.STEEL_HELMET.get(),
                 PoptartCoreItems.STEEL_CHESTPLATE.get(),
                 PoptartCoreItems.STEEL_LEGGINGS.get(),
@@ -62,18 +62,18 @@ public class ClientEvents {
             event.registerLayerDefinition(PoptartCoreModelLayers.LEATHER_TUNIC_SKIRTLESS_LAYER, LeatherArmorModels::tunicSkirtless);
             event.registerLayerDefinition(PoptartCoreModelLayers.LEATHER_PANTS_LAYER, LeatherArmorModels::pants);
             event.registerLayerDefinition(PoptartCoreModelLayers.LEATHER_BOOTS_LAYER, LeatherArmorModels::boots);
-        event.registerLayerDefinition(PoptartCoreModelLayers.IRON_HELMET_LAYER, IronArmorModels::helmet);
+        event.registerLayerDefinition(PoptartCoreModelLayers.IRON_HELMET_LAYER, MetalArmorModels::helmet);
         event.registerLayerDefinition(
-                PoptartCoreModelLayers.IRON_CHESTPLATE_LAYER, IronArmorModels::chestplate);
-        event.registerLayerDefinition(PoptartCoreModelLayers.IRON_LEGGINGS_LAYER, IronArmorModels::leggings);
-        event.registerLayerDefinition(PoptartCoreModelLayers.IRON_BOOTS_LAYER, IronArmorModels::boots);
+                PoptartCoreModelLayers.IRON_CHESTPLATE_LAYER, MetalArmorModels::chestplate);
+        event.registerLayerDefinition(PoptartCoreModelLayers.IRON_LEGGINGS_LAYER, MetalArmorModels::leggings);
+        event.registerLayerDefinition(PoptartCoreModelLayers.IRON_BOOTS_LAYER, MetalArmorModels::boots);
         event.registerLayerDefinition(
-                PoptartCoreModelLayers.STEEL_HELMET_LAYER, SteelArmorModels::helmet);
+                PoptartCoreModelLayers.STEEL_HELMET_LAYER, MetalArmorModels::helmet);
         event.registerLayerDefinition(
-                PoptartCoreModelLayers.STEEL_CHESTPLATE_LAYER, SteelArmorModels::chestplate);
+                PoptartCoreModelLayers.STEEL_CHESTPLATE_LAYER, MetalArmorModels::chestplate);
         event.registerLayerDefinition(
-                PoptartCoreModelLayers.STEEL_LEGGINGS_LAYER, SteelArmorModels::leggings);
-        event.registerLayerDefinition(PoptartCoreModelLayers.STEEL_BOOTS_LAYER, SteelArmorModels::boots);
+                PoptartCoreModelLayers.STEEL_LEGGINGS_LAYER, MetalArmorModels::leggings);
+        event.registerLayerDefinition(PoptartCoreModelLayers.STEEL_BOOTS_LAYER, MetalArmorModels::boots);
     }
 
     @SubscribeEvent

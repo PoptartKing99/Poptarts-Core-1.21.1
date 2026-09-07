@@ -1,5 +1,6 @@
 package dev.poptartking.poptartcore.client.model;
 
+import dev.poptartking.poptartcore.client.PoptartCoreModelLayers;
 import java.util.function.Supplier;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
@@ -9,14 +10,14 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 
-public abstract class ArmorClientExtensions implements IClientItemExtensions {
+public final class ArmorClientExtensions implements IClientItemExtensions {
 
     private final Supplier<PoptartCoreArmorModel> helmetModel;
     private final Supplier<PoptartCoreArmorModel> chestplateModel;
     private final Supplier<PoptartCoreArmorModel> leggingsModel;
     private final Supplier<PoptartCoreArmorModel> bootsModel;
 
-    protected ArmorClientExtensions(
+    private ArmorClientExtensions(
             Supplier<PoptartCoreArmorModel> helmetModel,
             Supplier<PoptartCoreArmorModel> chestplateModel,
             Supplier<PoptartCoreArmorModel> leggingsModel,
@@ -25,6 +26,22 @@ public abstract class ArmorClientExtensions implements IClientItemExtensions {
         this.chestplateModel = chestplateModel;
         this.leggingsModel = leggingsModel;
         this.bootsModel = bootsModel;
+    }
+
+    public static ArmorClientExtensions iron() {
+        return new ArmorClientExtensions(
+                () -> PoptartCoreModelLayers.IRON_HELMET_MODEL,
+                () -> PoptartCoreModelLayers.IRON_CHESTPLATE_MODEL,
+                () -> PoptartCoreModelLayers.IRON_LEGGINGS_MODEL,
+                () -> PoptartCoreModelLayers.IRON_BOOTS_MODEL);
+    }
+
+    public static ArmorClientExtensions steel() {
+        return new ArmorClientExtensions(
+                () -> PoptartCoreModelLayers.STEEL_HELMET_MODEL,
+                () -> PoptartCoreModelLayers.STEEL_CHESTPLATE_MODEL,
+                () -> PoptartCoreModelLayers.STEEL_LEGGINGS_MODEL,
+                () -> PoptartCoreModelLayers.STEEL_BOOTS_MODEL);
     }
 
     @Override
