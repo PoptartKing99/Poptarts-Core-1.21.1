@@ -28,6 +28,15 @@ public class PoptartCoreTabs {
                         output.accept(PoptartCoreItems.BRONZE_INGOT);
                         output.accept(PoptartCoreItems.BRONZE_NUGGET);
                         output.accept(PoptartCoreItems.BRONZE_SHEET);
+                        output.accept(PoptartCoreItems.TIN_INGOT);
+                        output.accept(PoptartCoreItems.TIN_NUGGET);
+                        output.accept(PoptartCoreItems.RAW_TIN);
+                        output.accept(PoptartCoreItems.LEAD_INGOT);
+                        output.accept(PoptartCoreItems.LEAD_NUGGET);
+                        output.accept(PoptartCoreItems.RAW_LEAD);
+                        output.accept(PoptartCoreItems.SILVER_INGOT);
+                        output.accept(PoptartCoreItems.SILVER_NUGGET);
+                        output.accept(PoptartCoreItems.RAW_SILVER);
                         output.accept(PoptartCoreItems.STEEL_HELMET);
                         output.accept(PoptartCoreItems.STEEL_CHESTPLATE);
                         output.accept(PoptartCoreItems.STEEL_LEGGINGS);

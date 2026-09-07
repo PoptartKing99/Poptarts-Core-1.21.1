@@ -42,6 +42,15 @@ public class PoptartCoreItems {
     public static final DeferredItem<Item> BRONZE_INGOT = registerItem("bronze_ingot");
     public static final DeferredItem<Item> BRONZE_NUGGET = registerItem("bronze_nugget");
     public static final DeferredItem<Item> BRONZE_SHEET = registerItem("bronze_sheet");
+    public static final DeferredItem<Item> TIN_INGOT = registerItem("tin_ingot");
+    public static final DeferredItem<Item> TIN_NUGGET = registerItem("tin_nugget");
+    public static final DeferredItem<Item> RAW_TIN = registerItem("raw_tin");
+    public static final DeferredItem<Item> LEAD_INGOT = registerItem("lead_ingot");
+    public static final DeferredItem<Item> LEAD_NUGGET = registerItem("lead_nugget");
+    public static final DeferredItem<Item> RAW_LEAD = registerItem("raw_lead");
+    public static final DeferredItem<Item> SILVER_INGOT = registerItem("silver_ingot");
+    public static final DeferredItem<Item> SILVER_NUGGET = registerItem("silver_nugget");
+    public static final DeferredItem<Item> RAW_SILVER = registerItem("raw_silver");
     public static final DeferredItem<ArmorItem> STEEL_HELMET = ITEMS.register(
             "steel_helmet",
             () -> new ArmorItem(
