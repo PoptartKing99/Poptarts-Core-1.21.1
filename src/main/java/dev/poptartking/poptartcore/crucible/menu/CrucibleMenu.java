@@ -23,14 +23,14 @@ public class CrucibleMenu extends AbstractContainerMenu {
     private final ContainerData data;
 
     public CrucibleMenu(int containerId, Inventory playerInventory) {
-        this(containerId, playerInventory, new SimpleContainer(6), new SimpleContainerData(6));
+        this(containerId, playerInventory, new SimpleContainer(6), new SimpleContainerData(8));
     }
 
     public CrucibleMenu(int containerId, Inventory playerInventory, Container container, ContainerData data) {
         super(PoptartCoreMenus.CRUCIBLE.get(), containerId);
 
         checkContainerSize(container, 6);
-        checkContainerDataCount(data, 6);
+        checkContainerDataCount(data, 8);
 
         this.container = container;
         this.data = data;
@@ -90,6 +90,20 @@ public class CrucibleMenu extends AbstractContainerMenu {
 
     public int getFluidAmount() {
         return data.get(5);
+    }
+
+    public ItemStack getMould() {
+        return container.getItem(CrucibleBlockEntity.CONTAINER_SLOT);
+    }
+
+    public float getCastingProgress() {
+        int castingTimeTotal = data.get(7);
+
+        if (castingTimeTotal == 0) {
+            return 0.0F;
+        }
+
+        return Mth.clamp((float) data.get(6) / castingTimeTotal, 0.0F, 1.0F);
     }
 
     public float getFluidProgress() {
@@ -156,6 +170,6 @@ public class CrucibleMenu extends AbstractContainerMenu {
     }
 
     protected boolean isMould(ItemStack stack) {
-        return stack.is(PoptartCoreItems.INGOT_MOULD.get());
+        return PoptartCoreItems.isMould(stack);
     }
 }

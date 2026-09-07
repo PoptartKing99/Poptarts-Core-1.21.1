@@ -30,6 +30,8 @@ public class PoptartCoreTabs {
                         output.accept(PoptartCoreItems.CRUCIBLE);
                         output.accept(PoptartCoreItems.INGOT_MOULD);
                         output.accept(PoptartCoreItems.UNFIRED_INGOT_MOULD);
+                        output.accept(PoptartCoreItems.PLATE_MOULD);
+                        output.accept(PoptartCoreItems.UNFIRED_PLATE_MOULD);
 
                         output.accept(PoptartCoreItems.RAW_TIN);
                         output.accept(PoptartCoreItems.TIN_INGOT);

@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "poptartcore:unfired_plate_mould"
+  },
+  "result": {
+    "id": "poptartcore:plate_mould"
+  },
+  "experience": 0.1,
+  "cookingtime": 200
+}

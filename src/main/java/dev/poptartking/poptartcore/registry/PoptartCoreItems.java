@@ -4,6 +4,7 @@ import dev.poptartking.poptartcore.PoptartCore;
 import dev.poptartking.poptartcore.crucible.CrucibleBlockItem;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -81,6 +82,10 @@ public class PoptartCoreItems {
             ITEMS.register("unfired_ingot_mould", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> INGOT_MOULD =
             ITEMS.register("ingot_mould", () -> new Item(new Item.Properties().durability(32)));
+    public static final DeferredItem<Item> UNFIRED_PLATE_MOULD =
+            ITEMS.register("unfired_plate_mould", () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> PLATE_MOULD =
+            ITEMS.register("plate_mould", () -> new Item(new Item.Properties().durability(32)));
 
     // Helper Functions
     private static DeferredItem<Item> registerItem(String name) {
@@ -89,6 +94,10 @@ public class PoptartCoreItems {
 
     private static DeferredItem<Item> registerItem(String name, Item.Properties properties) {
         return ITEMS.registerSimpleItem(name, properties);
+    }
+
+    public static boolean isMould(ItemStack stack) {
+        return stack.is(INGOT_MOULD.get()) || stack.is(PLATE_MOULD.get());
     }
 
     // Registration

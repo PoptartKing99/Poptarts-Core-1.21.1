@@ -32,6 +32,9 @@ public class CrucibleScreen extends AbstractContainerScreen<CrucibleMenu> {
     private static final ResourceLocation TANK_SPRITE =
             ResourceLocation.fromNamespaceAndPath(PoptartCore.MOD_ID, "crucible_tank");
 
+    private static final ResourceLocation CASTING_PROGRESS_SPRITE =
+            ResourceLocation.fromNamespaceAndPath(PoptartCore.MOD_ID, "crucible_casting_progress");
+
     public CrucibleScreen(CrucibleMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
 
@@ -61,7 +64,9 @@ public class CrucibleScreen extends AbstractContainerScreen<CrucibleMenu> {
 
         FluidStack fluid = new FluidStack(menu.getFluid(), menu.getFluidAmount());
 
-        ItemStack ingotMould = PoptartCoreItems.INGOT_MOULD.get().getDefaultInstance();
+        ItemStack insertedMould = menu.getMould();
+        ItemStack mould =
+                insertedMould.isEmpty() ? PoptartCoreItems.INGOT_MOULD.get().getDefaultInstance() : insertedMould;
 
         Optional<CastingRecipe> castingRecipe =
                 minecraft
@@ -70,7 +75,7 @@ public class CrucibleScreen extends AbstractContainerScreen<CrucibleMenu> {
                         .getAllRecipesFor(PoptartCoreRecipes.CRUCIBLE_CASTING_TYPE.get())
                         .stream()
                         .map(RecipeHolder::value)
-                        .filter(recipe -> recipe.ingredient().test(ingotMould))
+                        .filter(recipe -> recipe.ingredient().test(mould))
                         .filter(recipe -> FluidStack.isSameFluid(fluid, recipe.fluid()))
                         .findFirst();
 
@@ -121,6 +126,20 @@ public class CrucibleScreen extends AbstractContainerScreen<CrucibleMenu> {
         }
 
         renderCastingDisplay(guiGraphics, x, y);
+
+        int castingProgressHeight = Mth.ceil(menu.getCastingProgress() * 13.0F);
+        if (castingProgressHeight > 0) {
+            guiGraphics.blitSprite(
+                    CASTING_PROGRESS_SPRITE,
+                    15,
+                    13,
+                    0,
+                    13 - castingProgressHeight,
+                    x + 142,
+                    y + 25 + 13 - castingProgressHeight,
+                    15,
+                    castingProgressHeight);
+        }
 
         if (menu.isBurning()) {
             int flameHeight = Mth.ceil(menu.getLitProgress() * 13.0F) + 1;

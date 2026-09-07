@@ -13,6 +13,6 @@ public class CrucibleContainerSlot extends Slot {
 
     @Override
     public boolean mayPlace(ItemStack stack) {
-        return stack.is(PoptartCoreItems.INGOT_MOULD.get());
+        return PoptartCoreItems.isMould(stack);
     }
 }
