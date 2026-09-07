@@ -1,6 +1,5 @@
 package dev.poptartking.poptartcore.crucible;
 
-import dev.poptartking.poptartcore.PoptartCoreConfig;
 import dev.poptartking.poptartcore.crucible.alloying.AlloyingRecipe;
 import dev.poptartking.poptartcore.crucible.alloying.AlloyingRecipeInput;
 import dev.poptartking.poptartcore.crucible.alloying.CrucibleIngredient;
@@ -181,18 +180,7 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
 
         boolean canCast = castingRecipe != null && blockEntity.canCast(level, castingRecipe);
 
-        if (!PoptartCoreConfig.ENABLE_CASTING_TIMER.get()) {
-            if (blockEntity.castingProgress != 0 || blockEntity.castingTimeTotal != 0) {
-                changed = true;
-            }
-
-            blockEntity.castingProgress = 0;
-            blockEntity.castingTimeTotal = 0;
-
-            if (canCast && blockEntity.performCasting(level, castingRecipe)) {
-                changed = true;
-            }
-        } else if (canCast) {
+        if (canCast) {
             blockEntity.castingTimeTotal = CASTING_TIME;
             blockEntity.castingProgress++;
 
