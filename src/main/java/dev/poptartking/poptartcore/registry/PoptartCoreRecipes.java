@@ -1,6 +1,8 @@
 package dev.poptartking.poptartcore.registry;
 
 import dev.poptartking.poptartcore.PoptartCore;
+import dev.poptartking.poptartcore.crucible.alloying.AlloyingRecipe;
+import dev.poptartking.poptartcore.crucible.alloying.AlloyingRecipeSerializer;
 import dev.poptartking.poptartcore.crucible.casting.CastingRecipe;
 import dev.poptartking.poptartcore.crucible.casting.CastingRecipeSerializer;
 import dev.poptartking.poptartcore.crucible.melting.MeltingRecipe;
@@ -30,6 +32,16 @@ public class PoptartCoreRecipes {
                     "crucible_melting",
                     () -> RecipeType.simple(
                             ResourceLocation.fromNamespaceAndPath(PoptartCore.MOD_ID, "crucible_melting")));
+
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<AlloyingRecipe>>
+            CRUCIBLE_ALLOYING_SERIALIZER =
+                    RECIPE_SERIALIZERS.register("crucible_alloying", () -> new AlloyingRecipeSerializer(false));
+
+    public static final DeferredHolder<RecipeType<?>, RecipeType<AlloyingRecipe>> CRUCIBLE_ALLOYING_TYPE =
+            RECIPE_TYPES.register(
+                    "crucible_alloying",
+                    () -> RecipeType.simple(
+                            ResourceLocation.fromNamespaceAndPath(PoptartCore.MOD_ID, "crucible_alloying")));
 
     public static final DeferredHolder<RecipeSerializer<?>, CastingRecipeSerializer> CRUCIBLE_CASTING_SERIALIZER =
             RECIPE_SERIALIZERS.register("crucible_casting", CastingRecipeSerializer::new);

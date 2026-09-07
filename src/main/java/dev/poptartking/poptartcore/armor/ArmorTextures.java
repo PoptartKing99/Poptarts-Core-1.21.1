@@ -27,13 +27,20 @@ public final class ArmorTextures {
             Map.entry(Items.IRON_LEGGINGS, PoptartCore.location("textures/armor/iron_leggings.png")),
             Map.entry(Items.IRON_BOOTS, PoptartCore.location("textures/armor/iron_boots.png")),
             Map.entry(PoptartCoreItems.STEEL_HELMET.get(), PoptartCore.location("textures/armor/steel_helmet.png")),
-            Map.entry(PoptartCoreItems.STEEL_CHESTPLATE.get(), PoptartCore.location("textures/armor/steel_chestplate.png")),
+            Map.entry(
+                    PoptartCoreItems.STEEL_CHESTPLATE.get(),
+                    PoptartCore.location("textures/armor/steel_chestplate.png")),
             Map.entry(PoptartCoreItems.STEEL_LEGGINGS.get(), PoptartCore.location("textures/armor/steel_leggings.png")),
             Map.entry(PoptartCoreItems.STEEL_BOOTS.get(), PoptartCore.location("textures/armor/steel_boots.png")),
             Map.entry(PoptartCoreItems.MINING_HELMET.get(), PoptartCore.location("textures/armor/mining_helmet.png")),
-            Map.entry(PoptartCoreItems.RAW_HIDE_HELMET.get(), PoptartCore.location("textures/armor/raw_hide_armor.png")),
-            Map.entry(PoptartCoreItems.RAW_HIDE_CHESTPLATE.get(), PoptartCore.location("textures/armor/raw_hide_armor.png")),
-            Map.entry(PoptartCoreItems.RAW_HIDE_LEGGINGS.get(), PoptartCore.location("textures/armor/raw_hide_armor.png")));
+            Map.entry(
+                    PoptartCoreItems.RAW_HIDE_HELMET.get(), PoptartCore.location("textures/armor/raw_hide_armor.png")),
+            Map.entry(
+                    PoptartCoreItems.RAW_HIDE_CHESTPLATE.get(),
+                    PoptartCore.location("textures/armor/raw_hide_armor.png")),
+            Map.entry(
+                    PoptartCoreItems.RAW_HIDE_LEGGINGS.get(),
+                    PoptartCore.location("textures/armor/raw_hide_armor.png")));
 
     private ArmorTextures() {}
 

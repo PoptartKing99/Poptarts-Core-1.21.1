@@ -56,36 +56,33 @@ public class ClientEvents {
 
     @SubscribeEvent
     public static void registerLayer(EntityRenderersEvent.RegisterLayerDefinitions event) {
-            event.registerLayerDefinition(PoptartCoreModelLayers.MINING_HELMET_LAYER, MiningHelmetModel::createBodyLayer);
-            event.registerLayerDefinition(PoptartCoreModelLayers.RAW_HIDE_ARMOR_LAYER, RawHideArmorModel::createBodyLayer);
-            event.registerLayerDefinition(PoptartCoreModelLayers.LEATHER_HELM_LAYER, LeatherArmorModels::helm);
-            event.registerLayerDefinition(PoptartCoreModelLayers.LEATHER_TUNIC_SKIRTLESS_LAYER, LeatherArmorModels::tunicSkirtless);
-            event.registerLayerDefinition(PoptartCoreModelLayers.LEATHER_PANTS_LAYER, LeatherArmorModels::pants);
-            event.registerLayerDefinition(PoptartCoreModelLayers.LEATHER_BOOTS_LAYER, LeatherArmorModels::boots);
-        event.registerLayerDefinition(PoptartCoreModelLayers.IRON_HELMET_LAYER, MetalArmorModels::helmet);
+        event.registerLayerDefinition(PoptartCoreModelLayers.MINING_HELMET_LAYER, MiningHelmetModel::createBodyLayer);
+        event.registerLayerDefinition(PoptartCoreModelLayers.RAW_HIDE_ARMOR_LAYER, RawHideArmorModel::createBodyLayer);
+        event.registerLayerDefinition(PoptartCoreModelLayers.LEATHER_HELM_LAYER, LeatherArmorModels::helm);
         event.registerLayerDefinition(
-                PoptartCoreModelLayers.IRON_CHESTPLATE_LAYER, MetalArmorModels::chestplate);
+                PoptartCoreModelLayers.LEATHER_TUNIC_SKIRTLESS_LAYER, LeatherArmorModels::tunicSkirtless);
+        event.registerLayerDefinition(PoptartCoreModelLayers.LEATHER_PANTS_LAYER, LeatherArmorModels::pants);
+        event.registerLayerDefinition(PoptartCoreModelLayers.LEATHER_BOOTS_LAYER, LeatherArmorModels::boots);
+        event.registerLayerDefinition(PoptartCoreModelLayers.IRON_HELMET_LAYER, MetalArmorModels::helmet);
+        event.registerLayerDefinition(PoptartCoreModelLayers.IRON_CHESTPLATE_LAYER, MetalArmorModels::chestplate);
         event.registerLayerDefinition(PoptartCoreModelLayers.IRON_LEGGINGS_LAYER, MetalArmorModels::leggings);
         event.registerLayerDefinition(PoptartCoreModelLayers.IRON_BOOTS_LAYER, MetalArmorModels::boots);
-        event.registerLayerDefinition(
-                PoptartCoreModelLayers.STEEL_HELMET_LAYER, MetalArmorModels::helmet);
-        event.registerLayerDefinition(
-                PoptartCoreModelLayers.STEEL_CHESTPLATE_LAYER, MetalArmorModels::chestplate);
-        event.registerLayerDefinition(
-                PoptartCoreModelLayers.STEEL_LEGGINGS_LAYER, MetalArmorModels::leggings);
+        event.registerLayerDefinition(PoptartCoreModelLayers.STEEL_HELMET_LAYER, MetalArmorModels::helmet);
+        event.registerLayerDefinition(PoptartCoreModelLayers.STEEL_CHESTPLATE_LAYER, MetalArmorModels::chestplate);
+        event.registerLayerDefinition(PoptartCoreModelLayers.STEEL_LEGGINGS_LAYER, MetalArmorModels::leggings);
         event.registerLayerDefinition(PoptartCoreModelLayers.STEEL_BOOTS_LAYER, MetalArmorModels::boots);
     }
 
     @SubscribeEvent
     public static void addLayers(EntityRenderersEvent.AddLayers event) {
-        PoptartCoreModelLayers.MINING_HELMET_MODEL = new MiningHelmetModel(
-                event.getEntityModels().bakeLayer(PoptartCoreModelLayers.MINING_HELMET_LAYER));
+        PoptartCoreModelLayers.MINING_HELMET_MODEL =
+                new MiningHelmetModel(event.getEntityModels().bakeLayer(PoptartCoreModelLayers.MINING_HELMET_LAYER));
 
-        PoptartCoreModelLayers.RAW_HIDE_ARMOR_MODEL = new RawHideArmorModel(
-                event.getEntityModels().bakeLayer(PoptartCoreModelLayers.RAW_HIDE_ARMOR_LAYER));
+        PoptartCoreModelLayers.RAW_HIDE_ARMOR_MODEL =
+                new RawHideArmorModel(event.getEntityModels().bakeLayer(PoptartCoreModelLayers.RAW_HIDE_ARMOR_LAYER));
 
-        PoptartCoreModelLayers.LEATHER_HELM_MODEL = new PoptartCoreArmorModel(
-                event.getEntityModels().bakeLayer(PoptartCoreModelLayers.LEATHER_HELM_LAYER));
+        PoptartCoreModelLayers.LEATHER_HELM_MODEL =
+                new PoptartCoreArmorModel(event.getEntityModels().bakeLayer(PoptartCoreModelLayers.LEATHER_HELM_LAYER));
 
         PoptartCoreModelLayers.LEATHER_TUNIC_SKIRTLESS_MODEL = new PoptartCoreArmorModel(
                 event.getEntityModels().bakeLayer(PoptartCoreModelLayers.LEATHER_TUNIC_SKIRTLESS_LAYER));
@@ -108,8 +105,8 @@ public class ClientEvents {
         PoptartCoreModelLayers.IRON_BOOTS_MODEL =
                 new PoptartCoreArmorModel(event.getEntityModels().bakeLayer(PoptartCoreModelLayers.IRON_BOOTS_LAYER));
 
-        PoptartCoreModelLayers.STEEL_HELMET_MODEL = new PoptartCoreArmorModel(
-                event.getEntityModels().bakeLayer(PoptartCoreModelLayers.STEEL_HELMET_LAYER));
+        PoptartCoreModelLayers.STEEL_HELMET_MODEL =
+                new PoptartCoreArmorModel(event.getEntityModels().bakeLayer(PoptartCoreModelLayers.STEEL_HELMET_LAYER));
 
         PoptartCoreModelLayers.STEEL_CHESTPLATE_MODEL = new PoptartCoreArmorModel(
                 event.getEntityModels().bakeLayer(PoptartCoreModelLayers.STEEL_CHESTPLATE_LAYER));

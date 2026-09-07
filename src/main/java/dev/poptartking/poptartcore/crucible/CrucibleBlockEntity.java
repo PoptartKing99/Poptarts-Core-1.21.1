@@ -1,5 +1,8 @@
 package dev.poptartking.poptartcore.crucible;
 
+import dev.poptartking.poptartcore.crucible.alloying.AlloyingRecipe;
+import dev.poptartking.poptartcore.crucible.alloying.AlloyingRecipeInput;
+import dev.poptartking.poptartcore.crucible.alloying.CrucibleIngredient;
 import dev.poptartking.poptartcore.crucible.casting.CastingRecipe;
 import dev.poptartking.poptartcore.crucible.casting.CastingRecipeInput;
 import dev.poptartking.poptartcore.crucible.melting.MeltingRecipe;
@@ -98,18 +101,27 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
     public static void serverTick(Level level, BlockPos pos, BlockState state, CrucibleBlockEntity blockEntity) {
         boolean changed = false;
 
-        Optional<RecipeHolder<MeltingRecipe>> meltingRecipe = blockEntity.getMeltingRecipe(level);
+        AlloyingRecipe alloyingRecipe =
+                blockEntity.getAlloyingRecipe(level).map(RecipeHolder::value).orElse(null);
+        AlloyPlan alloyPlan = alloyingRecipe == null ? null : blockEntity.planAlloying(level, alloyingRecipe);
 
-        boolean canMelt = meltingRecipe
-                .map(recipe -> blockEntity.meltBatches(recipe.value()) > 0)
-                .orElse(false);
+        MeltingRecipe meltingRecipe = null;
+        int meltingBatches = 0;
+
+        if (alloyPlan == null) {
+            meltingRecipe =
+                    blockEntity.getMeltingRecipe(level).map(RecipeHolder::value).orElse(null);
+            meltingBatches = meltingRecipe == null ? 0 : blockEntity.meltBatches(meltingRecipe);
+        }
+
+        boolean canProcess = alloyPlan != null || meltingBatches > 0;
 
         if (blockEntity.burnTime > 0) {
             blockEntity.burnTime--;
             changed = true;
         }
 
-        if (!blockEntity.isBurning() && canMelt) {
+        if (!blockEntity.isBurning() && canProcess) {
             ItemStack fuel = blockEntity.items.get(FUEL_SLOT);
             int burnDuration = blockEntity.getBurnDuration(fuel);
 
@@ -126,11 +138,10 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
             }
         }
 
-        if (blockEntity.isBurning() && canMelt) {
-            MeltingRecipe recipe = meltingRecipe.get().value();
-            int batches = blockEntity.meltBatches(recipe);
-
-            int cookTimeTotal = recipe.getCookingTime() * Math.max(1, batches);
+        if (blockEntity.isBurning() && canProcess) {
+            int cookTimeTotal = alloyPlan != null
+                    ? alloyingRecipe.getCookingTime() * alloyPlan.batches()
+                    : meltingRecipe.getCookingTime() * meltingBatches;
 
             if (blockEntity.cookTime > 0 && blockEntity.cookTimeTotal != cookTimeTotal) {
                 blockEntity.cookTime = 0;
@@ -142,7 +153,11 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
             if (blockEntity.cookTime >= blockEntity.cookTimeTotal) {
                 blockEntity.cookTime = 0;
 
-                if (blockEntity.performMelting(recipe)) {
+                boolean completed = alloyPlan != null
+                        ? blockEntity.performAlloying(alloyingRecipe, alloyPlan)
+                        : blockEntity.performMelting(meltingRecipe);
+
+                if (completed) {
                     changed = true;
                 }
             }
@@ -169,9 +184,7 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
                 || currentState.getValue(CrucibleBlock.FLUID_LEVEL) != fluidLevel) {
             level.setBlock(
                     pos,
-                    currentState
-                            .setValue(CrucibleBlock.LIT, isLit)
-                            .setValue(CrucibleBlock.FLUID_LEVEL, fluidLevel),
+                    currentState.setValue(CrucibleBlock.LIT, isLit).setValue(CrucibleBlock.FLUID_LEVEL, fluidLevel),
                     3);
 
             changed = true;
@@ -190,6 +203,16 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
     private Optional<RecipeHolder<MeltingRecipe>> getMeltingRecipe(Level level) {
         return level.getRecipeManager()
                 .getRecipeFor(PoptartCoreRecipes.CRUCIBLE_MELTING_TYPE.get(), getMeltingInput(), level);
+    }
+
+    private AlloyingRecipeInput getAlloyingInput() {
+        return new AlloyingRecipeInput(
+                List.of(items.get(INPUT_SLOT_1), items.get(INPUT_SLOT_2), items.get(INPUT_SLOT_3)), tank.getFluid());
+    }
+
+    private Optional<RecipeHolder<AlloyingRecipe>> getAlloyingRecipe(Level level) {
+        return level.getRecipeManager()
+                .getRecipeFor(PoptartCoreRecipes.CRUCIBLE_ALLOYING_TYPE.get(), getAlloyingInput(), level);
     }
 
     private CastingRecipeInput getCastingInput() {
@@ -273,6 +296,198 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
             if (!stack.isEmpty()) {
                 stack.shrink(1);
                 melted++;
+            }
+        }
+
+        return true;
+    }
+
+    private AlloyPlan planAlloying(Level level, AlloyingRecipe recipe) {
+        FluidStack tankFluid = tank.getFluid();
+        int batches = recipe.batchCount(getAlloyingInput(), level);
+
+        if (batches <= 0) {
+            return null;
+        }
+
+        ItemStack itemResult = recipe.itemResult();
+        if (!itemResult.isEmpty()) {
+            ItemStack resultSlot = items.get(RESULT_SLOT);
+            int availableSpace;
+
+            if (resultSlot.isEmpty()) {
+                availableSpace = itemResult.getMaxStackSize();
+            } else if (ItemStack.isSameItemSameComponents(resultSlot, itemResult)) {
+                availableSpace = resultSlot.getMaxStackSize() - resultSlot.getCount();
+            } else {
+                return null;
+            }
+
+            int maxBatchesByItem = availableSpace / Math.max(1, itemResult.getCount());
+            if (maxBatchesByItem <= 0) {
+                return null;
+            }
+
+            batches = Math.min(batches, maxBatchesByItem);
+        }
+
+        int[] meltAmountPerSlot = new int[FUEL_SLOT];
+        FluidStack[] meltFluidPerSlot = new FluidStack[FUEL_SLOT];
+
+        for (int slot = INPUT_SLOT_1; slot <= INPUT_SLOT_3; slot++) {
+            ItemStack stack = items.get(slot);
+
+            if (!stack.isEmpty() && !recipe.usesAsItem(stack)) {
+                FluidStack melted = tryMelt(stack, level);
+
+                if (!melted.isEmpty()) {
+                    meltFluidPerSlot[slot] = melted;
+                    meltAmountPerSlot[slot] = melted.getAmount();
+                }
+            }
+        }
+
+        while (batches > 0) {
+            int[] itemsToConsume = new int[FUEL_SLOT];
+            int tankToDrain =
+                    gatherIngredients(recipe, batches, meltFluidPerSlot, meltAmountPerSlot, tankFluid, itemsToConsume);
+
+            FluidStack produced = recipe.result().isEmpty()
+                    ? FluidStack.EMPTY
+                    : recipe.result().copyWithAmount(recipe.result().getAmount() * batches);
+
+            if (tankToDrain >= 0 && outputFits(produced, tankFluid, tankToDrain)) {
+                return new AlloyPlan(batches, tankToDrain, itemsToConsume, produced);
+            }
+
+            batches--;
+        }
+
+        return null;
+    }
+
+    private FluidStack tryMelt(ItemStack stack, Level level) {
+        ItemStack singleItem = stack.copyWithCount(1);
+        MeltingRecipeInput input = new MeltingRecipeInput(List.of(singleItem));
+
+        return level.getRecipeManager()
+                .getRecipeFor(PoptartCoreRecipes.CRUCIBLE_MELTING_TYPE.get(), input, level)
+                .map(RecipeHolder::value)
+                .map(recipe -> recipe.assembleFluid(input))
+                .orElse(FluidStack.EMPTY);
+    }
+
+    private int gatherIngredients(
+            AlloyingRecipe recipe,
+            int batches,
+            FluidStack[] meltFluidPerSlot,
+            int[] meltAmountPerSlot,
+            FluidStack tankFluid,
+            int[] itemsToConsume) {
+        int[] remainingItems = new int[FUEL_SLOT];
+
+        for (int slot = INPUT_SLOT_1; slot <= INPUT_SLOT_3; slot++) {
+            remainingItems[slot] = items.get(slot).getCount();
+        }
+
+        int tankToDrain = 0;
+
+        for (CrucibleIngredient ingredient : recipe.ingredients()) {
+            if (!ingredient.fluid().isEmpty()) {
+                int needed = ingredient.fluid().getAmount() * batches;
+
+                if (FluidStack.isSameFluid(ingredient.fluid(), tankFluid)) {
+                    int taken = Math.min(tankFluid.getAmount() - tankToDrain, needed);
+                    tankToDrain += Math.max(0, taken);
+                    needed -= Math.max(0, taken);
+                }
+
+                for (int slot = INPUT_SLOT_1; slot <= INPUT_SLOT_3 && needed > 0; slot++) {
+                    FluidStack melted = meltFluidPerSlot[slot];
+
+                    if (melted == null
+                            || remainingItems[slot] <= 0
+                            || !FluidStack.isSameFluid(melted, ingredient.fluid())) {
+                        continue;
+                    }
+
+                    int amountPerItem = meltAmountPerSlot[slot];
+                    int requiredItems = (needed + amountPerItem - 1) / amountPerItem;
+                    int taken = Math.min(remainingItems[slot], requiredItems);
+
+                    remainingItems[slot] -= taken;
+                    itemsToConsume[slot] += taken;
+                    needed -= taken * amountPerItem;
+                }
+
+                if (needed > 0) {
+                    return -1;
+                }
+            } else if (!ingredient.item().isEmpty()) {
+                int needed = batches;
+
+                for (int slot = INPUT_SLOT_1; slot <= INPUT_SLOT_3 && needed > 0; slot++) {
+                    if (meltFluidPerSlot[slot] != null || remainingItems[slot] <= 0) {
+                        continue;
+                    }
+
+                    ItemStack stack = items.get(slot);
+                    if (ingredient.item().test(stack)) {
+                        int taken = Math.min(remainingItems[slot], needed);
+                        remainingItems[slot] -= taken;
+                        itemsToConsume[slot] += taken;
+                        needed -= taken;
+                    }
+                }
+
+                if (needed > 0) {
+                    return -1;
+                }
+            }
+        }
+
+        return tankToDrain;
+    }
+
+    private boolean outputFits(FluidStack produced, FluidStack tankFluid, int tankToDrain) {
+        if (produced.isEmpty()) {
+            return true;
+        }
+
+        int fluidRemaining = tankFluid.getAmount() - tankToDrain;
+        if (fluidRemaining > 0 && !FluidStack.isSameFluidSameComponents(tankFluid, produced)) {
+            return false;
+        }
+
+        return produced.getAmount() + fluidRemaining <= tank.getCapacity();
+    }
+
+    private boolean performAlloying(AlloyingRecipe recipe, AlloyPlan plan) {
+        if (plan.tankToDrain() > 0) {
+            tank.drain(plan.tankToDrain(), IFluidHandler.FluidAction.EXECUTE);
+        }
+
+        for (int slot = INPUT_SLOT_1; slot <= INPUT_SLOT_3; slot++) {
+            if (plan.itemsToConsume()[slot] > 0) {
+                items.get(slot).shrink(plan.itemsToConsume()[slot]);
+            }
+        }
+
+        if (!plan.produced().isEmpty()) {
+            tank.fill(plan.produced(), IFluidHandler.FluidAction.EXECUTE);
+        }
+
+        ItemStack itemResult = recipe.itemResult();
+        if (!itemResult.isEmpty()) {
+            ItemStack resultSlot = items.get(RESULT_SLOT);
+            int amountProduced = itemResult.getCount() * plan.batches();
+
+            if (resultSlot.isEmpty()) {
+                ItemStack output = itemResult.copy();
+                output.setCount(amountProduced);
+                items.set(RESULT_SLOT, output);
+            } else {
+                resultSlot.grow(amountProduced);
             }
         }
 
@@ -381,4 +596,6 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
             tank.setFluid(FluidStack.EMPTY);
         }
     }
+
+    private record AlloyPlan(int batches, int tankToDrain, int[] itemsToConsume, FluidStack produced) {}
 }
