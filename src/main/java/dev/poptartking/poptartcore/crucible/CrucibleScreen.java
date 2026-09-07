@@ -158,7 +158,7 @@ public class CrucibleScreen extends AbstractContainerScreen<CrucibleMenu> {
 
         int progressWidth = Mth.ceil(menu.getCookProgress() * 24.0F);
 
-        guiGraphics.blitSprite(COOK_PROGRESS_SPRITE, 24, 16, 0, 0, x + 73, y + 24, progressWidth, 16);
+        guiGraphics.blitSprite(COOK_PROGRESS_SPRITE, 24, 16, 0, 0, x + 73, y + 23, progressWidth, 16);
     }
 
     @Override

@@ -39,10 +39,10 @@ public class PoptartCoreItems {
                     new Item.Properties().durability(140)));
     public static final DeferredItem<Item> STEEL_INGOT = registerItem("steel_ingot");
     public static final DeferredItem<Item> STEEL_NUGGET = registerItem("steel_nugget");
-    public static final DeferredItem<Item> STEEL_SHEET = registerItem("steel_sheet");
+    public static final DeferredItem<Item> STEEL_PLATE = registerItem("steel_plate");
     public static final DeferredItem<Item> BRONZE_INGOT = registerItem("bronze_ingot");
     public static final DeferredItem<Item> BRONZE_NUGGET = registerItem("bronze_nugget");
-    public static final DeferredItem<Item> BRONZE_SHEET = registerItem("bronze_sheet");
+    public static final DeferredItem<Item> BRONZE_PLATE = registerItem("bronze_plate");
     public static final DeferredItem<Item> TIN_INGOT = registerItem("tin_ingot");
     public static final DeferredItem<Item> TIN_NUGGET = registerItem("tin_nugget");
     public static final DeferredItem<Item> RAW_TIN = registerItem("raw_tin");
@@ -102,6 +102,8 @@ public class PoptartCoreItems {
 
     // Registration
     public static void register(IEventBus eventBus) {
+        ITEMS.addAlias(PoptartCore.location("steel_sheet"), PoptartCore.location("steel_plate"));
+        ITEMS.addAlias(PoptartCore.location("bronze_sheet"), PoptartCore.location("bronze_plate"));
         ITEMS.register(eventBus);
     }
 }

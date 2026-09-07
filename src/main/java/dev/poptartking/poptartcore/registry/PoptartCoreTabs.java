@@ -47,11 +47,11 @@ public class PoptartCoreTabs {
 
                         output.accept(PoptartCoreItems.BRONZE_INGOT);
                         output.accept(PoptartCoreItems.BRONZE_NUGGET);
-                        output.accept(PoptartCoreItems.BRONZE_SHEET);
+                        output.accept(PoptartCoreItems.BRONZE_PLATE);
 
                         output.accept(PoptartCoreItems.STEEL_INGOT);
                         output.accept(PoptartCoreItems.STEEL_NUGGET);
-                        output.accept(PoptartCoreItems.STEEL_SHEET);
+                        output.accept(PoptartCoreItems.STEEL_PLATE);
                     })
                     .build());
 
