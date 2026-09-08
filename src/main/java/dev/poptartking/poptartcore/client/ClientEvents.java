@@ -12,6 +12,7 @@ import net.minecraft.world.item.Items;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
@@ -21,6 +22,13 @@ import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsE
         modid = PoptartCore.MOD_ID,
         value = {Dist.CLIENT})
 public class ClientEvents {
+
+    @SubscribeEvent
+    public static void onClientLogout(ClientPlayerNetworkEvent.LoggingOut event) {
+        if (event.getMultiPlayerGameMode() instanceof ClientHammerMiningCleanup cleanup) {
+            cleanup.poptartcore$clearHammerMining();
+        }
+    }
 
     @SubscribeEvent
     public static void onClientTick(ClientTickEvent.Post event) {
