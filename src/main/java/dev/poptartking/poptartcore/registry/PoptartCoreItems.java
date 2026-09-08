@@ -82,6 +82,28 @@ public class PoptartCoreItems {
             "crucible", () -> new CrucibleBlockItem(PoptartCoreBlocks.CRUCIBLE.get(), new Item.Properties()));
     public static final DeferredItem<BlockItem> BLAST_FURNACE = ITEMS.register(
             "blast_furnace", () -> new BlockItem(PoptartCoreBlocks.BLAST_FURNACE.get(), new Item.Properties()));
+    public static final DeferredItem<BlockItem> CLINKER_BRICKS =
+            registerBlockItem("clinker_bricks", PoptartCoreBlocks.CLINKER_BRICKS);
+    public static final DeferredItem<BlockItem> CLINKER_BRICK_SLAB =
+            registerBlockItem("clinker_brick_slab", PoptartCoreBlocks.CLINKER_BRICK_SLAB);
+    public static final DeferredItem<BlockItem> CLINKER_BRICK_STAIRS =
+            registerBlockItem("clinker_brick_stairs", PoptartCoreBlocks.CLINKER_BRICK_STAIRS);
+    public static final DeferredItem<BlockItem> CLINKER_BRICK_WALL =
+            registerBlockItem("clinker_brick_wall", PoptartCoreBlocks.CLINKER_BRICK_WALL);
+    public static final DeferredItem<BlockItem> CLINKER_TILE =
+            registerBlockItem("clinker_tile", PoptartCoreBlocks.CLINKER_TILE);
+    public static final DeferredItem<BlockItem> CLINKER_TILE_SLAB =
+            registerBlockItem("clinker_tile_slab", PoptartCoreBlocks.CLINKER_TILE_SLAB);
+    public static final DeferredItem<BlockItem> CLINKER_TILE_STAIRS =
+            registerBlockItem("clinker_tile_stairs", PoptartCoreBlocks.CLINKER_TILE_STAIRS);
+    public static final DeferredItem<BlockItem> CLINKER_TILE_WALL =
+            registerBlockItem("clinker_tile_wall", PoptartCoreBlocks.CLINKER_TILE_WALL);
+    public static final DeferredItem<BlockItem> MOSAIC_CLINKER_TILE =
+            registerBlockItem("mosaic_clinker_tile", PoptartCoreBlocks.MOSAIC_CLINKER_TILE);
+    public static final DeferredItem<BlockItem> CHISELED_CLINKER_TILE =
+            registerBlockItem("chiseled_clinker_tile", PoptartCoreBlocks.CHISELED_CLINKER_TILE);
+    public static final DeferredItem<BlockItem> CLINKER_PILLAR =
+            registerBlockItem("clinker_pillar", PoptartCoreBlocks.CLINKER_PILLAR);
     public static final DeferredItem<Item> UNFIRED_INGOT_MOULD =
             ITEMS.register("unfired_ingot_mould", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> INGOT_MOULD =
@@ -98,6 +120,12 @@ public class PoptartCoreItems {
 
     private static DeferredItem<Item> registerItem(String name, Item.Properties properties) {
         return ITEMS.registerSimpleItem(name, properties);
+    }
+
+    private static DeferredItem<BlockItem> registerBlockItem(
+            String name,
+            net.neoforged.neoforge.registries.DeferredBlock<? extends net.minecraft.world.level.block.Block> block) {
+        return ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
     }
 
     public static boolean isMould(ItemStack stack) {

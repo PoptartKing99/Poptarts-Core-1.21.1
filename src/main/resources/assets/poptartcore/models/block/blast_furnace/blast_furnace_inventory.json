@@ -4,7 +4,7 @@
 	"textures": {
 		"0": "poptartcore:block/blast_furnace/blast_furnace_side",
 		"1": "poptartcore:block/blast_furnace/blast_furnace_top",
-		"particle": "poptartcore:block/blast_furnace/blast_furnace_side"
+		"particle": "poptartcore:block/clinker/clinker_bricks_1"
 	},
 	"elements": [
 		{

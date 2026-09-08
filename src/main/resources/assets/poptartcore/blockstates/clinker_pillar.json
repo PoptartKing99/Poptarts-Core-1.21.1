@@ -1,0 +1,164 @@
+{
+  "variants": {
+    "facing=north,segment=short": [
+      {
+        "model": "poptartcore:block/clinker_pillar_short_1"
+      },
+      {
+        "model": "poptartcore:block/clinker_pillar_short_2"
+      },
+      {
+        "model": "poptartcore:block/clinker_pillar_short_3"
+      },
+      {
+        "model": "poptartcore:block/clinker_pillar_short_4"
+      }
+    ],
+    "facing=north,segment=base": {
+      "model": "poptartcore:block/clinker_pillar_base"
+    },
+    "facing=north,segment=shaft": {
+      "model": "poptartcore:block/clinker_pillar_shaft"
+    },
+    "facing=north,segment=capital": [
+      {
+        "model": "poptartcore:block/clinker_pillar_capital_1"
+      },
+      {
+        "model": "poptartcore:block/clinker_pillar_capital_2"
+      },
+      {
+        "model": "poptartcore:block/clinker_pillar_capital_3"
+      },
+      {
+        "model": "poptartcore:block/clinker_pillar_capital_4"
+      }
+    ],
+    "facing=east,segment=short": [
+      {
+        "model": "poptartcore:block/clinker_pillar_short_1",
+        "y": 90
+      },
+      {
+        "model": "poptartcore:block/clinker_pillar_short_2",
+        "y": 90
+      },
+      {
+        "model": "poptartcore:block/clinker_pillar_short_3",
+        "y": 90
+      },
+      {
+        "model": "poptartcore:block/clinker_pillar_short_4",
+        "y": 90
+      }
+    ],
+    "facing=east,segment=base": {
+      "model": "poptartcore:block/clinker_pillar_base"
+    },
+    "facing=east,segment=shaft": {
+      "model": "poptartcore:block/clinker_pillar_shaft"
+    },
+    "facing=east,segment=capital": [
+      {
+        "model": "poptartcore:block/clinker_pillar_capital_1",
+        "y": 90
+      },
+      {
+        "model": "poptartcore:block/clinker_pillar_capital_2",
+        "y": 90
+      },
+      {
+        "model": "poptartcore:block/clinker_pillar_capital_3",
+        "y": 90
+      },
+      {
+        "model": "poptartcore:block/clinker_pillar_capital_4",
+        "y": 90
+      }
+    ],
+    "facing=south,segment=short": [
+      {
+        "model": "poptartcore:block/clinker_pillar_short_1",
+        "y": 180
+      },
+      {
+        "model": "poptartcore:block/clinker_pillar_short_2",
+        "y": 180
+      },
+      {
+        "model": "poptartcore:block/clinker_pillar_short_3",
+        "y": 180
+      },
+      {
+        "model": "poptartcore:block/clinker_pillar_short_4",
+        "y": 180
+      }
+    ],
+    "facing=south,segment=base": {
+      "model": "poptartcore:block/clinker_pillar_base"
+    },
+    "facing=south,segment=shaft": {
+      "model": "poptartcore:block/clinker_pillar_shaft"
+    },
+    "facing=south,segment=capital": [
+      {
+        "model": "poptartcore:block/clinker_pillar_capital_1",
+        "y": 180
+      },
+      {
+        "model": "poptartcore:block/clinker_pillar_capital_2",
+        "y": 180
+      },
+      {
+        "model": "poptartcore:block/clinker_pillar_capital_3",
+        "y": 180
+      },
+      {
+        "model": "poptartcore:block/clinker_pillar_capital_4",
+        "y": 180
+      }
+    ],
+    "facing=west,segment=short": [
+      {
+        "model": "poptartcore:block/clinker_pillar_short_1",
+        "y": 270
+      },
+      {
+        "model": "poptartcore:block/clinker_pillar_short_2",
+        "y": 270
+      },
+      {
+        "model": "poptartcore:block/clinker_pillar_short_3",
+        "y": 270
+      },
+      {
+        "model": "poptartcore:block/clinker_pillar_short_4",
+        "y": 270
+      }
+    ],
+    "facing=west,segment=base": {
+      "model": "poptartcore:block/clinker_pillar_base"
+    },
+    "facing=west,segment=shaft": {
+      "model": "poptartcore:block/clinker_pillar_shaft"
+    },
+    "facing=west,segment=capital": [
+      {
+        "model": "poptartcore:block/clinker_pillar_capital_1",
+        "y": 270
+      },
+      {
+        "model": "poptartcore:block/clinker_pillar_capital_2",
+        "y": 270
+      },
+      {
+        "model": "poptartcore:block/clinker_pillar_capital_3",
+        "y": 270
+      },
+      {
+        "model": "poptartcore:block/clinker_pillar_capital_4",
+        "y": 270
+      }
+    ]
+  }
+}

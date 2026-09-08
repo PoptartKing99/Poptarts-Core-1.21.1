@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "poptartcore:block/clinker/chiseled_clinker_tile"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "poptartcore:block/clinker/clinker_pillar_short_side_3",
+    "north": "poptartcore:block/clinker/clinker_pillar_short_3",
+    "south": "poptartcore:block/clinker/clinker_pillar_short_3",
+    "east": "poptartcore:block/clinker/clinker_pillar_short_side_3",
+    "west": "poptartcore:block/clinker/clinker_pillar_short_side_3",
+    "up": "poptartcore:block/clinker/mosaic_clinker_tile_top_3",
+    "down": "poptartcore:block/clinker/clinker_tile"
+  }
+}

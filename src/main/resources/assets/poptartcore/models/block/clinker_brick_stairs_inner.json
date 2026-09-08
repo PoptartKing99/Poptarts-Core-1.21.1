@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "poptartcore:block/clinker/clinker_bricks_1",
+    "side": "poptartcore:block/clinker/clinker_bricks_1",
+    "top": "poptartcore:block/clinker/clinker_bricks_1"
+  }
+}

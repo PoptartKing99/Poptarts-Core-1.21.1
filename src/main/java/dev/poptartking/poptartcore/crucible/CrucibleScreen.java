@@ -40,7 +40,8 @@ public class CrucibleScreen extends AbstractContainerScreen<CrucibleMenu> {
 
         this.imageWidth = 176;
         this.imageHeight = 190;
-        this.titleLabelY -= 20;
+        this.titleLabelY = 10;
+        this.inventoryLabelY = 96;
     }
 
     private void renderFluid(GuiGraphics guiGraphics, int x, int y) {
@@ -115,7 +116,7 @@ public class CrucibleScreen extends AbstractContainerScreen<CrucibleMenu> {
     @Override
     protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
         int x = leftPos;
-        int y = topPos - 24;
+        int y = topPos;
 
         guiGraphics.blit(TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
 

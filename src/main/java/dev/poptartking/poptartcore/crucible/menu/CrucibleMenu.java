@@ -38,23 +38,23 @@ public class CrucibleMenu extends AbstractContainerMenu {
         addDataSlots(data);
 
         for (int i = 0; i < 3; i++) {
-            addSlot(new Slot(container, i, 17 + i * 18, 1));
+            addSlot(new Slot(container, i, 17 + i * 18, 25));
         }
 
-        addSlot(new CrucibleFuelSlot(container, 3, 35, 37));
+        addSlot(new CrucibleFuelSlot(container, 3, 35, 61));
 
-        addSlot(new CrucibleContainerSlot(container, 4, 105, 37));
+        addSlot(new CrucibleContainerSlot(container, 4, 105, 61));
 
-        addSlot(new CrucibleResultSlot(container, 5, 141, 20));
+        addSlot(new CrucibleResultSlot(container, 5, 141, 44));
 
         for (int row = 0; row < 3; row++) {
             for (int column = 0; column < 9; column++) {
-                addSlot(new Slot(playerInventory, column + row * 9 + 9, 8 + column * 18, 84 + row * 18));
+                addSlot(new Slot(playerInventory, column + row * 9 + 9, 8 + column * 18, 108 + row * 18));
             }
         }
 
         for (int column = 0; column < 9; column++) {
-            addSlot(new Slot(playerInventory, column, 8 + column * 18, 142));
+            addSlot(new Slot(playerInventory, column, 8 + column * 18, 166));
         }
     }
 

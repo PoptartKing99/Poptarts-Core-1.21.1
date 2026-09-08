@@ -29,6 +29,17 @@ public class PoptartCoreTabs {
 
                         output.accept(PoptartCoreItems.CRUCIBLE);
                         output.accept(PoptartCoreItems.BLAST_FURNACE);
+                        output.accept(PoptartCoreItems.CLINKER_BRICKS);
+                        output.accept(PoptartCoreItems.CLINKER_BRICK_SLAB);
+                        output.accept(PoptartCoreItems.CLINKER_BRICK_STAIRS);
+                        output.accept(PoptartCoreItems.CLINKER_BRICK_WALL);
+                        output.accept(PoptartCoreItems.CLINKER_TILE);
+                        output.accept(PoptartCoreItems.CLINKER_TILE_SLAB);
+                        output.accept(PoptartCoreItems.CLINKER_TILE_STAIRS);
+                        output.accept(PoptartCoreItems.CLINKER_TILE_WALL);
+                        output.accept(PoptartCoreItems.MOSAIC_CLINKER_TILE);
+                        output.accept(PoptartCoreItems.CHISELED_CLINKER_TILE);
+                        output.accept(PoptartCoreItems.CLINKER_PILLAR);
                         output.accept(PoptartCoreItems.INGOT_MOULD);
                         output.accept(PoptartCoreItems.UNFIRED_INGOT_MOULD);
                         output.accept(PoptartCoreItems.PLATE_MOULD);

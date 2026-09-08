@@ -46,6 +46,8 @@ public class BlastFurnaceBlock extends BaseEntityBlock {
     private static final VoxelShape LOWER_SHAPE = Shapes.block();
     private static final VoxelShape UPPER_SHAPE =
             Shapes.or(Block.box(0, 0, 0, 16, 4, 16), Block.box(1, 4, 1, 15, 14, 15), Block.box(3, 14, 3, 13, 16, 13));
+    private static final VoxelShape FULL_SHAPE_LOWER = Shapes.or(LOWER_SHAPE, UPPER_SHAPE.move(0, 1, 0));
+    private static final VoxelShape FULL_SHAPE_UPPER = FULL_SHAPE_LOWER.move(0, -1, 0);
 
     public BlastFurnaceBlock(BlockBehaviour.Properties properties) {
         super(properties);
@@ -79,7 +81,12 @@ public class BlastFurnaceBlock extends BaseEntityBlock {
 
     @Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return getCollisionShape(state, level, pos, context);
+        return state.getValue(HALF) == DoubleBlockHalf.UPPER ? FULL_SHAPE_UPPER : FULL_SHAPE_LOWER;
+    }
+
+    @Override
+    protected VoxelShape getOcclusionShape(BlockState state, BlockGetter level, BlockPos pos) {
+        return state.getValue(HALF) == DoubleBlockHalf.UPPER ? UPPER_SHAPE : LOWER_SHAPE;
     }
 
     @Nullable

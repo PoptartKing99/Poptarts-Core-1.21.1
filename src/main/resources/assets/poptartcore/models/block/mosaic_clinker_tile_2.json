@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "poptartcore:block/clinker/mosaic_clinker_tile_bottom",
+    "side": "poptartcore:block/clinker/mosaic_clinker_tile_3",
+    "top": "poptartcore:block/clinker/mosaic_clinker_tile_top_3"
+  }
+}

@@ -1,5 +1,16 @@
 {
   "values": [
-    "poptartcore:blast_furnace"
+    "poptartcore:blast_furnace",
+    "poptartcore:clinker_bricks",
+    "poptartcore:clinker_brick_slab",
+    "poptartcore:clinker_brick_stairs",
+    "poptartcore:clinker_brick_wall",
+    "poptartcore:clinker_tile",
+    "poptartcore:clinker_tile_slab",
+    "poptartcore:clinker_tile_stairs",
+    "poptartcore:clinker_tile_wall",
+    "poptartcore:mosaic_clinker_tile",
+    "poptartcore:chiseled_clinker_tile",
+    "poptartcore:clinker_pillar"
   ]
 }
