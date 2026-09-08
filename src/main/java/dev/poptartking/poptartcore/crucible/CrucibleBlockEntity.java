@@ -58,6 +58,7 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
 
     private int burnTime;
     private int burnDuration;
+    private int burnSpeed = 1;
     private int cookTime;
     private int cookTimeTotal = 200;
     private int castingProgress;
@@ -141,7 +142,7 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
         boolean canProcess = alloyPlan != null || meltingBatches > 0;
 
         if (blockEntity.burnTime > 0) {
-            blockEntity.burnTime--;
+            blockEntity.burnTime = Math.max(0, blockEntity.burnTime - blockEntity.burnSpeed);
             changed = true;
         }
 
@@ -152,6 +153,7 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
             if (burnDuration > 0) {
                 blockEntity.burnTime = burnDuration;
                 blockEntity.burnDuration = burnDuration;
+                blockEntity.burnSpeed = blockEntity.fuelSpeedMultiplier(fuel);
 
                 if (fuel.hasCraftingRemainingItem()) {
                     blockEntity.items.set(blockEntity.fuelSlot, fuel.getCraftingRemainingItem());
@@ -173,7 +175,7 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
             }
 
             blockEntity.cookTimeTotal = cookTimeTotal;
-            blockEntity.cookTime++;
+            blockEntity.cookTime += blockEntity.burnSpeed;
 
             if (blockEntity.cookTime >= blockEntity.cookTimeTotal) {
                 blockEntity.cookTime = 0;
@@ -298,7 +300,7 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
             return 0;
         }
 
-        return fuel.getBurnTime(RecipeType.SMELTING) * fuelSpeedMultiplier(fuel);
+        return fuel.getBurnTime(RecipeType.SMELTING);
     }
 
     protected boolean isBlastFurnace() {
@@ -650,6 +652,7 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
 
         tag.putInt("BurnTime", burnTime);
         tag.putInt("BurnDuration", burnDuration);
+        tag.putInt("BurnSpeed", burnSpeed);
         tag.putInt("CookTime", cookTime);
         tag.putInt("CookTimeTotal", cookTimeTotal);
         tag.putInt("CastingProgress", castingProgress);
@@ -672,6 +675,7 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
 
         burnTime = tag.getInt("BurnTime");
         burnDuration = tag.getInt("BurnDuration");
+        burnSpeed = Math.max(1, tag.getInt("BurnSpeed"));
         cookTime = tag.getInt("CookTime");
 
         if (tag.contains("CookTimeTotal")) {
