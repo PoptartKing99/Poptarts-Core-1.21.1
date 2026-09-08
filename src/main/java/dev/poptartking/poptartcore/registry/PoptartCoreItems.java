@@ -2,6 +2,8 @@ package dev.poptartking.poptartcore.registry;
 
 import dev.poptartking.poptartcore.PoptartCore;
 import dev.poptartking.poptartcore.crucible.CrucibleBlockItem;
+import dev.poptartking.poptartcore.item.HammerItem;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -42,6 +44,13 @@ public class PoptartCoreItems {
     public static final DeferredItem<Item> STEEL_NUGGET = registerItem("steel_nugget");
     public static final DeferredItem<Item> STEEL_PLATE = registerItem("steel_plate");
     public static final DeferredItem<Item> COAL_COKE = registerItem("coal_coke");
+    public static final DeferredItem<HammerItem> HAMMER = ITEMS.register(
+            "hammer",
+            () -> new HammerItem(new Item.Properties()
+                    .stacksTo(1)
+                    .attributes(HammerItem.createAttributes())
+                    .component(DataComponents.TOOL, HammerItem.createToolProperties())
+                    .durability(720)));
     public static final DeferredItem<Item> BRONZE_INGOT = registerItem("bronze_ingot");
     public static final DeferredItem<Item> BRONZE_NUGGET = registerItem("bronze_nugget");
     public static final DeferredItem<Item> BRONZE_PLATE = registerItem("bronze_plate");

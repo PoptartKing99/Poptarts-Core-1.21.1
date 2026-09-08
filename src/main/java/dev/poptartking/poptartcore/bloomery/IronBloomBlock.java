@@ -1,8 +1,10 @@
 package dev.poptartking.poptartcore.bloomery;
 
+import dev.poptartking.poptartcore.registry.PoptartCoreTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -54,10 +56,31 @@ public class IronBloomBlock extends Block {
     @Override
     public boolean onDestroyedByPlayer(
             BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
-        if (!level.isClientSide && !player.getAbilities().instabuild) {
-            popResource(level, pos, new ItemStack(this, state.getValue(BLOOMS)));
+        int blooms = state.getValue(BLOOMS);
+        boolean hammer = player.getMainHandItem().is(PoptartCoreTags.HAMMERS);
+        boolean creative = player.getAbilities().instabuild;
+
+        if (hammer && blooms > 1 && !creative) {
+            if (!level.isClientSide) {
+                dropNuggets(level, pos);
+                level.setBlock(pos, state.setValue(BLOOMS, blooms - 1), 3);
+                level.levelEvent(2001, pos, Block.getId(state));
+            }
+            return false;
+        }
+
+        if (!level.isClientSide && !creative) {
+            if (hammer) {
+                dropNuggets(level, pos);
+            } else {
+                popResource(level, pos, new ItemStack(this, blooms));
+            }
         }
         return super.onDestroyedByPlayer(state, level, pos, player, willHarvest, fluid);
+    }
+
+    private static void dropNuggets(Level level, BlockPos pos) {
+        popResource(level, pos, new ItemStack(Items.IRON_NUGGET, 6 + level.random.nextInt(4)));
     }
 
     private static VoxelShape[] makeShapes() {
