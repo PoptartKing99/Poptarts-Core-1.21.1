@@ -2,16 +2,16 @@
   "variants": {
     "": [
       {
-        "model": "poptartcore:block/mosaic_clinker_tile"
+        "model": "poptartcore:block/clinker/mosaic_clinker_tile"
       },
       {
-        "model": "poptartcore:block/mosaic_clinker_tile_1"
+        "model": "poptartcore:block/clinker/mosaic_clinker_tile_1"
       },
       {
-        "model": "poptartcore:block/mosaic_clinker_tile_2"
+        "model": "poptartcore:block/clinker/mosaic_clinker_tile_2"
       },
       {
-        "model": "poptartcore:block/mosaic_clinker_tile_3"
+        "model": "poptartcore:block/clinker/mosaic_clinker_tile_3"
       }
     ]
   }

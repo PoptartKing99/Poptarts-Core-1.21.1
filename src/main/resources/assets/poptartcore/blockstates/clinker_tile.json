@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "poptartcore:block/clinker_tile"
+      "model": "poptartcore:block/clinker/clinker_tile"
     }
   }
 }

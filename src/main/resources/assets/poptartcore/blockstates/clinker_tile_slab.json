@@ -1,13 +1,13 @@
 {
   "variants": {
     "type=bottom": {
-      "model": "poptartcore:block/clinker_tile_slab"
+      "model": "poptartcore:block/clinker/clinker_tile_slab"
     },
     "type=double": {
-      "model": "poptartcore:block/clinker_tile_slab_double"
+      "model": "poptartcore:block/clinker/clinker_tile_slab_double"
     },
     "type=top": {
-      "model": "poptartcore:block/clinker_tile_slab_top"
+      "model": "poptartcore:block/clinker/clinker_tile_slab_top"
     }
   }
 }

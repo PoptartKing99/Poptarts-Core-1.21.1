@@ -1,154 +1,324 @@
 {
-  "variants": {
-    "facing=east,fluid_level=0,lit=false": {
-      "model": "poptartcore:block/crucible",
-      "y": 270
+  "multipart": [
+    {
+      "when": {
+        "facing": "south",
+        "fluid_level": "0",
+        "lit": "false"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible"
+      }
     },
-    "facing=east,fluid_level=1,lit=false": {
-      "model": "poptartcore:block/crucible_molten_1",
-      "y": 270
+    {
+      "when": {
+        "facing": "south",
+        "fluid_level": "0",
+        "lit": "true"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_hot"
+      }
     },
-    "facing=east,fluid_level=2,lit=false": {
-      "model": "poptartcore:block/crucible_molten_2",
-      "y": 270
+    {
+      "when": {
+        "facing": "south",
+        "fluid_level": "1|2|3|4"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_hot"
+      }
     },
-    "facing=east,fluid_level=3,lit=false": {
-      "model": "poptartcore:block/crucible_molten_3",
-      "y": 270
+    {
+      "when": {
+        "facing": "south",
+        "lit": "true"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fire"
+      }
     },
-    "facing=east,fluid_level=4,lit=false": {
-      "model": "poptartcore:block/crucible_molten_4",
-      "y": 270
+    {
+      "when": {
+        "facing": "south",
+        "fluid_level": "1"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_1"
+      }
     },
-    "facing=east,fluid_level=0,lit=true": {
-      "model": "poptartcore:block/crucible_lit",
-      "y": 270
+    {
+      "when": {
+        "facing": "south",
+        "fluid_level": "2"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_2"
+      }
     },
-    "facing=east,fluid_level=1,lit=true": {
-      "model": "poptartcore:block/crucible_molten_lit_1",
-      "y": 270
+    {
+      "when": {
+        "facing": "south",
+        "fluid_level": "3"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_3"
+      }
     },
-    "facing=east,fluid_level=2,lit=true": {
-      "model": "poptartcore:block/crucible_molten_lit_2",
-      "y": 270
+    {
+      "when": {
+        "facing": "south",
+        "fluid_level": "4"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_4"
+      }
     },
-    "facing=east,fluid_level=3,lit=true": {
-      "model": "poptartcore:block/crucible_molten_lit_3",
-      "y": 270
+    {
+      "when": {
+        "facing": "west",
+        "fluid_level": "0",
+        "lit": "false"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible",
+        "y": 90
+      }
     },
-    "facing=east,fluid_level=4,lit=true": {
-      "model": "poptartcore:block/crucible_molten_lit_4",
-      "y": 270
+    {
+      "when": {
+        "facing": "west",
+        "fluid_level": "0",
+        "lit": "true"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_hot",
+        "y": 90
+      }
     },
-    "facing=north,fluid_level=0,lit=false": {
-      "model": "poptartcore:block/crucible",
-      "y": 180
+    {
+      "when": {
+        "facing": "west",
+        "fluid_level": "1|2|3|4"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_hot",
+        "y": 90
+      }
     },
-    "facing=north,fluid_level=1,lit=false": {
-      "model": "poptartcore:block/crucible_molten_1",
-      "y": 180
+    {
+      "when": {
+        "facing": "west",
+        "lit": "true"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fire",
+        "y": 90
+      }
     },
-    "facing=north,fluid_level=2,lit=false": {
-      "model": "poptartcore:block/crucible_molten_2",
-      "y": 180
+    {
+      "when": {
+        "facing": "west",
+        "fluid_level": "1"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_1",
+        "y": 90
+      }
     },
-    "facing=north,fluid_level=3,lit=false": {
-      "model": "poptartcore:block/crucible_molten_3",
-      "y": 180
+    {
+      "when": {
+        "facing": "west",
+        "fluid_level": "2"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_2",
+        "y": 90
+      }
     },
-    "facing=north,fluid_level=4,lit=false": {
-      "model": "poptartcore:block/crucible_molten_4",
-      "y": 180
+    {
+      "when": {
+        "facing": "west",
+        "fluid_level": "3"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_3",
+        "y": 90
+      }
     },
-    "facing=north,fluid_level=0,lit=true": {
-      "model": "poptartcore:block/crucible_lit",
-      "y": 180
+    {
+      "when": {
+        "facing": "west",
+        "fluid_level": "4"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_4",
+        "y": 90
+      }
     },
-    "facing=north,fluid_level=1,lit=true": {
-      "model": "poptartcore:block/crucible_molten_lit_1",
-      "y": 180
+    {
+      "when": {
+        "facing": "north",
+        "fluid_level": "0",
+        "lit": "false"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible",
+        "y": 180
+      }
     },
-    "facing=north,fluid_level=2,lit=true": {
-      "model": "poptartcore:block/crucible_molten_lit_2",
-      "y": 180
+    {
+      "when": {
+        "facing": "north",
+        "fluid_level": "0",
+        "lit": "true"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_hot",
+        "y": 180
+      }
     },
-    "facing=north,fluid_level=3,lit=true": {
-      "model": "poptartcore:block/crucible_molten_lit_3",
-      "y": 180
+    {
+      "when": {
+        "facing": "north",
+        "fluid_level": "1|2|3|4"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_hot",
+        "y": 180
+      }
     },
-    "facing=north,fluid_level=4,lit=true": {
-      "model": "poptartcore:block/crucible_molten_lit_4",
-      "y": 180
+    {
+      "when": {
+        "facing": "north",
+        "lit": "true"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fire",
+        "y": 180
+      }
     },
-    "facing=south,fluid_level=0,lit=false": {
-      "model": "poptartcore:block/crucible"
+    {
+      "when": {
+        "facing": "north",
+        "fluid_level": "1"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_1",
+        "y": 180
+      }
     },
-    "facing=south,fluid_level=1,lit=false": {
-      "model": "poptartcore:block/crucible_molten_1"
+    {
+      "when": {
+        "facing": "north",
+        "fluid_level": "2"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_2",
+        "y": 180
+      }
     },
-    "facing=south,fluid_level=2,lit=false": {
-      "model": "poptartcore:block/crucible_molten_2"
+    {
+      "when": {
+        "facing": "north",
+        "fluid_level": "3"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_3",
+        "y": 180
+      }
     },
-    "facing=south,fluid_level=3,lit=false": {
-      "model": "poptartcore:block/crucible_molten_3"
+    {
+      "when": {
+        "facing": "north",
+        "fluid_level": "4"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_4",
+        "y": 180
+      }
     },
-    "facing=south,fluid_level=4,lit=false": {
-      "model": "poptartcore:block/crucible_molten_4"
+    {
+      "when": {
+        "facing": "east",
+        "fluid_level": "0",
+        "lit": "false"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible",
+        "y": 270
+      }
     },
-    "facing=south,fluid_level=0,lit=true": {
-      "model": "poptartcore:block/crucible_lit"
+    {
+      "when": {
+        "facing": "east",
+        "fluid_level": "0",
+        "lit": "true"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_hot",
+        "y": 270
+      }
     },
-    "facing=south,fluid_level=1,lit=true": {
-      "model": "poptartcore:block/crucible_molten_lit_1"
+    {
+      "when": {
+        "facing": "east",
+        "fluid_level": "1|2|3|4"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_hot",
+        "y": 270
+      }
     },
-    "facing=south,fluid_level=2,lit=true": {
-      "model": "poptartcore:block/crucible_molten_lit_2"
+    {
+      "when": {
+        "facing": "east",
+        "lit": "true"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fire",
+        "y": 270
+      }
     },
-    "facing=south,fluid_level=3,lit=true": {
-      "model": "poptartcore:block/crucible_molten_lit_3"
+    {
+      "when": {
+        "facing": "east",
+        "fluid_level": "1"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_1",
+        "y": 270
+      }
     },
-    "facing=south,fluid_level=4,lit=true": {
-      "model": "poptartcore:block/crucible_molten_lit_4"
+    {
+      "when": {
+        "facing": "east",
+        "fluid_level": "2"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_2",
+        "y": 270
+      }
     },
-    "facing=west,fluid_level=0,lit=false": {
-      "model": "poptartcore:block/crucible",
-      "y": 90
+    {
+      "when": {
+        "facing": "east",
+        "fluid_level": "3"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_3",
+        "y": 270
+      }
     },
-    "facing=west,fluid_level=1,lit=false": {
-      "model": "poptartcore:block/crucible_molten_1",
-      "y": 90
-    },
-    "facing=west,fluid_level=2,lit=false": {
-      "model": "poptartcore:block/crucible_molten_2",
-      "y": 90
-    },
-    "facing=west,fluid_level=3,lit=false": {
-      "model": "poptartcore:block/crucible_molten_3",
-      "y": 90
-    },
-    "facing=west,fluid_level=4,lit=false": {
-      "model": "poptartcore:block/crucible_molten_4",
-      "y": 90
-    },
-    "facing=west,fluid_level=0,lit=true": {
-      "model": "poptartcore:block/crucible_lit",
-      "y": 90
-    },
-    "facing=west,fluid_level=1,lit=true": {
-      "model": "poptartcore:block/crucible_molten_lit_1",
-      "y": 90
-    },
-    "facing=west,fluid_level=2,lit=true": {
-      "model": "poptartcore:block/crucible_molten_lit_2",
-      "y": 90
-    },
-    "facing=west,fluid_level=3,lit=true": {
-      "model": "poptartcore:block/crucible_molten_lit_3",
-      "y": 90
-    },
-    "facing=west,fluid_level=4,lit=true": {
-      "model": "poptartcore:block/crucible_molten_lit_4",
-      "y": 90
+    {
+      "when": {
+        "facing": "east",
+        "fluid_level": "4"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_4",
+        "y": 270
+      }
     }
-  }
+  ]
 }

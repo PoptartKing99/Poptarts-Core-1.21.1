@@ -1,0 +1,45 @@
+{
+  "format_version": "1.21.11",
+  "credit": "Made by Farcr",
+  "parent": "block/block",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "4": "poptartcore:block/crucible/crucible_lit",
+    "particle": "block/campfire_log"
+  },
+  "elements": [
+    {
+      "name": "bottom_inner_crucible",
+      "from": [
+        5,
+        7,
+        5
+      ],
+      "to": [
+        11,
+        7,
+        11
+      ],
+      "rotation": {
+        "angle": 0,
+        "axis": "y",
+        "origin": [
+          5,
+          7,
+          5
+        ]
+      },
+      "faces": {
+        "up": {
+          "uv": [
+            12,
+            12,
+            15,
+            15
+          ],
+          "texture": "#4"
+        }
+      }
+    }
+  ]
+}

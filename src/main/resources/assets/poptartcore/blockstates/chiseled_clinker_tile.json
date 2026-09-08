@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "poptartcore:block/chiseled_clinker_tile"
+      "model": "poptartcore:block/clinker/chiseled_clinker_tile"
     }
   }
 }
