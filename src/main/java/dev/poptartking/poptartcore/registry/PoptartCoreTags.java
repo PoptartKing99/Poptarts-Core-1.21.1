@@ -5,6 +5,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 
 public final class PoptartCoreTags {
     public static final TagKey<Item> HAMMERS =
@@ -17,4 +18,8 @@ public final class PoptartCoreTags {
             TagKey.create(Registries.ITEM, PoptartCore.location("blast_furnace_efficient"));
 
     private PoptartCoreTags() {}
+
+    public static boolean isBlastFurnaceFuel(ItemStack stack) {
+        return stack.is(BLAST_FURNACE_ALLOWED) || stack.is(BLAST_FURNACE_EFFICIENT);
+    }
 }

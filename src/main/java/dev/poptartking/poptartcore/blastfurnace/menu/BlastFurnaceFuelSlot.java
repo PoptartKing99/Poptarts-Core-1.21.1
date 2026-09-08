@@ -12,6 +12,6 @@ public class BlastFurnaceFuelSlot extends Slot {
 
     @Override
     public boolean mayPlace(ItemStack stack) {
-        return stack.is(PoptartCoreTags.BLAST_FURNACE_ALLOWED);
+        return PoptartCoreTags.isBlastFurnaceFuel(stack);
     }
 }

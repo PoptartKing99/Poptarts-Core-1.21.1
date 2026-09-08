@@ -89,7 +89,7 @@ public class BlastFurnaceMenu extends AbstractContainerMenu {
         ItemStack copy = stack.copy();
         if (index < MACHINE_SLOTS) {
             if (!moveItemStackTo(stack, MACHINE_SLOTS, MACHINE_SLOTS + 36, true)) return ItemStack.EMPTY;
-        } else if (stack.is(PoptartCoreTags.BLAST_FURNACE_ALLOWED)) {
+        } else if (PoptartCoreTags.isBlastFurnaceFuel(stack)) {
             if (!moveItemStackTo(stack, 6, 7, false)) return ItemStack.EMPTY;
         } else if (PoptartCoreItems.isMould(stack)) {
             if (!moveItemStackTo(stack, 7, 8, false)) return ItemStack.EMPTY;
