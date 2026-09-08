@@ -1,16 +1,25 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "BBB",
-    "BFB",
-    "BBB"
+    "CMC",
+    "CFC",
+    "IPI"
   ],
   "key": {
-    "B": {
-      "item": "minecraft:brick"
+    "C": {
+      "item": "poptartcore:clinker_bricks"
+    },
+    "M": {
+      "item": "supplementaries:slidy_block"
     },
     "F": {
       "item": "minecraft:furnace"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "P": {
+      "item": "create:iron_sheet"
     }
   },
   "result": {
