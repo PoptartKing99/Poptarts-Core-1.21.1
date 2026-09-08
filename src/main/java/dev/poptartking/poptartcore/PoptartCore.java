@@ -1,5 +1,6 @@
 package dev.poptartking.poptartcore;
 
+import dev.poptartking.poptartcore.blastfurnace.BlastFurnaceCapabilities;
 import dev.poptartking.poptartcore.registry.*;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
@@ -18,6 +19,7 @@ public class PoptartCore {
         PoptartCoreFluids.register(modEventBus);
         PoptartCoreRecipes.register(modEventBus);
         PoptartCoreTabs.register(modEventBus);
+        BlastFurnaceCapabilities.register(modEventBus);
     }
 
     public static ResourceLocation location(String path) {

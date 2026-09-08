@@ -106,6 +106,7 @@ public class BlastFurnaceBlock extends BaseEntityBlock implements WorldlyContain
     public void setPlacedBy(
             Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
         level.setBlock(pos.above(), state.setValue(HALF, DoubleBlockHalf.UPPER), 3);
+        level.invalidateCapabilities(pos.above());
     }
 
     @Override
@@ -155,11 +156,16 @@ public class BlastFurnaceBlock extends BaseEntityBlock implements WorldlyContain
 
     @Override
     protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
-        if (!state.is(newState.getBlock())
-                && state.getValue(HALF) == DoubleBlockHalf.LOWER
-                && level.getBlockEntity(pos) instanceof BlastFurnaceBlockEntity furnace) {
-            Containers.dropContents(level, pos, furnace);
-            level.updateNeighbourForOutputSignal(pos, this);
+        if (!state.is(newState.getBlock())) {
+            BlockPos otherHalf = state.getValue(HALF) == DoubleBlockHalf.LOWER ? pos.above() : pos.below();
+            level.invalidateCapabilities(pos);
+            level.invalidateCapabilities(otherHalf);
+
+            if (state.getValue(HALF) == DoubleBlockHalf.LOWER
+                    && level.getBlockEntity(pos) instanceof BlastFurnaceBlockEntity furnace) {
+                Containers.dropContents(level, pos, furnace);
+                level.updateNeighbourForOutputSignal(pos, this);
+            }
         }
         super.onRemove(state, level, pos, newState, movedByPiston);
     }
