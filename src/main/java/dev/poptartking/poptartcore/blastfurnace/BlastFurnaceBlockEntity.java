@@ -15,6 +15,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -72,12 +73,27 @@ public class BlastFurnaceBlockEntity extends CrucibleBlockEntity implements Worl
                 : slot < inputCount;
     }
 
+    private int[] inputSlots() {
+        int[] slots = new int[inputCount];
+        for (int slot = 0; slot < inputCount; slot++) {
+            slots[slot] = slot;
+        }
+        return slots;
+    }
+
+    private Direction facing() {
+        return getBlockState().getValue(BlastFurnaceBlock.FACING);
+    }
+
     @Override
     public int[] getSlotsForFace(Direction side) {
         if (side == Direction.DOWN) return new int[] {resultSlot, containerSlot};
-        if (side == Direction.UP) return new int[] {containerSlot};
+        if (side == facing().getClockWise()) return new int[] {fuelSlot, containerSlot};
+        if (side == facing().getCounterClockWise()) return new int[] {containerSlot};
+        if (side != facing().getOpposite()) return new int[] {containerSlot};
+
         int[] slots = new int[inputCount + 1];
-        for (int i = 0; i < inputCount; i++) slots[i] = i;
+        System.arraycopy(inputSlots(), 0, slots, 0, inputCount);
         slots[inputCount] = containerSlot;
         return slots;
     }
@@ -91,6 +107,10 @@ public class BlastFurnaceBlockEntity extends CrucibleBlockEntity implements Worl
     @Override
     public boolean canTakeItemThroughFace(int slot, ItemStack stack, Direction side) {
         return slot == resultSlot && side == Direction.DOWN;
+    }
+
+    public WorldlyContainer topHalf() {
+        return new TopHalf(this);
     }
 
     @Override
@@ -114,5 +134,79 @@ public class BlastFurnaceBlockEntity extends CrucibleBlockEntity implements Worl
     @Override
     protected AbstractContainerMenu createMenu(int id, Inventory inventory) {
         return new BlastFurnaceMenu(id, inventory, this, dataAccess);
+    }
+
+    private record TopHalf(BlastFurnaceBlockEntity furnace) implements WorldlyContainer {
+        @Override
+        public int[] getSlotsForFace(Direction side) {
+            if (side == Direction.UP) return new int[] {furnace.containerSlot};
+
+            int[] slots = new int[furnace.inputCount + 1];
+            System.arraycopy(furnace.inputSlots(), 0, slots, 0, furnace.inputCount);
+            slots[furnace.inputCount] = furnace.containerSlot;
+            return slots;
+        }
+
+        @Override
+        public boolean canPlaceItemThroughFace(int slot, ItemStack stack, Direction side) {
+            return slot == furnace.containerSlot
+                    ? furnace.canPlaceItem(slot, stack)
+                    : side != Direction.UP && slot < furnace.inputCount && furnace.canPlaceItem(slot, stack);
+        }
+
+        @Override
+        public boolean canTakeItemThroughFace(int slot, ItemStack stack, Direction side) {
+            return false;
+        }
+
+        @Override
+        public int getContainerSize() {
+            return furnace.getContainerSize();
+        }
+
+        @Override
+        public boolean isEmpty() {
+            return furnace.isEmpty();
+        }
+
+        @Override
+        public ItemStack getItem(int slot) {
+            return furnace.getItem(slot);
+        }
+
+        @Override
+        public ItemStack removeItem(int slot, int amount) {
+            return furnace.removeItem(slot, amount);
+        }
+
+        @Override
+        public ItemStack removeItemNoUpdate(int slot) {
+            return furnace.removeItemNoUpdate(slot);
+        }
+
+        @Override
+        public void setItem(int slot, ItemStack stack) {
+            furnace.setItem(slot, stack);
+        }
+
+        @Override
+        public int getMaxStackSize() {
+            return furnace.getMaxStackSize();
+        }
+
+        @Override
+        public void setChanged() {
+            furnace.setChanged();
+        }
+
+        @Override
+        public boolean stillValid(Player player) {
+            return furnace.stillValid(player);
+        }
+
+        @Override
+        public void clearContent() {
+            furnace.clearContent();
+        }
     }
 }

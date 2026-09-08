@@ -11,6 +11,8 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.WorldlyContainer;
+import net.minecraft.world.WorldlyContainerHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -39,7 +41,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class BlastFurnaceBlock extends BaseEntityBlock {
+public class BlastFurnaceBlock extends BaseEntityBlock implements WorldlyContainerHolder {
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
@@ -131,6 +133,15 @@ public class BlastFurnaceBlock extends BaseEntityBlock {
 
     private BlockPos lowerPos(BlockState state, BlockPos pos) {
         return state.getValue(HALF) == DoubleBlockHalf.LOWER ? pos : pos.below();
+    }
+
+    @Nullable
+    @Override
+    public WorldlyContainer getContainer(BlockState state, LevelAccessor level, BlockPos pos) {
+        if (level.getBlockEntity(lowerPos(state, pos)) instanceof BlastFurnaceBlockEntity furnace) {
+            return state.getValue(HALF) == DoubleBlockHalf.LOWER ? furnace : furnace.topHalf();
+        }
+        return null;
     }
 
     @Override
