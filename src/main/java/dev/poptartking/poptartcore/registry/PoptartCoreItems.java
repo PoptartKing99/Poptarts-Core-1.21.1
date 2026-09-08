@@ -82,6 +82,9 @@ public class PoptartCoreItems {
             "crucible", () -> new CrucibleBlockItem(PoptartCoreBlocks.CRUCIBLE.get(), new Item.Properties()));
     public static final DeferredItem<BlockItem> BLAST_FURNACE = ITEMS.register(
             "blast_furnace", () -> new BlockItem(PoptartCoreBlocks.BLAST_FURNACE.get(), new Item.Properties()));
+    public static final DeferredItem<BlockItem> BLOOMERY = registerBlockItem("bloomery", PoptartCoreBlocks.BLOOMERY);
+    public static final DeferredItem<BlockItem> IRON_BLOOM =
+            registerBlockItem("iron_bloom", PoptartCoreBlocks.IRON_BLOOM);
     public static final DeferredItem<BlockItem> CLINKER_BRICKS =
             registerBlockItem("clinker_bricks", PoptartCoreBlocks.CLINKER_BRICKS);
     public static final DeferredItem<BlockItem> CLINKER_BRICK_SLAB =

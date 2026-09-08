@@ -30,6 +30,8 @@
 
   "block.poptartcore.crucible" : "Crucible",
   "block.poptartcore.blast_furnace": "Blast Furnace",
+  "block.poptartcore.bloomery": "Bloomery",
+  "block.poptartcore.iron_bloom": "Iron Bloom",
   "block.poptartcore.clinker_bricks": "Clinker Bricks",
   "block.poptartcore.clinker_brick_slab": "Clinker Brick Slab",
   "block.poptartcore.clinker_brick_stairs": "Clinker Brick Stairs",

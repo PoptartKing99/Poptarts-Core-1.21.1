@@ -1,6 +1,8 @@
 {
   "values": [
     "poptartcore:blast_furnace",
+    "poptartcore:bloomery",
+    "poptartcore:iron_bloom",
     "poptartcore:clinker_bricks",
     "poptartcore:clinker_brick_slab",
     "poptartcore:clinker_brick_stairs",

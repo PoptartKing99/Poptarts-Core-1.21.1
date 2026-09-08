@@ -2,6 +2,8 @@ package dev.poptartking.poptartcore.registry;
 
 import dev.poptartking.poptartcore.PoptartCore;
 import dev.poptartking.poptartcore.blastfurnace.BlastFurnaceBlock;
+import dev.poptartking.poptartcore.bloomery.BloomeryBlock;
+import dev.poptartking.poptartcore.bloomery.IronBloomBlock;
 import dev.poptartking.poptartcore.clinker.ClinkerPillarBlock;
 import dev.poptartking.poptartcore.crucible.CrucibleBlock;
 import net.minecraft.world.level.block.Block;
@@ -34,6 +36,14 @@ public class PoptartCoreBlocks {
             "blast_furnace",
             () -> new BlastFurnaceBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BLAST_FURNACE)
                     .lightLevel(state -> state.getValue(BlastFurnaceBlock.LIT) ? 13 : 0)));
+
+    public static final DeferredBlock<BloomeryBlock> BLOOMERY = BLOCKS.register(
+            "bloomery", () -> new BloomeryBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.MUD_BRICKS)));
+    public static final DeferredBlock<IronBloomBlock> IRON_BLOOM = BLOCKS.register(
+            "iron_bloom",
+            () -> new IronBloomBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.RAW_IRON_BLOCK)
+                    .noOcclusion()
+                    .noLootTable()));
 
     public static final DeferredBlock<Block> CLINKER_BRICKS =
             BLOCKS.register("clinker_bricks", () -> new Block(clinkerProperties()));

@@ -1,0 +1,31 @@
+{
+  "variants": {
+    "blooms=1": {
+      "model": "poptartcore:block/iron_bloom/iron_bloom_1"
+    },
+    "blooms=2": {
+      "model": "poptartcore:block/iron_bloom/iron_bloom_2"
+    },
+    "blooms=3": {
+      "model": "poptartcore:block/iron_bloom/iron_bloom_3"
+    },
+    "blooms=4": {
+      "model": "poptartcore:block/iron_bloom/iron_bloom_4"
+    },
+    "blooms=5": {
+      "model": "poptartcore:block/iron_bloom/iron_bloom_5"
+    },
+    "blooms=6": {
+      "model": "poptartcore:block/iron_bloom/iron_bloom_6"
+    },
+    "blooms=7": {
+      "model": "poptartcore:block/iron_bloom/iron_bloom_7"
+    },
+    "blooms=8": {
+      "model": "poptartcore:block/iron_bloom/iron_bloom_8"
+    },
+    "blooms=9": {
+      "model": "poptartcore:block/iron_bloom/iron_bloom_9"
+    }
+  }
+}

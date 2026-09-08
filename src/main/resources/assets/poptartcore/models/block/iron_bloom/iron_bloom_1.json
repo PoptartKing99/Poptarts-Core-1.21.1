@@ -1,0 +1,43 @@
+{
+  "render_type": "minecraft:cutout",
+  "ambientocclusion": false,
+  "textures": {
+    "particle": "poptartcore:block/iron_bloom/iron_bloom",
+    "0": "poptartcore:block/iron_bloom/iron_bloom_base",
+    "1": "poptartcore:block/iron_bloom/iron_bloom"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        0.3,
+        0
+      ],
+      "to": [
+        16,
+        0.3,
+        16
+      ],
+      "faces": {
+        "up": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#0"
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#0"
+        }
+      }
+    }
+  ]
+}
