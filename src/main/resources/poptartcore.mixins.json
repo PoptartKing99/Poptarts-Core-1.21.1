@@ -3,9 +3,12 @@
   "package": "dev.poptartking.poptartcore.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "armor.ArmorTextureMixin"
+    "armor.ArmorTextureMixin",
+    "item.HammerDestroyProgressMixin",
+    "item.ServerHammerMiningMixin"
   ],
   "client": [
+    "item.ClientHammerFaceMixin",
     "render.BlastFurnaceBreakRenderMixin"
   ],
   "injectors": {
