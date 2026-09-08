@@ -39,6 +39,22 @@ versionRange="${minecraft_version_range}"
 ordering="NONE"
 side="BOTH"
 
+# Create dependency
+[[dependencies."${mod_id}"]]
+modId="create"
+type="required"
+versionRange="[${create_version},)"
+ordering="NONE"
+side="BOTH"
+
+# Supplementaries dependency
+[[dependencies."${mod_id}"]]
+modId="supplementaries"
+type="required"
+versionRange="[${supplementaries_version},)"
+ordering="NONE"
+side="BOTH"
+
 # LambDynamicLights dependency
 [[dependencies."${mod_id}"]]
 modId="lambdynlights"

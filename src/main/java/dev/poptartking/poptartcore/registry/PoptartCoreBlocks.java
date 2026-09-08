@@ -23,10 +23,12 @@ public class PoptartCoreBlocks {
             "crucible",
             () -> new CrucibleBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CAMPFIRE)
                     .sound(SoundType.MUD_BRICKS)
-                    .lightLevel(
-                            state -> state.getValue(CrucibleBlock.LIT) || state.getValue(CrucibleBlock.FLUID_LEVEL) > 0
-                                    ? 15
-                                    : 0)));
+                    .lightLevel(state -> {
+                        if (state.getValue(CrucibleBlock.LIT)) {
+                            return 15;
+                        }
+                        return state.getValue(CrucibleBlock.FLUID_LEVEL) > 0 ? 8 : 0;
+                    })));
 
     public static final DeferredBlock<BlastFurnaceBlock> BLAST_FURNACE = BLOCKS.register(
             "blast_furnace",
