@@ -1,5 +1,6 @@
 package dev.poptartking.poptartcore.crucible.alloying;
 
+import dev.poptartking.poptartcore.crucible.melting.MeltingRecipe;
 import dev.poptartking.poptartcore.crucible.melting.MeltingRecipeInput;
 import dev.poptartking.poptartcore.registry.PoptartCoreRecipes;
 import java.util.HashMap;
@@ -131,8 +132,19 @@ public record AlloyingRecipe(
         ItemStack singleItem = stack.copyWithCount(1);
         MeltingRecipeInput input = new MeltingRecipeInput(List.of(singleItem), blastFurnaceInput);
 
+        if (blastFurnaceInput) {
+            FluidStack blastResult = melt(input, level, PoptartCoreRecipes.BLAST_FURNACE_MELTING_TYPE.get());
+            if (!blastResult.isEmpty()) {
+                return blastResult;
+            }
+        }
+
+        return melt(input, level, PoptartCoreRecipes.CRUCIBLE_MELTING_TYPE.get());
+    }
+
+    private FluidStack melt(MeltingRecipeInput input, Level level, RecipeType<MeltingRecipe> recipeType) {
         return level.getRecipeManager()
-                .getRecipeFor(PoptartCoreRecipes.CRUCIBLE_MELTING_TYPE.get(), input, level)
+                .getRecipeFor(recipeType, input, level)
                 .map(RecipeHolder::value)
                 .map(recipe -> recipe.assembleFluid(input))
                 .orElse(FluidStack.EMPTY);
