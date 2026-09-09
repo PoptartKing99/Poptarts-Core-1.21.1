@@ -8,11 +8,14 @@ import java.util.Optional;
 import java.util.UUID;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.nbt.Tag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.saveddata.SavedData;
 
@@ -47,6 +50,10 @@ public final class BlockBreakProgress extends SavedData {
 
     public float fractionAt(BlockPos pos) {
         Crack crack = cracks.get(pos.asLong());
+        if (crack != null && crack.block != level.getBlockState(pos).getBlock()) {
+            clear(pos);
+            return 0.0F;
+        }
         return crack == null ? 0.0F : crack.fraction;
     }
 
@@ -75,7 +82,7 @@ public final class BlockBreakProgress extends SavedData {
             return;
         }
 
-        Crack crack = cracks.computeIfAbsent(pos.asLong(), packed -> new Crack(BlockPos.of(packed)));
+        Crack crack = crackForCurrentBlock(pos);
         crack.fraction = Math.min(1.0F, Math.max(crack.fraction, fraction));
         crack.rate = rate;
         crack.decayRatio = hammered ? HAMMER_DECAY_RATIO : NORMAL_DECAY_RATIO;
@@ -89,7 +96,7 @@ public final class BlockBreakProgress extends SavedData {
             return;
         }
 
-        Crack crack = cracks.computeIfAbsent(pos.asLong(), packed -> new Crack(BlockPos.of(packed)));
+        Crack crack = crackForCurrentBlock(pos);
         crack.fraction = Math.min(1.0F, crack.fraction + amount);
         crack.rate = rate;
         crack.decayRatio = hammered ? HAMMER_DECAY_RATIO : NORMAL_DECAY_RATIO;
@@ -106,6 +113,21 @@ public final class BlockBreakProgress extends SavedData {
         }
     }
 
+    private Crack crackForCurrentBlock(BlockPos pos) {
+        Block block = level.getBlockState(pos).getBlock();
+        Crack crack = cracks.get(pos.asLong());
+        if (crack != null && crack.block != block) {
+            crack.hide(level);
+            cracks.remove(pos.asLong());
+            crack = null;
+        }
+        if (crack == null) {
+            crack = new Crack(pos.immutable(), block);
+            cracks.put(pos.asLong(), crack);
+        }
+        return crack;
+    }
+
     public void tick(long gameTime) {
         if (cracks.isEmpty()) {
             return;
@@ -118,7 +140,10 @@ public final class BlockBreakProgress extends SavedData {
 
             crack.fraction -= Math.min(crack.rate * crack.decayRatio, MAX_DECAY_PER_TICK * crack.decayRatio);
             BlockState state = level.getBlockState(crack.pos);
-            if (crack.fraction > 0.0F && !state.isAir() && state.getFluidState().isEmpty()) {
+            if (crack.fraction > 0.0F
+                    && state.getBlock() == crack.block
+                    && !state.isAir()
+                    && state.getFluidState().isEmpty()) {
                 crack.show(level);
                 return false;
             }
@@ -169,16 +194,19 @@ public final class BlockBreakProgress extends SavedData {
     }
 
     private static final class Crack {
+        private static final String BLOCK_KEY = "block";
         private final int id;
         private final BlockPos pos;
+        private final Block block;
         private float decayRatio = NORMAL_DECAY_RATIO;
         private float fraction;
         private float rate;
         private int shownStage = -1;
         private long touched;
 
-        private Crack(BlockPos pos) {
+        private Crack(BlockPos pos, Block block) {
             this.pos = pos;
+            this.block = block;
             this.id = HammerMining.crackId(pos);
         }
 
@@ -198,6 +226,7 @@ public final class BlockBreakProgress extends SavedData {
         private CompoundTag save() {
             CompoundTag tag = new CompoundTag();
             tag.put("pos", NbtUtils.writeBlockPos(pos));
+            tag.putString(BLOCK_KEY, BuiltInRegistries.BLOCK.getKey(block).toString());
             tag.putFloat("fraction", fraction);
             tag.putFloat("rate", rate);
             tag.putFloat("decay", decayRatio);
@@ -205,14 +234,20 @@ public final class BlockBreakProgress extends SavedData {
         }
 
         private static Crack load(CompoundTag tag) {
+            if (!tag.contains(BLOCK_KEY, Tag.TAG_STRING)) {
+                return null;
+            }
+
             Optional<BlockPos> position = NbtUtils.readBlockPos(tag, "pos");
-            return position.map(pos -> {
-                        Crack crack = new Crack(pos);
+            ResourceLocation blockId = ResourceLocation.tryParse(tag.getString(BLOCK_KEY));
+            Optional<Block> block = blockId == null ? Optional.empty() : BuiltInRegistries.BLOCK.getOptional(blockId);
+            return position.flatMap(pos -> block.map(savedBlock -> {
+                        Crack crack = new Crack(pos, savedBlock);
                         crack.fraction = tag.getFloat("fraction");
                         crack.rate = tag.getFloat("rate");
                         crack.decayRatio = tag.contains("decay") ? tag.getFloat("decay") : NORMAL_DECAY_RATIO;
                         return crack;
-                    })
+                    }))
                     .orElse(null);
         }
     }

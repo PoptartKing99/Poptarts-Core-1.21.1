@@ -10,6 +10,7 @@ import net.minecraft.world.level.block.Block;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent.PlayerLoggedOutEvent;
+import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
 
 @EventBusSubscriber(modid = PoptartCore.MOD_ID)
@@ -28,6 +29,13 @@ public final class BlockBreakingEvents {
             mining.poptartcore$setDelayedDestroy(false);
         }
         HammerMining.endMining(event.getEntity());
+    }
+
+    @SubscribeEvent
+    public static void onBlockPlaced(BlockEvent.EntityPlaceEvent event) {
+        if (event.getLevel() instanceof ServerLevel level) {
+            BlockBreakProgress.get(level).clear(event.getPos());
+        }
     }
 
     @SubscribeEvent
