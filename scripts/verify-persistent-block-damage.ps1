@@ -44,6 +44,8 @@ Assert-Contains $progressSource "state.getBlock() == crack.block" "Damage for a 
 Assert-Contains $eventsSource "BlockEvent.EntityPlaceEvent" "Replacing a block with the same block type does not clear old damage."
 Assert-Contains $progressSource "crack.fraction -= Math.min" "Abandoned damage does not decay."
 Assert-Contains $progressSource "crack.hide(level)" "Expired damage does not remove its crack overlay."
+Assert-Contains $progressSource "if (!level.isLoaded(crack.pos))" "Persistent damage can access unloaded chunk contents."
+Assert-NotContains $progressSource "for (Crack crack : progress.cracks.values()) {`r`n            crack.show(level);" "Loading saved damage must not render cracks in unloaded chunks."
 Assert-Contains $eventsSource "LevelTickEvent.Post" "Persistent damage is not ticked by the server."
 Assert-Contains $serverMixin 'method = "handleBlockBreakAction", at = @At("RETURN")' "Saved damage must be resumed once after a mining attempt starts."
 Assert-Contains $serverMixin "resumedStart" "Server mining does not resume saved damage."
@@ -73,6 +75,12 @@ if ([Math]::Abs((Get-GroupResumeFraction @(0.9, 0.0, 0.0)) - 0.0) -gt 0.0001) {
 
 if ([Math]::Abs((Get-GroupResumeFraction @(0.9, 0.9, 0.9)) - 0.9) -gt 0.0001) {
     throw "Returning to the same damaged area must resume its shared progress."
+}
+
+$chunkGuardIndex = $progressSource.IndexOf("if (!level.isLoaded(crack.pos))")
+$chunkBlockReadIndex = $progressSource.IndexOf("BlockState state = level.getBlockState(crack.pos)")
+if ($chunkGuardIndex -lt 0 -or $chunkBlockReadIndex -lt 0 -or $chunkGuardIndex -gt $chunkBlockReadIndex) {
+    throw "The loaded-chunk guard must run before reading the damaged block state."
 }
 
 Write-Host "Persistent block-damage verification passed."

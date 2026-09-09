@@ -139,9 +139,16 @@ public final class BlockBreakProgress extends SavedData {
             }
 
             crack.fraction -= Math.min(crack.rate * crack.decayRatio, MAX_DECAY_PER_TICK * crack.decayRatio);
+            if (crack.fraction <= 0.0F) {
+                crack.hide(level);
+                return true;
+            }
+            if (!level.isLoaded(crack.pos)) {
+                return false;
+            }
+
             BlockState state = level.getBlockState(crack.pos);
-            if (crack.fraction > 0.0F
-                    && state.getBlock() == crack.block
+            if (state.getBlock() == crack.block
                     && !state.isAir()
                     && state.getFluidState().isEmpty()) {
                 crack.show(level);
@@ -174,9 +181,6 @@ public final class BlockBreakProgress extends SavedData {
             if (crack != null) {
                 progress.cracks.put(crack.pos.asLong(), crack);
             }
-        }
-        for (Crack crack : progress.cracks.values()) {
-            crack.show(level);
         }
         return progress;
     }
