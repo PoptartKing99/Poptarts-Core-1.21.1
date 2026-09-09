@@ -32,6 +32,7 @@
   "block.poptartcore.crucible" : "Crucible",
   "block.poptartcore.blast_furnace": "Blast Furnace",
   "block.poptartcore.bloomery": "Bloomery",
+  "block.poptartcore.workbench": "Workbench",
   "block.poptartcore.iron_bloom": "Iron Bloom",
   "block.poptartcore.clinker_bricks": "Clinker Bricks",
   "block.poptartcore.clinker_brick_slab": "Clinker Brick Slab",
@@ -47,6 +48,7 @@
 
   "container.poptartcore.crucible" : "Crucible",
   "container.poptartcore.blast_furnace" : "Blast Furnace",
+  "container.poptartcore.workbench" : "Workbench",
 
   "creativetab.poptartcore.poptartcore_tab" : "PoptartCore"
 }

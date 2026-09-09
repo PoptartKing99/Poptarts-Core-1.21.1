@@ -3,6 +3,7 @@ package dev.poptartking.poptartcore.registry;
 import dev.poptartking.poptartcore.PoptartCore;
 import dev.poptartking.poptartcore.blastfurnace.menu.BlastFurnaceMenu;
 import dev.poptartking.poptartcore.crucible.menu.CrucibleMenu;
+import dev.poptartking.poptartcore.workbench.menu.WorkbenchMenu;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.MenuType;
@@ -20,6 +21,9 @@ public class PoptartCoreMenus {
 
     public static final DeferredHolder<MenuType<?>, MenuType<BlastFurnaceMenu>> BLAST_FURNACE =
             MENUS.register("blast_furnace", () -> new MenuType<>(BlastFurnaceMenu::new, FeatureFlags.DEFAULT_FLAGS));
+
+    public static final DeferredHolder<MenuType<?>, MenuType<WorkbenchMenu>> WORKBENCH =
+            MENUS.register("workbench", () -> new MenuType<>(WorkbenchMenu::new, FeatureFlags.DEFAULT_FLAGS));
 
     public static void register(IEventBus eventBus) {
         MENUS.register(eventBus);

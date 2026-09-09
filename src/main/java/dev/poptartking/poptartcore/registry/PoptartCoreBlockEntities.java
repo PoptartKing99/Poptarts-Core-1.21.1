@@ -4,6 +4,7 @@ import dev.poptartking.poptartcore.PoptartCore;
 import dev.poptartking.poptartcore.blastfurnace.BlastFurnaceBlockEntity;
 import dev.poptartking.poptartcore.bloomery.BloomeryBlockEntity;
 import dev.poptartking.poptartcore.crucible.CrucibleBlockEntity;
+import dev.poptartking.poptartcore.workbench.WorkbenchBlockEntity;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.IEventBus;
@@ -28,6 +29,11 @@ public class PoptartCoreBlockEntities {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BloomeryBlockEntity>> BLOOMERY =
             BLOCK_ENTITIES.register("bloomery", () -> BlockEntityType.Builder.of(
                             BloomeryBlockEntity::new, PoptartCoreBlocks.BLOOMERY.get())
+                    .build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<WorkbenchBlockEntity>> WORKBENCH =
+            BLOCK_ENTITIES.register("workbench", () -> BlockEntityType.Builder.of(
+                            WorkbenchBlockEntity::new, PoptartCoreBlocks.WORKBENCH.get())
                     .build(null));
 
     public static void register(IEventBus eventBus) {

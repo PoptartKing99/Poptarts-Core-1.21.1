@@ -6,6 +6,7 @@ import dev.poptartking.poptartcore.client.model.*;
 import dev.poptartking.poptartcore.crucible.CrucibleScreen;
 import dev.poptartking.poptartcore.registry.PoptartCoreItems;
 import dev.poptartking.poptartcore.registry.PoptartCoreMenus;
+import dev.poptartking.poptartcore.workbench.WorkbenchScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -138,5 +139,6 @@ public class ClientEvents {
     public static void registerScreens(RegisterMenuScreensEvent event) {
         event.register(PoptartCoreMenus.CRUCIBLE.get(), CrucibleScreen::new);
         event.register(PoptartCoreMenus.BLAST_FURNACE.get(), BlastFurnaceScreen::new);
+        event.register(PoptartCoreMenus.WORKBENCH.get(), WorkbenchScreen::new);
     }
 }

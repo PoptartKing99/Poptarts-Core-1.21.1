@@ -30,6 +30,7 @@ public class PoptartCoreTabs {
                         output.accept(PoptartCoreItems.CRUCIBLE);
                         output.accept(PoptartCoreItems.BLAST_FURNACE);
                         output.accept(PoptartCoreItems.BLOOMERY);
+                        output.accept(PoptartCoreItems.WORKBENCH);
                         output.accept(PoptartCoreItems.IRON_BLOOM);
                         output.accept(PoptartCoreItems.HAMMER);
                         output.accept(PoptartCoreItems.CLINKER_BRICKS);
