@@ -70,10 +70,16 @@ public abstract class ServerBlockBreakingMixin {
         }
 
         BlockBreakProgress progress = BlockBreakProgress.get(level);
-        progress.beginAttempt(player.getUUID(), pos);
+        float savedFraction = progress.fractionAt(pos);
+        if (HammerMining.isAreaMining(player)) {
+            for (BlockPos target : HammerMining.findTargets(player, level, pos)) {
+                savedFraction = Math.min(savedFraction, progress.fractionAt(target));
+            }
+        }
+        progress.beginAttempt(player.getUUID(), pos, savedFraction);
         float rate = level.getBlockState(pos).getDestroyProgress(player, level, pos);
         int resumedStart = progress.resumedStart(
-                pos, rate, mining.poptartcore$getGameTicks(), mining.poptartcore$getDestroyProgressStart());
+                savedFraction, rate, mining.poptartcore$getGameTicks(), mining.poptartcore$getDestroyProgressStart());
         mining.poptartcore$setDestroyProgressStart(resumedStart);
     }
 
@@ -87,6 +93,7 @@ public abstract class ServerBlockBreakingMixin {
         float rate = state.getDestroyProgress(player, level, pos);
         float fraction = callback.getReturnValue();
         boolean areaMining = HammerMining.isAreaMining(player);
+        progress.updateAttempt(player.getUUID(), pos, fraction);
         progress.record(pos, fraction, rate, areaMining, level.getGameTime());
 
         if (!areaMining) {
@@ -97,7 +104,7 @@ public abstract class ServerBlockBreakingMixin {
         poptartcore$hammerTargets = HammerMining.findTargets(player, level, pos);
         for (BlockPos target : poptartcore$hammerTargets) {
             if (!target.equals(pos)) {
-                progress.record(target, fraction, rate, true, level.getGameTime());
+                progress.accrue(target, rate, rate, true, level.getGameTime());
             }
         }
     }

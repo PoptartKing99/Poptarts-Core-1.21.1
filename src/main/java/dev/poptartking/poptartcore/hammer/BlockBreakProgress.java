@@ -22,7 +22,7 @@ public final class BlockBreakProgress extends SavedData {
     private static final float HAMMER_DECAY_RATIO = 0.2F;
     private static final float MAX_DECAY_PER_TICK = 0.05F;
     private final Long2ObjectMap<Crack> cracks = new Long2ObjectOpenHashMap<>();
-    private final Map<UUID, BlockPos> resumedAttempts = new HashMap<>();
+    private final Map<UUID, MiningAttempt> miningAttempts = new HashMap<>();
     private final ServerLevel level;
 
     private BlockBreakProgress(ServerLevel level) {
@@ -36,13 +36,12 @@ public final class BlockBreakProgress extends SavedData {
                         FILE_NAME);
     }
 
-    public int resumedStart(BlockPos pos, float rate, int gameTicks, int currentStart) {
-        Crack crack = cracks.get(pos.asLong());
-        if (crack == null || crack.fraction <= 0.0F || rate <= 0.0F) {
+    public int resumedStart(float savedFraction, float rate, int gameTicks, int currentStart) {
+        if (savedFraction <= 0.0F || rate <= 0.0F) {
             return currentStart;
         }
 
-        int earnedTicks = Math.round(Math.min(crack.fraction, 1.0F) / rate);
+        int earnedTicks = Math.round(Math.min(savedFraction, 1.0F) / rate);
         return gameTicks - Math.max(0, earnedTicks - 1);
     }
 
@@ -51,20 +50,24 @@ public final class BlockBreakProgress extends SavedData {
         return crack == null ? 0.0F : crack.fraction;
     }
 
-    public void beginAttempt(UUID playerId, BlockPos pos) {
-        if (fractionAt(pos) > 0.0F) {
-            resumedAttempts.put(playerId, pos.immutable());
-        } else {
-            resumedAttempts.remove(playerId);
+    public void beginAttempt(UUID playerId, BlockPos pos, float savedFraction) {
+        miningAttempts.put(playerId, new MiningAttempt(pos.immutable(), savedFraction > 0.0F, savedFraction));
+    }
+
+    public void updateAttempt(UUID playerId, BlockPos pos, float fraction) {
+        MiningAttempt attempt = miningAttempts.get(playerId);
+        if (attempt != null && attempt.pos.equals(pos)) {
+            attempt.fraction = fraction;
         }
     }
 
-    public boolean isResumedAttempt(UUID playerId, BlockPos pos) {
-        return pos.equals(resumedAttempts.get(playerId));
+    public boolean isCompletedResumedAttempt(UUID playerId, BlockPos pos) {
+        MiningAttempt attempt = miningAttempts.get(playerId);
+        return attempt != null && attempt.resumed && attempt.pos.equals(pos) && attempt.fraction >= 1.0F;
     }
 
     public void endAttempt(UUID playerId) {
-        resumedAttempts.remove(playerId);
+        miningAttempts.remove(playerId);
     }
 
     public void record(BlockPos pos, float fraction, float rate, boolean hammered, long gameTime) {
@@ -74,6 +77,20 @@ public final class BlockBreakProgress extends SavedData {
 
         Crack crack = cracks.computeIfAbsent(pos.asLong(), packed -> new Crack(BlockPos.of(packed)));
         crack.fraction = Math.min(1.0F, Math.max(crack.fraction, fraction));
+        crack.rate = rate;
+        crack.decayRatio = hammered ? HAMMER_DECAY_RATIO : NORMAL_DECAY_RATIO;
+        crack.touched = gameTime;
+        crack.show(level);
+        setDirty();
+    }
+
+    public void accrue(BlockPos pos, float amount, float rate, boolean hammered, long gameTime) {
+        if (amount <= 0.0F || rate <= 0.0F) {
+            return;
+        }
+
+        Crack crack = cracks.computeIfAbsent(pos.asLong(), packed -> new Crack(BlockPos.of(packed)));
+        crack.fraction = Math.min(1.0F, crack.fraction + amount);
         crack.rate = rate;
         crack.decayRatio = hammered ? HAMMER_DECAY_RATIO : NORMAL_DECAY_RATIO;
         crack.touched = gameTime;
@@ -137,6 +154,18 @@ public final class BlockBreakProgress extends SavedData {
             crack.show(level);
         }
         return progress;
+    }
+
+    private static final class MiningAttempt {
+        private final BlockPos pos;
+        private final boolean resumed;
+        private float fraction;
+
+        private MiningAttempt(BlockPos pos, boolean resumed, float fraction) {
+            this.pos = pos;
+            this.resumed = resumed;
+            this.fraction = fraction;
+        }
     }
 
     private static final class Crack {

@@ -41,7 +41,7 @@ Assert-Contains $eventsSource "PlayerLoggedOutEvent" "Hammer mining sessions mus
 Assert-Contains $eventsSource "HammerMining.endMining(event.getEntity())" "Logout cleanup must remove the player's mining session."
 Assert-Contains $eventsSource "poptartcore`$setDestroyingBlock(false)" "Logout must cancel active server mining before removing the hammer session."
 Assert-Contains $eventsSource "poptartcore`$setDelayedDestroy(false)" "Logout must cancel delayed server mining before removing the hammer session."
-Assert-Contains $serverMixin "progress.record(target, fraction, rate, true" "Surrounding persistent damage is not synchronized."
+Assert-Contains $serverMixin "progress.accrue(target, rate, rate, true" "Surrounding persistent damage is not synchronized."
 Assert-Contains $serverMixin "gameMode.destroyBlock(target)" "Surrounding blocks are not using vanilla breaking."
 Assert-Contains $clientMixin "HammerMining.beginMining" "The client is not recording the selected mining plane and mode."
 Assert-Contains $clientMixin 'method = "stopDestroyBlock"' "Stopping client-side mining must clear hammer state."

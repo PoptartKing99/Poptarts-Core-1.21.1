@@ -44,7 +44,7 @@ public final class BlockBreakingEvents {
             }
 
             BlockPos pos = mining.poptartcore$getDestroyPos();
-            if (progress.isResumedAttempt(player.getUUID(), pos) && progress.fractionAt(pos) >= 1.0F) {
+            if (progress.isCompletedResumedAttempt(player.getUUID(), pos)) {
                 var state = level.getBlockState(pos);
                 progress.clear(pos);
                 if (player.gameMode.destroyBlock(pos)) {

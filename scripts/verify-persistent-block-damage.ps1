@@ -26,24 +26,30 @@ function Get-NextFraction([double] $SavedFraction, [double] $Rate) {
     return $Rate * (($gameTicks + 1) - $startTick + 1)
 }
 
+function Get-GroupResumeFraction([double[]] $Fractions) {
+    return ($Fractions | Measure-Object -Minimum).Minimum
+}
+
 Assert-Contains $progressSource 'FILE_NAME = "poptartcore_block_break_progress"' "Persistent damage needs its own saved-world data file."
 Assert-Contains $progressSource "computeIfAbsent" "Persistent damage is not loaded through SavedData."
 Assert-Contains $progressSource 'tag.put("cracks", entries)' "Persistent damage is not saved."
 Assert-Contains $progressSource "resumedStart" "Saved damage is not resumed when mining restarts."
 Assert-Contains $progressSource "fractionAt" "The server cannot determine when restored damage reaches completion."
 Assert-Contains $progressSource "beginAttempt" "Mining attempts do not distinguish fresh blocks from resumed damage."
-Assert-Contains $progressSource "isResumedAttempt" "Fresh blocks cannot be excluded from server-forced completion."
+Assert-Contains $progressSource "isCompletedResumedAttempt" "Fresh blocks cannot be excluded from server-forced completion."
+Assert-Contains $progressSource "crack.fraction + amount" "Hammer targets must gain only newly earned damage."
 Assert-Contains $progressSource "crack.fraction -= Math.min" "Abandoned damage does not decay."
 Assert-Contains $progressSource "crack.hide(level)" "Expired damage does not remove its crack overlay."
 Assert-Contains $eventsSource "LevelTickEvent.Post" "Persistent damage is not ticked by the server."
 Assert-Contains $serverMixin 'method = "handleBlockBreakAction", at = @At("RETURN")' "Saved damage must be resumed once after a mining attempt starts."
 Assert-Contains $serverMixin "resumedStart" "Server mining does not resume saved damage."
 Assert-NotContains $eventsSource "progress.resumedStart" "Saved damage must not be reapplied every server tick."
-Assert-Contains $eventsSource "progress.isResumedAttempt(player.getUUID(), pos)" "Fresh mining must retain vanilla completion timing."
-Assert-Contains $eventsSource "progress.fractionAt(pos) >= 1.0F" "Restored mining progress cannot finish the block server-side."
+Assert-Contains $eventsSource "progress.isCompletedResumedAttempt(player.getUUID(), pos)" "Fresh mining must retain vanilla completion timing."
 Assert-Contains $eventsSource "player.gameMode.destroyBlock(pos)" "Completed restored damage does not use vanilla block breaking."
+Assert-Contains $serverMixin "savedFraction = Math.min(savedFraction, progress.fractionAt(target))" "A shifted hammer area must resume from its least-damaged block."
+Assert-Contains $serverMixin "progress.updateAttempt(player.getUUID(), pos, fraction)" "Area completion must track the current attempt instead of old center damage."
 Assert-Contains $serverMixin "progress.record(pos, fraction, rate, areaMining" "The hammer center must use the same decay rate as its surrounding targets."
-Assert-Contains $serverMixin "progress.record(target, fraction, rate, true" "Hammer target damage is not recorded."
+Assert-Contains $serverMixin "progress.accrue(target, rate, rate, true" "Hammer targets must not inherit the center's old absolute damage."
 Assert-Contains $serverMixin "progress.clear(pos)" "Destroyed blocks do not clear saved damage."
 Assert-Contains $clientMixin "poptartcore`$breakerId, poptartcore`$hammerCenter, -1" "Logout does not clear the stale vanilla player overlay."
 Assert-Contains $mixinConfig '"item.GameModeDestroyAccessor"' "The mining progress accessor is not registered."
@@ -55,6 +61,14 @@ if ([Math]::Abs((Get-NextFraction 0.1 0.1) - 0.2) -gt 0.0001) {
 
 if ([Math]::Abs((Get-NextFraction 0.5 0.1) - 0.6) -gt 0.0001) {
     throw "Resumed mining must add exactly one tick to its saved progress."
+}
+
+if ([Math]::Abs((Get-GroupResumeFraction @(0.9, 0.0, 0.0)) - 0.0) -gt 0.0001) {
+    throw "Moving a damaged edge block into a fresh area must not spread its old damage."
+}
+
+if ([Math]::Abs((Get-GroupResumeFraction @(0.9, 0.9, 0.9)) - 0.9) -gt 0.0001) {
+    throw "Returning to the same damaged area must resume its shared progress."
 }
 
 Write-Host "Persistent block-damage verification passed."
