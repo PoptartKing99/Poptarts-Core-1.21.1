@@ -31,6 +31,13 @@ public class ClientEvents {
     }
 
     @SubscribeEvent
+    public static void onClientPlayerClone(ClientPlayerNetworkEvent.Clone event) {
+        if (event.getMultiPlayerGameMode() instanceof ClientMiningCleanup cleanup) {
+            cleanup.poptartcore$clearActiveMining();
+        }
+    }
+
+    @SubscribeEvent
     public static void onClientTick(ClientTickEvent.Post event) {
         MiningHelmetParticles.tick(Minecraft.getInstance());
     }

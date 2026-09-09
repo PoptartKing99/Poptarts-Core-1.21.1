@@ -3,6 +3,7 @@ $ErrorActionPreference = "Stop"
 $projectRoot = Split-Path -Parent $PSScriptRoot
 $progressSource = Get-Content -Raw (Join-Path $projectRoot "src/main/java/dev/poptartking/poptartcore/hammer/BlockBreakProgress.java")
 $eventsSource = Get-Content -Raw (Join-Path $projectRoot "src/main/java/dev/poptartking/poptartcore/hammer/BlockBreakingEvents.java")
+$clientEventsSource = Get-Content -Raw (Join-Path $projectRoot "src/main/java/dev/poptartking/poptartcore/client/ClientEvents.java")
 $serverMixin = Get-Content -Raw (Join-Path $projectRoot "src/main/java/dev/poptartking/poptartcore/mixin/item/ServerBlockBreakingMixin.java")
 $clientMixin = Get-Content -Raw (Join-Path $projectRoot "src/main/java/dev/poptartking/poptartcore/mixin/item/ClientHammerFaceMixin.java")
 $mixinConfig = Get-Content -Raw (Join-Path $projectRoot "src/main/resources/poptartcore.mixins.json")
@@ -47,6 +48,13 @@ Assert-Contains $progressSource "crack.hide(level)" "Expired damage does not rem
 Assert-Contains $progressSource "if (!level.isLoaded(crack.pos))" "Persistent damage can access unloaded chunk contents."
 Assert-NotContains $progressSource "for (Crack crack : progress.cracks.values()) {`r`n            crack.show(level);" "Loading saved damage must not render cracks in unloaded chunks."
 Assert-Contains $eventsSource "LevelTickEvent.Post" "Persistent damage is not ticked by the server."
+Assert-Contains $eventsSource "PlayerChangedDimensionEvent" "Dimension changes do not clear active server mining state."
+Assert-Contains $eventsSource "LivingDeathEvent" "Player death does not clear active server mining state."
+Assert-Contains $eventsSource "server.getLevel(event.getFrom())" "Dimension cleanup must clear the attempt from the previous level."
+Assert-Contains $eventsSource "poptartcore`$setDestroyingBlock(false)" "Lifecycle cleanup must cancel active server mining."
+Assert-Contains $eventsSource "poptartcore`$setDelayedDestroy(false)" "Lifecycle cleanup must cancel delayed server mining."
+Assert-Contains $clientEventsSource "ClientPlayerNetworkEvent.Clone" "Respawning does not clear active client mining state."
+Assert-Contains $clientEventsSource "cleanup.poptartcore`$clearActiveMining()" "Client lifecycle cleanup does not clear crack overlays."
 Assert-Contains $serverMixin 'method = "handleBlockBreakAction", at = @At("RETURN")' "Saved damage must be resumed once after a mining attempt starts."
 Assert-Contains $serverMixin "resumedStart" "Server mining does not resume saved damage."
 Assert-NotContains $eventsSource "progress.resumedStart" "Saved damage must not be reapplied every server tick."

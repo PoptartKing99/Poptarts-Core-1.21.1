@@ -4,11 +4,14 @@ import dev.poptartking.poptartcore.PoptartCore;
 import dev.poptartking.poptartcore.mixin.item.GameModeDestroyAccessor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.protocol.game.ClientboundLevelEventPacket;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent.PlayerChangedDimensionEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent.PlayerLoggedOutEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
@@ -20,15 +23,26 @@ public final class BlockBreakingEvents {
     @SubscribeEvent
     public static void onPlayerLoggedOut(PlayerLoggedOutEvent event) {
         if (event.getEntity() instanceof ServerPlayer player) {
-            BlockBreakProgress.get(player.serverLevel()).endAttempt(player.getUUID());
-            GameModeDestroyAccessor mining = (GameModeDestroyAccessor) player.gameMode;
-            if (mining.poptartcore$isDestroyingBlock()) {
-                player.serverLevel().destroyBlockProgress(player.getId(), mining.poptartcore$getDestroyPos(), -1);
-            }
-            mining.poptartcore$setDestroyingBlock(false);
-            mining.poptartcore$setDelayedDestroy(false);
+            clearActiveMining(player, player.serverLevel());
         }
-        HammerMining.endMining(event.getEntity());
+    }
+
+    @SubscribeEvent
+    public static void onPlayerChangedDimension(PlayerChangedDimensionEvent event) {
+        if (!(event.getEntity() instanceof ServerPlayer player)) {
+            return;
+        }
+
+        MinecraftServer server = player.getServer();
+        ServerLevel previousLevel = server == null ? null : server.getLevel(event.getFrom());
+        clearActiveMining(player, previousLevel == null ? player.serverLevel() : previousLevel);
+    }
+
+    @SubscribeEvent
+    public static void onPlayerDeath(LivingDeathEvent event) {
+        if (event.getEntity() instanceof ServerPlayer player) {
+            clearActiveMining(player, player.serverLevel());
+        }
     }
 
     @SubscribeEvent
@@ -61,5 +75,16 @@ public final class BlockBreakingEvents {
             }
         }
         progress.tick(level.getGameTime());
+    }
+
+    private static void clearActiveMining(ServerPlayer player, ServerLevel level) {
+        BlockBreakProgress.get(level).endAttempt(player.getUUID());
+        GameModeDestroyAccessor mining = (GameModeDestroyAccessor) player.gameMode;
+        if (mining.poptartcore$isDestroyingBlock()) {
+            level.destroyBlockProgress(player.getId(), mining.poptartcore$getDestroyPos(), -1);
+        }
+        mining.poptartcore$setDestroyingBlock(false);
+        mining.poptartcore$setDelayedDestroy(false);
+        HammerMining.endMining(player);
     }
 }
