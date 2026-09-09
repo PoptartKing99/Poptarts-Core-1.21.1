@@ -1,5 +1,6 @@
 package dev.poptartking.poptartcore.mixin.item;
 
+import dev.poptartking.poptartcore.hammer.BlockBreakProgress;
 import dev.poptartking.poptartcore.hammer.HammerMining;
 import dev.poptartking.poptartcore.registry.PoptartCoreTags;
 import java.util.List;
@@ -18,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ServerPlayerGameMode.class)
-public abstract class ServerHammerMiningMixin {
+public abstract class ServerBlockBreakingMixin {
     @Shadow
     protected ServerLevel level;
 
@@ -31,7 +32,7 @@ public abstract class ServerHammerMiningMixin {
     @Unique
     private List<BlockPos> poptartcore$hammerTargets = List.of();
 
-    protected ServerHammerMiningMixin(ServerPlayer player) {
+    protected ServerBlockBreakingMixin(ServerPlayer player) {
         this.player = player;
     }
 
@@ -44,30 +45,59 @@ public abstract class ServerHammerMiningMixin {
             int sequence,
             CallbackInfo callback) {
         if (action == ServerboundPlayerActionPacket.Action.START_DESTROY_BLOCK) {
-            poptartcore$clearHammerCracks();
             HammerMining.beginMining(player, face);
         } else if (action == ServerboundPlayerActionPacket.Action.ABORT_DESTROY_BLOCK) {
-            poptartcore$clearHammerCracks();
+            BlockBreakProgress.get(level).endAttempt(player.getUUID());
             HammerMining.endMining(player);
         }
     }
 
+    @Inject(method = "handleBlockBreakAction", at = @At("RETURN"))
+    private void poptartcore$resumePersistentDamage(
+            BlockPos pos,
+            ServerboundPlayerActionPacket.Action action,
+            Direction face,
+            int maxBuildHeight,
+            int sequence,
+            CallbackInfo callback) {
+        if (action != ServerboundPlayerActionPacket.Action.START_DESTROY_BLOCK) {
+            return;
+        }
+
+        GameModeDestroyAccessor mining = (GameModeDestroyAccessor) this;
+        if (!mining.poptartcore$isDestroyingBlock() || !pos.equals(mining.poptartcore$getDestroyPos())) {
+            return;
+        }
+
+        BlockBreakProgress progress = BlockBreakProgress.get(level);
+        progress.beginAttempt(player.getUUID(), pos);
+        float rate = level.getBlockState(pos).getDestroyProgress(player, level, pos);
+        int resumedStart = progress.resumedStart(
+                pos, rate, mining.poptartcore$getGameTicks(), mining.poptartcore$getDestroyProgressStart());
+        mining.poptartcore$setDestroyProgressStart(resumedStart);
+    }
+
     @Inject(method = "incrementDestroyProgress", at = @At("RETURN"))
-    private void poptartcore$mirrorHammerCracks(
+    private void poptartcore$recordPersistentDamage(
             net.minecraft.world.level.block.state.BlockState state,
             BlockPos pos,
             int startTick,
             CallbackInfoReturnable<Float> callback) {
-        if (!HammerMining.isAreaMining(player)) {
-            poptartcore$clearHammerCracks();
+        BlockBreakProgress progress = BlockBreakProgress.get(level);
+        float rate = state.getDestroyProgress(player, level, pos);
+        float fraction = callback.getReturnValue();
+        boolean areaMining = HammerMining.isAreaMining(player);
+        progress.record(pos, fraction, rate, areaMining, level.getGameTime());
+
+        if (!areaMining) {
+            poptartcore$hammerTargets = List.of();
             return;
         }
 
         poptartcore$hammerTargets = HammerMining.findTargets(player, level, pos);
-        int stage = Math.min(9, (int) (callback.getReturnValue() * 10.0F));
         for (BlockPos target : poptartcore$hammerTargets) {
             if (!target.equals(pos)) {
-                level.destroyBlockProgress(HammerMining.crackId(target), target, stage);
+                progress.record(target, fraction, rate, true, level.getGameTime());
             }
         }
     }
@@ -81,24 +111,26 @@ public abstract class ServerHammerMiningMixin {
 
     @Inject(method = "destroyBlock", at = @At("RETURN"))
     private void poptartcore$breakHammerTargets(BlockPos pos, CallbackInfoReturnable<Boolean> callback) {
+        BlockBreakProgress progress = BlockBreakProgress.get(level);
+        progress.endAttempt(player.getUUID());
+        progress.clear(pos);
         if (poptartcore$breakingHammerTargets) {
             return;
         }
 
         if (!callback.getReturnValue()) {
-            poptartcore$clearHammerCracks();
             HammerMining.endMining(player);
             return;
         }
 
         List<BlockPos> targets = poptartcore$hammerTargets;
-        poptartcore$clearHammerCracks();
         HammerMining.endMining(player);
         poptartcore$breakingHammerTargets = true;
         try {
             ServerPlayerGameMode gameMode = (ServerPlayerGameMode) (Object) this;
             for (BlockPos target : targets) {
                 if (!target.equals(pos) && player.getMainHandItem().is(PoptartCoreTags.HAMMERS)) {
+                    progress.clear(target);
                     gameMode.destroyBlock(target);
                 }
             }
@@ -106,13 +138,5 @@ public abstract class ServerHammerMiningMixin {
             poptartcore$breakingHammerTargets = false;
             poptartcore$hammerTargets = List.of();
         }
-    }
-
-    @Unique
-    private void poptartcore$clearHammerCracks() {
-        for (BlockPos target : poptartcore$hammerTargets) {
-            level.destroyBlockProgress(HammerMining.crackId(target), target, -1);
-        }
-        poptartcore$hammerTargets = List.of();
     }
 }

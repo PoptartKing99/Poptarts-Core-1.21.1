@@ -25,8 +25,8 @@ public class ClientEvents {
 
     @SubscribeEvent
     public static void onClientLogout(ClientPlayerNetworkEvent.LoggingOut event) {
-        if (event.getMultiPlayerGameMode() instanceof ClientHammerMiningCleanup cleanup) {
-            cleanup.poptartcore$clearHammerMining();
+        if (event.getMultiPlayerGameMode() instanceof ClientMiningCleanup cleanup) {
+            cleanup.poptartcore$clearActiveMining();
         }
     }
 

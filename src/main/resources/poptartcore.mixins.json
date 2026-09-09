@@ -4,8 +4,9 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "armor.ArmorTextureMixin",
+    "item.GameModeDestroyAccessor",
     "item.HammerDestroyProgressMixin",
-    "item.ServerHammerMiningMixin"
+    "item.ServerBlockBreakingMixin"
   ],
   "client": [
     "item.ClientHammerFaceMixin",

@@ -6,6 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
 
 public final class PoptartCoreTags {
     public static final TagKey<Item> HAMMERS =
@@ -16,6 +17,8 @@ public final class PoptartCoreTags {
             TagKey.create(Registries.ITEM, PoptartCore.location("blast_furnace_allowed"));
     public static final TagKey<Item> BLAST_FURNACE_EFFICIENT =
             TagKey.create(Registries.ITEM, PoptartCore.location("blast_furnace_efficient"));
+    public static final TagKey<Block> HAMMER_NO_SPREAD =
+            TagKey.create(Registries.BLOCK, PoptartCore.location("hammer_no_spread"));
 
     private PoptartCoreTags() {}
 

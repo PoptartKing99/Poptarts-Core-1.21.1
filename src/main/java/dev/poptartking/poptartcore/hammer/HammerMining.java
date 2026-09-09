@@ -15,17 +15,18 @@ import net.minecraft.world.level.block.state.BlockState;
 public final class HammerMining {
     private static final int DESTROY_DELAY_TICKS = 5;
     private static final int HAMMER_CRACK_ID_SALT = 1212239181;
-    private static final Map<UUID, MiningSession> MINING_SESSIONS = new ConcurrentHashMap<>();
+    private static final Map<UUID, MiningSession> CLIENT_MINING_SESSIONS = new ConcurrentHashMap<>();
+    private static final Map<UUID, MiningSession> SERVER_MINING_SESSIONS = new ConcurrentHashMap<>();
     private static final ThreadLocal<Boolean> CALCULATING_SPEED = ThreadLocal.withInitial(() -> false);
 
     private HammerMining() {}
 
     public static void beginMining(Player player, Direction face) {
-        MINING_SESSIONS.put(player.getUUID(), new MiningSession(face, !player.isShiftKeyDown()));
+        sessionsFor(player).put(player.getUUID(), new MiningSession(face, !player.isShiftKeyDown()));
     }
 
     public static void endMining(Player player) {
-        MINING_SESSIONS.remove(player.getUUID());
+        sessionsFor(player).remove(player.getUUID());
     }
 
     public static int crackId(BlockPos pos) {
@@ -33,15 +34,18 @@ public final class HammerMining {
     }
 
     public static boolean isAreaMining(Player player) {
-        MiningSession session = MINING_SESSIONS.get(player.getUUID());
+        MiningSession session = sessionsFor(player).get(player.getUUID());
         return session != null
                 && session.areaMining()
                 && player.getMainHandItem().is(PoptartCoreTags.HAMMERS);
     }
 
     public static List<BlockPos> findTargets(Player player, BlockGetter level, BlockPos center) {
-        MiningSession session = MINING_SESSIONS.get(player.getUUID());
+        MiningSession session = sessionsFor(player).get(player.getUUID());
         if (!isAreaMining(player) || session == null) {
+            return List.of();
+        }
+        if (level.getBlockState(center).is(PoptartCoreTags.HAMMER_NO_SPREAD)) {
             return List.of();
         }
 
@@ -89,6 +93,7 @@ public final class HammerMining {
         return !state.isAir()
                 && state.getFluidState().isEmpty()
                 && state.getDestroySpeed(level, pos) >= 0.0F
+                && !state.is(PoptartCoreTags.HAMMER_NO_SPREAD)
                 && state.canHarvestBlock(level, pos, player);
     }
 
@@ -98,6 +103,10 @@ public final class HammerMining {
             case Y -> center.offset(first, 0, second);
             case Z -> center.offset(first, second, 0);
         };
+    }
+
+    private static Map<UUID, MiningSession> sessionsFor(Player player) {
+        return player.level().isClientSide ? CLIENT_MINING_SESSIONS : SERVER_MINING_SESSIONS;
     }
 
     private record MiningSession(Direction face, boolean areaMining) {}
