@@ -2,6 +2,7 @@ $ErrorActionPreference = "Stop"
 
 $projectRoot = Split-Path -Parent $PSScriptRoot
 $progressSource = Get-Content -Raw (Join-Path $projectRoot "src/main/java/dev/poptartking/poptartcore/hammer/BlockBreakProgress.java")
+$mathSource = Get-Content -Raw (Join-Path $projectRoot "src/main/java/dev/poptartking/poptartcore/hammer/PersistentMiningMath.java")
 $eventsSource = Get-Content -Raw (Join-Path $projectRoot "src/main/java/dev/poptartking/poptartcore/hammer/BlockBreakingEvents.java")
 $clientEventsSource = Get-Content -Raw (Join-Path $projectRoot "src/main/java/dev/poptartking/poptartcore/client/ClientEvents.java")
 $serverMixin = Get-Content -Raw (Join-Path $projectRoot "src/main/java/dev/poptartking/poptartcore/mixin/item/ServerBlockBreakingMixin.java")
@@ -34,16 +35,16 @@ function Get-GroupResumeFraction([double[]] $Fractions) {
 Assert-Contains $progressSource 'FILE_NAME = "poptartcore_block_break_progress"' "Persistent damage needs its own saved-world data file."
 Assert-Contains $progressSource "computeIfAbsent" "Persistent damage is not loaded through SavedData."
 Assert-Contains $progressSource 'tag.put("cracks", entries)' "Persistent damage is not saved."
-Assert-Contains $progressSource "resumedStart" "Saved damage is not resumed when mining restarts."
+Assert-Contains $mathSource "resumedStart" "Saved damage is not resumed when mining restarts."
 Assert-Contains $progressSource "fractionAt" "The server cannot determine when restored damage reaches completion."
 Assert-Contains $progressSource "beginAttempt" "Mining attempts do not distinguish fresh blocks from resumed damage."
 Assert-Contains $progressSource "isCompletedResumedAttempt" "Fresh blocks cannot be excluded from server-forced completion."
-Assert-Contains $progressSource "crack.fraction + amount" "Hammer targets must gain only newly earned damage."
+Assert-Contains $progressSource "PersistentMiningMath.accrue(crack.fraction, amount)" "Hammer targets must gain only newly earned damage."
 Assert-Contains $progressSource "crack.block != level.getBlockState(pos).getBlock()" "Saved damage can transfer to a different replacement block."
 Assert-Contains $progressSource 'tag.putString(BLOCK_KEY, BuiltInRegistries.BLOCK.getKey(block).toString())' "Saved damage does not remember its original block type."
 Assert-Contains $progressSource "state.getBlock() == crack.block" "Damage for a replaced block is not discarded during decay."
 Assert-Contains $eventsSource "BlockEvent.EntityPlaceEvent" "Replacing a block with the same block type does not clear old damage."
-Assert-Contains $progressSource "crack.fraction -= Math.min" "Abandoned damage does not decay."
+Assert-Contains $progressSource "PersistentMiningMath.decay" "Abandoned damage does not decay."
 Assert-Contains $progressSource "crack.hide(level)" "Expired damage does not remove its crack overlay."
 Assert-Contains $progressSource "if (!level.isLoaded(crack.pos))" "Persistent damage can access unloaded chunk contents."
 Assert-NotContains $progressSource "for (Crack crack : progress.cracks.values()) {`r`n            crack.show(level);" "Loading saved damage must not render cracks in unloaded chunks."
@@ -60,7 +61,7 @@ Assert-Contains $serverMixin "resumedStart" "Server mining does not resume saved
 Assert-NotContains $eventsSource "progress.resumedStart" "Saved damage must not be reapplied every server tick."
 Assert-Contains $eventsSource "progress.isCompletedResumedAttempt(player.getUUID(), pos)" "Fresh mining must retain vanilla completion timing."
 Assert-Contains $eventsSource "player.gameMode.destroyBlock(pos)" "Completed restored damage does not use vanilla block breaking."
-Assert-Contains $serverMixin "savedFraction = Math.min(savedFraction, progress.fractionAt(target))" "A shifted hammer area must resume from its least-damaged block."
+Assert-Contains $serverMixin "PersistentMiningMath.leastProgress(savedFraction, progress.fractionAt(target))" "A shifted hammer area must resume from its least-damaged block."
 Assert-Contains $serverMixin "progress.updateAttempt(player.getUUID(), pos, fraction)" "Area completion must track the current attempt instead of old center damage."
 Assert-Contains $serverMixin "progress.record(pos, fraction, rate, areaMining" "The hammer center must use the same decay rate as its surrounding targets."
 Assert-Contains $serverMixin "progress.accrue(target, rate, rate, true" "Hammer targets must not inherit the center's old absolute damage."

@@ -2,6 +2,7 @@ package dev.poptartking.poptartcore.mixin.item;
 
 import dev.poptartking.poptartcore.hammer.BlockBreakProgress;
 import dev.poptartking.poptartcore.hammer.HammerMining;
+import dev.poptartking.poptartcore.hammer.PersistentMiningMath;
 import dev.poptartking.poptartcore.registry.PoptartCoreTags;
 import java.util.List;
 import net.minecraft.core.BlockPos;
@@ -73,12 +74,12 @@ public abstract class ServerBlockBreakingMixin {
         float savedFraction = progress.fractionAt(pos);
         if (HammerMining.isAreaMining(player)) {
             for (BlockPos target : HammerMining.findTargets(player, level, pos)) {
-                savedFraction = Math.min(savedFraction, progress.fractionAt(target));
+                savedFraction = PersistentMiningMath.leastProgress(savedFraction, progress.fractionAt(target));
             }
         }
         progress.beginAttempt(player.getUUID(), pos, savedFraction);
         float rate = level.getBlockState(pos).getDestroyProgress(player, level, pos);
-        int resumedStart = progress.resumedStart(
+        int resumedStart = PersistentMiningMath.resumedStart(
                 savedFraction, rate, mining.poptartcore$getGameTicks(), mining.poptartcore$getDestroyProgressStart());
         mining.poptartcore$setDestroyProgressStart(resumedStart);
     }

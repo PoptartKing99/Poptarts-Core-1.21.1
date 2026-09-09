@@ -39,15 +39,6 @@ public final class BlockBreakProgress extends SavedData {
                         FILE_NAME);
     }
 
-    public int resumedStart(float savedFraction, float rate, int gameTicks, int currentStart) {
-        if (savedFraction <= 0.0F || rate <= 0.0F) {
-            return currentStart;
-        }
-
-        int earnedTicks = Math.round(Math.min(savedFraction, 1.0F) / rate);
-        return gameTicks - Math.max(0, earnedTicks - 1);
-    }
-
     public float fractionAt(BlockPos pos) {
         Crack crack = cracks.get(pos.asLong());
         if (crack != null && crack.block != level.getBlockState(pos).getBlock()) {
@@ -83,7 +74,7 @@ public final class BlockBreakProgress extends SavedData {
         }
 
         Crack crack = crackForCurrentBlock(pos);
-        crack.fraction = Math.min(1.0F, Math.max(crack.fraction, fraction));
+        crack.fraction = PersistentMiningMath.record(crack.fraction, fraction);
         crack.rate = rate;
         crack.decayRatio = hammered ? HAMMER_DECAY_RATIO : NORMAL_DECAY_RATIO;
         crack.touched = gameTime;
@@ -97,7 +88,7 @@ public final class BlockBreakProgress extends SavedData {
         }
 
         Crack crack = crackForCurrentBlock(pos);
-        crack.fraction = Math.min(1.0F, crack.fraction + amount);
+        crack.fraction = PersistentMiningMath.accrue(crack.fraction, amount);
         crack.rate = rate;
         crack.decayRatio = hammered ? HAMMER_DECAY_RATIO : NORMAL_DECAY_RATIO;
         crack.touched = gameTime;
@@ -138,7 +129,8 @@ public final class BlockBreakProgress extends SavedData {
                 return false;
             }
 
-            crack.fraction -= Math.min(crack.rate * crack.decayRatio, MAX_DECAY_PER_TICK * crack.decayRatio);
+            crack.fraction =
+                    PersistentMiningMath.decay(crack.fraction, crack.rate, crack.decayRatio, MAX_DECAY_PER_TICK);
             if (crack.fraction <= 0.0F) {
                 crack.hide(level);
                 return true;
