@@ -36,31 +36,22 @@ public class QuernBlockEntity extends BlockEntity implements Container {
             RecipeManager.createCheck(PoptartCoreRecipes.GRINDING_TYPE.get());
 
     private int observedCrankSequence = -1;
-    private float rotation;
-    private float previousRotation;
-    private float remainingRotation;
+    private final QuernRotation rotation = new QuernRotation();
 
     public QuernBlockEntity(BlockPos pos, BlockState state) {
         super(PoptartCoreBlockEntities.QUERN.get(), pos, state);
     }
 
     public static void clientTick(Level level, BlockPos pos, BlockState state, QuernBlockEntity quern) {
-        quern.previousRotation = quern.rotation;
-        float turn = Math.min(DEGREES_PER_TICK, quern.remainingRotation);
-        quern.rotation += turn;
-        quern.remainingRotation -= turn;
-        if (quern.remainingRotation <= 0 && quern.rotation >= 360) {
-            quern.rotation -= 360;
-            quern.previousRotation -= 360;
-        }
+        quern.rotation.tick(DEGREES_PER_TICK);
     }
 
     public float rotation(float partialTick) {
-        return previousRotation + (rotation - previousRotation) * partialTick;
+        return rotation.angle(partialTick);
     }
 
     public boolean isRotating() {
-        return remainingRotation > 0;
+        return rotation.isRotating();
     }
 
     public float flourFill() {
@@ -92,6 +83,7 @@ public class QuernBlockEntity extends BlockEntity implements Container {
         int room = (input.isEmpty() ? heldStack.getMaxStackSize() : input.getMaxStackSize() - input.getCount());
         int amount = Math.min(room, heldStack.getCount());
         if (input.isEmpty()) {
+            crankProgress = 0;
             items.set(INPUT_SLOT, heldStack.copyWithCount(amount));
         } else {
             input.grow(amount);
@@ -99,7 +91,7 @@ public class QuernBlockEntity extends BlockEntity implements Container {
         if (!creative) {
             heldStack.shrink(amount);
         }
-        sync();
+        setChanged();
     }
 
     public boolean canCrank() {
@@ -129,7 +121,7 @@ public class QuernBlockEntity extends BlockEntity implements Container {
         if (crankProgress >= recipe.cranks()) {
             complete(recipe);
         }
-        sync();
+        setChanged();
         return true;
     }
 
@@ -169,15 +161,13 @@ public class QuernBlockEntity extends BlockEntity implements Container {
         if (!player.getInventory().add(stack)) {
             player.drop(stack, false);
         }
-        if (slot == INPUT_SLOT) {
-            crankProgress = 0;
-        }
-        sync();
+        setChanged();
         return true;
     }
 
-    private void sync() {
-        setChanged();
+    @Override
+    public void setChanged() {
+        super.setChanged();
         if (level != null && !level.isClientSide) {
             level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
         }
@@ -211,7 +201,7 @@ public class QuernBlockEntity extends BlockEntity implements Container {
         if (level != null && level.isClientSide && observedCrankSequence >= 0) {
             int newCranks = Math.max(0, loadedSequence - observedCrankSequence);
             if (newCranks > 0) {
-                remainingRotation = Math.max(remainingRotation, 360.0F);
+                rotation.crank();
             }
         }
         observedCrankSequence = loadedSequence;
@@ -239,20 +229,40 @@ public class QuernBlockEntity extends BlockEntity implements Container {
     public ItemStack removeItem(int slot, int amount) {
         ItemStack removed = ContainerHelper.removeItem(items, slot, amount);
         if (!removed.isEmpty()) {
-            sync();
+            if (slot == INPUT_SLOT && getItem(INPUT_SLOT).isEmpty()) {
+                crankProgress = 0;
+            }
+            setChanged();
         }
         return removed;
     }
 
     @Override
     public ItemStack removeItemNoUpdate(int slot) {
+        if (slot == INPUT_SLOT) {
+            crankProgress = 0;
+        }
         return ContainerHelper.takeItem(items, slot);
     }
 
     @Override
     public void setItem(int slot, ItemStack stack) {
+        if (slot == INPUT_SLOT && (stack.isEmpty() || !ItemStack.isSameItemSameComponents(getItem(slot), stack))) {
+            crankProgress = 0;
+        }
+        stack.limitSize(getMaxStackSize(stack));
         items.set(slot, stack);
-        sync();
+        setChanged();
+    }
+
+    @Override
+    public boolean canPlaceItem(int slot, ItemStack stack) {
+        return slot == INPUT_SLOT && !stack.isEmpty() && findRecipe(stack).isPresent();
+    }
+
+    @Override
+    public boolean canTakeItem(Container target, int slot, ItemStack stack) {
+        return slot == OUTPUT_SLOT;
     }
 
     @Override
@@ -264,6 +274,6 @@ public class QuernBlockEntity extends BlockEntity implements Container {
     public void clearContent() {
         items.clear();
         crankProgress = 0;
-        sync();
+        setChanged();
     }
 }

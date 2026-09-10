@@ -5,8 +5,6 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import dev.poptartking.poptartcore.PoptartCore;
 import dev.poptartking.poptartcore.quern.QuernBlockEntity;
-import java.util.Map;
-import java.util.WeakHashMap;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -34,7 +32,6 @@ public class QuernRenderer implements BlockEntityRenderer<QuernBlockEntity> {
     private static final float INPUT_ITEM_X = 0.14F;
     private static final float OUTPUT_ITEM_X = 0.86F;
     private static final float COUNT_FORWARD_OFFSET = 0.08F;
-    private final Map<QuernBlockEntity, QuernSoundInstance> activeSounds = new WeakHashMap<>();
 
     @Override
     public void render(
@@ -44,7 +41,7 @@ public class QuernRenderer implements BlockEntityRenderer<QuernBlockEntity> {
             MultiBufferSource bufferSource,
             int packedLight,
             int packedOverlay) {
-        updateSound(quern);
+        QuernSounds.update(quern);
         renderRotor(quern, partialTick, poseStack, bufferSource, packedOverlay);
         if (quern.flourFill() > 0) {
             poseStack.pushPose();
@@ -60,18 +57,6 @@ public class QuernRenderer implements BlockEntityRenderer<QuernBlockEntity> {
     private static boolean isTargeted(QuernBlockEntity quern) {
         return Minecraft.getInstance().hitResult instanceof BlockHitResult hit
                 && hit.getBlockPos().equals(quern.getBlockPos());
-    }
-
-    private void updateSound(QuernBlockEntity quern) {
-        if (!quern.isRotating()) {
-            return;
-        }
-        QuernSoundInstance sound = activeSounds.get(quern);
-        if (sound == null || sound.isStopped()) {
-            sound = new QuernSoundInstance(quern);
-            activeSounds.put(quern, sound);
-            Minecraft.getInstance().getSoundManager().play(sound);
-        }
     }
 
     private static void renderStoredItems(
