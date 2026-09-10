@@ -4,6 +4,8 @@ import dev.poptartking.poptartcore.PoptartCore;
 import dev.poptartking.poptartcore.blastfurnace.BlastFurnaceScreen;
 import dev.poptartking.poptartcore.client.model.*;
 import dev.poptartking.poptartcore.crucible.CrucibleScreen;
+import dev.poptartking.poptartcore.quern.QuernRenderer;
+import dev.poptartking.poptartcore.registry.PoptartCoreBlockEntities;
 import dev.poptartking.poptartcore.registry.PoptartCoreItems;
 import dev.poptartking.poptartcore.registry.PoptartCoreMenus;
 import dev.poptartking.poptartcore.workbench.WorkbenchScreen;
@@ -16,6 +18,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.ModelEvent.RegisterAdditional;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 
@@ -140,5 +143,16 @@ public class ClientEvents {
         event.register(PoptartCoreMenus.CRUCIBLE.get(), CrucibleScreen::new);
         event.register(PoptartCoreMenus.BLAST_FURNACE.get(), BlastFurnaceScreen::new);
         event.register(PoptartCoreMenus.WORKBENCH.get(), WorkbenchScreen::new);
+    }
+
+    @SubscribeEvent
+    public static void registerBlockEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerBlockEntityRenderer(PoptartCoreBlockEntities.QUERN.get(), context -> new QuernRenderer());
+    }
+
+    @SubscribeEvent
+    public static void registerAdditionalModels(RegisterAdditional event) {
+        event.register(QuernRenderer.ROTOR_MODEL);
+        event.register(QuernRenderer.FLOUR_MODEL);
     }
 }

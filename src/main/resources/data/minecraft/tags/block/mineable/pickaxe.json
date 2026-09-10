@@ -13,6 +13,7 @@
     "poptartcore:clinker_tile_wall",
     "poptartcore:mosaic_clinker_tile",
     "poptartcore:chiseled_clinker_tile",
-    "poptartcore:clinker_pillar"
+    "poptartcore:clinker_pillar",
+    "poptartcore:quern"
   ]
 }

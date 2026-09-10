@@ -1,0 +1,7 @@
+{
+  "type": "poptartcore:grinding",
+  "ingredient": { "item": "minecraft:peony" },
+  "result": { "id": "minecraft:pink_dye", "count": 2 },
+  "cranks": 4,
+  "powder_color": 15961002
+}

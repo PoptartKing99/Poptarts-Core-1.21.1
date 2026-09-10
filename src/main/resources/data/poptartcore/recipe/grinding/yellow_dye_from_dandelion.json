@@ -1,0 +1,7 @@
+{
+  "type": "poptartcore:grinding",
+  "ingredient": { "item": "minecraft:dandelion" },
+  "result": { "id": "minecraft:yellow_dye", "count": 1 },
+  "cranks": 4,
+  "powder_color": 16701501
+}

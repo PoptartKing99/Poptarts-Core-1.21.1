@@ -18,6 +18,7 @@ public class PoptartCore {
         PoptartCoreMenus.register(modEventBus);
         PoptartCoreFluids.register(modEventBus);
         PoptartCoreRecipes.register(modEventBus);
+        PoptartCoreSounds.register(modEventBus);
         PoptartCoreTabs.register(modEventBus);
         BlastFurnaceCapabilities.register(modEventBus);
     }

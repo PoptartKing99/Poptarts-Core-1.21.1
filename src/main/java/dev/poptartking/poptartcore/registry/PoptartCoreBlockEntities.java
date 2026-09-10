@@ -4,6 +4,7 @@ import dev.poptartking.poptartcore.PoptartCore;
 import dev.poptartking.poptartcore.blastfurnace.BlastFurnaceBlockEntity;
 import dev.poptartking.poptartcore.bloomery.BloomeryBlockEntity;
 import dev.poptartking.poptartcore.crucible.CrucibleBlockEntity;
+import dev.poptartking.poptartcore.quern.QuernBlockEntity;
 import dev.poptartking.poptartcore.workbench.WorkbenchBlockEntity;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -35,6 +36,11 @@ public class PoptartCoreBlockEntities {
             BLOCK_ENTITIES.register("workbench", () -> BlockEntityType.Builder.of(
                             WorkbenchBlockEntity::new, PoptartCoreBlocks.WORKBENCH.get())
                     .build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<QuernBlockEntity>> QUERN =
+            BLOCK_ENTITIES.register(
+                    "quern", () -> BlockEntityType.Builder.of(QuernBlockEntity::new, PoptartCoreBlocks.QUERN.get())
+                            .build(null));
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);

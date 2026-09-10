@@ -1,0 +1,7 @@
+{
+  "type": "poptartcore:grinding",
+  "ingredient": { "item": "minecraft:blue_orchid" },
+  "result": { "id": "minecraft:light_blue_dye", "count": 1 },
+  "cranks": 4,
+  "powder_color": 3847130
+}

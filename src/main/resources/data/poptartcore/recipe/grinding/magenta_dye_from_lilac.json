@@ -1,0 +1,7 @@
+{
+  "type": "poptartcore:grinding",
+  "ingredient": { "item": "minecraft:lilac" },
+  "result": { "id": "minecraft:magenta_dye", "count": 2 },
+  "cranks": 4,
+  "powder_color": 13061821
+}

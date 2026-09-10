@@ -1,0 +1,7 @@
+{
+  "type": "poptartcore:grinding",
+  "ingredient": { "item": "minecraft:allium" },
+  "result": { "id": "minecraft:magenta_dye", "count": 1 },
+  "cranks": 4,
+  "powder_color": 13061821
+}

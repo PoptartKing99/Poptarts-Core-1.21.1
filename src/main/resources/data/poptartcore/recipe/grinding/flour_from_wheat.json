@@ -1,0 +1,12 @@
+{
+  "type": "poptartcore:grinding",
+  "ingredient": {
+    "item": "minecraft:wheat"
+  },
+  "result": {
+    "id": "create:wheat_flour",
+    "count": 1
+  },
+  "cranks": 4,
+  "powder_color": 13813666
+}

@@ -1,0 +1,7 @@
+{
+  "type": "poptartcore:grinding",
+  "ingredient": { "item": "minecraft:sunflower" },
+  "result": { "id": "minecraft:yellow_dye", "count": 2 },
+  "cranks": 4,
+  "powder_color": 16701501
+}

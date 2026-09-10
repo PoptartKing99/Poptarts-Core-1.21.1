@@ -1,0 +1,7 @@
+{
+  "type": "poptartcore:grinding",
+  "ingredient": { "item": "minecraft:oxeye_daisy" },
+  "result": { "id": "minecraft:light_gray_dye", "count": 1 },
+  "cranks": 4,
+  "powder_color": 10329495
+}

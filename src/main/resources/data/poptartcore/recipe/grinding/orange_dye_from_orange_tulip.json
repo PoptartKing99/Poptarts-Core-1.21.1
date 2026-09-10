@@ -1,0 +1,7 @@
+{
+  "type": "poptartcore:grinding",
+  "ingredient": { "item": "minecraft:orange_tulip" },
+  "result": { "id": "minecraft:orange_dye", "count": 1 },
+  "cranks": 4,
+  "powder_color": 16351261
+}

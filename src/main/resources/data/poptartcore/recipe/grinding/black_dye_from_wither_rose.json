@@ -1,0 +1,7 @@
+{
+  "type": "poptartcore:grinding",
+  "ingredient": { "item": "minecraft:wither_rose" },
+  "result": { "id": "minecraft:black_dye", "count": 1 },
+  "cranks": 4,
+  "powder_color": 1908001
+}

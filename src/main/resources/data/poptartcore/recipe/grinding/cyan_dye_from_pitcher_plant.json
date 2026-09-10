@@ -1,0 +1,7 @@
+{
+  "type": "poptartcore:grinding",
+  "ingredient": { "item": "minecraft:pitcher_plant" },
+  "result": { "id": "minecraft:cyan_dye", "count": 2 },
+  "cranks": 4,
+  "powder_color": 1481884
+}

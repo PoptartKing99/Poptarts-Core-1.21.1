@@ -7,6 +7,8 @@ import dev.poptartking.poptartcore.crucible.casting.CastingRecipe;
 import dev.poptartking.poptartcore.crucible.casting.CastingRecipeSerializer;
 import dev.poptartking.poptartcore.crucible.melting.MeltingRecipe;
 import dev.poptartking.poptartcore.crucible.melting.MeltingRecipeSerializer;
+import dev.poptartking.poptartcore.quern.GrindingRecipe;
+import dev.poptartking.poptartcore.quern.GrindingRecipeSerializer;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -67,6 +69,12 @@ public class PoptartCoreRecipes {
                     "crucible_casting",
                     () -> RecipeType.simple(
                             ResourceLocation.fromNamespaceAndPath(PoptartCore.MOD_ID, "crucible_casting")));
+
+    public static final DeferredHolder<RecipeSerializer<?>, GrindingRecipeSerializer> GRINDING_SERIALIZER =
+            RECIPE_SERIALIZERS.register("grinding", GrindingRecipeSerializer::new);
+
+    public static final DeferredHolder<RecipeType<?>, RecipeType<GrindingRecipe>> GRINDING_TYPE =
+            RECIPE_TYPES.register("grinding", () -> RecipeType.simple(PoptartCore.location("grinding")));
 
     public static void register(IEventBus eventBus) {
         RECIPE_SERIALIZERS.register(eventBus);

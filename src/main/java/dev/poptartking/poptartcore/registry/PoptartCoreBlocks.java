@@ -6,6 +6,7 @@ import dev.poptartking.poptartcore.bloomery.BloomeryBlock;
 import dev.poptartking.poptartcore.bloomery.IronBloomBlock;
 import dev.poptartking.poptartcore.clinker.ClinkerPillarBlock;
 import dev.poptartking.poptartcore.crucible.CrucibleBlock;
+import dev.poptartking.poptartcore.quern.QuernBlock;
 import dev.poptartking.poptartcore.workbench.WorkbenchBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -42,6 +43,10 @@ public class PoptartCoreBlocks {
             "bloomery", () -> new BloomeryBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.MUD_BRICKS)));
     public static final DeferredBlock<WorkbenchBlock> WORKBENCH = BLOCKS.register(
             "workbench", () -> new WorkbenchBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CRAFTING_TABLE)));
+    public static final DeferredBlock<QuernBlock> QUERN = BLOCKS.register(
+            "quern",
+            () -> new QuernBlock(
+                    BlockBehaviour.Properties.ofFullCopy(Blocks.STONECUTTER).noOcclusion()));
     public static final DeferredBlock<IronBloomBlock> IRON_BLOOM = BLOCKS.register(
             "iron_bloom",
             () -> new IronBloomBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.RAW_IRON_BLOCK)
