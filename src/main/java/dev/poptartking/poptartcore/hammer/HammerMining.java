@@ -14,7 +14,6 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public final class HammerMining {
     private static final int DESTROY_DELAY_TICKS = 5;
-    private static final int HAMMER_CRACK_ID_SALT = 1212239181;
     private static final Map<UUID, MiningSession> CLIENT_MINING_SESSIONS = new ConcurrentHashMap<>();
     private static final Map<UUID, MiningSession> SERVER_MINING_SESSIONS = new ConcurrentHashMap<>();
     private static final ThreadLocal<Boolean> CALCULATING_SPEED = ThreadLocal.withInitial(() -> false);
@@ -27,10 +26,6 @@ public final class HammerMining {
 
     public static void endMining(Player player) {
         sessionsFor(player).remove(player.getUUID());
-    }
-
-    public static int crackId(BlockPos pos) {
-        return pos.hashCode() ^ HAMMER_CRACK_ID_SALT;
     }
 
     public static boolean isAreaMining(Player player) {

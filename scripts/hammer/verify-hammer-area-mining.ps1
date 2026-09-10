@@ -36,7 +36,7 @@ Assert-Contains $miningSource "state.canHarvestBlock" "Blocks the hammer cannot 
 Assert-Contains $miningSource "level.getBlockState(center).is(PoptartCoreTags.HAMMER_NO_SPREAD)" "A no-spread center block must disable area mining."
 Assert-Contains $miningSource "!state.is(PoptartCoreTags.HAMMER_NO_SPREAD)" "No-spread blocks must be excluded from surrounding targets."
 Assert-Contains $noSpreadTag '"poptartcore:iron_bloom"' "Iron blooms must not trigger or receive hammer area mining."
-Assert-Contains $miningSource "pos.hashCode() ^ HAMMER_CRACK_ID_SALT" "Each surrounding block needs its own crack-render ID."
+# Persistent overlay IDs are checked by verify-persistent-block-damage.ps1 and CrackRenderIdsTest.
 Assert-Contains $eventsSource "PlayerLoggedOutEvent" "Hammer mining sessions must be cleaned up when players log out."
 Assert-Contains $eventsSource "clearActiveMining(player, player.serverLevel())" "Logout must use the shared mining cleanup path."
 Assert-Contains $eventsSource "HammerMining.endMining(player)" "Lifecycle cleanup must remove the player's mining session."

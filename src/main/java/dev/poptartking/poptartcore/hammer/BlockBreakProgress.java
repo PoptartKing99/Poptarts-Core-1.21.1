@@ -16,6 +16,7 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.saveddata.SavedData;
 
@@ -26,6 +27,7 @@ public final class BlockBreakProgress extends SavedData {
     private static final float MAX_DECAY_PER_TICK = 0.05F;
     private final Long2ObjectMap<Crack> cracks = new Long2ObjectOpenHashMap<>();
     private final Map<UUID, MiningAttempt> miningAttempts = new HashMap<>();
+    private final CrackRenderIds renderIds = new CrackRenderIds();
     private final ServerLevel level;
 
     private BlockBreakProgress(ServerLevel level) {
@@ -113,7 +115,7 @@ public final class BlockBreakProgress extends SavedData {
             crack = null;
         }
         if (crack == null) {
-            crack = new Crack(pos.immutable(), block);
+            crack = new Crack(pos.immutable(), block, renderIds);
             cracks.put(pos.asLong(), crack);
         }
         return crack;
@@ -140,9 +142,7 @@ public final class BlockBreakProgress extends SavedData {
             }
 
             BlockState state = level.getBlockState(crack.pos);
-            if (state.getBlock() == crack.block
-                    && !state.isAir()
-                    && state.getFluidState().isEmpty()) {
+            if (state.getBlock() == crack.block && !state.isAir() && !(state.getBlock() instanceof LiquidBlock)) {
                 crack.show(level);
                 return false;
             }
@@ -169,9 +169,12 @@ public final class BlockBreakProgress extends SavedData {
         BlockBreakProgress progress = new BlockBreakProgress(level);
         ListTag entries = tag.getList("cracks", Tag.TAG_COMPOUND);
         for (int index = 0; index < entries.size(); index++) {
-            Crack crack = Crack.load(entries.getCompound(index));
+            Crack crack = Crack.load(entries.getCompound(index), progress.renderIds);
             if (crack != null) {
-                progress.cracks.put(crack.pos.asLong(), crack);
+                Crack previous = progress.cracks.put(crack.pos.asLong(), crack);
+                if (previous != null) {
+                    progress.renderIds.release(previous.id);
+                }
             }
         }
         return progress;
@@ -192,6 +195,7 @@ public final class BlockBreakProgress extends SavedData {
     private static final class Crack {
         private static final String BLOCK_KEY = "block";
         private final int id;
+        private final CrackRenderIds renderIds;
         private final BlockPos pos;
         private final Block block;
         private float decayRatio = NORMAL_DECAY_RATIO;
@@ -200,10 +204,11 @@ public final class BlockBreakProgress extends SavedData {
         private int shownStage = -1;
         private long touched;
 
-        private Crack(BlockPos pos, Block block) {
+        private Crack(BlockPos pos, Block block, CrackRenderIds renderIds) {
             this.pos = pos;
             this.block = block;
-            this.id = HammerMining.crackId(pos);
+            this.renderIds = renderIds;
+            this.id = renderIds.allocate();
         }
 
         private void show(ServerLevel level) {
@@ -217,6 +222,7 @@ public final class BlockBreakProgress extends SavedData {
         private void hide(ServerLevel level) {
             shownStage = -1;
             level.destroyBlockProgress(id, pos, -1);
+            renderIds.release(id);
         }
 
         private CompoundTag save() {
@@ -229,7 +235,7 @@ public final class BlockBreakProgress extends SavedData {
             return tag;
         }
 
-        private static Crack load(CompoundTag tag) {
+        private static Crack load(CompoundTag tag, CrackRenderIds renderIds) {
             if (!tag.contains(BLOCK_KEY, Tag.TAG_STRING)) {
                 return null;
             }
@@ -238,7 +244,7 @@ public final class BlockBreakProgress extends SavedData {
             ResourceLocation blockId = ResourceLocation.tryParse(tag.getString(BLOCK_KEY));
             Optional<Block> block = blockId == null ? Optional.empty() : BuiltInRegistries.BLOCK.getOptional(blockId);
             return position.flatMap(pos -> block.map(savedBlock -> {
-                        Crack crack = new Crack(pos, savedBlock);
+                        Crack crack = new Crack(pos, savedBlock, renderIds);
                         crack.fraction = tag.getFloat("fraction");
                         crack.rate = tag.getFloat("rate");
                         crack.decayRatio = tag.contains("decay") ? tag.getFloat("decay") : NORMAL_DECAY_RATIO;
