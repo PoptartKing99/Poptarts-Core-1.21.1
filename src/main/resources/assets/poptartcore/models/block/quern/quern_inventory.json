@@ -1,0 +1,410 @@
+{
+	"format_version": "1.21.11",
+	"credit": "Made with Blockbench",
+	"parent": "minecraft:block/block",
+	"textures": {
+		"quern_inside": "poptartcore:block/quern/quern_inside",
+		"quern_inside_bottom": "poptartcore:block/quern/quern_inside_bottom",
+		"quern_particle": "poptartcore:block/quern/quern_particle",
+		"quern_side": "poptartcore:block/quern/quern_side",
+		"quern_top": "poptartcore:block/quern/quern_top",
+		"quern_bottom": "poptartcore:block/quern/quern_bottom",
+		"particle": "poptartcore:block/quern/quern_particle"
+	},
+	"elements": [
+		{
+			"name": "quern_stone_base",
+			"from": [2, 10, 2],
+			"to": [14, 10, 14],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 7, 0]},
+			"faces": {
+				"up": {"uv": [2, 2, 14, 14], "texture": "#quern_inside_bottom"}
+			}
+		},
+		{
+			"name": "quern_stone_base",
+			"from": [10, 10.15, 6],
+			"to": [12, 12.15, 10],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 13.9, 8]},
+			"faces": {
+				"west": {"uv": [6, 6, 10, 10], "texture": "#quern_particle"},
+				"up": {"uv": [10, 6, 12, 10], "texture": "#quern_particle"}
+			}
+		},
+		{
+			"name": "quern_stone_base",
+			"from": [4, 10.15, 6],
+			"to": [6, 12.15, 10],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 13.9, 8]},
+			"faces": {
+				"east": {"uv": [6, 6, 10, 10], "texture": "#quern_particle"},
+				"up": {"uv": [4, 6, 6, 10], "texture": "#quern_particle"}
+			}
+		},
+		{
+			"name": "quern_stone_base",
+			"from": [4, 10.15, 3],
+			"to": [12, 12.15, 6],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 13.9, 8]},
+			"faces": {
+				"north": {"uv": [4, 10, 12, 12], "texture": "#quern_particle"},
+				"east": {"uv": [11, 10, 12, 12], "texture": "#quern_particle"},
+				"south": {"uv": [4, 10, 12, 12], "texture": "#quern_particle"},
+				"west": {"uv": [4, 10, 5, 12], "texture": "#quern_particle"},
+				"up": {"uv": [4, 3, 12, 6], "texture": "#quern_particle"}
+			}
+		},
+		{
+			"name": "quern_stone_base",
+			"from": [3, 10.15, 4],
+			"to": [4, 12.15, 12],
+			"rotation": {"angle": 0, "axis": "y", "origin": [9, 13.9, 8]},
+			"faces": {
+				"north": {"uv": [4, 6, 5, 8], "texture": "#quern_particle"},
+				"south": {"uv": [11, 6, 12, 8], "texture": "#quern_particle"},
+				"west": {"uv": [4, 6, 12, 8], "texture": "#quern_particle"},
+				"up": {"uv": [3, 4, 4, 12], "texture": "#quern_particle"}
+			}
+		},
+		{
+			"name": "quern_stone_base",
+			"from": [4, 10.15, 10],
+			"to": [12, 12.15, 13],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 13.9, 8]},
+			"faces": {
+				"north": {"uv": [4, 10, 12, 12], "texture": "#quern_particle"},
+				"east": {"uv": [11, 10, 12, 12], "texture": "#quern_particle"},
+				"south": {"uv": [4, 10, 12, 12], "texture": "#quern_particle"},
+				"west": {"uv": [4, 10, 5, 12], "texture": "#quern_particle"},
+				"up": {"uv": [4, 10, 12, 13], "texture": "#quern_particle"}
+			}
+		},
+		{
+			"name": "quern_stone_base",
+			"from": [12, 10.15, 4],
+			"to": [13, 12.15, 12],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7, 13.9, 8]},
+			"faces": {
+				"north": {"uv": [11, 6, 12, 8], "texture": "#quern_particle"},
+				"east": {"uv": [4, 6, 12, 8], "texture": "#quern_particle"},
+				"south": {"uv": [4, 6, 5, 8], "texture": "#quern_particle"},
+				"up": {"uv": [12, 4, 13, 12], "texture": "#quern_particle"}
+			}
+		},
+		{
+			"name": "quern_stone_base",
+			"from": [6, 10.15, 6],
+			"to": [7, 12.15, 7],
+			"rotation": {"angle": 0, "axis": "y", "origin": [6, 12.15, 6]},
+			"faces": {
+				"east": {"uv": [6, 6, 7, 10], "texture": "#quern_particle"},
+				"south": {"uv": [9, 6, 10, 10], "texture": "#quern_particle"},
+				"up": {"uv": [6, 6, 7, 7], "texture": "#quern_particle"}
+			}
+		},
+		{
+			"name": "quern_stone_base",
+			"from": [9, 10.15, 6],
+			"to": [10, 12.15, 7],
+			"rotation": {"angle": 0, "axis": "y", "origin": [9, 12.15, 6]},
+			"faces": {
+				"south": {"uv": [6, 6, 7, 10], "texture": "#quern_particle"},
+				"west": {"uv": [9, 6, 10, 10], "texture": "#quern_particle"},
+				"up": {"uv": [9, 6, 10, 7], "texture": "#quern_particle"}
+			}
+		},
+		{
+			"name": "quern_stone_base",
+			"from": [9, 10.15, 9],
+			"to": [10, 12.15, 10],
+			"rotation": {"angle": 0, "axis": "y", "origin": [9, 12.15, 9]},
+			"faces": {
+				"north": {"uv": [6, 6, 7, 10], "texture": "#quern_particle"},
+				"west": {"uv": [9, 6, 10, 10], "texture": "#quern_particle"},
+				"up": {"uv": [9, 9, 10, 10], "texture": "#quern_particle"}
+			}
+		},
+		{
+			"name": "quern_stone_base",
+			"from": [6, 10.15, 9],
+			"to": [7, 12.15, 10],
+			"rotation": {"angle": 0, "axis": "y", "origin": [6, 12.15, 9]},
+			"faces": {
+				"north": {"uv": [6, 6, 7, 10], "texture": "#quern_particle"},
+				"east": {"uv": [9, 6, 10, 10], "texture": "#quern_particle"},
+				"up": {"uv": [6, 9, 7, 10], "texture": "#quern_particle"}
+			}
+		},
+		{
+			"name": "shaft",
+			"from": [7.5, 10, 7.5],
+			"to": [8.5, 16, 8.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 6, 0]},
+			"faces": {
+				"north": {"uv": [1, 10, 2, 16], "texture": "#quern_side"},
+				"east": {"uv": [0, 10, 1, 15], "texture": "#quern_side"},
+				"south": {"uv": [1, 10, 2, 15], "texture": "#quern_side"},
+				"west": {"uv": [0, 10, 1, 15], "texture": "#quern_side"},
+				"up": {"uv": [0, 15, 1, 16], "texture": "#quern_side"}
+			}
+		},
+		{
+			"name": "quern_stone_base",
+			"from": [0, 0, 0],
+			"to": [2, 2.005, 2],
+			"faces": {
+				"north": {"uv": [14, 14, 16, 16], "texture": "#quern_side"},
+				"east": {"uv": [0, 14, 2, 16], "texture": "#quern_side"},
+				"south": {"uv": [14, 14, 16, 16], "texture": "#quern_side"},
+				"west": {"uv": [0, 14, 2, 16], "texture": "#quern_side"},
+				"down": {"uv": [14, 14, 16, 16], "texture": "#quern_side"}
+			}
+		},
+		{
+			"name": "quern_stone_base",
+			"from": [14, 0, 14],
+			"to": [16, 2.005, 16],
+			"faces": {
+				"north": {"uv": [14, 14, 16, 16], "texture": "#quern_side"},
+				"east": {"uv": [0, 14, 2, 16], "texture": "#quern_side"},
+				"south": {"uv": [14, 14, 16, 16], "texture": "#quern_side"},
+				"west": {"uv": [0, 14, 2, 16], "texture": "#quern_side"},
+				"down": {"uv": [14, 0, 16, 2], "texture": "#quern_side"}
+			}
+		},
+		{
+			"name": "quern_stone_base",
+			"from": [14, 0, 0],
+			"to": [16, 2.005, 2],
+			"faces": {
+				"north": {"uv": [0, 14, 2, 16], "texture": "#quern_side"},
+				"east": {"uv": [14, 14, 16, 16], "texture": "#quern_side"},
+				"south": {"uv": [0, 14, 2, 16], "texture": "#quern_side"},
+				"west": {"uv": [14, 14, 16, 16], "texture": "#quern_side"},
+				"down": {"uv": [0, 14, 2, 16], "texture": "#quern_side"}
+			}
+		},
+		{
+			"name": "quern_stone_base",
+			"from": [0, 0, 14],
+			"to": [2, 2.005, 16],
+			"faces": {
+				"north": {"uv": [0, 14, 2, 16], "texture": "#quern_side"},
+				"east": {"uv": [14, 14, 16, 16], "texture": "#quern_side"},
+				"south": {"uv": [0, 14, 2, 16], "texture": "#quern_side"},
+				"west": {"uv": [14, 14, 16, 16], "texture": "#quern_side"},
+				"down": {"uv": [0, 0, 2, 2], "texture": "#quern_side"}
+			}
+		},
+		{
+			"name": "quern_stone_base",
+			"from": [0, 1.995, 0],
+			"to": [16, 4, 16],
+			"faces": {
+				"north": {"uv": [0, 11.9957, 16, 14], "texture": "#quern_side"},
+				"east": {"uv": [0, 11.9957, 16, 14], "texture": "#quern_side"},
+				"south": {"uv": [0, 11.9957, 16, 14], "texture": "#quern_side"},
+				"west": {"uv": [0, 11.9957, 16, 14], "texture": "#quern_side"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#quern_side"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#quern_bottom"}
+			}
+		},
+		{
+			"name": "quern_stone_base",
+			"from": [0, 4, 0],
+			"to": [16, 11, 2],
+			"faces": {
+				"north": {"uv": [0, 5, 16, 11.9957], "texture": "#quern_side"},
+				"east": {"uv": [14, 5, 16, 11.9957], "texture": "#quern_side"},
+				"south": {"uv": [0, 0, 16, 7], "texture": "#quern_inside"},
+				"west": {"uv": [0, 5, 2, 11.9957], "texture": "#quern_side"},
+				"up": {"uv": [0, 0, 16, 2], "texture": "#quern_top"}
+			}
+		},
+		{
+			"name": "quern_stone_base",
+			"from": [0, 4, 14],
+			"to": [16, 11, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 7], "texture": "#quern_inside"},
+				"east": {"uv": [0, 5, 2, 11.9957], "texture": "#quern_side"},
+				"south": {"uv": [0, 5, 16, 11.9957], "texture": "#quern_side"},
+				"west": {"uv": [14, 5, 16, 11.9957], "texture": "#quern_side"},
+				"up": {"uv": [0, 14, 16, 16], "texture": "#quern_top"}
+			}
+		},
+		{
+			"name": "quern_stone_base",
+			"from": [0, 4, 2],
+			"to": [2, 11, 14],
+			"faces": {
+				"east": {"uv": [0, 0, 16, 7], "texture": "#quern_inside"},
+				"west": {"uv": [2, 5, 14, 11.9957], "texture": "#quern_side"},
+				"up": {"uv": [0, 2, 2, 14], "texture": "#quern_top"}
+			}
+		},
+		{
+			"name": "quern_stone_base",
+			"from": [14, 4, 2],
+			"to": [16, 11, 14],
+			"faces": {
+				"east": {"uv": [2, 5, 14, 11.9957], "texture": "#quern_side"},
+				"west": {"uv": [0, 0, 16, 7], "texture": "#quern_inside"},
+				"up": {"uv": [14, 2, 16, 14], "texture": "#quern_top"}
+			}
+		},
+		{
+			"name": "quern_stone",
+			"from": [10, 12.25, 6],
+			"to": [12, 16.25, 10],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 16, 8]},
+			"faces": {
+				"west": {"uv": [6, 6, 10, 10], "texture": "#quern_particle"},
+				"up": {"uv": [10, 6, 12, 10], "texture": "#quern_particle"},
+				"down": {"uv": [4, 6, 6, 10], "texture": "#quern_particle"}
+			}
+		},
+		{
+			"name": "quern_stone",
+			"from": [4, 12.25, 6],
+			"to": [6, 16.25, 10],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 16, 8]},
+			"faces": {
+				"east": {"uv": [6, 6, 10, 10], "texture": "#quern_particle"},
+				"up": {"uv": [4, 6, 6, 10], "texture": "#quern_particle"},
+				"down": {"uv": [10, 6, 12, 10], "texture": "#quern_particle"}
+			}
+		},
+		{
+			"name": "quern_stone",
+			"from": [4, 12.25, 3],
+			"to": [12, 16.25, 6],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 16, 8]},
+			"faces": {
+				"north": {"uv": [4, 6, 12, 10], "texture": "#quern_particle"},
+				"east": {"uv": [12, 6, 13, 10], "texture": "#quern_particle"},
+				"south": {"uv": [4, 6, 12, 10], "texture": "#quern_particle"},
+				"west": {"uv": [3, 6, 4, 10], "texture": "#quern_particle"},
+				"up": {"uv": [4, 3, 12, 6], "texture": "#quern_particle"},
+				"down": {"uv": [12, 13, 4, 10], "texture": "#quern_particle"}
+			}
+		},
+		{
+			"name": "quern_stone",
+			"from": [3, 12.25, 4],
+			"to": [4, 16.25, 12],
+			"rotation": {"angle": 0, "axis": "y", "origin": [9, 16, 8]},
+			"faces": {
+				"north": {"uv": [3, 6, 4, 10], "texture": "#quern_particle"},
+				"south": {"uv": [12, 6, 13, 10], "texture": "#quern_particle"},
+				"west": {"uv": [4, 6, 12, 10], "texture": "#quern_particle"},
+				"up": {"uv": [3, 4, 4, 12], "texture": "#quern_particle"},
+				"down": {"uv": [13, 12, 12, 4], "texture": "#quern_particle"}
+			}
+		},
+		{
+			"name": "quern_stone",
+			"from": [4, 12.25, 10],
+			"to": [12, 16.25, 13],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 16, 8]},
+			"faces": {
+				"north": {"uv": [4, 6, 12, 10], "texture": "#quern_particle"},
+				"east": {"uv": [12, 6, 13, 10], "texture": "#quern_particle"},
+				"south": {"uv": [4, 6, 12, 10], "texture": "#quern_particle"},
+				"west": {"uv": [3, 6, 4, 10], "texture": "#quern_particle"},
+				"up": {"uv": [4, 10, 12, 13], "texture": "#quern_particle"},
+				"down": {"uv": [4, 3, 12, 6], "texture": "#quern_particle"}
+			}
+		},
+		{
+			"name": "quern_stone",
+			"from": [12, 12.25, 4],
+			"to": [13, 16.25, 12],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7, 16, 8]},
+			"faces": {
+				"north": {"uv": [12, 6, 13, 10], "texture": "#quern_particle"},
+				"east": {"uv": [4, 6, 12, 10], "texture": "#quern_particle"},
+				"south": {"uv": [3, 6, 4, 10], "texture": "#quern_particle"},
+				"up": {"uv": [12, 4, 13, 12], "texture": "#quern_particle"},
+				"down": {"uv": [3, 4, 4, 12], "texture": "#quern_particle"}
+			}
+		},
+		{
+			"name": "quern_stone",
+			"from": [6, 12.25, 6],
+			"to": [7, 16.25, 7],
+			"rotation": {"angle": 0, "axis": "y", "origin": [6, 14.25, 6]},
+			"faces": {
+				"east": {"uv": [6, 6, 7, 10], "texture": "#quern_particle"},
+				"south": {"uv": [9, 6, 10, 10], "texture": "#quern_particle"},
+				"up": {"uv": [6, 6, 7, 7], "texture": "#quern_particle"},
+				"down": {"uv": [6, 9, 7, 10], "texture": "#quern_particle"}
+			}
+		},
+		{
+			"name": "quern_stone",
+			"from": [9, 12.25, 6],
+			"to": [10, 16.25, 7],
+			"rotation": {"angle": 0, "axis": "y", "origin": [9, 14.25, 6]},
+			"faces": {
+				"south": {"uv": [6, 6, 7, 10], "texture": "#quern_particle"},
+				"west": {"uv": [9, 6, 10, 10], "texture": "#quern_particle"},
+				"up": {"uv": [9, 6, 10, 7], "texture": "#quern_particle"},
+				"down": {"uv": [9, 9, 10, 10], "texture": "#quern_particle"}
+			}
+		},
+		{
+			"name": "quern_stone",
+			"from": [9, 12.25, 9],
+			"to": [10, 16.25, 10],
+			"rotation": {"angle": 0, "axis": "y", "origin": [9, 14.25, 9]},
+			"faces": {
+				"north": {"uv": [6, 6, 7, 10], "texture": "#quern_particle"},
+				"west": {"uv": [9, 6, 10, 10], "texture": "#quern_particle"},
+				"up": {"uv": [9, 9, 10, 10], "texture": "#quern_particle"},
+				"down": {"uv": [9, 6, 10, 7], "texture": "#quern_particle"}
+			}
+		},
+		{
+			"name": "quern_stone",
+			"from": [6, 12.25, 9],
+			"to": [7, 16.25, 10],
+			"rotation": {"angle": 0, "axis": "y", "origin": [6, 14.25, 9]},
+			"faces": {
+				"north": {"uv": [6, 6, 7, 10], "texture": "#quern_particle"},
+				"east": {"uv": [9, 6, 10, 10], "texture": "#quern_particle"},
+				"up": {"uv": [6, 9, 7, 10], "texture": "#quern_particle"},
+				"down": {"uv": [6, 6, 7, 7], "texture": "#quern_particle"}
+			}
+		},
+		{
+			"name": "quern_stone_handle",
+			"from": [4.5, 16, 4.5],
+			"to": [5.5, 20, 5.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8.5, 16, 8.5]},
+			"faces": {
+				"north": {"uv": [0, 11, 1, 15], "texture": "#quern_side"},
+				"east": {"uv": [1, 11, 2, 15], "texture": "#quern_side"},
+				"south": {"uv": [0, 11, 1, 15], "texture": "#quern_side"},
+				"west": {"uv": [1, 11, 2, 15], "texture": "#quern_side"},
+				"up": {"uv": [0, 15, 1, 16], "texture": "#quern_side"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "quern_stone_base",
+			"origin": [0, 0, 0],
+			"scope": 0,
+			"color": 0,
+			"children": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+		},
+		{
+			"name": "quern_stone",
+			"origin": [8, 8, 8],
+			"scope": 0,
+			"color": 0,
+			"children": [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
+		}
+	]
+}

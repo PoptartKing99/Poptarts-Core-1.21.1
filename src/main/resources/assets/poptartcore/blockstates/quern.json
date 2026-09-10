@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "poptartcore:block/quern_stone_base"
+      "model": "poptartcore:block/quern/quern_stone_base"
     }
   }
 }

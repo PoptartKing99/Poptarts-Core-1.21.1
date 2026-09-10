@@ -1,5 +1,7 @@
 package dev.poptartking.poptartcore.quern;
 
+import dev.poptartking.poptartcore.quern.recipe.GrindingRecipe;
+import dev.poptartking.poptartcore.quern.recipe.GrindingRecipeInput;
 import dev.poptartking.poptartcore.registry.PoptartCoreBlockEntities;
 import dev.poptartking.poptartcore.registry.PoptartCoreRecipes;
 import java.util.Optional;

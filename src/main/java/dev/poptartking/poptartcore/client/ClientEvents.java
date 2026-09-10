@@ -1,14 +1,15 @@
 package dev.poptartking.poptartcore.client;
 
 import dev.poptartking.poptartcore.PoptartCore;
-import dev.poptartking.poptartcore.blastfurnace.BlastFurnaceScreen;
-import dev.poptartking.poptartcore.client.model.*;
-import dev.poptartking.poptartcore.crucible.CrucibleScreen;
-import dev.poptartking.poptartcore.quern.QuernRenderer;
+import dev.poptartking.poptartcore.armor.client.*;
+import dev.poptartking.poptartcore.blastfurnace.client.BlastFurnaceScreen;
+import dev.poptartking.poptartcore.crucible.client.CrucibleScreen;
+import dev.poptartking.poptartcore.hammer.client.ClientMiningCleanup;
+import dev.poptartking.poptartcore.quern.client.QuernRenderer;
 import dev.poptartking.poptartcore.registry.PoptartCoreBlockEntities;
 import dev.poptartking.poptartcore.registry.PoptartCoreItems;
 import dev.poptartking.poptartcore.registry.PoptartCoreMenus;
-import dev.poptartking.poptartcore.workbench.WorkbenchScreen;
+import dev.poptartking.poptartcore.workbench.client.WorkbenchScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;

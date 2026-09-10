@@ -2,7 +2,7 @@ package dev.poptartking.poptartcore.registry;
 
 import dev.poptartking.poptartcore.PoptartCore;
 import dev.poptartking.poptartcore.crucible.CrucibleBlockItem;
-import dev.poptartking.poptartcore.item.HammerItem;
+import dev.poptartking.poptartcore.hammer.HammerItem;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.BlockItem;

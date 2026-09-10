@@ -1,7 +1,7 @@
 package dev.poptartking.poptartcore.hammer;
 
 import dev.poptartking.poptartcore.PoptartCore;
-import dev.poptartking.poptartcore.mixin.item.GameModeDestroyAccessor;
+import dev.poptartking.poptartcore.mixin.hammer.GameModeDestroyAccessor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.protocol.game.ClientboundLevelEventPacket;
 import net.minecraft.server.MinecraftServer;

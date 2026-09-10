@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "poptartcore:block/workbench/workbench_side_1",
+    "down": "poptartcore:block/workbench/workbench_bottom",
+    "up": "poptartcore:block/workbench/workbench_top",
+    "north": "poptartcore:block/workbench/workbench_side_1",
+    "south": "poptartcore:block/workbench/workbench_side_1",
+    "east": "poptartcore:block/workbench/workbench_side_2",
+    "west": "poptartcore:block/workbench/workbench_side_2"
+  }
+}

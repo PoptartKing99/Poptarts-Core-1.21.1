@@ -4,13 +4,13 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "armor.ArmorTextureMixin",
-    "item.GameModeDestroyAccessor",
-    "item.HammerDestroyProgressMixin",
-    "item.ServerBlockBreakingMixin"
+    "hammer.GameModeDestroyAccessor",
+    "hammer.HammerDestroyProgressMixin",
+    "hammer.ServerBlockBreakingMixin"
   ],
   "client": [
-    "item.ClientHammerFaceMixin",
-    "render.BlastFurnaceBreakRenderMixin"
+    "hammer.ClientHammerFaceMixin",
+    "blastfurnace.BlastFurnaceBreakRenderMixin"
   ],
   "injectors": {
     "defaultRequire": 1

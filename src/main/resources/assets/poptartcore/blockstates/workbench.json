@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "poptartcore:block/workbench"
+      "model": "poptartcore:block/workbench/workbench"
     }
   }
 }
