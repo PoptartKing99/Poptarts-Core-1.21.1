@@ -4,6 +4,8 @@ import dev.poptartking.poptartcore.PoptartCore;
 import dev.poptartking.poptartcore.blastfurnace.BlastFurnaceBlockEntity;
 import dev.poptartking.poptartcore.bloomery.BloomeryBlockEntity;
 import dev.poptartking.poptartcore.crucible.CrucibleBlockEntity;
+import dev.poptartking.poptartcore.millstone.MillstoneBlockEntity;
+import dev.poptartking.poptartcore.millstone.MillstoneRotorBlockEntity;
 import dev.poptartking.poptartcore.quern.QuernBlockEntity;
 import dev.poptartking.poptartcore.workbench.WorkbenchBlockEntity;
 import net.minecraft.core.registries.Registries;
@@ -16,6 +18,15 @@ public class PoptartCoreBlockEntities {
 
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
             DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, PoptartCore.MOD_ID);
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MillstoneBlockEntity>> MILLSTONE =
+            BLOCK_ENTITIES.register("millstone", () -> BlockEntityType.Builder.of(
+                            MillstoneBlockEntity::new, PoptartCoreBlocks.MILLSTONE.get())
+                    .build(null));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MillstoneRotorBlockEntity>> MILLSTONE_ROTOR =
+            BLOCK_ENTITIES.register("millstone_rotor", () -> BlockEntityType.Builder.of(
+                            MillstoneRotorBlockEntity::new, PoptartCoreBlocks.MILLSTONE_ROTOR.get())
+                    .build(null));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<CrucibleBlockEntity>> CRUCIBLE =
             BLOCK_ENTITIES.register("crucible", () -> BlockEntityType.Builder.of(

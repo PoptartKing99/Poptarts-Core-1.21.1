@@ -1,0 +1,7 @@
+{
+  "type": "poptartcore:milling",
+  "ingredient": { "item": "minecraft:wheat" },
+  "input_count": 1,
+  "result": { "id": "create:wheat_flour", "count": 1 },
+  "duration": 20
+}

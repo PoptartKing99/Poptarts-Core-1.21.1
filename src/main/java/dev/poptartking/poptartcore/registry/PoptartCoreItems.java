@@ -94,8 +94,34 @@ public class PoptartCoreItems {
     public static final DeferredItem<BlockItem> BLOOMERY = registerBlockItem("bloomery", PoptartCoreBlocks.BLOOMERY);
     public static final DeferredItem<BlockItem> WORKBENCH = registerBlockItem("workbench", PoptartCoreBlocks.WORKBENCH);
     public static final DeferredItem<BlockItem> QUERN = registerBlockItem("quern", PoptartCoreBlocks.QUERN);
+    public static final DeferredItem<dev.poptartking.poptartcore.millstone.MillstoneBlockItem> MILLSTONE =
+            ITEMS.register(
+                    "millstone",
+                    () -> new dev.poptartking.poptartcore.millstone.MillstoneBlockItem(
+                            PoptartCoreBlocks.MILLSTONE.get(), new Item.Properties()));
     public static final DeferredItem<BlockItem> IRON_BLOOM =
             registerBlockItem("iron_bloom", PoptartCoreBlocks.IRON_BLOOM);
+    public static final DeferredItem<BlockItem> TIN_BLOCK = registerBlockItem("tin_block", PoptartCoreBlocks.TIN_BLOCK);
+    public static final DeferredItem<BlockItem> TIN_ORE = registerBlockItem("tin_ore", PoptartCoreBlocks.TIN_ORE);
+    public static final DeferredItem<BlockItem> DEEPSLATE_TIN_ORE =
+            registerBlockItem("deepslate_tin_ore", PoptartCoreBlocks.DEEPSLATE_TIN_ORE);
+    public static final DeferredItem<BlockItem> RAW_TIN_BLOCK =
+            registerBlockItem("raw_tin_block", PoptartCoreBlocks.RAW_TIN_BLOCK);
+    public static final DeferredItem<BlockItem> LEAD_BLOCK =
+            registerBlockItem("lead_block", PoptartCoreBlocks.LEAD_BLOCK);
+    public static final DeferredItem<BlockItem> LEAD_ORE = registerBlockItem("lead_ore", PoptartCoreBlocks.LEAD_ORE);
+    public static final DeferredItem<BlockItem> DEEPSLATE_LEAD_ORE =
+            registerBlockItem("deepslate_lead_ore", PoptartCoreBlocks.DEEPSLATE_LEAD_ORE);
+    public static final DeferredItem<BlockItem> RAW_LEAD_BLOCK =
+            registerBlockItem("raw_lead_block", PoptartCoreBlocks.RAW_LEAD_BLOCK);
+    public static final DeferredItem<BlockItem> SILVER_BLOCK =
+            registerBlockItem("silver_block", PoptartCoreBlocks.SILVER_BLOCK);
+    public static final DeferredItem<BlockItem> SILVER_ORE =
+            registerBlockItem("silver_ore", PoptartCoreBlocks.SILVER_ORE);
+    public static final DeferredItem<BlockItem> DEEPSLATE_SILVER_ORE =
+            registerBlockItem("deepslate_silver_ore", PoptartCoreBlocks.DEEPSLATE_SILVER_ORE);
+    public static final DeferredItem<BlockItem> RAW_SILVER_BLOCK =
+            registerBlockItem("raw_silver_block", PoptartCoreBlocks.RAW_SILVER_BLOCK);
     public static final DeferredItem<BlockItem> CLINKER_BRICKS =
             registerBlockItem("clinker_bricks", PoptartCoreBlocks.CLINKER_BRICKS);
     public static final DeferredItem<BlockItem> CLINKER_BRICK_SLAB =

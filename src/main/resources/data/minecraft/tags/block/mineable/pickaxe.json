@@ -1,5 +1,8 @@
 {
   "values": [
+    "poptartcore:millstone",
+    "poptartcore:millstone_structural",
+    "poptartcore:millstone_rotor",
     "poptartcore:crucible",
     "poptartcore:blast_furnace",
     "poptartcore:bloomery",
@@ -15,6 +18,18 @@
     "poptartcore:mosaic_clinker_tile",
     "poptartcore:chiseled_clinker_tile",
     "poptartcore:clinker_pillar",
-    "poptartcore:quern"
+    "poptartcore:quern",
+    "poptartcore:tin_ore",
+    "poptartcore:deepslate_tin_ore",
+    "poptartcore:tin_block",
+    "poptartcore:raw_tin_block",
+    "poptartcore:lead_ore",
+    "poptartcore:deepslate_lead_ore",
+    "poptartcore:lead_block",
+    "poptartcore:raw_lead_block",
+    "poptartcore:silver_ore",
+    "poptartcore:deepslate_silver_ore",
+    "poptartcore:silver_block",
+    "poptartcore:raw_silver_block"
   ]
 }

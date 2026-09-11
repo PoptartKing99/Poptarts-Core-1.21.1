@@ -1,0 +1,13 @@
+{
+  "multipart": [
+    { "when": { "top": "true" }, "apply": { "model": "poptartcore:block/millstone/top_invisible" } },
+    { "when": { "top": "false", "corner": "false", "facing": "south" }, "apply": { "model": "poptartcore:block/millstone/base_n" } },
+    { "when": { "top": "false", "corner": "false", "facing": "north" }, "apply": { "model": "poptartcore:block/millstone/base_s" } },
+    { "when": { "top": "false", "corner": "false", "facing": "west" }, "apply": { "model": "poptartcore:block/millstone/base_e" } },
+    { "when": { "top": "false", "corner": "false", "facing": "east" }, "apply": { "model": "poptartcore:block/millstone/base_w" } },
+    { "when": { "top": "false", "corner": "true", "facing": "south" }, "apply": { "model": "poptartcore:block/millstone/base_ne" } },
+    { "when": { "top": "false", "corner": "true", "facing": "east" }, "apply": { "model": "poptartcore:block/millstone/base_nw" } },
+    { "when": { "top": "false", "corner": "true", "facing": "west" }, "apply": { "model": "poptartcore:block/millstone/base_se" } },
+    { "when": { "top": "false", "corner": "true", "facing": "north" }, "apply": { "model": "poptartcore:block/millstone/base_sw" } }
+  ]
+}

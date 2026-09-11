@@ -1,0 +1,41 @@
+{
+  "textures": {
+    "0": "poptartcore:block/millstone/millstone",
+    "particle": "poptartcore:block/millstone/millstone"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
+      "faces": {
+        "up": {
+          "uv": [
+            5.0,
+            2.0,
+            4.0,
+            1.0
+          ],
+          "texture": "#0"
+        },
+        "down": {
+          "uv": [
+            8.0,
+            1.0,
+            7.0,
+            2.0
+          ],
+          "texture": "#0",
+          "cullface": "down"
+        }
+      }
+    }
+  ]
+}

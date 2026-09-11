@@ -17,4 +17,9 @@ public class PoptartCoreSounds {
     public static void register(IEventBus eventBus) {
         SOUNDS.register(eventBus);
     }
+
+    public static final DeferredHolder<SoundEvent, SoundEvent> MILLSTONE_LOOP = SOUNDS.register(
+            "millstone.loop", () -> SoundEvent.createVariableRangeEvent(PoptartCore.location("millstone.loop")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> MILLSTONE_USE = SOUNDS.register(
+            "millstone.use", () -> SoundEvent.createVariableRangeEvent(PoptartCore.location("millstone.use")));
 }

@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "poptartcore:lead_ore",
+    "poptartcore:deepslate_lead_ore",
+    "poptartcore:lead_block",
+    "poptartcore:raw_lead_block",
+    "poptartcore:silver_ore",
+    "poptartcore:deepslate_silver_ore",
+    "poptartcore:silver_block",
+    "poptartcore:raw_silver_block"
+  ]
+}

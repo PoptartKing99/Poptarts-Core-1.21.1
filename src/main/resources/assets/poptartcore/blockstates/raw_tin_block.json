@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "poptartcore:block/raw_tin_block"
+    }
+  }
+}

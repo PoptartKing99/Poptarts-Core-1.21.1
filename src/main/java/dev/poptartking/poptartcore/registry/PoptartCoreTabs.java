@@ -32,6 +32,7 @@ public class PoptartCoreTabs {
                         output.accept(PoptartCoreItems.BLOOMERY);
                         output.accept(PoptartCoreItems.WORKBENCH);
                         output.accept(PoptartCoreItems.QUERN);
+                        output.accept(PoptartCoreItems.MILLSTONE);
                         output.accept(PoptartCoreItems.IRON_BLOOM);
                         output.accept(PoptartCoreItems.HAMMER);
                         output.accept(PoptartCoreItems.CLINKER_BRICKS);
@@ -50,17 +51,29 @@ public class PoptartCoreTabs {
                         output.accept(PoptartCoreItems.PLATE_MOULD);
                         output.accept(PoptartCoreItems.UNFIRED_PLATE_MOULD);
 
+                        output.accept(PoptartCoreItems.TIN_ORE);
+                        output.accept(PoptartCoreItems.DEEPSLATE_TIN_ORE);
                         output.accept(PoptartCoreItems.RAW_TIN);
+                        output.accept(PoptartCoreItems.RAW_TIN_BLOCK);
                         output.accept(PoptartCoreItems.TIN_INGOT);
                         output.accept(PoptartCoreItems.TIN_NUGGET);
+                        output.accept(PoptartCoreItems.TIN_BLOCK);
 
+                        output.accept(PoptartCoreItems.LEAD_ORE);
+                        output.accept(PoptartCoreItems.DEEPSLATE_LEAD_ORE);
                         output.accept(PoptartCoreItems.RAW_LEAD);
+                        output.accept(PoptartCoreItems.RAW_LEAD_BLOCK);
                         output.accept(PoptartCoreItems.LEAD_INGOT);
                         output.accept(PoptartCoreItems.LEAD_NUGGET);
+                        output.accept(PoptartCoreItems.LEAD_BLOCK);
 
+                        output.accept(PoptartCoreItems.SILVER_ORE);
+                        output.accept(PoptartCoreItems.DEEPSLATE_SILVER_ORE);
                         output.accept(PoptartCoreItems.RAW_SILVER);
+                        output.accept(PoptartCoreItems.RAW_SILVER_BLOCK);
                         output.accept(PoptartCoreItems.SILVER_INGOT);
                         output.accept(PoptartCoreItems.SILVER_NUGGET);
+                        output.accept(PoptartCoreItems.SILVER_BLOCK);
 
                         output.accept(PoptartCoreItems.BRONZE_INGOT);
                         output.accept(PoptartCoreItems.BRONZE_NUGGET);

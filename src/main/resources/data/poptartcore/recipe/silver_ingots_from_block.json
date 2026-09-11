@@ -1,0 +1,6 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [{ "item": "poptartcore:silver_block" }],
+  "result": { "id": "poptartcore:silver_ingot", "count": 9 }
+}

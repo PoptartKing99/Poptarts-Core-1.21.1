@@ -1,4 +1,10 @@
 {
+  "message.poptartcore.millstone_space": "The Millstone needs a clear 3 x 3 area, two blocks tall.",
+  "poptartcore.millstone.too_fast": "Too fast! Maximum speed: 64 RPM",
+
+  "subtitles.poptartcore.millstone.loop": "Millstone turns",
+  "subtitles.poptartcore.millstone.use": "Millstone grinds",
+
   "item.poptartcore.mining_helmet" : "Mining Helmet",
   "item.poptartcore.raw_hide_helmet" : "Raw Hide Helmet",
   "item.poptartcore.raw_hide_chestplate" : "Raw Hide Chestplate",
@@ -34,6 +40,9 @@
   "block.poptartcore.bloomery": "Bloomery",
   "block.poptartcore.workbench": "Workbench",
   "block.poptartcore.quern": "Quern",
+  "block.poptartcore.millstone": "Millstone",
+  "block.poptartcore.millstone_structural": "Millstone",
+  "block.poptartcore.millstone_rotor": "Millstone",
   "block.poptartcore.iron_bloom": "Iron Bloom",
   "block.poptartcore.clinker_bricks": "Clinker Bricks",
   "block.poptartcore.clinker_brick_slab": "Clinker Brick Slab",
@@ -46,10 +55,39 @@
   "block.poptartcore.mosaic_clinker_tile": "Mosaic Clinker Tile",
   "block.poptartcore.chiseled_clinker_tile": "Chiseled Clinker Tile",
   "block.poptartcore.clinker_pillar": "Clinker Pillar",
+  "block.poptartcore.tin_ore": "Tin Ore",
+  "block.poptartcore.deepslate_tin_ore": "Deepslate Tin Ore",
+  "block.poptartcore.tin_block": "Block of Tin",
+  "block.poptartcore.raw_tin_block": "Block of Raw Tin",
+  "block.poptartcore.lead_ore": "Lead Ore",
+  "block.poptartcore.deepslate_lead_ore": "Deepslate Lead Ore",
+  "block.poptartcore.lead_block": "Block of Lead",
+  "block.poptartcore.raw_lead_block": "Block of Raw Lead",
+  "block.poptartcore.silver_ore": "Silver Ore",
+  "block.poptartcore.deepslate_silver_ore": "Deepslate Silver Ore",
+  "block.poptartcore.silver_block": "Block of Silver",
+  "block.poptartcore.raw_silver_block": "Block of Raw Silver",
+
+  "fluid_type.poptartcore.molten_bronze": "Molten Bronze",
+  "fluid_type.poptartcore.molten_copper": "Molten Copper",
+  "fluid_type.poptartcore.molten_gold": "Molten Gold",
+  "fluid_type.poptartcore.molten_iron": "Molten Iron",
+  "fluid_type.poptartcore.molten_lead": "Molten Lead",
+  "fluid_type.poptartcore.molten_silver": "Molten Silver",
+  "fluid_type.poptartcore.molten_steel": "Molten Steel",
+  "fluid_type.poptartcore.molten_tin": "Molten Tin",
 
   "container.poptartcore.crucible" : "Crucible",
   "container.poptartcore.blast_furnace" : "Blast Furnace",
   "container.poptartcore.workbench" : "Workbench",
 
-  "creativetab.poptartcore.poptartcore_tab" : "PoptartCore"
+  "creativetab.poptartcore.poptartcore_tab" : "PoptartCore",
+
+  "emi.category.poptartcore.crucible_melting": "Crucible Melting",
+  "emi.category.poptartcore.blast_furnace_melting": "Blast Furnace Melting",
+  "emi.category.poptartcore.crucible_alloying": "Crucible Alloying",
+  "emi.category.poptartcore.blast_furnace_alloying": "Blast Furnace Alloying",
+  "emi.category.poptartcore.casting": "Casting",
+  "emi.category.poptartcore.grinding": "Quern Grinding",
+  "emi.category.poptartcore.milling": "Millstone Milling"
 }

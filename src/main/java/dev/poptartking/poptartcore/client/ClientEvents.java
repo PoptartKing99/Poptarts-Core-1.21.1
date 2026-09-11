@@ -148,11 +148,15 @@ public class ClientEvents {
 
     @SubscribeEvent
     public static void registerBlockEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerBlockEntityRenderer(
+                PoptartCoreBlockEntities.MILLSTONE_ROTOR.get(),
+                context -> new dev.poptartking.poptartcore.millstone.client.MillstoneRenderer());
         event.registerBlockEntityRenderer(PoptartCoreBlockEntities.QUERN.get(), context -> new QuernRenderer());
     }
 
     @SubscribeEvent
     public static void registerAdditionalModels(RegisterAdditional event) {
+        event.register(dev.poptartking.poptartcore.millstone.client.MillstoneRenderer.ROTOR_MODEL);
         event.register(QuernRenderer.ROTOR_MODEL);
         event.register(QuernRenderer.FLOUR_MODEL);
     }

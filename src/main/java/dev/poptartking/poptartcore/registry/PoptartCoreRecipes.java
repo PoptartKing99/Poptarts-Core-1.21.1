@@ -7,6 +7,8 @@ import dev.poptartking.poptartcore.crucible.casting.CastingRecipe;
 import dev.poptartking.poptartcore.crucible.casting.CastingRecipeSerializer;
 import dev.poptartking.poptartcore.crucible.melting.MeltingRecipe;
 import dev.poptartking.poptartcore.crucible.melting.MeltingRecipeSerializer;
+import dev.poptartking.poptartcore.millstone.recipe.MillingRecipe;
+import dev.poptartking.poptartcore.millstone.recipe.MillingRecipeSerializer;
 import dev.poptartking.poptartcore.quern.recipe.GrindingRecipe;
 import dev.poptartking.poptartcore.quern.recipe.GrindingRecipeSerializer;
 import net.minecraft.core.registries.Registries;
@@ -80,4 +82,9 @@ public class PoptartCoreRecipes {
         RECIPE_SERIALIZERS.register(eventBus);
         RECIPE_TYPES.register(eventBus);
     }
+
+    public static final DeferredHolder<RecipeSerializer<?>, MillingRecipeSerializer> MILLING_SERIALIZER =
+            RECIPE_SERIALIZERS.register("milling", MillingRecipeSerializer::new);
+    public static final DeferredHolder<RecipeType<?>, RecipeType<MillingRecipe>> MILLING_TYPE =
+            RECIPE_TYPES.register("milling", () -> RecipeType.simple(PoptartCore.location("milling")));
 }

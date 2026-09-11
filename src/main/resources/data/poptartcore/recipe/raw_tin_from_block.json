@@ -1,0 +1,6 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [{ "item": "poptartcore:raw_tin_block" }],
+  "result": { "id": "poptartcore:raw_tin", "count": 9 }
+}

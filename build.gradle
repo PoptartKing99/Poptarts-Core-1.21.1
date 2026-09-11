@@ -36,6 +36,9 @@ sourceSets.main.resources {
 }
 
 repositories {
+    maven { url = 'https://repo.sleeping.town/'; content { includeGroup 'dev.emi' } }
+    maven { url = 'https://api.modrinth.com/maven'; content { includeGroup 'maven.modrinth' } }
+    maven { url = 'https://maven.createmod.net'; content { includeGroup 'net.createmod.ponder'; includeGroup 'dev.engine-room.flywheel' } }
     // Add here additional repositories if required by some of the dependencies below.
 }
 
@@ -46,9 +49,33 @@ base {
 // Mojang ships Java 21 to end users in 1.21.1, so mods should target Java 21.
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
+// Opt-in integration tests; this source set is not packaged in the mod JAR.
+if (providers.gradleProperty('emiTests').isPresent()) {
+    sourceSets.create('emiTest') {
+        compileClasspath += sourceSets.main.output
+        runtimeClasspath += sourceSets.main.output
+    }
+    configurations.emiTestImplementation.extendsFrom(configurations.implementation)
+    configurations.emiTestCompileOnly.extendsFrom(configurations.compileOnly)
+}
+if (providers.gradleProperty('millstoneTests').isPresent()) {
+    sourceSets.create('gameTest') {
+        compileClasspath += sourceSets.main.output
+        runtimeClasspath += sourceSets.main.output
+    }
+    configurations.gameTestImplementation.extendsFrom(configurations.implementation)
+    configurations.gameTestCompileOnly.extendsFrom(configurations.compileOnly)
+}
+
 neoForge {
     // Specify the version of NeoForge to use.
     version = project.neo_version
+    if (providers.gradleProperty('emiTests').isPresent()) {
+        addModdingDependenciesTo(sourceSets.emiTest)
+    }
+    if (providers.gradleProperty('millstoneTests').isPresent()) {
+        addModdingDependenciesTo(sourceSets.gameTest)
+    }
 
     parchment {
         mappingsVersion = project.parchment_mappings_version
@@ -63,6 +90,10 @@ neoForge {
     runs {
         client {
             client()
+            if (providers.gradleProperty('emiTests').isPresent()) {
+                gameDirectory = file('build/emi-test-run')
+                programArguments.addAll '--quickPlaySingleplayer', 'emi-smoke'
+            }
             // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
             systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
         }
@@ -78,6 +109,9 @@ neoForge {
         // The gametest system is also enabled by default for other run configs under the /test command.
         gameTestServer {
             type = "gameTestServer"
+            if (providers.gradleProperty('millstoneTests').isPresent()) {
+                gameDirectory = file('build/millstone-test-run')
+            }
             systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
         }
 
@@ -112,6 +146,12 @@ neoForge {
         // multi mod projects should define one per mod
         "${mod_id}" {
             sourceSet(sourceSets.main)
+            if (providers.gradleProperty('emiTests').isPresent()) {
+                sourceSet(sourceSets.emiTest)
+            }
+            if (providers.gradleProperty('millstoneTests').isPresent()) {
+                sourceSet(sourceSets.gameTest)
+            }
         }
     }
 }
@@ -125,6 +165,12 @@ configurations {
 }
 
 dependencies {
+    // Optional recipe viewer; the test instance already has the full EMI mod in run/mods.
+    compileOnly "dev.emi:emi-neoforge:${emi_version}:api"
+    // Compile against the installed Create release; run/mods already supplies it at runtime.
+    compileOnly "maven.modrinth:create:${create_version}+mc${minecraft_version}"
+    compileOnly 'net.createmod.ponder:ponder-neoforge:1.0.82+mc1.21.1'
+    compileOnly 'dev.engine-room.flywheel:flywheel-neoforge-api-1.21.1:1.0.6'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.11.4'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.11.4'
 

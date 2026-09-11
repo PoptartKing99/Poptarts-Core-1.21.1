@@ -1,4 +1,12 @@
 {
+  "millstone.loop": {
+    "sounds": ["poptartcore:millstone/loop"],
+    "subtitle": "subtitles.poptartcore.millstone.loop"
+  },
+  "millstone.use": {
+    "sounds": ["poptartcore:millstone/use1", "poptartcore:millstone/use2", "poptartcore:millstone/use3"],
+    "subtitle": "subtitles.poptartcore.millstone.use"
+  },
   "quern": {
     "sounds": [
       {

@@ -6,6 +6,9 @@ import dev.poptartking.poptartcore.bloomery.BloomeryBlock;
 import dev.poptartking.poptartcore.bloomery.IronBloomBlock;
 import dev.poptartking.poptartcore.clinker.ClinkerPillarBlock;
 import dev.poptartking.poptartcore.crucible.CrucibleBlock;
+import dev.poptartking.poptartcore.millstone.MillstoneBlock;
+import dev.poptartking.poptartcore.millstone.MillstoneRotorBlock;
+import dev.poptartking.poptartcore.millstone.MillstoneStructuralBlock;
 import dev.poptartking.poptartcore.quern.QuernBlock;
 import dev.poptartking.poptartcore.workbench.WorkbenchBlock;
 import net.minecraft.world.level.block.Block;
@@ -15,6 +18,8 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -22,6 +27,23 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class PoptartCoreBlocks {
 
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(PoptartCore.MOD_ID);
+
+    public static final DeferredBlock<MillstoneBlock> MILLSTONE =
+            BLOCKS.register("millstone", () -> new MillstoneBlock(millstoneProperties()));
+    public static final DeferredBlock<MillstoneStructuralBlock> MILLSTONE_STRUCTURAL = BLOCKS.register(
+            "millstone_structural",
+            () -> new MillstoneStructuralBlock(millstoneProperties().noLootTable()));
+    public static final DeferredBlock<MillstoneRotorBlock> MILLSTONE_ROTOR = BLOCKS.register(
+            "millstone_rotor",
+            () -> new MillstoneRotorBlock(millstoneProperties().noOcclusion().noLootTable()));
+
+    private static BlockBehaviour.Properties millstoneProperties() {
+        return BlockBehaviour.Properties.of()
+                .mapColor(MapColor.STONE)
+                .sound(SoundType.STONE)
+                .strength(3.0F)
+                .pushReaction(PushReaction.BLOCK);
+    }
 
     public static final DeferredBlock<CrucibleBlock> CRUCIBLE = BLOCKS.register(
             "crucible",
@@ -52,6 +74,68 @@ public class PoptartCoreBlocks {
             () -> new IronBloomBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.RAW_IRON_BLOCK)
                     .noOcclusion()
                     .noLootTable()));
+
+    public static final DeferredBlock<Block> TIN_BLOCK = BLOCKS.register(
+            "tin_block",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)
+                    .sound(SoundType.METAL)
+                    .strength(1.0F, 6.0F)));
+    public static final DeferredBlock<Block> TIN_ORE = BLOCKS.register(
+            "tin_ore",
+            () -> new Block(
+                    BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_ORE).strength(2.0F, 6.0F)));
+    public static final DeferredBlock<Block> DEEPSLATE_TIN_ORE = BLOCKS.register(
+            "deepslate_tin_ore",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_COPPER_ORE)
+                    .strength(3.0F, 6.0F)));
+    public static final DeferredBlock<Block> RAW_TIN_BLOCK = BLOCKS.register(
+            "raw_tin_block",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.RAW_COPPER_BLOCK)
+                    .strength(5.0F, 6.0F)));
+
+    public static final DeferredBlock<Block> LEAD_BLOCK = BLOCKS.register(
+            "lead_block",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)
+                    .sound(SoundType.METAL)
+                    .strength(1.0F, 6.0F)));
+    public static final DeferredBlock<Block> LEAD_ORE = BLOCKS.register(
+            "lead_ore",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_ORE)
+                    .sound(SoundType.STONE)
+                    .requiresCorrectToolForDrops()
+                    .strength(2.0F, 6.0F)));
+    public static final DeferredBlock<Block> DEEPSLATE_LEAD_ORE = BLOCKS.register(
+            "deepslate_lead_ore",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_ORE)
+                    .sound(SoundType.DEEPSLATE)
+                    .requiresCorrectToolForDrops()
+                    .strength(3.0F, 6.0F)));
+    public static final DeferredBlock<Block> RAW_LEAD_BLOCK = BLOCKS.register(
+            "raw_lead_block",
+            () -> new Block(
+                    BlockBehaviour.Properties.ofFullCopy(Blocks.RAW_IRON_BLOCK).strength(5.0F, 6.0F)));
+
+    public static final DeferredBlock<Block> SILVER_BLOCK = BLOCKS.register(
+            "silver_block",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)
+                    .sound(SoundType.METAL)
+                    .strength(5.0F, 6.0F)));
+    public static final DeferredBlock<Block> SILVER_ORE = BLOCKS.register(
+            "silver_ore",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_ORE)
+                    .sound(SoundType.STONE)
+                    .requiresCorrectToolForDrops()
+                    .strength(5.0F, 6.0F)));
+    public static final DeferredBlock<Block> DEEPSLATE_SILVER_ORE = BLOCKS.register(
+            "deepslate_silver_ore",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_IRON_ORE)
+                    .sound(SoundType.DEEPSLATE)
+                    .requiresCorrectToolForDrops()
+                    .strength(6.0F, 6.0F)));
+    public static final DeferredBlock<Block> RAW_SILVER_BLOCK = BLOCKS.register(
+            "raw_silver_block",
+            () -> new Block(
+                    BlockBehaviour.Properties.ofFullCopy(Blocks.RAW_IRON_BLOCK).strength(5.0F, 6.0F)));
 
     public static final DeferredBlock<Block> CLINKER_BRICKS =
             BLOCKS.register("clinker_bricks", () -> new Block(clinkerProperties()));

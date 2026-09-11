@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": { "#": { "item": "poptartcore:raw_silver" } },
+  "pattern": ["###", "###", "###"],
+  "result": { "id": "poptartcore:raw_silver_block" }
+}
