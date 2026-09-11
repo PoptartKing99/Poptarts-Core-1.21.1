@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "poptartcore:crucible",
     "poptartcore:workbench"
   ]
 }

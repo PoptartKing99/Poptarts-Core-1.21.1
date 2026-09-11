@@ -10,6 +10,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.item.component.Tool.Rule;
@@ -45,6 +46,11 @@ public class HammerItem extends Item {
                         Rule.minesAndDrops(BlockTags.MINEABLE_WITH_PICKAXE, STONE_SPEED)),
                 1,
                 1);
+    }
+
+    @Override
+    public int getEnchantmentValue(ItemStack stack) {
+        return Tiers.STONE.getEnchantmentValue();
     }
 
     @Override

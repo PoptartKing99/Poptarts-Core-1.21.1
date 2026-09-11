@@ -21,6 +21,7 @@ public class PoptartCore {
         PoptartCoreSounds.register(modEventBus);
         PoptartCoreTabs.register(modEventBus);
         BlastFurnaceCapabilities.register(modEventBus);
+        PoptartCoreCapabilities.register(modEventBus);
     }
 
     public static ResourceLocation location(String path) {
