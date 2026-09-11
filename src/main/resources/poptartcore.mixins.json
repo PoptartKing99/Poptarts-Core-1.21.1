@@ -6,6 +6,7 @@
     "armor.ArmorTextureMixin",
     "hammer.GameModeDestroyAccessor",
     "hammer.HammerDestroyProgressMixin",
+    "hammer.HammerTargetChangeMixin",
     "hammer.ServerBlockBreakingMixin"
   ],
   "client": [

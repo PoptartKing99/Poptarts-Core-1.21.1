@@ -18,6 +18,7 @@ import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -32,6 +33,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
@@ -114,7 +116,11 @@ public class BloomeryBlock extends BaseEntityBlock {
                 bloomery.light(level.getRandom());
                 level.setBlockAndUpdate(pos, state.setValue(LIT, true));
                 level.playSound(null, pos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1, 1);
-                stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
+                if (stack.is(Items.FIRE_CHARGE)) {
+                    stack.consume(1, player);
+                } else {
+                    stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
+                }
             }
             return ItemInteractionResult.sidedSuccess(level.isClientSide);
         }
@@ -162,13 +168,28 @@ public class BloomeryBlock extends BaseEntityBlock {
     }
 
     @Override
+    public boolean onDestroyedByPlayer(
+            BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
+        if (!level.isClientSide
+                && level.getBlockEntity(pos) instanceof BloomeryBlockEntity bloomery
+                && bloomery.isDone()
+                && bloomery.bloomCount() > 0) {
+            int blooms = Mth.clamp(bloomery.bloomCount(), 1, IronBloomBlock.MAX_BLOOMS);
+            // The pile receives the contents, so onRemove must not also drop them as items.
+            bloomery.clearContent();
+            return level.setBlockAndUpdate(
+                    pos,
+                    PoptartCoreBlocks.IRON_BLOOM.get().defaultBlockState().setValue(IronBloomBlock.BLOOMS, blooms));
+        }
+        return super.onDestroyedByPlayer(state, level, pos, player, willHarvest, fluid);
+    }
+
+    @Override
     protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
         if (!state.is(newState.getBlock()) && level.getBlockEntity(pos) instanceof BloomeryBlockEntity bloomery) {
             if (bloomery.isDone() && bloomery.bloomCount() > 0) {
                 int blooms = Mth.clamp(bloomery.bloomCount(), 1, IronBloomBlock.MAX_BLOOMS);
-                level.setBlockAndUpdate(
-                        pos,
-                        PoptartCoreBlocks.IRON_BLOOM.get().defaultBlockState().setValue(IronBloomBlock.BLOOMS, blooms));
+                popResource(level, pos, new ItemStack(PoptartCoreBlocks.IRON_BLOOM.get(), blooms));
             } else if (bloomery.hasStarted()) {
                 ItemStack iron = bloomery.getItem(BloomeryBlockEntity.IRON_SLOT);
                 if (!iron.isEmpty()) {

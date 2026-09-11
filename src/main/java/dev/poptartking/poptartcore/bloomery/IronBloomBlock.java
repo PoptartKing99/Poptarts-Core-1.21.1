@@ -9,6 +9,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
@@ -54,27 +55,28 @@ public class IronBloomBlock extends Block {
     }
 
     @Override
-    public boolean onDestroyedByPlayer(
-            BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
-        int blooms = state.getValue(BLOOMS);
-        boolean hammer = player.getMainHandItem().is(PoptartCoreTags.HAMMERS);
-        boolean creative = player.getAbilities().instabuild;
-
-        if (hammer && blooms > 1 && !creative) {
+    public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+        BlockState result = super.playerWillDestroy(level, pos, state, player);
+        // This callback runs before mining spends the hammer's final durability point.
+        if (!player.getAbilities().instabuild && player.getMainHandItem().is(PoptartCoreTags.HAMMERS)) {
+            int blooms = state.getValue(BLOOMS);
             if (!level.isClientSide) {
                 dropNuggets(level, pos);
-                level.setBlock(pos, state.setValue(BLOOMS, blooms - 1), 3);
-                level.levelEvent(2001, pos, Block.getId(state));
             }
+            level.setBlock(pos, blooms > 1 ? state.setValue(BLOOMS, blooms - 1) : Blocks.AIR.defaultBlockState(), 3);
+        }
+        return result;
+    }
+
+    @Override
+    public boolean onDestroyedByPlayer(
+            BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
+        // Hammer processing already changed the pile. Do not remove the remaining blooms.
+        if (level.getBlockState(pos) != state) {
             return false;
         }
-
-        if (!level.isClientSide && !creative) {
-            if (hammer) {
-                dropNuggets(level, pos);
-            } else {
-                popResource(level, pos, new ItemStack(this, blooms));
-            }
+        if (!level.isClientSide && !player.getAbilities().instabuild) {
+            popResource(level, pos, new ItemStack(this, state.getValue(BLOOMS)));
         }
         return super.onDestroyedByPlayer(state, level, pos, player, willHarvest, fluid);
     }

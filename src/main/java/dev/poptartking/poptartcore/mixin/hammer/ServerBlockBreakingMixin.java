@@ -2,6 +2,7 @@ package dev.poptartking.poptartcore.mixin.hammer;
 
 import dev.poptartking.poptartcore.hammer.BlockBreakProgress;
 import dev.poptartking.poptartcore.hammer.HammerMining;
+import dev.poptartking.poptartcore.hammer.HammerTarget;
 import dev.poptartking.poptartcore.hammer.PersistentMiningMath;
 import dev.poptartking.poptartcore.registry.PoptartCoreTags;
 import java.util.List;
@@ -31,7 +32,7 @@ public abstract class ServerBlockBreakingMixin {
     private boolean poptartcore$breakingHammerTargets;
 
     @Unique
-    private List<BlockPos> poptartcore$hammerTargets = List.of();
+    private List<HammerTarget> poptartcore$hammerTargets = List.of();
 
     protected ServerBlockBreakingMixin(ServerPlayer player) {
         this.player = player;
@@ -46,7 +47,7 @@ public abstract class ServerBlockBreakingMixin {
             int sequence,
             CallbackInfo callback) {
         if (action == ServerboundPlayerActionPacket.Action.START_DESTROY_BLOCK) {
-            HammerMining.beginMining(player, face);
+            HammerMining.beginMining(player, pos, face);
         } else if (action == ServerboundPlayerActionPacket.Action.ABORT_DESTROY_BLOCK) {
             BlockBreakProgress.get(level).endAttempt(player.getUUID());
             HammerMining.endMining(player);
@@ -73,7 +74,7 @@ public abstract class ServerBlockBreakingMixin {
         BlockBreakProgress progress = BlockBreakProgress.get(level);
         float savedFraction = progress.fractionAt(pos);
         if (HammerMining.isAreaMining(player)) {
-            for (BlockPos target : HammerMining.findTargets(player, level, pos)) {
+            for (BlockPos target : HammerMining.findTargets(player, pos)) {
                 savedFraction = PersistentMiningMath.leastProgress(savedFraction, progress.fractionAt(target));
             }
         }
@@ -98,12 +99,10 @@ public abstract class ServerBlockBreakingMixin {
         progress.record(pos, fraction, rate, areaMining, level.getGameTime());
 
         if (!areaMining) {
-            poptartcore$hammerTargets = List.of();
             return;
         }
 
-        poptartcore$hammerTargets = HammerMining.findTargets(player, level, pos);
-        for (BlockPos target : poptartcore$hammerTargets) {
+        for (BlockPos target : HammerMining.findTargets(player, pos)) {
             if (!target.equals(pos)) {
                 progress.accrue(target, rate, rate, true, level.getGameTime());
             }
@@ -113,7 +112,7 @@ public abstract class ServerBlockBreakingMixin {
     @Inject(method = "destroyBlock", at = @At("HEAD"))
     private void poptartcore$captureHammerTargets(BlockPos pos, CallbackInfoReturnable<Boolean> callback) {
         if (!poptartcore$breakingHammerTargets) {
-            poptartcore$hammerTargets = HammerMining.findTargets(player, level, pos);
+            poptartcore$hammerTargets = HammerMining.targetsForBreak(player, pos);
         }
     }
 
@@ -128,21 +127,23 @@ public abstract class ServerBlockBreakingMixin {
 
         if (!callback.getReturnValue()) {
             HammerMining.endMining(player);
+            poptartcore$hammerTargets = List.of();
             return;
         }
 
-        List<BlockPos> targets = poptartcore$hammerTargets;
-        HammerMining.endMining(player);
+        List<HammerTarget> targets = poptartcore$hammerTargets;
         poptartcore$breakingHammerTargets = true;
         try {
             ServerPlayerGameMode gameMode = (ServerPlayerGameMode) (Object) this;
-            for (BlockPos target : targets) {
-                if (!target.equals(pos) && player.getMainHandItem().is(PoptartCoreTags.HAMMERS)) {
-                    progress.clear(target);
-                    gameMode.destroyBlock(target);
+            for (HammerTarget target : targets) {
+                if (!target.pos().equals(pos)
+                        && player.getMainHandItem().is(PoptartCoreTags.HAMMERS)
+                        && HammerMining.canBreakTarget(player, target)) {
+                    gameMode.destroyBlock(target.pos());
                 }
             }
         } finally {
+            HammerMining.endMining(player);
             poptartcore$breakingHammerTargets = false;
             poptartcore$hammerTargets = List.of();
         }

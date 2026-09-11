@@ -66,11 +66,16 @@ public class BlastFurnaceBlockEntity extends CrucibleBlockEntity implements Worl
 
     @Override
     public boolean canPlaceItem(int slot, ItemStack stack) {
-        if (slot == resultSlot) return false;
+        if (stack.isEmpty() || slot < 0 || slot > resultSlot) return false;
         if (slot == fuelSlot) return PoptartCoreTags.isBlastFurnaceFuel(stack);
-        return slot == containerSlot
-                ? dev.poptartking.poptartcore.registry.PoptartCoreItems.isMould(stack)
-                : slot < inputCount;
+        return super.canPlaceItem(slot, stack)
+                || slot < inputCount
+                        && level != null
+                        && level
+                                .getRecipeManager()
+                                .getAllRecipesFor(PoptartCoreRecipes.BLAST_FURNACE_ALLOYING_TYPE.get())
+                                .stream()
+                                .anyMatch(recipe -> recipe.value().usesAsItem(stack));
     }
 
     private int[] inputSlots() {

@@ -1,9 +1,7 @@
 package dev.poptartking.poptartcore.armor.client;
 
 import dev.poptartking.poptartcore.armor.ArmorTextures;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ArmorMaterial;
@@ -21,19 +19,8 @@ public class LeatherArmorClientExtensions implements IClientItemExtensions {
             return original;
         }
 
-        float partialTick = Minecraft.getInstance().getFrameTimeNs() / 20000000000L;
-        float bodyRot = Mth.rotLerp(partialTick, entity.yBodyRotO, entity.yBodyRot);
-        float headRot = Mth.rotLerp(partialTick, entity.yHeadRotO, entity.yHeadRot);
-
         model.slot = armorSlot;
-        model.copyFromDefault(original);
-        model.setupAnim(
-                entity,
-                entity.walkAnimation.position(),
-                entity.walkAnimation.speed(),
-                entity.tickCount + partialTick,
-                headRot - bodyRot,
-                Mth.lerp(partialTick, entity.xRotO, entity.getXRot()));
+        // NeoForge copies the original model's animated pose after this method returns.
 
         return model;
     }

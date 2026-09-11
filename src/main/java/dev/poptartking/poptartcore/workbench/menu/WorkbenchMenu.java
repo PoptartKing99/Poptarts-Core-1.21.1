@@ -2,6 +2,7 @@ package dev.poptartking.poptartcore.workbench.menu;
 
 import dev.poptartking.poptartcore.registry.PoptartCoreMenus;
 import dev.poptartking.poptartcore.workbench.WorkbenchBlockEntity;
+import net.minecraft.core.NonNullList;
 import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
@@ -9,6 +10,7 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.ResultContainer;
 import net.minecraft.world.inventory.ResultSlot;
 import net.minecraft.world.inventory.Slot;
@@ -31,6 +33,7 @@ public class WorkbenchMenu extends AbstractContainerMenu {
     private final Container container;
     private final WorkbenchCraftingContainer craftingContainer;
     private final ResultContainer resultContainer = new ResultContainer();
+    private final NonNullList<ItemStack> lastGrid = NonNullList.withSize(GRID_SIZE, ItemStack.EMPTY);
     private final Player player;
     private final Level level;
 
@@ -81,11 +84,42 @@ public class WorkbenchMenu extends AbstractContainerMenu {
     private void updateResult() {
         if (player instanceof ServerPlayer serverPlayer) {
             ItemStack result = computeResult();
+            for (int slot = 0; slot < GRID_SIZE; slot++) {
+                lastGrid.set(slot, craftingContainer.getItem(slot).copy());
+            }
             resultContainer.setItem(RESULT_SLOT, result);
             setRemoteSlot(RESULT_SLOT, result);
             serverPlayer.connection.send(
                     new ClientboundContainerSetSlotPacket(containerId, incrementStateId(), RESULT_SLOT, result));
         }
+    }
+
+    @Override
+    public void broadcastChanges() {
+        if (!level.isClientSide) {
+            // Other menus and hoppers edit the backing inventory without notifying this menu.
+            for (int slot = 0; slot < GRID_SIZE; slot++) {
+                if (!ItemStack.matches(lastGrid.get(slot), craftingContainer.getItem(slot))) {
+                    updateResult();
+                    break;
+                }
+            }
+        }
+        super.broadcastChanges();
+    }
+
+    @Override
+    public void clicked(int slotId, int button, ClickType clickType, Player player) {
+        // Refresh before vanilla captures any result-stack references, including hotbar swaps and drops.
+        if (!level.isClientSide) {
+            updateResult();
+        }
+        super.clicked(slotId, button, clickType, player);
+    }
+
+    @Override
+    public boolean canTakeItemForPickAll(ItemStack stack, Slot slot) {
+        return slot.container != resultContainer && super.canTakeItemForPickAll(stack, slot);
     }
 
     private ItemStack computeResult() {
@@ -106,6 +140,9 @@ public class WorkbenchMenu extends AbstractContainerMenu {
 
     @Override
     public ItemStack quickMoveStack(Player player, int index) {
+        if (index == RESULT_SLOT && !level.isClientSide) {
+            updateResult();
+        }
         ItemStack original = ItemStack.EMPTY;
         Slot slot = slots.get(index);
         if (!slot.hasItem()) {

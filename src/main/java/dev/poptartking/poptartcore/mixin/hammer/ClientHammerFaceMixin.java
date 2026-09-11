@@ -27,7 +27,7 @@ public abstract class ClientHammerFaceMixin implements ClientMiningCleanup {
         Minecraft minecraft = Minecraft.getInstance();
         poptartcore$clearActiveMining();
         if (minecraft.player != null && minecraft.level != null) {
-            HammerMining.beginMining(minecraft.player, face);
+            HammerMining.beginMining(minecraft.player, pos, face);
             poptartcore$breakerId = minecraft.player.getId();
             poptartcore$hammerCenter = pos.immutable();
         }

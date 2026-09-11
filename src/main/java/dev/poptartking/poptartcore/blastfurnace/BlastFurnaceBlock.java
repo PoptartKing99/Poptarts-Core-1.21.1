@@ -36,6 +36,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -134,6 +135,33 @@ public class BlastFurnaceBlock extends BaseEntityBlock implements WorldlyContain
 
     private BlockPos lowerPos(BlockState state, BlockPos pos) {
         return state.getValue(HALF) == DoubleBlockHalf.LOWER ? pos : pos.below();
+    }
+
+    @Override
+    public boolean onDestroyedByPlayer(
+            BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
+        if (state.getValue(HALF) == DoubleBlockHalf.UPPER) {
+            BlockPos lowerPos = pos.below();
+            BlockState lower = level.getBlockState(lowerPos);
+            if (lower.is(this) && lower.getValue(HALF) == DoubleBlockHalf.LOWER) {
+                // Remove the inventory half without automatic block loot or a recursive upper-half removal.
+                level.setBlock(lowerPos, Blocks.AIR.defaultBlockState(), UPDATE_ALL | UPDATE_KNOWN_SHAPE);
+            }
+        }
+        return super.onDestroyedByPlayer(state, level, pos, player, willHarvest, fluid);
+    }
+
+    @Override
+    public void playerDestroy(
+            Level level,
+            Player player,
+            BlockPos pos,
+            BlockState state,
+            @Nullable BlockEntity blockEntity,
+            ItemStack tool) {
+        // Minecraft only calls this after a successful harvest with the correct tool, never in Creative.
+        super.playerDestroy(
+                level, player, lowerPos(state, pos), state.setValue(HALF, DoubleBlockHalf.LOWER), blockEntity, tool);
     }
 
     @Nullable

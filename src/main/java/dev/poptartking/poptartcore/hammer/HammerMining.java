@@ -8,8 +8,10 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
 public final class HammerMining {
@@ -20,8 +22,27 @@ public final class HammerMining {
 
     private HammerMining() {}
 
-    public static void beginMining(Player player, Direction face) {
-        sessionsFor(player).put(player.getUUID(), new MiningSession(face, !player.isShiftKeyDown()));
+    public static void beginMining(Player player, BlockPos center, Direction face) {
+        boolean areaMining =
+                !player.isShiftKeyDown() && player.getMainHandItem().is(PoptartCoreTags.HAMMERS);
+        List<HammerTarget> targets = new ArrayList<>(9);
+        Level level = player.level();
+        if (areaMining && level.isLoaded(center) && isValidTarget(player, level, center, level.getBlockState(center))) {
+            for (int firstOffset = -1; firstOffset <= 1; firstOffset++) {
+                for (int secondOffset = -1; secondOffset <= 1; secondOffset++) {
+                    BlockPos target = offsetInFacePlane(center, face, firstOffset, secondOffset);
+                    if (!level.isLoaded(target)) {
+                        continue;
+                    }
+                    BlockState state = level.getBlockState(target);
+                    if (isValidTarget(player, level, target, state)) {
+                        targets.add(new HammerTarget(target.immutable(), state));
+                    }
+                }
+            }
+        }
+        sessionsFor(player)
+                .put(player.getUUID(), new MiningSession(center.immutable(), areaMining, List.copyOf(targets)));
     }
 
     public static void endMining(Player player) {
@@ -35,23 +56,19 @@ public final class HammerMining {
                 && player.getMainHandItem().is(PoptartCoreTags.HAMMERS);
     }
 
-    public static List<BlockPos> findTargets(Player player, BlockGetter level, BlockPos center) {
+    public static List<BlockPos> findTargets(Player player, BlockPos center) {
         MiningSession session = sessionsFor(player).get(player.getUUID());
-        if (!isAreaMining(player) || session == null) {
+        if (!isAreaMining(player) || session == null || !session.center().equals(center)) {
             return List.of();
         }
-        if (level.getBlockState(center).is(PoptartCoreTags.HAMMER_NO_SPREAD)) {
+        if (!player.level().isLoaded(center) || !hasOriginalCenter(player, session)) {
             return List.of();
         }
 
         List<BlockPos> targets = new ArrayList<>(9);
-        for (int firstOffset = -1; firstOffset <= 1; firstOffset++) {
-            for (int secondOffset = -1; secondOffset <= 1; secondOffset++) {
-                BlockPos target = offsetInFacePlane(center, session.face(), firstOffset, secondOffset);
-                BlockState state = level.getBlockState(target);
-                if (isValidTarget(player, level, target, state)) {
-                    targets.add(target.immutable());
-                }
+        for (HammerTarget target : session.targets()) {
+            if (canBreakTarget(player, target)) {
+                targets.add(target.pos());
             }
         }
         return targets;
@@ -59,20 +76,25 @@ public final class HammerMining {
 
     public static float synchronizeDestroyProgress(
             float originalProgress, Player player, BlockGetter level, BlockPos center) {
-        if (CALCULATING_SPEED.get() || !isAreaMining(player)) {
+        if (originalProgress <= 0.0F || CALCULATING_SPEED.get() || !isAreaMining(player)) {
             return originalProgress;
         }
 
-        List<BlockPos> targets = findTargets(player, level, center);
-        if (targets.size() <= 1) {
+        MiningSession session = sessionsFor(player).get(player.getUUID());
+        if (session == null
+                || !session.center().equals(center)
+                || session.targets().size() <= 1) {
             return originalProgress;
         }
+        List<HammerTarget> targets = session.targets();
 
         CALCULATING_SPEED.set(true);
         try {
             double totalTicks = 0.0;
-            for (BlockPos target : targets) {
-                float progress = level.getBlockState(target).getDestroyProgress(player, level, target);
+            // Keep the original workload even if a neighbor disappears. Otherwise elapsed
+            // mining time would suddenly be multiplied by a faster rate.
+            for (HammerTarget target : targets) {
+                float progress = target.state().getDestroyProgress(player, level, target.pos());
                 if (progress > 0.0F && progress < 1.0F) {
                     totalTicks += Math.ceil(1.0 / progress);
                 }
@@ -81,6 +103,57 @@ public final class HammerMining {
             return totalTicks > 0.0 ? (float) (1.0 / totalTicks) : originalProgress;
         } finally {
             CALCULATING_SPEED.set(false);
+        }
+    }
+
+    public static List<HammerTarget> targetsForBreak(Player player, BlockPos center) {
+        MiningSession session = sessionsFor(player).get(player.getUUID());
+        return isAreaMining(player)
+                        && session != null
+                        && session.center().equals(center)
+                        && hasOriginalCenter(player, session)
+                ? session.targets()
+                : List.of();
+    }
+
+    private static boolean hasOriginalCenter(Player player, MiningSession session) {
+        for (HammerTarget target : session.targets()) {
+            if (target.pos().equals(session.center())) {
+                return canBreakTarget(player, target);
+            }
+        }
+        return false;
+    }
+
+    public static boolean canBreakTarget(Player player, HammerTarget target) {
+        Level level = player.level();
+        if (!target.isValid() || !level.isLoaded(target.pos())) {
+            return false;
+        }
+        BlockState current = level.getBlockState(target.pos());
+        if (current != target.state()) {
+            target.invalidate();
+            return false;
+        }
+        return level.getWorldBorder().isWithinBounds(target.pos())
+                && (!(level instanceof ServerLevel serverLevel) || serverLevel.mayInteract(player, target.pos()))
+                && isValidTarget(player, level, target.pos(), current);
+    }
+
+    public static void onBlockChanged(Level level, BlockPos pos) {
+        Map<UUID, MiningSession> sessions = level.isClientSide ? CLIENT_MINING_SESSIONS : SERVER_MINING_SESSIONS;
+        if (sessions.isEmpty()) {
+            return;
+        }
+        for (Player player : level.players()) {
+            MiningSession session = sessions.get(player.getUUID());
+            if (session != null) {
+                for (HammerTarget target : session.targets()) {
+                    if (target.pos().equals(pos)) {
+                        target.invalidate();
+                    }
+                }
+            }
         }
     }
 
@@ -104,5 +177,5 @@ public final class HammerMining {
         return player.level().isClientSide ? CLIENT_MINING_SESSIONS : SERVER_MINING_SESSIONS;
     }
 
-    private record MiningSession(Direction face, boolean areaMining) {}
+    private record MiningSession(BlockPos center, boolean areaMining, List<HammerTarget> targets) {}
 }

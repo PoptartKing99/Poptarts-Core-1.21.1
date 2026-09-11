@@ -9,19 +9,24 @@ import dev.poptartking.poptartcore.crucible.melting.MeltingRecipe;
 import dev.poptartking.poptartcore.crucible.melting.MeltingRecipeInput;
 import dev.poptartking.poptartcore.crucible.menu.CrucibleMenu;
 import dev.poptartking.poptartcore.registry.PoptartCoreBlockEntities;
+import dev.poptartking.poptartcore.registry.PoptartCoreItems;
 import dev.poptartking.poptartcore.registry.PoptartCoreRecipes;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
@@ -36,7 +41,7 @@ import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 
-public class CrucibleBlockEntity extends BaseContainerBlockEntity {
+public class CrucibleBlockEntity extends BaseContainerBlockEntity implements WorldlyContainer {
 
     public static final int INPUT_SLOT_1 = 0;
     public static final int INPUT_SLOT_2 = 1;
@@ -60,9 +65,12 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
     private int burnDuration;
     private int burnSpeed = 1;
     private int cookTime;
+    private int cookingBatches;
     private int cookTimeTotal = 200;
     private int castingProgress;
     private int castingTimeTotal = CASTING_TIME;
+    private ResourceLocation cookingRecipeId;
+    private ResourceLocation castingRecipeId;
 
     protected final ContainerData dataAccess = new ContainerData() {
 
@@ -126,17 +134,25 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
     public static void serverTick(Level level, BlockPos pos, BlockState state, CrucibleBlockEntity blockEntity) {
         boolean changed = false;
 
-        AlloyingRecipe alloyingRecipe =
-                blockEntity.getAlloyingRecipe(level).map(RecipeHolder::value).orElse(null);
-        AlloyPlan alloyPlan = alloyingRecipe == null ? null : blockEntity.planAlloying(level, alloyingRecipe);
+        RecipeHolder<AlloyingRecipe> alloyingHolder =
+                blockEntity.getAlloyingRecipe(level).orElse(null);
+        AlloyingRecipe alloyingRecipe = alloyingHolder == null ? null : alloyingHolder.value();
+        int alloyBatchLimit = alloyingHolder == null ? 0 : blockEntity.activeBatches(alloyingHolder.id());
+        AlloyPlan alloyPlan =
+                alloyingRecipe == null ? null : blockEntity.planAlloying(level, alloyingRecipe, alloyBatchLimit);
 
         MeltingRecipe meltingRecipe = null;
+        RecipeHolder<MeltingRecipe> meltingHolder = null;
         int meltingBatches = 0;
 
         if (alloyPlan == null) {
-            meltingRecipe =
-                    blockEntity.getMeltingRecipe(level).map(RecipeHolder::value).orElse(null);
+            meltingHolder = blockEntity.getMeltingRecipe(level).orElse(null);
+            meltingRecipe = meltingHolder == null ? null : meltingHolder.value();
             meltingBatches = meltingRecipe == null ? 0 : blockEntity.meltBatches(meltingRecipe);
+            int activeBatches = meltingHolder == null ? 0 : blockEntity.activeBatches(meltingHolder.id());
+            if (activeBatches > 0) {
+                meltingBatches = meltingBatches >= activeBatches ? activeBatches : 0;
+            }
         }
 
         boolean canProcess = alloyPlan != null || meltingBatches > 0;
@@ -165,15 +181,18 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
         }
 
         if (blockEntity.isBurning() && canProcess) {
+            ResourceLocation recipeId = alloyPlan != null ? alloyingHolder.id() : meltingHolder.id();
             int cookTimeTotal = blockEntity.adjustCookTime(
                     alloyPlan != null
                             ? alloyingRecipe.getCookingTime() * alloyPlan.batches()
                             : meltingRecipe.getCookingTime() * meltingBatches);
 
-            if (blockEntity.cookTime > 0 && blockEntity.cookTimeTotal != cookTimeTotal) {
+            if (!Objects.equals(blockEntity.cookingRecipeId, recipeId) || blockEntity.cookTimeTotal != cookTimeTotal) {
                 blockEntity.cookTime = 0;
             }
 
+            blockEntity.cookingRecipeId = recipeId;
+            blockEntity.cookingBatches = alloyPlan != null ? alloyPlan.batches() : meltingBatches;
             blockEntity.cookTimeTotal = cookTimeTotal;
             blockEntity.cookTime += blockEntity.burnSpeed;
 
@@ -182,7 +201,8 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
 
                 boolean completed = alloyPlan != null
                         ? blockEntity.performAlloying(alloyingRecipe, alloyPlan)
-                        : blockEntity.performMelting(meltingRecipe);
+                        : blockEntity.performMelting(meltingRecipe, meltingBatches);
+                blockEntity.cookingBatches = 0;
 
                 if (completed) {
                     changed = true;
@@ -192,15 +212,21 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
             changed = true;
         } else if (blockEntity.cookTime > 0) {
             blockEntity.cookTime = 0;
+            blockEntity.cookingBatches = 0;
             changed = true;
         }
 
-        CastingRecipe castingRecipe =
-                blockEntity.getCastingRecipe(level).map(RecipeHolder::value).orElse(null);
+        RecipeHolder<CastingRecipe> castingHolder =
+                blockEntity.getCastingRecipe(level).orElse(null);
+        CastingRecipe castingRecipe = castingHolder == null ? null : castingHolder.value();
 
         boolean canCast = castingRecipe != null && blockEntity.canCast(level, castingRecipe);
 
         if (canCast) {
+            if (!Objects.equals(blockEntity.castingRecipeId, castingHolder.id())) {
+                blockEntity.castingProgress = 0;
+            }
+            blockEntity.castingRecipeId = castingHolder.id();
             blockEntity.castingTimeTotal = CASTING_TIME;
             blockEntity.castingProgress++;
 
@@ -349,10 +375,8 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
         return availableBatches;
     }
 
-    private boolean performMelting(MeltingRecipe recipe) {
-        int batches = meltBatches(recipe);
-
-        if (batches <= 0) {
+    private boolean performMelting(MeltingRecipe recipe, int batches) {
+        if (batches <= 0 || meltBatches(recipe) < batches) {
             return false;
         }
 
@@ -375,7 +399,12 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
         return true;
     }
 
-    private AlloyPlan planAlloying(Level level, AlloyingRecipe recipe) {
+    // A running cycle keeps its batch size when automation adds items or frees output space.
+    private int activeBatches(ResourceLocation recipeId) {
+        return cookTime > 0 && Objects.equals(cookingRecipeId, recipeId) ? cookingBatches : 0;
+    }
+
+    private AlloyPlan planAlloying(Level level, AlloyingRecipe recipe, int requiredBatches) {
         FluidStack tankFluid = tank.getFluid();
         int availableBatches = recipe.batchCount(getAlloyingInput(), level);
 
@@ -384,6 +413,10 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
         }
 
         int batches = limitAlloyingBatches(recipe, availableBatches);
+        if (requiredBatches > 0) {
+            if (batches < requiredBatches) return null;
+            batches = requiredBatches;
+        }
 
         ItemStack itemResult = recipe.itemResult();
         if (!itemResult.isEmpty()) {
@@ -404,6 +437,7 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
             }
 
             batches = Math.min(batches, maxBatchesByItem);
+            if (batches < requiredBatches) return null;
         }
 
         int[] meltAmountPerSlot = new int[inputCount];
@@ -422,7 +456,7 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
             }
         }
 
-        while (batches > 0) {
+        while (batches >= Math.max(1, requiredBatches)) {
             int[] itemsToConsume = new int[inputCount];
             int tankToDrain =
                     gatherIngredients(recipe, batches, meltFluidPerSlot, meltAmountPerSlot, tankFluid, itemsToConsume);
@@ -625,6 +659,63 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
     }
 
     @Override
+    public int[] getSlotsForFace(Direction side) {
+        if (side == Direction.UP) {
+            return new int[] {INPUT_SLOT_1, INPUT_SLOT_2, INPUT_SLOT_3};
+        }
+        if (side == Direction.DOWN) {
+            return new int[] {resultSlot};
+        }
+        Direction front = getBlockState().getValue(CrucibleBlock.FACING);
+        // Left and right are from the player's view while facing the front.
+        if (side == front.getClockWise()) {
+            return new int[] {fuelSlot};
+        }
+        if (side == front.getCounterClockWise()) {
+            return new int[] {containerSlot};
+        }
+        return new int[0];
+    }
+
+    @Override
+    public boolean canPlaceItem(int slot, ItemStack stack) {
+        if (stack.isEmpty()) {
+            return false;
+        }
+        if (slot == fuelSlot) {
+            return getBurnDuration(stack) > 0;
+        }
+        if (slot == containerSlot) {
+            return PoptartCoreItems.isMould(stack);
+        }
+        if (slot < 0 || slot >= inputCount || level == null) {
+            return false;
+        }
+        MeltingRecipeInput input = new MeltingRecipeInput(List.of(stack.copyWithCount(1)), isBlastFurnace());
+        return findMelting(input, level).isPresent()
+                || level.getRecipeManager().getAllRecipesFor(PoptartCoreRecipes.CRUCIBLE_ALLOYING_TYPE.get()).stream()
+                        .anyMatch(recipe -> recipe.value().usesAsItem(stack));
+    }
+
+    @Override
+    public boolean canPlaceItemThroughFace(int slot, ItemStack stack, Direction side) {
+        if (side == Direction.DOWN) {
+            return false;
+        }
+        for (int exposed : getSlotsForFace(side)) {
+            if (slot == exposed) {
+                return canPlaceItem(slot, stack);
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean canTakeItemThroughFace(int slot, ItemStack stack, Direction side) {
+        return side == Direction.DOWN && slot == resultSlot;
+    }
+
+    @Override
     protected Component getDefaultName() {
         return Component.translatable("container.poptartcore.crucible");
     }
@@ -654,9 +745,16 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
         tag.putInt("BurnDuration", burnDuration);
         tag.putInt("BurnSpeed", burnSpeed);
         tag.putInt("CookTime", cookTime);
+        tag.putInt("CookingBatches", cookingBatches);
         tag.putInt("CookTimeTotal", cookTimeTotal);
         tag.putInt("CastingProgress", castingProgress);
         tag.putInt("CastingTimeTotal", castingTimeTotal);
+        if (cookingRecipeId != null) {
+            tag.putString("CookingRecipe", cookingRecipeId.toString());
+        }
+        if (castingRecipeId != null) {
+            tag.putString("CastingRecipe", castingRecipeId.toString());
+        }
 
         FluidStack fluid = tank.getFluid();
 
@@ -677,12 +775,16 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity {
         burnDuration = tag.getInt("BurnDuration");
         burnSpeed = Math.max(1, tag.getInt("BurnSpeed"));
         cookTime = tag.getInt("CookTime");
+        cookingBatches = Math.max(0, tag.getInt("CookingBatches"));
 
         if (tag.contains("CookTimeTotal")) {
             cookTimeTotal = tag.getInt("CookTimeTotal");
         }
 
         castingProgress = tag.getInt("CastingProgress");
+        // Older saves have no recipe identity. Their partial progress safely restarts.
+        cookingRecipeId = ResourceLocation.tryParse(tag.getString("CookingRecipe"));
+        castingRecipeId = ResourceLocation.tryParse(tag.getString("CastingRecipe"));
 
         if (tag.contains("CastingTimeTotal")) {
             castingTimeTotal = tag.getInt("CastingTimeTotal");
