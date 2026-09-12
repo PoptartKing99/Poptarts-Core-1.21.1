@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [" R ", "RCR", " R "],
+  "key": {
+    "C": { "item": "minecraft:copper_ingot" },
+    "R": { "item": "minecraft:redstone" }
+  },
+  "result": { "id": "poptartcore:redstone_circuit", "count": 1 }
+}

@@ -1,0 +1,6 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [{ "item": "poptartcore:bronze_block" }],
+  "result": { "id": "poptartcore:bronze_ingot", "count": 9 }
+}

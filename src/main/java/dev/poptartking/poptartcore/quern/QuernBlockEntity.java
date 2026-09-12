@@ -24,14 +24,13 @@ public class QuernBlockEntity extends BlockEntity implements Container {
     public static final int INPUT_SLOT = 0;
     public static final int OUTPUT_SLOT = 1;
     private static final int CONTAINER_SIZE = 2;
-    private static final int ROTATION_TICKS = 16;
-    private static final float DEGREES_PER_TICK = 360.0F / ROTATION_TICKS;
+    private static final int TICKS_PER_RECIPE_CRANK = 16;
 
     private NonNullList<ItemStack> items = NonNullList.withSize(CONTAINER_SIZE, ItemStack.EMPTY);
-    private int crankProgress;
+    private int processingTicksRemaining;
+    private int processingDuration;
     private int crankSequence;
     private int powderColor = GrindingRecipe.DEFAULT_POWDER_COLOR;
-    private long lastCrankGameTime = Long.MIN_VALUE;
     private final RecipeManager.CachedCheck<GrindingRecipeInput, GrindingRecipe> recipeCheck =
             RecipeManager.createCheck(PoptartCoreRecipes.GRINDING_TYPE.get());
 
@@ -42,8 +41,19 @@ public class QuernBlockEntity extends BlockEntity implements Container {
         super(PoptartCoreBlockEntities.QUERN.get(), pos, state);
     }
 
-    public static void clientTick(Level level, BlockPos pos, BlockState state, QuernBlockEntity quern) {
-        quern.rotation.tick(DEGREES_PER_TICK);
+    public static void tick(Level level, BlockPos pos, BlockState state, QuernBlockEntity quern) {
+        if (level.isClientSide) {
+            quern.rotation.tick();
+            return;
+        }
+        if (quern.processingTicksRemaining <= 0) {
+            return;
+        }
+        quern.processingTicksRemaining--;
+        quern.markProcessingChanged();
+        if (quern.processingTicksRemaining == 0) {
+            quern.finishProcessing();
+        }
     }
 
     public float rotation(float partialTick) {
@@ -83,7 +93,7 @@ public class QuernBlockEntity extends BlockEntity implements Container {
         int room = (input.isEmpty() ? heldStack.getMaxStackSize() : input.getMaxStackSize() - input.getCount());
         int amount = Math.min(room, heldStack.getCount());
         if (input.isEmpty()) {
-            crankProgress = 0;
+            stopProcessing();
             items.set(INPUT_SLOT, heldStack.copyWithCount(amount));
         } else {
             input.grow(amount);
@@ -95,7 +105,7 @@ public class QuernBlockEntity extends BlockEntity implements Container {
     }
 
     public boolean canCrank() {
-        if (level == null) {
+        if (level == null || processingTicksRemaining > 0) {
             return false;
         }
         Optional<RecipeHolder<GrindingRecipe>> recipe = findRecipe(getItem(INPUT_SLOT));
@@ -106,23 +116,35 @@ public class QuernBlockEntity extends BlockEntity implements Container {
         if (level == null || level.isClientSide) {
             return false;
         }
-        long gameTime = level.getGameTime();
-        if (lastCrankGameTime != Long.MIN_VALUE && gameTime - lastCrankGameTime < ROTATION_TICKS) {
-            return false;
-        }
         Optional<RecipeHolder<GrindingRecipe>> match = findRecipe(getItem(INPUT_SLOT));
         if (match.isEmpty() || !canFit(match.get().value().result())) {
             return false;
         }
         GrindingRecipe recipe = match.get().value();
-        lastCrankGameTime = gameTime;
+        processingDuration = recipe.cranks() * TICKS_PER_RECIPE_CRANK;
+        processingTicksRemaining = processingDuration;
         crankSequence++;
-        crankProgress++;
-        if (crankProgress >= recipe.cranks()) {
-            complete(recipe);
-        }
         setChanged();
         return true;
+    }
+
+    private void finishProcessing() {
+        Optional<RecipeHolder<GrindingRecipe>> match = findRecipe(getItem(INPUT_SLOT));
+        if (match.isPresent() && canFit(match.get().value().result())) {
+            complete(match.get().value());
+        } else {
+            processingDuration = 0;
+        }
+        setChanged();
+    }
+
+    private void markProcessingChanged() {
+        super.setChanged();
+    }
+
+    private void stopProcessing() {
+        processingTicksRemaining = 0;
+        processingDuration = 0;
     }
 
     private void complete(GrindingRecipe recipe) {
@@ -135,7 +157,7 @@ public class QuernBlockEntity extends BlockEntity implements Container {
         }
         powderColor = recipe.powderColor();
         getItem(INPUT_SLOT).shrink(1);
-        crankProgress = 0;
+        processingDuration = 0;
     }
 
     private boolean canFit(ItemStack result) {
@@ -186,7 +208,8 @@ public class QuernBlockEntity extends BlockEntity implements Container {
     @Override
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
-        tag.putInt("CrankProgress", crankProgress);
+        tag.putInt("ProcessingTicksRemaining", processingTicksRemaining);
+        tag.putInt("ProcessingDuration", processingDuration);
         tag.putInt("CrankSequence", crankSequence);
         tag.putInt("PowderColor", powderColor);
         ContainerHelper.saveAllItems(tag, items, registries);
@@ -195,13 +218,15 @@ public class QuernBlockEntity extends BlockEntity implements Container {
     @Override
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
-        crankProgress = tag.getInt("CrankProgress");
+        processingTicksRemaining = tag.getInt("ProcessingTicksRemaining");
+        processingDuration = tag.getInt("ProcessingDuration");
         powderColor = tag.contains("PowderColor") ? tag.getInt("PowderColor") : GrindingRecipe.DEFAULT_POWDER_COLOR;
         int loadedSequence = tag.getInt("CrankSequence");
-        if (level != null && level.isClientSide && observedCrankSequence >= 0) {
-            int newCranks = Math.max(0, loadedSequence - observedCrankSequence);
-            if (newCranks > 0) {
-                rotation.crank();
+        if (level != null && level.isClientSide && processingTicksRemaining > 0) {
+            if (observedCrankSequence >= 0 && loadedSequence > observedCrankSequence) {
+                rotation.start(processingDuration);
+            } else if (observedCrankSequence < 0) {
+                rotation.resume(processingTicksRemaining, processingDuration);
             }
         }
         observedCrankSequence = loadedSequence;
@@ -230,7 +255,7 @@ public class QuernBlockEntity extends BlockEntity implements Container {
         ItemStack removed = ContainerHelper.removeItem(items, slot, amount);
         if (!removed.isEmpty()) {
             if (slot == INPUT_SLOT && getItem(INPUT_SLOT).isEmpty()) {
-                crankProgress = 0;
+                stopProcessing();
             }
             setChanged();
         }
@@ -240,7 +265,7 @@ public class QuernBlockEntity extends BlockEntity implements Container {
     @Override
     public ItemStack removeItemNoUpdate(int slot) {
         if (slot == INPUT_SLOT) {
-            crankProgress = 0;
+            stopProcessing();
         }
         return ContainerHelper.takeItem(items, slot);
     }
@@ -248,7 +273,7 @@ public class QuernBlockEntity extends BlockEntity implements Container {
     @Override
     public void setItem(int slot, ItemStack stack) {
         if (slot == INPUT_SLOT && (stack.isEmpty() || !ItemStack.isSameItemSameComponents(getItem(slot), stack))) {
-            crankProgress = 0;
+            stopProcessing();
         }
         stack.limitSize(getMaxStackSize(stack));
         items.set(slot, stack);
@@ -273,7 +298,7 @@ public class QuernBlockEntity extends BlockEntity implements Container {
     @Override
     public void clearContent() {
         items.clear();
-        crankProgress = 0;
+        stopProcessing();
         setChanged();
     }
 }

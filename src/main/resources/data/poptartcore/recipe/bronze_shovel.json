@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["B", "S", "S"],
+  "key": {
+    "B": { "item": "poptartcore:bronze_ingot" },
+    "S": { "item": "minecraft:stick" }
+  },
+  "result": { "id": "poptartcore:bronze_shovel", "count": 1 }
+}

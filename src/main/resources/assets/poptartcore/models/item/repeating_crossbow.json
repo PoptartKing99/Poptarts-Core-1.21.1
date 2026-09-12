@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:item/crossbow",
+  "textures": { "layer0": "poptartcore:item/crossbows/repeating_crossbow_standby" },
+  "overrides": [
+    { "predicate": { "poptartcore:pulling": 1 }, "model": "poptartcore:item/crossbows/repeating_crossbow_pulling_0" },
+    { "predicate": { "poptartcore:pulling": 1, "poptartcore:pull": 0.58 }, "model": "poptartcore:item/crossbows/repeating_crossbow_pulling_1" },
+    { "predicate": { "poptartcore:pulling": 1, "poptartcore:pull": 1.0 }, "model": "poptartcore:item/crossbows/repeating_crossbow_pulling_2" },
+    { "predicate": { "poptartcore:charged": 1 }, "model": "poptartcore:item/crossbows/repeating_crossbow_arrow" },
+    { "predicate": { "poptartcore:charged": 1, "poptartcore:firework": 1 }, "model": "minecraft:item/crossbow_firework" }
+  ]
+}

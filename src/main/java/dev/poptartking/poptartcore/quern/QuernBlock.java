@@ -100,10 +100,7 @@ public class QuernBlock extends BaseEntityBlock {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
             Level level, BlockState state, BlockEntityType<T> blockEntityType) {
-        return level.isClientSide
-                ? createTickerHelper(
-                        blockEntityType, PoptartCoreBlockEntities.QUERN.get(), QuernBlockEntity::clientTick)
-                : null;
+        return createTickerHelper(blockEntityType, PoptartCoreBlockEntities.QUERN.get(), QuernBlockEntity::tick);
     }
 
     @Override

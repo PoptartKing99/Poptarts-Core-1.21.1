@@ -1,16 +1,26 @@
 package dev.poptartking.poptartcore.registry;
 
 import dev.poptartking.poptartcore.PoptartCore;
+import dev.poptartking.poptartcore.crossbow.RepeatingCrossbowItem;
 import dev.poptartking.poptartcore.crucible.CrucibleBlockItem;
 import dev.poptartking.poptartcore.hammer.HammerItem;
+import dev.poptartking.poptartcore.tool.BonePickItem;
+import dev.poptartking.poptartcore.wax.WaxItem;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.FlintAndSteelItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.PickaxeItem;
+import net.minecraft.world.item.ShovelItem;
+import net.minecraft.world.item.SwordItem;
+import net.minecraft.world.item.component.ChargedProjectiles;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import vectorwing.farmersdelight.common.item.KnifeItem;
 
 public class PoptartCoreItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(PoptartCore.MOD_ID);
@@ -43,7 +53,64 @@ public class PoptartCoreItems {
     public static final DeferredItem<Item> STEEL_INGOT = registerItem("steel_ingot");
     public static final DeferredItem<Item> STEEL_NUGGET = registerItem("steel_nugget");
     public static final DeferredItem<Item> STEEL_PLATE = registerItem("steel_plate");
+    public static final DeferredItem<SwordItem> STEEL_SWORD = ITEMS.register(
+            "steel_sword",
+            () -> new SwordItem(
+                    PoptartCoreTiers.STEEL,
+                    new Item.Properties().attributes(SwordItem.createAttributes(PoptartCoreTiers.STEEL, 2, -2.4F))));
+    public static final DeferredItem<PickaxeItem> STEEL_PICKAXE = ITEMS.register(
+            "steel_pickaxe",
+            () -> new PickaxeItem(
+                    PoptartCoreTiers.STEEL,
+                    new Item.Properties()
+                            .attributes(PickaxeItem.createAttributes(PoptartCoreTiers.STEEL, 0.0F, -2.8F))));
+    public static final DeferredItem<AxeItem> STEEL_AXE = ITEMS.register(
+            "steel_axe",
+            () -> new AxeItem(
+                    PoptartCoreTiers.STEEL,
+                    new Item.Properties().attributes(AxeItem.createAttributes(PoptartCoreTiers.STEEL, 5.0F, -3.1F))));
+    public static final DeferredItem<ShovelItem> STEEL_SHOVEL = ITEMS.register(
+            "steel_shovel",
+            () -> new ShovelItem(
+                    PoptartCoreTiers.STEEL,
+                    new Item.Properties()
+                            .attributes(ShovelItem.createAttributes(PoptartCoreTiers.STEEL, 0.5F, -3.0F))));
+    public static final DeferredItem<KnifeItem> STEEL_KNIFE = ITEMS.register(
+            "steel_knife",
+            () -> new KnifeItem(
+                    PoptartCoreTiers.STEEL,
+                    new Item.Properties()
+                            .durability(1250)
+                            .attributes(KnifeItem.createAttributes(PoptartCoreTiers.STEEL, 1.0F, -2.0F))));
     public static final DeferredItem<Item> COAL_COKE = registerItem("coal_coke");
+    public static final DeferredItem<WaxItem> WAX = ITEMS.register("wax", () -> new WaxItem(new Item.Properties()));
+    public static final DeferredItem<Item> REDSTONE_CIRCUIT = registerItem("redstone_circuit");
+    public static final DeferredItem<BonePickItem> BONE_PICK = ITEMS.register(
+            "bone_pick",
+            () -> new BonePickItem(
+                    PoptartCoreTiers.BONE,
+                    new Item.Properties()
+                            .attributes(PickaxeItem.createAttributes(PoptartCoreTiers.BONE, 2.0F, -2.8F))));
+    public static final DeferredItem<AxeItem> FLINT_AXE = ITEMS.register(
+            "flint_axe",
+            () -> new AxeItem(
+                    PoptartCoreTiers.FLINT,
+                    new Item.Properties()
+                            .attributes(PickaxeItem.createAttributes(PoptartCoreTiers.FLINT, 3.0F, -3.1F))));
+    public static final DeferredItem<ShovelItem> FLINT_SHOVEL = ITEMS.register(
+            "flint_shovel",
+            () -> new ShovelItem(
+                    PoptartCoreTiers.FLINT,
+                    new Item.Properties()
+                            .attributes(PickaxeItem.createAttributes(PoptartCoreTiers.FLINT, 0.5F, -3.0F))));
+    public static final DeferredItem<FlintAndSteelItem> FIRESTARTER =
+            ITEMS.register("firestarter", () -> new FlintAndSteelItem(new Item.Properties().durability(3)));
+    public static final DeferredItem<RepeatingCrossbowItem> REPEATING_CROSSBOW = ITEMS.register(
+            "repeating_crossbow",
+            () -> new RepeatingCrossbowItem(new Item.Properties()
+                    .stacksTo(1)
+                    .durability(300)
+                    .component(DataComponents.CHARGED_PROJECTILES, ChargedProjectiles.EMPTY)));
     public static final DeferredItem<HammerItem> HAMMER = ITEMS.register(
             "hammer",
             () -> new HammerItem(new Item.Properties()
@@ -54,6 +121,35 @@ public class PoptartCoreItems {
     public static final DeferredItem<Item> BRONZE_INGOT = registerItem("bronze_ingot");
     public static final DeferredItem<Item> BRONZE_NUGGET = registerItem("bronze_nugget");
     public static final DeferredItem<Item> BRONZE_PLATE = registerItem("bronze_plate");
+    public static final DeferredItem<SwordItem> BRONZE_SWORD = ITEMS.register(
+            "bronze_sword",
+            () -> new SwordItem(
+                    PoptartCoreTiers.BRONZE,
+                    new Item.Properties().attributes(SwordItem.createAttributes(PoptartCoreTiers.BRONZE, 2, -2.4F))));
+    public static final DeferredItem<PickaxeItem> BRONZE_PICKAXE = ITEMS.register(
+            "bronze_pickaxe",
+            () -> new PickaxeItem(
+                    PoptartCoreTiers.BRONZE,
+                    new Item.Properties()
+                            .attributes(PickaxeItem.createAttributes(PoptartCoreTiers.BRONZE, 0.0F, -2.8F))));
+    public static final DeferredItem<AxeItem> BRONZE_AXE = ITEMS.register(
+            "bronze_axe",
+            () -> new AxeItem(
+                    PoptartCoreTiers.BRONZE,
+                    new Item.Properties().attributes(AxeItem.createAttributes(PoptartCoreTiers.BRONZE, 5.0F, -3.1F))));
+    public static final DeferredItem<ShovelItem> BRONZE_SHOVEL = ITEMS.register(
+            "bronze_shovel",
+            () -> new ShovelItem(
+                    PoptartCoreTiers.BRONZE,
+                    new Item.Properties()
+                            .attributes(ShovelItem.createAttributes(PoptartCoreTiers.BRONZE, 0.5F, -3.0F))));
+    public static final DeferredItem<KnifeItem> BRONZE_KNIFE = ITEMS.register(
+            "bronze_knife",
+            () -> new KnifeItem(
+                    PoptartCoreTiers.BRONZE,
+                    new Item.Properties()
+                            .durability(275)
+                            .attributes(KnifeItem.createAttributes(PoptartCoreTiers.BRONZE, 1.0F, -2.0F))));
     public static final DeferredItem<Item> TIN_INGOT = registerItem("tin_ingot");
     public static final DeferredItem<Item> TIN_NUGGET = registerItem("tin_nugget");
     public static final DeferredItem<Item> RAW_TIN = registerItem("raw_tin");
@@ -94,6 +190,8 @@ public class PoptartCoreItems {
     public static final DeferredItem<BlockItem> BLOOMERY = registerBlockItem("bloomery", PoptartCoreBlocks.BLOOMERY);
     public static final DeferredItem<BlockItem> WORKBENCH = registerBlockItem("workbench", PoptartCoreBlocks.WORKBENCH);
     public static final DeferredItem<BlockItem> QUERN = registerBlockItem("quern", PoptartCoreBlocks.QUERN);
+    public static final DeferredItem<BlockItem> PORTABLE_ENGINE =
+            registerBlockItem("portable_engine", PoptartCoreBlocks.PORTABLE_ENGINE);
     public static final DeferredItem<dev.poptartking.poptartcore.millstone.MillstoneBlockItem> MILLSTONE =
             ITEMS.register(
                     "millstone",
@@ -122,6 +220,13 @@ public class PoptartCoreItems {
             registerBlockItem("deepslate_silver_ore", PoptartCoreBlocks.DEEPSLATE_SILVER_ORE);
     public static final DeferredItem<BlockItem> RAW_SILVER_BLOCK =
             registerBlockItem("raw_silver_block", PoptartCoreBlocks.RAW_SILVER_BLOCK);
+    public static final DeferredItem<BlockItem> WAX_BLOCK = registerBlockItem("wax_block", PoptartCoreBlocks.WAX_BLOCK);
+    public static final DeferredItem<BlockItem> COAL_COKE_BLOCK =
+            registerBlockItem("coal_coke_block", PoptartCoreBlocks.COAL_COKE_BLOCK);
+    public static final DeferredItem<BlockItem> BRONZE_BLOCK =
+            registerBlockItem("bronze_block", PoptartCoreBlocks.BRONZE_BLOCK);
+    public static final DeferredItem<BlockItem> STEEL_BLOCK =
+            registerBlockItem("steel_block", PoptartCoreBlocks.STEEL_BLOCK);
     public static final DeferredItem<BlockItem> CLINKER_BRICKS =
             registerBlockItem("clinker_bricks", PoptartCoreBlocks.CLINKER_BRICKS);
     public static final DeferredItem<BlockItem> CLINKER_BRICK_SLAB =

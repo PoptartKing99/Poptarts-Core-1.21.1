@@ -22,6 +22,7 @@ public class PoptartCoreTabs {
                         output.accept(PoptartCoreItems.RAW_HIDE_HELMET);
                         output.accept(PoptartCoreItems.RAW_HIDE_CHESTPLATE);
                         output.accept(PoptartCoreItems.RAW_HIDE_LEGGINGS);
+                        output.accept(PoptartCoreItems.REPEATING_CROSSBOW);
                         output.accept(PoptartCoreItems.STEEL_HELMET);
                         output.accept(PoptartCoreItems.STEEL_CHESTPLATE);
                         output.accept(PoptartCoreItems.STEEL_LEGGINGS);
@@ -32,9 +33,14 @@ public class PoptartCoreTabs {
                         output.accept(PoptartCoreItems.BLOOMERY);
                         output.accept(PoptartCoreItems.WORKBENCH);
                         output.accept(PoptartCoreItems.QUERN);
+                        output.accept(PoptartCoreItems.PORTABLE_ENGINE);
                         output.accept(PoptartCoreItems.MILLSTONE);
                         output.accept(PoptartCoreItems.IRON_BLOOM);
                         output.accept(PoptartCoreItems.HAMMER);
+                        output.accept(PoptartCoreItems.BONE_PICK);
+                        output.accept(PoptartCoreItems.FLINT_AXE);
+                        output.accept(PoptartCoreItems.FLINT_SHOVEL);
+                        output.accept(PoptartCoreItems.FIRESTARTER);
                         output.accept(PoptartCoreItems.CLINKER_BRICKS);
                         output.accept(PoptartCoreItems.CLINKER_BRICK_SLAB);
                         output.accept(PoptartCoreItems.CLINKER_BRICK_STAIRS);
@@ -78,11 +84,27 @@ public class PoptartCoreTabs {
                         output.accept(PoptartCoreItems.BRONZE_INGOT);
                         output.accept(PoptartCoreItems.BRONZE_NUGGET);
                         output.accept(PoptartCoreItems.BRONZE_PLATE);
+                        output.accept(PoptartCoreItems.BRONZE_BLOCK);
+                        output.accept(PoptartCoreItems.BRONZE_SWORD);
+                        output.accept(PoptartCoreItems.BRONZE_PICKAXE);
+                        output.accept(PoptartCoreItems.BRONZE_AXE);
+                        output.accept(PoptartCoreItems.BRONZE_SHOVEL);
+                        output.accept(PoptartCoreItems.BRONZE_KNIFE);
 
                         output.accept(PoptartCoreItems.STEEL_INGOT);
                         output.accept(PoptartCoreItems.STEEL_NUGGET);
                         output.accept(PoptartCoreItems.STEEL_PLATE);
+                        output.accept(PoptartCoreItems.STEEL_BLOCK);
+                        output.accept(PoptartCoreItems.STEEL_SWORD);
+                        output.accept(PoptartCoreItems.STEEL_PICKAXE);
+                        output.accept(PoptartCoreItems.STEEL_AXE);
+                        output.accept(PoptartCoreItems.STEEL_SHOVEL);
+                        output.accept(PoptartCoreItems.STEEL_KNIFE);
                         output.accept(PoptartCoreItems.COAL_COKE);
+                        output.accept(PoptartCoreItems.COAL_COKE_BLOCK);
+                        output.accept(PoptartCoreItems.WAX);
+                        output.accept(PoptartCoreItems.WAX_BLOCK);
+                        output.accept(PoptartCoreItems.REDSTONE_CIRCUIT);
                     })
                     .build());
 

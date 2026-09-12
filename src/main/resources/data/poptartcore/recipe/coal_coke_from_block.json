@@ -1,0 +1,6 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [{ "item": "poptartcore:coal_coke_block" }],
+  "result": { "id": "poptartcore:coal_coke", "count": 9 }
+}

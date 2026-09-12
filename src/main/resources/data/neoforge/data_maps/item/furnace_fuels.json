@@ -2,6 +2,9 @@
   "values": {
     "poptartcore:coal_coke": {
       "burn_time": 3200
+    },
+    "poptartcore:coal_coke_block": {
+      "burn_time": 28800
     }
   }
 }

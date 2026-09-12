@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": { "#": { "item": "poptartcore:coal_coke" } },
+  "pattern": ["###", "###", "###"],
+  "result": { "id": "poptartcore:coal_coke_block" }
+}

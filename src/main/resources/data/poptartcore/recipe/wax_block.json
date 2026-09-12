@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": { "#": { "item": "poptartcore:wax" } },
+  "pattern": ["###", "###", "###"],
+  "result": { "id": "poptartcore:wax_block" }
+}

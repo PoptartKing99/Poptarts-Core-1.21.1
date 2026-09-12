@@ -17,8 +17,11 @@ public final class PoptartCoreTags {
             TagKey.create(Registries.ITEM, PoptartCore.location("blast_furnace_allowed"));
     public static final TagKey<Item> BLAST_FURNACE_EFFICIENT =
             TagKey.create(Registries.ITEM, PoptartCore.location("blast_furnace_efficient"));
+    public static final TagKey<Item> PORTABLE_ENGINE_ALLOWED_FUEL =
+            TagKey.create(Registries.ITEM, PoptartCore.location("portable_engine_allowed_fuel"));
     public static final TagKey<Block> HAMMER_NO_SPREAD =
             TagKey.create(Registries.BLOCK, PoptartCore.location("hammer_no_spread"));
+    public static final TagKey<Block> UNWAXABLE = TagKey.create(Registries.BLOCK, PoptartCore.location("unwaxable"));
 
     private PoptartCoreTags() {}
 

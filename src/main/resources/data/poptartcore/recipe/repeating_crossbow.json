@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    { "item": "minecraft:crossbow" },
+    { "item": "poptartcore:redstone_circuit" }
+  ],
+  "result": { "id": "poptartcore:repeating_crossbow", "count": 1 }
+}

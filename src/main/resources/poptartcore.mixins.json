@@ -7,9 +7,16 @@
     "hammer.GameModeDestroyAccessor",
     "hammer.HammerDestroyProgressMixin",
     "hammer.HammerTargetChangeMixin",
-    "hammer.ServerBlockBreakingMixin"
+    "hammer.ServerBlockBreakingMixin",
+    "integration.simulated.PortableEngineBlockMixin",
+    "integration.simulated.PortableEngineDyeingMixin",
+    "integration.simulated.PortableEngineFuelInventoryMixin",
+    "integration.simulated.PortableEngineFuelMixin",
+    "wax.HoneycombWaxingMixin",
+    "wax.IWaxableMoonlightMixin"
   ],
   "client": [
+    "integration.simulated.PortableEngineDyeingJeiMixin",
     "hammer.ClientHammerFaceMixin",
     "blastfurnace.BlastFurnaceBreakRenderMixin"
   ],

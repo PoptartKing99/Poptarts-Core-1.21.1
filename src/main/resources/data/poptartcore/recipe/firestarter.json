@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "tools",
+  "ingredients": [
+    { "item": "minecraft:flint" },
+    { "item": "minecraft:stick" }
+  ],
+  "result": { "id": "poptartcore:firestarter", "count": 1 }
+}

@@ -2,11 +2,9 @@ package dev.poptartking.poptartcore.quern.client;
 
 import dev.poptartking.poptartcore.quern.QuernBlockEntity;
 import dev.poptartking.poptartcore.registry.PoptartCoreSounds;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.AbstractTickableSoundInstance;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
@@ -28,16 +26,8 @@ public class QuernSoundInstance extends AbstractTickableSoundInstance {
 
     @Override
     public void tick() {
-        if (quern.isRemoved() || quern.getLevel() == null || (!quern.isRotating() && !isHoldingUseOnQuern())) {
+        if (quern.isRemoved() || quern.getLevel() == null || !quern.isRotating()) {
             stop();
         }
-    }
-
-    private boolean isHoldingUseOnQuern() {
-        Minecraft minecraft = Minecraft.getInstance();
-        return minecraft.options.keyUse.isDown()
-                && minecraft.hitResult instanceof BlockHitResult hit
-                && hit.getBlockPos().equals(quern.getBlockPos())
-                && quern.canCrank();
     }
 }

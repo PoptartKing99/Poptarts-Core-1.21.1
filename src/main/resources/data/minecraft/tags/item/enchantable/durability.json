@@ -1,6 +1,11 @@
 {
   "replace": false,
   "values": [
-    "poptartcore:hammer"
+    "poptartcore:hammer",
+    "poptartcore:bone_pick",
+    "poptartcore:flint_axe",
+    "poptartcore:flint_shovel",
+    "poptartcore:firestarter",
+    "poptartcore:repeating_crossbow"
   ]
 }

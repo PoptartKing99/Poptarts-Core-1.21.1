@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": { "#": { "item": "poptartcore:bronze_ingot" } },
+  "pattern": ["###", "###", "###"],
+  "result": { "id": "poptartcore:bronze_block" }
+}

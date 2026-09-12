@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    { "id": "caverns_and_chasms:toolbox", "required": false },
+    { "id": "caverns_and_chasms:exposed_toolbox", "required": false },
+    { "id": "caverns_and_chasms:weathered_toolbox", "required": false },
+    { "id": "caverns_and_chasms:oxidized_toolbox", "required": false }
+  ]
+}

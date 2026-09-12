@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": ["ISI", "IBI", "PTP"],
+  "key": {
+    "I": { "item": "minecraft:iron_ingot" },
+    "S": { "item": "create:iron_sheet" },
+    "B": { "item": "aeronautics:adjustable_burner" },
+    "P": { "tag": "minecraft:planks" },
+    "T": { "item": "poptartcore:steel_ingot" }
+  },
+  "result": { "id": "poptartcore:portable_engine", "count": 1 }
+}

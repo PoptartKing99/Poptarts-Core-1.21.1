@@ -11,6 +11,7 @@ import dev.poptartking.poptartcore.millstone.MillstoneRotorBlock;
 import dev.poptartking.poptartcore.millstone.MillstoneStructuralBlock;
 import dev.poptartking.poptartcore.quern.QuernBlock;
 import dev.poptartking.poptartcore.workbench.WorkbenchBlock;
+import dev.simulated_team.simulated.content.blocks.portable_engine.PortableEngineBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SlabBlock;
@@ -69,6 +70,16 @@ public class PoptartCoreBlocks {
             "quern",
             () -> new QuernBlock(
                     BlockBehaviour.Properties.ofFullCopy(Blocks.STONECUTTER).noOcclusion()));
+    public static final DeferredBlock<PortableEngineBlock> PORTABLE_ENGINE = BLOCKS.register(
+            "portable_engine",
+            () -> new PortableEngineBlock(
+                    BlockBehaviour.Properties.of()
+                            .mapColor(MapColor.TERRACOTTA_WHITE)
+                            .requiresCorrectToolForDrops()
+                            .strength(3.0F, 6.0F)
+                            .sound(SoundType.COPPER)
+                            .noOcclusion(),
+                    null));
     public static final DeferredBlock<IronBloomBlock> IRON_BLOOM = BLOCKS.register(
             "iron_bloom",
             () -> new IronBloomBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.RAW_IRON_BLOCK)
@@ -136,6 +147,22 @@ public class PoptartCoreBlocks {
             "raw_silver_block",
             () -> new Block(
                     BlockBehaviour.Properties.ofFullCopy(Blocks.RAW_IRON_BLOCK).strength(5.0F, 6.0F)));
+
+    public static final DeferredBlock<Block> WAX_BLOCK = BLOCKS.register(
+            "wax_block",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.MUD).strength(0.7F, 0.3F)));
+    public static final DeferredBlock<Block> COAL_COKE_BLOCK = BLOCKS.register(
+            "coal_coke_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.COAL_BLOCK)));
+    public static final DeferredBlock<Block> BRONZE_BLOCK = BLOCKS.register(
+            "bronze_block",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)
+                    .sound(SoundType.METAL)
+                    .strength(3.0F, 6.0F)));
+    public static final DeferredBlock<Block> STEEL_BLOCK = BLOCKS.register(
+            "steel_block",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)
+                    .sound(SoundType.METAL)
+                    .strength(7.0F, 8.0F)));
 
     public static final DeferredBlock<Block> CLINKER_BRICKS =
             BLOCKS.register("clinker_bricks", () -> new Block(clinkerProperties()));

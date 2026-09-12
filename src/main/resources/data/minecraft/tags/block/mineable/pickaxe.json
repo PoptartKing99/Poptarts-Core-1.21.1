@@ -1,5 +1,6 @@
 {
   "values": [
+    "poptartcore:portable_engine",
     "poptartcore:millstone",
     "poptartcore:millstone_structural",
     "poptartcore:millstone_rotor",
@@ -30,6 +31,9 @@
     "poptartcore:silver_ore",
     "poptartcore:deepslate_silver_ore",
     "poptartcore:silver_block",
-    "poptartcore:raw_silver_block"
+    "poptartcore:raw_silver_block",
+    "poptartcore:coal_coke_block",
+    "poptartcore:bronze_block",
+    "poptartcore:steel_block"
   ]
 }

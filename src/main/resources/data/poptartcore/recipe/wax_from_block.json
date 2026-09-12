@@ -1,0 +1,6 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [{ "item": "poptartcore:wax_block" }],
+  "result": { "id": "poptartcore:wax", "count": 9 }
+}

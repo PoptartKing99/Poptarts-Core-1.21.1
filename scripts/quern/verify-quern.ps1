@@ -93,6 +93,22 @@ if ($recipe.powder_color -lt 0 -or $recipe.powder_color -gt 16777215) {
     throw "The Quern recipe powder_color must be an RGB color between 0 and 16777215"
 }
 
+$quernSource = Get-Content -Raw -LiteralPath (Join-Path $projectRoot "src\main\java\dev\poptartking\poptartcore\quern\QuernBlockEntity.java")
+$blockSource = Get-Content -Raw -LiteralPath (Join-Path $projectRoot "src\main\java\dev\poptartking\poptartcore\quern\QuernBlock.java")
+$rotationSource = Get-Content -Raw -LiteralPath (Join-Path $projectRoot "src\main\java\dev\poptartking\poptartcore\quern\QuernRotation.java")
+if ($quernSource -notmatch 'TICKS_PER_RECIPE_CRANK = 16' -or
+    $quernSource -notmatch 'processingDuration = recipe\.cranks\(\) \* TICKS_PER_RECIPE_CRANK' -or
+    $quernSource -notmatch 'processingTicksRemaining--' -or
+    $quernSource -notmatch 'finishProcessing\(\)') {
+    throw "The Quern must finish one recipe after one automatically timed interaction"
+}
+if ($blockSource -notmatch 'QuernBlockEntity::tick') {
+    throw "The Quern block entity must tick on both the client and server"
+}
+if ($rotationSource -notmatch '360\.0F / durationTicks') {
+    throw "The Quern must animate one full turn across the complete processing duration"
+}
+
 $redDyeRecipePath = Join-Path $projectRoot "src/main/resources/data/poptartcore/recipe/grinding/red_dye_from_poppy.json"
 $redDyeRecipe = Get-Content -LiteralPath $redDyeRecipePath -Raw | ConvertFrom-Json
 if ($redDyeRecipe.ingredient.item -ne "minecraft:poppy" -or $redDyeRecipe.result.id -ne "minecraft:red_dye") {
