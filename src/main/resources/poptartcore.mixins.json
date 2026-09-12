@@ -4,6 +4,9 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "armor.ArmorTextureMixin",
+    "bee.BeeFlightMixin",
+    "bee.BeehiveSkylightMixin",
+    "bee.TurtleEggBeeMixin",
     "hammer.GameModeDestroyAccessor",
     "hammer.HammerDestroyProgressMixin",
     "hammer.HammerTargetChangeMixin",
@@ -16,6 +19,7 @@
     "wax.IWaxableMoonlightMixin"
   ],
   "client": [
+    "bee.BeeFlipMixin",
     "integration.simulated.PortableEngineDyeingJeiMixin",
     "hammer.ClientHammerFaceMixin",
     "blastfurnace.BlastFurnaceBreakRenderMixin"
