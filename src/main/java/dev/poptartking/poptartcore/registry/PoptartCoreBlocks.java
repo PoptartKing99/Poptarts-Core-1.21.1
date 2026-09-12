@@ -78,6 +78,7 @@ public class PoptartCoreBlocks {
                             .requiresCorrectToolForDrops()
                             .strength(3.0F, 6.0F)
                             .sound(SoundType.COPPER)
+                            .lightLevel(state -> PortableEngineBlock.isLitState(state) ? 6 : 0)
                             .noOcclusion(),
                     null));
     public static final DeferredBlock<IronBloomBlock> IRON_BLOOM = BLOCKS.register(

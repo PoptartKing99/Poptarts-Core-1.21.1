@@ -19,7 +19,8 @@ function Require-Text([string]$relativePath, [string[]]$patterns) {
 }
 
 Require-Text 'src/main/java/dev/poptartking/poptartcore/registry/PoptartCoreBlocks.java' @(
-    'DeferredBlock<PortableEngineBlock> PORTABLE_ENGINE', 'strength\(3\.0F, 6\.0F\)', 'SoundType\.COPPER'
+    'DeferredBlock<PortableEngineBlock> PORTABLE_ENGINE', 'strength\(3\.0F, 6\.0F\)', 'SoundType\.COPPER',
+    'PortableEngineBlock\.isLitState\(state\) \? 6 : 0'
 )
 Require-Text 'src/main/java/dev/poptartking/poptartcore/integration/simulated/PortableEngineSetup.java' @(
     'CAPACITIES\.register', '\(DoubleSupplier\) \(\) -> 64\.0', 'new GeneratedRpm\(32, false\)'
