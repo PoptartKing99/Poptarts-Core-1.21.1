@@ -5,8 +5,12 @@
   "mixins": [
     "armor.ArmorTextureMixin",
     "bee.BeeFlightMixin",
+    "bee.BeeStingMixin",
     "bee.BeehiveSkylightMixin",
+    "bee.BeehiveSmokedMixin",
+    "bee.SmokedBeeMixin",
     "bee.TurtleEggBeeMixin",
+    "effect.MobEffectInstanceAccessor",
     "hammer.GameModeDestroyAccessor",
     "hammer.HammerDestroyProgressMixin",
     "hammer.HammerTargetChangeMixin",
@@ -20,6 +24,9 @@
   ],
   "client": [
     "bee.BeeFlipMixin",
+    "bee.BeeSmokerArmPoseMixin",
+    "bee.BeeSmokerReequipMixin",
+    "armor.FirstPersonBeekeeperSleeveMixin",
     "integration.simulated.PortableEngineDyeingJeiMixin",
     "hammer.ClientHammerFaceMixin",
     "blastfurnace.BlastFurnaceBreakRenderMixin"

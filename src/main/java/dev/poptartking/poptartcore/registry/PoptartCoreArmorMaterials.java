@@ -24,6 +24,9 @@ public class PoptartCoreArmorMaterials {
     public static final Holder<ArmorMaterial> RAW_HIDE_ARMOR_MATERIAL = register(
             "raw_hide", protection(2, 4, 3, 2), 8, ARMOR_EQUIP_LEATHER, 0.0F, 0.0F, () -> Ingredient.of(LEATHER));
 
+    public static final Holder<ArmorMaterial> BEEKEEPER_ARMOR_MATERIAL = register(
+            "beekeeper", protection(1, 3, 2, 1), 15, ARMOR_EQUIP_LEATHER, 0.0F, 0.0F, () -> Ingredient.of(LEATHER));
+
     public static final Holder<ArmorMaterial> STEEL_ARMOR_MATERIAL = register(
             "steel",
             protection(3, 7, 6, 3),

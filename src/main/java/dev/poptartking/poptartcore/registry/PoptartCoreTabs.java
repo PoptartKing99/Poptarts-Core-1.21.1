@@ -23,6 +23,11 @@ public class PoptartCoreTabs {
                         output.accept(PoptartCoreItems.RAW_HIDE_CHESTPLATE);
                         output.accept(PoptartCoreItems.RAW_HIDE_LEGGINGS);
                         output.accept(PoptartCoreItems.REPEATING_CROSSBOW);
+                        output.accept(PoptartCoreItems.BEE_SMOKER);
+                        output.accept(PoptartCoreItems.BEEKEEPER_HELMET);
+                        output.accept(PoptartCoreItems.BEEKEEPER_CHESTPLATE);
+                        output.accept(PoptartCoreItems.BEEKEEPER_LEGGINGS);
+                        output.accept(PoptartCoreItems.BEEKEEPER_BOOTS);
                         output.accept(PoptartCoreItems.STEEL_HELMET);
                         output.accept(PoptartCoreItems.STEEL_CHESTPLATE);
                         output.accept(PoptartCoreItems.STEEL_LEGGINGS);

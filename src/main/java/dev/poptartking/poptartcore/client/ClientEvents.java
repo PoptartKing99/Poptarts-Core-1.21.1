@@ -2,6 +2,7 @@ package dev.poptartking.poptartcore.client;
 
 import dev.poptartking.poptartcore.PoptartCore;
 import dev.poptartking.poptartcore.armor.client.*;
+import dev.poptartking.poptartcore.beekeeping.client.BeeSmokerClientExtensions;
 import dev.poptartking.poptartcore.blastfurnace.client.BlastFurnaceScreen;
 import dev.poptartking.poptartcore.crucible.client.CrucibleScreen;
 import dev.poptartking.poptartcore.hammer.client.ClientMiningCleanup;
@@ -49,6 +50,15 @@ public class ClientEvents {
 
     @SubscribeEvent
     public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
+        event.registerItem(new BeeSmokerClientExtensions(), PoptartCoreItems.BEE_SMOKER.get());
+
+        event.registerItem(
+                new ArmorClientItemExtensions(() -> PoptartCoreModelLayers.BEEKEEPER_ARMOR_MODEL),
+                PoptartCoreItems.BEEKEEPER_HELMET.get(),
+                PoptartCoreItems.BEEKEEPER_CHESTPLATE.get(),
+                PoptartCoreItems.BEEKEEPER_LEGGINGS.get(),
+                PoptartCoreItems.BEEKEEPER_BOOTS.get());
+
         event.registerItem(
                 new ArmorClientItemExtensions(() -> PoptartCoreModelLayers.MINING_HELMET_MODEL),
                 PoptartCoreItems.MINING_HELMET.get());
@@ -92,6 +102,8 @@ public class ClientEvents {
         event.registerLayerDefinition(PoptartCoreModelLayers.STEEL_CHESTPLATE_LAYER, MetalArmorModels::chestplate);
         event.registerLayerDefinition(PoptartCoreModelLayers.STEEL_LEGGINGS_LAYER, MetalArmorModels::leggings);
         event.registerLayerDefinition(PoptartCoreModelLayers.STEEL_BOOTS_LAYER, MetalArmorModels::boots);
+        event.registerLayerDefinition(
+                PoptartCoreModelLayers.BEEKEEPER_ARMOR_LAYER, BeekeeperArmorModel::createBodyLayer);
     }
 
     @SubscribeEvent
@@ -137,6 +149,9 @@ public class ClientEvents {
 
         PoptartCoreModelLayers.STEEL_BOOTS_MODEL =
                 new PoptartCoreArmorModel(event.getEntityModels().bakeLayer(PoptartCoreModelLayers.STEEL_BOOTS_LAYER));
+
+        PoptartCoreModelLayers.BEEKEEPER_ARMOR_MODEL = new BeekeeperArmorModel(
+                event.getEntityModels().bakeLayer(PoptartCoreModelLayers.BEEKEEPER_ARMOR_LAYER));
     }
 
     @SubscribeEvent

@@ -6,6 +6,10 @@
     "poptartcore:flint_axe",
     "poptartcore:flint_shovel",
     "poptartcore:firestarter",
-    "poptartcore:repeating_crossbow"
+    "poptartcore:repeating_crossbow",
+    "poptartcore:beekeeper_helmet",
+    "poptartcore:beekeeper_chestplate",
+    "poptartcore:beekeeper_leggings",
+    "poptartcore:beekeeper_boots"
   ]
 }

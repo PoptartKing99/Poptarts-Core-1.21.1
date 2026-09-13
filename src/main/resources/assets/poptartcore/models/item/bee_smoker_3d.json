@@ -1,0 +1,54 @@
+{
+  "texture_size": [32, 32],
+  "textures": {
+    "0": "poptartcore:item/bee_smoker_model",
+    "particle": "poptartcore:item/bee_smoker_model"
+  },
+  "elements": [
+    {
+      "from": [5.99, -0.01, 5.99],
+      "to": [10.01, 6.01, 10.01],
+      "faces": {
+        "north": {"uv": [2, 2, 4, 5], "texture": "#0"},
+        "east": {"uv": [0, 2, 2, 5], "texture": "#0"},
+        "south": {"uv": [6, 2, 8, 5], "texture": "#0"},
+        "west": {"uv": [4, 2, 6, 5], "texture": "#0"},
+        "up": {"uv": [4, 2, 2, 0], "texture": "#0"},
+        "down": {"uv": [6, 0, 4, 2], "texture": "#0"}
+      }
+    },
+    {
+      "from": [6.5, 1, 10],
+      "to": [9.5, 6, 13],
+      "rotation": {"angle": 22.5, "axis": "x", "origin": [7.5, 6, 10]},
+      "faces": {
+        "north": {"uv": [1.5, 6.5, 3, 9], "texture": "#0"},
+        "east": {"uv": [0, 6.5, 1.5, 9], "texture": "#0"},
+        "south": {"uv": [4.5, 6.5, 6, 9], "texture": "#0"},
+        "west": {"uv": [3, 6.5, 4.5, 9], "texture": "#0"},
+        "up": {"uv": [3, 6.5, 1.5, 5], "texture": "#0"},
+        "down": {"uv": [4.5, 5, 3, 6.5], "texture": "#0"}
+      }
+    },
+    {
+      "from": [7, 4, 4],
+      "to": [9, 6, 8],
+      "rotation": {"angle": 22.5, "axis": "x", "origin": [8, 6, 8]},
+      "faces": {
+        "north": {"uv": [8, 7, 9, 8], "texture": "#0"},
+        "east": {"uv": [6, 7, 8, 8], "texture": "#0"},
+        "south": {"uv": [11, 7, 12, 8], "texture": "#0"},
+        "west": {"uv": [9, 7, 11, 8], "texture": "#0"},
+        "up": {"uv": [9, 7, 8, 5], "texture": "#0"},
+        "down": {"uv": [10, 5, 9, 7], "texture": "#0"}
+      }
+    }
+  ],
+  "display": {
+    "thirdperson_righthand": {"rotation": [0, 0, 0], "translation": [0, 3, -1.5], "scale": [1, 1, 1]},
+    "thirdperson_lefthand": {"rotation": [0, 0, 0], "translation": [0, 3, -1.5], "scale": [1, 1, 1]},
+    "firstperson_righthand": {"rotation": [0, 0, 0], "translation": [0, 3, -2], "scale": [1, 1, 1]},
+    "firstperson_lefthand": {"rotation": [0, 0, 0], "translation": [0, 3, -2], "scale": [1, 1, 1]},
+    "head": {"translation": [0, 8, 0]}
+  }
+}

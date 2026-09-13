@@ -1,6 +1,8 @@
 package dev.poptartking.poptartcore.registry;
 
 import dev.poptartking.poptartcore.PoptartCore;
+import dev.poptartking.poptartcore.beekeeping.BeeSmokerItem;
+import dev.poptartking.poptartcore.beekeeping.BeekeeperArmorItem;
 import dev.poptartking.poptartcore.crossbow.RepeatingCrossbowItem;
 import dev.poptartking.poptartcore.crucible.CrucibleBlockItem;
 import dev.poptartking.poptartcore.hammer.HammerItem;
@@ -105,6 +107,21 @@ public class PoptartCoreItems {
                             .attributes(PickaxeItem.createAttributes(PoptartCoreTiers.FLINT, 0.5F, -3.0F))));
     public static final DeferredItem<FlintAndSteelItem> FIRESTARTER =
             ITEMS.register("firestarter", () -> new FlintAndSteelItem(new Item.Properties().durability(3)));
+    public static final DeferredItem<BeeSmokerItem> BEE_SMOKER = ITEMS.register(
+            "bee_smoker",
+            () -> new BeeSmokerItem(new Item.Properties().stacksTo(1).durability(360)));
+    public static final DeferredItem<BeekeeperArmorItem> BEEKEEPER_HELMET = ITEMS.register(
+            "beekeeper_helmet",
+            () -> new BeekeeperArmorItem(ArmorItem.Type.HELMET, new Item.Properties().durability(200)));
+    public static final DeferredItem<BeekeeperArmorItem> BEEKEEPER_CHESTPLATE = ITEMS.register(
+            "beekeeper_chestplate",
+            () -> new BeekeeperArmorItem(ArmorItem.Type.CHESTPLATE, new Item.Properties().durability(300)));
+    public static final DeferredItem<BeekeeperArmorItem> BEEKEEPER_LEGGINGS = ITEMS.register(
+            "beekeeper_leggings",
+            () -> new BeekeeperArmorItem(ArmorItem.Type.LEGGINGS, new Item.Properties().durability(260)));
+    public static final DeferredItem<BeekeeperArmorItem> BEEKEEPER_BOOTS = ITEMS.register(
+            "beekeeper_boots",
+            () -> new BeekeeperArmorItem(ArmorItem.Type.BOOTS, new Item.Properties().durability(200)));
     public static final DeferredItem<RepeatingCrossbowItem> REPEATING_CROSSBOW = ITEMS.register(
             "repeating_crossbow",
             () -> new RepeatingCrossbowItem(new Item.Properties()

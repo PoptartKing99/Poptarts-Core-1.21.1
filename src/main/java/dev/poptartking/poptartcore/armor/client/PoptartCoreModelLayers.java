@@ -21,6 +21,7 @@ public class PoptartCoreModelLayers {
     public static PoptartCoreArmorModel STEEL_CHESTPLATE_MODEL;
     public static PoptartCoreArmorModel STEEL_LEGGINGS_MODEL;
     public static PoptartCoreArmorModel STEEL_BOOTS_MODEL;
+    public static BeekeeperArmorModel BEEKEEPER_ARMOR_MODEL;
 
     public static final ModelLayerLocation MINING_HELMET_LAYER =
             new ModelLayerLocation(PoptartCore.location("mining_helmet"), "main");
@@ -50,4 +51,6 @@ public class PoptartCoreModelLayers {
             new ModelLayerLocation(PoptartCore.location("steel_leggings"), "main");
     public static final ModelLayerLocation STEEL_BOOTS_LAYER =
             new ModelLayerLocation(PoptartCore.location("steel_boots"), "main");
+    public static final ModelLayerLocation BEEKEEPER_ARMOR_LAYER =
+            new ModelLayerLocation(PoptartCore.location("beekeeper_armor"), "main");
 }

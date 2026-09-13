@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "poptartcore:raw_hide_chestplate",
-    "poptartcore:steel_chestplate"
+    "poptartcore:steel_chestplate",
+    "poptartcore:beekeeper_chestplate"
   ]
 }

@@ -32,6 +32,17 @@ public final class ArmorTextures {
                     PoptartCore.location("textures/armor/steel_chestplate.png")),
             Map.entry(PoptartCoreItems.STEEL_LEGGINGS.get(), PoptartCore.location("textures/armor/steel_leggings.png")),
             Map.entry(PoptartCoreItems.STEEL_BOOTS.get(), PoptartCore.location("textures/armor/steel_boots.png")),
+            Map.entry(
+                    PoptartCoreItems.BEEKEEPER_HELMET.get(),
+                    PoptartCore.location("textures/armor/beekeeper_armor.png")),
+            Map.entry(
+                    PoptartCoreItems.BEEKEEPER_CHESTPLATE.get(),
+                    PoptartCore.location("textures/armor/beekeeper_armor.png")),
+            Map.entry(
+                    PoptartCoreItems.BEEKEEPER_LEGGINGS.get(),
+                    PoptartCore.location("textures/armor/beekeeper_armor.png")),
+            Map.entry(
+                    PoptartCoreItems.BEEKEEPER_BOOTS.get(), PoptartCore.location("textures/armor/beekeeper_armor.png")),
             Map.entry(PoptartCoreItems.MINING_HELMET.get(), PoptartCore.location("textures/armor/mining_helmet.png")),
             Map.entry(
                     PoptartCoreItems.RAW_HIDE_HELMET.get(), PoptartCore.location("textures/armor/raw_hide_armor.png")),

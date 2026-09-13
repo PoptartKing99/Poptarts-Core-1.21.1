@@ -1,0 +1,18 @@
+{
+  "loader": "neoforge:separate_transforms",
+  "gui_light": "front",
+  "base": {
+    "parent": "poptartcore:item/bee_smoker_3d"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "poptartcore:item/bee_smoker_gui"
+    },
+    "ground": {
+      "parent": "poptartcore:item/bee_smoker_gui"
+    },
+    "fixed": {
+      "parent": "poptartcore:item/bee_smoker_gui"
+    }
+  }
+}
