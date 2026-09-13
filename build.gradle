@@ -196,6 +196,7 @@ dependencies {
     compileOnly "maven.modrinth:create:${create_version}+mc${minecraft_version}"
     compileOnly files(extractedSimulatedJar).builtBy(extractSimulatedJar)
     compileOnly "maven.modrinth:farmers-delight:${farmers_delight_version}"
+    compileOnly files('run/mods/nomansland-2.0.0.jar')
     compileOnly 'maven.modrinth:twkfQtEc:uPJlV3eS'
     compileOnly 'net.createmod.ponder:ponder-neoforge:1.0.82+mc1.21.1'
     compileOnly 'dev.engine-room.flywheel:flywheel-neoforge-api-1.21.1:1.0.6'

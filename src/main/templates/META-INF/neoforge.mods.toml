@@ -79,6 +79,14 @@ versionRange="[4.5.0,)"
 ordering="NONE"
 side="CLIENT"
 
+# No Man's Land supplies honey cauldrons and hive taps used by the Wax Golem
+[[dependencies."${mod_id}"]]
+modId="nomansland"
+type="required"
+versionRange="[2.0.0,3.0.0)"
+ordering="AFTER"
+side="BOTH"
+
 [[mixins]]
 config="poptartcore.mixins.json"
 

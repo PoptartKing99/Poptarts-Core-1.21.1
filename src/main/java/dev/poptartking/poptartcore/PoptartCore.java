@@ -14,12 +14,15 @@ public class PoptartCore {
     public PoptartCore(IEventBus modEventBus) {
         PoptartCoreBlocks.register(modEventBus);
         PoptartCoreItems.register(modEventBus);
+        PoptartCoreEntities.register(modEventBus);
         PoptartCoreBlockEntities.register(modEventBus);
         PoptartCoreMenus.register(modEventBus);
         PoptartCoreFluids.register(modEventBus);
         PoptartCoreRecipes.register(modEventBus);
         PoptartCoreSounds.register(modEventBus);
         PoptartCoreTabs.register(modEventBus);
+        PoptartCoreAttachments.register(modEventBus);
+        PoptartCoreDataMaps.register(modEventBus);
         BlastFurnaceCapabilities.register(modEventBus);
         PoptartCoreCapabilities.register(modEventBus);
     }

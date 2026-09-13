@@ -8,8 +8,11 @@ import dev.poptartking.poptartcore.crucible.client.CrucibleScreen;
 import dev.poptartking.poptartcore.hammer.client.ClientMiningCleanup;
 import dev.poptartking.poptartcore.quern.client.QuernRenderer;
 import dev.poptartking.poptartcore.registry.PoptartCoreBlockEntities;
+import dev.poptartking.poptartcore.registry.PoptartCoreEntities;
 import dev.poptartking.poptartcore.registry.PoptartCoreItems;
 import dev.poptartking.poptartcore.registry.PoptartCoreMenus;
+import dev.poptartking.poptartcore.waxgolem.client.WaxGolemModel;
+import dev.poptartking.poptartcore.waxgolem.client.WaxGolemRenderer;
 import dev.poptartking.poptartcore.workbench.client.WorkbenchScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.Item;
@@ -87,6 +90,7 @@ public class ClientEvents {
 
     @SubscribeEvent
     public static void registerLayer(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(WaxGolemRenderer.LAYER, WaxGolemModel::create);
         event.registerLayerDefinition(PoptartCoreModelLayers.MINING_HELMET_LAYER, MiningHelmetModel::createBodyLayer);
         event.registerLayerDefinition(PoptartCoreModelLayers.RAW_HIDE_ARMOR_LAYER, RawHideArmorModel::createBodyLayer);
         event.registerLayerDefinition(PoptartCoreModelLayers.LEATHER_HELM_LAYER, LeatherArmorModels::helm);
@@ -163,6 +167,7 @@ public class ClientEvents {
 
     @SubscribeEvent
     public static void registerBlockEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerEntityRenderer(PoptartCoreEntities.WAX_GOLEM.get(), WaxGolemRenderer::new);
         event.registerBlockEntityRenderer(
                 PoptartCoreBlockEntities.MILLSTONE_ROTOR.get(),
                 context -> new dev.poptartking.poptartcore.millstone.client.MillstoneRenderer());

@@ -15,8 +15,11 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.animal.Bee;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ClickAction;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
@@ -25,6 +28,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import vectorwing.farmersdelight.common.registry.ModItems;
 
 public class BeeSmokerItem extends Item {
     private static final double REACH = 5.0D;
@@ -40,8 +44,25 @@ public class BeeSmokerItem extends Item {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        ItemStack stack = player.getItemInHand(hand);
+        if (isEmpty(stack)) {
+            return InteractionResultHolder.fail(stack);
+        }
+
         player.startUsingItem(hand);
-        return InteractionResultHolder.consume(player.getItemInHand(hand));
+        return InteractionResultHolder.consume(stack);
+    }
+
+    @Override
+    public boolean overrideOtherStackedOnMe(
+            ItemStack smoker, ItemStack carried, Slot slot, ClickAction action, Player player, SlotAccess carriedSlot) {
+        if (!isEmpty(smoker) || !carried.is(ModItems.STRAW.get())) {
+            return false;
+        }
+
+        smoker.setDamageValue(0);
+        carried.shrink(1);
+        return true;
     }
 
     @Override
@@ -56,6 +77,11 @@ public class BeeSmokerItem extends Item {
 
     @Override
     public void onUseTick(Level level, LivingEntity entity, ItemStack stack, int remainingUseDuration) {
+        if (isEmpty(stack)) {
+            entity.stopUsingItem();
+            return;
+        }
+
         if (!(level instanceof ServerLevel serverLevel)) {
             return;
         }
@@ -66,6 +92,10 @@ public class BeeSmokerItem extends Item {
                     ? EquipmentSlot.MAINHAND
                     : EquipmentSlot.OFFHAND;
             stack.hurtAndBreak(1, entity, slot);
+            if (isEmpty(stack)) {
+                entity.stopUsingItem();
+                return;
+            }
         }
 
         Vec3 eye = entity.getEyePosition();
@@ -158,5 +188,9 @@ public class BeeSmokerItem extends Item {
                 view.y + 0.15D,
                 view.z + (random.nextDouble() - 0.5D) * 0.15D,
                 0.22D);
+    }
+
+    public static boolean isEmpty(ItemStack stack) {
+        return stack.isDamageableItem() && stack.getDamageValue() >= stack.getMaxDamage() - 1;
     }
 }
