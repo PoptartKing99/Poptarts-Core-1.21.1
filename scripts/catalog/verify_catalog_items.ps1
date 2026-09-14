@@ -65,6 +65,7 @@ param(
 
 $ErrorActionPreference = 'Stop'
 $projectRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..\..')).Path
+$generatedResourceRoot = Join-Path $projectRoot 'src\generated\resources'
 $generatedRoot = Join-Path $projectRoot 'src\generated\resources\assets'
 $mainRoot = Join-Path $projectRoot 'src\main\resources\assets\poptartcore'
 $generatedLanguagePath = Join-Path $generatedRoot 'poptart_catalog\lang\en_us.json'
@@ -134,3 +135,38 @@ foreach ($catalogItem in $catalogItems) {
 }
 
 Write-Output "Verified $($catalogItems.Count) Poptart Catalog item names, models, and textures."
+
+$expectedTags = @{
+    'minecraft\tags\item\axes.json' = @('poptartcore:flint_axe', 'poptartcore:bronze_axe', 'poptartcore:steel_axe')
+    'minecraft\tags\item\chest_armor.json' = @('poptartcore:raw_hide_chestplate', 'poptartcore:steel_chestplate', 'poptartcore:beekeeper_chestplate')
+    'minecraft\tags\item\foot_armor.json' = @('poptartcore:steel_boots', 'poptartcore:beekeeper_boots')
+    'minecraft\tags\item\head_armor.json' = @('poptartcore:mining_helmet', 'poptartcore:raw_hide_helmet', 'poptartcore:steel_helmet', 'poptartcore:beekeeper_helmet')
+    'minecraft\tags\item\hoes.json' = @('poptartcore:bone_pick')
+    'minecraft\tags\item\leg_armor.json' = @('poptartcore:raw_hide_leggings', 'poptartcore:steel_leggings', 'poptartcore:beekeeper_leggings')
+    'minecraft\tags\item\pickaxes.json' = @('poptartcore:bone_pick', 'poptartcore:bronze_pickaxe', 'poptartcore:steel_pickaxe')
+    'minecraft\tags\item\shovels.json' = @('poptartcore:flint_shovel', 'poptartcore:bronze_shovel', 'poptartcore:steel_shovel')
+    'minecraft\tags\item\swords.json' = @('poptartcore:bronze_sword', 'poptartcore:steel_sword')
+    'farmersdelight\tags\item\tools\knives.json' = @('poptartcore:bronze_knife', 'poptartcore:steel_knife')
+}
+
+foreach ($entry in $expectedTags.GetEnumerator()) {
+    $generatedTagPath = Join-Path $generatedResourceRoot "data\$($entry.Key)"
+    if (-not (Test-Path -LiteralPath $generatedTagPath)) {
+        throw "Missing generated Catalog item tag: $($entry.Key)"
+    }
+    $generatedTag = Get-Content -Raw -LiteralPath $generatedTagPath | ConvertFrom-Json
+    $expectedValues = @($entry.Value | Sort-Object)
+    $actualValues = @($generatedTag.values | Sort-Object)
+    if (($expectedValues -join "`n") -ne ($actualValues -join "`n")) {
+        throw "Wrong generated values for Catalog item tag: $($entry.Key)"
+    }
+    if ($generatedTag.replace -eq $true) {
+        throw "Catalog item tag replaces values from other mods: $($entry.Key)"
+    }
+    $handwrittenTagPath = Join-Path $projectRoot "src\main\resources\data\$($entry.Key)"
+    if (Test-Path -LiteralPath $handwrittenTagPath) {
+        throw "Handwritten item tag still exists: $($entry.Key)"
+    }
+}
+
+Write-Output "Verified $($expectedTags.Count) generated Poptart Catalog item tags."

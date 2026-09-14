@@ -11,6 +11,8 @@ import net.minecraft.world.level.block.Block;
 public final class PoptartCoreTags {
     public static final TagKey<Item> HAMMERS =
             TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "tools/hammers"));
+    public static final TagKey<Item> KNIVES =
+            TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("farmersdelight", "tools/knives"));
     public static final TagKey<Item> HAMMER_REPAIR_MATERIALS =
             TagKey.create(Registries.ITEM, PoptartCore.location("hammer_repair_materials"));
     public static final TagKey<Item> BLAST_FURNACE_ALLOWED =

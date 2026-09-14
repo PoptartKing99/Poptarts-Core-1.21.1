@@ -1,12 +1,16 @@
 package dev.poptartking.poptartcore.catalog;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.function.Supplier;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredItem;
 
 public final class CatalogItemDefinition<T extends Item> implements Supplier<T> {
     private final String id;
     private final DeferredItem<T> item;
+    private final Set<TagKey<Item>> tags = new LinkedHashSet<>();
     private String displayName;
     private CatalogItemModel model = CatalogItemModel.GENERATED;
     private boolean frozen;
@@ -27,6 +31,10 @@ public final class CatalogItemDefinition<T extends Item> implements Supplier<T> 
 
     public CatalogItemModel model() {
         return model;
+    }
+
+    public Set<TagKey<Item>> tags() {
+        return Set.copyOf(tags);
     }
 
     public DeferredItem<T> item() {
@@ -59,6 +67,13 @@ public final class CatalogItemDefinition<T extends Item> implements Supplier<T> 
 
     public CatalogItemDefinition<T> withoutGeneratedModel() {
         return model(CatalogItemModel.CUSTOM);
+    }
+
+    @SafeVarargs
+    public final CatalogItemDefinition<T> tags(TagKey<Item>... tags) {
+        requireMutable();
+        this.tags.addAll(java.util.List.of(tags));
+        return this;
     }
 
     void freeze() {

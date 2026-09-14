@@ -9,6 +9,7 @@ import dev.poptartking.poptartcore.hammer.HammerItem;
 import dev.poptartking.poptartcore.tool.BonePickItem;
 import dev.poptartking.poptartcore.wax.WaxItem;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.BlockItem;
@@ -25,29 +26,33 @@ import vectorwing.farmersdelight.common.item.KnifeItem;
 public class PoptartCoreItems {
     // Items
     public static final CatalogItemDefinition<ArmorItem> MINING_HELMET = PoptartCatalog.item(
-            "mining_helmet",
-            () -> new ArmorItem(
-                    PoptartCoreArmorMaterials.MINING_ARMOR_MATERIAL,
-                    ArmorItem.Type.HELMET,
-                    new Item.Properties().durability(100)));
+                    "mining_helmet",
+                    () -> new ArmorItem(
+                            PoptartCoreArmorMaterials.MINING_ARMOR_MATERIAL,
+                            ArmorItem.Type.HELMET,
+                            new Item.Properties().durability(100)))
+            .tags(ItemTags.HEAD_ARMOR);
     public static final CatalogItemDefinition<ArmorItem> RAW_HIDE_HELMET = PoptartCatalog.item(
-            "raw_hide_helmet",
-            () -> new ArmorItem(
-                    PoptartCoreArmorMaterials.RAW_HIDE_ARMOR_MATERIAL,
-                    ArmorItem.Type.HELMET,
-                    new Item.Properties().durability(140)));
+                    "raw_hide_helmet",
+                    () -> new ArmorItem(
+                            PoptartCoreArmorMaterials.RAW_HIDE_ARMOR_MATERIAL,
+                            ArmorItem.Type.HELMET,
+                            new Item.Properties().durability(140)))
+            .tags(ItemTags.HEAD_ARMOR);
     public static final CatalogItemDefinition<ArmorItem> RAW_HIDE_CHESTPLATE = PoptartCatalog.item(
-            "raw_hide_chestplate",
-            () -> new ArmorItem(
-                    PoptartCoreArmorMaterials.RAW_HIDE_ARMOR_MATERIAL,
-                    ArmorItem.Type.CHESTPLATE,
-                    new Item.Properties().durability(140)));
+                    "raw_hide_chestplate",
+                    () -> new ArmorItem(
+                            PoptartCoreArmorMaterials.RAW_HIDE_ARMOR_MATERIAL,
+                            ArmorItem.Type.CHESTPLATE,
+                            new Item.Properties().durability(140)))
+            .tags(ItemTags.CHEST_ARMOR);
     public static final CatalogItemDefinition<ArmorItem> RAW_HIDE_LEGGINGS = PoptartCatalog.item(
-            "raw_hide_leggings",
-            () -> new ArmorItem(
-                    PoptartCoreArmorMaterials.RAW_HIDE_ARMOR_MATERIAL,
-                    ArmorItem.Type.LEGGINGS,
-                    new Item.Properties().durability(140)));
+                    "raw_hide_leggings",
+                    () -> new ArmorItem(
+                            PoptartCoreArmorMaterials.RAW_HIDE_ARMOR_MATERIAL,
+                            ArmorItem.Type.LEGGINGS,
+                            new Item.Properties().durability(140)))
+            .tags(ItemTags.LEG_ARMOR);
     public static final CatalogItemDefinition<Item> STEEL_INGOT = PoptartCatalog.simpleItem("steel_ingot");
     public static final CatalogItemDefinition<Item> STEEL_NUGGET = PoptartCatalog.simpleItem("steel_nugget");
     public static final CatalogItemDefinition<Item> STEEL_PLATE = PoptartCatalog.simpleItem("steel_plate");
@@ -57,35 +62,40 @@ public class PoptartCoreItems {
                             PoptartCoreTiers.STEEL,
                             new Item.Properties()
                                     .attributes(SwordItem.createAttributes(PoptartCoreTiers.STEEL, 2, -2.4F))))
-            .handheld();
+            .handheld()
+            .tags(ItemTags.SWORDS);
     public static final CatalogItemDefinition<PickaxeItem> STEEL_PICKAXE = PoptartCatalog.item(
                     "steel_pickaxe",
                     () -> new PickaxeItem(
                             PoptartCoreTiers.STEEL,
                             new Item.Properties()
                                     .attributes(PickaxeItem.createAttributes(PoptartCoreTiers.STEEL, 0.0F, -2.8F))))
-            .handheld();
+            .handheld()
+            .tags(ItemTags.PICKAXES);
     public static final CatalogItemDefinition<AxeItem> STEEL_AXE = PoptartCatalog.item(
                     "steel_axe",
                     () -> new AxeItem(
                             PoptartCoreTiers.STEEL,
                             new Item.Properties()
                                     .attributes(AxeItem.createAttributes(PoptartCoreTiers.STEEL, 5.0F, -3.1F))))
-            .handheld();
+            .handheld()
+            .tags(ItemTags.AXES);
     public static final CatalogItemDefinition<ShovelItem> STEEL_SHOVEL = PoptartCatalog.item(
                     "steel_shovel",
                     () -> new ShovelItem(
                             PoptartCoreTiers.STEEL,
                             new Item.Properties()
                                     .attributes(ShovelItem.createAttributes(PoptartCoreTiers.STEEL, 0.5F, -3.0F))))
-            .handheld();
+            .handheld()
+            .tags(ItemTags.SHOVELS);
     public static final CatalogItemDefinition<KnifeItem> STEEL_KNIFE = PoptartCatalog.item(
                     "steel_knife",
                     () -> new KnifeItem(
                             PoptartCoreTiers.STEEL,
                             new Item.Properties()
                                     .attributes(KnifeItem.createAttributes(PoptartCoreTiers.STEEL, 1.0F, -2.0F))))
-            .handheld();
+            .handheld()
+            .tags(PoptartCoreTags.KNIVES);
     public static final CatalogItemDefinition<Item> COAL_COKE = PoptartCatalog.simpleItem("coal_coke");
     public static final CatalogItemDefinition<WaxItem> WAX =
             PoptartCatalog.item("wax", () -> new WaxItem(new Item.Properties()));
@@ -96,21 +106,24 @@ public class PoptartCoreItems {
                             PoptartCoreTiers.BONE,
                             new Item.Properties()
                                     .attributes(PickaxeItem.createAttributes(PoptartCoreTiers.BONE, 2.0F, -2.8F))))
-            .handheld();
+            .handheld()
+            .tags(ItemTags.PICKAXES, ItemTags.HOES);
     public static final CatalogItemDefinition<AxeItem> FLINT_AXE = PoptartCatalog.item(
                     "flint_axe",
                     () -> new AxeItem(
                             PoptartCoreTiers.FLINT,
                             new Item.Properties()
                                     .attributes(PickaxeItem.createAttributes(PoptartCoreTiers.FLINT, 3.0F, -3.1F))))
-            .handheld();
+            .handheld()
+            .tags(ItemTags.AXES);
     public static final CatalogItemDefinition<ShovelItem> FLINT_SHOVEL = PoptartCatalog.item(
                     "flint_shovel",
                     () -> new ShovelItem(
                             PoptartCoreTiers.FLINT,
                             new Item.Properties()
                                     .attributes(PickaxeItem.createAttributes(PoptartCoreTiers.FLINT, 0.5F, -3.0F))))
-            .handheld();
+            .handheld()
+            .tags(ItemTags.SHOVELS);
     public static final CatalogItemDefinition<FlintAndSteelItem> FIRESTARTER =
             PoptartCatalog.item("firestarter", () -> new FlintAndSteelItem(new Item.Properties().durability(3)));
     public static final CatalogItemDefinition<BeeSmokerItem> BEE_SMOKER = PoptartCatalog.item(
@@ -120,18 +133,22 @@ public class PoptartCoreItems {
     public static final CatalogItemDefinition<BeekeeperArmorItem> BEEKEEPER_HELMET = PoptartCatalog.item(
                     "beekeeper_helmet",
                     () -> new BeekeeperArmorItem(ArmorItem.Type.HELMET, new Item.Properties().durability(200)))
-            .withName("Beekeeper Hood");
+            .withName("Beekeeper Hood")
+            .tags(ItemTags.HEAD_ARMOR);
     public static final CatalogItemDefinition<BeekeeperArmorItem> BEEKEEPER_CHESTPLATE = PoptartCatalog.item(
                     "beekeeper_chestplate",
                     () -> new BeekeeperArmorItem(ArmorItem.Type.CHESTPLATE, new Item.Properties().durability(300)))
-            .withName("Beekeeper Tunic");
+            .withName("Beekeeper Tunic")
+            .tags(ItemTags.CHEST_ARMOR);
     public static final CatalogItemDefinition<BeekeeperArmorItem> BEEKEEPER_LEGGINGS = PoptartCatalog.item(
                     "beekeeper_leggings",
                     () -> new BeekeeperArmorItem(ArmorItem.Type.LEGGINGS, new Item.Properties().durability(260)))
-            .withName("Beekeeper Skirt");
+            .withName("Beekeeper Skirt")
+            .tags(ItemTags.LEG_ARMOR);
     public static final CatalogItemDefinition<BeekeeperArmorItem> BEEKEEPER_BOOTS = PoptartCatalog.item(
-            "beekeeper_boots",
-            () -> new BeekeeperArmorItem(ArmorItem.Type.BOOTS, new Item.Properties().durability(200)));
+                    "beekeeper_boots",
+                    () -> new BeekeeperArmorItem(ArmorItem.Type.BOOTS, new Item.Properties().durability(200)))
+            .tags(ItemTags.FOOT_ARMOR);
     public static final CatalogItemDefinition<RepeatingCrossbowItem> REPEATING_CROSSBOW = PoptartCatalog.item(
                     "repeating_crossbow",
                     () -> new RepeatingCrossbowItem(new Item.Properties()
@@ -156,35 +173,40 @@ public class PoptartCoreItems {
                             PoptartCoreTiers.BRONZE,
                             new Item.Properties()
                                     .attributes(SwordItem.createAttributes(PoptartCoreTiers.BRONZE, 2, -2.4F))))
-            .handheld();
+            .handheld()
+            .tags(ItemTags.SWORDS);
     public static final CatalogItemDefinition<PickaxeItem> BRONZE_PICKAXE = PoptartCatalog.item(
                     "bronze_pickaxe",
                     () -> new PickaxeItem(
                             PoptartCoreTiers.BRONZE,
                             new Item.Properties()
                                     .attributes(PickaxeItem.createAttributes(PoptartCoreTiers.BRONZE, 0.0F, -2.8F))))
-            .handheld();
+            .handheld()
+            .tags(ItemTags.PICKAXES);
     public static final CatalogItemDefinition<AxeItem> BRONZE_AXE = PoptartCatalog.item(
                     "bronze_axe",
                     () -> new AxeItem(
                             PoptartCoreTiers.BRONZE,
                             new Item.Properties()
                                     .attributes(AxeItem.createAttributes(PoptartCoreTiers.BRONZE, 5.0F, -3.1F))))
-            .handheld();
+            .handheld()
+            .tags(ItemTags.AXES);
     public static final CatalogItemDefinition<ShovelItem> BRONZE_SHOVEL = PoptartCatalog.item(
                     "bronze_shovel",
                     () -> new ShovelItem(
                             PoptartCoreTiers.BRONZE,
                             new Item.Properties()
                                     .attributes(ShovelItem.createAttributes(PoptartCoreTiers.BRONZE, 0.5F, -3.0F))))
-            .handheld();
+            .handheld()
+            .tags(ItemTags.SHOVELS);
     public static final CatalogItemDefinition<KnifeItem> BRONZE_KNIFE = PoptartCatalog.item(
                     "bronze_knife",
                     () -> new KnifeItem(
                             PoptartCoreTiers.BRONZE,
                             new Item.Properties()
                                     .attributes(KnifeItem.createAttributes(PoptartCoreTiers.BRONZE, 1.0F, -2.0F))))
-            .handheld();
+            .handheld()
+            .tags(PoptartCoreTags.KNIVES);
     public static final CatalogItemDefinition<Item> TIN_INGOT = PoptartCatalog.simpleItem("tin_ingot");
     public static final CatalogItemDefinition<Item> TIN_NUGGET = PoptartCatalog.simpleItem("tin_nugget");
     public static final CatalogItemDefinition<Item> RAW_TIN = PoptartCatalog.simpleItem("raw_tin");
@@ -195,29 +217,33 @@ public class PoptartCoreItems {
     public static final CatalogItemDefinition<Item> SILVER_NUGGET = PoptartCatalog.simpleItem("silver_nugget");
     public static final CatalogItemDefinition<Item> RAW_SILVER = PoptartCatalog.simpleItem("raw_silver");
     public static final CatalogItemDefinition<ArmorItem> STEEL_HELMET = PoptartCatalog.item(
-            "steel_helmet",
-            () -> new ArmorItem(
-                    PoptartCoreArmorMaterials.STEEL_ARMOR_MATERIAL,
-                    ArmorItem.Type.HELMET,
-                    new Item.Properties().durability(275)));
+                    "steel_helmet",
+                    () -> new ArmorItem(
+                            PoptartCoreArmorMaterials.STEEL_ARMOR_MATERIAL,
+                            ArmorItem.Type.HELMET,
+                            new Item.Properties().durability(275)))
+            .tags(ItemTags.HEAD_ARMOR);
     public static final CatalogItemDefinition<ArmorItem> STEEL_CHESTPLATE = PoptartCatalog.item(
-            "steel_chestplate",
-            () -> new ArmorItem(
-                    PoptartCoreArmorMaterials.STEEL_ARMOR_MATERIAL,
-                    ArmorItem.Type.CHESTPLATE,
-                    new Item.Properties().durability(400)));
+                    "steel_chestplate",
+                    () -> new ArmorItem(
+                            PoptartCoreArmorMaterials.STEEL_ARMOR_MATERIAL,
+                            ArmorItem.Type.CHESTPLATE,
+                            new Item.Properties().durability(400)))
+            .tags(ItemTags.CHEST_ARMOR);
     public static final CatalogItemDefinition<ArmorItem> STEEL_LEGGINGS = PoptartCatalog.item(
-            "steel_leggings",
-            () -> new ArmorItem(
-                    PoptartCoreArmorMaterials.STEEL_ARMOR_MATERIAL,
-                    ArmorItem.Type.LEGGINGS,
-                    new Item.Properties().durability(375)));
+                    "steel_leggings",
+                    () -> new ArmorItem(
+                            PoptartCoreArmorMaterials.STEEL_ARMOR_MATERIAL,
+                            ArmorItem.Type.LEGGINGS,
+                            new Item.Properties().durability(375)))
+            .tags(ItemTags.LEG_ARMOR);
     public static final CatalogItemDefinition<ArmorItem> STEEL_BOOTS = PoptartCatalog.item(
-            "steel_boots",
-            () -> new ArmorItem(
-                    PoptartCoreArmorMaterials.STEEL_ARMOR_MATERIAL,
-                    ArmorItem.Type.BOOTS,
-                    new Item.Properties().durability(325)));
+                    "steel_boots",
+                    () -> new ArmorItem(
+                            PoptartCoreArmorMaterials.STEEL_ARMOR_MATERIAL,
+                            ArmorItem.Type.BOOTS,
+                            new Item.Properties().durability(325)))
+            .tags(ItemTags.FOOT_ARMOR);
     public static final DeferredItem<BlockItem> CRUCIBLE = PoptartCoreBlocks.CRUCIBLE.item();
     public static final DeferredItem<BlockItem> BLAST_FURNACE = PoptartCoreBlocks.BLAST_FURNACE.item();
     public static final DeferredItem<BlockItem> BLOOMERY = PoptartCoreBlocks.BLOOMERY.item();
