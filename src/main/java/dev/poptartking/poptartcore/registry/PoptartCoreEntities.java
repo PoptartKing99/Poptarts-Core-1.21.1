@@ -1,6 +1,7 @@
 package dev.poptartking.poptartcore.registry;
 
 import dev.poptartking.poptartcore.PoptartCore;
+import dev.poptartking.poptartcore.spider.WebProjectile;
 import dev.poptartking.poptartcore.waxgolem.WaxGolem;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;
@@ -21,6 +22,13 @@ public final class PoptartCoreEntities {
                     .build("wax_golem"));
 
     private PoptartCoreEntities() {}
+
+    public static final DeferredHolder<EntityType<?>, EntityType<WebProjectile>> WEB_PROJECTILE = ENTITY_TYPES.register(
+            "web_projectile", () -> EntityType.Builder.<WebProjectile>of(WebProjectile::new, MobCategory.MISC)
+                    .sized(0.25F, 0.25F)
+                    .clientTrackingRange(8)
+                    .updateInterval(1)
+                    .build("web_projectile"));
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);

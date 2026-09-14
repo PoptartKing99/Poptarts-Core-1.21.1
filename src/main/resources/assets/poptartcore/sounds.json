@@ -1,4 +1,16 @@
 {
+  "spider.prepare_shoot": {
+    "sounds": ["poptartcore:spider/prepare_shoot1", "poptartcore:spider/prepare_shoot2", "poptartcore:spider/prepare_shoot3"],
+    "subtitle": "subtitles.poptartcore.spider.prepare_shoot"
+  },
+  "spider.shoot": {
+    "sounds": ["poptartcore:spider/shoot1", "poptartcore:spider/shoot2"],
+    "subtitle": "subtitles.poptartcore.spider.shoot"
+  },
+  "spider.web_impact": {
+    "sounds": ["poptartcore:spider/web_impact1", "poptartcore:spider/web_impact2"],
+    "subtitle": "subtitles.poptartcore.spider.web_impact"
+  },
   "bee_smoker.blow": {
     "sounds": ["poptartcore:bee_smoker/blow"],
     "subtitle": "subtitles.poptartcore.bee_smoker.blow"

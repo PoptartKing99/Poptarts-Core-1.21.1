@@ -14,6 +14,7 @@ import dev.poptartking.poptartcore.millstone.MillstoneBlockItem;
 import dev.poptartking.poptartcore.millstone.MillstoneRotorBlock;
 import dev.poptartking.poptartcore.millstone.MillstoneStructuralBlock;
 import dev.poptartking.poptartcore.quern.QuernBlock;
+import dev.poptartking.poptartcore.spider.TemporaryCobwebBlock;
 import dev.poptartking.poptartcore.workbench.WorkbenchBlock;
 import dev.simulated_team.simulated.content.blocks.portable_engine.PortableEngineBlock;
 import net.minecraft.world.level.block.Block;
@@ -32,6 +33,11 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class PoptartCoreBlocks {
 
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(PoptartCore.MOD_ID);
+
+    public static final DeferredBlock<TemporaryCobwebBlock> TEMPORARY_COBWEB = BLOCKS.register(
+            "temporary_cobweb",
+            () -> new TemporaryCobwebBlock(
+                    BlockBehaviour.Properties.ofFullCopy(Blocks.COBWEB).noLootTable()));
 
     public static final CatalogBlockDefinition<MillstoneBlock> MILLSTONE = PoptartCatalog.block(
                     "millstone", () -> new MillstoneBlock(millstoneProperties()), MillstoneBlockItem::new)

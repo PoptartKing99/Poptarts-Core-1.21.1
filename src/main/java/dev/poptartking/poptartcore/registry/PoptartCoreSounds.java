@@ -13,6 +13,13 @@ public class PoptartCoreSounds {
 
     public static final DeferredHolder<SoundEvent, SoundEvent> QUERN =
             SOUNDS.register("quern", () -> SoundEvent.createVariableRangeEvent(PoptartCore.location("quern")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> SPIDER_PREPARE_SHOOT = SOUNDS.register(
+            "spider.prepare_shoot",
+            () -> SoundEvent.createVariableRangeEvent(PoptartCore.location("spider.prepare_shoot")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> SPIDER_SHOOT = SOUNDS.register(
+            "spider.shoot", () -> SoundEvent.createVariableRangeEvent(PoptartCore.location("spider.shoot")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> SPIDER_WEB_IMPACT = SOUNDS.register(
+            "spider.web_impact", () -> SoundEvent.createVariableRangeEvent(PoptartCore.location("spider.web_impact")));
     public static final DeferredHolder<SoundEvent, SoundEvent> BEE_SMOKER_BLOW = SOUNDS.register(
             "bee_smoker.blow", () -> SoundEvent.createVariableRangeEvent(PoptartCore.location("bee_smoker.blow")));
     public static final DeferredHolder<SoundEvent, SoundEvent> BEE_SMOKER_RETRACT = SOUNDS.register(

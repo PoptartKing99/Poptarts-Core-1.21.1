@@ -1,4 +1,9 @@
 {
+  "subtitles.poptartcore.spider.prepare_shoot": "Spider prepares web",
+  "subtitles.poptartcore.spider.shoot": "Spider shoots web",
+  "subtitles.poptartcore.spider.web_impact": "Web splats",
+  "entity.poptartcore.web_projectile": "Web Projectile",
+  "block.poptartcore.temporary_cobweb": "Temporary Cobweb",
   "message.poptartcore.millstone_space": "The Millstone needs a clear 3 x 3 area, two blocks tall.",
   "poptartcore.millstone.too_fast": "Too fast! Maximum speed: 64 RPM",
 

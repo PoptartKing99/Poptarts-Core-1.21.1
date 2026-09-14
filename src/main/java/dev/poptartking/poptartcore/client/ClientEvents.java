@@ -11,6 +11,7 @@ import dev.poptartking.poptartcore.registry.PoptartCoreBlockEntities;
 import dev.poptartking.poptartcore.registry.PoptartCoreEntities;
 import dev.poptartking.poptartcore.registry.PoptartCoreItems;
 import dev.poptartking.poptartcore.registry.PoptartCoreMenus;
+import dev.poptartking.poptartcore.spider.client.WebProjectileRenderer;
 import dev.poptartking.poptartcore.waxgolem.client.WaxGolemModel;
 import dev.poptartking.poptartcore.waxgolem.client.WaxGolemRenderer;
 import dev.poptartking.poptartcore.workbench.client.WorkbenchScreen;
@@ -168,6 +169,7 @@ public class ClientEvents {
     @SubscribeEvent
     public static void registerBlockEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(PoptartCoreEntities.WAX_GOLEM.get(), WaxGolemRenderer::new);
+        event.registerEntityRenderer(PoptartCoreEntities.WEB_PROJECTILE.get(), WebProjectileRenderer::new);
         event.registerBlockEntityRenderer(
                 PoptartCoreBlockEntities.MILLSTONE_ROTOR.get(),
                 context -> new dev.poptartking.poptartcore.millstone.client.MillstoneRenderer());

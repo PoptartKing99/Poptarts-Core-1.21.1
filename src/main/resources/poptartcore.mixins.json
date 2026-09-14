@@ -3,6 +3,8 @@
   "package": "dev.poptartking.poptartcore.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "spider.WallClimberNavigationAccessor",
+    "spider.SpiderWebAttackMixin",
     "armor.ArmorTextureMixin",
     "bee.BeeFlightMixin",
     "bee.BeeStingMixin",
@@ -23,6 +25,7 @@
     "wax.IWaxableMoonlightMixin"
   ],
   "client": [
+    "spider.SpiderWebPoseMixin",
     "bee.BeeFlipMixin",
     "bee.BeeSmokerArmPoseMixin",
     "bee.BeeSmokerReequipMixin",
