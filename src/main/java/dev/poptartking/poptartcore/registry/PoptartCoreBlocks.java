@@ -217,6 +217,7 @@ public class PoptartCoreBlocks {
     public static final CatalogBlockDefinition<Block> COAL_COKE_BLOCK = PoptartCatalog.block(
                     "coal_coke_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.COAL_BLOCK)))
             .withStorageRecipes(() -> PoptartCoreItems.COAL_COKE.get(), "coal_coke_from_block")
+            .fuelBurnTime(28800)
             .mineableWithPickaxe();
     public static final CatalogBlockDefinition<Block> BRONZE_BLOCK = PoptartCatalog.block(
                     "bronze_block",

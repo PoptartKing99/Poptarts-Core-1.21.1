@@ -13,6 +13,7 @@ public final class CatalogItemDefinition<T extends Item> implements Supplier<T> 
     private final Set<TagKey<Item>> tags = new LinkedHashSet<>();
     private String displayName;
     private CatalogItemModel model = CatalogItemModel.GENERATED;
+    private int fuelBurnTime = -1;
     private boolean frozen;
 
     CatalogItemDefinition(String id, DeferredItem<T> item) {
@@ -35,6 +36,10 @@ public final class CatalogItemDefinition<T extends Item> implements Supplier<T> 
 
     public Set<TagKey<Item>> tags() {
         return Set.copyOf(tags);
+    }
+
+    public int fuelBurnTime() {
+        return fuelBurnTime;
     }
 
     public DeferredItem<T> item() {
@@ -73,6 +78,15 @@ public final class CatalogItemDefinition<T extends Item> implements Supplier<T> 
     public final CatalogItemDefinition<T> tags(TagKey<Item>... tags) {
         requireMutable();
         this.tags.addAll(java.util.List.of(tags));
+        return this;
+    }
+
+    public CatalogItemDefinition<T> fuelBurnTime(int ticks) {
+        requireMutable();
+        if (ticks <= 0) {
+            throw new IllegalArgumentException("A Poptart Catalog fuel burn time must be positive");
+        }
+        this.fuelBurnTime = ticks;
         return this;
     }
 

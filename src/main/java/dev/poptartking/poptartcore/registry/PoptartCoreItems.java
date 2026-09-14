@@ -96,7 +96,8 @@ public class PoptartCoreItems {
                                     .attributes(KnifeItem.createAttributes(PoptartCoreTiers.STEEL, 1.0F, -2.0F))))
             .handheld()
             .tags(PoptartCoreTags.KNIVES);
-    public static final CatalogItemDefinition<Item> COAL_COKE = PoptartCatalog.simpleItem("coal_coke");
+    public static final CatalogItemDefinition<Item> COAL_COKE =
+            PoptartCatalog.simpleItem("coal_coke").fuelBurnTime(3200);
     public static final CatalogItemDefinition<WaxItem> WAX =
             PoptartCatalog.item("wax", () -> new WaxItem(new Item.Properties()));
     public static final CatalogItemDefinition<Item> REDSTONE_CIRCUIT = PoptartCatalog.simpleItem("redstone_circuit");

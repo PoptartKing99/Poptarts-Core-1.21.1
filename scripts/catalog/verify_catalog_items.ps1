@@ -170,3 +170,30 @@ foreach ($entry in $expectedTags.GetEnumerator()) {
 }
 
 Write-Output "Verified $($expectedTags.Count) generated Poptart Catalog item tags."
+
+$fuelDataMapRelativePath = 'data\neoforge\data_maps\item\furnace_fuels.json'
+$generatedFuelDataMapPath = Join-Path $generatedResourceRoot $fuelDataMapRelativePath
+if (-not (Test-Path -LiteralPath $generatedFuelDataMapPath)) {
+    throw "Missing generated Catalog furnace-fuel data map: $fuelDataMapRelativePath"
+}
+if (Test-Path -LiteralPath (Join-Path $projectRoot "src\main\resources\$fuelDataMapRelativePath")) {
+    throw "Handwritten furnace-fuel data map still exists: $fuelDataMapRelativePath"
+}
+
+$fuelDataMap = Get-Content -Raw -LiteralPath $generatedFuelDataMapPath | ConvertFrom-Json
+$expectedFuels = @{
+    'poptartcore:coal_coke' = 3200
+    'poptartcore:coal_coke_block' = 28800
+}
+$actualFuelIds = @($fuelDataMap.values.PSObject.Properties.Name | Sort-Object)
+$expectedFuelIds = @($expectedFuels.Keys | Sort-Object)
+if (($expectedFuelIds -join "`n") -ne ($actualFuelIds -join "`n")) {
+    throw 'Generated Catalog furnace-fuel data map contains the wrong items'
+}
+foreach ($entry in $expectedFuels.GetEnumerator()) {
+    if ($fuelDataMap.values.PSObject.Properties[$entry.Key].Value.burn_time -ne $entry.Value) {
+        throw "Wrong generated burn time for $($entry.Key)"
+    }
+}
+
+Write-Output "Verified $($expectedFuels.Count) generated Poptart Catalog furnace fuels."

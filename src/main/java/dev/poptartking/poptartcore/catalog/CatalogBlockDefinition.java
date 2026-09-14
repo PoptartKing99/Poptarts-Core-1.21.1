@@ -28,6 +28,7 @@ public final class CatalogBlockDefinition<T extends Block> implements Supplier<T
     private ResourceLocation bottomTexture;
     private int variants = 1;
     private boolean generatedLoot = true;
+    private int fuelBurnTime = -1;
     private boolean frozen;
 
     CatalogBlockDefinition(String id, DeferredBlock<T> block, DeferredItem<BlockItem> item) {
@@ -95,6 +96,10 @@ public final class CatalogBlockDefinition<T extends Block> implements Supplier<T
 
     public Set<TagKey<Block>> tags() {
         return Set.copyOf(tags);
+    }
+
+    public int fuelBurnTime() {
+        return fuelBurnTime;
     }
 
     @Override
@@ -192,6 +197,15 @@ public final class CatalogBlockDefinition<T extends Block> implements Supplier<T
 
     public CatalogBlockDefinition<T> requiresIronTool() {
         return tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    }
+
+    public CatalogBlockDefinition<T> fuelBurnTime(int ticks) {
+        requireMutable();
+        if (ticks <= 0) {
+            throw new IllegalArgumentException("A Poptart Catalog fuel burn time must be positive");
+        }
+        this.fuelBurnTime = ticks;
+        return this;
     }
 
     void freeze() {
