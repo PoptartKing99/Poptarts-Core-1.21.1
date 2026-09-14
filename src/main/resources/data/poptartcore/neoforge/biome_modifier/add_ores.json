@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#c:is_overworld",
+  "features": [
+    "poptartcore:ore_tin",
+    "poptartcore:ore_lead",
+    "poptartcore:ore_silver"
+  ],
+  "step": "underground_ores"
+}
