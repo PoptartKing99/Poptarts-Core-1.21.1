@@ -16,7 +16,9 @@ import java.util.function.Supplier;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.data.loot.LootTableProvider.SubProviderEntry;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.bus.api.IEventBus;
@@ -75,6 +77,25 @@ public final class PoptartCatalog {
 
     public static Collection<CatalogBlockDefinition<?>> blocks() {
         return List.copyOf(BLOCK_DEFINITIONS.values());
+    }
+
+    public static void addCreativeTabItems(CreativeModeTab.Output output, List<String> preferredOrder) {
+        Map<String, Supplier<? extends ItemLike>> remaining = new LinkedHashMap<>();
+        ITEM_DEFINITIONS.forEach((id, definition) -> remaining.put(id, definition));
+        BLOCK_DEFINITIONS.forEach((id, definition) -> remaining.put(id, definition.item()));
+
+        Set<String> orderedIds = new java.util.HashSet<>();
+        for (String id : preferredOrder) {
+            if (!orderedIds.add(id)) {
+                throw new IllegalArgumentException("Duplicate Poptart Catalog creative-tab entry: " + id);
+            }
+            Supplier<? extends ItemLike> entry = remaining.remove(id);
+            if (entry == null) {
+                throw new IllegalArgumentException("Unknown Poptart Catalog creative-tab entry: " + id);
+            }
+            output.accept(entry.get());
+        }
+        remaining.values().forEach(entry -> output.accept(entry.get()));
     }
 
     public static void register(IEventBus eventBus) {
