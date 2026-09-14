@@ -26,7 +26,7 @@ public final class QuernHighlightRenderer {
     public static void renderBlockHighlight(RenderHighlightEvent.Block event) {
         Level level = Minecraft.getInstance().level;
         BlockPos pos = event.getTarget().getBlockPos();
-        if (level == null || !level.getBlockState(pos).is(PoptartCoreBlocks.QUERN)) {
+        if (level == null || !level.getBlockState(pos).is(PoptartCoreBlocks.QUERN.get())) {
             return;
         }
 

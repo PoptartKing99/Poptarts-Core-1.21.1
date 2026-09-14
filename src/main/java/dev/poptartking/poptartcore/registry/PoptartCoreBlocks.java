@@ -8,7 +8,9 @@ import dev.poptartking.poptartcore.catalog.CatalogBlockDefinition;
 import dev.poptartking.poptartcore.catalog.PoptartCatalog;
 import dev.poptartking.poptartcore.clinker.ClinkerPillarBlock;
 import dev.poptartking.poptartcore.crucible.CrucibleBlock;
+import dev.poptartking.poptartcore.crucible.CrucibleBlockItem;
 import dev.poptartking.poptartcore.millstone.MillstoneBlock;
+import dev.poptartking.poptartcore.millstone.MillstoneBlockItem;
 import dev.poptartking.poptartcore.millstone.MillstoneRotorBlock;
 import dev.poptartking.poptartcore.millstone.MillstoneStructuralBlock;
 import dev.poptartking.poptartcore.quern.QuernBlock;
@@ -31,8 +33,9 @@ public class PoptartCoreBlocks {
 
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(PoptartCore.MOD_ID);
 
-    public static final DeferredBlock<MillstoneBlock> MILLSTONE =
-            BLOCKS.register("millstone", () -> new MillstoneBlock(millstoneProperties()));
+    public static final CatalogBlockDefinition<MillstoneBlock> MILLSTONE = PoptartCatalog.block(
+                    "millstone", () -> new MillstoneBlock(millstoneProperties()), MillstoneBlockItem::new)
+            .externalModel();
     public static final DeferredBlock<MillstoneStructuralBlock> MILLSTONE_STRUCTURAL = BLOCKS.register(
             "millstone_structural",
             () -> new MillstoneStructuralBlock(millstoneProperties().noLootTable()));
@@ -48,46 +51,55 @@ public class PoptartCoreBlocks {
                 .pushReaction(PushReaction.BLOCK);
     }
 
-    public static final DeferredBlock<CrucibleBlock> CRUCIBLE = BLOCKS.register(
-            "crucible",
-            () -> new CrucibleBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CAMPFIRE)
-                    .sound(SoundType.MUD_BRICKS)
-                    .lightLevel(state -> {
-                        if (state.getValue(CrucibleBlock.LIT)) {
-                            return 15;
-                        }
-                        return state.getValue(CrucibleBlock.FLUID_LEVEL) > 0 ? 8 : 0;
-                    })));
+    public static final CatalogBlockDefinition<CrucibleBlock> CRUCIBLE = PoptartCatalog.block(
+                    "crucible",
+                    () -> new CrucibleBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CAMPFIRE)
+                            .sound(SoundType.MUD_BRICKS)
+                            .lightLevel(state -> {
+                                if (state.getValue(CrucibleBlock.LIT)) {
+                                    return 15;
+                                }
+                                return state.getValue(CrucibleBlock.FLUID_LEVEL) > 0 ? 8 : 0;
+                            })),
+                    CrucibleBlockItem::new)
+            .externalModel();
 
-    public static final DeferredBlock<BlastFurnaceBlock> BLAST_FURNACE = BLOCKS.register(
-            "blast_furnace",
-            () -> new BlastFurnaceBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BLAST_FURNACE)
-                    .lightLevel(state -> state.getValue(BlastFurnaceBlock.LIT) ? 13 : 0)));
+    public static final CatalogBlockDefinition<BlastFurnaceBlock> BLAST_FURNACE = PoptartCatalog.block(
+                    "blast_furnace",
+                    () -> new BlastFurnaceBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BLAST_FURNACE)
+                            .lightLevel(state -> state.getValue(BlastFurnaceBlock.LIT) ? 13 : 0)))
+            .externalModel();
 
-    public static final DeferredBlock<BloomeryBlock> BLOOMERY = BLOCKS.register(
-            "bloomery", () -> new BloomeryBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.MUD_BRICKS)));
-    public static final DeferredBlock<WorkbenchBlock> WORKBENCH = BLOCKS.register(
-            "workbench", () -> new WorkbenchBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CRAFTING_TABLE)));
-    public static final DeferredBlock<QuernBlock> QUERN = BLOCKS.register(
-            "quern",
-            () -> new QuernBlock(
-                    BlockBehaviour.Properties.ofFullCopy(Blocks.STONECUTTER).noOcclusion()));
-    public static final DeferredBlock<PortableEngineBlock> PORTABLE_ENGINE = BLOCKS.register(
-            "portable_engine",
-            () -> new PortableEngineBlock(
-                    BlockBehaviour.Properties.of()
-                            .mapColor(MapColor.TERRACOTTA_WHITE)
-                            .requiresCorrectToolForDrops()
-                            .strength(3.0F, 6.0F)
-                            .sound(SoundType.COPPER)
-                            .lightLevel(state -> PortableEngineBlock.isLitState(state) ? 6 : 0)
-                            .noOcclusion(),
-                    null));
-    public static final DeferredBlock<IronBloomBlock> IRON_BLOOM = BLOCKS.register(
-            "iron_bloom",
-            () -> new IronBloomBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.RAW_IRON_BLOCK)
-                    .noOcclusion()
-                    .noLootTable()));
+    public static final CatalogBlockDefinition<BloomeryBlock> BLOOMERY = PoptartCatalog.block(
+                    "bloomery", () -> new BloomeryBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.MUD_BRICKS)))
+            .externalModel();
+    public static final CatalogBlockDefinition<WorkbenchBlock> WORKBENCH = PoptartCatalog.block(
+                    "workbench", () -> new WorkbenchBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CRAFTING_TABLE)))
+            .externalModel();
+    public static final CatalogBlockDefinition<QuernBlock> QUERN = PoptartCatalog.block(
+                    "quern",
+                    () -> new QuernBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONECUTTER)
+                            .noOcclusion()))
+            .externalModel();
+    public static final CatalogBlockDefinition<PortableEngineBlock> PORTABLE_ENGINE = PoptartCatalog.block(
+                    "portable_engine",
+                    () -> new PortableEngineBlock(
+                            BlockBehaviour.Properties.of()
+                                    .mapColor(MapColor.TERRACOTTA_WHITE)
+                                    .requiresCorrectToolForDrops()
+                                    .strength(3.0F, 6.0F)
+                                    .sound(SoundType.COPPER)
+                                    .lightLevel(state -> PortableEngineBlock.isLitState(state) ? 6 : 0)
+                                    .noOcclusion(),
+                            null))
+            .externalModel();
+    public static final CatalogBlockDefinition<IronBloomBlock> IRON_BLOOM = PoptartCatalog.block(
+                    "iron_bloom",
+                    () -> new IronBloomBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.RAW_IRON_BLOCK)
+                            .noOcclusion()
+                            .noLootTable()))
+            .externalModel()
+            .withoutGeneratedLoot();
 
     public static final CatalogBlockDefinition<Block> TIN_BLOCK = PoptartCatalog.block(
                     "tin_block",

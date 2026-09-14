@@ -11,9 +11,11 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.BiFunction;
 import java.util.function.Supplier;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.data.loot.LootTableProvider.SubProviderEntry;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
@@ -49,12 +51,19 @@ public final class PoptartCatalog {
     }
 
     public static <T extends Block> CatalogBlockDefinition<T> block(String id, Supplier<? extends T> factory) {
+        return block(id, factory, BlockItem::new);
+    }
+
+    public static <T extends Block> CatalogBlockDefinition<T> block(
+            String id,
+            Supplier<? extends T> factory,
+            BiFunction<? super T, Item.Properties, ? extends BlockItem> itemFactory) {
         if (BLOCK_DEFINITIONS.containsKey(id) || ITEM_DEFINITIONS.containsKey(id)) {
             throw new IllegalArgumentException("Duplicate Poptart Catalog entry: " + id);
         }
 
         DeferredBlock<T> block = BLOCKS.register(id, factory);
-        DeferredItem<net.minecraft.world.item.BlockItem> item = ITEMS.registerSimpleBlockItem(id, block);
+        DeferredItem<BlockItem> item = ITEMS.register(id, () -> itemFactory.apply(block.get(), new Item.Properties()));
         CatalogBlockDefinition<T> definition = new CatalogBlockDefinition<>(id, block, item);
         BLOCK_DEFINITIONS.put(id, definition);
         return definition;

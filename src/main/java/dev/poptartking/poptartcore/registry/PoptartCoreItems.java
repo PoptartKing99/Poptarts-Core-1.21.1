@@ -1,12 +1,10 @@
 package dev.poptartking.poptartcore.registry;
 
-import dev.poptartking.poptartcore.PoptartCore;
 import dev.poptartking.poptartcore.beekeeping.BeeSmokerItem;
 import dev.poptartking.poptartcore.beekeeping.BeekeeperArmorItem;
 import dev.poptartking.poptartcore.catalog.CatalogItemDefinition;
 import dev.poptartking.poptartcore.catalog.PoptartCatalog;
 import dev.poptartking.poptartcore.crossbow.RepeatingCrossbowItem;
-import dev.poptartking.poptartcore.crucible.CrucibleBlockItem;
 import dev.poptartking.poptartcore.hammer.HammerItem;
 import dev.poptartking.poptartcore.tool.BonePickItem;
 import dev.poptartking.poptartcore.wax.WaxItem;
@@ -21,14 +19,10 @@ import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.component.ChargedProjectiles;
-import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
-import net.neoforged.neoforge.registries.DeferredRegister;
 import vectorwing.farmersdelight.common.item.KnifeItem;
 
 public class PoptartCoreItems {
-    public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(PoptartCore.MOD_ID);
-
     // Items
     public static final CatalogItemDefinition<ArmorItem> MINING_HELMET = PoptartCatalog.item(
             "mining_helmet",
@@ -224,22 +218,14 @@ public class PoptartCoreItems {
                     PoptartCoreArmorMaterials.STEEL_ARMOR_MATERIAL,
                     ArmorItem.Type.BOOTS,
                     new Item.Properties().durability(325)));
-    public static final DeferredItem<CrucibleBlockItem> CRUCIBLE = ITEMS.register(
-            "crucible", () -> new CrucibleBlockItem(PoptartCoreBlocks.CRUCIBLE.get(), new Item.Properties()));
-    public static final DeferredItem<BlockItem> BLAST_FURNACE = ITEMS.register(
-            "blast_furnace", () -> new BlockItem(PoptartCoreBlocks.BLAST_FURNACE.get(), new Item.Properties()));
-    public static final DeferredItem<BlockItem> BLOOMERY = registerBlockItem("bloomery", PoptartCoreBlocks.BLOOMERY);
-    public static final DeferredItem<BlockItem> WORKBENCH = registerBlockItem("workbench", PoptartCoreBlocks.WORKBENCH);
-    public static final DeferredItem<BlockItem> QUERN = registerBlockItem("quern", PoptartCoreBlocks.QUERN);
-    public static final DeferredItem<BlockItem> PORTABLE_ENGINE =
-            registerBlockItem("portable_engine", PoptartCoreBlocks.PORTABLE_ENGINE);
-    public static final DeferredItem<dev.poptartking.poptartcore.millstone.MillstoneBlockItem> MILLSTONE =
-            ITEMS.register(
-                    "millstone",
-                    () -> new dev.poptartking.poptartcore.millstone.MillstoneBlockItem(
-                            PoptartCoreBlocks.MILLSTONE.get(), new Item.Properties()));
-    public static final DeferredItem<BlockItem> IRON_BLOOM =
-            registerBlockItem("iron_bloom", PoptartCoreBlocks.IRON_BLOOM);
+    public static final DeferredItem<BlockItem> CRUCIBLE = PoptartCoreBlocks.CRUCIBLE.item();
+    public static final DeferredItem<BlockItem> BLAST_FURNACE = PoptartCoreBlocks.BLAST_FURNACE.item();
+    public static final DeferredItem<BlockItem> BLOOMERY = PoptartCoreBlocks.BLOOMERY.item();
+    public static final DeferredItem<BlockItem> WORKBENCH = PoptartCoreBlocks.WORKBENCH.item();
+    public static final DeferredItem<BlockItem> QUERN = PoptartCoreBlocks.QUERN.item();
+    public static final DeferredItem<BlockItem> PORTABLE_ENGINE = PoptartCoreBlocks.PORTABLE_ENGINE.item();
+    public static final DeferredItem<BlockItem> MILLSTONE = PoptartCoreBlocks.MILLSTONE.item();
+    public static final DeferredItem<BlockItem> IRON_BLOOM = PoptartCoreBlocks.IRON_BLOOM.item();
     public static final DeferredItem<BlockItem> CLINKER_BRICKS = PoptartCoreBlocks.CLINKER_BRICKS.item();
     public static final DeferredItem<BlockItem> CLINKER_BRICK_SLAB = PoptartCoreBlocks.CLINKER_BRICK_SLAB.item();
     public static final DeferredItem<BlockItem> CLINKER_BRICK_STAIRS = PoptartCoreBlocks.CLINKER_BRICK_STAIRS.item();
@@ -260,21 +246,9 @@ public class PoptartCoreItems {
     public static final CatalogItemDefinition<Item> PLATE_MOULD =
             PoptartCatalog.item("plate_mould", () -> new Item(new Item.Properties().durability(32)));
 
-    // Helper Functions
-    private static DeferredItem<BlockItem> registerBlockItem(
-            String name,
-            net.neoforged.neoforge.registries.DeferredBlock<? extends net.minecraft.world.level.block.Block> block) {
-        return ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
-    }
-
     public static boolean isMould(ItemStack stack) {
         return stack.is(INGOT_MOULD.get()) || stack.is(PLATE_MOULD.get());
     }
 
-    // Registration
-    public static void register(IEventBus eventBus) {
-        ITEMS.addAlias(PoptartCore.location("steel_sheet"), PoptartCore.location("steel_plate"));
-        ITEMS.addAlias(PoptartCore.location("bronze_sheet"), PoptartCore.location("bronze_plate"));
-        ITEMS.register(eventBus);
-    }
+    public static void initialize() {}
 }

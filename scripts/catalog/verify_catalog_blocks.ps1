@@ -241,3 +241,273 @@ foreach ($loot in @($brickSlabLoot, $tileSlabLoot)) {
 }
 
 Write-Output "Verified $($ClinkerBlocks.Count) Poptart Catalog clinker blocks."
+
+$ironBloomName = $generatedLanguage.PSObject.Properties['block.poptartcore.iron_bloom'].Value
+if ($ironBloomName -ne 'Iron Bloom') {
+    throw 'Wrong generated name for iron_bloom'
+}
+if ($null -ne $mainLanguage.PSObject.Properties['block.poptartcore.iron_bloom']) {
+    throw 'Handwritten Iron Bloom translation still exists'
+}
+foreach ($relativePath in @(
+    'assets\poptartcore\blockstates\iron_bloom.json',
+    'assets\poptartcore\models\item\iron_bloom.json')) {
+    if (-not (Test-Path -LiteralPath (Join-Path $mainRoot $relativePath))) {
+        throw "Missing handwritten Iron Bloom resource: $relativePath"
+    }
+    if (Test-Path -LiteralPath (Join-Path $generatedRoot $relativePath)) {
+        throw "Catalog unexpectedly generated custom Iron Bloom resource: $relativePath"
+    }
+}
+$ironBloomLoot = 'data\poptartcore\loot_table\blocks\iron_bloom.json'
+if ((Test-Path -LiteralPath (Join-Path $mainRoot $ironBloomLoot)) -or
+    (Test-Path -LiteralPath (Join-Path $generatedRoot $ironBloomLoot))) {
+    throw 'Iron Bloom must not have a generated loot table'
+}
+if ($pickaxeTag.values -notcontains 'poptartcore:iron_bloom') {
+    throw 'Pickaxe mining tag is missing iron_bloom'
+}
+
+Write-Output 'Verified the Poptart Catalog Iron Bloom registration.'
+
+$workbenchName = $generatedLanguage.PSObject.Properties['block.poptartcore.workbench'].Value
+if ($workbenchName -ne 'Workbench') {
+    throw 'Wrong generated name for workbench'
+}
+if ($null -ne $mainLanguage.PSObject.Properties['block.poptartcore.workbench']) {
+    throw 'Handwritten Workbench block translation still exists'
+}
+foreach ($relativePath in @(
+    'assets\poptartcore\blockstates\workbench.json',
+    'assets\poptartcore\models\item\workbench.json')) {
+    if (-not (Test-Path -LiteralPath (Join-Path $mainRoot $relativePath))) {
+        throw "Missing handwritten Workbench resource: $relativePath"
+    }
+    if (Test-Path -LiteralPath (Join-Path $generatedRoot $relativePath)) {
+        throw "Catalog unexpectedly generated custom Workbench resource: $relativePath"
+    }
+}
+$workbenchLootPath = 'data\poptartcore\loot_table\blocks\workbench.json'
+$generatedWorkbenchLootPath = Join-Path $generatedRoot $workbenchLootPath
+if (-not (Test-Path -LiteralPath $generatedWorkbenchLootPath)) {
+    throw 'Missing generated Workbench self-drop loot table'
+}
+if (Test-Path -LiteralPath (Join-Path $mainRoot $workbenchLootPath)) {
+    throw 'Handwritten Workbench loot table still exists'
+}
+$workbenchLoot = Get-Content -Raw -LiteralPath $generatedWorkbenchLootPath | ConvertFrom-Json
+if ($workbenchLoot.pools[0].entries[0].name -ne 'poptartcore:workbench') {
+    throw 'Generated Workbench loot table does not drop the Workbench'
+}
+
+Write-Output 'Verified the Poptart Catalog Workbench registration.'
+
+$quernName = $generatedLanguage.PSObject.Properties['block.poptartcore.quern'].Value
+if ($quernName -ne 'Quern') {
+    throw 'Wrong generated name for quern'
+}
+if ($null -ne $mainLanguage.PSObject.Properties['block.poptartcore.quern']) {
+    throw 'Handwritten Quern block translation still exists'
+}
+foreach ($relativePath in @(
+    'assets\poptartcore\blockstates\quern.json',
+    'assets\poptartcore\models\item\quern.json')) {
+    if (-not (Test-Path -LiteralPath (Join-Path $mainRoot $relativePath))) {
+        throw "Missing handwritten Quern resource: $relativePath"
+    }
+    if (Test-Path -LiteralPath (Join-Path $generatedRoot $relativePath)) {
+        throw "Catalog unexpectedly generated custom Quern resource: $relativePath"
+    }
+}
+$quernLootPath = 'data\poptartcore\loot_table\blocks\quern.json'
+$generatedQuernLootPath = Join-Path $generatedRoot $quernLootPath
+if (-not (Test-Path -LiteralPath $generatedQuernLootPath)) {
+    throw 'Missing generated Quern self-drop loot table'
+}
+if (Test-Path -LiteralPath (Join-Path $mainRoot $quernLootPath)) {
+    throw 'Handwritten Quern loot table still exists'
+}
+$quernLoot = Get-Content -Raw -LiteralPath $generatedQuernLootPath | ConvertFrom-Json
+if ($quernLoot.pools[0].entries[0].name -ne 'poptartcore:quern') {
+    throw 'Generated Quern loot table does not drop the Quern'
+}
+
+Write-Output 'Verified the Poptart Catalog Quern registration.'
+
+$bloomeryName = $generatedLanguage.PSObject.Properties['block.poptartcore.bloomery'].Value
+if ($bloomeryName -ne 'Bloomery') {
+    throw 'Wrong generated name for bloomery'
+}
+if ($null -ne $mainLanguage.PSObject.Properties['block.poptartcore.bloomery']) {
+    throw 'Handwritten Bloomery block translation still exists'
+}
+foreach ($relativePath in @(
+    'assets\poptartcore\blockstates\bloomery.json',
+    'assets\poptartcore\models\item\bloomery.json')) {
+    if (-not (Test-Path -LiteralPath (Join-Path $mainRoot $relativePath))) {
+        throw "Missing handwritten Bloomery resource: $relativePath"
+    }
+    if (Test-Path -LiteralPath (Join-Path $generatedRoot $relativePath)) {
+        throw "Catalog unexpectedly generated custom Bloomery resource: $relativePath"
+    }
+}
+$bloomeryLootPath = 'data\poptartcore\loot_table\blocks\bloomery.json'
+$generatedBloomeryLootPath = Join-Path $generatedRoot $bloomeryLootPath
+if (-not (Test-Path -LiteralPath $generatedBloomeryLootPath)) {
+    throw 'Missing generated Bloomery self-drop loot table'
+}
+if (Test-Path -LiteralPath (Join-Path $mainRoot $bloomeryLootPath)) {
+    throw 'Handwritten Bloomery loot table still exists'
+}
+$bloomeryLoot = Get-Content -Raw -LiteralPath $generatedBloomeryLootPath | ConvertFrom-Json
+if ($bloomeryLoot.pools[0].entries[0].name -ne 'poptartcore:bloomery') {
+    throw 'Generated Bloomery loot table does not drop the Bloomery'
+}
+
+Write-Output 'Verified the Poptart Catalog Bloomery registration.'
+
+$portableEngineName = $generatedLanguage.PSObject.Properties['block.poptartcore.portable_engine'].Value
+if ($portableEngineName -ne 'Portable Engine') {
+    throw 'Wrong generated name for portable_engine'
+}
+if ($null -ne $mainLanguage.PSObject.Properties['block.poptartcore.portable_engine']) {
+    throw 'Handwritten Portable Engine block translation still exists'
+}
+foreach ($relativePath in @(
+    'assets\poptartcore\blockstates\portable_engine.json',
+    'assets\poptartcore\models\item\portable_engine.json')) {
+    if (-not (Test-Path -LiteralPath (Join-Path $mainRoot $relativePath))) {
+        throw "Missing handwritten Portable Engine resource: $relativePath"
+    }
+    if (Test-Path -LiteralPath (Join-Path $generatedRoot $relativePath)) {
+        throw "Catalog unexpectedly generated custom Portable Engine resource: $relativePath"
+    }
+}
+$portableEngineLootPath = 'data\poptartcore\loot_table\blocks\portable_engine.json'
+$generatedPortableEngineLootPath = Join-Path $generatedRoot $portableEngineLootPath
+if (-not (Test-Path -LiteralPath $generatedPortableEngineLootPath)) {
+    throw 'Missing generated Portable Engine self-drop loot table'
+}
+if (Test-Path -LiteralPath (Join-Path $mainRoot $portableEngineLootPath)) {
+    throw 'Handwritten Portable Engine loot table still exists'
+}
+$portableEngineLoot = Get-Content -Raw -LiteralPath $generatedPortableEngineLootPath | ConvertFrom-Json
+if ($portableEngineLoot.pools[0].entries[0].name -ne 'poptartcore:portable_engine') {
+    throw 'Generated Portable Engine loot table does not drop the Portable Engine'
+}
+
+Write-Output 'Verified the Poptart Catalog Portable Engine registration.'
+
+$crucibleName = $generatedLanguage.PSObject.Properties['block.poptartcore.crucible'].Value
+if ($crucibleName -ne 'Crucible') {
+    throw 'Wrong generated name for crucible'
+}
+if ($null -ne $mainLanguage.PSObject.Properties['block.poptartcore.crucible']) {
+    throw 'Handwritten Crucible block translation still exists'
+}
+if ($mainLanguage.PSObject.Properties['container.poptartcore.crucible'].Value -ne 'Crucible') {
+    throw 'Crucible menu translation must remain handwritten'
+}
+foreach ($relativePath in @(
+    'assets\poptartcore\blockstates\crucible.json',
+    'assets\poptartcore\models\item\crucible.json')) {
+    if (-not (Test-Path -LiteralPath (Join-Path $mainRoot $relativePath))) {
+        throw "Missing handwritten Crucible resource: $relativePath"
+    }
+    if (Test-Path -LiteralPath (Join-Path $generatedRoot $relativePath)) {
+        throw "Catalog unexpectedly generated custom Crucible resource: $relativePath"
+    }
+}
+$crucibleLootPath = 'data\poptartcore\loot_table\blocks\crucible.json'
+$generatedCrucibleLootPath = Join-Path $generatedRoot $crucibleLootPath
+if (-not (Test-Path -LiteralPath $generatedCrucibleLootPath)) {
+    throw 'Missing generated Crucible self-drop loot table'
+}
+if (Test-Path -LiteralPath (Join-Path $mainRoot $crucibleLootPath)) {
+    throw 'Handwritten Crucible loot table still exists'
+}
+$crucibleLoot = Get-Content -Raw -LiteralPath $generatedCrucibleLootPath | ConvertFrom-Json
+if ($crucibleLoot.pools[0].entries[0].name -ne 'poptartcore:crucible') {
+    throw 'Generated Crucible loot table does not drop the Crucible'
+}
+
+Write-Output 'Verified the Poptart Catalog Crucible registration and custom BlockItem.'
+
+$millstoneName = $generatedLanguage.PSObject.Properties['block.poptartcore.millstone'].Value
+if ($millstoneName -ne 'Millstone') {
+    throw 'Wrong generated name for millstone'
+}
+if ($null -ne $mainLanguage.PSObject.Properties['block.poptartcore.millstone']) {
+    throw 'Handwritten Millstone block translation still exists'
+}
+foreach ($helperName in @('millstone_structural', 'millstone_rotor')) {
+    if ($mainLanguage.PSObject.Properties["block.poptartcore.$helperName"].Value -ne 'Millstone') {
+        throw "Internal Millstone helper translation is missing: $helperName"
+    }
+}
+foreach ($relativePath in @(
+    'assets\poptartcore\blockstates\millstone.json',
+    'assets\poptartcore\models\item\millstone.json')) {
+    if (-not (Test-Path -LiteralPath (Join-Path $mainRoot $relativePath))) {
+        throw "Missing handwritten Millstone resource: $relativePath"
+    }
+    if (Test-Path -LiteralPath (Join-Path $generatedRoot $relativePath)) {
+        throw "Catalog unexpectedly generated custom Millstone resource: $relativePath"
+    }
+}
+$millstoneLootPath = 'data\poptartcore\loot_table\blocks\millstone.json'
+$generatedMillstoneLootPath = Join-Path $generatedRoot $millstoneLootPath
+if (-not (Test-Path -LiteralPath $generatedMillstoneLootPath)) {
+    throw 'Missing generated Millstone self-drop loot table'
+}
+if (Test-Path -LiteralPath (Join-Path $mainRoot $millstoneLootPath)) {
+    throw 'Handwritten Millstone loot table still exists'
+}
+$millstoneLoot = Get-Content -Raw -LiteralPath $generatedMillstoneLootPath | ConvertFrom-Json
+if ($millstoneLoot.pools[0].entries[0].name -ne 'poptartcore:millstone') {
+    throw 'Generated Millstone loot table does not drop the Millstone'
+}
+foreach ($helperName in @('millstone_structural', 'millstone_rotor')) {
+    $helperLootPath = "data\poptartcore\loot_table\blocks\$helperName.json"
+    if ((Test-Path -LiteralPath (Join-Path $mainRoot $helperLootPath)) -or
+        (Test-Path -LiteralPath (Join-Path $generatedRoot $helperLootPath))) {
+        throw "Internal Millstone helper must not have a loot table: $helperName"
+    }
+}
+
+Write-Output 'Verified the Poptart Catalog Millstone and its internal helper blocks.'
+
+$blastFurnaceName = $generatedLanguage.PSObject.Properties['block.poptartcore.blast_furnace'].Value
+if ($blastFurnaceName -ne 'Blast Furnace') {
+    throw 'Wrong generated name for blast_furnace'
+}
+if ($null -ne $mainLanguage.PSObject.Properties['block.poptartcore.blast_furnace']) {
+    throw 'Handwritten Blast Furnace block translation still exists'
+}
+if ($mainLanguage.PSObject.Properties['container.poptartcore.blast_furnace'].Value -ne 'Blast Furnace') {
+    throw 'Blast Furnace menu translation must remain handwritten'
+}
+foreach ($relativePath in @(
+    'assets\poptartcore\blockstates\blast_furnace.json',
+    'assets\poptartcore\models\item\blast_furnace.json')) {
+    if (-not (Test-Path -LiteralPath (Join-Path $mainRoot $relativePath))) {
+        throw "Missing handwritten Blast Furnace resource: $relativePath"
+    }
+    if (Test-Path -LiteralPath (Join-Path $generatedRoot $relativePath)) {
+        throw "Catalog unexpectedly generated custom Blast Furnace resource: $relativePath"
+    }
+}
+$blastFurnaceLootPath = 'data\poptartcore\loot_table\blocks\blast_furnace.json'
+$generatedBlastFurnaceLootPath = Join-Path $generatedRoot $blastFurnaceLootPath
+if (-not (Test-Path -LiteralPath $generatedBlastFurnaceLootPath)) {
+    throw 'Missing generated Blast Furnace self-drop loot table'
+}
+if (Test-Path -LiteralPath (Join-Path $mainRoot $blastFurnaceLootPath)) {
+    throw 'Handwritten Blast Furnace loot table still exists'
+}
+$blastFurnaceLoot = Get-Content -Raw -LiteralPath $generatedBlastFurnaceLootPath | ConvertFrom-Json
+if ($blastFurnaceLoot.pools[0].entries[0].name -ne 'poptartcore:blast_furnace') {
+    throw 'Generated Blast Furnace loot table does not drop the Blast Furnace'
+}
+
+Write-Output 'Verified the Poptart Catalog Blast Furnace registration.'

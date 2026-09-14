@@ -14,7 +14,7 @@ public class PoptartCore {
 
     public PoptartCore(IEventBus modEventBus) {
         PoptartCoreBlocks.register(modEventBus);
-        PoptartCoreItems.register(modEventBus);
+        PoptartCoreItems.initialize();
         PoptartCatalog.register(modEventBus);
         PoptartCoreEntities.register(modEventBus);
         PoptartCoreBlockEntities.register(modEventBus);

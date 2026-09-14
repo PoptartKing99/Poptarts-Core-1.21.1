@@ -17,6 +17,9 @@ public final class CatalogBlockLootProvider extends BlockLootSubProvider {
     @Override
     protected void generate() {
         for (CatalogBlockDefinition<?> definition : PoptartCatalog.blocks()) {
+            if (!definition.generatedLoot()) {
+                continue;
+            }
             if (definition.model() == dev.poptartking.poptartcore.catalog.CatalogBlockModel.SLAB) {
                 add(definition.get(), createSlabItemTable(definition.get()));
             } else if (definition.oreDrop() == null) {
@@ -32,6 +35,7 @@ public final class CatalogBlockLootProvider extends BlockLootSubProvider {
     @Override
     protected Iterable<Block> getKnownBlocks() {
         return PoptartCatalog.blocks().stream()
+                .filter(CatalogBlockDefinition::generatedLoot)
                 .map(CatalogBlockDefinition::get)
                 .map(Block.class::cast)
                 .toList();

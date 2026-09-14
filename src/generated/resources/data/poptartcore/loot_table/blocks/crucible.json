@@ -2,7 +2,7 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "bonus_rolls": 0,
+      "bonus_rolls": 0.0,
       "conditions": [
         {
           "condition": "minecraft:survives_explosion"
@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "poptartcore:quern"
+          "name": "poptartcore:crucible"
         }
       ],
-      "rolls": 1
+      "rolls": 1.0
     }
   ],
-  "random_sequence": "poptartcore:blocks/quern"
+  "random_sequence": "poptartcore:blocks/crucible"
 }

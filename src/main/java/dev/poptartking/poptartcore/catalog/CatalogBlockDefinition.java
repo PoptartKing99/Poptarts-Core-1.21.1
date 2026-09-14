@@ -22,6 +22,7 @@ public final class CatalogBlockDefinition<T extends Block> implements Supplier<T
     private ResourceLocation topTexture;
     private ResourceLocation bottomTexture;
     private int variants = 1;
+    private boolean generatedLoot = true;
     private boolean frozen;
 
     CatalogBlockDefinition(String id, DeferredBlock<T> block, DeferredItem<BlockItem> item) {
@@ -81,6 +82,10 @@ public final class CatalogBlockDefinition<T extends Block> implements Supplier<T
 
     public int variants() {
         return variants;
+    }
+
+    public boolean generatedLoot() {
+        return generatedLoot;
     }
 
     @Override
@@ -149,6 +154,12 @@ public final class CatalogBlockDefinition<T extends Block> implements Supplier<T
 
     public CatalogBlockDefinition<T> externalModel() {
         return configureModel(CatalogBlockModel.EXTERNAL, null, "", 1);
+    }
+
+    public CatalogBlockDefinition<T> withoutGeneratedLoot() {
+        requireMutable();
+        this.generatedLoot = false;
+        return this;
     }
 
     void freeze() {

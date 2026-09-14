@@ -132,7 +132,14 @@ public final class PoptartCatalogGameTests {
                 Map.entry("clinker_tile_wall", "Clinker Tile Wall"),
                 Map.entry("mosaic_clinker_tile", "Mosaic Clinker Tile"),
                 Map.entry("chiseled_clinker_tile", "Chiseled Clinker Tile"),
-                Map.entry("clinker_pillar", "Clinker Pillar"));
+                Map.entry("clinker_pillar", "Clinker Pillar"),
+                Map.entry("iron_bloom", "Iron Bloom"),
+                Map.entry("workbench", "Workbench"),
+                Map.entry("quern", "Quern"),
+                Map.entry("bloomery", "Bloomery"),
+                Map.entry("portable_engine", "Portable Engine"),
+                Map.entry("crucible", "Crucible"),
+                Map.entry("millstone", "Millstone"));
         Set<String> oreBlocks = Set.of(
                 "tin_ore", "deepslate_tin_ore", "lead_ore", "deepslate_lead_ore", "silver_ore", "deepslate_silver_ore");
         helper.assertTrue(
@@ -160,7 +167,14 @@ public final class PoptartCatalogGameTests {
                         "Catalog storage block is missing its packing recipes: " + definition.id());
             } else {
                 helper.assertTrue(
-                        definition.id().contains("clinker")
+                        (definition.id().contains("clinker")
+                                        || definition.id().equals("iron_bloom")
+                                        || definition.id().equals("workbench")
+                                        || definition.id().equals("quern")
+                                        || definition.id().equals("bloomery")
+                                        || definition.id().equals("portable_engine")
+                                        || definition.id().equals("crucible")
+                                        || definition.id().equals("millstone"))
                                 && definition.oreDrop() == null
                                 && definition.storageRecipes() == null,
                         "Unexpected ordinary Catalog block: " + definition.id());
@@ -175,6 +189,55 @@ public final class PoptartCatalogGameTests {
                         && PoptartCoreBlocks.CLINKER_TILE_WALL.model() == CatalogBlockModel.WALL
                         && PoptartCoreBlocks.CLINKER_PILLAR.model() == CatalogBlockModel.EXTERNAL,
                 "Catalog clinker blocks do not preserve their model types");
+        helper.assertTrue(
+                PoptartCoreBlocks.IRON_BLOOM.model() == CatalogBlockModel.EXTERNAL
+                        && !PoptartCoreBlocks.IRON_BLOOM.generatedLoot()
+                        && PoptartCoreBlocks.IRON_BLOOM
+                                        .get()
+                                        .defaultBlockState()
+                                        .getValue(dev.poptartking.poptartcore.bloomery.IronBloomBlock.BLOOMS)
+                                == 1,
+                "Catalog Iron Bloom does not preserve its custom model, loot, and initial stack state");
+        helper.assertTrue(
+                PoptartCoreBlocks.WORKBENCH.model() == CatalogBlockModel.EXTERNAL
+                        && PoptartCoreBlocks.WORKBENCH.generatedLoot()
+                        && PoptartCoreBlocks.WORKBENCH.get()
+                                instanceof dev.poptartking.poptartcore.workbench.WorkbenchBlock,
+                "Catalog Workbench does not preserve its custom block class, model, and self-drop loot");
+        helper.assertTrue(
+                PoptartCoreBlocks.QUERN.model() == CatalogBlockModel.EXTERNAL
+                        && PoptartCoreBlocks.QUERN.generatedLoot()
+                        && PoptartCoreBlocks.QUERN.get() instanceof dev.poptartking.poptartcore.quern.QuernBlock,
+                "Catalog Quern does not preserve its custom block class, model, and self-drop loot");
+        helper.assertTrue(
+                PoptartCoreBlocks.BLOOMERY.model() == CatalogBlockModel.EXTERNAL
+                        && PoptartCoreBlocks.BLOOMERY.generatedLoot()
+                        && PoptartCoreBlocks.BLOOMERY.get()
+                                instanceof dev.poptartking.poptartcore.bloomery.BloomeryBlock,
+                "Catalog Bloomery does not preserve its custom block class, model, and self-drop loot");
+        helper.assertTrue(
+                PoptartCoreBlocks.PORTABLE_ENGINE.model() == CatalogBlockModel.EXTERNAL
+                        && PoptartCoreBlocks.PORTABLE_ENGINE.generatedLoot()
+                        && PoptartCoreBlocks.PORTABLE_ENGINE.get()
+                                instanceof
+                                dev.simulated_team.simulated.content.blocks.portable_engine.PortableEngineBlock,
+                "Catalog Portable Engine does not preserve its Aeronautics block class, model, and self-drop loot");
+        helper.assertTrue(
+                PoptartCoreBlocks.CRUCIBLE.model() == CatalogBlockModel.EXTERNAL
+                        && PoptartCoreBlocks.CRUCIBLE.generatedLoot()
+                        && PoptartCoreBlocks.CRUCIBLE.get()
+                                instanceof dev.poptartking.poptartcore.crucible.CrucibleBlock
+                        && PoptartCoreBlocks.CRUCIBLE.item().get()
+                                instanceof dev.poptartking.poptartcore.crucible.CrucibleBlockItem,
+                "Catalog Crucible does not preserve its custom block, BlockItem, model, and self-drop loot");
+        helper.assertTrue(
+                PoptartCoreBlocks.MILLSTONE.model() == CatalogBlockModel.EXTERNAL
+                        && PoptartCoreBlocks.MILLSTONE.generatedLoot()
+                        && PoptartCoreBlocks.MILLSTONE.get()
+                                instanceof dev.poptartking.poptartcore.millstone.MillstoneBlock
+                        && PoptartCoreBlocks.MILLSTONE.item().get()
+                                instanceof dev.poptartking.poptartcore.millstone.MillstoneBlockItem,
+                "Catalog Millstone does not preserve its custom block, BlockItem, model, and self-drop loot");
         helper.assertTrue(
                 PoptartCoreBlocks.WAX_BLOCK.item().get().getBlock() == PoptartCoreBlocks.WAX_BLOCK.get(),
                 "Catalog block item does not point to its registered block");

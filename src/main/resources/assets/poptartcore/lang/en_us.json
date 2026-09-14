@@ -8,16 +8,8 @@
   "subtitles.poptartcore.bee_smoker.retract": "Bee Smoker retracts",
 
 
-  "block.poptartcore.crucible" : "Crucible",
-  "block.poptartcore.blast_furnace": "Blast Furnace",
-  "block.poptartcore.bloomery": "Bloomery",
-  "block.poptartcore.workbench": "Workbench",
-  "block.poptartcore.quern": "Quern",
-  "block.poptartcore.portable_engine": "Portable Engine",
-  "block.poptartcore.millstone": "Millstone",
   "block.poptartcore.millstone_structural": "Millstone",
   "block.poptartcore.millstone_rotor": "Millstone",
-  "block.poptartcore.iron_bloom": "Iron Bloom",
   "entity.poptartcore.wax_golem": "Wax Golem",
 
   "fluid_type.poptartcore.molten_bronze": "Molten Bronze",
