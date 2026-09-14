@@ -41,6 +41,96 @@ $mainRoot = Join-Path $projectRoot 'src\main\resources'
 $generatedLanguage = Get-Content -Raw -LiteralPath (Join-Path $generatedRoot 'assets\poptart_catalog\lang\en_us.json') | ConvertFrom-Json
 $mainLanguage = Get-Content -Raw -LiteralPath (Join-Path $mainRoot 'assets\poptartcore\lang\en_us.json') | ConvertFrom-Json
 
+$expectedBlockTags = @{
+    'minecraft\tags\block\mineable\axe.json' = @(
+        'poptartcore:crucible',
+        'poptartcore:workbench'
+    )
+    'minecraft\tags\block\mineable\pickaxe.json' = @(
+        'poptartcore:portable_engine',
+        'poptartcore:millstone',
+        'poptartcore:millstone_structural',
+        'poptartcore:millstone_rotor',
+        'poptartcore:crucible',
+        'poptartcore:blast_furnace',
+        'poptartcore:bloomery',
+        'poptartcore:iron_bloom',
+        'poptartcore:clinker_bricks',
+        'poptartcore:clinker_brick_slab',
+        'poptartcore:clinker_brick_stairs',
+        'poptartcore:clinker_brick_wall',
+        'poptartcore:clinker_tile',
+        'poptartcore:clinker_tile_slab',
+        'poptartcore:clinker_tile_stairs',
+        'poptartcore:clinker_tile_wall',
+        'poptartcore:mosaic_clinker_tile',
+        'poptartcore:chiseled_clinker_tile',
+        'poptartcore:clinker_pillar',
+        'poptartcore:quern',
+        'poptartcore:tin_ore',
+        'poptartcore:deepslate_tin_ore',
+        'poptartcore:tin_block',
+        'poptartcore:raw_tin_block',
+        'poptartcore:lead_ore',
+        'poptartcore:deepslate_lead_ore',
+        'poptartcore:lead_block',
+        'poptartcore:raw_lead_block',
+        'poptartcore:silver_ore',
+        'poptartcore:deepslate_silver_ore',
+        'poptartcore:silver_block',
+        'poptartcore:raw_silver_block',
+        'poptartcore:coal_coke_block',
+        'poptartcore:bronze_block',
+        'poptartcore:steel_block'
+    )
+    'minecraft\tags\block\needs_iron_tool.json' = @(
+        'poptartcore:lead_ore',
+        'poptartcore:deepslate_lead_ore',
+        'poptartcore:lead_block',
+        'poptartcore:raw_lead_block',
+        'poptartcore:silver_ore',
+        'poptartcore:deepslate_silver_ore',
+        'poptartcore:silver_block',
+        'poptartcore:raw_silver_block',
+        'poptartcore:steel_block'
+    )
+    'minecraft\tags\block\needs_stone_tool.json' = @(
+        'poptartcore:bronze_block'
+    )
+    'minecraft\tags\block\walls.json' = @(
+        'poptartcore:clinker_brick_wall',
+        'poptartcore:clinker_tile_wall'
+    )
+}
+
+foreach ($entry in $expectedBlockTags.GetEnumerator()) {
+    $relativePath = Join-Path 'data' $entry.Key
+    $generatedPath = Join-Path $generatedRoot $relativePath
+    if (-not (Test-Path -LiteralPath $generatedPath)) {
+        throw "Missing generated block tag: $relativePath"
+    }
+    if (Test-Path -LiteralPath (Join-Path $mainRoot $relativePath)) {
+        throw "Handwritten block tag still exists: $relativePath"
+    }
+
+    $tag = Get-Content -Raw -LiteralPath $generatedPath | ConvertFrom-Json
+    if ($tag.replace -eq $true) {
+        throw "Generated block tag unexpectedly replaces the shared tag: $relativePath"
+    }
+    $expectedValues = @($entry.Value | Sort-Object)
+    $actualValues = @($tag.values | Sort-Object)
+    if (($expectedValues.Count -ne $actualValues.Count) -or
+        (Compare-Object -ReferenceObject $expectedValues -DifferenceObject $actualValues)) {
+        throw "Generated block tag has the wrong values: $relativePath"
+    }
+}
+
+$pickaxeTag = Get-Content -Raw -LiteralPath (Join-Path $generatedRoot 'data\minecraft\tags\block\mineable\pickaxe.json') | ConvertFrom-Json
+$ironToolTag = Get-Content -Raw -LiteralPath (Join-Path $generatedRoot 'data\minecraft\tags\block\needs_iron_tool.json') | ConvertFrom-Json
+$wallTag = Get-Content -Raw -LiteralPath (Join-Path $generatedRoot 'data\minecraft\tags\block\walls.json') | ConvertFrom-Json
+
+Write-Output "Verified $($expectedBlockTags.Count) generated Poptart Catalog block tags."
+
 foreach ($entry in $StorageBlocks.GetEnumerator()) {
     $id = $entry.Key
     $details = $entry.Value
@@ -139,8 +229,6 @@ foreach ($entry in $OreBlocks.GetEnumerator()) {
     }
 }
 
-$pickaxeTag = Get-Content -Raw -LiteralPath (Join-Path $mainRoot 'data\minecraft\tags\block\mineable\pickaxe.json') | ConvertFrom-Json
-$ironToolTag = Get-Content -Raw -LiteralPath (Join-Path $mainRoot 'data\minecraft\tags\block\needs_iron_tool.json') | ConvertFrom-Json
 foreach ($id in $OreBlocks.Keys) {
     if ($pickaxeTag.values -notcontains "poptartcore:$id") {
         throw "Pickaxe mining tag is missing $id"
@@ -224,7 +312,6 @@ foreach ($id in $ClinkerBlocks.Keys) {
     }
 }
 
-$wallTag = Get-Content -Raw -LiteralPath (Join-Path $mainRoot 'data\minecraft\tags\block\walls.json') | ConvertFrom-Json
 foreach ($id in @('clinker_brick_wall', 'clinker_tile_wall')) {
     if ($wallTag.values -notcontains "poptartcore:$id") {
         throw "Wall tag is missing $id"

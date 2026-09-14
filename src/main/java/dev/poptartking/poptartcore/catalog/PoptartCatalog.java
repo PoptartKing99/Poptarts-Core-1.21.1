@@ -3,6 +3,7 @@ package dev.poptartking.poptartcore.catalog;
 import dev.poptartking.poptartcore.PoptartCore;
 import dev.poptartking.poptartcore.catalog.datagen.CatalogBlockLootProvider;
 import dev.poptartking.poptartcore.catalog.datagen.CatalogBlockStateProvider;
+import dev.poptartking.poptartcore.catalog.datagen.CatalogBlockTagProvider;
 import dev.poptartking.poptartcore.catalog.datagen.CatalogItemModelProvider;
 import dev.poptartking.poptartcore.catalog.datagen.CatalogItemTagProvider;
 import dev.poptartking.poptartcore.catalog.datagen.CatalogLanguageProvider;
@@ -120,6 +121,8 @@ public final class PoptartCatalog {
                     List.of(new SubProviderEntry(CatalogBlockLootProvider::new, LootContextParamSets.BLOCK)),
                     event.getLookupProvider()));
             event.createProvider((output, lookup) -> new CatalogRecipeProvider(output, lookup));
+            event.createProvider(
+                    (output, lookup) -> new CatalogBlockTagProvider(output, lookup, event.getExistingFileHelper()));
             event.createProvider(
                     (output, lookup) -> new CatalogItemTagProvider(output, lookup, event.getExistingFileHelper()));
         }

@@ -1,7 +1,11 @@
 package dev.poptartking.poptartcore.catalog;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.function.Supplier;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
@@ -12,6 +16,7 @@ public final class CatalogBlockDefinition<T extends Block> implements Supplier<T
     private final String id;
     private final DeferredBlock<T> block;
     private final DeferredItem<BlockItem> item;
+    private final Set<TagKey<Block>> tags = new LinkedHashSet<>();
     private String displayName;
     private StorageRecipes storageRecipes;
     private Supplier<? extends ItemLike> oreDrop;
@@ -88,6 +93,10 @@ public final class CatalogBlockDefinition<T extends Block> implements Supplier<T
         return generatedLoot;
     }
 
+    public Set<TagKey<Block>> tags() {
+        return Set.copyOf(tags);
+    }
+
     @Override
     public T get() {
         return block.get();
@@ -160,6 +169,29 @@ public final class CatalogBlockDefinition<T extends Block> implements Supplier<T
         requireMutable();
         this.generatedLoot = false;
         return this;
+    }
+
+    @SafeVarargs
+    public final CatalogBlockDefinition<T> tags(TagKey<Block>... tags) {
+        requireMutable();
+        this.tags.addAll(java.util.List.of(tags));
+        return this;
+    }
+
+    public CatalogBlockDefinition<T> mineableWithPickaxe() {
+        return tags(BlockTags.MINEABLE_WITH_PICKAXE);
+    }
+
+    public CatalogBlockDefinition<T> mineableWithAxe() {
+        return tags(BlockTags.MINEABLE_WITH_AXE);
+    }
+
+    public CatalogBlockDefinition<T> requiresStoneTool() {
+        return tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_STONE_TOOL);
+    }
+
+    public CatalogBlockDefinition<T> requiresIronTool() {
+        return tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
     }
 
     void freeze() {
