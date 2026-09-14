@@ -96,18 +96,22 @@ public class PoptartCoreBlocks {
                             .strength(1.0F, 6.0F)))
             .withName("Block of Tin")
             .withStorageRecipes(() -> PoptartCoreItems.TIN_INGOT.get(), "tin_ingots_from_block");
-    public static final DeferredBlock<Block> TIN_ORE = BLOCKS.register(
-            "tin_ore",
-            () -> new Block(
-                    BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_ORE).strength(2.0F, 6.0F)));
-    public static final DeferredBlock<Block> DEEPSLATE_TIN_ORE = BLOCKS.register(
-            "deepslate_tin_ore",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_COPPER_ORE)
-                    .strength(3.0F, 6.0F)));
-    public static final DeferredBlock<Block> RAW_TIN_BLOCK = BLOCKS.register(
-            "raw_tin_block",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.RAW_COPPER_BLOCK)
-                    .strength(5.0F, 6.0F)));
+    public static final CatalogBlockDefinition<Block> TIN_ORE = PoptartCatalog.block(
+                    "tin_ore",
+                    () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_ORE)
+                            .strength(2.0F, 6.0F)))
+            .withOreDrop(() -> PoptartCoreItems.RAW_TIN.get());
+    public static final CatalogBlockDefinition<Block> DEEPSLATE_TIN_ORE = PoptartCatalog.block(
+                    "deepslate_tin_ore",
+                    () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_COPPER_ORE)
+                            .strength(3.0F, 6.0F)))
+            .withOreDrop(() -> PoptartCoreItems.RAW_TIN.get());
+    public static final CatalogBlockDefinition<Block> RAW_TIN_BLOCK = PoptartCatalog.block(
+                    "raw_tin_block",
+                    () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.RAW_COPPER_BLOCK)
+                            .strength(5.0F, 6.0F)))
+            .withName("Block of Raw Tin")
+            .withStorageRecipes(() -> PoptartCoreItems.RAW_TIN.get(), "raw_tin_from_block");
 
     public static final CatalogBlockDefinition<Block> LEAD_BLOCK = PoptartCatalog.block(
                     "lead_block",
@@ -116,22 +120,26 @@ public class PoptartCoreBlocks {
                             .strength(1.0F, 6.0F)))
             .withName("Block of Lead")
             .withStorageRecipes(() -> PoptartCoreItems.LEAD_INGOT.get(), "lead_ingots_from_block");
-    public static final DeferredBlock<Block> LEAD_ORE = BLOCKS.register(
-            "lead_ore",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_ORE)
-                    .sound(SoundType.STONE)
-                    .requiresCorrectToolForDrops()
-                    .strength(2.0F, 6.0F)));
-    public static final DeferredBlock<Block> DEEPSLATE_LEAD_ORE = BLOCKS.register(
-            "deepslate_lead_ore",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_ORE)
-                    .sound(SoundType.DEEPSLATE)
-                    .requiresCorrectToolForDrops()
-                    .strength(3.0F, 6.0F)));
-    public static final DeferredBlock<Block> RAW_LEAD_BLOCK = BLOCKS.register(
-            "raw_lead_block",
-            () -> new Block(
-                    BlockBehaviour.Properties.ofFullCopy(Blocks.RAW_IRON_BLOCK).strength(5.0F, 6.0F)));
+    public static final CatalogBlockDefinition<Block> LEAD_ORE = PoptartCatalog.block(
+                    "lead_ore",
+                    () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_ORE)
+                            .sound(SoundType.STONE)
+                            .requiresCorrectToolForDrops()
+                            .strength(2.0F, 6.0F)))
+            .withOreDrop(() -> PoptartCoreItems.RAW_LEAD.get());
+    public static final CatalogBlockDefinition<Block> DEEPSLATE_LEAD_ORE = PoptartCatalog.block(
+                    "deepslate_lead_ore",
+                    () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_ORE)
+                            .sound(SoundType.DEEPSLATE)
+                            .requiresCorrectToolForDrops()
+                            .strength(3.0F, 6.0F)))
+            .withOreDrop(() -> PoptartCoreItems.RAW_LEAD.get());
+    public static final CatalogBlockDefinition<Block> RAW_LEAD_BLOCK = PoptartCatalog.block(
+                    "raw_lead_block",
+                    () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.RAW_IRON_BLOCK)
+                            .strength(5.0F, 6.0F)))
+            .withName("Block of Raw Lead")
+            .withStorageRecipes(() -> PoptartCoreItems.RAW_LEAD.get(), "raw_lead_from_block");
 
     public static final CatalogBlockDefinition<Block> SILVER_BLOCK = PoptartCatalog.block(
                     "silver_block",
@@ -140,22 +148,26 @@ public class PoptartCoreBlocks {
                             .strength(5.0F, 6.0F)))
             .withName("Block of Silver")
             .withStorageRecipes(() -> PoptartCoreItems.SILVER_INGOT.get(), "silver_ingots_from_block");
-    public static final DeferredBlock<Block> SILVER_ORE = BLOCKS.register(
-            "silver_ore",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_ORE)
-                    .sound(SoundType.STONE)
-                    .requiresCorrectToolForDrops()
-                    .strength(5.0F, 6.0F)));
-    public static final DeferredBlock<Block> DEEPSLATE_SILVER_ORE = BLOCKS.register(
-            "deepslate_silver_ore",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_IRON_ORE)
-                    .sound(SoundType.DEEPSLATE)
-                    .requiresCorrectToolForDrops()
-                    .strength(6.0F, 6.0F)));
-    public static final DeferredBlock<Block> RAW_SILVER_BLOCK = BLOCKS.register(
-            "raw_silver_block",
-            () -> new Block(
-                    BlockBehaviour.Properties.ofFullCopy(Blocks.RAW_IRON_BLOCK).strength(5.0F, 6.0F)));
+    public static final CatalogBlockDefinition<Block> SILVER_ORE = PoptartCatalog.block(
+                    "silver_ore",
+                    () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_ORE)
+                            .sound(SoundType.STONE)
+                            .requiresCorrectToolForDrops()
+                            .strength(5.0F, 6.0F)))
+            .withOreDrop(() -> PoptartCoreItems.RAW_SILVER.get());
+    public static final CatalogBlockDefinition<Block> DEEPSLATE_SILVER_ORE = PoptartCatalog.block(
+                    "deepslate_silver_ore",
+                    () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_IRON_ORE)
+                            .sound(SoundType.DEEPSLATE)
+                            .requiresCorrectToolForDrops()
+                            .strength(6.0F, 6.0F)))
+            .withOreDrop(() -> PoptartCoreItems.RAW_SILVER.get());
+    public static final CatalogBlockDefinition<Block> RAW_SILVER_BLOCK = PoptartCatalog.block(
+                    "raw_silver_block",
+                    () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.RAW_IRON_BLOCK)
+                            .strength(5.0F, 6.0F)))
+            .withName("Block of Raw Silver")
+            .withStorageRecipes(() -> PoptartCoreItems.RAW_SILVER.get(), "raw_silver_from_block");
 
     public static final CatalogBlockDefinition<Block> WAX_BLOCK = PoptartCatalog.block(
                     "wax_block",
@@ -180,29 +192,46 @@ public class PoptartCoreBlocks {
             .withName("Block of Steel")
             .withStorageRecipes(() -> PoptartCoreItems.STEEL_INGOT.get(), "steel_ingot_from_block");
 
-    public static final DeferredBlock<Block> CLINKER_BRICKS =
-            BLOCKS.register("clinker_bricks", () -> new Block(clinkerProperties()));
-    public static final DeferredBlock<SlabBlock> CLINKER_BRICK_SLAB =
-            BLOCKS.register("clinker_brick_slab", () -> new SlabBlock(clinkerProperties()));
-    public static final DeferredBlock<StairBlock> CLINKER_BRICK_STAIRS = BLOCKS.register(
-            "clinker_brick_stairs",
-            () -> new StairBlock(CLINKER_BRICKS.get().defaultBlockState(), clinkerProperties()));
-    public static final DeferredBlock<WallBlock> CLINKER_BRICK_WALL =
-            BLOCKS.register("clinker_brick_wall", () -> new WallBlock(clinkerProperties()));
-    public static final DeferredBlock<Block> CLINKER_TILE =
-            BLOCKS.register("clinker_tile", () -> new Block(clinkerProperties()));
-    public static final DeferredBlock<SlabBlock> CLINKER_TILE_SLAB =
-            BLOCKS.register("clinker_tile_slab", () -> new SlabBlock(clinkerProperties()));
-    public static final DeferredBlock<StairBlock> CLINKER_TILE_STAIRS = BLOCKS.register(
-            "clinker_tile_stairs", () -> new StairBlock(CLINKER_TILE.get().defaultBlockState(), clinkerProperties()));
-    public static final DeferredBlock<WallBlock> CLINKER_TILE_WALL =
-            BLOCKS.register("clinker_tile_wall", () -> new WallBlock(clinkerProperties()));
-    public static final DeferredBlock<Block> MOSAIC_CLINKER_TILE =
-            BLOCKS.register("mosaic_clinker_tile", () -> new Block(clinkerProperties()));
-    public static final DeferredBlock<Block> CHISELED_CLINKER_TILE =
-            BLOCKS.register("chiseled_clinker_tile", () -> new Block(clinkerProperties()));
-    public static final DeferredBlock<ClinkerPillarBlock> CLINKER_PILLAR =
-            BLOCKS.register("clinker_pillar", () -> new ClinkerPillarBlock(clinkerProperties()));
+    public static final CatalogBlockDefinition<Block> CLINKER_BRICKS = PoptartCatalog.block(
+                    "clinker_bricks", () -> new Block(clinkerProperties()))
+            .randomCubeModel(PoptartCore.location("block/clinker/clinker_bricks"), "clinker", 12);
+    public static final CatalogBlockDefinition<SlabBlock> CLINKER_BRICK_SLAB = PoptartCatalog.block(
+                    "clinker_brick_slab", () -> new SlabBlock(clinkerProperties()))
+            .slabModel(PoptartCore.location("block/clinker/clinker_bricks_1"), "clinker");
+    public static final CatalogBlockDefinition<StairBlock> CLINKER_BRICK_STAIRS = PoptartCatalog.block(
+                    "clinker_brick_stairs",
+                    () -> new StairBlock(CLINKER_BRICKS.get().defaultBlockState(), clinkerProperties()))
+            .stairsModel(PoptartCore.location("block/clinker/clinker_bricks_1"), "clinker");
+    public static final CatalogBlockDefinition<WallBlock> CLINKER_BRICK_WALL = PoptartCatalog.block(
+                    "clinker_brick_wall", () -> new WallBlock(clinkerProperties()))
+            .wallModel(PoptartCore.location("block/clinker/clinker_bricks_1"), "clinker");
+    public static final CatalogBlockDefinition<Block> CLINKER_TILE = PoptartCatalog.block(
+                    "clinker_tile", () -> new Block(clinkerProperties()))
+            .simpleModel(PoptartCore.location("block/clinker/clinker_tile"), "clinker");
+    public static final CatalogBlockDefinition<SlabBlock> CLINKER_TILE_SLAB = PoptartCatalog.block(
+                    "clinker_tile_slab", () -> new SlabBlock(clinkerProperties()))
+            .slabModel(PoptartCore.location("block/clinker/clinker_tile"), "clinker");
+    public static final CatalogBlockDefinition<StairBlock> CLINKER_TILE_STAIRS = PoptartCatalog.block(
+                    "clinker_tile_stairs",
+                    () -> new StairBlock(CLINKER_TILE.get().defaultBlockState(), clinkerProperties()))
+            .stairsModel(PoptartCore.location("block/clinker/clinker_tile"), "clinker");
+    public static final CatalogBlockDefinition<WallBlock> CLINKER_TILE_WALL = PoptartCatalog.block(
+                    "clinker_tile_wall", () -> new WallBlock(clinkerProperties()))
+            .wallModel(PoptartCore.location("block/clinker/clinker_tile"), "clinker");
+    public static final CatalogBlockDefinition<Block> MOSAIC_CLINKER_TILE = PoptartCatalog.block(
+                    "mosaic_clinker_tile", () -> new Block(clinkerProperties()))
+            .randomBottomTopModel(
+                    PoptartCore.location("block/clinker/mosaic_clinker_tile"),
+                    PoptartCore.location("block/clinker/mosaic_clinker_tile_top"),
+                    PoptartCore.location("block/clinker/mosaic_clinker_tile_bottom"),
+                    "clinker",
+                    4);
+    public static final CatalogBlockDefinition<Block> CHISELED_CLINKER_TILE = PoptartCatalog.block(
+                    "chiseled_clinker_tile", () -> new Block(clinkerProperties()))
+            .simpleModel(PoptartCore.location("block/clinker/chiseled_clinker_tile"), "clinker");
+    public static final CatalogBlockDefinition<ClinkerPillarBlock> CLINKER_PILLAR = PoptartCatalog.block(
+                    "clinker_pillar", () -> new ClinkerPillarBlock(clinkerProperties()))
+            .externalModel();
 
     private static BlockBehaviour.Properties clinkerProperties() {
         return BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICKS);

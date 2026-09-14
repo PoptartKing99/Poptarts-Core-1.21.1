@@ -62,26 +62,28 @@ public class PoptartCoreTabs {
                         output.accept(PoptartCoreItems.PLATE_MOULD.get());
                         output.accept(PoptartCoreItems.UNFIRED_PLATE_MOULD.get());
 
-                        output.accept(PoptartCoreItems.TIN_ORE);
-                        output.accept(PoptartCoreItems.DEEPSLATE_TIN_ORE);
+                        output.accept(PoptartCoreBlocks.TIN_ORE.item().get());
+                        output.accept(PoptartCoreBlocks.DEEPSLATE_TIN_ORE.item().get());
                         output.accept(PoptartCoreItems.RAW_TIN.get());
-                        output.accept(PoptartCoreItems.RAW_TIN_BLOCK);
+                        output.accept(PoptartCoreBlocks.RAW_TIN_BLOCK.item().get());
                         output.accept(PoptartCoreItems.TIN_INGOT.get());
                         output.accept(PoptartCoreItems.TIN_NUGGET.get());
                         output.accept(PoptartCoreBlocks.TIN_BLOCK.item().get());
 
-                        output.accept(PoptartCoreItems.LEAD_ORE);
-                        output.accept(PoptartCoreItems.DEEPSLATE_LEAD_ORE);
+                        output.accept(PoptartCoreBlocks.LEAD_ORE.item().get());
+                        output.accept(
+                                PoptartCoreBlocks.DEEPSLATE_LEAD_ORE.item().get());
                         output.accept(PoptartCoreItems.RAW_LEAD.get());
-                        output.accept(PoptartCoreItems.RAW_LEAD_BLOCK);
+                        output.accept(PoptartCoreBlocks.RAW_LEAD_BLOCK.item().get());
                         output.accept(PoptartCoreItems.LEAD_INGOT.get());
                         output.accept(PoptartCoreItems.LEAD_NUGGET.get());
                         output.accept(PoptartCoreBlocks.LEAD_BLOCK.item().get());
 
-                        output.accept(PoptartCoreItems.SILVER_ORE);
-                        output.accept(PoptartCoreItems.DEEPSLATE_SILVER_ORE);
+                        output.accept(PoptartCoreBlocks.SILVER_ORE.item().get());
+                        output.accept(
+                                PoptartCoreBlocks.DEEPSLATE_SILVER_ORE.item().get());
                         output.accept(PoptartCoreItems.RAW_SILVER.get());
-                        output.accept(PoptartCoreItems.RAW_SILVER_BLOCK);
+                        output.accept(PoptartCoreBlocks.RAW_SILVER_BLOCK.item().get());
                         output.accept(PoptartCoreItems.SILVER_INGOT.get());
                         output.accept(PoptartCoreItems.SILVER_NUGGET.get());
                         output.accept(PoptartCoreBlocks.SILVER_BLOCK.item().get());

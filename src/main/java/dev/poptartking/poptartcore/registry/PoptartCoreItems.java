@@ -240,44 +240,17 @@ public class PoptartCoreItems {
                             PoptartCoreBlocks.MILLSTONE.get(), new Item.Properties()));
     public static final DeferredItem<BlockItem> IRON_BLOOM =
             registerBlockItem("iron_bloom", PoptartCoreBlocks.IRON_BLOOM);
-    public static final DeferredItem<BlockItem> TIN_ORE = registerBlockItem("tin_ore", PoptartCoreBlocks.TIN_ORE);
-    public static final DeferredItem<BlockItem> DEEPSLATE_TIN_ORE =
-            registerBlockItem("deepslate_tin_ore", PoptartCoreBlocks.DEEPSLATE_TIN_ORE);
-    public static final DeferredItem<BlockItem> RAW_TIN_BLOCK =
-            registerBlockItem("raw_tin_block", PoptartCoreBlocks.RAW_TIN_BLOCK);
-    public static final DeferredItem<BlockItem> LEAD_ORE = registerBlockItem("lead_ore", PoptartCoreBlocks.LEAD_ORE);
-    public static final DeferredItem<BlockItem> DEEPSLATE_LEAD_ORE =
-            registerBlockItem("deepslate_lead_ore", PoptartCoreBlocks.DEEPSLATE_LEAD_ORE);
-    public static final DeferredItem<BlockItem> RAW_LEAD_BLOCK =
-            registerBlockItem("raw_lead_block", PoptartCoreBlocks.RAW_LEAD_BLOCK);
-    public static final DeferredItem<BlockItem> SILVER_ORE =
-            registerBlockItem("silver_ore", PoptartCoreBlocks.SILVER_ORE);
-    public static final DeferredItem<BlockItem> DEEPSLATE_SILVER_ORE =
-            registerBlockItem("deepslate_silver_ore", PoptartCoreBlocks.DEEPSLATE_SILVER_ORE);
-    public static final DeferredItem<BlockItem> RAW_SILVER_BLOCK =
-            registerBlockItem("raw_silver_block", PoptartCoreBlocks.RAW_SILVER_BLOCK);
-    public static final DeferredItem<BlockItem> CLINKER_BRICKS =
-            registerBlockItem("clinker_bricks", PoptartCoreBlocks.CLINKER_BRICKS);
-    public static final DeferredItem<BlockItem> CLINKER_BRICK_SLAB =
-            registerBlockItem("clinker_brick_slab", PoptartCoreBlocks.CLINKER_BRICK_SLAB);
-    public static final DeferredItem<BlockItem> CLINKER_BRICK_STAIRS =
-            registerBlockItem("clinker_brick_stairs", PoptartCoreBlocks.CLINKER_BRICK_STAIRS);
-    public static final DeferredItem<BlockItem> CLINKER_BRICK_WALL =
-            registerBlockItem("clinker_brick_wall", PoptartCoreBlocks.CLINKER_BRICK_WALL);
-    public static final DeferredItem<BlockItem> CLINKER_TILE =
-            registerBlockItem("clinker_tile", PoptartCoreBlocks.CLINKER_TILE);
-    public static final DeferredItem<BlockItem> CLINKER_TILE_SLAB =
-            registerBlockItem("clinker_tile_slab", PoptartCoreBlocks.CLINKER_TILE_SLAB);
-    public static final DeferredItem<BlockItem> CLINKER_TILE_STAIRS =
-            registerBlockItem("clinker_tile_stairs", PoptartCoreBlocks.CLINKER_TILE_STAIRS);
-    public static final DeferredItem<BlockItem> CLINKER_TILE_WALL =
-            registerBlockItem("clinker_tile_wall", PoptartCoreBlocks.CLINKER_TILE_WALL);
-    public static final DeferredItem<BlockItem> MOSAIC_CLINKER_TILE =
-            registerBlockItem("mosaic_clinker_tile", PoptartCoreBlocks.MOSAIC_CLINKER_TILE);
-    public static final DeferredItem<BlockItem> CHISELED_CLINKER_TILE =
-            registerBlockItem("chiseled_clinker_tile", PoptartCoreBlocks.CHISELED_CLINKER_TILE);
-    public static final DeferredItem<BlockItem> CLINKER_PILLAR =
-            registerBlockItem("clinker_pillar", PoptartCoreBlocks.CLINKER_PILLAR);
+    public static final DeferredItem<BlockItem> CLINKER_BRICKS = PoptartCoreBlocks.CLINKER_BRICKS.item();
+    public static final DeferredItem<BlockItem> CLINKER_BRICK_SLAB = PoptartCoreBlocks.CLINKER_BRICK_SLAB.item();
+    public static final DeferredItem<BlockItem> CLINKER_BRICK_STAIRS = PoptartCoreBlocks.CLINKER_BRICK_STAIRS.item();
+    public static final DeferredItem<BlockItem> CLINKER_BRICK_WALL = PoptartCoreBlocks.CLINKER_BRICK_WALL.item();
+    public static final DeferredItem<BlockItem> CLINKER_TILE = PoptartCoreBlocks.CLINKER_TILE.item();
+    public static final DeferredItem<BlockItem> CLINKER_TILE_SLAB = PoptartCoreBlocks.CLINKER_TILE_SLAB.item();
+    public static final DeferredItem<BlockItem> CLINKER_TILE_STAIRS = PoptartCoreBlocks.CLINKER_TILE_STAIRS.item();
+    public static final DeferredItem<BlockItem> CLINKER_TILE_WALL = PoptartCoreBlocks.CLINKER_TILE_WALL.item();
+    public static final DeferredItem<BlockItem> MOSAIC_CLINKER_TILE = PoptartCoreBlocks.MOSAIC_CLINKER_TILE.item();
+    public static final DeferredItem<BlockItem> CHISELED_CLINKER_TILE = PoptartCoreBlocks.CHISELED_CLINKER_TILE.item();
+    public static final DeferredItem<BlockItem> CLINKER_PILLAR = PoptartCoreBlocks.CLINKER_PILLAR.item();
     public static final CatalogItemDefinition<Item> UNFIRED_INGOT_MOULD =
             PoptartCatalog.simpleItem("unfired_ingot_mould");
     public static final CatalogItemDefinition<Item> INGOT_MOULD =

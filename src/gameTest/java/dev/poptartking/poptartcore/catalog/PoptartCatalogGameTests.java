@@ -105,17 +105,39 @@ public final class PoptartCatalogGameTests {
                     PoptartCore.location(definition.id()).equals(BuiltInRegistries.ITEM.getKey(definition.get())),
                     "Catalog item has the wrong registry ID: " + definition.id());
         }
-        Map<String, String> expectedBlockNames = Map.of(
-                "tin_block", "Block of Tin",
-                "lead_block", "Block of Lead",
-                "silver_block", "Block of Silver",
-                "wax_block", "Wax Block",
-                "coal_coke_block", "Coal Coke Block",
-                "bronze_block", "Block of Bronze",
-                "steel_block", "Block of Steel");
+        Map<String, String> expectedBlockNames = Map.ofEntries(
+                Map.entry("tin_block", "Block of Tin"),
+                Map.entry("raw_tin_block", "Block of Raw Tin"),
+                Map.entry("lead_block", "Block of Lead"),
+                Map.entry("raw_lead_block", "Block of Raw Lead"),
+                Map.entry("silver_block", "Block of Silver"),
+                Map.entry("raw_silver_block", "Block of Raw Silver"),
+                Map.entry("wax_block", "Wax Block"),
+                Map.entry("coal_coke_block", "Coal Coke Block"),
+                Map.entry("bronze_block", "Block of Bronze"),
+                Map.entry("steel_block", "Block of Steel"),
+                Map.entry("tin_ore", "Tin Ore"),
+                Map.entry("deepslate_tin_ore", "Deepslate Tin Ore"),
+                Map.entry("lead_ore", "Lead Ore"),
+                Map.entry("deepslate_lead_ore", "Deepslate Lead Ore"),
+                Map.entry("silver_ore", "Silver Ore"),
+                Map.entry("deepslate_silver_ore", "Deepslate Silver Ore"),
+                Map.entry("clinker_bricks", "Clinker Bricks"),
+                Map.entry("clinker_brick_slab", "Clinker Brick Slab"),
+                Map.entry("clinker_brick_stairs", "Clinker Brick Stairs"),
+                Map.entry("clinker_brick_wall", "Clinker Brick Wall"),
+                Map.entry("clinker_tile", "Clinker Tile"),
+                Map.entry("clinker_tile_slab", "Clinker Tile Slab"),
+                Map.entry("clinker_tile_stairs", "Clinker Tile Stairs"),
+                Map.entry("clinker_tile_wall", "Clinker Tile Wall"),
+                Map.entry("mosaic_clinker_tile", "Mosaic Clinker Tile"),
+                Map.entry("chiseled_clinker_tile", "Chiseled Clinker Tile"),
+                Map.entry("clinker_pillar", "Clinker Pillar"));
+        Set<String> oreBlocks = Set.of(
+                "tin_ore", "deepslate_tin_ore", "lead_ore", "deepslate_lead_ore", "silver_ore", "deepslate_silver_ore");
         helper.assertTrue(
                 PoptartCatalog.blocks().size() == expectedBlockNames.size(),
-                "Poptart Catalog does not contain exactly the expected storage blocks");
+                "Poptart Catalog does not contain exactly the expected blocks");
         for (CatalogBlockDefinition<?> definition : PoptartCatalog.blocks()) {
             helper.assertTrue(
                     expectedBlockNames.get(definition.id()).equals(definition.displayName()),
@@ -128,10 +150,31 @@ public final class PoptartCatalogGameTests {
                             .equals(BuiltInRegistries.ITEM.getKey(
                                     definition.item().get())),
                     "Catalog block item has the wrong registry ID: " + definition.id());
-            helper.assertTrue(
-                    definition.storageRecipes() != null,
-                    "Catalog storage block is missing its packing recipes: " + definition.id());
+            if (oreBlocks.contains(definition.id())) {
+                helper.assertTrue(
+                        definition.oreDrop() != null && definition.storageRecipes() == null,
+                        "Catalog ore is missing its ore drop: " + definition.id());
+            } else if (definition.storageRecipes() != null) {
+                helper.assertTrue(
+                        definition.storageRecipes() != null && definition.oreDrop() == null,
+                        "Catalog storage block is missing its packing recipes: " + definition.id());
+            } else {
+                helper.assertTrue(
+                        definition.id().contains("clinker")
+                                && definition.oreDrop() == null
+                                && definition.storageRecipes() == null,
+                        "Unexpected ordinary Catalog block: " + definition.id());
+            }
         }
+        helper.assertTrue(
+                PoptartCoreBlocks.CLINKER_BRICK_SLAB.model() == CatalogBlockModel.SLAB
+                        && PoptartCoreBlocks.CLINKER_BRICK_STAIRS.model() == CatalogBlockModel.STAIRS
+                        && PoptartCoreBlocks.CLINKER_BRICK_WALL.model() == CatalogBlockModel.WALL
+                        && PoptartCoreBlocks.CLINKER_TILE_SLAB.model() == CatalogBlockModel.SLAB
+                        && PoptartCoreBlocks.CLINKER_TILE_STAIRS.model() == CatalogBlockModel.STAIRS
+                        && PoptartCoreBlocks.CLINKER_TILE_WALL.model() == CatalogBlockModel.WALL
+                        && PoptartCoreBlocks.CLINKER_PILLAR.model() == CatalogBlockModel.EXTERNAL,
+                "Catalog clinker blocks do not preserve their model types");
         helper.assertTrue(
                 PoptartCoreBlocks.WAX_BLOCK.item().get().getBlock() == PoptartCoreBlocks.WAX_BLOCK.get(),
                 "Catalog block item does not point to its registered block");

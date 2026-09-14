@@ -17,7 +17,15 @@ public final class CatalogBlockLootProvider extends BlockLootSubProvider {
     @Override
     protected void generate() {
         for (CatalogBlockDefinition<?> definition : PoptartCatalog.blocks()) {
-            dropSelf(definition.get());
+            if (definition.model() == dev.poptartking.poptartcore.catalog.CatalogBlockModel.SLAB) {
+                add(definition.get(), createSlabItemTable(definition.get()));
+            } else if (definition.oreDrop() == null) {
+                dropSelf(definition.get());
+            } else {
+                add(
+                        definition.get(),
+                        block -> createOreDrop(block, definition.oreDrop().get().asItem()));
+            }
         }
     }
 
