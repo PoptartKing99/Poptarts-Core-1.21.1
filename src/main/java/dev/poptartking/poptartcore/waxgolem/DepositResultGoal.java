@@ -7,7 +7,6 @@ import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 
-/* JADX INFO: loaded from: wayfarer_core-0.1.0.jar:dev/tazer/wayfarer/waxgolem/DepositResultGoal.class */
 public class DepositResultGoal extends Goal {
     private static final int SEARCH = 16;
     private final WaxGolem golem;
@@ -26,7 +25,7 @@ public class DepositResultGoal extends Goal {
         if (!this.golem.awake() || this.golem.result().isEmpty()) {
             return false;
         }
-        this.target = DepositSites.best(this.golem, this.golem.result(), 16);
+        this.target = DepositSites.best(this.golem, this.golem.result(), SEARCH);
         if (this.target == null) {
             return false;
         }

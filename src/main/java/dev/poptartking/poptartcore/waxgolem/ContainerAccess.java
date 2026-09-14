@@ -14,7 +14,6 @@ import net.minecraft.world.level.block.ChestBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-/* JADX INFO: loaded from: wayfarer_core-0.1.0.jar:dev/tazer/wayfarer/waxgolem/ContainerAccess.class */
 public final class ContainerAccess {
     public static final int OPEN_DELAY = 30;
     public static final int FACE_REACH = 2;
@@ -88,7 +87,6 @@ public final class ContainerAccess {
         });
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
     public static boolean inFrontOf(WaxGolem golem, BlockPos pos, BlockPos spot, Direction side) {
         int iAbs;
         int along = ((spot.getX() - pos.getX()) * side.getStepX()) + ((spot.getZ() - pos.getZ()) * side.getStepZ());
@@ -115,8 +113,8 @@ public final class ContainerAccess {
     public static void setOpen(Level level, BlockPos pos, boolean opening) {
         BlockState state = level.getBlockState(pos);
         Block block = state.getBlock();
-        if ((block instanceof BarrelBlock) && ((Boolean) state.getValue(BarrelBlock.OPEN)).booleanValue() != opening) {
-            level.setBlock(pos, (BlockState) state.setValue(BarrelBlock.OPEN, Boolean.valueOf(opening)), 3);
+        if (block instanceof BarrelBlock && state.getValue(BarrelBlock.OPEN) != opening) {
+            level.setBlock(pos, state.setValue(BarrelBlock.OPEN, opening), 3);
         }
         level.blockEvent(pos, block, 1, opening ? 1 : 0);
         SoundEvent sound = sound(block, opening);

@@ -1,7 +1,0 @@
-{
-  "type": "minecraft:crafting_shaped",
-  "category": "building",
-  "key": { "#": { "item": "poptartcore:steel_ingot" } },
-  "pattern": ["###", "###", "###"],
-  "result": { "id": "poptartcore:steel_block" }
-}

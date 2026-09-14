@@ -1,6 +1,7 @@
 package dev.poptartking.poptartcore;
 
 import dev.poptartking.poptartcore.blastfurnace.BlastFurnaceCapabilities;
+import dev.poptartking.poptartcore.catalog.PoptartCatalog;
 import dev.poptartking.poptartcore.registry.*;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
@@ -14,6 +15,7 @@ public class PoptartCore {
     public PoptartCore(IEventBus modEventBus) {
         PoptartCoreBlocks.register(modEventBus);
         PoptartCoreItems.register(modEventBus);
+        PoptartCatalog.register(modEventBus);
         PoptartCoreEntities.register(modEventBus);
         PoptartCoreBlockEntities.register(modEventBus);
         PoptartCoreMenus.register(modEventBus);

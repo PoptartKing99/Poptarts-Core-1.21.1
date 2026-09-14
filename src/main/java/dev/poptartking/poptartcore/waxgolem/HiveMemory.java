@@ -2,7 +2,6 @@ package dev.poptartking.poptartcore.waxgolem;
 
 import net.minecraft.core.BlockPos;
 
-/* JADX INFO: loaded from: wayfarer_core-0.1.0.jar:dev/tazer/wayfarer/waxgolem/HiveMemory.class */
 public final class HiveMemory {
     public static final int UNKNOWN = -1;
     public static final long SMOKE_MEMORY = 2400;

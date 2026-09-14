@@ -24,7 +24,9 @@ function Require-File([string]$relativePath) {
 }
 
 Require-Text 'src/main/java/dev/poptartking/poptartcore/registry/PoptartCoreItems.java' @(
-    'REDSTONE_CIRCUIT', 'BONE_PICK', 'FLINT_AXE', 'FLINT_SHOVEL', 'FIRESTARTER', 'REPEATING_CROSSBOW', 'durability\(300\)'
+    'REDSTONE_CIRCUIT', 'BONE_PICK', 'FLINT_AXE', 'FLINT_SHOVEL', 'FIRESTARTER',
+    'CatalogItemDefinition<RepeatingCrossbowItem> REPEATING_CROSSBOW', 'durability\(300\)',
+    '(?s)REPEATING_CROSSBOW.*?\.withoutGeneratedModel\(\)'
 )
 Require-Text 'src/main/java/dev/poptartking/poptartcore/registry/PoptartCoreTiers.java' @(
     'public static final Tier FLINT', 'public static final Tier BONE', '100', '150'
@@ -41,9 +43,13 @@ Require-Text 'src/main/java/dev/poptartking/poptartcore/client/PoptartCoreItemPr
 
 $itemNames = @('bone_pick', 'flint_axe', 'flint_shovel', 'firestarter', 'redstone_circuit', 'repeating_crossbow')
 foreach ($name in $itemNames) {
-    Require-File "src/main/resources/assets/poptartcore/models/item/$name.json"
     Require-File "src/main/resources/data/poptartcore/recipe/$name.json"
 }
+$catalogItemNames = @('bone_pick', 'flint_axe', 'flint_shovel', 'firestarter', 'redstone_circuit')
+foreach ($name in $catalogItemNames) {
+    Require-File "src/generated/resources/assets/poptartcore/models/item/$name.json"
+}
+Require-File 'src/main/resources/assets/poptartcore/models/item/repeating_crossbow.json'
 foreach ($name in $itemNames | Where-Object { $_ -ne 'repeating_crossbow' }) {
     Require-File "src/main/resources/assets/poptartcore/textures/item/$name.png"
 }

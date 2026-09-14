@@ -2,23 +2,23 @@ $ErrorActionPreference = 'Stop'
 
 $projectRoot = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
 $resourceRoot = Join-Path $projectRoot 'src\main\resources'
+$generatedResourceRoot = Join-Path $projectRoot 'src\generated\resources'
 $blocksSource = Get-Content -Raw -LiteralPath (Join-Path $projectRoot 'src\main\java\dev\poptartking\poptartcore\registry\PoptartCoreBlocks.java')
 $itemsSource = Get-Content -Raw -LiteralPath (Join-Path $projectRoot 'src\main\java\dev\poptartking\poptartcore\registry\PoptartCoreItems.java')
 $tabsSource = Get-Content -Raw -LiteralPath (Join-Path $projectRoot 'src\main\java\dev\poptartking\poptartcore\registry\PoptartCoreTabs.java')
 $mixins = Get-Content -Raw -LiteralPath (Join-Path $resourceRoot 'poptartcore.mixins.json') | ConvertFrom-Json
 $language = Get-Content -Raw -LiteralPath (Join-Path $resourceRoot 'assets\poptartcore\lang\en_us.json') | ConvertFrom-Json
+$catalogLanguage = Get-Content -Raw -LiteralPath (Join-Path $generatedResourceRoot 'assets\poptart_catalog\lang\en_us.json') | ConvertFrom-Json
 $blockIds = @('wax_block', 'coal_coke_block', 'bronze_block', 'steel_block')
 
-if ($itemsSource -notmatch '\bWAX\b' -or -not $language.PSObject.Properties['item.poptartcore.wax']) {
+if ($itemsSource -notmatch '\bWAX\b' -or -not $catalogLanguage.PSObject.Properties['item.poptartcore.wax']) {
     throw 'Wax item registration or language entry is missing.'
 }
-foreach ($relativePath in @(
-    'assets\poptartcore\models\item\wax.json',
-    'assets\poptartcore\textures\item\wax.png'
-)) {
-    if (-not (Test-Path -LiteralPath (Join-Path $resourceRoot $relativePath))) {
-        throw "Missing Wax resource: $relativePath"
-    }
+if (-not (Test-Path -LiteralPath (Join-Path $generatedResourceRoot 'assets\poptartcore\models\item\wax.json'))) {
+    throw 'Missing generated Wax item model.'
+}
+if (-not (Test-Path -LiteralPath (Join-Path $resourceRoot 'assets\poptartcore\textures\item\wax.png'))) {
+    throw 'Missing Wax item texture.'
 }
 
 foreach ($blockId in $blockIds) {

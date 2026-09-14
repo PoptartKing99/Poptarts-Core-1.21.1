@@ -4,6 +4,8 @@ import dev.poptartking.poptartcore.PoptartCore;
 import dev.poptartking.poptartcore.blastfurnace.BlastFurnaceBlock;
 import dev.poptartking.poptartcore.bloomery.BloomeryBlock;
 import dev.poptartking.poptartcore.bloomery.IronBloomBlock;
+import dev.poptartking.poptartcore.catalog.CatalogBlockDefinition;
+import dev.poptartking.poptartcore.catalog.PoptartCatalog;
 import dev.poptartking.poptartcore.clinker.ClinkerPillarBlock;
 import dev.poptartking.poptartcore.crucible.CrucibleBlock;
 import dev.poptartking.poptartcore.millstone.MillstoneBlock;
@@ -87,11 +89,13 @@ public class PoptartCoreBlocks {
                     .noOcclusion()
                     .noLootTable()));
 
-    public static final DeferredBlock<Block> TIN_BLOCK = BLOCKS.register(
-            "tin_block",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)
-                    .sound(SoundType.METAL)
-                    .strength(1.0F, 6.0F)));
+    public static final CatalogBlockDefinition<Block> TIN_BLOCK = PoptartCatalog.block(
+                    "tin_block",
+                    () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)
+                            .sound(SoundType.METAL)
+                            .strength(1.0F, 6.0F)))
+            .withName("Block of Tin")
+            .withStorageRecipes(() -> PoptartCoreItems.TIN_INGOT.get(), "tin_ingots_from_block");
     public static final DeferredBlock<Block> TIN_ORE = BLOCKS.register(
             "tin_ore",
             () -> new Block(
@@ -105,11 +109,13 @@ public class PoptartCoreBlocks {
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.RAW_COPPER_BLOCK)
                     .strength(5.0F, 6.0F)));
 
-    public static final DeferredBlock<Block> LEAD_BLOCK = BLOCKS.register(
-            "lead_block",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)
-                    .sound(SoundType.METAL)
-                    .strength(1.0F, 6.0F)));
+    public static final CatalogBlockDefinition<Block> LEAD_BLOCK = PoptartCatalog.block(
+                    "lead_block",
+                    () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)
+                            .sound(SoundType.METAL)
+                            .strength(1.0F, 6.0F)))
+            .withName("Block of Lead")
+            .withStorageRecipes(() -> PoptartCoreItems.LEAD_INGOT.get(), "lead_ingots_from_block");
     public static final DeferredBlock<Block> LEAD_ORE = BLOCKS.register(
             "lead_ore",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_ORE)
@@ -127,11 +133,13 @@ public class PoptartCoreBlocks {
             () -> new Block(
                     BlockBehaviour.Properties.ofFullCopy(Blocks.RAW_IRON_BLOCK).strength(5.0F, 6.0F)));
 
-    public static final DeferredBlock<Block> SILVER_BLOCK = BLOCKS.register(
-            "silver_block",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)
-                    .sound(SoundType.METAL)
-                    .strength(5.0F, 6.0F)));
+    public static final CatalogBlockDefinition<Block> SILVER_BLOCK = PoptartCatalog.block(
+                    "silver_block",
+                    () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)
+                            .sound(SoundType.METAL)
+                            .strength(5.0F, 6.0F)))
+            .withName("Block of Silver")
+            .withStorageRecipes(() -> PoptartCoreItems.SILVER_INGOT.get(), "silver_ingots_from_block");
     public static final DeferredBlock<Block> SILVER_ORE = BLOCKS.register(
             "silver_ore",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_ORE)
@@ -149,21 +157,28 @@ public class PoptartCoreBlocks {
             () -> new Block(
                     BlockBehaviour.Properties.ofFullCopy(Blocks.RAW_IRON_BLOCK).strength(5.0F, 6.0F)));
 
-    public static final DeferredBlock<Block> WAX_BLOCK = BLOCKS.register(
-            "wax_block",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.MUD).strength(0.7F, 0.3F)));
-    public static final DeferredBlock<Block> COAL_COKE_BLOCK = BLOCKS.register(
-            "coal_coke_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.COAL_BLOCK)));
-    public static final DeferredBlock<Block> BRONZE_BLOCK = BLOCKS.register(
-            "bronze_block",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)
-                    .sound(SoundType.METAL)
-                    .strength(3.0F, 6.0F)));
-    public static final DeferredBlock<Block> STEEL_BLOCK = BLOCKS.register(
-            "steel_block",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)
-                    .sound(SoundType.METAL)
-                    .strength(7.0F, 8.0F)));
+    public static final CatalogBlockDefinition<Block> WAX_BLOCK = PoptartCatalog.block(
+                    "wax_block",
+                    () -> new Block(
+                            BlockBehaviour.Properties.ofFullCopy(Blocks.MUD).strength(0.7F, 0.3F)))
+            .withStorageRecipes(() -> PoptartCoreItems.WAX.get(), "wax_from_block");
+    public static final CatalogBlockDefinition<Block> COAL_COKE_BLOCK = PoptartCatalog.block(
+                    "coal_coke_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.COAL_BLOCK)))
+            .withStorageRecipes(() -> PoptartCoreItems.COAL_COKE.get(), "coal_coke_from_block");
+    public static final CatalogBlockDefinition<Block> BRONZE_BLOCK = PoptartCatalog.block(
+                    "bronze_block",
+                    () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)
+                            .sound(SoundType.METAL)
+                            .strength(3.0F, 6.0F)))
+            .withName("Block of Bronze")
+            .withStorageRecipes(() -> PoptartCoreItems.BRONZE_INGOT.get(), "bronze_ingot_from_block");
+    public static final CatalogBlockDefinition<Block> STEEL_BLOCK = PoptartCatalog.block(
+                    "steel_block",
+                    () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)
+                            .sound(SoundType.METAL)
+                            .strength(7.0F, 8.0F)))
+            .withName("Block of Steel")
+            .withStorageRecipes(() -> PoptartCoreItems.STEEL_INGOT.get(), "steel_ingot_from_block");
 
     public static final DeferredBlock<Block> CLINKER_BRICKS =
             BLOCKS.register("clinker_bricks", () -> new Block(clinkerProperties()));

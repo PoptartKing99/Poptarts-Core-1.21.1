@@ -1,11 +1,13 @@
 package dev.poptartking.poptartcore.beekeeping;
 
+import dev.poptartking.poptartcore.registry.PoptartCoreSounds;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.WeakHashMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
@@ -35,6 +37,9 @@ public class BeeSmokerItem extends Item {
     private static final double SPRAY_RADIUS = 1.25D;
     private static final int BEE_SMOKE_TICKS = 30;
     private static final int HIVE_SMOKE_TICKS = 100;
+    private static final int PUMP_CYCLE_TICKS = 40;
+    private static final int PARTICLE_DURATION_TICKS = 30;
+    private static final int RETRACT_DELAY_TICKS = 15;
     private static final Map<Bee, Integer> BEE_PROGRESS = new WeakHashMap<>();
     private static final Map<Level, Map<Long, Integer>> HIVE_PROGRESS = new WeakHashMap<>();
 
@@ -49,6 +54,9 @@ public class BeeSmokerItem extends Item {
             return InteractionResultHolder.fail(stack);
         }
 
+        if (!level.isClientSide) {
+            playPumpSound(level, player, PoptartCoreSounds.BEE_SMOKER_BLOW.get());
+        }
         player.startUsingItem(hand);
         return InteractionResultHolder.consume(stack);
     }
@@ -87,6 +95,12 @@ public class BeeSmokerItem extends Item {
         }
 
         int elapsed = getUseDuration(stack, entity) - remainingUseDuration;
+        int pumpTick = elapsed % PUMP_CYCLE_TICKS;
+        if (elapsed > 0 && pumpTick == 0) {
+            playPumpSound(level, entity, PoptartCoreSounds.BEE_SMOKER_BLOW.get());
+        } else if (pumpTick == RETRACT_DELAY_TICKS) {
+            playPumpSound(level, entity, PoptartCoreSounds.BEE_SMOKER_RETRACT.get());
+        }
         if (elapsed > 0 && elapsed % 20 == 0) {
             EquipmentSlot slot = entity.getUsedItemHand() == InteractionHand.MAIN_HAND
                     ? EquipmentSlot.MAINHAND
@@ -101,7 +115,9 @@ public class BeeSmokerItem extends Item {
         Vec3 eye = entity.getEyePosition();
         Vec3 view = entity.getViewVector(1.0F);
         Vec3 end = eye.add(view.scale(REACH));
-        spawnSmoke(serverLevel, eye, view, entity);
+        if (pumpTick < PARTICLE_DURATION_TICKS) {
+            spawnSmoke(serverLevel, eye, view, entity);
+        }
 
         BlockHitResult blockHit =
                 level.clip(new ClipContext(eye, end, ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, entity));
@@ -188,6 +204,10 @@ public class BeeSmokerItem extends Item {
                 view.y + 0.15D,
                 view.z + (random.nextDouble() - 0.5D) * 0.15D,
                 0.22D);
+    }
+
+    private static void playPumpSound(Level level, LivingEntity entity, SoundEvent sound) {
+        level.playSound(null, entity.getX(), entity.getY(), entity.getZ(), sound, SoundSource.PLAYERS, 0.5F, 1.0F);
     }
 
     public static boolean isEmpty(ItemStack stack) {

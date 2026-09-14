@@ -19,8 +19,10 @@ Require-Text 'src/main/java/dev/poptartking/poptartcore/registry/PoptartCoreArmo
     'BEEKEEPER_ARMOR_MATERIAL', 'protection\(1, 3, 2, 1\)', 'ARMOR_EQUIP_LEATHER'
 )
 Require-Text 'src/main/java/dev/poptartking/poptartcore/registry/PoptartCoreItems.java' @(
-    'BEEKEEPER_HELMET', 'durability\(200\)', 'BEEKEEPER_CHESTPLATE', 'durability\(300\)',
-    'BEEKEEPER_LEGGINGS', 'durability\(260\)', 'BEEKEEPER_BOOTS'
+    'CatalogItemDefinition<BeekeeperArmorItem> BEEKEEPER_HELMET', 'durability\(200\)',
+    'BEEKEEPER_CHESTPLATE', 'durability\(300\)', 'BEEKEEPER_LEGGINGS', 'durability\(260\)',
+    'BEEKEEPER_BOOTS', 'withName\("Beekeeper Hood"\)', 'withName\("Beekeeper Tunic"\)',
+    'withName\("Beekeeper Skirt"\)'
 )
 Require-Text 'src/main/java/dev/poptartking/poptartcore/beekeeping/BeekeeperEvents.java' @(
     '0\.05F \* pieces', '0\.15F \* pieces', 'SENSITIVE_TO_BANE_OF_ARTHROPODS'
@@ -44,10 +46,10 @@ foreach ($relativePath in @(
     'src/main/resources/assets/poptartcore/textures/item/beekeeper_chestplate.png',
     'src/main/resources/assets/poptartcore/textures/item/beekeeper_leggings.png',
     'src/main/resources/assets/poptartcore/textures/item/beekeeper_boots.png',
-    'src/main/resources/assets/poptartcore/models/item/beekeeper_helmet.json',
-    'src/main/resources/assets/poptartcore/models/item/beekeeper_chestplate.json',
-    'src/main/resources/assets/poptartcore/models/item/beekeeper_leggings.json',
-    'src/main/resources/assets/poptartcore/models/item/beekeeper_boots.json'
+    'src/generated/resources/assets/poptartcore/models/item/beekeeper_helmet.json',
+    'src/generated/resources/assets/poptartcore/models/item/beekeeper_chestplate.json',
+    'src/generated/resources/assets/poptartcore/models/item/beekeeper_leggings.json',
+    'src/generated/resources/assets/poptartcore/models/item/beekeeper_boots.json'
 )) {
     if (-not (Test-Path -LiteralPath (Join-Path $projectRoot $relativePath) -PathType Leaf)) {
         throw "Missing beekeeper armor asset: $relativePath"

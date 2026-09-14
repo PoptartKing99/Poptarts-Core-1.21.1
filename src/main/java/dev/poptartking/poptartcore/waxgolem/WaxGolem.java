@@ -48,7 +48,6 @@ import net.minecraft.world.level.chunk.LevelChunkSection;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
-/* JADX INFO: loaded from: wayfarer_core-0.1.0.jar:dev/tazer/wayfarer/waxgolem/WaxGolem.class */
 public class WaxGolem extends AbstractGolem {
     public static final int LIFETIME_TICKS = 48000;
     public static final int STAGES = 4;
@@ -106,7 +105,7 @@ public class WaxGolem extends AbstractGolem {
 
     public WaxGolem(EntityType<? extends WaxGolem> type, Level level) {
         super(type, level);
-        this.hives = new ArrayList();
+        this.hives = new ArrayList<>();
         setPersistenceRequired();
         setCanPickUpLoot(true);
     }
@@ -203,15 +202,15 @@ public class WaxGolem extends AbstractGolem {
         builder.define(DATA_STAGE, 0);
         builder.define(DATA_LIT, true);
         builder.define(DATA_SITTING, false);
-        builder.define(DATA_STATE, Integer.valueOf(WaxGolemState.IDLE.ordinal()));
+        builder.define(DATA_STATE, WaxGolemState.IDLE.ordinal());
     }
 
     public int stage() {
-        return ((Integer) this.entityData.get(DATA_STAGE)).intValue();
+        return this.entityData.get(DATA_STAGE);
     }
 
     public void setStage(int stage) {
-        this.entityData.set(DATA_STAGE, Integer.valueOf(Math.clamp(stage, 0, 3)));
+        this.entityData.set(DATA_STAGE, Math.clamp(stage, 0, 3));
         refreshDimensions();
     }
 
@@ -227,11 +226,11 @@ public class WaxGolem extends AbstractGolem {
     }
 
     public boolean lit() {
-        return ((Boolean) this.entityData.get(DATA_LIT)).booleanValue();
+        return this.entityData.get(DATA_LIT);
     }
 
     public void setLit(boolean value) {
-        this.entityData.set(DATA_LIT, Boolean.valueOf(value));
+        this.entityData.set(DATA_LIT, value);
         if (!value) {
             setState(WaxGolemState.EXTINGUISHED);
         } else if (state() == WaxGolemState.EXTINGUISHED) {
@@ -240,19 +239,19 @@ public class WaxGolem extends AbstractGolem {
     }
 
     public boolean sitting() {
-        return ((Boolean) this.entityData.get(DATA_SITTING)).booleanValue();
+        return this.entityData.get(DATA_SITTING);
     }
 
     public void setSitting(boolean value) {
-        this.entityData.set(DATA_SITTING, Boolean.valueOf(value));
+        this.entityData.set(DATA_SITTING, value);
     }
 
     public WaxGolemState state() {
-        return WaxGolemState.values()[((Integer) this.entityData.get(DATA_STATE)).intValue()];
+        return WaxGolemState.values()[this.entityData.get(DATA_STATE)];
     }
 
     public void setState(WaxGolemState value) {
-        this.entityData.set(DATA_STATE, Integer.valueOf(value.ordinal()));
+        this.entityData.set(DATA_STATE, value.ordinal());
     }
 
     public boolean awake() {
@@ -329,7 +328,7 @@ public class WaxGolem extends AbstractGolem {
         }
         long time = level().getGameTime();
         HiveMemory memory2 = hive(pos);
-        memory2.seen(((Integer) state.getValue(BeehiveBlock.HONEY_LEVEL)).intValue(), time);
+        memory2.seen(state.getValue(BeehiveBlock.HONEY_LEVEL), time);
         memory2.sawSmoke(CampfireBlock.isSmokeyPos(level(), pos), time);
         memory2.setReachable(reachable(pos));
     }
@@ -423,7 +422,7 @@ public class WaxGolem extends AbstractGolem {
             if (memory.pos().distToCenterSqr(position()) <= 100.0d) {
                 BlockState state = level().getBlockState(memory.pos());
                 if (state.getBlock() instanceof BeehiveBlock) {
-                    memory.seen(((Integer) state.getValue(BeehiveBlock.HONEY_LEVEL)).intValue(), time);
+                    memory.seen(state.getValue(BeehiveBlock.HONEY_LEVEL), time);
                     memory.sawSmoke(CampfireBlock.isSmokeyPos(level(), memory.pos()), time);
                     memory.setReachable(reachable(memory.pos()));
                 }
@@ -866,9 +865,9 @@ public class WaxGolem extends AbstractGolem {
     public void readAdditionalSaveData(CompoundTag tag) {
         super.readAdditionalSaveData(tag);
         this.burned = tag.getInt("Burned");
-        this.entityData.set(DATA_LIT, Boolean.valueOf(tag.getBoolean("Lit")));
+        this.entityData.set(DATA_LIT, tag.getBoolean("Lit"));
         setStage(tag.getInt("Stage"));
-        this.entityData.set(DATA_STATE, Integer.valueOf(tag.getInt("State")));
+        this.entityData.set(DATA_STATE, tag.getInt("State"));
         this.outsideHome = tag.getInt("OutsideHome");
         NbtUtils.readBlockPos(tag, "Home").ifPresent(pos -> {
             this.home = pos;

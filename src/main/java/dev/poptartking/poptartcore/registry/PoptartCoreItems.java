@@ -3,6 +3,8 @@ package dev.poptartking.poptartcore.registry;
 import dev.poptartking.poptartcore.PoptartCore;
 import dev.poptartking.poptartcore.beekeeping.BeeSmokerItem;
 import dev.poptartking.poptartcore.beekeeping.BeekeeperArmorItem;
+import dev.poptartking.poptartcore.catalog.CatalogItemDefinition;
+import dev.poptartking.poptartcore.catalog.PoptartCatalog;
 import dev.poptartking.poptartcore.crossbow.RepeatingCrossbowItem;
 import dev.poptartking.poptartcore.crucible.CrucibleBlockItem;
 import dev.poptartking.poptartcore.hammer.HammerItem;
@@ -28,173 +30,195 @@ public class PoptartCoreItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(PoptartCore.MOD_ID);
 
     // Items
-    public static final DeferredItem<ArmorItem> MINING_HELMET = ITEMS.register(
+    public static final CatalogItemDefinition<ArmorItem> MINING_HELMET = PoptartCatalog.item(
             "mining_helmet",
             () -> new ArmorItem(
                     PoptartCoreArmorMaterials.MINING_ARMOR_MATERIAL,
                     ArmorItem.Type.HELMET,
                     new Item.Properties().durability(100)));
-    public static final DeferredItem<ArmorItem> RAW_HIDE_HELMET = ITEMS.register(
+    public static final CatalogItemDefinition<ArmorItem> RAW_HIDE_HELMET = PoptartCatalog.item(
             "raw_hide_helmet",
             () -> new ArmorItem(
                     PoptartCoreArmorMaterials.RAW_HIDE_ARMOR_MATERIAL,
                     ArmorItem.Type.HELMET,
                     new Item.Properties().durability(140)));
-    public static final DeferredItem<ArmorItem> RAW_HIDE_CHESTPLATE = ITEMS.register(
+    public static final CatalogItemDefinition<ArmorItem> RAW_HIDE_CHESTPLATE = PoptartCatalog.item(
             "raw_hide_chestplate",
             () -> new ArmorItem(
                     PoptartCoreArmorMaterials.RAW_HIDE_ARMOR_MATERIAL,
                     ArmorItem.Type.CHESTPLATE,
                     new Item.Properties().durability(140)));
-    public static final DeferredItem<ArmorItem> RAW_HIDE_LEGGINGS = ITEMS.register(
+    public static final CatalogItemDefinition<ArmorItem> RAW_HIDE_LEGGINGS = PoptartCatalog.item(
             "raw_hide_leggings",
             () -> new ArmorItem(
                     PoptartCoreArmorMaterials.RAW_HIDE_ARMOR_MATERIAL,
                     ArmorItem.Type.LEGGINGS,
                     new Item.Properties().durability(140)));
-    public static final DeferredItem<Item> STEEL_INGOT = registerItem("steel_ingot");
-    public static final DeferredItem<Item> STEEL_NUGGET = registerItem("steel_nugget");
-    public static final DeferredItem<Item> STEEL_PLATE = registerItem("steel_plate");
-    public static final DeferredItem<SwordItem> STEEL_SWORD = ITEMS.register(
-            "steel_sword",
-            () -> new SwordItem(
-                    PoptartCoreTiers.STEEL,
-                    new Item.Properties().attributes(SwordItem.createAttributes(PoptartCoreTiers.STEEL, 2, -2.4F))));
-    public static final DeferredItem<PickaxeItem> STEEL_PICKAXE = ITEMS.register(
-            "steel_pickaxe",
-            () -> new PickaxeItem(
-                    PoptartCoreTiers.STEEL,
-                    new Item.Properties()
-                            .attributes(PickaxeItem.createAttributes(PoptartCoreTiers.STEEL, 0.0F, -2.8F))));
-    public static final DeferredItem<AxeItem> STEEL_AXE = ITEMS.register(
-            "steel_axe",
-            () -> new AxeItem(
-                    PoptartCoreTiers.STEEL,
-                    new Item.Properties().attributes(AxeItem.createAttributes(PoptartCoreTiers.STEEL, 5.0F, -3.1F))));
-    public static final DeferredItem<ShovelItem> STEEL_SHOVEL = ITEMS.register(
-            "steel_shovel",
-            () -> new ShovelItem(
-                    PoptartCoreTiers.STEEL,
-                    new Item.Properties()
-                            .attributes(ShovelItem.createAttributes(PoptartCoreTiers.STEEL, 0.5F, -3.0F))));
-    public static final DeferredItem<KnifeItem> STEEL_KNIFE = ITEMS.register(
-            "steel_knife",
-            () -> new KnifeItem(
-                    PoptartCoreTiers.STEEL,
-                    new Item.Properties()
-                            .durability(1250)
-                            .attributes(KnifeItem.createAttributes(PoptartCoreTiers.STEEL, 1.0F, -2.0F))));
-    public static final DeferredItem<Item> COAL_COKE = registerItem("coal_coke");
-    public static final DeferredItem<WaxItem> WAX = ITEMS.register("wax", () -> new WaxItem(new Item.Properties()));
-    public static final DeferredItem<Item> REDSTONE_CIRCUIT = registerItem("redstone_circuit");
-    public static final DeferredItem<BonePickItem> BONE_PICK = ITEMS.register(
-            "bone_pick",
-            () -> new BonePickItem(
-                    PoptartCoreTiers.BONE,
-                    new Item.Properties()
-                            .attributes(PickaxeItem.createAttributes(PoptartCoreTiers.BONE, 2.0F, -2.8F))));
-    public static final DeferredItem<AxeItem> FLINT_AXE = ITEMS.register(
-            "flint_axe",
-            () -> new AxeItem(
-                    PoptartCoreTiers.FLINT,
-                    new Item.Properties()
-                            .attributes(PickaxeItem.createAttributes(PoptartCoreTiers.FLINT, 3.0F, -3.1F))));
-    public static final DeferredItem<ShovelItem> FLINT_SHOVEL = ITEMS.register(
-            "flint_shovel",
-            () -> new ShovelItem(
-                    PoptartCoreTiers.FLINT,
-                    new Item.Properties()
-                            .attributes(PickaxeItem.createAttributes(PoptartCoreTiers.FLINT, 0.5F, -3.0F))));
-    public static final DeferredItem<FlintAndSteelItem> FIRESTARTER =
-            ITEMS.register("firestarter", () -> new FlintAndSteelItem(new Item.Properties().durability(3)));
-    public static final DeferredItem<BeeSmokerItem> BEE_SMOKER = ITEMS.register(
-            "bee_smoker",
-            () -> new BeeSmokerItem(new Item.Properties().stacksTo(1).durability(360)));
-    public static final DeferredItem<BeekeeperArmorItem> BEEKEEPER_HELMET = ITEMS.register(
-            "beekeeper_helmet",
-            () -> new BeekeeperArmorItem(ArmorItem.Type.HELMET, new Item.Properties().durability(200)));
-    public static final DeferredItem<BeekeeperArmorItem> BEEKEEPER_CHESTPLATE = ITEMS.register(
-            "beekeeper_chestplate",
-            () -> new BeekeeperArmorItem(ArmorItem.Type.CHESTPLATE, new Item.Properties().durability(300)));
-    public static final DeferredItem<BeekeeperArmorItem> BEEKEEPER_LEGGINGS = ITEMS.register(
-            "beekeeper_leggings",
-            () -> new BeekeeperArmorItem(ArmorItem.Type.LEGGINGS, new Item.Properties().durability(260)));
-    public static final DeferredItem<BeekeeperArmorItem> BEEKEEPER_BOOTS = ITEMS.register(
+    public static final CatalogItemDefinition<Item> STEEL_INGOT = PoptartCatalog.simpleItem("steel_ingot");
+    public static final CatalogItemDefinition<Item> STEEL_NUGGET = PoptartCatalog.simpleItem("steel_nugget");
+    public static final CatalogItemDefinition<Item> STEEL_PLATE = PoptartCatalog.simpleItem("steel_plate");
+    public static final CatalogItemDefinition<SwordItem> STEEL_SWORD = PoptartCatalog.item(
+                    "steel_sword",
+                    () -> new SwordItem(
+                            PoptartCoreTiers.STEEL,
+                            new Item.Properties()
+                                    .attributes(SwordItem.createAttributes(PoptartCoreTiers.STEEL, 2, -2.4F))))
+            .handheld();
+    public static final CatalogItemDefinition<PickaxeItem> STEEL_PICKAXE = PoptartCatalog.item(
+                    "steel_pickaxe",
+                    () -> new PickaxeItem(
+                            PoptartCoreTiers.STEEL,
+                            new Item.Properties()
+                                    .attributes(PickaxeItem.createAttributes(PoptartCoreTiers.STEEL, 0.0F, -2.8F))))
+            .handheld();
+    public static final CatalogItemDefinition<AxeItem> STEEL_AXE = PoptartCatalog.item(
+                    "steel_axe",
+                    () -> new AxeItem(
+                            PoptartCoreTiers.STEEL,
+                            new Item.Properties()
+                                    .attributes(AxeItem.createAttributes(PoptartCoreTiers.STEEL, 5.0F, -3.1F))))
+            .handheld();
+    public static final CatalogItemDefinition<ShovelItem> STEEL_SHOVEL = PoptartCatalog.item(
+                    "steel_shovel",
+                    () -> new ShovelItem(
+                            PoptartCoreTiers.STEEL,
+                            new Item.Properties()
+                                    .attributes(ShovelItem.createAttributes(PoptartCoreTiers.STEEL, 0.5F, -3.0F))))
+            .handheld();
+    public static final CatalogItemDefinition<KnifeItem> STEEL_KNIFE = PoptartCatalog.item(
+                    "steel_knife",
+                    () -> new KnifeItem(
+                            PoptartCoreTiers.STEEL,
+                            new Item.Properties()
+                                    .attributes(KnifeItem.createAttributes(PoptartCoreTiers.STEEL, 1.0F, -2.0F))))
+            .handheld();
+    public static final CatalogItemDefinition<Item> COAL_COKE = PoptartCatalog.simpleItem("coal_coke");
+    public static final CatalogItemDefinition<WaxItem> WAX =
+            PoptartCatalog.item("wax", () -> new WaxItem(new Item.Properties()));
+    public static final CatalogItemDefinition<Item> REDSTONE_CIRCUIT = PoptartCatalog.simpleItem("redstone_circuit");
+    public static final CatalogItemDefinition<BonePickItem> BONE_PICK = PoptartCatalog.item(
+                    "bone_pick",
+                    () -> new BonePickItem(
+                            PoptartCoreTiers.BONE,
+                            new Item.Properties()
+                                    .attributes(PickaxeItem.createAttributes(PoptartCoreTiers.BONE, 2.0F, -2.8F))))
+            .handheld();
+    public static final CatalogItemDefinition<AxeItem> FLINT_AXE = PoptartCatalog.item(
+                    "flint_axe",
+                    () -> new AxeItem(
+                            PoptartCoreTiers.FLINT,
+                            new Item.Properties()
+                                    .attributes(PickaxeItem.createAttributes(PoptartCoreTiers.FLINT, 3.0F, -3.1F))))
+            .handheld();
+    public static final CatalogItemDefinition<ShovelItem> FLINT_SHOVEL = PoptartCatalog.item(
+                    "flint_shovel",
+                    () -> new ShovelItem(
+                            PoptartCoreTiers.FLINT,
+                            new Item.Properties()
+                                    .attributes(PickaxeItem.createAttributes(PoptartCoreTiers.FLINT, 0.5F, -3.0F))))
+            .handheld();
+    public static final CatalogItemDefinition<FlintAndSteelItem> FIRESTARTER =
+            PoptartCatalog.item("firestarter", () -> new FlintAndSteelItem(new Item.Properties().durability(3)));
+    public static final CatalogItemDefinition<BeeSmokerItem> BEE_SMOKER = PoptartCatalog.item(
+                    "bee_smoker",
+                    () -> new BeeSmokerItem(new Item.Properties().stacksTo(1).durability(360)))
+            .withoutGeneratedModel();
+    public static final CatalogItemDefinition<BeekeeperArmorItem> BEEKEEPER_HELMET = PoptartCatalog.item(
+                    "beekeeper_helmet",
+                    () -> new BeekeeperArmorItem(ArmorItem.Type.HELMET, new Item.Properties().durability(200)))
+            .withName("Beekeeper Hood");
+    public static final CatalogItemDefinition<BeekeeperArmorItem> BEEKEEPER_CHESTPLATE = PoptartCatalog.item(
+                    "beekeeper_chestplate",
+                    () -> new BeekeeperArmorItem(ArmorItem.Type.CHESTPLATE, new Item.Properties().durability(300)))
+            .withName("Beekeeper Tunic");
+    public static final CatalogItemDefinition<BeekeeperArmorItem> BEEKEEPER_LEGGINGS = PoptartCatalog.item(
+                    "beekeeper_leggings",
+                    () -> new BeekeeperArmorItem(ArmorItem.Type.LEGGINGS, new Item.Properties().durability(260)))
+            .withName("Beekeeper Skirt");
+    public static final CatalogItemDefinition<BeekeeperArmorItem> BEEKEEPER_BOOTS = PoptartCatalog.item(
             "beekeeper_boots",
             () -> new BeekeeperArmorItem(ArmorItem.Type.BOOTS, new Item.Properties().durability(200)));
-    public static final DeferredItem<RepeatingCrossbowItem> REPEATING_CROSSBOW = ITEMS.register(
-            "repeating_crossbow",
-            () -> new RepeatingCrossbowItem(new Item.Properties()
-                    .stacksTo(1)
-                    .durability(300)
-                    .component(DataComponents.CHARGED_PROJECTILES, ChargedProjectiles.EMPTY)));
-    public static final DeferredItem<HammerItem> HAMMER = ITEMS.register(
-            "hammer",
-            () -> new HammerItem(new Item.Properties()
-                    .stacksTo(1)
-                    .attributes(HammerItem.createAttributes())
-                    .component(DataComponents.TOOL, HammerItem.createToolProperties())
-                    .durability(720)));
-    public static final DeferredItem<Item> BRONZE_INGOT = registerItem("bronze_ingot");
-    public static final DeferredItem<Item> BRONZE_NUGGET = registerItem("bronze_nugget");
-    public static final DeferredItem<Item> BRONZE_PLATE = registerItem("bronze_plate");
-    public static final DeferredItem<SwordItem> BRONZE_SWORD = ITEMS.register(
-            "bronze_sword",
-            () -> new SwordItem(
-                    PoptartCoreTiers.BRONZE,
-                    new Item.Properties().attributes(SwordItem.createAttributes(PoptartCoreTiers.BRONZE, 2, -2.4F))));
-    public static final DeferredItem<PickaxeItem> BRONZE_PICKAXE = ITEMS.register(
-            "bronze_pickaxe",
-            () -> new PickaxeItem(
-                    PoptartCoreTiers.BRONZE,
-                    new Item.Properties()
-                            .attributes(PickaxeItem.createAttributes(PoptartCoreTiers.BRONZE, 0.0F, -2.8F))));
-    public static final DeferredItem<AxeItem> BRONZE_AXE = ITEMS.register(
-            "bronze_axe",
-            () -> new AxeItem(
-                    PoptartCoreTiers.BRONZE,
-                    new Item.Properties().attributes(AxeItem.createAttributes(PoptartCoreTiers.BRONZE, 5.0F, -3.1F))));
-    public static final DeferredItem<ShovelItem> BRONZE_SHOVEL = ITEMS.register(
-            "bronze_shovel",
-            () -> new ShovelItem(
-                    PoptartCoreTiers.BRONZE,
-                    new Item.Properties()
-                            .attributes(ShovelItem.createAttributes(PoptartCoreTiers.BRONZE, 0.5F, -3.0F))));
-    public static final DeferredItem<KnifeItem> BRONZE_KNIFE = ITEMS.register(
-            "bronze_knife",
-            () -> new KnifeItem(
-                    PoptartCoreTiers.BRONZE,
-                    new Item.Properties()
-                            .durability(275)
-                            .attributes(KnifeItem.createAttributes(PoptartCoreTiers.BRONZE, 1.0F, -2.0F))));
-    public static final DeferredItem<Item> TIN_INGOT = registerItem("tin_ingot");
-    public static final DeferredItem<Item> TIN_NUGGET = registerItem("tin_nugget");
-    public static final DeferredItem<Item> RAW_TIN = registerItem("raw_tin");
-    public static final DeferredItem<Item> LEAD_INGOT = registerItem("lead_ingot");
-    public static final DeferredItem<Item> LEAD_NUGGET = registerItem("lead_nugget");
-    public static final DeferredItem<Item> RAW_LEAD = registerItem("raw_lead");
-    public static final DeferredItem<Item> SILVER_INGOT = registerItem("silver_ingot");
-    public static final DeferredItem<Item> SILVER_NUGGET = registerItem("silver_nugget");
-    public static final DeferredItem<Item> RAW_SILVER = registerItem("raw_silver");
-    public static final DeferredItem<ArmorItem> STEEL_HELMET = ITEMS.register(
+    public static final CatalogItemDefinition<RepeatingCrossbowItem> REPEATING_CROSSBOW = PoptartCatalog.item(
+                    "repeating_crossbow",
+                    () -> new RepeatingCrossbowItem(new Item.Properties()
+                            .stacksTo(1)
+                            .durability(300)
+                            .component(DataComponents.CHARGED_PROJECTILES, ChargedProjectiles.EMPTY)))
+            .withoutGeneratedModel();
+    public static final CatalogItemDefinition<HammerItem> HAMMER = PoptartCatalog.item(
+                    "hammer",
+                    () -> new HammerItem(new Item.Properties()
+                            .stacksTo(1)
+                            .attributes(HammerItem.createAttributes())
+                            .component(DataComponents.TOOL, HammerItem.createToolProperties())
+                            .durability(720)))
+            .handheld();
+    public static final CatalogItemDefinition<Item> BRONZE_INGOT = PoptartCatalog.simpleItem("bronze_ingot");
+    public static final CatalogItemDefinition<Item> BRONZE_NUGGET = PoptartCatalog.simpleItem("bronze_nugget");
+    public static final CatalogItemDefinition<Item> BRONZE_PLATE = PoptartCatalog.simpleItem("bronze_plate");
+    public static final CatalogItemDefinition<SwordItem> BRONZE_SWORD = PoptartCatalog.item(
+                    "bronze_sword",
+                    () -> new SwordItem(
+                            PoptartCoreTiers.BRONZE,
+                            new Item.Properties()
+                                    .attributes(SwordItem.createAttributes(PoptartCoreTiers.BRONZE, 2, -2.4F))))
+            .handheld();
+    public static final CatalogItemDefinition<PickaxeItem> BRONZE_PICKAXE = PoptartCatalog.item(
+                    "bronze_pickaxe",
+                    () -> new PickaxeItem(
+                            PoptartCoreTiers.BRONZE,
+                            new Item.Properties()
+                                    .attributes(PickaxeItem.createAttributes(PoptartCoreTiers.BRONZE, 0.0F, -2.8F))))
+            .handheld();
+    public static final CatalogItemDefinition<AxeItem> BRONZE_AXE = PoptartCatalog.item(
+                    "bronze_axe",
+                    () -> new AxeItem(
+                            PoptartCoreTiers.BRONZE,
+                            new Item.Properties()
+                                    .attributes(AxeItem.createAttributes(PoptartCoreTiers.BRONZE, 5.0F, -3.1F))))
+            .handheld();
+    public static final CatalogItemDefinition<ShovelItem> BRONZE_SHOVEL = PoptartCatalog.item(
+                    "bronze_shovel",
+                    () -> new ShovelItem(
+                            PoptartCoreTiers.BRONZE,
+                            new Item.Properties()
+                                    .attributes(ShovelItem.createAttributes(PoptartCoreTiers.BRONZE, 0.5F, -3.0F))))
+            .handheld();
+    public static final CatalogItemDefinition<KnifeItem> BRONZE_KNIFE = PoptartCatalog.item(
+                    "bronze_knife",
+                    () -> new KnifeItem(
+                            PoptartCoreTiers.BRONZE,
+                            new Item.Properties()
+                                    .attributes(KnifeItem.createAttributes(PoptartCoreTiers.BRONZE, 1.0F, -2.0F))))
+            .handheld();
+    public static final CatalogItemDefinition<Item> TIN_INGOT = PoptartCatalog.simpleItem("tin_ingot");
+    public static final CatalogItemDefinition<Item> TIN_NUGGET = PoptartCatalog.simpleItem("tin_nugget");
+    public static final CatalogItemDefinition<Item> RAW_TIN = PoptartCatalog.simpleItem("raw_tin");
+    public static final CatalogItemDefinition<Item> LEAD_INGOT = PoptartCatalog.simpleItem("lead_ingot");
+    public static final CatalogItemDefinition<Item> LEAD_NUGGET = PoptartCatalog.simpleItem("lead_nugget");
+    public static final CatalogItemDefinition<Item> RAW_LEAD = PoptartCatalog.simpleItem("raw_lead");
+    public static final CatalogItemDefinition<Item> SILVER_INGOT = PoptartCatalog.simpleItem("silver_ingot");
+    public static final CatalogItemDefinition<Item> SILVER_NUGGET = PoptartCatalog.simpleItem("silver_nugget");
+    public static final CatalogItemDefinition<Item> RAW_SILVER = PoptartCatalog.simpleItem("raw_silver");
+    public static final CatalogItemDefinition<ArmorItem> STEEL_HELMET = PoptartCatalog.item(
             "steel_helmet",
             () -> new ArmorItem(
                     PoptartCoreArmorMaterials.STEEL_ARMOR_MATERIAL,
                     ArmorItem.Type.HELMET,
                     new Item.Properties().durability(275)));
-    public static final DeferredItem<ArmorItem> STEEL_CHESTPLATE = ITEMS.register(
+    public static final CatalogItemDefinition<ArmorItem> STEEL_CHESTPLATE = PoptartCatalog.item(
             "steel_chestplate",
             () -> new ArmorItem(
                     PoptartCoreArmorMaterials.STEEL_ARMOR_MATERIAL,
                     ArmorItem.Type.CHESTPLATE,
                     new Item.Properties().durability(400)));
-    public static final DeferredItem<ArmorItem> STEEL_LEGGINGS = ITEMS.register(
+    public static final CatalogItemDefinition<ArmorItem> STEEL_LEGGINGS = PoptartCatalog.item(
             "steel_leggings",
             () -> new ArmorItem(
                     PoptartCoreArmorMaterials.STEEL_ARMOR_MATERIAL,
                     ArmorItem.Type.LEGGINGS,
                     new Item.Properties().durability(375)));
-    public static final DeferredItem<ArmorItem> STEEL_BOOTS = ITEMS.register(
+    public static final CatalogItemDefinition<ArmorItem> STEEL_BOOTS = PoptartCatalog.item(
             "steel_boots",
             () -> new ArmorItem(
                     PoptartCoreArmorMaterials.STEEL_ARMOR_MATERIAL,
@@ -216,34 +240,22 @@ public class PoptartCoreItems {
                             PoptartCoreBlocks.MILLSTONE.get(), new Item.Properties()));
     public static final DeferredItem<BlockItem> IRON_BLOOM =
             registerBlockItem("iron_bloom", PoptartCoreBlocks.IRON_BLOOM);
-    public static final DeferredItem<BlockItem> TIN_BLOCK = registerBlockItem("tin_block", PoptartCoreBlocks.TIN_BLOCK);
     public static final DeferredItem<BlockItem> TIN_ORE = registerBlockItem("tin_ore", PoptartCoreBlocks.TIN_ORE);
     public static final DeferredItem<BlockItem> DEEPSLATE_TIN_ORE =
             registerBlockItem("deepslate_tin_ore", PoptartCoreBlocks.DEEPSLATE_TIN_ORE);
     public static final DeferredItem<BlockItem> RAW_TIN_BLOCK =
             registerBlockItem("raw_tin_block", PoptartCoreBlocks.RAW_TIN_BLOCK);
-    public static final DeferredItem<BlockItem> LEAD_BLOCK =
-            registerBlockItem("lead_block", PoptartCoreBlocks.LEAD_BLOCK);
     public static final DeferredItem<BlockItem> LEAD_ORE = registerBlockItem("lead_ore", PoptartCoreBlocks.LEAD_ORE);
     public static final DeferredItem<BlockItem> DEEPSLATE_LEAD_ORE =
             registerBlockItem("deepslate_lead_ore", PoptartCoreBlocks.DEEPSLATE_LEAD_ORE);
     public static final DeferredItem<BlockItem> RAW_LEAD_BLOCK =
             registerBlockItem("raw_lead_block", PoptartCoreBlocks.RAW_LEAD_BLOCK);
-    public static final DeferredItem<BlockItem> SILVER_BLOCK =
-            registerBlockItem("silver_block", PoptartCoreBlocks.SILVER_BLOCK);
     public static final DeferredItem<BlockItem> SILVER_ORE =
             registerBlockItem("silver_ore", PoptartCoreBlocks.SILVER_ORE);
     public static final DeferredItem<BlockItem> DEEPSLATE_SILVER_ORE =
             registerBlockItem("deepslate_silver_ore", PoptartCoreBlocks.DEEPSLATE_SILVER_ORE);
     public static final DeferredItem<BlockItem> RAW_SILVER_BLOCK =
             registerBlockItem("raw_silver_block", PoptartCoreBlocks.RAW_SILVER_BLOCK);
-    public static final DeferredItem<BlockItem> WAX_BLOCK = registerBlockItem("wax_block", PoptartCoreBlocks.WAX_BLOCK);
-    public static final DeferredItem<BlockItem> COAL_COKE_BLOCK =
-            registerBlockItem("coal_coke_block", PoptartCoreBlocks.COAL_COKE_BLOCK);
-    public static final DeferredItem<BlockItem> BRONZE_BLOCK =
-            registerBlockItem("bronze_block", PoptartCoreBlocks.BRONZE_BLOCK);
-    public static final DeferredItem<BlockItem> STEEL_BLOCK =
-            registerBlockItem("steel_block", PoptartCoreBlocks.STEEL_BLOCK);
     public static final DeferredItem<BlockItem> CLINKER_BRICKS =
             registerBlockItem("clinker_bricks", PoptartCoreBlocks.CLINKER_BRICKS);
     public static final DeferredItem<BlockItem> CLINKER_BRICK_SLAB =
@@ -266,24 +278,16 @@ public class PoptartCoreItems {
             registerBlockItem("chiseled_clinker_tile", PoptartCoreBlocks.CHISELED_CLINKER_TILE);
     public static final DeferredItem<BlockItem> CLINKER_PILLAR =
             registerBlockItem("clinker_pillar", PoptartCoreBlocks.CLINKER_PILLAR);
-    public static final DeferredItem<Item> UNFIRED_INGOT_MOULD =
-            ITEMS.register("unfired_ingot_mould", () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> INGOT_MOULD =
-            ITEMS.register("ingot_mould", () -> new Item(new Item.Properties().durability(32)));
-    public static final DeferredItem<Item> UNFIRED_PLATE_MOULD =
-            ITEMS.register("unfired_plate_mould", () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> PLATE_MOULD =
-            ITEMS.register("plate_mould", () -> new Item(new Item.Properties().durability(32)));
+    public static final CatalogItemDefinition<Item> UNFIRED_INGOT_MOULD =
+            PoptartCatalog.simpleItem("unfired_ingot_mould");
+    public static final CatalogItemDefinition<Item> INGOT_MOULD =
+            PoptartCatalog.item("ingot_mould", () -> new Item(new Item.Properties().durability(32)));
+    public static final CatalogItemDefinition<Item> UNFIRED_PLATE_MOULD =
+            PoptartCatalog.simpleItem("unfired_plate_mould");
+    public static final CatalogItemDefinition<Item> PLATE_MOULD =
+            PoptartCatalog.item("plate_mould", () -> new Item(new Item.Properties().durability(32)));
 
     // Helper Functions
-    private static DeferredItem<Item> registerItem(String name) {
-        return registerItem(name, new Item.Properties());
-    }
-
-    private static DeferredItem<Item> registerItem(String name, Item.Properties properties) {
-        return ITEMS.registerSimpleItem(name, properties);
-    }
-
     private static DeferredItem<BlockItem> registerBlockItem(
             String name,
             net.neoforged.neoforge.registries.DeferredBlock<? extends net.minecraft.world.level.block.Block> block) {

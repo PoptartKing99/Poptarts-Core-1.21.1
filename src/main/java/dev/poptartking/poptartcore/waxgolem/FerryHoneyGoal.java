@@ -8,7 +8,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.phys.Vec3;
 
-/* JADX INFO: loaded from: wayfarer_core-0.1.0.jar:dev/tazer/wayfarer/waxgolem/FerryHoneyGoal.class */
 public class FerryHoneyGoal extends Goal {
     private static final int SEARCH = 12;
     private final WaxGolem golem;

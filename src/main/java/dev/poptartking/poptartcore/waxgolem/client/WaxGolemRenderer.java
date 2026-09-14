@@ -13,7 +13,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Vector3f;
 
-/* JADX INFO: loaded from: wayfarer_core-0.1.0.jar:dev/tazer/wayfarer/client/waxgolem/WaxGolemRenderer.class */
 public class WaxGolemRenderer extends MobRenderer<WaxGolem, WaxGolemModel> {
     public static final ModelLayerLocation LAYER = new ModelLayerLocation(PoptartCore.location("wax_golem"), "main");
     private static final ResourceLocation[] TEXTURES = {
@@ -53,7 +52,6 @@ public class WaxGolemRenderer extends MobRenderer<WaxGolem, WaxGolemModel> {
         return TEXTURES[Math.clamp(golem.stage(), 0, TEXTURES.length - 1)];
     }
 
-    /* JADX INFO: Access modifiers changed from: protected */
     public void scale(WaxGolem golem, PoseStack poseStack, float partialTick) {
         poseStack.scale(1.0f, 1.0f, 1.0f);
     }

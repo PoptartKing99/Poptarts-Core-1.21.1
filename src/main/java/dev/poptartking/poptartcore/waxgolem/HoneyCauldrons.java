@@ -17,7 +17,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 
-/* JADX INFO: loaded from: wayfarer_core-0.1.0.jar:dev/tazer/wayfarer/waxgolem/HoneyCauldrons.class */
 public final class HoneyCauldrons {
     public static final int MAX_LEVEL = 4;
 
@@ -33,7 +32,7 @@ public final class HoneyCauldrons {
 
     public static int level(BlockState state) {
         if (state.hasProperty(FourLayeredCauldronBlock.LEVEL)) {
-            return ((Integer) state.getValue(FourLayeredCauldronBlock.LEVEL)).intValue();
+            return state.getValue(FourLayeredCauldronBlock.LEVEL);
         }
         return 0;
     }
@@ -56,10 +55,7 @@ public final class HoneyCauldrons {
                             .setValue(FourLayeredCauldronBlock.LEVEL, 1),
                     3);
         } else if (isHoney(state) && level(state) < 4) {
-            level.setBlock(
-                    pos,
-                    (BlockState) state.setValue(FourLayeredCauldronBlock.LEVEL, Integer.valueOf(level(state) + 1)),
-                    3);
+            level.setBlock(pos, state.setValue(FourLayeredCauldronBlock.LEVEL, level(state) + 1), 3);
         } else {
             return false;
         }
@@ -78,8 +74,7 @@ public final class HoneyCauldrons {
         if (remaining <= 0) {
             blockStateDefaultBlockState = Blocks.CAULDRON.defaultBlockState();
         } else {
-            blockStateDefaultBlockState =
-                    (BlockState) state.setValue(FourLayeredCauldronBlock.LEVEL, Integer.valueOf(remaining));
+            blockStateDefaultBlockState = state.setValue(FourLayeredCauldronBlock.LEVEL, remaining);
         }
         level.setBlock(pos, blockStateDefaultBlockState, 3);
         level.playSound((Player) null, pos, SoundEvents.BOTTLE_EMPTY, SoundSource.BLOCKS);

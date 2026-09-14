@@ -1,4 +1,12 @@
 {
+  "bee_smoker.blow": {
+    "sounds": ["poptartcore:bee_smoker/blow"],
+    "subtitle": "subtitles.poptartcore.bee_smoker.blow"
+  },
+  "bee_smoker.retract": {
+    "sounds": ["poptartcore:bee_smoker/retract"],
+    "subtitle": "subtitles.poptartcore.bee_smoker.retract"
+  },
   "millstone.loop": {
     "sounds": ["poptartcore:millstone/loop"],
     "subtitle": "subtitles.poptartcore.millstone.loop"

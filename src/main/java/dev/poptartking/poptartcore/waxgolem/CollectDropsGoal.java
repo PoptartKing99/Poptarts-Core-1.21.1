@@ -6,7 +6,6 @@ import java.util.List;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.item.ItemEntity;
 
-/* JADX INFO: loaded from: wayfarer_core-0.1.0.jar:dev/tazer/wayfarer/waxgolem/CollectDropsGoal.class */
 public class CollectDropsGoal extends Goal {
     public static final double SEEK_RANGE = 5.0d;
     private final WaxGolem golem;

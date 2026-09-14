@@ -17,6 +17,9 @@ function Require-Text([string]$relativePath, [string[]]$patterns) {
 
 Require-Text 'src/main/java/dev/poptartking/poptartcore/beekeeping/BeeSmokerItem.java' @(
     'REACH = 5\.0D', 'SPRAY_RADIUS = 1\.25D', 'BEE_SMOKE_TICKS = 30', 'HIVE_SMOKE_TICKS = 100',
+    'PUMP_CYCLE_TICKS = 40', 'PARTICLE_DURATION_TICKS = 30', 'RETRACT_DELAY_TICKS = 15',
+    'PoptartCoreSounds\.BEE_SMOKER_BLOW', 'PoptartCoreSounds\.BEE_SMOKER_RETRACT',
+    'pumpTick < PARTICLE_DURATION_TICKS',
     'elapsed % 20 == 0', 'SmokedHives\.mark', 'CAMPFIRE_COSY_SMOKE',
     'SoundEvents\.EXPERIENCE_ORB_PICKUP', 'ParticleTypes\.HEART', 'ticks == HIVE_SMOKE_TICKS',
     'SmokedBees\.isSmoked', 'SmokedBees\.mark',
@@ -29,7 +32,15 @@ Require-Text 'src/main/java/dev/poptartking/poptartcore/beekeeping/SmokedBees.ja
     'SMOKED_DURATION = 300', 'keepCalm', 'setRemainingPersistentAngerTime\(0\)'
 )
 Require-Text 'src/main/java/dev/poptartking/poptartcore/registry/PoptartCoreItems.java' @(
-    'DeferredItem<BeeSmokerItem> BEE_SMOKER', 'stacksTo\(1\)\.durability\(360\)'
+    'CatalogItemDefinition<BeeSmokerItem> BEE_SMOKER', 'stacksTo\(1\)\.durability\(360\)',
+    '\.withoutGeneratedModel\(\)'
+)
+Require-Text 'src/main/java/dev/poptartking/poptartcore/registry/PoptartCoreSounds.java' @(
+    'BEE_SMOKER_BLOW', 'BEE_SMOKER_RETRACT', 'bee_smoker\.blow', 'bee_smoker\.retract'
+)
+Require-Text 'src/main/resources/assets/poptartcore/sounds.json' @(
+    'bee_smoker\.blow', 'poptartcore:bee_smoker/blow',
+    'bee_smoker\.retract', 'poptartcore:bee_smoker/retract'
 )
 Require-Text 'src/main/resources/poptartcore.mixins.json' @(
     'bee\.BeehiveSmokedMixin', 'bee\.SmokedBeeMixin', 'bee\.BeeSmokerArmPoseMixin',
@@ -57,7 +68,9 @@ foreach ($relativePath in @(
     'src/main/resources/assets/poptartcore/models/item/bee_smoker_gui.json',
     'src/main/resources/assets/poptartcore/models/item/bee_smoker_3d.json',
     'src/main/resources/assets/poptartcore/textures/item/bee_smoker.png',
-    'src/main/resources/assets/poptartcore/textures/item/bee_smoker_model.png'
+    'src/main/resources/assets/poptartcore/textures/item/bee_smoker_model.png',
+    'src/main/resources/assets/poptartcore/sounds/bee_smoker/blow.ogg',
+    'src/main/resources/assets/poptartcore/sounds/bee_smoker/retract.ogg'
 )) {
     $path = Join-Path $projectRoot $relativePath
     if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {

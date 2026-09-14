@@ -19,7 +19,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
 
-/* JADX INFO: loaded from: wayfarer_core-0.1.0.jar:dev/tazer/wayfarer/waxgolem/HarvestHiveGoal.class */
 public class HarvestHiveGoal extends Goal {
     private static final int PREFERRED_REACH = 1;
     private static final int HONEYCOMB_YIELD = 2;
@@ -157,7 +156,7 @@ public class HarvestHiveGoal extends Goal {
             return;
         }
         long time = this.golem.level().getGameTime();
-        int honey = ((Integer) state.getValue(BeehiveBlock.HONEY_LEVEL)).intValue();
+        int honey = state.getValue(BeehiveBlock.HONEY_LEVEL);
         this.target.seen(honey, time);
         this.target.sawSmoke(smoked(pos), time);
         this.target.setReachable(this.golem.reachable(pos));
@@ -195,7 +194,8 @@ public class HarvestHiveGoal extends Goal {
             return true;
         }
         BlockPos standing = this.golem.blockPosition();
-        return Math.abs(pos.getX() - standing.getX()) <= 1 && Math.abs(pos.getZ() - standing.getZ()) <= 1;
+        return Math.abs(pos.getX() - standing.getX()) <= PREFERRED_REACH
+                && Math.abs(pos.getZ() - standing.getZ()) <= PREFERRED_REACH;
     }
 
     private boolean inReach(BlockPos pos) {
@@ -210,7 +210,7 @@ public class HarvestHiveGoal extends Goal {
         ItemStack yield;
         ItemStack tool = this.golem.tool();
         if (tool.getItem() instanceof ShearsItem) {
-            yield = new ItemStack(Items.HONEYCOMB, 2);
+            yield = new ItemStack(Items.HONEYCOMB, HONEYCOMB_YIELD);
             tool.hurtAndBreak(1, this.golem, EquipmentSlot.MAINHAND);
             this.golem
                     .level()
@@ -223,7 +223,7 @@ public class HarvestHiveGoal extends Goal {
             return;
         }
         dropAtHive(pos, yield);
-        this.golem.level().setBlock(pos, (BlockState) state.setValue(BeehiveBlock.HONEY_LEVEL, 0), 3);
+        this.golem.level().setBlock(pos, state.setValue(BeehiveBlock.HONEY_LEVEL, 0), 3);
         this.target.harvested(this.golem.level().getGameTime());
         this.golem.level().gameEvent(this.golem, GameEvent.SHEAR, pos);
         this.golem.spendLife(600);

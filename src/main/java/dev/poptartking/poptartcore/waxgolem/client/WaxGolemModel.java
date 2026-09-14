@@ -13,7 +13,6 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.util.Mth;
 
-/* JADX INFO: loaded from: wayfarer_core-0.1.0.jar:dev/tazer/wayfarer/client/waxgolem/WaxGolemModel.class */
 public class WaxGolemModel extends EntityModel<WaxGolem> {
     public final ModelPart body;
     public final ModelPart head;

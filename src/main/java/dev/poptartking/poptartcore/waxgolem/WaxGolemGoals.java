@@ -16,11 +16,9 @@ import net.minecraft.world.level.block.CandleBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
-/* JADX INFO: loaded from: wayfarer_core-0.1.0.jar:dev/tazer/wayfarer/waxgolem/WaxGolemGoals.class */
 public final class WaxGolemGoals {
     private WaxGolemGoals() {}
 
-    /* JADX INFO: loaded from: wayfarer_core-0.1.0.jar:dev/tazer/wayfarer/waxgolem/WaxGolemGoals$Base.class */
     public abstract static class Base extends Goal {
         protected final WaxGolem golem;
 
@@ -39,7 +37,6 @@ public final class WaxGolemGoals {
         }
     }
 
-    /* JADX INFO: loaded from: wayfarer_core-0.1.0.jar:dev/tazer/wayfarer/waxgolem/WaxGolemGoals$WatchWatcher.class */
     public static class WatchWatcher extends Base {
         public WatchWatcher(WaxGolem golem) {
             super(golem);
@@ -63,7 +60,6 @@ public final class WaxGolemGoals {
         }
     }
 
-    /* JADX INFO: loaded from: wayfarer_core-0.1.0.jar:dev/tazer/wayfarer/waxgolem/WaxGolemGoals$Sit.class */
     public static class Sit extends Base {
         private int duration;
 
@@ -95,7 +91,6 @@ public final class WaxGolemGoals {
         }
     }
 
-    /* JADX INFO: loaded from: wayfarer_core-0.1.0.jar:dev/tazer/wayfarer/waxgolem/WaxGolemGoals$StareAt.class */
     public static class StareAt extends Base {
         private final Class<? extends Entity> type;
         private final int chance;
@@ -143,14 +138,12 @@ public final class WaxGolemGoals {
         }
     }
 
-    /* JADX INFO: loaded from: wayfarer_core-0.1.0.jar:dev/tazer/wayfarer/waxgolem/WaxGolemGoals$StareAtBlock.class */
     public static class StareAtBlock extends Base {
         private final Kind kind;
         private final int chance;
         private BlockPos target;
         private int duration;
 
-        /* JADX INFO: loaded from: wayfarer_core-0.1.0.jar:dev/tazer/wayfarer/waxgolem/WaxGolemGoals$StareAtBlock$Kind.class */
         public enum Kind {
             FLOWER,
             GLASS,
@@ -241,7 +234,6 @@ public final class WaxGolemGoals {
         }
     }
 
-    /* JADX INFO: loaded from: wayfarer_core-0.1.0.jar:dev/tazer/wayfarer/waxgolem/WaxGolemGoals$SitNearFriend.class */
     public static class SitNearFriend extends Base {
         private WaxGolem friend;
         private int duration;
@@ -291,7 +283,6 @@ public final class WaxGolemGoals {
         }
     }
 
-    /* JADX INFO: loaded from: wayfarer_core-0.1.0.jar:dev/tazer/wayfarer/waxgolem/WaxGolemGoals$LingerNearBees.class */
     public static class LingerNearBees extends Base {
         private static final double RANGE = 16.0d;
         private BlockPos spot;
@@ -319,7 +310,7 @@ public final class WaxGolemGoals {
             }
             for (Entity entity : this.golem
                     .level()
-                    .getEntities(this.golem, this.golem.getBoundingBox().inflate(16.0d), other -> {
+                    .getEntities(this.golem, this.golem.getBoundingBox().inflate(RANGE), other -> {
                         return (other instanceof Bee) || (other instanceof WaxGolem);
                     })) {
                 options.add(entity.blockPosition());
@@ -355,7 +346,6 @@ public final class WaxGolemGoals {
         }
     }
 
-    /* JADX INFO: loaded from: wayfarer_core-0.1.0.jar:dev/tazer/wayfarer/waxgolem/WaxGolemGoals$ReturnHome.class */
     public static class ReturnHome extends Base {
         public ReturnHome(WaxGolem golem) {
             super(golem);
@@ -380,7 +370,6 @@ public final class WaxGolemGoals {
         }
     }
 
-    /* JADX INFO: loaded from: wayfarer_core-0.1.0.jar:dev/tazer/wayfarer/waxgolem/WaxGolemGoals$Sleep.class */
     public static class Sleep extends Base {
         public Sleep(WaxGolem golem) {
             super(golem);
