@@ -14,6 +14,9 @@ import dev.poptartking.poptartcore.millstone.MillstoneBlockItem;
 import dev.poptartking.poptartcore.millstone.MillstoneRotorBlock;
 import dev.poptartking.poptartcore.millstone.MillstoneStructuralBlock;
 import dev.poptartking.poptartcore.quern.QuernBlock;
+import dev.poptartking.poptartcore.rift.PackedRiftSedimentBlock;
+import dev.poptartking.poptartcore.rift.RiftFireBlock;
+import dev.poptartking.poptartcore.rift.RiftSedimentBlock;
 import dev.poptartking.poptartcore.spider.TemporaryCobwebBlock;
 import dev.poptartking.poptartcore.workbench.WorkbenchBlock;
 import dev.simulated_team.simulated.content.blocks.portable_engine.PortableEngineBlock;
@@ -39,6 +42,10 @@ public class PoptartCoreBlocks {
             "temporary_cobweb",
             () -> new TemporaryCobwebBlock(
                     BlockBehaviour.Properties.ofFullCopy(Blocks.COBWEB).noLootTable()));
+    public static final DeferredBlock<RiftFireBlock> RIFT_FIRE = BLOCKS.register(
+            "rift_fire",
+            () -> new RiftFireBlock(
+                    BlockBehaviour.Properties.ofFullCopy(Blocks.FIRE).noLootTable()));
 
     public static final CatalogBlockDefinition<MillstoneBlock> MILLSTONE = PoptartCatalog.block(
                     "millstone", () -> new MillstoneBlock(millstoneProperties()), MillstoneBlockItem::new)
@@ -116,6 +123,26 @@ public class PoptartCoreBlocks {
             .externalModel()
             .withoutGeneratedLoot()
             .mineableWithPickaxe();
+
+    public static final CatalogBlockDefinition<RiftSedimentBlock> RIFT_SEDIMENT = PoptartCatalog.block(
+                    "rift_sediment",
+                    () -> new RiftSedimentBlock(BlockBehaviour.Properties.of()
+                            .mapColor(MapColor.COLOR_PURPLE)
+                            .noCollission()
+                            .instabreak()
+                            .sound(SoundType.SAND)
+                            .lightLevel(state -> state.getValue(RiftSedimentBlock.LIT) ? 7 : 0)
+                            .pushReaction(PushReaction.DESTROY)))
+            .externalModel()
+            .withoutGeneratedLoot();
+    public static final CatalogBlockDefinition<PackedRiftSedimentBlock> RIFT_SEDIMENT_BLOCK = PoptartCatalog.block(
+                    "rift_sediment_block",
+                    () -> new PackedRiftSedimentBlock(
+                            BlockBehaviour.Properties.ofFullCopy(Blocks.SAND).mapColor(MapColor.COLOR_PURPLE)))
+            .withName("Block of Rift Sediment")
+            .withStorageRecipes(PoptartCoreBlocks.RIFT_SEDIMENT::get, "rift_sediment_from_block")
+            .simpleModel(PoptartCore.location("block/rift_sediment_block"), "")
+            .tags(BlockTags.MINEABLE_WITH_SHOVEL);
 
     public static final CatalogBlockDefinition<Block> TIN_BLOCK = PoptartCatalog.block(
                     "tin_block",

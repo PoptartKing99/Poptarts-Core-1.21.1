@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "poptartcore:rift_sediment_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "poptartcore:rift_sediment"
+  }
+}

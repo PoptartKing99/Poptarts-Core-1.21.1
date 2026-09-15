@@ -11,6 +11,8 @@ import dev.poptartking.poptartcore.registry.PoptartCoreBlockEntities;
 import dev.poptartking.poptartcore.registry.PoptartCoreEntities;
 import dev.poptartking.poptartcore.registry.PoptartCoreItems;
 import dev.poptartking.poptartcore.registry.PoptartCoreMenus;
+import dev.poptartking.poptartcore.registry.PoptartCoreParticles;
+import dev.poptartking.poptartcore.rift.client.RiftFlameParticle;
 import dev.poptartking.poptartcore.spider.client.WebProjectileRenderer;
 import dev.poptartking.poptartcore.waxgolem.client.WaxGolemModel;
 import dev.poptartking.poptartcore.waxgolem.client.WaxGolemRenderer;
@@ -26,12 +28,18 @@ import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.ModelEvent.RegisterAdditional;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 
 @EventBusSubscriber(
         modid = PoptartCore.MOD_ID,
         value = {Dist.CLIENT})
 public class ClientEvents {
+
+    @SubscribeEvent
+    public static void registerParticles(RegisterParticleProvidersEvent event) {
+        event.registerSpriteSet(PoptartCoreParticles.RIFT_FIRE_FLAME.get(), RiftFlameParticle.Provider::new);
+    }
 
     @SubscribeEvent
     public static void onClientLogout(ClientPlayerNetworkEvent.LoggingOut event) {

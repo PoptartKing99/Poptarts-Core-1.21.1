@@ -1,0 +1,5 @@
+{
+  "parent": "minecraft:block/template_fire_side_alt",
+  "render_type": "minecraft:cutout",
+  "textures": { "fire": "poptartcore:block/rift_fire_1" }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "neoforge:add_table",
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "minecraft:entities/endermite"
+    },
+    {
+      "condition": "minecraft:random_chance",
+      "chance": 0.6
+    }
+  ],
+  "table": "poptartcore:inject/endermite_rift_sediment"
+}

@@ -253,6 +253,8 @@ public class PoptartCoreItems {
     public static final DeferredItem<BlockItem> PORTABLE_ENGINE = PoptartCoreBlocks.PORTABLE_ENGINE.item();
     public static final DeferredItem<BlockItem> MILLSTONE = PoptartCoreBlocks.MILLSTONE.item();
     public static final DeferredItem<BlockItem> IRON_BLOOM = PoptartCoreBlocks.IRON_BLOOM.item();
+    public static final DeferredItem<BlockItem> RIFT_SEDIMENT = PoptartCoreBlocks.RIFT_SEDIMENT.item();
+    public static final DeferredItem<BlockItem> RIFT_SEDIMENT_BLOCK = PoptartCoreBlocks.RIFT_SEDIMENT_BLOCK.item();
     public static final DeferredItem<BlockItem> CLINKER_BRICKS = PoptartCoreBlocks.CLINKER_BRICKS.item();
     public static final DeferredItem<BlockItem> CLINKER_BRICK_SLAB = PoptartCoreBlocks.CLINKER_BRICK_SLAB.item();
     public static final DeferredItem<BlockItem> CLINKER_BRICK_STAIRS = PoptartCoreBlocks.CLINKER_BRICK_STAIRS.item();

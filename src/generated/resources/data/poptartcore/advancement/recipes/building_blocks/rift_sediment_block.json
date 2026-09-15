@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_rift_sediment": {
+      "conditions": {
+        "items": [
+          {
+            "items": "poptartcore:rift_sediment"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "poptartcore:rift_sediment_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_rift_sediment"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "poptartcore:rift_sediment_block"
+    ]
+  }
+}

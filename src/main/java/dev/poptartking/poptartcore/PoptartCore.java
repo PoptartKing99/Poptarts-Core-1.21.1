@@ -22,6 +22,7 @@ public class PoptartCore {
         PoptartCoreFluids.register(modEventBus);
         PoptartCoreRecipes.register(modEventBus);
         PoptartCoreSounds.register(modEventBus);
+        PoptartCoreParticles.register(modEventBus);
         PoptartCoreTabs.register(modEventBus);
         PoptartCoreAttachments.register(modEventBus);
         PoptartCoreDataMaps.register(modEventBus);

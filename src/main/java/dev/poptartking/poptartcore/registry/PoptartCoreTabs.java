@@ -40,6 +40,8 @@ public class PoptartCoreTabs {
             "flint_axe",
             "flint_shovel",
             "firestarter",
+            "rift_sediment",
+            "rift_sediment_block",
             "clinker_bricks",
             "clinker_brick_slab",
             "clinker_brick_stairs",

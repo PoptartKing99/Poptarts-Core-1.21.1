@@ -1,0 +1,28 @@
+{
+  "multipart": [
+    {
+      "when": { "north": "true" },
+      "apply": { "model": "poptartcore:block/rift_sediment_face" }
+    },
+    {
+      "when": { "east": "true" },
+      "apply": { "model": "poptartcore:block/rift_sediment_face", "y": 90 }
+    },
+    {
+      "when": { "south": "true" },
+      "apply": { "model": "poptartcore:block/rift_sediment_face", "y": 180 }
+    },
+    {
+      "when": { "west": "true" },
+      "apply": { "model": "poptartcore:block/rift_sediment_face", "y": 270 }
+    },
+    {
+      "when": { "up": "true" },
+      "apply": { "model": "poptartcore:block/rift_sediment_face", "x": 270 }
+    },
+    {
+      "when": { "down": "true" },
+      "apply": { "model": "poptartcore:block/rift_sediment_face", "x": 90 }
+    }
+  ]
+}
