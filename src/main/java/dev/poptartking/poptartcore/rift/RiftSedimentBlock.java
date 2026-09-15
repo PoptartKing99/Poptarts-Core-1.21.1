@@ -83,7 +83,9 @@ public class RiftSedimentBlock extends MultifaceBlock {
                 1.0F,
                 level.getRandom().nextFloat() * 0.4F + 0.8F);
         if (level instanceof ServerLevel serverLevel) {
-            RiftPortalIgnition.arm(serverLevel, pos);
+            if (!RiftPortalIgnition.arm(serverLevel, pos)) {
+                RiftBearing.prime(serverLevel, pos);
+            }
             serverLevel.setBlock(pos, state.setValue(LIT, true), Block.UPDATE_ALL);
             serverLevel.scheduleTick(pos, this, burnTicks(state, serverLevel.random));
             serverLevel.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
@@ -141,16 +143,7 @@ public class RiftSedimentBlock extends MultifaceBlock {
             level.playSound(
                     null, pos, SoundEvents.FIRECHARGE_USE, SoundSource.BLOCKS, 0.4F, 0.7F + random.nextFloat() * 0.2F);
         } else {
-            level.sendParticles(
-                    ParticleTypes.PORTAL,
-                    pos.getX() + 0.5,
-                    pos.getY() + 0.2,
-                    pos.getZ() + 0.5,
-                    6,
-                    0.2,
-                    0.15,
-                    0.2,
-                    0.15);
+            RiftBearing.pulse(level, pos);
         }
     }
 

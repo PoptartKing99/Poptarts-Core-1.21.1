@@ -91,6 +91,7 @@ public final class RiftPortalEvents {
     public static void clearLevelState(LevelEvent.Unload event) {
         if (event.getLevel() instanceof ServerLevel level) {
             RiftPortalIgnition.clear(level);
+            RiftBearing.clear(level);
         }
     }
 }
