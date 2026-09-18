@@ -78,6 +78,21 @@ public class PoptartCoreTabs {
             "silver_ingot",
             "silver_nugget",
             "silver_block",
+            "titanium_ore",
+            "deepslate_titanium_ore",
+            "cassiterite_titanium_ore",
+            "cylindrite_titanium_ore",
+            "raw_titanium",
+            "raw_titanium_block",
+            "titanium_shard",
+            "titanium_ingot",
+            "titanium_nugget",
+            "titanium_plate",
+            "titanium_bricks",
+            "chiseled_titanium_bricks",
+            "titanium_brick_slab",
+            "titanium_brick_stairs",
+            "titanium_brick_wall",
             "bronze_ingot",
             "bronze_nugget",
             "bronze_plate",
@@ -100,7 +115,12 @@ public class PoptartCoreTabs {
             "coal_coke_block",
             "wax",
             "wax_block",
-            "redstone_circuit");
+            "redstone_circuit",
+            "audio_circuit",
+            "video_circuit",
+            "radio_circuit",
+            "amethyst_crystal",
+            "quartz_crystal");
 
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TAB =
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, PoptartCore.MOD_ID);

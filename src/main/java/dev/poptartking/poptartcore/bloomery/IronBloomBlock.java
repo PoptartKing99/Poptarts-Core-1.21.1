@@ -82,7 +82,7 @@ public class IronBloomBlock extends Block {
     }
 
     private static void dropNuggets(Level level, BlockPos pos) {
-        popResource(level, pos, new ItemStack(Items.IRON_NUGGET, 6 + level.random.nextInt(4)));
+        popResource(level, pos, new ItemStack(Items.IRON_NUGGET, 9));
     }
 
     private static VoxelShape[] makeShapes() {

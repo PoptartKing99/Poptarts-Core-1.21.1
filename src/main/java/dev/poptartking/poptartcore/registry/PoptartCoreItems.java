@@ -17,6 +17,7 @@ import net.minecraft.world.item.FlintAndSteelItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.PickaxeItem;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.component.ChargedProjectiles;
@@ -101,6 +102,11 @@ public class PoptartCoreItems {
     public static final CatalogItemDefinition<WaxItem> WAX =
             PoptartCatalog.item("wax", () -> new WaxItem(new Item.Properties()));
     public static final CatalogItemDefinition<Item> REDSTONE_CIRCUIT = PoptartCatalog.simpleItem("redstone_circuit");
+    public static final CatalogItemDefinition<Item> AUDIO_CIRCUIT = PoptartCatalog.simpleItem("audio_circuit");
+    public static final CatalogItemDefinition<Item> VIDEO_CIRCUIT = PoptartCatalog.simpleItem("video_circuit");
+    public static final CatalogItemDefinition<Item> RADIO_CIRCUIT = PoptartCatalog.simpleItem("radio_circuit");
+    public static final CatalogItemDefinition<Item> AMETHYST_CRYSTAL = PoptartCatalog.simpleItem("amethyst_crystal");
+    public static final CatalogItemDefinition<Item> QUARTZ_CRYSTAL = PoptartCatalog.simpleItem("quartz_crystal");
     public static final CatalogItemDefinition<BonePickItem> BONE_PICK = PoptartCatalog.item(
                     "bone_pick",
                     () -> new BonePickItem(
@@ -217,6 +223,14 @@ public class PoptartCoreItems {
     public static final CatalogItemDefinition<Item> SILVER_INGOT = PoptartCatalog.simpleItem("silver_ingot");
     public static final CatalogItemDefinition<Item> SILVER_NUGGET = PoptartCatalog.simpleItem("silver_nugget");
     public static final CatalogItemDefinition<Item> RAW_SILVER = PoptartCatalog.simpleItem("raw_silver");
+    public static final CatalogItemDefinition<Item> RAW_TITANIUM = PoptartCatalog.simpleItem("raw_titanium");
+    public static final CatalogItemDefinition<Item> TITANIUM_SHARD = PoptartCatalog.simpleItem("titanium_shard");
+    public static final CatalogItemDefinition<Item> TITANIUM_INGOT = PoptartCatalog.item(
+            "titanium_ingot", () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON)));
+    public static final CatalogItemDefinition<Item> TITANIUM_NUGGET = PoptartCatalog.item(
+            "titanium_nugget", () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON)));
+    public static final CatalogItemDefinition<Item> TITANIUM_PLATE = PoptartCatalog.item(
+            "titanium_plate", () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON)));
     public static final CatalogItemDefinition<ArmorItem> STEEL_HELMET = PoptartCatalog.item(
                     "steel_helmet",
                     () -> new ArmorItem(

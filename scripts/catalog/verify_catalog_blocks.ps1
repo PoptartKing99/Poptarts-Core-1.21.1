@@ -18,6 +18,18 @@ param(
         'deepslate_lead_ore' = @{ Name = 'Deepslate Lead Ore'; Drop = 'raw_lead' }
         'silver_ore' = @{ Name = 'Silver Ore'; Drop = 'raw_silver' }
         'deepslate_silver_ore' = @{ Name = 'Deepslate Silver Ore'; Drop = 'raw_silver' }
+        'titanium_ore' = @{ Name = 'Titanium Ore'; Drop = 'raw_titanium' }
+        'deepslate_titanium_ore' = @{ Name = 'Deepslate Titanium Ore'; Drop = 'raw_titanium' }
+        'cassiterite_titanium_ore' = @{ Name = 'Cassiterite Titanium Ore'; Drop = 'raw_titanium' }
+        'cylindrite_titanium_ore' = @{ Name = 'Cylindrite Titanium Ore'; Drop = 'raw_titanium' }
+    },
+    [hashtable]$TitaniumBlocks = @{
+        'raw_titanium_block' = @{ Name = 'Block of Raw Titanium'; Type = 'simple' }
+        'titanium_bricks' = @{ Name = 'Titanium Plated Bricks'; Type = 'simple' }
+        'chiseled_titanium_bricks' = @{ Name = 'Chiseled Titanium Plated Bricks'; Type = 'simple' }
+        'titanium_brick_slab' = @{ Name = 'Titanium Plated Brick Slab'; Type = 'slab' }
+        'titanium_brick_stairs' = @{ Name = 'Titanium Plated Brick Stairs'; Type = 'stairs' }
+        'titanium_brick_wall' = @{ Name = 'Titanium Plated Brick Wall'; Type = 'wall' }
     },
     [hashtable]$ClinkerBlocks = @{
         'clinker_bricks' = @{ Name = 'Clinker Bricks'; Type = 'random'; Models = 12 }
@@ -79,6 +91,16 @@ $expectedBlockTags = @{
         'poptartcore:deepslate_silver_ore',
         'poptartcore:silver_block',
         'poptartcore:raw_silver_block',
+        'poptartcore:titanium_ore',
+        'poptartcore:deepslate_titanium_ore',
+        'poptartcore:cassiterite_titanium_ore',
+        'poptartcore:cylindrite_titanium_ore',
+        'poptartcore:raw_titanium_block',
+        'poptartcore:titanium_bricks',
+        'poptartcore:chiseled_titanium_bricks',
+        'poptartcore:titanium_brick_slab',
+        'poptartcore:titanium_brick_stairs',
+        'poptartcore:titanium_brick_wall',
         'poptartcore:coal_coke_block',
         'poptartcore:bronze_block',
         'poptartcore:steel_block'
@@ -92,6 +114,11 @@ $expectedBlockTags = @{
         'poptartcore:deepslate_silver_ore',
         'poptartcore:silver_block',
         'poptartcore:raw_silver_block',
+        'poptartcore:titanium_ore',
+        'poptartcore:deepslate_titanium_ore',
+        'poptartcore:cassiterite_titanium_ore',
+        'poptartcore:cylindrite_titanium_ore',
+        'poptartcore:raw_titanium_block',
         'poptartcore:steel_block'
     )
     'minecraft\tags\block\needs_stone_tool.json' = @(
@@ -99,7 +126,8 @@ $expectedBlockTags = @{
     )
     'minecraft\tags\block\walls.json' = @(
         'poptartcore:clinker_brick_wall',
-        'poptartcore:clinker_tile_wall'
+        'poptartcore:clinker_tile_wall',
+        'poptartcore:titanium_brick_wall'
     )
 }
 
@@ -239,6 +267,53 @@ foreach ($id in $OreBlocks.Keys) {
 }
 
 Write-Output "Verified $($OreBlocks.Count) Poptart Catalog ore blocks."
+
+foreach ($entry in $TitaniumBlocks.GetEnumerator()) {
+    $id = $entry.Key
+    $details = $entry.Value
+    $translationKey = "block.poptartcore.$id"
+    if ($generatedLanguage.PSObject.Properties[$translationKey].Value -ne $details.Name) {
+        throw "Wrong generated name for $id"
+    }
+
+    foreach ($relativePath in @(
+        "assets\poptartcore\blockstates\$id.json",
+        "assets\poptartcore\models\item\$id.json",
+        "data\poptartcore\loot_table\blocks\$id.json")) {
+        $generatedPath = Join-Path $generatedRoot $relativePath
+        if (-not (Test-Path -LiteralPath $generatedPath)) {
+            throw "Missing generated titanium resource: $relativePath"
+        }
+        $jsonDocument = [System.Text.Json.JsonDocument]::Parse((Get-Content -Raw -LiteralPath $generatedPath))
+        $jsonDocument.Dispose()
+    }
+
+    $expectedModels = switch ($details.Type) {
+        'simple' { @($id) }
+        'slab' { @($id, "${id}_top", "${id}_double") }
+        'stairs' { @($id, "${id}_inner", "${id}_outer") }
+        'wall' { @("${id}_post", "${id}_side", "${id}_side_tall", "${id}_inventory") }
+        default { throw "Unknown titanium model type: $($details.Type)" }
+    }
+    foreach ($modelName in $expectedModels) {
+        if (-not (Test-Path -LiteralPath (Join-Path $generatedRoot "assets\poptartcore\models\block\$modelName.json"))) {
+            throw "Missing generated titanium model: $modelName"
+        }
+    }
+
+    if ($pickaxeTag.values -notcontains "poptartcore:$id") {
+        throw "Pickaxe mining tag is missing $id"
+    }
+}
+
+if ($ironToolTag.values -notcontains 'poptartcore:raw_titanium_block') {
+    throw 'Iron-tool tag is missing raw_titanium_block'
+}
+if ($wallTag.values -notcontains 'poptartcore:titanium_brick_wall') {
+    throw 'Wall tag is missing titanium_brick_wall'
+}
+
+Write-Output "Verified $($TitaniumBlocks.Count) Poptart Catalog titanium blocks."
 
 foreach ($entry in $ClinkerBlocks.GetEnumerator()) {
     $id = $entry.Key

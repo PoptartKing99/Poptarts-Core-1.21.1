@@ -1,5 +1,6 @@
 package dev.poptartking.poptartcore.registry;
 
+import com.teamabnormals.caverns_and_chasms.core.registry.CCSoundEvents.CCSoundTypes;
 import dev.poptartking.poptartcore.PoptartCore;
 import dev.poptartking.poptartcore.blastfurnace.BlastFurnaceBlock;
 import dev.poptartking.poptartcore.bloomery.BloomeryBlock;
@@ -236,6 +237,67 @@ public class PoptartCoreBlocks {
             .withStorageRecipes(() -> PoptartCoreItems.RAW_SILVER.get(), "raw_silver_from_block")
             .requiresIronTool();
 
+    public static final CatalogBlockDefinition<Block> TITANIUM_ORE = PoptartCatalog.block(
+                    "titanium_ore",
+                    () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DIAMOND_ORE)
+                            .strength(3.0F, 6.0F)))
+            .withOreDrop(() -> PoptartCoreItems.RAW_TITANIUM.get())
+            .requiresIronTool();
+    public static final CatalogBlockDefinition<Block> DEEPSLATE_TITANIUM_ORE = PoptartCatalog.block(
+                    "deepslate_titanium_ore",
+                    () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_DIAMOND_ORE)
+                            .strength(4.5F, 6.0F)))
+            .withOreDrop(() -> PoptartCoreItems.RAW_TITANIUM.get())
+            .requiresIronTool();
+    public static final CatalogBlockDefinition<Block> CASSITERITE_TITANIUM_ORE = PoptartCatalog.block(
+                    "cassiterite_titanium_ore",
+                    () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DIAMOND_ORE)
+                            .strength(3.0F, 6.0F)
+                            .sound(CCSoundTypes.CASSITERITE)))
+            .withName("Cassiterite Titanium Ore")
+            .withOreDrop(() -> PoptartCoreItems.RAW_TITANIUM.get())
+            .requiresIronTool();
+    public static final CatalogBlockDefinition<Block> CYLINDRITE_TITANIUM_ORE = PoptartCatalog.block(
+                    "cylindrite_titanium_ore",
+                    () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_DIAMOND_ORE)
+                            .strength(4.5F, 6.0F)
+                            .sound(CCSoundTypes.CYLINDRITE)))
+            .withName("Cylindrite Titanium Ore")
+            .withOreDrop(() -> PoptartCoreItems.RAW_TITANIUM.get())
+            .requiresIronTool();
+    public static final CatalogBlockDefinition<Block> RAW_TITANIUM_BLOCK = PoptartCatalog.block(
+                    "raw_titanium_block",
+                    () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.RAW_IRON_BLOCK)
+                            .strength(5.0F, 6.0F)))
+            .withName("Block of Raw Titanium")
+            .requiresIronTool();
+
+    public static final CatalogBlockDefinition<Block> TITANIUM_BRICKS = PoptartCatalog.block(
+                    "titanium_bricks", () -> new Block(titaniumBrickProperties()))
+            .withName("Titanium Plated Bricks")
+            .mineableWithPickaxe();
+    public static final CatalogBlockDefinition<Block> CHISELED_TITANIUM_BRICKS = PoptartCatalog.block(
+                    "chiseled_titanium_bricks", () -> new Block(titaniumBrickProperties()))
+            .withName("Chiseled Titanium Plated Bricks")
+            .mineableWithPickaxe();
+    public static final CatalogBlockDefinition<SlabBlock> TITANIUM_BRICK_SLAB = PoptartCatalog.block(
+                    "titanium_brick_slab", () -> new SlabBlock(titaniumBrickProperties()))
+            .withName("Titanium Plated Brick Slab")
+            .slabModel(PoptartCore.location("block/titanium_bricks"), "")
+            .mineableWithPickaxe();
+    public static final CatalogBlockDefinition<StairBlock> TITANIUM_BRICK_STAIRS = PoptartCatalog.block(
+                    "titanium_brick_stairs",
+                    () -> new StairBlock(TITANIUM_BRICKS.get().defaultBlockState(), titaniumBrickProperties()))
+            .withName("Titanium Plated Brick Stairs")
+            .stairsModel(PoptartCore.location("block/titanium_bricks"), "")
+            .mineableWithPickaxe();
+    public static final CatalogBlockDefinition<WallBlock> TITANIUM_BRICK_WALL = PoptartCatalog.block(
+                    "titanium_brick_wall", () -> new WallBlock(titaniumBrickProperties()))
+            .withName("Titanium Plated Brick Wall")
+            .wallModel(PoptartCore.location("block/titanium_bricks"), "")
+            .mineableWithPickaxe()
+            .tags(BlockTags.WALLS);
+
     public static final CatalogBlockDefinition<Block> WAX_BLOCK = PoptartCatalog.block(
                     "wax_block",
                     () -> new Block(
@@ -319,6 +381,13 @@ public class PoptartCoreBlocks {
 
     private static BlockBehaviour.Properties clinkerProperties() {
         return BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICKS);
+    }
+
+    private static BlockBehaviour.Properties titaniumBrickProperties() {
+        return BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)
+                .sound(SoundType.METAL)
+                .requiresCorrectToolForDrops()
+                .strength(5.0F, 6.0F);
     }
 
     public static void register(IEventBus eventBus) {

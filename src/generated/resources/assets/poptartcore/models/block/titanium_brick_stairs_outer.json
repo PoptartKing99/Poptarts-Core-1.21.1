@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "poptartcore:block/titanium_bricks",
+    "side": "poptartcore:block/titanium_bricks",
+    "top": "poptartcore:block/titanium_bricks"
+  }
+}

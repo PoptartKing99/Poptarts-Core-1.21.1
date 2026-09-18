@@ -18,6 +18,7 @@
     "hammer.HammerDestroyProgressMixin",
     "hammer.HammerTargetChangeMixin",
     "hammer.ServerBlockBreakingMixin",
+    "integration.cavernsandchasms.TinMonolithPieceMixin",
     "integration.simulated.PortableEngineBlockMixin",
     "integration.simulated.PortableEngineDyeingMixin",
     "integration.simulated.PortableEngineFuelInventoryMixin",

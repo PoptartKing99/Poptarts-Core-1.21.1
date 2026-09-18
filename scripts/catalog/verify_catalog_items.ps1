@@ -34,7 +34,12 @@ param(
         'raw_lead',
         'silver_ingot',
         'silver_nugget',
-        'raw_silver'
+        'raw_silver',
+        'raw_titanium',
+        'titanium_shard',
+        'titanium_ingot',
+        'titanium_nugget',
+        'titanium_plate'
     ),
     [string[]]$HandheldItemIds = @(
         'bronze_sword',

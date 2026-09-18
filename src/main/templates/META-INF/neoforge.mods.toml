@@ -87,6 +87,14 @@ versionRange="[2.0.0,3.0.0)"
 ordering="AFTER"
 side="BOTH"
 
+# Caverns & Chasms supplies the Tin Monolith generator adapted for titanium
+[[dependencies."${mod_id}"]]
+modId="caverns_and_chasms"
+type="required"
+versionRange="[3.0.0,3.1.0)"
+ordering="AFTER"
+side="BOTH"
+
 [[mixins]]
 config="poptartcore.mixins.json"
 

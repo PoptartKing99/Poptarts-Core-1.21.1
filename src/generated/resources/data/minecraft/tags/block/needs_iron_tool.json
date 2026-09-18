@@ -8,6 +8,11 @@
     "poptartcore:silver_ore",
     "poptartcore:deepslate_silver_ore",
     "poptartcore:raw_silver_block",
+    "poptartcore:titanium_ore",
+    "poptartcore:deepslate_titanium_ore",
+    "poptartcore:cassiterite_titanium_ore",
+    "poptartcore:cylindrite_titanium_ore",
+    "poptartcore:raw_titanium_block",
     "poptartcore:steel_block"
   ]
 }

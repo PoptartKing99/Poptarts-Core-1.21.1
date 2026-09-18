@@ -25,7 +25,8 @@ public class BloomeryBlockEntity extends BlockEntity implements WorldlyContainer
     public static final int IRON_SLOT = 0;
     public static final int FUEL_SLOT = 1;
     public static final int MAX_FUEL = 9;
-    private static final int MINUTE = 1200;
+    private static final int MIN_SMELTING_TIME = 90 * 20;
+    private static final int MAX_SMELTING_TIME = 120 * 20;
     private static final int[] NO_SLOTS = new int[0];
 
     private NonNullList<ItemStack> items = NonNullList.withSize(2, ItemStack.EMPTY);
@@ -65,7 +66,7 @@ public class BloomeryBlockEntity extends BlockEntity implements WorldlyContainer
     }
 
     public void light(RandomSource random) {
-        smeltingTime = random.nextInt(4 * MINUTE, 6 * MINUTE);
+        smeltingTime = random.nextInt(MIN_SMELTING_TIME, MAX_SMELTING_TIME + 1);
         smeltingProgress = 0;
         sync();
     }
