@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "axis=x": { "model": "poptartcore:block/industrial_encased_shaft", "uvlock": true, "x": 90, "y": 90 },
+    "axis=y": { "model": "poptartcore:block/industrial_encased_shaft", "uvlock": true },
+    "axis=z": { "model": "poptartcore:block/industrial_encased_shaft", "uvlock": true, "x": 90, "y": 180 }
+  }
+}

@@ -2,6 +2,7 @@ package dev.poptartking.poptartcore;
 
 import dev.poptartking.poptartcore.blastfurnace.BlastFurnaceCapabilities;
 import dev.poptartking.poptartcore.catalog.PoptartCatalog;
+import dev.poptartking.poptartcore.integration.create.PoptartCasingIntegration;
 import dev.poptartking.poptartcore.registry.*;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
@@ -13,9 +14,10 @@ public class PoptartCore {
     public static final String MOD_ID = "poptartcore";
 
     public PoptartCore(IEventBus modEventBus) {
-        PoptartCoreBlocks.register(modEventBus);
+        PoptartCoreBlocks.initialize();
         PoptartCoreItems.initialize();
         PoptartCatalog.register(modEventBus);
+        PoptartCoreBlocks.register(modEventBus);
         PoptartCoreEntities.register(modEventBus);
         PoptartCoreBlockEntities.register(modEventBus);
         PoptartCoreMenus.register(modEventBus);
@@ -28,6 +30,7 @@ public class PoptartCore {
         PoptartCoreDataMaps.register(modEventBus);
         BlastFurnaceCapabilities.register(modEventBus);
         PoptartCoreCapabilities.register(modEventBus);
+        PoptartCasingIntegration.register(modEventBus);
     }
 
     public static ResourceLocation location(String path) {

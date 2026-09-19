@@ -1,0 +1,11 @@
+{
+  "parent": "poptartcore:block/industrial_encased_cogwheels/normal/block_bottom",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "1": "poptartcore:block/industrial_plating",
+    "4": "create:block/gearbox",
+    "casing": "poptartcore:block/industrial_plating",
+    "particle": "poptartcore:block/industrial_plating",
+    "side": "poptartcore:block/industrial_plating_encased_cogwheel_side"
+  }
+}

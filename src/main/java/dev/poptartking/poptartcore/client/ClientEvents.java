@@ -6,6 +6,8 @@ import dev.poptartking.poptartcore.beekeeping.client.BeeSmokerClientExtensions;
 import dev.poptartking.poptartcore.blastfurnace.client.BlastFurnaceScreen;
 import dev.poptartking.poptartcore.crucible.client.CrucibleScreen;
 import dev.poptartking.poptartcore.hammer.client.ClientMiningCleanup;
+import dev.poptartking.poptartcore.integration.create.PoptartCasingClient;
+import dev.poptartking.poptartcore.integration.create.PoptartCasingPonders;
 import dev.poptartking.poptartcore.quern.client.QuernRenderer;
 import dev.poptartking.poptartcore.registry.PoptartCoreBlockEntities;
 import dev.poptartking.poptartcore.registry.PoptartCoreEntities;
@@ -23,6 +25,7 @@ import net.minecraft.world.item.Items;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
@@ -35,6 +38,12 @@ import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsE
         modid = PoptartCore.MOD_ID,
         value = {Dist.CLIENT})
 public class ClientEvents {
+
+    @SubscribeEvent
+    public static void clientSetup(FMLClientSetupEvent event) {
+        PoptartCasingClient.setup(event);
+        event.enqueueWork(PoptartCasingPonders::register);
+    }
 
     @SubscribeEvent
     public static void registerParticles(RegisterParticleProvidersEvent event) {

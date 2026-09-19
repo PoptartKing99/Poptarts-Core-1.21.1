@@ -35,6 +35,8 @@ public class PoptartCoreTabs {
             "portable_engine",
             "millstone",
             "iron_bloom",
+            "industrial_plating",
+            "treated_wood_casing",
             "hammer",
             "bone_pick",
             "flint_axe",

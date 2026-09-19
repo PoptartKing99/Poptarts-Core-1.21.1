@@ -3,6 +3,7 @@
   "package": "dev.poptartking.poptartcore.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "accessor.BlockEntityTypeAccessor",
     "spider.WallClimberNavigationAccessor",
     "spider.SpiderWebAttackMixin",
     "armor.ArmorTextureMixin",

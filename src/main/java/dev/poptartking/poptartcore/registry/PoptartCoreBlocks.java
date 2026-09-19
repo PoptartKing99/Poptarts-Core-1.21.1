@@ -1,5 +1,8 @@
 package dev.poptartking.poptartcore.registry;
 
+import com.simibubi.create.content.decoration.encasing.CasingBlock;
+import com.simibubi.create.content.kinetics.simpleRelays.encased.EncasedCogwheelBlock;
+import com.simibubi.create.content.kinetics.simpleRelays.encased.EncasedShaftBlock;
 import com.teamabnormals.caverns_and_chasms.core.registry.CCSoundEvents.CCSoundTypes;
 import dev.poptartking.poptartcore.PoptartCore;
 import dev.poptartking.poptartcore.blastfurnace.BlastFurnaceBlock;
@@ -47,6 +50,39 @@ public class PoptartCoreBlocks {
             "rift_fire",
             () -> new RiftFireBlock(
                     BlockBehaviour.Properties.ofFullCopy(Blocks.FIRE).noLootTable()));
+
+    public static final CatalogBlockDefinition<CasingBlock> INDUSTRIAL_PLATING = PoptartCatalog.block(
+                    "industrial_plating",
+                    () -> new CasingBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)
+                            .sound(SoundType.METAL)
+                            .strength(4.0F, 6.0F)))
+            .simpleModel(PoptartCore.location("block/industrial_plating"), "")
+            .mineableWithPickaxe();
+    public static final DeferredBlock<EncasedShaftBlock> INDUSTRIAL_ENCASED_SHAFT = BLOCKS.register(
+            "industrial_encased_shaft",
+            () -> new EncasedShaftBlock(industrialEncasedProperties(), INDUSTRIAL_PLATING::get));
+    public static final DeferredBlock<EncasedCogwheelBlock> INDUSTRIAL_ENCASED_COGWHEEL = BLOCKS.register(
+            "industrial_encased_cogwheel",
+            () -> new EncasedCogwheelBlock(industrialEncasedProperties(), false, INDUSTRIAL_PLATING::get));
+    public static final DeferredBlock<EncasedCogwheelBlock> INDUSTRIAL_ENCASED_LARGE_COGWHEEL = BLOCKS.register(
+            "industrial_encased_large_cogwheel",
+            () -> new EncasedCogwheelBlock(industrialEncasedProperties(), true, INDUSTRIAL_PLATING::get));
+    public static final CatalogBlockDefinition<CasingBlock> TREATED_WOOD_CASING = PoptartCatalog.block(
+                    "treated_wood_casing",
+                    () -> new CasingBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_PLANKS)
+                            .sound(SoundType.WOOD)
+                            .strength(2.0F, 3.0F)))
+            .simpleModel(PoptartCore.location("block/treated_wood_casing"), "")
+            .mineableWithAxe();
+    public static final DeferredBlock<EncasedShaftBlock> TREATED_WOOD_ENCASED_SHAFT = BLOCKS.register(
+            "treated_wood_encased_shaft",
+            () -> new EncasedShaftBlock(treatedWoodEncasedProperties(), TREATED_WOOD_CASING::get));
+    public static final DeferredBlock<EncasedCogwheelBlock> TREATED_WOOD_ENCASED_COGWHEEL = BLOCKS.register(
+            "treated_wood_encased_cogwheel",
+            () -> new EncasedCogwheelBlock(treatedWoodEncasedProperties(), false, TREATED_WOOD_CASING::get));
+    public static final DeferredBlock<EncasedCogwheelBlock> TREATED_WOOD_ENCASED_LARGE_COGWHEEL = BLOCKS.register(
+            "treated_wood_encased_large_cogwheel",
+            () -> new EncasedCogwheelBlock(treatedWoodEncasedProperties(), true, TREATED_WOOD_CASING::get));
 
     public static final CatalogBlockDefinition<MillstoneBlock> MILLSTONE = PoptartCatalog.block(
                     "millstone", () -> new MillstoneBlock(millstoneProperties()), MillstoneBlockItem::new)
@@ -389,6 +425,22 @@ public class PoptartCoreBlocks {
                 .requiresCorrectToolForDrops()
                 .strength(5.0F, 6.0F);
     }
+
+    private static BlockBehaviour.Properties industrialEncasedProperties() {
+        return BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)
+                .sound(SoundType.METAL)
+                .strength(4.0F, 6.0F)
+                .noOcclusion();
+    }
+
+    private static BlockBehaviour.Properties treatedWoodEncasedProperties() {
+        return BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_PLANKS)
+                .sound(SoundType.WOOD)
+                .strength(2.0F, 3.0F)
+                .noOcclusion();
+    }
+
+    public static void initialize() {}
 
     public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);
