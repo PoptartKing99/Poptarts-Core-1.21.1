@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "poptartcore:block/bronze_bricks",
+    "side": "poptartcore:block/bronze_bricks",
+    "top": "poptartcore:block/bronze_bricks"
+  }
+}

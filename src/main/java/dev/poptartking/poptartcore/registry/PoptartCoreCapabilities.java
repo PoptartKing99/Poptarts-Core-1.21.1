@@ -16,6 +16,10 @@ public final class PoptartCoreCapabilities {
 
     private static void registerCapabilities(RegisterCapabilitiesEvent event) {
         event.registerBlockEntity(
+                Capabilities.FluidHandler.BLOCK,
+                PoptartCoreBlockEntities.FLUID_BARREL.get(),
+                (barrel, side) -> barrel.fluidHandler());
+        event.registerBlockEntity(
                 Capabilities.ItemHandler.BLOCK,
                 PoptartCoreBlockEntities.CRUCIBLE.get(),
                 // Require a face so undirected queries cannot bypass the crucible's routing.

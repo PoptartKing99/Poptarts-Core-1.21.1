@@ -2,8 +2,10 @@ package dev.poptartking.poptartcore.registry;
 
 import dev.poptartking.poptartcore.PoptartCore;
 import dev.poptartking.poptartcore.blastfurnace.BlastFurnaceBlockEntity;
+import dev.poptartking.poptartcore.barrel.FluidBarrelBlockEntity;
 import dev.poptartking.poptartcore.bloomery.BloomeryBlockEntity;
 import dev.poptartking.poptartcore.crucible.CrucibleBlockEntity;
+import dev.poptartking.poptartcore.ingotpile.IngotPileBlockEntity;
 import dev.poptartking.poptartcore.millstone.MillstoneBlockEntity;
 import dev.poptartking.poptartcore.millstone.MillstoneRotorBlockEntity;
 import dev.poptartking.poptartcore.quern.QuernBlockEntity;
@@ -18,6 +20,10 @@ public class PoptartCoreBlockEntities {
 
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
             DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, PoptartCore.MOD_ID);
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<IngotPileBlockEntity>> INGOT_PILE =
+            BLOCK_ENTITIES.register("ingot_pile", () -> BlockEntityType.Builder.of(
+                    IngotPileBlockEntity::new, PoptartCoreBlocks.INGOT_PILE.get()).build(null));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MillstoneBlockEntity>> MILLSTONE =
             BLOCK_ENTITIES.register("millstone", () -> BlockEntityType.Builder.of(
@@ -36,6 +42,11 @@ public class PoptartCoreBlockEntities {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BlastFurnaceBlockEntity>> BLAST_FURNACE =
             BLOCK_ENTITIES.register("blast_furnace", () -> BlockEntityType.Builder.of(
                             BlastFurnaceBlockEntity::new, PoptartCoreBlocks.BLAST_FURNACE.get())
+                    .build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<FluidBarrelBlockEntity>> FLUID_BARREL =
+            BLOCK_ENTITIES.register("fluid_barrel", () -> BlockEntityType.Builder.of(
+                            FluidBarrelBlockEntity::new, PoptartCoreBlocks.FLUID_BARREL.get())
                     .build(null));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BloomeryBlockEntity>> BLOOMERY =

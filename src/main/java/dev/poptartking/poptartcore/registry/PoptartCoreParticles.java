@@ -1,6 +1,7 @@
 package dev.poptartking.poptartcore.registry;
 
 import dev.poptartking.poptartcore.PoptartCore;
+import dev.poptartking.poptartcore.lostheart.LostHeartEmberType;
 import java.util.function.Supplier;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
@@ -14,6 +15,9 @@ public final class PoptartCoreParticles {
 
     public static final Supplier<SimpleParticleType> RIFT_FIRE_FLAME =
             PARTICLE_TYPES.register("rift_fire_flame", () -> new SimpleParticleType(false));
+
+    public static final Supplier<LostHeartEmberType> LOST_HEART_EMBER =
+            PARTICLE_TYPES.register("lost_heart_ember", LostHeartEmberType::new);
 
     private PoptartCoreParticles() {}
 

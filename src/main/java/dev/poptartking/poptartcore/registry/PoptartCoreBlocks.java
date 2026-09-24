@@ -3,9 +3,12 @@ package dev.poptartking.poptartcore.registry;
 import com.simibubi.create.content.decoration.encasing.CasingBlock;
 import com.simibubi.create.content.kinetics.simpleRelays.encased.EncasedCogwheelBlock;
 import com.simibubi.create.content.kinetics.simpleRelays.encased.EncasedShaftBlock;
+import com.teamabnormals.caverns_and_chasms.core.registry.CCBlocks;
 import com.teamabnormals.caverns_and_chasms.core.registry.CCSoundEvents.CCSoundTypes;
 import dev.poptartking.poptartcore.PoptartCore;
 import dev.poptartking.poptartcore.blastfurnace.BlastFurnaceBlock;
+import dev.poptartking.poptartcore.barrel.FluidBarrelBlock;
+import dev.poptartking.poptartcore.barrel.FluidBarrelBlockItem;
 import dev.poptartking.poptartcore.bloomery.BloomeryBlock;
 import dev.poptartking.poptartcore.bloomery.IronBloomBlock;
 import dev.poptartking.poptartcore.catalog.CatalogBlockDefinition;
@@ -13,6 +16,7 @@ import dev.poptartking.poptartcore.catalog.PoptartCatalog;
 import dev.poptartking.poptartcore.clinker.ClinkerPillarBlock;
 import dev.poptartking.poptartcore.crucible.CrucibleBlock;
 import dev.poptartking.poptartcore.crucible.CrucibleBlockItem;
+import dev.poptartking.poptartcore.ingotpile.IngotPileBlock;
 import dev.poptartking.poptartcore.millstone.MillstoneBlock;
 import dev.poptartking.poptartcore.millstone.MillstoneBlockItem;
 import dev.poptartking.poptartcore.millstone.MillstoneRotorBlock;
@@ -41,6 +45,10 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class PoptartCoreBlocks {
 
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(PoptartCore.MOD_ID);
+
+    public static final DeferredBlock<IngotPileBlock> INGOT_PILE = BLOCKS.register(
+            "ingot_pile", () -> new IngotPileBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)
+                    .noOcclusion().noLootTable().pushReaction(PushReaction.DESTROY)));
 
     public static final DeferredBlock<TemporaryCobwebBlock> TEMPORARY_COBWEB = BLOCKS.register(
             "temporary_cobweb",
@@ -124,6 +132,13 @@ public class PoptartCoreBlocks {
                             .lightLevel(state -> state.getValue(BlastFurnaceBlock.LIT) ? 13 : 0)))
             .externalModel()
             .mineableWithPickaxe();
+
+    public static final CatalogBlockDefinition<FluidBarrelBlock> FLUID_BARREL = PoptartCatalog.block(
+                    "fluid_barrel", () -> new FluidBarrelBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BARREL)
+                            .noOcclusion()), FluidBarrelBlockItem::new)
+            .externalModel()
+            .withoutGeneratedLoot()
+            .mineableWithAxe();
 
     public static final CatalogBlockDefinition<BloomeryBlock> BLOOMERY = PoptartCatalog.block(
                     "bloomery", () -> new BloomeryBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.MUD_BRICKS)))
@@ -308,6 +323,135 @@ public class PoptartCoreBlocks {
             .withName("Block of Raw Titanium")
             .requiresIronTool();
 
+    public static final CatalogBlockDefinition<Block> BRONZE_BRICKS = PoptartCatalog.block(
+                    "bronze_bricks", () -> new Block(platedBrickProperties(CCBlocks.COPPER_BRICKS.get())))
+            .withName("Bronze Plated Bricks")
+            .mineableWithPickaxe();
+    public static final CatalogBlockDefinition<Block> CHISELED_BRONZE_BRICKS = PoptartCatalog.block(
+                    "chiseled_bronze_bricks", () -> new Block(platedBrickProperties(CCBlocks.CHISELED_COPPER_BRICKS.get())))
+            .withName("Chiseled Bronze Plated Bricks")
+            .mineableWithPickaxe();
+    public static final CatalogBlockDefinition<SlabBlock> BRONZE_BRICK_SLAB = PoptartCatalog.block(
+                    "bronze_brick_slab", () -> new SlabBlock(platedBrickProperties(CCBlocks.COPPER_BRICK_SLAB.get())))
+            .withName("Bronze Plated Brick Slab")
+            .slabModel(PoptartCore.location("block/bronze_bricks"), "")
+            .mineableWithPickaxe();
+    public static final CatalogBlockDefinition<StairBlock> BRONZE_BRICK_STAIRS = PoptartCatalog.block(
+                    "bronze_brick_stairs",
+                    () -> new StairBlock(BRONZE_BRICKS.get().defaultBlockState(), platedBrickProperties(CCBlocks.COPPER_BRICK_STAIRS.get())))
+            .withName("Bronze Plated Brick Stairs")
+            .stairsModel(PoptartCore.location("block/bronze_bricks"), "")
+            .mineableWithPickaxe();
+    public static final CatalogBlockDefinition<WallBlock> BRONZE_BRICK_WALL = PoptartCatalog.block(
+                    "bronze_brick_wall", () -> new WallBlock(platedBrickProperties(CCBlocks.COPPER_BRICK_WALL.get())))
+            .withName("Bronze Plated Brick Wall")
+            .wallModel(PoptartCore.location("block/bronze_bricks"), "")
+            .mineableWithPickaxe()
+            .tags(BlockTags.WALLS);
+
+    public static final CatalogBlockDefinition<Block> AGED_BRONZE_BRICKS = PoptartCatalog.block(
+                    "aged_bronze_bricks", () -> new Block(platedBrickProperties(CCBlocks.COPPER_BRICKS.get())))
+            .withName("Aged Bronze Plated Bricks")
+            .mineableWithPickaxe();
+    public static final CatalogBlockDefinition<Block> CHISELED_AGED_BRONZE_BRICKS = PoptartCatalog.block(
+                    "chiseled_aged_bronze_bricks", () -> new Block(platedBrickProperties(CCBlocks.CHISELED_COPPER_BRICKS.get())))
+            .withName("Chiseled Aged Bronze Plated Bricks")
+            .mineableWithPickaxe();
+    public static final CatalogBlockDefinition<SlabBlock> AGED_BRONZE_BRICK_SLAB = PoptartCatalog.block(
+                    "aged_bronze_brick_slab", () -> new SlabBlock(platedBrickProperties(CCBlocks.COPPER_BRICK_SLAB.get())))
+            .withName("Aged Bronze Plated Brick Slab")
+            .slabModel(PoptartCore.location("block/aged_bronze_bricks"), "")
+            .mineableWithPickaxe();
+    public static final CatalogBlockDefinition<StairBlock> AGED_BRONZE_BRICK_STAIRS = PoptartCatalog.block(
+                    "aged_bronze_brick_stairs",
+                    () -> new StairBlock(AGED_BRONZE_BRICKS.get().defaultBlockState(), platedBrickProperties(CCBlocks.COPPER_BRICK_STAIRS.get())))
+            .withName("Aged Bronze Plated Brick Stairs")
+            .stairsModel(PoptartCore.location("block/aged_bronze_bricks"), "")
+            .mineableWithPickaxe();
+    public static final CatalogBlockDefinition<WallBlock> AGED_BRONZE_BRICK_WALL = PoptartCatalog.block(
+                    "aged_bronze_brick_wall", () -> new WallBlock(platedBrickProperties(CCBlocks.COPPER_BRICK_WALL.get())))
+            .withName("Aged Bronze Plated Brick Wall")
+            .wallModel(PoptartCore.location("block/aged_bronze_bricks"), "")
+            .mineableWithPickaxe()
+            .tags(BlockTags.WALLS);
+
+    public static final CatalogBlockDefinition<Block> LEAD_BRICKS = PoptartCatalog.block(
+                    "lead_bricks", () -> new Block(platedBrickProperties(CCBlocks.TIN_BRICKS.get())))
+            .withName("Lead Plated Bricks")
+            .mineableWithPickaxe();
+    public static final CatalogBlockDefinition<Block> CHISELED_LEAD_BRICKS = PoptartCatalog.block(
+                    "chiseled_lead_bricks", () -> new Block(platedBrickProperties(CCBlocks.CHISELED_TIN_BRICKS.get())))
+            .withName("Chiseled Lead Plated Bricks")
+            .mineableWithPickaxe();
+    public static final CatalogBlockDefinition<SlabBlock> LEAD_BRICK_SLAB = PoptartCatalog.block(
+                    "lead_brick_slab", () -> new SlabBlock(platedBrickProperties(CCBlocks.TIN_BRICK_SLAB.get())))
+            .withName("Lead Plated Brick Slab")
+            .slabModel(PoptartCore.location("block/lead_bricks"), "")
+            .mineableWithPickaxe();
+    public static final CatalogBlockDefinition<StairBlock> LEAD_BRICK_STAIRS = PoptartCatalog.block(
+                    "lead_brick_stairs",
+                    () -> new StairBlock(LEAD_BRICKS.get().defaultBlockState(), platedBrickProperties(CCBlocks.TIN_BRICK_STAIRS.get())))
+            .withName("Lead Plated Brick Stairs")
+            .stairsModel(PoptartCore.location("block/lead_bricks"), "")
+            .mineableWithPickaxe();
+    public static final CatalogBlockDefinition<WallBlock> LEAD_BRICK_WALL = PoptartCatalog.block(
+                    "lead_brick_wall", () -> new WallBlock(platedBrickProperties(CCBlocks.TIN_BRICK_WALL.get())))
+            .withName("Lead Plated Brick Wall")
+            .wallModel(PoptartCore.location("block/lead_bricks"), "")
+            .mineableWithPickaxe()
+            .tags(BlockTags.WALLS);
+
+    public static final CatalogBlockDefinition<Block> MERCURY_BRICKS = PoptartCatalog.block(
+                    "mercury_bricks", () -> new Block(platedBrickProperties(CCBlocks.SILVER_BRICKS.get())))
+            .withName("Mercury Plated Bricks")
+            .mineableWithPickaxe();
+    public static final CatalogBlockDefinition<Block> CHISELED_MERCURY_BRICKS = PoptartCatalog.block(
+                    "chiseled_mercury_bricks", () -> new Block(platedBrickProperties(CCBlocks.CHISELED_SILVER_BRICKS.get())))
+            .withName("Chiseled Mercury Plated Bricks")
+            .mineableWithPickaxe();
+    public static final CatalogBlockDefinition<SlabBlock> MERCURY_BRICK_SLAB = PoptartCatalog.block(
+                    "mercury_brick_slab", () -> new SlabBlock(platedBrickProperties(CCBlocks.SILVER_BRICK_SLAB.get())))
+            .withName("Mercury Plated Brick Slab")
+            .slabModel(PoptartCore.location("block/mercury_bricks"), "")
+            .mineableWithPickaxe();
+    public static final CatalogBlockDefinition<StairBlock> MERCURY_BRICK_STAIRS = PoptartCatalog.block(
+                    "mercury_brick_stairs",
+                    () -> new StairBlock(MERCURY_BRICKS.get().defaultBlockState(), platedBrickProperties(CCBlocks.SILVER_BRICK_STAIRS.get())))
+            .withName("Mercury Plated Brick Stairs")
+            .stairsModel(PoptartCore.location("block/mercury_bricks"), "")
+            .mineableWithPickaxe();
+    public static final CatalogBlockDefinition<WallBlock> MERCURY_BRICK_WALL = PoptartCatalog.block(
+                    "mercury_brick_wall", () -> new WallBlock(platedBrickProperties(CCBlocks.SILVER_BRICK_WALL.get())))
+            .withName("Mercury Plated Brick Wall")
+            .wallModel(PoptartCore.location("block/mercury_bricks"), "")
+            .mineableWithPickaxe()
+            .tags(BlockTags.WALLS);
+
+    public static final CatalogBlockDefinition<Block> STEEL_BRICKS = PoptartCatalog.block(
+                    "steel_bricks", () -> new Block(platedBrickProperties(CCBlocks.IRON_BRICKS.get())))
+            .withName("Steel Plated Bricks")
+            .mineableWithPickaxe();
+    public static final CatalogBlockDefinition<Block> CHISELED_STEEL_BRICKS = PoptartCatalog.block(
+                    "chiseled_steel_bricks", () -> new Block(platedBrickProperties(CCBlocks.CHISELED_IRON_BRICKS.get())))
+            .withName("Chiseled Steel Plated Bricks")
+            .mineableWithPickaxe();
+    public static final CatalogBlockDefinition<SlabBlock> STEEL_BRICK_SLAB = PoptartCatalog.block(
+                    "steel_brick_slab", () -> new SlabBlock(platedBrickProperties(CCBlocks.IRON_BRICK_SLAB.get())))
+            .withName("Steel Plated Brick Slab")
+            .slabModel(PoptartCore.location("block/steel_bricks"), "")
+            .mineableWithPickaxe();
+    public static final CatalogBlockDefinition<StairBlock> STEEL_BRICK_STAIRS = PoptartCatalog.block(
+                    "steel_brick_stairs",
+                    () -> new StairBlock(STEEL_BRICKS.get().defaultBlockState(), platedBrickProperties(CCBlocks.IRON_BRICK_STAIRS.get())))
+            .withName("Steel Plated Brick Stairs")
+            .stairsModel(PoptartCore.location("block/steel_bricks"), "")
+            .mineableWithPickaxe();
+    public static final CatalogBlockDefinition<WallBlock> STEEL_BRICK_WALL = PoptartCatalog.block(
+                    "steel_brick_wall", () -> new WallBlock(platedBrickProperties(CCBlocks.IRON_BRICK_WALL.get())))
+            .withName("Steel Plated Brick Wall")
+            .wallModel(PoptartCore.location("block/steel_bricks"), "")
+            .mineableWithPickaxe()
+            .tags(BlockTags.WALLS);
     public static final CatalogBlockDefinition<Block> TITANIUM_BRICKS = PoptartCatalog.block(
                     "titanium_bricks", () -> new Block(titaniumBrickProperties()))
             .withName("Titanium Plated Bricks")
@@ -417,6 +561,10 @@ public class PoptartCoreBlocks {
 
     private static BlockBehaviour.Properties clinkerProperties() {
         return BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICKS);
+    }
+
+    private static BlockBehaviour.Properties platedBrickProperties(Block source) {
+        return BlockBehaviour.Properties.ofFullCopy(source);
     }
 
     private static BlockBehaviour.Properties titaniumBrickProperties() {

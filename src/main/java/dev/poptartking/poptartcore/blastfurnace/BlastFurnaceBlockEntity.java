@@ -21,10 +21,45 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.fluids.FluidStack;
 
 public class BlastFurnaceBlockEntity extends CrucibleBlockEntity implements WorldlyContainer {
     public static final int INPUT_COUNT = 6;
     public static final int TANK_CAPACITY = 3000;
+
+    private final IFluidHandler outputFluidHandler = new IFluidHandler() {
+        @Override
+        public int getTanks() { return 1; }
+
+        @Override
+        public FluidStack getFluidInTank(int index) {
+            return index == 0 ? tank.getFluid().copy() : FluidStack.EMPTY;
+        }
+
+        @Override
+        public int getTankCapacity(int index) { return index == 0 ? tank.getCapacity() : 0; }
+
+        @Override
+        public boolean isFluidValid(int index, FluidStack stack) { return false; }
+
+        @Override
+        public int fill(FluidStack resource, FluidAction action) { return 0; }
+
+        @Override
+        public FluidStack drain(FluidStack resource, FluidAction action) {
+            return tank.drain(resource, action);
+        }
+
+        @Override
+        public FluidStack drain(int maxDrain, FluidAction action) {
+            return tank.drain(maxDrain, action);
+        }
+    };
+
+    public IFluidHandler outputFluidHandler() {
+        return outputFluidHandler;
+    }
 
     public BlastFurnaceBlockEntity(BlockPos pos, BlockState state) {
         super(PoptartCoreBlockEntities.BLAST_FURNACE.get(), pos, state, INPUT_COUNT, TANK_CAPACITY);

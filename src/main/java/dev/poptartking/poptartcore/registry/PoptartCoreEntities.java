@@ -1,6 +1,7 @@
 package dev.poptartking.poptartcore.registry;
 
 import dev.poptartking.poptartcore.PoptartCore;
+import dev.poptartking.poptartcore.lostheart.LostHeartEntity;
 import dev.poptartking.poptartcore.spider.WebProjectile;
 import dev.poptartking.poptartcore.waxgolem.WaxGolem;
 import net.minecraft.core.registries.Registries;
@@ -20,6 +21,15 @@ public final class PoptartCoreEntities {
                     .eyeHeight(1.6F)
                     .clientTrackingRange(8)
                     .build("wax_golem"));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<LostHeartEntity>> LOST_HEART =
+            ENTITY_TYPES.register("lost_heart", () -> EntityType.Builder.<LostHeartEntity>of(LostHeartEntity::new, MobCategory.MISC)
+                    .sized(0.6F, 0.6F)
+                    .eyeHeight(0.3F)
+                    .fireImmune()
+                    .clientTrackingRange(8)
+                    .updateInterval(3)
+                    .build("lost_heart"));
 
     private PoptartCoreEntities() {}
 

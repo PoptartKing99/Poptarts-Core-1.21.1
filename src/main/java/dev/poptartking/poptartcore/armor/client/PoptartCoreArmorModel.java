@@ -3,6 +3,7 @@ package dev.poptartking.poptartcore.armor.client;
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import dev.poptartking.poptartcore.integration.ragdoll.RagdollArmorCompat;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -119,15 +120,20 @@ public class PoptartCoreArmorModel extends HumanoidModel<LivingEntity> {
 
     public void renderToBuffer(
             PoseStack matrixStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int p_350361_) {
-        if (this.slot == EquipmentSlot.LEGS) {
-            this.leggings.copyFrom(this.body);
-            this.leftLegging.copyFrom(this.leftLeg);
-            this.rightLegging.copyFrom(this.rightLeg);
-        } else if (this.slot == EquipmentSlot.FEET) {
-            this.leftFoot.copyFrom(this.leftLeg);
-            this.rightFoot.copyFrom(this.rightLeg);
+        boolean previous = RagdollArmorCompat.enterModelRender();
+        try {
+            if (this.slot == EquipmentSlot.LEGS) {
+                this.leggings.copyFrom(this.body);
+                this.leftLegging.copyFrom(this.leftLeg);
+                this.rightLegging.copyFrom(this.rightLeg);
+            } else if (this.slot == EquipmentSlot.FEET) {
+                this.leftFoot.copyFrom(this.leftLeg);
+                this.rightFoot.copyFrom(this.rightLeg);
+            }
+            super.renderToBuffer(matrixStack, vertexConsumer, packedLight, packedOverlay, p_350361_);
+        } finally {
+            RagdollArmorCompat.exitModelRender(previous);
         }
-        super.renderToBuffer(matrixStack, vertexConsumer, packedLight, packedOverlay, p_350361_);
     }
 
     public static ModelPart getPart(ModelPart root, String name) {

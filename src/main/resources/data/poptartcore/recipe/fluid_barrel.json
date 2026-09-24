@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TTT",
+    "PWP",
+    "TTT"
+  ],
+  "key": {
+    "T": { "item": "poptartcore:treated_wood_casing" },
+    "P": { "item": "create:iron_sheet" },
+    "W": { "item": "poptartcore:wax" }
+  },
+  "result": {
+    "id": "poptartcore:fluid_barrel",
+    "count": 1
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:lava",
+    "minecraft:flowing_lava",
+    { "id": "#c:lava", "required": false },
+    "poptartcore:molten_copper",
+    "poptartcore:flowing_molten_copper",
+    "poptartcore:molten_tin",
+    "poptartcore:flowing_molten_tin",
+    "poptartcore:molten_bronze",
+    "poptartcore:flowing_molten_bronze",
+    "poptartcore:molten_steel",
+    "poptartcore:flowing_molten_steel"
+  ]
+}

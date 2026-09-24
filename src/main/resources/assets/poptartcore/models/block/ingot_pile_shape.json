@@ -1,0 +1,17 @@
+{
+  "unit": "pixels (16 per block)",
+  "bottom": [0.25, 3.5078125, 0.25, 7.5078125],
+  "top": [0.75, 3.0078125, 0.75, 7.0078125],
+  "height": 2.0,
+  "column_spacing": 4.0,
+  "row_spacing": 8.0,
+  "layer_spacing": 2.0,
+  "alternate_layer_rotation": 90.0,
+  "texture_size": [32, 32],
+  "uv": {
+    "top": [1, 1, 9, 17],
+    "bottom": [11, 1, 19, 17],
+    "long_side": [1, 20, 17, 24],
+    "end": [20, 20, 28, 24]
+  }
+}

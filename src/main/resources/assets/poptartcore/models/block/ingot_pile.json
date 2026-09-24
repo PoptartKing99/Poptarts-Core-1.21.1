@@ -1,0 +1,14 @@
+{
+  "textures": {
+    "particle": "poptartcore:block/ingot_pile/iron",
+    "iron": "poptartcore:block/ingot_pile/iron",
+    "gold": "poptartcore:block/ingot_pile/gold",
+    "copper": "poptartcore:block/ingot_pile/copper",
+    "tin": "poptartcore:block/ingot_pile/tin",
+    "lead": "poptartcore:block/ingot_pile/lead",
+    "silver": "poptartcore:block/ingot_pile/silver",
+    "bronze": "poptartcore:block/ingot_pile/bronze",
+    "steel": "poptartcore:block/ingot_pile/steel",
+    "titanium": "poptartcore:block/ingot_pile/titanium"
+  }
+}

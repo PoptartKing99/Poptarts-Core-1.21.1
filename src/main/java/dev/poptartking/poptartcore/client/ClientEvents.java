@@ -5,9 +5,15 @@ import dev.poptartking.poptartcore.armor.client.*;
 import dev.poptartking.poptartcore.beekeeping.client.BeeSmokerClientExtensions;
 import dev.poptartking.poptartcore.blastfurnace.client.BlastFurnaceScreen;
 import dev.poptartking.poptartcore.crucible.client.CrucibleScreen;
+import dev.poptartking.poptartcore.ingotpile.client.IngotPileRenderer;
+import dev.poptartking.poptartcore.ingotpile.client.IngotPileShape;
+import dev.poptartking.poptartcore.lostheart.client.LostHeartRenderer;
+import dev.poptartking.poptartcore.lostheart.client.LostHeartEmberParticle;
 import dev.poptartking.poptartcore.hammer.client.ClientMiningCleanup;
 import dev.poptartking.poptartcore.integration.create.PoptartCasingClient;
+import dev.poptartking.poptartcore.integration.create.PoptartBeltCasingClient;
 import dev.poptartking.poptartcore.integration.create.PoptartCasingPonders;
+import dev.poptartking.poptartcore.integration.ragdoll.RagdollArmorCompat;
 import dev.poptartking.poptartcore.quern.client.QuernRenderer;
 import dev.poptartking.poptartcore.registry.PoptartCoreBlockEntities;
 import dev.poptartking.poptartcore.registry.PoptartCoreEntities;
@@ -20,6 +26,7 @@ import dev.poptartking.poptartcore.waxgolem.client.WaxGolemModel;
 import dev.poptartking.poptartcore.waxgolem.client.WaxGolemRenderer;
 import dev.poptartking.poptartcore.workbench.client.WorkbenchScreen;
 import net.minecraft.client.Minecraft;
+import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.neoforged.api.distmarker.Dist;
@@ -31,6 +38,7 @@ import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.ModelEvent.RegisterAdditional;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 
@@ -43,11 +51,13 @@ public class ClientEvents {
     public static void clientSetup(FMLClientSetupEvent event) {
         PoptartCasingClient.setup(event);
         event.enqueueWork(PoptartCasingPonders::register);
+        event.enqueueWork(RagdollArmorCompat::register);
     }
 
     @SubscribeEvent
     public static void registerParticles(RegisterParticleProvidersEvent event) {
         event.registerSpriteSet(PoptartCoreParticles.RIFT_FIRE_FLAME.get(), RiftFlameParticle.Provider::new);
+        event.registerSpriteSet(PoptartCoreParticles.LOST_HEART_EMBER.get(), LostHeartEmberParticle.Provider::new);
     }
 
     @SubscribeEvent
@@ -185,8 +195,10 @@ public class ClientEvents {
 
     @SubscribeEvent
     public static void registerBlockEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerBlockEntityRenderer(PoptartCoreBlockEntities.INGOT_PILE.get(), context -> new IngotPileRenderer());
         event.registerEntityRenderer(PoptartCoreEntities.WAX_GOLEM.get(), WaxGolemRenderer::new);
         event.registerEntityRenderer(PoptartCoreEntities.WEB_PROJECTILE.get(), WebProjectileRenderer::new);
+        event.registerEntityRenderer(PoptartCoreEntities.LOST_HEART.get(), LostHeartRenderer::new);
         event.registerBlockEntityRenderer(
                 PoptartCoreBlockEntities.MILLSTONE_ROTOR.get(),
                 context -> new dev.poptartking.poptartcore.millstone.client.MillstoneRenderer());
@@ -194,7 +206,13 @@ public class ClientEvents {
     }
 
     @SubscribeEvent
+    public static void registerClientReloadListeners(RegisterClientReloadListenersEvent event) {
+        event.registerReloadListener((ResourceManagerReloadListener) IngotPileShape::reload);
+    }
+
+    @SubscribeEvent
     public static void registerAdditionalModels(RegisterAdditional event) {
+        PoptartBeltCasingClient.registerModels(event);
         event.register(dev.poptartking.poptartcore.millstone.client.MillstoneRenderer.ROTOR_MODEL);
         event.register(QuernRenderer.ROTOR_MODEL);
         event.register(QuernRenderer.FLOUR_MODEL);

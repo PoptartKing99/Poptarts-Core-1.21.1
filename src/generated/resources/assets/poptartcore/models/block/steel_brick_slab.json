@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "poptartcore:block/steel_bricks",
+    "side": "poptartcore:block/steel_bricks",
+    "top": "poptartcore:block/steel_bricks"
+  }
+}

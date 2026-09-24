@@ -23,8 +23,33 @@ param(
         'cassiterite_titanium_ore' = @{ Name = 'Cassiterite Titanium Ore'; Drop = 'raw_titanium' }
         'cylindrite_titanium_ore' = @{ Name = 'Cylindrite Titanium Ore'; Drop = 'raw_titanium' }
     },
-    [hashtable]$TitaniumBlocks = @{
+    [hashtable]$MaterialBlocks = @{
         'raw_titanium_block' = @{ Name = 'Block of Raw Titanium'; Type = 'simple' }
+        'bronze_bricks' = @{ Name = 'Bronze Plated Bricks'; Type = 'simple' }
+        'chiseled_bronze_bricks' = @{ Name = 'Chiseled Bronze Plated Bricks'; Type = 'simple' }
+        'bronze_brick_slab' = @{ Name = 'Bronze Plated Brick Slab'; Type = 'slab' }
+        'bronze_brick_stairs' = @{ Name = 'Bronze Plated Brick Stairs'; Type = 'stairs' }
+        'bronze_brick_wall' = @{ Name = 'Bronze Plated Brick Wall'; Type = 'wall' }
+        'aged_bronze_bricks' = @{ Name = 'Aged Bronze Plated Bricks'; Type = 'simple' }
+        'chiseled_aged_bronze_bricks' = @{ Name = 'Chiseled Aged Bronze Plated Bricks'; Type = 'simple' }
+        'aged_bronze_brick_slab' = @{ Name = 'Aged Bronze Plated Brick Slab'; Type = 'slab' }
+        'aged_bronze_brick_stairs' = @{ Name = 'Aged Bronze Plated Brick Stairs'; Type = 'stairs' }
+        'aged_bronze_brick_wall' = @{ Name = 'Aged Bronze Plated Brick Wall'; Type = 'wall' }
+        'lead_bricks' = @{ Name = 'Lead Plated Bricks'; Type = 'simple' }
+        'chiseled_lead_bricks' = @{ Name = 'Chiseled Lead Plated Bricks'; Type = 'simple' }
+        'lead_brick_slab' = @{ Name = 'Lead Plated Brick Slab'; Type = 'slab' }
+        'lead_brick_stairs' = @{ Name = 'Lead Plated Brick Stairs'; Type = 'stairs' }
+        'lead_brick_wall' = @{ Name = 'Lead Plated Brick Wall'; Type = 'wall' }
+        'mercury_bricks' = @{ Name = 'Mercury Plated Bricks'; Type = 'simple' }
+        'chiseled_mercury_bricks' = @{ Name = 'Chiseled Mercury Plated Bricks'; Type = 'simple' }
+        'mercury_brick_slab' = @{ Name = 'Mercury Plated Brick Slab'; Type = 'slab' }
+        'mercury_brick_stairs' = @{ Name = 'Mercury Plated Brick Stairs'; Type = 'stairs' }
+        'mercury_brick_wall' = @{ Name = 'Mercury Plated Brick Wall'; Type = 'wall' }
+        'steel_bricks' = @{ Name = 'Steel Plated Bricks'; Type = 'simple' }
+        'chiseled_steel_bricks' = @{ Name = 'Chiseled Steel Plated Bricks'; Type = 'simple' }
+        'steel_brick_slab' = @{ Name = 'Steel Plated Brick Slab'; Type = 'slab' }
+        'steel_brick_stairs' = @{ Name = 'Steel Plated Brick Stairs'; Type = 'stairs' }
+        'steel_brick_wall' = @{ Name = 'Steel Plated Brick Wall'; Type = 'wall' }
         'titanium_bricks' = @{ Name = 'Titanium Plated Bricks'; Type = 'simple' }
         'chiseled_titanium_bricks' = @{ Name = 'Chiseled Titanium Plated Bricks'; Type = 'simple' }
         'titanium_brick_slab' = @{ Name = 'Titanium Plated Brick Slab'; Type = 'slab' }
@@ -98,6 +123,31 @@ $expectedBlockTags = @{
         'poptartcore:cassiterite_titanium_ore',
         'poptartcore:cylindrite_titanium_ore',
         'poptartcore:raw_titanium_block',
+        'poptartcore:bronze_bricks',
+        'poptartcore:chiseled_bronze_bricks',
+        'poptartcore:bronze_brick_slab',
+        'poptartcore:bronze_brick_stairs',
+        'poptartcore:bronze_brick_wall',
+        'poptartcore:aged_bronze_bricks',
+        'poptartcore:chiseled_aged_bronze_bricks',
+        'poptartcore:aged_bronze_brick_slab',
+        'poptartcore:aged_bronze_brick_stairs',
+        'poptartcore:aged_bronze_brick_wall',
+        'poptartcore:lead_bricks',
+        'poptartcore:chiseled_lead_bricks',
+        'poptartcore:lead_brick_slab',
+        'poptartcore:lead_brick_stairs',
+        'poptartcore:lead_brick_wall',
+        'poptartcore:mercury_bricks',
+        'poptartcore:chiseled_mercury_bricks',
+        'poptartcore:mercury_brick_slab',
+        'poptartcore:mercury_brick_stairs',
+        'poptartcore:mercury_brick_wall',
+        'poptartcore:steel_bricks',
+        'poptartcore:chiseled_steel_bricks',
+        'poptartcore:steel_brick_slab',
+        'poptartcore:steel_brick_stairs',
+        'poptartcore:steel_brick_wall',
         'poptartcore:titanium_bricks',
         'poptartcore:chiseled_titanium_bricks',
         'poptartcore:titanium_brick_slab',
@@ -129,6 +179,11 @@ $expectedBlockTags = @{
     'minecraft\tags\block\walls.json' = @(
         'poptartcore:clinker_brick_wall',
         'poptartcore:clinker_tile_wall',
+        'poptartcore:bronze_brick_wall',
+        'poptartcore:aged_bronze_brick_wall',
+        'poptartcore:lead_brick_wall',
+        'poptartcore:mercury_brick_wall',
+        'poptartcore:steel_brick_wall',
         'poptartcore:titanium_brick_wall'
     )
 }
@@ -270,7 +325,7 @@ foreach ($id in $OreBlocks.Keys) {
 
 Write-Output "Verified $($OreBlocks.Count) Poptart Catalog ore blocks."
 
-foreach ($entry in $TitaniumBlocks.GetEnumerator()) {
+foreach ($entry in $MaterialBlocks.GetEnumerator()) {
     $id = $entry.Key
     $details = $entry.Value
     $translationKey = "block.poptartcore.$id"
@@ -284,10 +339,15 @@ foreach ($entry in $TitaniumBlocks.GetEnumerator()) {
         "data\poptartcore\loot_table\blocks\$id.json")) {
         $generatedPath = Join-Path $generatedRoot $relativePath
         if (-not (Test-Path -LiteralPath $generatedPath)) {
-            throw "Missing generated titanium resource: $relativePath"
+            throw "Missing generated material resource: $relativePath"
         }
         $jsonDocument = [System.Text.Json.JsonDocument]::Parse((Get-Content -Raw -LiteralPath $generatedPath))
         $jsonDocument.Dispose()
+    }
+
+    if ($id -match '^(chiseled_)?(bronze|aged_bronze|lead|mercury|steel)_bricks$' -and
+        -not (Test-Path -LiteralPath (Join-Path $mainRoot "assets\poptartcore\textures\block\$id.png"))) {
+        throw "Missing plated brick texture: $id"
     }
 
     $expectedModels = switch ($details.Type) {
@@ -295,11 +355,11 @@ foreach ($entry in $TitaniumBlocks.GetEnumerator()) {
         'slab' { @($id, "${id}_top", "${id}_double") }
         'stairs' { @($id, "${id}_inner", "${id}_outer") }
         'wall' { @("${id}_post", "${id}_side", "${id}_side_tall", "${id}_inventory") }
-        default { throw "Unknown titanium model type: $($details.Type)" }
+        default { throw "Unknown material model type: $($details.Type)" }
     }
     foreach ($modelName in $expectedModels) {
         if (-not (Test-Path -LiteralPath (Join-Path $generatedRoot "assets\poptartcore\models\block\$modelName.json"))) {
-            throw "Missing generated titanium model: $modelName"
+            throw "Missing generated material model: $modelName"
         }
     }
 
@@ -315,7 +375,7 @@ if ($wallTag.values -notcontains 'poptartcore:titanium_brick_wall') {
     throw 'Wall tag is missing titanium_brick_wall'
 }
 
-Write-Output "Verified $($TitaniumBlocks.Count) Poptart Catalog titanium blocks."
+Write-Output "Verified $($MaterialBlocks.Count) Poptart Catalog material blocks."
 
 foreach ($entry in $ClinkerBlocks.GetEnumerator()) {
     $id = $entry.Key

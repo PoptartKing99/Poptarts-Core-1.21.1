@@ -20,6 +20,9 @@
     "hammer.HammerTargetChangeMixin",
     "hammer.ServerBlockBreakingMixin",
     "integration.cavernsandchasms.TinMonolithPieceMixin",
+    "integration.create.BeltBlockMixin",
+    "integration.create.BeltBlockEntityMixin",
+    "integration.nomansland.TapBlockMixin",
     "integration.simulated.PortableEngineBlockMixin",
     "integration.simulated.PortableEngineDyeingMixin",
     "integration.simulated.PortableEngineFuelInventoryMixin",
@@ -28,6 +31,12 @@
     "wax.IWaxableMoonlightMixin"
   ],
   "client": [
+    "integration.ragdoll.ArmorPartTransformMixin",
+    "integration.ragdoll.CorpseScreenArmorLayerMixin",
+    "integration.ragdoll.LostHeartAttackTargetMixin",
+    "integration.create.BeltBlockEntityClientMixin",
+    "integration.create.BeltBlockEntityLevelMixin",
+    "integration.create.BeltModelMixin",
     "spider.SpiderWebPoseMixin",
     "bee.BeeFlipMixin",
     "bee.BeeSmokerArmPoseMixin",

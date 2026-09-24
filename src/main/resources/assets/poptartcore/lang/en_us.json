@@ -4,6 +4,7 @@
   "subtitles.poptartcore.spider.web_impact": "Web splats",
   "entity.poptartcore.web_projectile": "Web Projectile",
   "block.poptartcore.temporary_cobweb": "Temporary Cobweb",
+  "block.poptartcore.fluid_barrel": "Fluid Barrel",
   "message.poptartcore.millstone_space": "The Millstone needs a clear 3 x 3 area, two blocks tall.",
   "poptartcore.millstone.too_fast": "Too fast! Maximum speed: 64 RPM",
 
@@ -16,6 +17,7 @@
   "block.poptartcore.millstone_structural": "Millstone",
   "block.poptartcore.millstone_rotor": "Millstone",
   "entity.poptartcore.wax_golem": "Wax Golem",
+  "entity.poptartcore.lost_heart": "Lost Heart",
 
   "fluid_type.poptartcore.molten_bronze": "Molten Bronze",
   "fluid_type.poptartcore.molten_copper": "Molten Copper",

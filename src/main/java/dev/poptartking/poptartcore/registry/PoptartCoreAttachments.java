@@ -16,6 +16,10 @@ public final class PoptartCoreAttachments {
             "milk_full_at",
             () -> AttachmentType.builder(() -> 0L).serialize(Codec.LONG).build());
 
+    public static final Supplier<AttachmentType<Integer>> MAX_HEARTS = ATTACHMENT_TYPES.register(
+            "max_hearts",
+            () -> AttachmentType.builder(() -> 10).serialize(Codec.INT).build());
+
     private PoptartCoreAttachments() {}
 
     public static void register(IEventBus eventBus) {

@@ -1,5 +1,10 @@
 {
   "values": [
+    "poptartcore:bronze_brick_wall",
+    "poptartcore:aged_bronze_brick_wall",
+    "poptartcore:lead_brick_wall",
+    "poptartcore:mercury_brick_wall",
+    "poptartcore:steel_brick_wall",
     "poptartcore:titanium_brick_wall",
     "poptartcore:clinker_brick_wall",
     "poptartcore:clinker_tile_wall"

@@ -212,6 +212,27 @@ def extractRegistrateJar = tasks.register('extractRegistrateJar') {
     }
 }
 
+def extractedSableCompanionJar = layout.buildDirectory.file('extracted-dependencies/sable-companion-common-1.21.1-1.6.0.jar')
+def extractSableCompanionJar = tasks.register('extractSableCompanionJar') {
+    def sableJar = file('run/mods/sable-neoforge-1.21.1-2.0.5.jar')
+    inputs.file(sableJar)
+    outputs.file(extractedSableCompanionJar)
+    doLast {
+        def output = outputs.files.singleFile
+        output.parentFile.mkdirs()
+        def archive = new java.util.zip.ZipFile(sableJar)
+        try {
+            def entry = archive.entries().find { it.name.matches('META-INF/jarjar/sable-companion-common-.*\\.jar') }
+            if (entry == null) throw new GradleException("Sable does not contain its companion JAR: ${sableJar}")
+            output.withOutputStream { destination ->
+                archive.getInputStream(entry).withCloseable { source -> source.transferTo(destination) }
+            }
+        } finally {
+            archive.close()
+        }
+    }
+}
+
 dependencies {
     aeronauticsBundle "maven.modrinth:create-aeronautics:${aeronautics_version}"
     createBundle "maven.modrinth:create:${create_version}+mc${minecraft_version}"
@@ -224,6 +245,8 @@ dependencies {
     compileOnly "maven.modrinth:farmers-delight:${farmers_delight_version}"
     compileOnly "maven.modrinth:tfjmPSbI:${caverns_and_chasms_version}"
     compileOnly files('run/mods/nomansland-2.0.0.jar')
+    compileOnly files('run/mods/ragdoll-0.3.0.jar')
+    compileOnly files(extractedSableCompanionJar).builtBy(extractSableCompanionJar)
     compileOnly 'maven.modrinth:twkfQtEc:uPJlV3eS'
     compileOnly 'net.createmod.ponder:ponder-neoforge:1.0.82+mc1.21.1'
     compileOnly 'dev.engine-room.flywheel:flywheel-neoforge-api-1.21.1:1.0.6'

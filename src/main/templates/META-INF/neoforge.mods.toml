@@ -95,6 +95,14 @@ versionRange="[3.0.0,3.1.0)"
 ordering="AFTER"
 side="BOTH"
 
+# Player corpses used by the Lost Heart mechanic
+[[dependencies."${mod_id}"]]
+modId="ragdoll"
+type="required"
+versionRange="[0.3.0,0.4.0)"
+ordering="AFTER"
+side="BOTH"
+
 [[mixins]]
 config="poptartcore.mixins.json"
 

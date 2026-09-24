@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "part=single": { "model": "poptartcore:block/fluid_barrel" },
+    "part=big": { "model": "poptartcore:block/big_fluid_barrel" },
+    "part=giant": { "model": "poptartcore:block/giant_fluid_barrel" },
+    "part=hidden": { "model": "poptartcore:block/fluid_barrel_hidden" }
+  }
+}

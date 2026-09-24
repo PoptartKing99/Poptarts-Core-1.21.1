@@ -7,6 +7,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.material.Fluid;
 
 public final class PoptartCoreTags {
     public static final TagKey<Item> HAMMERS =
@@ -24,6 +25,8 @@ public final class PoptartCoreTags {
     public static final TagKey<Block> HAMMER_NO_SPREAD =
             TagKey.create(Registries.BLOCK, PoptartCore.location("hammer_no_spread"));
     public static final TagKey<Block> UNWAXABLE = TagKey.create(Registries.BLOCK, PoptartCore.location("unwaxable"));
+    public static final TagKey<Fluid> BARREL_BLACKLISTED_FLUIDS =
+            TagKey.create(Registries.FLUID, PoptartCore.location("barrel_blacklisted_fluids"));
 
     private PoptartCoreTags() {}
 
