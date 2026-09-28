@@ -7,8 +7,7 @@ import org.joml.Matrix4f;
 public final class CorpseScreenArmorPose {
     private static final ThreadLocal<Frame> FRAME = new ThreadLocal<>();
 
-    private CorpseScreenArmorPose() {
-    }
+    private CorpseScreenArmorPose() {}
 
     public static void begin(Matrix4f pose, Matrix3f normal) {
         FRAME.set(new Frame(pose, normal));
@@ -26,6 +25,5 @@ public final class CorpseScreenArmorPose {
         FRAME.remove();
     }
 
-    private record Frame(Matrix4f pose, Matrix3f normal) {
-    }
+    private record Frame(Matrix4f pose, Matrix3f normal) {}
 }

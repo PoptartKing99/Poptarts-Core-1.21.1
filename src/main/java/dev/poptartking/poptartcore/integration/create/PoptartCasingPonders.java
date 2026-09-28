@@ -31,55 +31,81 @@ public final class PoptartCasingPonders implements PonderPlugin {
 
     @Override
     public void registerScenes(PonderSceneRegistrationHelper<ResourceLocation> helper) {
-        addFamily(helper, "industrial_plating", "industrial_plating", PoptartCoreBlocks.INDUSTRIAL_PLATING.get(),
+        addFamily(
+                helper,
+                "industrial_plating",
+                "industrial_plating",
+                PoptartCoreBlocks.INDUSTRIAL_PLATING.get(),
                 PoptartCoreBlocks.INDUSTRIAL_ENCASED_SHAFT.get(),
                 PoptartCoreBlocks.INDUSTRIAL_ENCASED_COGWHEEL.get());
-        addFamily(helper, "treated_wood", "treated_wood_casing", PoptartCoreBlocks.TREATED_WOOD_CASING.get(),
+        addFamily(
+                helper,
+                "treated_wood",
+                "treated_wood_casing",
+                PoptartCoreBlocks.TREATED_WOOD_CASING.get(),
                 PoptartCoreBlocks.TREATED_WOOD_ENCASED_SHAFT.get(),
                 PoptartCoreBlocks.TREATED_WOOD_ENCASED_COGWHEEL.get());
     }
 
-    private static void addFamily(PonderSceneRegistrationHelper<ResourceLocation> helper, String name, String itemPath,
-                                  Block casing, Block encasedShaft, Block encasedCog) {
+    private static void addFamily(
+            PonderSceneRegistrationHelper<ResourceLocation> helper,
+            String name,
+            String itemPath,
+            Block casing,
+            Block encasedShaft,
+            Block encasedCog) {
         ResourceLocation itemId = PoptartCore.location(itemPath);
-        helper.addStoryBoard(itemId, SHAFT_SCHEMATIC,
-                (scene, util) -> shaftScene(scene, util, name, casing, encasedShaft));
-        helper.addStoryBoard(itemId, COG_SCHEMATIC,
-                (scene, util) -> cogScene(scene, util, name, casing, encasedCog));
+        helper.addStoryBoard(
+                itemId, SHAFT_SCHEMATIC, (scene, util) -> shaftScene(scene, util, name, casing, encasedShaft));
+        helper.addStoryBoard(itemId, COG_SCHEMATIC, (scene, util) -> cogScene(scene, util, name, casing, encasedCog));
     }
 
-    private static void shaftScene(SceneBuilder scene, SceneBuildingUtil util, String name,
-                                   Block casing, Block encasedShaft) {
+    private static void shaftScene(
+            SceneBuilder scene, SceneBuildingUtil util, String name, Block casing, Block encasedShaft) {
         scene.title(name + "_shaft_encasing", "Encasing Shafts");
         scene.configureBasePlate(0, 0, 5);
         scene.world().showSection(util.select().layer(0), Direction.UP);
         scene.idle(10);
         scene.world().showSection(util.select().fromTo(0, 1, 2, 4, 1, 2), Direction.DOWN);
         scene.idle(20);
-        scene.overlay().showControls(util.vector().topOf(3, 1, 2), Pointing.DOWN, 50)
-                .rightClick().withItem(casing.asItem().getDefaultInstance());
+        scene.overlay()
+                .showControls(util.vector().topOf(3, 1, 2), Pointing.DOWN, 50)
+                .rightClick()
+                .withItem(casing.asItem().getDefaultInstance());
         scene.idle(7);
-        scene.world().setBlock(util.grid().at(3, 1, 2), encasedShaft.defaultBlockState()
-                .setValue(EncasedShaftBlock.AXIS, Direction.Axis.X), true);
-        scene.overlay().showText(70).text("Use this casing on a shaft to encase it")
+        scene.world()
+                .setBlock(
+                        util.grid().at(3, 1, 2),
+                        encasedShaft.defaultBlockState().setValue(EncasedShaftBlock.AXIS, Direction.Axis.X),
+                        true);
+        scene.overlay()
+                .showText(70)
+                .text("Use this casing on a shaft to encase it")
                 .pointAt(util.vector().centerOf(3, 1, 2));
         scene.idle(80);
     }
 
-    private static void cogScene(SceneBuilder scene, SceneBuildingUtil util, String name,
-                                 Block casing, Block encasedCog) {
+    private static void cogScene(
+            SceneBuilder scene, SceneBuildingUtil util, String name, Block casing, Block encasedCog) {
         scene.title(name + "_cog_encasing", "Encasing Cogwheels");
         scene.configureBasePlate(0, 0, 5);
         scene.world().showSection(util.select().layer(0), Direction.UP);
         scene.idle(10);
         scene.world().showSection(util.select().fromTo(1, 1, 2, 4, 2, 4), Direction.DOWN);
         scene.idle(20);
-        scene.overlay().showControls(util.vector().topOf(2, 1, 2), Pointing.DOWN, 50)
-                .rightClick().withItem(casing.asItem().getDefaultInstance());
+        scene.overlay()
+                .showControls(util.vector().topOf(2, 1, 2), Pointing.DOWN, 50)
+                .rightClick()
+                .withItem(casing.asItem().getDefaultInstance());
         scene.idle(7);
-        scene.world().setBlock(util.grid().at(2, 1, 2), encasedCog.defaultBlockState()
-                .setValue(EncasedCogwheelBlock.AXIS, Direction.Axis.Y), true);
-        scene.overlay().showText(70).text("Use this casing on a cogwheel to encase it")
+        scene.world()
+                .setBlock(
+                        util.grid().at(2, 1, 2),
+                        encasedCog.defaultBlockState().setValue(EncasedCogwheelBlock.AXIS, Direction.Axis.Y),
+                        true);
+        scene.overlay()
+                .showText(70)
+                .text("Use this casing on a cogwheel to encase it")
                 .pointAt(util.vector().centerOf(2, 1, 2));
         scene.idle(80);
     }

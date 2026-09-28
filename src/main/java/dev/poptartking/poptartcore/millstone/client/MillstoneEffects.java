@@ -49,8 +49,6 @@ public class MillstoneEffects {
     }
 
     public static void tick(Level level, BlockPos controllerPos, ItemStack grinding, float speed) {
-        cleanup();
-        LOOPS.entrySet().removeIf(entry -> entry.getValue().isStopped());
         MillstoneLoopSound loop = LOOPS.get(controllerPos);
         if (loop == null || loop.isStopped()) {
             loop = new MillstoneLoopSound(level, controllerPos.immutable());

@@ -13,10 +13,15 @@ public final class IngotPileMaterials {
     public static boolean supports(ItemStack stack) {
         if (stack.isEmpty()) return false;
         Item item = stack.getItem();
-        return item == Items.IRON_INGOT || item == Items.GOLD_INGOT || item == Items.COPPER_INGOT
-                || item == PoptartCoreItems.TIN_INGOT.get() || item == PoptartCoreItems.LEAD_INGOT.get()
-                || item == PoptartCoreItems.SILVER_INGOT.get() || item == PoptartCoreItems.BRONZE_INGOT.get()
-                || item == PoptartCoreItems.STEEL_INGOT.get() || item == PoptartCoreItems.TITANIUM_INGOT.get();
+        return item == Items.IRON_INGOT
+                || item == Items.GOLD_INGOT
+                || item == Items.COPPER_INGOT
+                || item == PoptartCoreItems.TIN_INGOT.get()
+                || item == PoptartCoreItems.LEAD_INGOT.get()
+                || item == PoptartCoreItems.SILVER_INGOT.get()
+                || item == PoptartCoreItems.BRONZE_INGOT.get()
+                || item == PoptartCoreItems.STEEL_INGOT.get()
+                || item == PoptartCoreItems.TITANIUM_INGOT.get();
     }
 
     public static ResourceLocation texture(Item item) {

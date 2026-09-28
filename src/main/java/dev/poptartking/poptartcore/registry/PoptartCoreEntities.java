@@ -22,8 +22,8 @@ public final class PoptartCoreEntities {
                     .clientTrackingRange(8)
                     .build("wax_golem"));
 
-    public static final DeferredHolder<EntityType<?>, EntityType<LostHeartEntity>> LOST_HEART =
-            ENTITY_TYPES.register("lost_heart", () -> EntityType.Builder.<LostHeartEntity>of(LostHeartEntity::new, MobCategory.MISC)
+    public static final DeferredHolder<EntityType<?>, EntityType<LostHeartEntity>> LOST_HEART = ENTITY_TYPES.register(
+            "lost_heart", () -> EntityType.Builder.<LostHeartEntity>of(LostHeartEntity::new, MobCategory.MISC)
                     .sized(0.6F, 0.6F)
                     .eyeHeight(0.3F)
                     .fireImmune()

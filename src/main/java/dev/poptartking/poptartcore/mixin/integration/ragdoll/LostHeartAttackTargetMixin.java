@@ -28,17 +28,16 @@ public abstract class LostHeartAttackTargetMixin {
             return original.call();
         }
 
-        var hearts = minecraft.level.getEntitiesOfClass(LostHeartEntity.class,
-                corpse.getBoundingBox().inflate(4), heart -> heart.corpseId() == corpse.getId());
+        var hearts = minecraft.level.getEntitiesOfClass(
+                LostHeartEntity.class, corpse.getBoundingBox().inflate(4), heart -> heart.corpseId() == corpse.getId());
         if (hearts.isEmpty()) {
             return original.call();
         }
 
         Vec3 eye = minecraft.player.getEyePosition(1.0F);
-        Vec3 end = eye.add(minecraft.player.getViewVector(1.0F)
-                .scale(minecraft.player.entityInteractionRange()));
-        BlockHitResult blockHit = minecraft.level.clip(new ClipContext(
-                eye, end, ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, minecraft.player));
+        Vec3 end = eye.add(minecraft.player.getViewVector(1.0F).scale(minecraft.player.entityInteractionRange()));
+        BlockHitResult blockHit = minecraft.level.clip(
+                new ClipContext(eye, end, ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, minecraft.player));
         if (blockHit.getType() != HitResult.Type.MISS) {
             end = blockHit.getLocation();
         }

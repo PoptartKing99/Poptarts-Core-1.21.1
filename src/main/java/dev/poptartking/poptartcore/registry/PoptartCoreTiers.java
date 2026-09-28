@@ -11,6 +11,8 @@ public final class PoptartCoreTiers {
             new SimpleTier(BlockTags.INCORRECT_FOR_WOODEN_TOOL, 100, 3.0F, 0.0F, 5, () -> Ingredient.of(Items.FLINT));
     public static final Tier BONE =
             new SimpleTier(BlockTags.INCORRECT_FOR_WOODEN_TOOL, 150, 3.0F, 0.0F, 3, () -> Ingredient.of(Items.BONE));
+    public static final Tier RUINED = new SimpleTier(
+            BlockTags.INCORRECT_FOR_WOODEN_TOOL, 480, 5.0F, 0.0F, 5, () -> Ingredient.of(Items.IRON_INGOT));
     public static final Tier BRONZE = new SimpleTier(
             BlockTags.INCORRECT_FOR_STONE_TOOL,
             275,

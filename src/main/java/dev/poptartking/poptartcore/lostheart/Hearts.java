@@ -20,6 +20,11 @@ public final class Hearts {
     private Hearts() {}
 
     public static int get(Player player) {
+        if (player.level().isClientSide) {
+            AttributeInstance health = player.getAttribute(Attributes.MAX_HEALTH);
+            AttributeModifier modifier = health == null ? null : health.getModifier(MODIFIER);
+            return modifier == null ? MAX : (int) Math.round((modifier.amount() + 20.0) / 2.0);
+        }
         return player.getData(PoptartCoreAttachments.MAX_HEARTS.get());
     }
 
@@ -31,8 +36,8 @@ public final class Hearts {
     public static void apply(Player player) {
         AttributeInstance health = player.getAttribute(Attributes.MAX_HEALTH);
         if (health == null) return;
-        health.addOrReplacePermanentModifier(new AttributeModifier(
-                MODIFIER, 2.0 * get(player) - 20.0, AttributeModifier.Operation.ADD_VALUE));
+        health.addOrReplacePermanentModifier(
+                new AttributeModifier(MODIFIER, 2.0 * get(player) - 20.0, AttributeModifier.Operation.ADD_VALUE));
         if (player.getHealth() > player.getMaxHealth()) {
             player.setHealth(player.getMaxHealth());
         }

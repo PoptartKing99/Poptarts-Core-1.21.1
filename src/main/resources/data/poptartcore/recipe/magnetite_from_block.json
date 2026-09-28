@@ -1,0 +1,6 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [{"item":"poptartcore:magnetite_block"}],
+  "result": {"id":"poptartcore:magnetite", "count":9}
+}

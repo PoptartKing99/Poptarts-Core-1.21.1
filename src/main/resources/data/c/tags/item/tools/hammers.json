@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "poptartcore:hammer"
+    "poptartcore:hammer",
+    "poptartcore:sledgehammer"
   ]
 }

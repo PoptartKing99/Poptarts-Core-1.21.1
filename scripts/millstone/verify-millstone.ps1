@@ -42,7 +42,7 @@ if ($recipe.type -ne 'poptartcore:milling' -or $recipe.ingredient.item -ne 'mine
 Write-Host "Millstone models, blockstates, textures, sounds and wheat recipe validated."
 
 if ($RunServer) {
-    $mods = Join-Path $project 'build/millstone-test-run/mods'
+    $mods = Join-Path $project 'build/game-test-run/mods'
     New-Item -ItemType Directory -Force -Path $mods | Out-Null
     $properties = Get-Content -LiteralPath "$project/gradle.properties" -Raw | ConvertFrom-StringData
     $required = @("create-$($properties.minecraft_version)-$($properties.create_version).jar",
@@ -55,7 +55,7 @@ if ($RunServer) {
     Copy-Item -LiteralPath $moonlight[0].FullName -Destination "$mods/$($moonlight[0].Name)"
     Push-Location $project
     try {
-        & .\gradlew.bat runGameTestServer -PmillstoneTests --console=plain
+        & .\gradlew.bat runGameTestServer -PgameTests --console=plain
         if ($LASTEXITCODE -ne 0) { throw 'Millstone server tests failed' }
     } finally { Pop-Location }
 }

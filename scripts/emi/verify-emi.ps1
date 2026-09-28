@@ -31,14 +31,14 @@ try {
     if ($RunClient) {
         $testRun = Join-Path $project 'build/emi-test-run'
         $testWorld = Join-Path $testRun 'saves/emi-smoke'
-        if (-not (Test-Path -LiteralPath "$project/build/millstone-test-run/world/level.dat")) {
+        if (-not (Test-Path -LiteralPath "$project/build/game-test-run/world/level.dat")) {
             throw 'Run scripts/millstone/verify-millstone.ps1 -RunServer first to generate the disposable test world.'
         }
         New-Item -ItemType Directory -Force -Path "$testRun/mods", "$testRun/saves" | Out-Null
         if (-not (Test-Path -LiteralPath $testWorld)) {
-            Copy-Item -LiteralPath "$project/build/millstone-test-run/world" -Destination $testWorld -Recurse
+            Copy-Item -LiteralPath "$project/build/game-test-run/world" -Destination $testWorld -Recurse
         }
-        foreach ($mod in Get-ChildItem -LiteralPath "$project/build/millstone-test-run/mods" -Filter '*.jar') {
+        foreach ($mod in Get-ChildItem -LiteralPath "$project/build/game-test-run/mods" -Filter '*.jar') {
             Copy-Item -LiteralPath $mod.FullName -Destination "$testRun/mods/$($mod.Name)"
         }
         $emiName = "emi-$($properties.emi_version)+neoforge.jar"

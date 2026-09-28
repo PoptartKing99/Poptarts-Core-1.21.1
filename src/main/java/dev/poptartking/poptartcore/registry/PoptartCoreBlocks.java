@@ -6,9 +6,9 @@ import com.simibubi.create.content.kinetics.simpleRelays.encased.EncasedShaftBlo
 import com.teamabnormals.caverns_and_chasms.core.registry.CCBlocks;
 import com.teamabnormals.caverns_and_chasms.core.registry.CCSoundEvents.CCSoundTypes;
 import dev.poptartking.poptartcore.PoptartCore;
-import dev.poptartking.poptartcore.blastfurnace.BlastFurnaceBlock;
 import dev.poptartking.poptartcore.barrel.FluidBarrelBlock;
 import dev.poptartking.poptartcore.barrel.FluidBarrelBlockItem;
+import dev.poptartking.poptartcore.blastfurnace.BlastFurnaceBlock;
 import dev.poptartking.poptartcore.bloomery.BloomeryBlock;
 import dev.poptartking.poptartcore.bloomery.IronBloomBlock;
 import dev.poptartking.poptartcore.catalog.CatalogBlockDefinition;
@@ -16,26 +16,52 @@ import dev.poptartking.poptartcore.catalog.PoptartCatalog;
 import dev.poptartking.poptartcore.clinker.ClinkerPillarBlock;
 import dev.poptartking.poptartcore.crucible.CrucibleBlock;
 import dev.poptartking.poptartcore.crucible.CrucibleBlockItem;
+import dev.poptartking.poptartcore.flesh.DecayingFleshBlock;
+import dev.poptartking.poptartcore.flesh.LifebudBlock;
 import dev.poptartking.poptartcore.ingotpile.IngotPileBlock;
 import dev.poptartking.poptartcore.millstone.MillstoneBlock;
 import dev.poptartking.poptartcore.millstone.MillstoneBlockItem;
 import dev.poptartking.poptartcore.millstone.MillstoneRotorBlock;
 import dev.poptartking.poptartcore.millstone.MillstoneStructuralBlock;
 import dev.poptartking.poptartcore.quern.QuernBlock;
+import dev.poptartking.poptartcore.rift.CupricBrazierBlock;
+import dev.poptartking.poptartcore.rift.CupricSconceLeverBlock;
+import dev.poptartking.poptartcore.rift.CupricSconceTorchBlock;
+import dev.poptartking.poptartcore.rift.CupricSconceWallTorchBlock;
+import dev.poptartking.poptartcore.rift.CupricStoneBrazierBlock;
 import dev.poptartking.poptartcore.rift.PackedRiftSedimentBlock;
+import dev.poptartking.poptartcore.rift.RiftBrazierBlock;
+import dev.poptartking.poptartcore.rift.RiftCampfireBlock;
 import dev.poptartking.poptartcore.rift.RiftFireBlock;
+import dev.poptartking.poptartcore.rift.RiftSconceLeverBlock;
+import dev.poptartking.poptartcore.rift.RiftSconceTorchBlock;
+import dev.poptartking.poptartcore.rift.RiftSconceWallTorchBlock;
 import dev.poptartking.poptartcore.rift.RiftSedimentBlock;
+import dev.poptartking.poptartcore.rift.RiftStoneBrazierBlock;
+import dev.poptartking.poptartcore.rift.RiftTorchBlock;
+import dev.poptartking.poptartcore.rift.RiftWallTorchBlock;
+import dev.poptartking.poptartcore.rift.SoulSconceLeverBlock;
+import dev.poptartking.poptartcore.scribing.ScribingTableBlock;
 import dev.poptartking.poptartcore.spider.TemporaryCobwebBlock;
 import dev.poptartking.poptartcore.workbench.WorkbenchBlock;
 import dev.simulated_team.simulated.content.blocks.portable_engine.PortableEngineBlock;
+import net.mehvahdjukaar.supplementaries.common.block.blocks.SconceLeverBlock;
+import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.ColorRGBA;
+import net.minecraft.world.item.StandingAndWallBlockItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.ColoredFallingBlock;
+import net.minecraft.world.level.block.LanternBlock;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.bus.api.IEventBus;
@@ -47,8 +73,11 @@ public class PoptartCoreBlocks {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(PoptartCore.MOD_ID);
 
     public static final DeferredBlock<IngotPileBlock> INGOT_PILE = BLOCKS.register(
-            "ingot_pile", () -> new IngotPileBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)
-                    .noOcclusion().noLootTable().pushReaction(PushReaction.DESTROY)));
+            "ingot_pile",
+            () -> new IngotPileBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)
+                    .noOcclusion()
+                    .noLootTable()
+                    .pushReaction(PushReaction.DESTROY)));
 
     public static final DeferredBlock<TemporaryCobwebBlock> TEMPORARY_COBWEB = BLOCKS.register(
             "temporary_cobweb",
@@ -58,6 +87,100 @@ public class PoptartCoreBlocks {
             "rift_fire",
             () -> new RiftFireBlock(
                     BlockBehaviour.Properties.ofFullCopy(Blocks.FIRE).noLootTable()));
+
+    public static final DeferredBlock<RiftWallTorchBlock> RIFT_WALL_TORCH = BLOCKS.register(
+            "rift_wall_torch",
+            () -> new RiftWallTorchBlock(BlockBehaviour.Properties.of()
+                    .noCollission()
+                    .instabreak()
+                    .lightLevel(state -> 14)
+                    .sound(SoundType.WOOD)
+                    .pushReaction(PushReaction.DESTROY)));
+    public static final CatalogBlockDefinition<RiftTorchBlock> RIFT_TORCH = PoptartCatalog.block(
+                    "rift_torch",
+                    () -> new RiftTorchBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.TORCH)),
+                    (block, properties) ->
+                            new StandingAndWallBlockItem(block, RIFT_WALL_TORCH.get(), properties, Direction.DOWN))
+            .externalModel();
+    public static final DeferredBlock<RiftSconceWallTorchBlock> SCONCE_RIFT_WALL_TORCH = BLOCKS.register(
+            "sconce_rift_wall_torch",
+            () -> new RiftSconceWallTorchBlock(BlockBehaviour.Properties.of()
+                    .noCollission()
+                    .instabreak()
+                    .lightLevel(state -> 14)
+                    .sound(SoundType.WOOD)
+                    .pushReaction(PushReaction.DESTROY)));
+    public static final CatalogBlockDefinition<RiftSconceTorchBlock> SCONCE_RIFT_TORCH = PoptartCatalog.block(
+                    "sconce_rift_torch",
+                    () -> new RiftSconceTorchBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.TORCH)),
+                    (block, properties) -> new StandingAndWallBlockItem(
+                            block, SCONCE_RIFT_WALL_TORCH.get(), properties, Direction.DOWN))
+            .externalModel()
+            .customLoot();
+    public static final DeferredBlock<CupricSconceWallTorchBlock> SCONCE_CUPRIC_WALL_TORCH = BLOCKS.register(
+            "sconce_cupric_wall_torch",
+            () -> new CupricSconceWallTorchBlock(BlockBehaviour.Properties.of()
+                    .noCollission()
+                    .instabreak()
+                    .lightLevel(state -> 10)
+                    .sound(SoundType.WOOD)
+                    .pushReaction(PushReaction.DESTROY)));
+    public static final CatalogBlockDefinition<CupricSconceTorchBlock> SCONCE_CUPRIC_TORCH = PoptartCatalog.block(
+                    "sconce_cupric_torch",
+                    () -> new CupricSconceTorchBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SOUL_TORCH)),
+                    (block, properties) -> new StandingAndWallBlockItem(
+                            block, SCONCE_CUPRIC_WALL_TORCH.get(), properties, Direction.DOWN))
+            .externalModel();
+    public static final CatalogBlockDefinition<LanternBlock> RIFT_LANTERN = PoptartCatalog.block(
+                    "rift_lantern", () -> new LanternBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.LANTERN)))
+            .externalModel()
+            .mineableWithPickaxe();
+    public static final CatalogBlockDefinition<RiftCampfireBlock> RIFT_CAMPFIRE = PoptartCatalog.block(
+                    "rift_campfire", () -> new RiftCampfireBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CAMPFIRE)))
+            .externalModel()
+            .mineableWithAxe();
+    public static final CatalogBlockDefinition<RiftBrazierBlock> RIFT_BRAZIER = PoptartCatalog.block(
+                    "rift_brazier", () -> new RiftBrazierBlock(riftBrazierProperties()))
+            .externalModel()
+            .mineableWithPickaxe();
+    public static final CatalogBlockDefinition<RiftStoneBrazierBlock> RIFT_STONE_BRAZIER = PoptartCatalog.block(
+                    "rift_stone_brazier", () -> new RiftStoneBrazierBlock(stoneBrazierProperties(15)))
+            .externalModel()
+            .mineableWithPickaxe();
+    public static final CatalogBlockDefinition<CupricBrazierBlock> CUPRIC_BRAZIER = PoptartCatalog.block(
+                    "cupric_brazier", () -> new CupricBrazierBlock(cupricBrazierProperties()))
+            .externalModel()
+            .mineableWithPickaxe();
+    public static final CatalogBlockDefinition<CupricStoneBrazierBlock> CUPRIC_STONE_BRAZIER = PoptartCatalog.block(
+                    "cupric_stone_brazier", () -> new CupricStoneBrazierBlock(stoneBrazierProperties(10)))
+            .externalModel()
+            .mineableWithPickaxe();
+    public static final CatalogBlockDefinition<SconceLeverBlock> SCONCE_TORCH_LEVER = PoptartCatalog.block(
+                    "sconce_torch_lever",
+                    () -> new SconceLeverBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.LEVER)
+                            .noOcclusion()
+                            .lightLevel(state -> state.getValue(BlockStateProperties.LIT) ? 14 : 0),
+                            () -> ParticleTypes.FLAME))
+            .externalModel()
+            .customLoot();
+    public static final CatalogBlockDefinition<RiftSconceLeverBlock> SCONCE_RIFT_TORCH_LEVER = PoptartCatalog.block(
+                    "sconce_rift_torch_lever",
+                    () -> new RiftSconceLeverBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.LEVER)
+                            .noOcclusion()
+                            .lightLevel(state -> state.getValue(BlockStateProperties.LIT) ? 15 : 0)))
+            .externalModel();
+    public static final CatalogBlockDefinition<CupricSconceLeverBlock> SCONCE_CUPRIC_TORCH_LEVER = PoptartCatalog.block(
+                    "sconce_cupric_torch_lever",
+                    () -> new CupricSconceLeverBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.LEVER)
+                            .noOcclusion()
+                            .lightLevel(state -> state.getValue(BlockStateProperties.LIT) ? 10 : 0)))
+            .externalModel();
+    public static final CatalogBlockDefinition<SoulSconceLeverBlock> SCONCE_SOUL_TORCH_LEVER = PoptartCatalog.block(
+                    "sconce_soul_torch_lever",
+                    () -> new SoulSconceLeverBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.LEVER)
+                            .noOcclusion()
+                            .lightLevel(state -> state.getValue(BlockStateProperties.LIT) ? 10 : 0)))
+            .externalModel();
 
     public static final CatalogBlockDefinition<CasingBlock> INDUSTRIAL_PLATING = PoptartCatalog.block(
                     "industrial_plating",
@@ -134,10 +257,12 @@ public class PoptartCoreBlocks {
             .mineableWithPickaxe();
 
     public static final CatalogBlockDefinition<FluidBarrelBlock> FLUID_BARREL = PoptartCatalog.block(
-                    "fluid_barrel", () -> new FluidBarrelBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BARREL)
-                            .noOcclusion()), FluidBarrelBlockItem::new)
+                    "fluid_barrel",
+                    () -> new FluidBarrelBlock(
+                            BlockBehaviour.Properties.ofFullCopy(Blocks.BARREL).noOcclusion()),
+                    FluidBarrelBlockItem::new)
             .externalModel()
-            .withoutGeneratedLoot()
+            .customLoot()
             .mineableWithAxe();
 
     public static final CatalogBlockDefinition<BloomeryBlock> BLOOMERY = PoptartCatalog.block(
@@ -173,7 +298,7 @@ public class PoptartCoreBlocks {
                             .noOcclusion()
                             .noLootTable()))
             .externalModel()
-            .withoutGeneratedLoot()
+            .noLoot()
             .mineableWithPickaxe();
 
     public static final CatalogBlockDefinition<RiftSedimentBlock> RIFT_SEDIMENT = PoptartCatalog.block(
@@ -186,7 +311,7 @@ public class PoptartCoreBlocks {
                             .lightLevel(state -> state.getValue(RiftSedimentBlock.LIT) ? 7 : 0)
                             .pushReaction(PushReaction.DESTROY)))
             .externalModel()
-            .withoutGeneratedLoot();
+            .noLoot();
     public static final CatalogBlockDefinition<PackedRiftSedimentBlock> RIFT_SEDIMENT_BLOCK = PoptartCatalog.block(
                     "rift_sediment_block",
                     () -> new PackedRiftSedimentBlock(
@@ -195,6 +320,56 @@ public class PoptartCoreBlocks {
             .withStorageRecipes(PoptartCoreBlocks.RIFT_SEDIMENT::get, "rift_sediment_from_block")
             .simpleModel(PoptartCore.location("block/rift_sediment_block"), "")
             .tags(BlockTags.MINEABLE_WITH_SHOVEL);
+
+    public static final CatalogBlockDefinition<DecayingFleshBlock> FLESH = PoptartCatalog.block(
+                    "flesh",
+                    () -> new DecayingFleshBlock(
+                            () -> PoptartCoreBlocks.ROTTEN_FLESH.get(),
+                            BlockBehaviour.Properties.ofFullCopy(Blocks.SCULK)
+                                    .mapColor(MapColor.NETHER)
+                                    .randomTicks()
+                                    .noLootTable()))
+            .externalModel()
+            .noLoot()
+            .tags(BlockTags.MINEABLE_WITH_HOE);
+    public static final CatalogBlockDefinition<DecayingFleshBlock> FRESH_FLESH = PoptartCatalog.block(
+                    "fresh_flesh",
+                    () -> new DecayingFleshBlock(
+                            FLESH::get,
+                            BlockBehaviour.Properties.ofFullCopy(Blocks.SCULK)
+                                    .mapColor(MapColor.COLOR_RED)
+                                    .randomTicks()
+                                    .noLootTable()))
+            .externalModel()
+            .noLoot()
+            .tags(BlockTags.MINEABLE_WITH_HOE);
+    public static final CatalogBlockDefinition<Block> ROTTEN_FLESH = PoptartCatalog.block(
+                    "rotten_flesh",
+                    () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SCULK)
+                            .mapColor(MapColor.COLOR_BROWN)
+                            .noLootTable()))
+            .externalModel()
+            .noLoot()
+            .tags(BlockTags.MINEABLE_WITH_HOE);
+    public static final CatalogBlockDefinition<DecayingFleshBlock> BUDDING_FLESH = PoptartCatalog.block(
+                    "budding_flesh",
+                    () -> new DecayingFleshBlock(
+                            FRESH_FLESH::get,
+                            BlockBehaviour.Properties.ofFullCopy(Blocks.SCULK)
+                                    .mapColor(MapColor.COLOR_RED)
+                                    .randomTicks()
+                                    .noLootTable()))
+            .externalModel()
+            .noLoot()
+            .tags(BlockTags.MINEABLE_WITH_HOE);
+    public static final DeferredBlock<LifebudBlock> LIFEBUD = BLOCKS.register(
+            "lifebud",
+            () -> new LifebudBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_RED)
+                    .instabreak()
+                    .sound(SoundType.HONEY_BLOCK)
+                    .noOcclusion()
+                    .pushReaction(PushReaction.DESTROY)));
 
     public static final CatalogBlockDefinition<Block> TIN_BLOCK = PoptartCatalog.block(
                     "tin_block",
@@ -254,6 +429,34 @@ public class PoptartCoreBlocks {
                             .strength(5.0F, 6.0F)))
             .withName("Block of Raw Lead")
             .withStorageRecipes(() -> PoptartCoreItems.RAW_LEAD.get(), "raw_lead_from_block")
+            .requiresIronTool();
+
+    public static final CatalogBlockDefinition<Block> MAGNETITE_BLOCK = PoptartCatalog.block(
+                    "magnetite_block",
+                    () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.RAW_IRON_BLOCK)
+                            .strength(5.0F, 6.0F)))
+            .withName("Block of Magnetite")
+            .externalModel()
+            .customLoot()
+            .requiresStoneTool();
+
+    public static final CatalogBlockDefinition<Block> CINNABAR_BLOCK = PoptartCatalog.block(
+                    "cinnabar_block",
+                    () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.RAW_IRON_BLOCK)
+                            .strength(4.0F, 3.0F)))
+            .withName("Block of Cinnabar")
+            .externalModel()
+            .customLoot()
+            .requiresIronTool();
+
+    public static final CatalogBlockDefinition<Block> MERCURY_BLOCK = PoptartCatalog.block(
+                    "mercury_block",
+                    () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)
+                            .sound(SoundType.METAL)
+                            .strength(5.0F, 6.0F)))
+            .withName("Block of Mercury")
+            .externalModel()
+            .customLoot()
             .requiresIronTool();
 
     public static final CatalogBlockDefinition<Block> SILVER_BLOCK = PoptartCatalog.block(
@@ -327,8 +530,41 @@ public class PoptartCoreBlocks {
                     "bronze_bricks", () -> new Block(platedBrickProperties(CCBlocks.COPPER_BRICKS.get())))
             .withName("Bronze Plated Bricks")
             .mineableWithPickaxe();
+    public static final CatalogBlockDefinition<Block> CONCRETE = PoptartCatalog.block(
+                    "concrete", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.LIGHT_GRAY_CONCRETE)))
+            .externalModel()
+            .customLoot()
+            .mineableWithPickaxe();
+    public static final CatalogBlockDefinition<SlabBlock> CONCRETE_SLAB = PoptartCatalog.block(
+                    "concrete_slab",
+                    () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.LIGHT_GRAY_CONCRETE)))
+            .externalModel()
+            .customLoot()
+            .mineableWithPickaxe();
+    public static final CatalogBlockDefinition<StairBlock> CONCRETE_STAIRS = PoptartCatalog.block(
+                    "concrete_stairs",
+                    () -> new StairBlock(
+                            CONCRETE.get().defaultBlockState(),
+                            BlockBehaviour.Properties.ofFullCopy(Blocks.LIGHT_GRAY_CONCRETE)))
+            .externalModel()
+            .customLoot()
+            .mineableWithPickaxe();
+    public static final CatalogBlockDefinition<ColoredFallingBlock> CONCRETE_POWDER = PoptartCatalog.block(
+                    "concrete_powder",
+                    () -> new ColoredFallingBlock(
+                            new ColorRGBA(15658734),
+                            BlockBehaviour.Properties.ofFullCopy(Blocks.LIGHT_GRAY_CONCRETE_POWDER)))
+            .externalModel()
+            .customLoot()
+            .tags(BlockTags.MINEABLE_WITH_SHOVEL);
+    public static final CatalogBlockDefinition<ScribingTableBlock> SCRIBING_TABLE = PoptartCatalog.block(
+                    "scribing_table",
+                    () -> new ScribingTableBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CRAFTING_TABLE)))
+            .externalModel()
+            .mineableWithAxe();
     public static final CatalogBlockDefinition<Block> CHISELED_BRONZE_BRICKS = PoptartCatalog.block(
-                    "chiseled_bronze_bricks", () -> new Block(platedBrickProperties(CCBlocks.CHISELED_COPPER_BRICKS.get())))
+                    "chiseled_bronze_bricks",
+                    () -> new Block(platedBrickProperties(CCBlocks.CHISELED_COPPER_BRICKS.get())))
             .withName("Chiseled Bronze Plated Bricks")
             .mineableWithPickaxe();
     public static final CatalogBlockDefinition<SlabBlock> BRONZE_BRICK_SLAB = PoptartCatalog.block(
@@ -338,7 +574,9 @@ public class PoptartCoreBlocks {
             .mineableWithPickaxe();
     public static final CatalogBlockDefinition<StairBlock> BRONZE_BRICK_STAIRS = PoptartCatalog.block(
                     "bronze_brick_stairs",
-                    () -> new StairBlock(BRONZE_BRICKS.get().defaultBlockState(), platedBrickProperties(CCBlocks.COPPER_BRICK_STAIRS.get())))
+                    () -> new StairBlock(
+                            BRONZE_BRICKS.get().defaultBlockState(),
+                            platedBrickProperties(CCBlocks.COPPER_BRICK_STAIRS.get())))
             .withName("Bronze Plated Brick Stairs")
             .stairsModel(PoptartCore.location("block/bronze_bricks"), "")
             .mineableWithPickaxe();
@@ -354,22 +592,27 @@ public class PoptartCoreBlocks {
             .withName("Aged Bronze Plated Bricks")
             .mineableWithPickaxe();
     public static final CatalogBlockDefinition<Block> CHISELED_AGED_BRONZE_BRICKS = PoptartCatalog.block(
-                    "chiseled_aged_bronze_bricks", () -> new Block(platedBrickProperties(CCBlocks.CHISELED_COPPER_BRICKS.get())))
+                    "chiseled_aged_bronze_bricks",
+                    () -> new Block(platedBrickProperties(CCBlocks.CHISELED_COPPER_BRICKS.get())))
             .withName("Chiseled Aged Bronze Plated Bricks")
             .mineableWithPickaxe();
     public static final CatalogBlockDefinition<SlabBlock> AGED_BRONZE_BRICK_SLAB = PoptartCatalog.block(
-                    "aged_bronze_brick_slab", () -> new SlabBlock(platedBrickProperties(CCBlocks.COPPER_BRICK_SLAB.get())))
+                    "aged_bronze_brick_slab",
+                    () -> new SlabBlock(platedBrickProperties(CCBlocks.COPPER_BRICK_SLAB.get())))
             .withName("Aged Bronze Plated Brick Slab")
             .slabModel(PoptartCore.location("block/aged_bronze_bricks"), "")
             .mineableWithPickaxe();
     public static final CatalogBlockDefinition<StairBlock> AGED_BRONZE_BRICK_STAIRS = PoptartCatalog.block(
                     "aged_bronze_brick_stairs",
-                    () -> new StairBlock(AGED_BRONZE_BRICKS.get().defaultBlockState(), platedBrickProperties(CCBlocks.COPPER_BRICK_STAIRS.get())))
+                    () -> new StairBlock(
+                            AGED_BRONZE_BRICKS.get().defaultBlockState(),
+                            platedBrickProperties(CCBlocks.COPPER_BRICK_STAIRS.get())))
             .withName("Aged Bronze Plated Brick Stairs")
             .stairsModel(PoptartCore.location("block/aged_bronze_bricks"), "")
             .mineableWithPickaxe();
     public static final CatalogBlockDefinition<WallBlock> AGED_BRONZE_BRICK_WALL = PoptartCatalog.block(
-                    "aged_bronze_brick_wall", () -> new WallBlock(platedBrickProperties(CCBlocks.COPPER_BRICK_WALL.get())))
+                    "aged_bronze_brick_wall",
+                    () -> new WallBlock(platedBrickProperties(CCBlocks.COPPER_BRICK_WALL.get())))
             .withName("Aged Bronze Plated Brick Wall")
             .wallModel(PoptartCore.location("block/aged_bronze_bricks"), "")
             .mineableWithPickaxe()
@@ -390,7 +633,9 @@ public class PoptartCoreBlocks {
             .mineableWithPickaxe();
     public static final CatalogBlockDefinition<StairBlock> LEAD_BRICK_STAIRS = PoptartCatalog.block(
                     "lead_brick_stairs",
-                    () -> new StairBlock(LEAD_BRICKS.get().defaultBlockState(), platedBrickProperties(CCBlocks.TIN_BRICK_STAIRS.get())))
+                    () -> new StairBlock(
+                            LEAD_BRICKS.get().defaultBlockState(),
+                            platedBrickProperties(CCBlocks.TIN_BRICK_STAIRS.get())))
             .withName("Lead Plated Brick Stairs")
             .stairsModel(PoptartCore.location("block/lead_bricks"), "")
             .mineableWithPickaxe();
@@ -406,7 +651,8 @@ public class PoptartCoreBlocks {
             .withName("Mercury Plated Bricks")
             .mineableWithPickaxe();
     public static final CatalogBlockDefinition<Block> CHISELED_MERCURY_BRICKS = PoptartCatalog.block(
-                    "chiseled_mercury_bricks", () -> new Block(platedBrickProperties(CCBlocks.CHISELED_SILVER_BRICKS.get())))
+                    "chiseled_mercury_bricks",
+                    () -> new Block(platedBrickProperties(CCBlocks.CHISELED_SILVER_BRICKS.get())))
             .withName("Chiseled Mercury Plated Bricks")
             .mineableWithPickaxe();
     public static final CatalogBlockDefinition<SlabBlock> MERCURY_BRICK_SLAB = PoptartCatalog.block(
@@ -416,7 +662,9 @@ public class PoptartCoreBlocks {
             .mineableWithPickaxe();
     public static final CatalogBlockDefinition<StairBlock> MERCURY_BRICK_STAIRS = PoptartCatalog.block(
                     "mercury_brick_stairs",
-                    () -> new StairBlock(MERCURY_BRICKS.get().defaultBlockState(), platedBrickProperties(CCBlocks.SILVER_BRICK_STAIRS.get())))
+                    () -> new StairBlock(
+                            MERCURY_BRICKS.get().defaultBlockState(),
+                            platedBrickProperties(CCBlocks.SILVER_BRICK_STAIRS.get())))
             .withName("Mercury Plated Brick Stairs")
             .stairsModel(PoptartCore.location("block/mercury_bricks"), "")
             .mineableWithPickaxe();
@@ -432,7 +680,8 @@ public class PoptartCoreBlocks {
             .withName("Steel Plated Bricks")
             .mineableWithPickaxe();
     public static final CatalogBlockDefinition<Block> CHISELED_STEEL_BRICKS = PoptartCatalog.block(
-                    "chiseled_steel_bricks", () -> new Block(platedBrickProperties(CCBlocks.CHISELED_IRON_BRICKS.get())))
+                    "chiseled_steel_bricks",
+                    () -> new Block(platedBrickProperties(CCBlocks.CHISELED_IRON_BRICKS.get())))
             .withName("Chiseled Steel Plated Bricks")
             .mineableWithPickaxe();
     public static final CatalogBlockDefinition<SlabBlock> STEEL_BRICK_SLAB = PoptartCatalog.block(
@@ -442,7 +691,9 @@ public class PoptartCoreBlocks {
             .mineableWithPickaxe();
     public static final CatalogBlockDefinition<StairBlock> STEEL_BRICK_STAIRS = PoptartCatalog.block(
                     "steel_brick_stairs",
-                    () -> new StairBlock(STEEL_BRICKS.get().defaultBlockState(), platedBrickProperties(CCBlocks.IRON_BRICK_STAIRS.get())))
+                    () -> new StairBlock(
+                            STEEL_BRICKS.get().defaultBlockState(),
+                            platedBrickProperties(CCBlocks.IRON_BRICK_STAIRS.get())))
             .withName("Steel Plated Brick Stairs")
             .stairsModel(PoptartCore.location("block/steel_bricks"), "")
             .mineableWithPickaxe();
@@ -572,6 +823,34 @@ public class PoptartCoreBlocks {
                 .sound(SoundType.METAL)
                 .requiresCorrectToolForDrops()
                 .strength(5.0F, 6.0F);
+    }
+
+    private static BlockBehaviour.Properties riftBrazierProperties() {
+        return BlockBehaviour.Properties.ofFullCopy(Blocks.LANTERN)
+                .strength(4.0F, 8.0F)
+                .requiresCorrectToolForDrops()
+                .noOcclusion()
+                .lightLevel(state -> state.getValue(BlockStateProperties.LIT) ? 15 : 0);
+    }
+
+    private static BlockBehaviour.Properties cupricBrazierProperties() {
+        return BlockBehaviour.Properties.ofFullCopy(Blocks.SOUL_LANTERN)
+                .strength(4.0F, 8.0F)
+                .requiresCorrectToolForDrops()
+                .noOcclusion()
+                .lightLevel(state -> state.getValue(BlockStateProperties.LIT) ? 10 : 0);
+    }
+
+    private static BlockBehaviour.Properties stoneBrazierProperties(int light) {
+        return BlockBehaviour.Properties.of()
+                .mapColor(MapColor.DEEPSLATE)
+                .strength(4.0F, 8.0F)
+                .requiresCorrectToolForDrops()
+                .noOcclusion()
+                .ignitedByLava()
+                .instrument(NoteBlockInstrument.BASS)
+                .sound(SoundType.POLISHED_DEEPSLATE)
+                .lightLevel(state -> state.getValue(BlockStateProperties.LIT) ? light : 0);
     }
 
     private static BlockBehaviour.Properties industrialEncasedProperties() {

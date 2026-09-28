@@ -1,7 +1,6 @@
 package dev.poptartking.poptartcore.barrel;
 
 import com.mojang.serialization.MapCodec;
-import dev.poptartking.poptartcore.registry.PoptartCoreBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -16,8 +15,8 @@ import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.PushReaction;
@@ -29,8 +28,7 @@ import net.neoforged.neoforge.fluids.FluidUtil;
 
 public class FluidBarrelBlock extends BaseEntityBlock {
     public static final EnumProperty<Part> PART = EnumProperty.create("part", Part.class);
-    private static final VoxelShape SHAPE = Shapes.or(
-            Block.box(1, 0, 1, 15, 16, 15), Block.box(0, 2, 0, 16, 14, 16));
+    private static final VoxelShape SHAPE = Shapes.or(Block.box(1, 0, 1, 15, 16, 15), Block.box(0, 2, 0, 16, 14, 16));
     private static final VoxelShape[] FORMED_SHAPES = {
         Shapes.empty(),
         SHAPE,
@@ -63,8 +61,8 @@ public class FluidBarrelBlock extends BaseEntityBlock {
         if (state.getValue(PART) == Part.SINGLE) return SHAPE;
         if (level.getBlockEntity(pos) instanceof FluidBarrelBlockEntity barrel && barrel.formationSize() > 1) {
             BlockPos origin = barrel.formationOrigin();
-            return FORMED_SHAPES[barrel.formationSize()]
-                    .move(origin.getX() - pos.getX(), origin.getY() - pos.getY(), origin.getZ() - pos.getZ());
+            return FORMED_SHAPES[barrel.formationSize()].move(
+                    origin.getX() - pos.getX(), origin.getY() - pos.getY(), origin.getZ() - pos.getZ());
         }
         return SHAPE;
     }
@@ -93,7 +91,12 @@ public class FluidBarrelBlock extends BaseEntityBlock {
 
     @Override
     protected ItemInteractionResult useItemOn(
-            ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand,
+            ItemStack stack,
+            BlockState state,
+            Level level,
+            BlockPos pos,
+            Player player,
+            InteractionHand hand,
             BlockHitResult hit) {
         return !stack.isEmpty() && FluidUtil.interactWithFluidHandler(player, hand, level, pos, hit.getDirection())
                 ? ItemInteractionResult.sidedSuccess(level.isClientSide)
@@ -106,7 +109,10 @@ public class FluidBarrelBlock extends BaseEntityBlock {
     }
 
     public enum Part implements StringRepresentable {
-        SINGLE("single"), BIG("big"), GIANT("giant"), HIDDEN("hidden");
+        SINGLE("single"),
+        BIG("big"),
+        GIANT("giant"),
+        HIDDEN("hidden");
 
         private final String name;
 

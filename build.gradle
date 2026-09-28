@@ -58,7 +58,47 @@ if (providers.gradleProperty('emiTests').isPresent()) {
     configurations.emiTestImplementation.extendsFrom(configurations.implementation)
     configurations.emiTestCompileOnly.extendsFrom(configurations.compileOnly)
 }
-if (providers.gradleProperty('millstoneTests').isPresent()) {
+
+def disabledRecipeList = layout.projectDirectory.file('config/disabled_recipes.txt')
+def disabledRecipeOutput = layout.buildDirectory.dir('generated/disabled-recipes')
+def generateDisabledRecipes = tasks.register('generateDisabledRecipes') {
+    inputs.file(disabledRecipeList)
+    outputs.dir(disabledRecipeOutput)
+
+    doLast {
+        def outputRoot = disabledRecipeOutput.get().asFile
+        outputRoot.deleteDir()
+        def seen = new HashSet<String>()
+        def disabledJson = '{"neoforge:conditions":[{"type":"neoforge:false"}]}\n'
+
+        disabledRecipeList.asFile.readLines('UTF-8').eachWithIndex { rawLine, index ->
+            def id = rawLine.trim()
+            if (id.isEmpty() || id.startsWith('#')) {
+                return
+            }
+            def parts = id.split(':', -1)
+            if (parts.length != 2
+                    || !(parts[0] ==~ /[a-z0-9_.-]+/)
+                    || !(parts[1] ==~ /[a-z0-9_.\/-]+/)
+                    || parts[1].split('/', -1).any { it in ['', '.', '..'] }) {
+                throw new GradleException("Invalid recipe ID at config/disabled_recipes.txt:${index + 1}: ${id}")
+            }
+            if (!seen.add(id)) {
+                throw new GradleException("Duplicate disabled recipe ID at config/disabled_recipes.txt:${index + 1}: ${id}")
+            }
+
+            def recipeFile = new File(outputRoot, "data/${parts[0]}/recipe/${parts[1]}.json")
+            recipeFile.parentFile.mkdirs()
+            recipeFile.setText(disabledJson, 'UTF-8')
+        }
+        logger.lifecycle("Generated ${seen.size()} disabled recipe overrides")
+    }
+}
+
+tasks.named('processResources') {
+    from(generateDisabledRecipes)
+}
+if (providers.gradleProperty('gameTests').isPresent()) {
     sourceSets.create('gameTest') {
         compileClasspath += sourceSets.main.output
         runtimeClasspath += sourceSets.main.output
@@ -73,7 +113,7 @@ neoForge {
     if (providers.gradleProperty('emiTests').isPresent()) {
         addModdingDependenciesTo(sourceSets.emiTest)
     }
-    if (providers.gradleProperty('millstoneTests').isPresent()) {
+    if (providers.gradleProperty('gameTests').isPresent()) {
         addModdingDependenciesTo(sourceSets.gameTest)
     }
 
@@ -109,8 +149,8 @@ neoForge {
         // The gametest system is also enabled by default for other run configs under the /test command.
         gameTestServer {
             type = "gameTestServer"
-            if (providers.gradleProperty('millstoneTests').isPresent()) {
-                gameDirectory = file('build/millstone-test-run')
+            if (providers.gradleProperty('gameTests').isPresent()) {
+                gameDirectory = file('build/game-test-run')
             }
             systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
         }
@@ -149,7 +189,7 @@ neoForge {
             if (providers.gradleProperty('emiTests').isPresent()) {
                 sourceSet(sourceSets.emiTest)
             }
-            if (providers.gradleProperty('millstoneTests').isPresent()) {
+            if (providers.gradleProperty('gameTests').isPresent()) {
                 sourceSet(sourceSets.gameTest)
             }
         }
@@ -245,6 +285,9 @@ dependencies {
     compileOnly "maven.modrinth:farmers-delight:${farmers_delight_version}"
     compileOnly "maven.modrinth:tfjmPSbI:${caverns_and_chasms_version}"
     compileOnly files('run/mods/nomansland-2.0.0.jar')
+    compileOnly files('run/mods/abundant_atmosphere-1.21.1-2.0.0-beta2-neoforge.jar')
+    compileOnly files('run/mods/BlockBox-1.21.1-0.1.3.jar')
+    compileOnly files('run/mods/supplementaries-1.21.1-3.9.8-neoforge.jar')
     compileOnly files('run/mods/ragdoll-0.3.0.jar')
     compileOnly files(extractedSableCompanionJar).builtBy(extractSableCompanionJar)
     compileOnly 'maven.modrinth:twkfQtEc:uPJlV3eS'

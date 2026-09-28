@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "C  ",
+    "CC ",
+    "CCC"
+  ],
+  "key": {
+    "C": {
+      "item": "poptartcore:concrete"
+    }
+  },
+  "result": {
+    "id": "poptartcore:concrete_stairs",
+    "count": 4
+  }
+}

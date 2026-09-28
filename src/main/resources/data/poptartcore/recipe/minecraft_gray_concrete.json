@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "CCC",
+    "CDC",
+    "CCC"
+  ],
+  "key": {
+    "C": {
+      "item": "poptartcore:concrete"
+    },
+    "D": {
+      "item": "minecraft:gray_dye"
+    }
+  },
+  "result": {
+    "id": "minecraft:gray_concrete",
+    "count": 8
+  }
+}

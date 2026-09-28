@@ -13,16 +13,23 @@ import net.minecraft.world.entity.player.Player;
 
 public final class LostHeartEmberParticle extends TextureSheetParticle {
     private static final int[][] PALETTES = {
-            {16777215, 14408916, 13158320, 11645838, 10527108},
-            {16775908, 16050099, 13747342, 12364409, 11767392},
-            {16767691, 15705217, 13466974, 12020816, 10704704},
-            {16759731, 15491408, 13252142, 11742761, 9707808}
+        {16777215, 14408916, 13158320, 11645838, 10527108},
+        {16775908, 16050099, 13747342, 12364409, 11767392},
+        {16767691, 15705217, 13466974, 12020816, 10704704},
+        {16759731, 15491408, 13252142, 11742761, 9707808}
     };
     private final int owner;
 
-    private LostHeartEmberParticle(ClientLevel level, double x, double y, double z,
-                                   double xd, double yd, double zd, SpriteSet sprites,
-                                   LostHeartEmberOptions options) {
+    private LostHeartEmberParticle(
+            ClientLevel level,
+            double x,
+            double y,
+            double z,
+            double xd,
+            double yd,
+            double zd,
+            SpriteSet sprites,
+            LostHeartEmberOptions options) {
         super(level, x, y, z, 0, 0, 0);
         this.xd = xd;
         this.yd = yd;
@@ -54,9 +61,16 @@ public final class LostHeartEmberParticle extends TextureSheetParticle {
             double dz = player.getZ() - z;
             double distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
             if (distance < 0.4) {
-                player.level().playLocalSound(player.getX(), player.getY(), player.getZ(),
-                        SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.PLAYERS,
-                        0.12F, 0.32F + random.nextFloat() * 0.16F, false);
+                player.level()
+                        .playLocalSound(
+                                player.getX(),
+                                player.getY(),
+                                player.getZ(),
+                                SoundEvents.EXPERIENCE_ORB_PICKUP,
+                                SoundSource.PLAYERS,
+                                0.12F,
+                                0.32F + random.nextFloat() * 0.16F,
+                                false);
                 remove();
                 return;
             }
@@ -78,8 +92,15 @@ public final class LostHeartEmberParticle extends TextureSheetParticle {
 
     public record Provider(SpriteSet sprites) implements ParticleProvider<LostHeartEmberOptions> {
         @Override
-        public Particle createParticle(LostHeartEmberOptions options, ClientLevel level,
-                                       double x, double y, double z, double xd, double yd, double zd) {
+        public Particle createParticle(
+                LostHeartEmberOptions options,
+                ClientLevel level,
+                double x,
+                double y,
+                double z,
+                double xd,
+                double yd,
+                double zd) {
             return new LostHeartEmberParticle(level, x, y, z, xd, yd, zd, sprites, options);
         }
     }

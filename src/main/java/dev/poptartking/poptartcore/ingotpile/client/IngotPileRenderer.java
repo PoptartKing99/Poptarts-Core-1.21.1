@@ -15,13 +15,19 @@ import net.minecraft.world.item.ItemStack;
 
 public class IngotPileRenderer implements BlockEntityRenderer<IngotPileBlockEntity> {
     @Override
-    public void render(IngotPileBlockEntity pile, float partialTick, PoseStack pose,
-            MultiBufferSource buffers, int light, int overlay) {
+    public void render(
+            IngotPileBlockEntity pile,
+            float partialTick,
+            PoseStack pose,
+            MultiBufferSource buffers,
+            int light,
+            int overlay) {
         IngotPileShape shape = IngotPileShape.current();
         VertexConsumer vertices = buffers.getBuffer(RenderType.solid());
         int index = 0;
         for (ItemStack stack : pile.ingots()) {
-            TextureAtlasSprite sprite = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS)
+            TextureAtlasSprite sprite = Minecraft.getInstance()
+                    .getTextureAtlas(TextureAtlas.LOCATION_BLOCKS)
                     .apply(IngotPileMaterials.texture(stack.getItem()));
             int layer = index / 8;
             pose.pushPose();
@@ -30,7 +36,8 @@ public class IngotPileRenderer implements BlockEntityRenderer<IngotPileBlockEnti
                 pose.mulPose(Axis.YP.rotationDegrees(shape.alternateLayerRotation()));
                 pose.translate(-0.5F, 0, -0.5F);
             }
-            pose.translate((index % 4) * shape.columnSpacing() / 16,
+            pose.translate(
+                    (index % 4) * shape.columnSpacing() / 16,
                     layer * shape.layerSpacing() / 16,
                     (index % 8 >= 4) ? shape.rowSpacing() / 16 : 0);
             drawIngot(pose, vertices, sprite, light, overlay, shape);
@@ -39,8 +46,13 @@ public class IngotPileRenderer implements BlockEntityRenderer<IngotPileBlockEnti
         }
     }
 
-    private static void drawIngot(PoseStack pose, VertexConsumer out, TextureAtlasSprite sprite,
-            int light, int overlay, IngotPileShape shape) {
+    private static void drawIngot(
+            PoseStack pose,
+            VertexConsumer out,
+            TextureAtlasSprite sprite,
+            int light,
+            int overlay,
+            IngotPileShape shape) {
         IngotPileShape.Bounds bottom = shape.bottom();
         IngotPileShape.Bounds top = shape.top();
         float px0 = bottom.minX() / 16;
@@ -52,23 +64,158 @@ public class IngotPileRenderer implements BlockEntityRenderer<IngotPileBlockEnti
         float qz0 = top.minZ() / 16;
         float qz1 = top.maxZ() / 16;
         float height = shape.height() / 16;
-        quad(pose, out, sprite, light, overlay, shape.uv(), shape.uv().top(), 0, 1, 0,
-                qx0, height, qz0, qx1, height, qz0, qx1, height, qz1, qx0, height, qz1);
-        quad(pose, out, sprite, light, overlay, shape.uv(), shape.uv().bottom(), 0, -1, 0,
-                px0, 0, pz1, px1, 0, pz1, px1, 0, pz0, px0, 0, pz0);
-        quad(pose, out, sprite, light, overlay, shape.uv(), shape.uv().end(), 0, 0, -1,
-                px0, 0, pz0, px1, 0, pz0, qx1, height, qz0, qx0, height, qz0);
-        quad(pose, out, sprite, light, overlay, shape.uv(), shape.uv().end(), 0, 0, 1,
-                px1, 0, pz1, px0, 0, pz1, qx0, height, qz1, qx1, height, qz1);
-        quad(pose, out, sprite, light, overlay, shape.uv(), shape.uv().longSide(), -1, 0, 0,
-                px0, 0, pz1, px0, 0, pz0, qx0, height, qz0, qx0, height, qz1);
-        quad(pose, out, sprite, light, overlay, shape.uv(), shape.uv().longSide(), 1, 0, 0,
-                px1, 0, pz0, px1, 0, pz1, qx1, height, qz1, qx1, height, qz0);
+        quad(
+                pose,
+                out,
+                sprite,
+                light,
+                overlay,
+                shape.uv(),
+                shape.uv().top(),
+                0,
+                1,
+                0,
+                qx0,
+                height,
+                qz0,
+                qx1,
+                height,
+                qz0,
+                qx1,
+                height,
+                qz1,
+                qx0,
+                height,
+                qz1);
+        quad(
+                pose,
+                out,
+                sprite,
+                light,
+                overlay,
+                shape.uv(),
+                shape.uv().bottom(),
+                0,
+                -1,
+                0,
+                px0,
+                0,
+                pz1,
+                px1,
+                0,
+                pz1,
+                px1,
+                0,
+                pz0,
+                px0,
+                0,
+                pz0);
+        quad(
+                pose,
+                out,
+                sprite,
+                light,
+                overlay,
+                shape.uv(),
+                shape.uv().end(),
+                0,
+                0,
+                -1,
+                px0,
+                0,
+                pz0,
+                px1,
+                0,
+                pz0,
+                qx1,
+                height,
+                qz0,
+                qx0,
+                height,
+                qz0);
+        quad(
+                pose,
+                out,
+                sprite,
+                light,
+                overlay,
+                shape.uv(),
+                shape.uv().end(),
+                0,
+                0,
+                1,
+                px1,
+                0,
+                pz1,
+                px0,
+                0,
+                pz1,
+                qx0,
+                height,
+                qz1,
+                qx1,
+                height,
+                qz1);
+        quad(
+                pose,
+                out,
+                sprite,
+                light,
+                overlay,
+                shape.uv(),
+                shape.uv().longSide(),
+                -1,
+                0,
+                0,
+                px0,
+                0,
+                pz1,
+                px0,
+                0,
+                pz0,
+                qx0,
+                height,
+                qz0,
+                qx0,
+                height,
+                qz1);
+        quad(
+                pose,
+                out,
+                sprite,
+                light,
+                overlay,
+                shape.uv(),
+                shape.uv().longSide(),
+                1,
+                0,
+                0,
+                px1,
+                0,
+                pz0,
+                px1,
+                0,
+                pz1,
+                qx1,
+                height,
+                qz1,
+                qx1,
+                height,
+                qz0);
     }
 
-    private static void quad(PoseStack pose, VertexConsumer out, TextureAtlasSprite sprite,
-            int light, int overlay, IngotPileShape.UvMap uvMap, IngotPileShape.UvRect uvRect,
-            float nx, float ny, float nz, float... xyz) {
+    private static void quad(
+            PoseStack pose,
+            VertexConsumer out,
+            TextureAtlasSprite sprite,
+            int light,
+            int overlay,
+            IngotPileShape.UvMap uvMap,
+            IngotPileShape.UvRect uvRect,
+            float nx,
+            float ny,
+            float nz,
+            float... xyz) {
         int shade = ny > 0 ? 255 : ny < 0 ? 128 : nz != 0 ? 204 : 153;
         for (int i = 0; i < 4; i++) {
             int corner = 3 - i;
@@ -78,7 +225,8 @@ public class IngotPileRenderer implements BlockEntityRenderer<IngotPileBlockEnti
             out.addVertex(pose.last().pose(), xyz[p], xyz[p + 1], xyz[p + 2])
                     .setColor(shade, shade, shade, 255)
                     .setUv(sprite.getU(u / uvMap.width()), sprite.getV(v / uvMap.height()))
-                    .setOverlay(overlay).setLight(light)
+                    .setOverlay(overlay)
+                    .setLight(light)
                     .setNormal(pose.last(), nx, ny, nz);
         }
     }

@@ -35,10 +35,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(BeltModel.class)
 public abstract class BeltModelMixin {
-    @Inject(method = "getParticleIcon(Lnet/neoforged/neoforge/client/model/data/ModelData;)Lnet/minecraft/client/renderer/texture/TextureAtlasSprite;",
-            at = @At("RETURN"), cancellable = true)
-    private void poptartcore$customCasingParticle(ModelData data,
-                                                   CallbackInfoReturnable<TextureAtlasSprite> callback) {
+    @Inject(
+            method =
+                    "getParticleIcon(Lnet/neoforged/neoforge/client/model/data/ModelData;)Lnet/minecraft/client/renderer/texture/TextureAtlasSprite;",
+            at = @At("RETURN"),
+            cancellable = true)
+    private void poptartcore$customCasingParticle(ModelData data, CallbackInfoReturnable<TextureAtlasSprite> callback) {
         if (data.has(PoptartBeltCasingClient.CASING_PROPERTY)) {
             PoptartBeltCasing casing = data.get(PoptartBeltCasingClient.CASING_PROPERTY);
             if (casing != null) {
@@ -49,9 +51,13 @@ public abstract class BeltModelMixin {
     }
 
     @Inject(method = "getQuads", at = @At("RETURN"), cancellable = true)
-    private void poptartcore$renderCustomCasing(BlockState state, Direction side, RandomSource random,
-                                                 ModelData data, RenderType renderType,
-                                                 CallbackInfoReturnable<List<BakedQuad>> callback) {
+    private void poptartcore$renderCustomCasing(
+            BlockState state,
+            Direction side,
+            RandomSource random,
+            ModelData data,
+            RenderType renderType,
+            CallbackInfoReturnable<List<BakedQuad>> callback) {
         if (!data.has(PoptartBeltCasingClient.CASING_PROPERTY)) {
             return;
         }
@@ -75,7 +81,9 @@ public abstract class BeltModelMixin {
     }
 
     private static TextureAtlasSprite sprite(ResourceLocation location) {
-        return Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(location);
+        return Minecraft.getInstance()
+                .getTextureAtlas(InventoryMenu.BLOCK_ATLAS)
+                .apply(location);
     }
 
     private static BakedModel model(ResourceLocation location) {
@@ -96,9 +104,13 @@ public abstract class BeltModelMixin {
         List<BakedQuad> rotated = new ArrayList<>(quads.size());
         for (BakedQuad quad : quads) {
             BakedQuad transformed = transformer.process(quad);
-            rotated.add(new BakedQuad(transformed.getVertices(), transformed.getTintIndex(),
-                    rotation.actualRotation().rotate(quad.getDirection()), transformed.getSprite(),
-                    transformed.isShade(), transformed.hasAmbientOcclusion()));
+            rotated.add(new BakedQuad(
+                    transformed.getVertices(),
+                    transformed.getTintIndex(),
+                    rotation.actualRotation().rotate(quad.getDirection()),
+                    transformed.getSprite(),
+                    transformed.isShade(),
+                    transformed.hasAmbientOcclusion()));
         }
         return rotated;
     }
@@ -114,15 +126,14 @@ public abstract class BeltModelMixin {
         boolean negativeFacing = facing.getAxisDirection() == AxisDirection.NEGATIVE;
 
         if ((vertical && negativeFacing || downward || sideways && negativeFacing)
-                && part != BeltPart.MIDDLE && part != BeltPart.PULLEY) {
+                && part != BeltPart.MIDDLE
+                && part != BeltPart.PULLEY) {
             part = part == BeltPart.END ? BeltPart.START : BeltPart.END;
         }
 
         String slopeName = diagonal ? "diagonal" : (vertical ? "sideways" : slope.getSerializedName());
         int xRotation = vertical ? 90 : (sideways && negativeFacing ? 180 : 0);
-        int yRotation = (int) facing.toYRot()
-                + (slope == BeltSlope.UPWARD ? 180 : 0)
-                + (vertical ? 90 : 0);
+        int yRotation = (int) facing.toYRot() + (slope == BeltSlope.UPWARD ? 180 : 0) + (vertical ? 90 : 0);
         return new ModelSelection(slopeName + "_" + part.getSerializedName(), xRotation, yRotation);
     }
 

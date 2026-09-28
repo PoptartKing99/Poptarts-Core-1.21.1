@@ -17,10 +17,10 @@ import org.joml.Matrix4f;
 
 public final class LostHeartRenderer extends EntityRenderer<LostHeartEntity> {
     private static final ResourceLocation[] STAGES = {
-            ResourceLocation.fromNamespaceAndPath("poptartcore", "textures/entity/lost_heart/heart_1.png"),
-            ResourceLocation.fromNamespaceAndPath("poptartcore", "textures/entity/lost_heart/heart_2.png"),
-            ResourceLocation.fromNamespaceAndPath("poptartcore", "textures/entity/lost_heart/heart_3.png"),
-            ResourceLocation.fromNamespaceAndPath("poptartcore", "textures/entity/lost_heart/heart_4.png")
+        ResourceLocation.fromNamespaceAndPath("poptartcore", "textures/entity/lost_heart/heart_1.png"),
+        ResourceLocation.fromNamespaceAndPath("poptartcore", "textures/entity/lost_heart/heart_2.png"),
+        ResourceLocation.fromNamespaceAndPath("poptartcore", "textures/entity/lost_heart/heart_3.png"),
+        ResourceLocation.fromNamespaceAndPath("poptartcore", "textures/entity/lost_heart/heart_4.png")
     };
 
     public LostHeartRenderer(EntityRendererProvider.Context context) {
@@ -33,8 +33,13 @@ public final class LostHeartRenderer extends EntityRenderer<LostHeartEntity> {
     }
 
     @Override
-    public void render(LostHeartEntity entity, float yaw, float partialTick,
-                       PoseStack poseStack, MultiBufferSource buffers, int packedLight) {
+    public void render(
+            LostHeartEntity entity,
+            float yaw,
+            float partialTick,
+            PoseStack poseStack,
+            MultiBufferSource buffers,
+            int packedLight) {
         poseStack.pushPose();
         anchor(entity, partialTick, poseStack);
         float phase = (entity.level().getGameTime() % 140 + partialTick) / 140.0F;
@@ -55,9 +60,11 @@ public final class LostHeartRenderer extends EntityRenderer<LostHeartEntity> {
     }
 
     private static void anchor(LostHeartEntity heart, float partialTick, PoseStack poseStack) {
-        if (heart.corpseId() == -1) return;
-        Entity corpse = heart.level().getEntity(heart.corpseId());
-        if (corpse == null) return;
+        Entity corpse = heart.corpseId() == -1 ? null : heart.level().getEntity(heart.corpseId());
+        if (corpse == null) {
+            poseStack.translate(0, heart.getBbHeight() * 0.5, 0);
+            return;
+        }
         Vec3 head = LostHeartEntity.headOf(corpse);
         poseStack.translate(
                 head.x - Mth.lerp(partialTick, heart.xOld, heart.getX()),
@@ -65,8 +72,15 @@ public final class LostHeartRenderer extends EntityRenderer<LostHeartEntity> {
                 head.z - Mth.lerp(partialTick, heart.zOld, heart.getZ()));
     }
 
-    private static void vertex(VertexConsumer vertices, Matrix4f position, Matrix3f normal,
-                               float x, float y, float u, float v, int light) {
+    private static void vertex(
+            VertexConsumer vertices,
+            Matrix4f position,
+            Matrix3f normal,
+            float x,
+            float y,
+            float u,
+            float v,
+            int light) {
         vertices.addVertex(position, x, y, 0)
                 .setColor(-1)
                 .setUv(u, v)

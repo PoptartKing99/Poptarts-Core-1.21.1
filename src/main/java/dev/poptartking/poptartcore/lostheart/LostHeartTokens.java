@@ -13,8 +13,9 @@ final class LostHeartTokens extends SavedData {
     private final Map<UUID, Integer> tokens = new HashMap<>();
 
     static LostHeartTokens of(MinecraftServer server) {
-        return server.getLevel(Level.OVERWORLD).getDataStorage().computeIfAbsent(
-                new Factory<>(LostHeartTokens::new, LostHeartTokens::load), "poptartcore_lost_hearts");
+        return server.getLevel(Level.OVERWORLD)
+                .getDataStorage()
+                .computeIfAbsent(new Factory<>(LostHeartTokens::new, LostHeartTokens::load), "poptartcore_lost_hearts");
     }
 
     private static LostHeartTokens load(CompoundTag tag, HolderLookup.Provider registries) {

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "poptartcore:block/rift_wall_torch"
+    },
+    "facing=north": {
+      "model": "poptartcore:block/rift_wall_torch",
+      "y": 270
+    },
+    "facing=south": {
+      "model": "poptartcore:block/rift_wall_torch",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "poptartcore:block/rift_wall_torch",
+      "y": 180
+    }
+  }
+}

@@ -58,7 +58,8 @@ public class IngotPileBlockEntity extends BlockEntity {
     @Override
     public void setChanged() {
         super.setChanged();
-        if (level != null && !level.isClientSide) level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
+        if (level != null && !level.isClientSide)
+            level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
     }
 
     @Override

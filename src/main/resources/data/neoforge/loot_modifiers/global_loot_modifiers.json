@@ -2,6 +2,13 @@
   "replace": false,
   "entries": [
     "poptartcore:endermite_rift_sediment",
-    "poptartcore:ruined_portal_rift_sediment"
+    "poptartcore:ruined_portal_rift_sediment",
+    "poptartcore:ruined_combat_tools",
+    "poptartcore:ruined_mining_tools",
+    "poptartcore:ruined_archaeology_tools",
+    "poptartcore:magnetite_from_iron_ore",
+    "poptartcore:magnetite_from_deepslate_iron_ore",
+    "poptartcore:cinnabar_from_redstone_ore",
+    "poptartcore:cinnabar_from_deepslate_redstone_ore"
   ]
 }

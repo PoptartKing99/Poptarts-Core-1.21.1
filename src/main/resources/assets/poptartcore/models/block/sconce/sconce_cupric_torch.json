@@ -1,0 +1,7 @@
+{
+  "parent": "nomansland:block/sconce_torch_template",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "texture": "poptartcore:block/sconce/sconce_cupric_torch"
+  }
+}

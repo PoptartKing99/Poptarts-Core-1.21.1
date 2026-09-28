@@ -4,6 +4,7 @@ import dev.poptartking.poptartcore.blastfurnace.BlastFurnaceCapabilities;
 import dev.poptartking.poptartcore.catalog.PoptartCatalog;
 import dev.poptartking.poptartcore.integration.create.PoptartCasingIntegration;
 import dev.poptartking.poptartcore.registry.*;
+import dev.poptartking.poptartcore.scribing.ScribingNetwork;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
@@ -23,7 +24,10 @@ public class PoptartCore {
         PoptartCoreMenus.register(modEventBus);
         PoptartCoreFluids.register(modEventBus);
         PoptartCoreRecipes.register(modEventBus);
+        PoptartCoreLootModifiers.register(modEventBus);
         PoptartCoreSounds.register(modEventBus);
+        PoptartCorePoiTypes.register(modEventBus);
+        PoptartCoreFeatures.register(modEventBus);
         PoptartCoreParticles.register(modEventBus);
         PoptartCoreTabs.register(modEventBus);
         PoptartCoreAttachments.register(modEventBus);
@@ -31,6 +35,7 @@ public class PoptartCore {
         BlastFurnaceCapabilities.register(modEventBus);
         PoptartCoreCapabilities.register(modEventBus);
         PoptartCasingIntegration.register(modEventBus);
+        ScribingNetwork.register(modEventBus);
     }
 
     public static ResourceLocation location(String path) {

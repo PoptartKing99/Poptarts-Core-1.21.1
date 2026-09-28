@@ -13,7 +13,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class BeltBlockEntityLevelMixin {
     @Inject(method = "setLevel", at = @At("TAIL"))
     private void poptartcore$refreshLoadedBelt(Level level, CallbackInfo callback) {
-        if (!level.isClientSide || !((Object) this instanceof BeltBlockEntity belt)
+        if (!level.isClientSide
+                || !((Object) this instanceof BeltBlockEntity belt)
                 || ((PoptartBeltCasingAccess) belt).poptartcore$getCasing() == null) {
             return;
         }

@@ -1,0 +1,8 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#minecraft:is_nether",
+  "features": [
+    "poptartcore:nether_flesh_geode"
+  ],
+  "step": "local_modifications"
+}

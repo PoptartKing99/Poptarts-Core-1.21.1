@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "poptartcore:block/sconce/sconce_cupric_wall_torch"
+    },
+    "facing=east": {
+      "model": "poptartcore:block/sconce/sconce_cupric_wall_torch",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "poptartcore:block/sconce/sconce_cupric_wall_torch",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "poptartcore:block/sconce/sconce_cupric_wall_torch",
+      "y": 270
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "GSG",
+    "SCS",
+    "GSG"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:gravel"
+    },
+    "S": {
+      "item": "minecraft:sand"
+    },
+    "C": {
+      "item": "minecraft:clay_ball"
+    }
+  },
+  "result": {
+    "id": "poptartcore:concrete_powder",
+    "count": 8
+  }
+}

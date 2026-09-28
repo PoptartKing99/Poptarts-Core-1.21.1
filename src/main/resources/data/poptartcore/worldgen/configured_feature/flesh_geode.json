@@ -1,0 +1,38 @@
+{
+  "type": "poptartcore:flesh_geode",
+  "config": {
+    "shell": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "poptartcore:flesh"
+      }
+    },
+    "lining": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "poptartcore:fresh_flesh"
+      }
+    },
+    "pool": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "minecraft:water",
+        "Properties": {
+          "level": "0"
+        }
+      }
+    },
+    "casing": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "minecraft:tuff"
+      }
+    },
+    "gem": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "poptartcore:lifebud"
+      }
+    }
+  }
+}

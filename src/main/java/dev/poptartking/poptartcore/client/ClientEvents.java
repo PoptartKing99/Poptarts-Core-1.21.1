@@ -5,15 +5,15 @@ import dev.poptartking.poptartcore.armor.client.*;
 import dev.poptartking.poptartcore.beekeeping.client.BeeSmokerClientExtensions;
 import dev.poptartking.poptartcore.blastfurnace.client.BlastFurnaceScreen;
 import dev.poptartking.poptartcore.crucible.client.CrucibleScreen;
+import dev.poptartking.poptartcore.hammer.client.ClientMiningCleanup;
 import dev.poptartking.poptartcore.ingotpile.client.IngotPileRenderer;
 import dev.poptartking.poptartcore.ingotpile.client.IngotPileShape;
-import dev.poptartking.poptartcore.lostheart.client.LostHeartRenderer;
-import dev.poptartking.poptartcore.lostheart.client.LostHeartEmberParticle;
-import dev.poptartking.poptartcore.hammer.client.ClientMiningCleanup;
-import dev.poptartking.poptartcore.integration.create.PoptartCasingClient;
 import dev.poptartking.poptartcore.integration.create.PoptartBeltCasingClient;
+import dev.poptartking.poptartcore.integration.create.PoptartCasingClient;
 import dev.poptartking.poptartcore.integration.create.PoptartCasingPonders;
 import dev.poptartking.poptartcore.integration.ragdoll.RagdollArmorCompat;
+import dev.poptartking.poptartcore.lostheart.client.LostHeartEmberParticle;
+import dev.poptartking.poptartcore.lostheart.client.LostHeartRenderer;
 import dev.poptartking.poptartcore.quern.client.QuernRenderer;
 import dev.poptartking.poptartcore.registry.PoptartCoreBlockEntities;
 import dev.poptartking.poptartcore.registry.PoptartCoreEntities;
@@ -21,6 +21,7 @@ import dev.poptartking.poptartcore.registry.PoptartCoreItems;
 import dev.poptartking.poptartcore.registry.PoptartCoreMenus;
 import dev.poptartking.poptartcore.registry.PoptartCoreParticles;
 import dev.poptartking.poptartcore.rift.client.RiftFlameParticle;
+import dev.poptartking.poptartcore.scribing.ScribingTableScreen;
 import dev.poptartking.poptartcore.spider.client.WebProjectileRenderer;
 import dev.poptartking.poptartcore.waxgolem.client.WaxGolemModel;
 import dev.poptartking.poptartcore.waxgolem.client.WaxGolemRenderer;
@@ -37,8 +38,8 @@ import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.ModelEvent.RegisterAdditional;
-import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 
@@ -191,11 +192,13 @@ public class ClientEvents {
         event.register(PoptartCoreMenus.CRUCIBLE.get(), CrucibleScreen::new);
         event.register(PoptartCoreMenus.BLAST_FURNACE.get(), BlastFurnaceScreen::new);
         event.register(PoptartCoreMenus.WORKBENCH.get(), WorkbenchScreen::new);
+        event.register(PoptartCoreMenus.SCRIBING_TABLE.get(), ScribingTableScreen::new);
     }
 
     @SubscribeEvent
     public static void registerBlockEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerBlockEntityRenderer(PoptartCoreBlockEntities.INGOT_PILE.get(), context -> new IngotPileRenderer());
+        event.registerBlockEntityRenderer(
+                PoptartCoreBlockEntities.INGOT_PILE.get(), context -> new IngotPileRenderer());
         event.registerEntityRenderer(PoptartCoreEntities.WAX_GOLEM.get(), WaxGolemRenderer::new);
         event.registerEntityRenderer(PoptartCoreEntities.WEB_PROJECTILE.get(), WebProjectileRenderer::new);
         event.registerEntityRenderer(PoptartCoreEntities.LOST_HEART.get(), LostHeartRenderer::new);

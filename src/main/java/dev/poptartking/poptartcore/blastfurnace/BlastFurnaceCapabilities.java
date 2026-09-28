@@ -32,7 +32,8 @@ public final class BlastFurnaceCapabilities {
                     if (!lowerState.is(PoptartCoreBlocks.BLAST_FURNACE.get())
                             || lowerState.getValue(BlastFurnaceBlock.HALF) != DoubleBlockHalf.LOWER) return null;
                     return level.getBlockEntity(lowerPos) instanceof BlastFurnaceBlockEntity furnace
-                            ? furnace.outputFluidHandler() : null;
+                            ? furnace.outputFluidHandler()
+                            : null;
                 },
                 PoptartCoreBlocks.BLAST_FURNACE.get());
     }

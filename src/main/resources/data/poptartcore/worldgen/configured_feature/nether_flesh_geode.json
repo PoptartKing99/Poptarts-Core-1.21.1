@@ -1,0 +1,29 @@
+{
+  "type": "poptartcore:flesh_geode",
+  "config": {
+    "shell": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "poptartcore:flesh"
+      }
+    },
+    "lining": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "poptartcore:fresh_flesh"
+      }
+    },
+    "air": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "nomansland:toxic_gas"
+      }
+    },
+    "gem": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "poptartcore:lifebud"
+      }
+    }
+  }
+}

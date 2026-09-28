@@ -10,8 +10,8 @@ import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.mojang.blaze3d.vertex.PoseStack;
 import dev.poptartking.poptartcore.armor.client.PoptartCoreModelLayers;
-import dev.poptartking.poptartcore.integration.ragdoll.RagdollArmorCompat;
 import dev.poptartking.poptartcore.integration.ragdoll.CorpseScreenArmorPose;
+import dev.poptartking.poptartcore.integration.ragdoll.RagdollArmorCompat;
 import java.util.Set;
 import net.minecraft.client.model.geom.ModelPart;
 import org.joml.Quaternionf;
@@ -56,7 +56,9 @@ public abstract class ArmorPartTransformMixin {
         }
 
         ModelPart root = RagdollRenderManager.getBoundModel();
-        ModelPart playerPart = root == null ? null : ((ModelPartAccessor) (Object) root).children().get(geometry.name);
+        ModelPart playerPart = root == null
+                ? null
+                : ((ModelPartAccessor) (Object) root).children().get(geometry.name);
         if (playerPart == null) {
             original.call(poseStack, geometry, part, originOffset);
             return;

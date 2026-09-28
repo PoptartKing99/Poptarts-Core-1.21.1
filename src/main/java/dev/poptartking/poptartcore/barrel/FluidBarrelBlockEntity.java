@@ -122,15 +122,20 @@ public class FluidBarrelBlockEntity extends BlockEntity {
     @Override
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
-        tank.setFluid(tag.contains("Fluid")
-                ? FluidStack.parseOptional(registries, tag.getCompound("Fluid"))
-                : FluidStack.EMPTY);
+        tank.setFluid(
+                tag.contains("Fluid")
+                        ? FluidStack.parseOptional(registries, tag.getCompound("Fluid"))
+                        : FluidStack.EMPTY);
         int size = tag.getInt("FormationSize");
         BlockPos origin = BlockPos.of(tag.getLong("FormationOrigin"));
-        if (size >= 2 && size <= 3
-                && worldPosition.getX() >= origin.getX() && worldPosition.getX() < origin.getX() + size
-                && worldPosition.getY() >= origin.getY() && worldPosition.getY() < origin.getY() + size
-                && worldPosition.getZ() >= origin.getZ() && worldPosition.getZ() < origin.getZ() + size) {
+        if (size >= 2
+                && size <= 3
+                && worldPosition.getX() >= origin.getX()
+                && worldPosition.getX() < origin.getX() + size
+                && worldPosition.getY() >= origin.getY()
+                && worldPosition.getY() < origin.getY() + size
+                && worldPosition.getZ() >= origin.getZ()
+                && worldPosition.getZ() < origin.getZ() + size) {
             formationOrigin = origin;
             formationSize = size;
         } else {
@@ -195,7 +200,8 @@ public class FluidBarrelBlockEntity extends BlockEntity {
         @Override
         public FluidStack drain(FluidStack stack, FluidAction action) {
             List<FluidBarrelBlockEntity> current = members();
-            if (current == null || stack.isEmpty()
+            if (current == null
+                    || stack.isEmpty()
                     || !FluidStack.isSameFluidSameComponents(pooledFluid(current), stack)) return FluidStack.EMPTY;
             return drain(stack.getAmount(), action);
         }

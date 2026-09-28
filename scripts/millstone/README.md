@@ -26,8 +26,8 @@ pwsh -File scripts/millstone/verify-millstone.ps1 -RunServer
 ```
 
 The optional server tests copy the installed Create, Supplementaries and Moonlight
-dependencies to `build/millstone-test-run/mods`. They use a separate test world.
-Test classes in `src/gameTest` are enabled only by `-PmillstoneTests` and are not
+dependencies to `build/game-test-run/mods`. They use a separate test world.
+Test classes in `src/gameTest` are enabled only by `-PgameTests` and are not
 included in the released mod JAR.
 
 The tests cover structure formation, inventory limits, rejected ingredients,

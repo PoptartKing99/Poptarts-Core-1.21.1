@@ -28,15 +28,19 @@ public final class IngotPilePlacement {
             if (clickedState.getValue(IngotPileBlock.COUNT) < 64) {
                 event.setCanceled(true);
                 event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide));
-                if (!level.isClientSide && level.getBlockEntity(clicked) instanceof IngotPileBlockEntity pile
-                        && pile.add(stack) && !player.getAbilities().instabuild) stack.shrink(1);
+                if (!level.isClientSide
+                        && level.getBlockEntity(clicked) instanceof IngotPileBlockEntity pile
+                        && pile.add(stack)
+                        && !player.getAbilities().instabuild) stack.shrink(1);
             }
             return;
         }
         BlockPos target = clickedState.canBeReplaced() ? clicked : clicked.relative(event.getFace());
         if (!level.getBlockState(target).canBeReplaced()) return;
         BlockState state = PoptartCoreBlocks.INGOT_PILE.get().defaultBlockState();
-        if (!state.canSurvive(level, target) || !level.isUnobstructed(state, target, net.minecraft.world.phys.shapes.CollisionContext.of(player))) return;
+        if (!state.canSurvive(level, target)
+                || !level.isUnobstructed(state, target, net.minecraft.world.phys.shapes.CollisionContext.of(player)))
+            return;
         event.setCanceled(true);
         event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide));
         if (!level.isClientSide && level.setBlock(target, state, 3)) {

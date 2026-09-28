@@ -17,7 +17,7 @@ public final class CatalogBlockLootProvider extends BlockLootSubProvider {
     @Override
     protected void generate() {
         for (CatalogBlockDefinition<?> definition : PoptartCatalog.blocks()) {
-            if (!definition.generatedLoot()) {
+            if (definition.lootMode() != CatalogBlockDefinition.LootMode.GENERATED) {
                 continue;
             }
             if (definition.model() == dev.poptartking.poptartcore.catalog.CatalogBlockModel.SLAB) {
@@ -35,7 +35,7 @@ public final class CatalogBlockLootProvider extends BlockLootSubProvider {
     @Override
     protected Iterable<Block> getKnownBlocks() {
         return PoptartCatalog.blocks().stream()
-                .filter(CatalogBlockDefinition::generatedLoot)
+                .filter(definition -> definition.lootMode() == CatalogBlockDefinition.LootMode.GENERATED)
                 .map(CatalogBlockDefinition::get)
                 .map(Block.class::cast)
                 .toList();

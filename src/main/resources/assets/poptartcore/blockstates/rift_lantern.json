@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "hanging=false": {
+      "model": "poptartcore:block/rift_lantern"
+    },
+    "hanging=true": {
+      "model": "poptartcore:block/rift_lantern_hanging"
+    }
+  }
+}

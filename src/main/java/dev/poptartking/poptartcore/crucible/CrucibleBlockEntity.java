@@ -32,6 +32,8 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.RecipeManager.CachedCheck;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
@@ -60,6 +62,12 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity implements Wor
     protected final int tankCapacity;
     protected NonNullList<ItemStack> items;
     protected final FluidTank tank;
+    private final CachedCheck<MeltingRecipeInput, MeltingRecipe> meltingCheck =
+            RecipeManager.createCheck(PoptartCoreRecipes.CRUCIBLE_MELTING_TYPE.get());
+    private final CachedCheck<AlloyingRecipeInput, AlloyingRecipe> alloyingCheck =
+            RecipeManager.createCheck(PoptartCoreRecipes.CRUCIBLE_ALLOYING_TYPE.get());
+    private final CachedCheck<CastingRecipeInput, CastingRecipe> castingCheck =
+            RecipeManager.createCheck(PoptartCoreRecipes.CRUCIBLE_CASTING_TYPE.get());
 
     private int burnTime;
     private int burnDuration;
@@ -263,7 +271,7 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity implements Wor
     }
 
     protected Optional<RecipeHolder<MeltingRecipe>> findMelting(MeltingRecipeInput input, Level level) {
-        return level.getRecipeManager().getRecipeFor(PoptartCoreRecipes.CRUCIBLE_MELTING_TYPE.get(), input, level);
+        return meltingCheck.getRecipeFor(input, level);
     }
 
     protected AlloyingRecipeInput getAlloyingInput() {
@@ -275,7 +283,7 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity implements Wor
     }
 
     protected Optional<RecipeHolder<AlloyingRecipe>> findAlloying(AlloyingRecipeInput input, Level level) {
-        return level.getRecipeManager().getRecipeFor(PoptartCoreRecipes.CRUCIBLE_ALLOYING_TYPE.get(), input, level);
+        return alloyingCheck.getRecipeFor(input, level);
     }
 
     private List<ItemStack> getInputStacks() {
@@ -287,8 +295,7 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity implements Wor
     }
 
     private Optional<RecipeHolder<CastingRecipe>> getCastingRecipe(Level level) {
-        return level.getRecipeManager()
-                .getRecipeFor(PoptartCoreRecipes.CRUCIBLE_CASTING_TYPE.get(), getCastingInput(), level);
+        return castingCheck.getRecipeFor(getCastingInput(), level);
     }
 
     private boolean isBurning() {

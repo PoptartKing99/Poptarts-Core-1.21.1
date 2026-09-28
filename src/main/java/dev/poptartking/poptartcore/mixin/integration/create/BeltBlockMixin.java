@@ -23,9 +23,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(BeltBlock.class)
 public abstract class BeltBlockMixin {
     @Inject(method = "useItemOn", at = @At("HEAD"), cancellable = true)
-    private void poptartcore$applyCasing(ItemStack stack, BlockState state, Level level, BlockPos pos,
-                                          Player player, InteractionHand hand, BlockHitResult hit,
-                                          CallbackInfoReturnable<ItemInteractionResult> callback) {
+    private void poptartcore$applyCasing(
+            ItemStack stack,
+            BlockState state,
+            Level level,
+            BlockPos pos,
+            Player player,
+            InteractionHand hand,
+            BlockHitResult hit,
+            CallbackInfoReturnable<ItemInteractionResult> callback) {
         PoptartBeltCasing casing = PoptartBeltCasing.fromItem(stack);
         if (casing == null || player.isShiftKeyDown() || !player.mayBuild()) {
             return;
@@ -37,8 +43,13 @@ public abstract class BeltBlockMixin {
         ((PoptartBeltCasingAccess) belt).poptartcore$setCasing(casing);
         ((BeltBlock) (Object) this).updateCoverProperty(level, pos, level.getBlockState(pos));
         SoundType sound = casing.block().defaultBlockState().getSoundType(level, pos, player);
-        level.playSound(null, pos, sound.getPlaceSound(), SoundSource.BLOCKS,
-                (sound.getVolume() + 1.0F) / 2.0F, sound.getPitch() * 0.8F);
+        level.playSound(
+                null,
+                pos,
+                sound.getPlaceSound(),
+                SoundSource.BLOCKS,
+                (sound.getVolume() + 1.0F) / 2.0F,
+                sound.getPitch() * 0.8F);
         callback.setReturnValue(ItemInteractionResult.SUCCESS);
     }
 }

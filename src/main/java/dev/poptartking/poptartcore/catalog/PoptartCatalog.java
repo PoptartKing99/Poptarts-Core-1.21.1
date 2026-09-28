@@ -84,8 +84,16 @@ public final class PoptartCatalog {
 
     public static void addCreativeTabItems(CreativeModeTab.Output output, List<String> preferredOrder) {
         Map<String, Supplier<? extends ItemLike>> remaining = new LinkedHashMap<>();
-        ITEM_DEFINITIONS.forEach((id, definition) -> remaining.put(id, definition));
-        BLOCK_DEFINITIONS.forEach((id, definition) -> remaining.put(id, definition.item()));
+        ITEM_DEFINITIONS.forEach((id, definition) -> {
+            if (definition.showInCreativeTab()) {
+                remaining.put(id, definition);
+            }
+        });
+        BLOCK_DEFINITIONS.forEach((id, definition) -> {
+            if (definition.showInCreativeTab()) {
+                remaining.put(id, definition.item());
+            }
+        });
 
         Set<String> orderedIds = new java.util.HashSet<>();
         for (String id : preferredOrder) {
@@ -94,6 +102,9 @@ public final class PoptartCatalog {
             }
             Supplier<? extends ItemLike> entry = remaining.remove(id);
             if (entry == null) {
+                if (ITEM_DEFINITIONS.containsKey(id) || BLOCK_DEFINITIONS.containsKey(id)) {
+                    continue;
+                }
                 throw new IllegalArgumentException("Unknown Poptart Catalog creative-tab entry: " + id);
             }
             output.accept(entry.get());

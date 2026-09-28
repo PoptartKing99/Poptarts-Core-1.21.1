@@ -19,18 +19,26 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.RecipeManager.CachedCheck;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 
 public class BlastFurnaceBlockEntity extends CrucibleBlockEntity implements WorldlyContainer {
     public static final int INPUT_COUNT = 6;
     public static final int TANK_CAPACITY = 3000;
+    private final CachedCheck<MeltingRecipeInput, MeltingRecipe> meltingCheck =
+            RecipeManager.createCheck(PoptartCoreRecipes.BLAST_FURNACE_MELTING_TYPE.get());
+    private final CachedCheck<AlloyingRecipeInput, AlloyingRecipe> alloyingCheck =
+            RecipeManager.createCheck(PoptartCoreRecipes.BLAST_FURNACE_ALLOYING_TYPE.get());
 
     private final IFluidHandler outputFluidHandler = new IFluidHandler() {
         @Override
-        public int getTanks() { return 1; }
+        public int getTanks() {
+            return 1;
+        }
 
         @Override
         public FluidStack getFluidInTank(int index) {
@@ -38,13 +46,19 @@ public class BlastFurnaceBlockEntity extends CrucibleBlockEntity implements Worl
         }
 
         @Override
-        public int getTankCapacity(int index) { return index == 0 ? tank.getCapacity() : 0; }
+        public int getTankCapacity(int index) {
+            return index == 0 ? tank.getCapacity() : 0;
+        }
 
         @Override
-        public boolean isFluidValid(int index, FluidStack stack) { return false; }
+        public boolean isFluidValid(int index, FluidStack stack) {
+            return false;
+        }
 
         @Override
-        public int fill(FluidStack resource, FluidAction action) { return 0; }
+        public int fill(FluidStack resource, FluidAction action) {
+            return 0;
+        }
 
         @Override
         public FluidStack drain(FluidStack resource, FluidAction action) {
@@ -67,15 +81,13 @@ public class BlastFurnaceBlockEntity extends CrucibleBlockEntity implements Worl
 
     @Override
     protected Optional<RecipeHolder<MeltingRecipe>> findMelting(MeltingRecipeInput input, Level level) {
-        Optional<RecipeHolder<MeltingRecipe>> blast = level.getRecipeManager()
-                .getRecipeFor(PoptartCoreRecipes.BLAST_FURNACE_MELTING_TYPE.get(), input, level);
+        Optional<RecipeHolder<MeltingRecipe>> blast = meltingCheck.getRecipeFor(input, level);
         return blast.isPresent() ? blast : super.findMelting(input, level);
     }
 
     @Override
     protected Optional<RecipeHolder<AlloyingRecipe>> findAlloying(AlloyingRecipeInput input, Level level) {
-        Optional<RecipeHolder<AlloyingRecipe>> blast = level.getRecipeManager()
-                .getRecipeFor(PoptartCoreRecipes.BLAST_FURNACE_ALLOYING_TYPE.get(), input, level);
+        Optional<RecipeHolder<AlloyingRecipe>> blast = alloyingCheck.getRecipeFor(input, level);
         return blast.isPresent() ? blast : super.findAlloying(input, level);
     }
 
@@ -128,13 +140,14 @@ public class BlastFurnaceBlockEntity extends CrucibleBlockEntity implements Worl
     @Override
     public int[] getSlotsForFace(Direction side) {
         if (side == Direction.DOWN) return new int[] {resultSlot, containerSlot};
-        if (side == facing().getClockWise()) return new int[] {fuelSlot, containerSlot};
-        if (side == facing().getCounterClockWise()) return new int[] {containerSlot};
-        if (side != facing().getOpposite()) return new int[] {containerSlot};
+        if (side == facing().getClockWise()) return new int[] {fuelSlot, containerSlot, resultSlot};
+        if (side == facing().getCounterClockWise()) return new int[] {containerSlot, resultSlot};
+        if (side != facing().getOpposite()) return new int[] {containerSlot, resultSlot};
 
-        int[] slots = new int[inputCount + 1];
+        int[] slots = new int[inputCount + 2];
         System.arraycopy(inputSlots(), 0, slots, 0, inputCount);
         slots[inputCount] = containerSlot;
+        slots[inputCount + 1] = resultSlot;
         return slots;
     }
 
@@ -146,7 +159,7 @@ public class BlastFurnaceBlockEntity extends CrucibleBlockEntity implements Worl
 
     @Override
     public boolean canTakeItemThroughFace(int slot, ItemStack stack, Direction side) {
-        return slot == resultSlot && side == Direction.DOWN;
+        return slot == resultSlot;
     }
 
     public WorldlyContainer topHalf() {
@@ -179,11 +192,12 @@ public class BlastFurnaceBlockEntity extends CrucibleBlockEntity implements Worl
     private record TopHalf(BlastFurnaceBlockEntity furnace) implements WorldlyContainer {
         @Override
         public int[] getSlotsForFace(Direction side) {
-            if (side == Direction.UP) return new int[] {furnace.containerSlot};
+            if (side == Direction.UP) return new int[] {furnace.containerSlot, furnace.resultSlot};
 
-            int[] slots = new int[furnace.inputCount + 1];
+            int[] slots = new int[furnace.inputCount + 2];
             System.arraycopy(furnace.inputSlots(), 0, slots, 0, furnace.inputCount);
             slots[furnace.inputCount] = furnace.containerSlot;
+            slots[furnace.inputCount + 1] = furnace.resultSlot;
             return slots;
         }
 
@@ -196,7 +210,7 @@ public class BlastFurnaceBlockEntity extends CrucibleBlockEntity implements Worl
 
         @Override
         public boolean canTakeItemThroughFace(int slot, ItemStack stack, Direction side) {
-            return false;
+            return slot == furnace.resultSlot;
         }
 
         @Override

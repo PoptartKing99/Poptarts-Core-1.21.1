@@ -1,0 +1,103 @@
+{
+  "loader": "neoforge:separate_transforms",
+  "gui_light": "front",
+  "base": {
+    "parent": "item/handheld",
+    "textures": {
+      "layer0": "poptartcore:item/sledgehammer_handheld"
+    },
+    "display": {
+      "thirdperson_righthand": {
+        "rotation": [
+          0,
+          -90,
+          55
+        ],
+        "translation": [
+          0,
+          8.25,
+          -1
+        ],
+        "scale": [
+          1.7,
+          1.7,
+          0.85
+        ]
+      },
+      "thirdperson_lefthand": {
+        "rotation": [
+          0,
+          90,
+          -55
+        ],
+        "translation": [
+          0,
+          8.25,
+          -1
+        ],
+        "scale": [
+          1.7,
+          1.7,
+          0.85
+        ]
+      },
+      "firstperson_righthand": {
+        "rotation": [
+          0,
+          -90,
+          25
+        ],
+        "translation": [
+          1.13,
+          6.45,
+          1.13
+        ],
+        "scale": [
+          1.36,
+          1.36,
+          0.68
+        ]
+      },
+      "firstperson_lefthand": {
+        "rotation": [
+          0,
+          90,
+          -25
+        ],
+        "translation": [
+          1.13,
+          6.45,
+          1.13
+        ],
+        "scale": [
+          1.36,
+          1.36,
+          0.68
+        ]
+      }
+    }
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "item/generated",
+      "textures": {
+        "layer0": "poptartcore:item/sledgehammer"
+      },
+      "gui_light": "front"
+    },
+    "ground": {
+      "parent": "item/generated",
+      "textures": {
+        "layer0": "poptartcore:item/sledgehammer"
+      },
+      "gui_light": "front"
+    },
+    "fixed": {
+      "parent": "item/generated",
+      "textures": {
+        "layer0": "poptartcore:item/sledgehammer"
+      },
+      "gui_light": "front"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "CCC"
+  ],
+  "key": {
+    "C": {
+      "item": "poptartcore:concrete"
+    }
+  },
+  "result": {
+    "id": "poptartcore:concrete_slab",
+    "count": 6
+  }
+}

@@ -4,6 +4,7 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "accessor.BlockEntityTypeAccessor",
+    "accessor.BlockEntityPersistentDataAccessor",
     "spider.WallClimberNavigationAccessor",
     "spider.SpiderWebAttackMixin",
     "armor.ArmorTextureMixin",
@@ -34,6 +35,7 @@
     "integration.ragdoll.ArmorPartTransformMixin",
     "integration.ragdoll.CorpseScreenArmorLayerMixin",
     "integration.ragdoll.LostHeartAttackTargetMixin",
+    "integration.ragdoll.RagdollCameraWorldResetMixin",
     "integration.create.BeltBlockEntityClientMixin",
     "integration.create.BeltBlockEntityLevelMixin",
     "integration.create.BeltModelMixin",

@@ -1,0 +1,64 @@
+{
+  "variants": {
+    "lit=true,facing=north,powered=true": {
+      "model": "poptartcore:block/sconce_lever/sconce_soul_torch_on"
+    },
+    "lit=true,facing=east,powered=true": {
+      "model": "poptartcore:block/sconce_lever/sconce_soul_torch_on",
+      "y": 90
+    },
+    "lit=true,facing=south,powered=true": {
+      "model": "poptartcore:block/sconce_lever/sconce_soul_torch_on",
+      "y": 180
+    },
+    "lit=true,facing=west,powered=true": {
+      "model": "poptartcore:block/sconce_lever/sconce_soul_torch_on",
+      "y": 270
+    },
+    "lit=true,facing=north,powered=false": {
+      "model": "poptartcore:block/sconce_lever/sconce_soul_torch_off"
+    },
+    "lit=true,facing=east,powered=false": {
+      "model": "poptartcore:block/sconce_lever/sconce_soul_torch_off",
+      "y": 90
+    },
+    "lit=true,facing=south,powered=false": {
+      "model": "poptartcore:block/sconce_lever/sconce_soul_torch_off",
+      "y": 180
+    },
+    "lit=true,facing=west,powered=false": {
+      "model": "poptartcore:block/sconce_lever/sconce_soul_torch_off",
+      "y": 270
+    },
+    "lit=false,facing=north,powered=true": {
+      "model": "poptartcore:block/sconce_lever/sconce_soul_torch_on_unlit"
+    },
+    "lit=false,facing=east,powered=true": {
+      "model": "poptartcore:block/sconce_lever/sconce_soul_torch_on_unlit",
+      "y": 90
+    },
+    "lit=false,facing=south,powered=true": {
+      "model": "poptartcore:block/sconce_lever/sconce_soul_torch_on_unlit",
+      "y": 180
+    },
+    "lit=false,facing=west,powered=true": {
+      "model": "poptartcore:block/sconce_lever/sconce_soul_torch_on_unlit",
+      "y": 270
+    },
+    "lit=false,facing=north,powered=false": {
+      "model": "poptartcore:block/sconce_lever/sconce_soul_torch_off_unlit"
+    },
+    "lit=false,facing=east,powered=false": {
+      "model": "poptartcore:block/sconce_lever/sconce_soul_torch_off_unlit",
+      "y": 90
+    },
+    "lit=false,facing=south,powered=false": {
+      "model": "poptartcore:block/sconce_lever/sconce_soul_torch_off_unlit",
+      "y": 180
+    },
+    "lit=false,facing=west,powered=false": {
+      "model": "poptartcore:block/sconce_lever/sconce_soul_torch_off_unlit",
+      "y": 270
+    }
+  }
+}

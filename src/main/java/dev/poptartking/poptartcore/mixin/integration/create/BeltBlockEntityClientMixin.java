@@ -15,7 +15,8 @@ public abstract class BeltBlockEntityClientMixin {
     private void poptartcore$addCasingModelData(CallbackInfoReturnable<ModelData> callback) {
         PoptartBeltCasingAccess access = (PoptartBeltCasingAccess) this;
         if (access.poptartcore$getCasing() != null) {
-            callback.setReturnValue(callback.getReturnValue().derive()
+            callback.setReturnValue(callback.getReturnValue()
+                    .derive()
                     .with(PoptartBeltCasingClient.CASING_PROPERTY, access.poptartcore$getCasing())
                     .build());
         }

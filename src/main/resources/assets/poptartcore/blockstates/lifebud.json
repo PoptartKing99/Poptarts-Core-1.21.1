@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "rooted=false": { "model": "poptartcore:block/flesh/lifebud" },
+    "rooted=true": { "model": "poptartcore:block/flesh/lifebud_rooted" }
+  }
+}

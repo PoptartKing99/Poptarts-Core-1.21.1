@@ -34,13 +34,19 @@ public class IngotPileBlock extends BaseEntityBlock {
     }
 
     @Override
-    protected MapCodec<? extends BaseEntityBlock> codec() { return CODEC; }
+    protected MapCodec<? extends BaseEntityBlock> codec() {
+        return CODEC;
+    }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) { builder.add(COUNT); }
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(COUNT);
+    }
 
     @Override
-    protected RenderShape getRenderShape(BlockState state) { return RenderShape.INVISIBLE; }
+    protected RenderShape getRenderShape(BlockState state) {
+        return RenderShape.INVISIBLE;
+    }
 
     @Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
@@ -54,10 +60,14 @@ public class IngotPileBlock extends BaseEntityBlock {
     }
 
     @Override
-    protected BlockState updateShape(BlockState state, Direction direction, BlockState neighborState,
-            net.minecraft.world.level.LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
-        if (direction == Direction.DOWN && !canSurvive(state, level, pos))
-            level.scheduleTick(pos, this, 1);
+    protected BlockState updateShape(
+            BlockState state,
+            Direction direction,
+            BlockState neighborState,
+            net.minecraft.world.level.LevelAccessor level,
+            BlockPos pos,
+            BlockPos neighborPos) {
+        if (direction == Direction.DOWN && !canSurvive(state, level, pos)) level.scheduleTick(pos, this, 1);
         return super.updateShape(state, direction, neighborState, level, pos, neighborPos);
     }
 
@@ -67,8 +77,8 @@ public class IngotPileBlock extends BaseEntityBlock {
     }
 
     @Override
-    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos,
-            Player player, BlockHitResult hit) {
+    protected InteractionResult useWithoutItem(
+            BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
         if (player.isSecondaryUseActive()) return InteractionResult.PASS;
         if (!level.isClientSide && level.getBlockEntity(pos) instanceof IngotPileBlockEntity pile) {
             ItemStack removed = pile.removeLast();
@@ -82,7 +92,8 @@ public class IngotPileBlock extends BaseEntityBlock {
 
     @Override
     protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState next, boolean moved) {
-        if (!state.is(next.getBlock()) && !level.isClientSide
+        if (!state.is(next.getBlock())
+                && !level.isClientSide
                 && level.getBlockEntity(pos) instanceof IngotPileBlockEntity pile) {
             for (ItemStack stack : pile.takeAll()) Block.popResource(level, pos, stack);
         }
@@ -90,21 +101,23 @@ public class IngotPileBlock extends BaseEntityBlock {
     }
 
     @Override
-    public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player,
-            boolean willHarvest, FluidState fluid) {
+    public boolean onDestroyedByPlayer(
+            BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
         if (player.getAbilities().instabuild && level.getBlockEntity(pos) instanceof IngotPileBlockEntity pile)
             pile.takeAll();
         return super.onDestroyedByPlayer(state, level, pos, player, willHarvest, fluid);
     }
 
     @Override
-    public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level,
-            BlockPos pos, Player player) {
-        if (level.getBlockEntity(pos) instanceof IngotPileBlockEntity pile && !pile.ingots().isEmpty())
-            return pile.ingots().getLast().copy();
+    public ItemStack getCloneItemStack(
+            BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
+        if (level.getBlockEntity(pos) instanceof IngotPileBlockEntity pile
+                && !pile.ingots().isEmpty()) return pile.ingots().getLast().copy();
         return ItemStack.EMPTY;
     }
 
     @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) { return new IngotPileBlockEntity(pos, state); }
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new IngotPileBlockEntity(pos, state);
+    }
 }

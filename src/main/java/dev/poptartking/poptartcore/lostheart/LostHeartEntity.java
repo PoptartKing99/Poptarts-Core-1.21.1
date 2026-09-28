@@ -30,6 +30,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.player.AttackEntityEvent;
+import net.neoforged.neoforge.event.level.LevelEvent;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
 import org.joml.Vector3dc;
 
@@ -46,7 +47,6 @@ public class LostHeartEntity extends Entity {
     private UUID corpse;
     private int token;
     private int ticksSinceHit;
-    private int missingTicks;
 
     public LostHeartEntity(EntityType<? extends LostHeartEntity> type, Level level) {
         super(type, level);
@@ -72,8 +72,8 @@ public class LostHeartEntity extends Entity {
         if (body instanceof RagdollDataHolder holder) {
             RagdollBody ragdoll = holder.getRagdoll();
             if (ragdoll != null) {
-                RagdollBody.Limb head = ragdoll.isLimbDetached("head")
-                        ? ragdoll.getLimbs().get("body") : ragdoll.getHead();
+                RagdollBody.Limb head =
+                        ragdoll.isLimbDetached("head") ? ragdoll.getLimbs().get("body") : ragdoll.getHead();
                 if (head != null) {
                     Vector3dc point = head.getPose().position();
                     return new Vec3(point.x(), point.y(), point.z());
@@ -99,14 +99,6 @@ public class LostHeartEntity extends Entity {
             boolean gone = body == null || body.isRemoved();
             int id = gone ? -1 : body.getId();
             if (corpseId() != id) entityData.set(CORPSE_ID, id);
-            if (gone) {
-                if (++missingTicks > 60) {
-                    discard();
-                    return;
-                }
-            } else {
-                missingTicks = 0;
-            }
         }
         followCorpse();
         if (++ticksSinceHit > 60 && cracks() > 0) {
@@ -131,7 +123,9 @@ public class LostHeartEntity extends Entity {
     }
 
     private void punch(Player player) {
-        if (!(level() instanceof ServerLevel server) || isRemoved() || !player.getUUID().equals(owner)) return;
+        if (!(level() instanceof ServerLevel server)
+                || isRemoved()
+                || !player.getUUID().equals(owner)) return;
         if (Hearts.get(player) >= Hearts.MAX) return;
         ticksSinceHit = 0;
         int next = cracks() + 1;
@@ -139,24 +133,38 @@ public class LostHeartEntity extends Entity {
             shatter(server, player);
         } else {
             entityData.set(CRACKS, next);
-            server.playSound(null, getX(), getY(), getZ(), SoundEvents.FIRE_EXTINGUISH,
-                    SoundSource.PLAYERS, 0.35F, 1.5F + 0.15F * next);
+            server.playSound(
+                    null,
+                    getX(),
+                    getY(),
+                    getZ(),
+                    SoundEvents.FIRE_EXTINGUISH,
+                    SoundSource.PLAYERS,
+                    0.35F,
+                    1.5F + 0.15F * next);
             embers(server, player, next, 6);
         }
     }
 
     private void embers(ServerLevel server, Player player, int stage, int count) {
-        server.sendParticles(new LostHeartEmberOptions(player.getId(), stage),
-                getX(), getY(), getZ(), count, 0.18, 0.18, 0.18, 0.035);
+        server.sendParticles(
+                new LostHeartEmberOptions(player.getId(), stage),
+                getX(),
+                getY(),
+                getZ(),
+                count,
+                0.18,
+                0.18,
+                0.18,
+                0.035);
     }
 
     private void shatter(ServerLevel server, Player player) {
         Hearts.set(player, Hearts.get(player) + 1);
         player.heal(2.0F);
-        server.playSound(null, getX(), getY(), getZ(), SoundEvents.FIRE_EXTINGUISH,
-                SoundSource.PLAYERS, 0.7F, 0.75F);
-        server.playSound(null, getX(), getY(), getZ(), SoundEvents.SOUL_ESCAPE.value(),
-                SoundSource.PLAYERS, 0.6F, 1.2F);
+        server.playSound(null, getX(), getY(), getZ(), SoundEvents.FIRE_EXTINGUISH, SoundSource.PLAYERS, 0.7F, 0.75F);
+        server.playSound(
+                null, getX(), getY(), getZ(), SoundEvents.SOUL_ESCAPE.value(), SoundSource.PLAYERS, 0.6F, 1.2F);
         embers(server, player, 4, 26);
         discard();
     }
@@ -196,18 +204,24 @@ public class LostHeartEntity extends Entity {
     public static void onPlayerDeath(LivingDeathEvent event) {
         if (event.getEntity() instanceof ServerPlayer player && Hearts.get(player) > Hearts.MIN) {
             int token = LostHeartTokens.of(player.server).bump(player.getUUID());
-            PENDING.put(player.getUUID(), new Claim(token, player.level().getGameTime() + 40));
+            ServerLevel level = player.serverLevel();
+            PENDING.put(player.getUUID(), new Claim(player, level, token, level.getGameTime() + 40));
             // Previously spawned hearts become invalid even if their chunk is unloaded.
         }
     }
 
     @SubscribeEvent
     public static void onCorpseSpawned(EntityJoinLevelEvent event) {
-        if (!(event.getLevel() instanceof ServerLevel level) || !(event.getEntity() instanceof CorpseEntity body)) return;
+        if (!(event.getLevel() instanceof ServerLevel level) || !(event.getEntity() instanceof CorpseEntity body))
+            return;
         UUID owner = body.getOwnerUUID();
         if (owner == null) return;
-        Claim claim = PENDING.remove(owner);
-        if (claim != null && level.getGameTime() <= claim.deadline()) {
+        Claim claim = PENDING.get(owner);
+        if (claim != null
+                && claim.player() == body.getPlayer()
+                && claim.level() == level
+                && level.getGameTime() <= claim.deadline()) {
+            PENDING.remove(owner);
             QUEUE.add(new Queued(level, body, owner, claim.token()));
         }
     }
@@ -215,7 +229,9 @@ public class LostHeartEntity extends Entity {
     @SubscribeEvent
     public static void onLevelTick(LevelTickEvent.Post event) {
         if (!(event.getLevel() instanceof ServerLevel level)) return;
-        PENDING.entrySet().removeIf(entry -> level.getGameTime() > entry.getValue().deadline() + 40);
+        PENDING.entrySet()
+                .removeIf(entry -> entry.getValue().level() == level
+                        && level.getGameTime() > entry.getValue().deadline());
         QUEUE.removeIf(queued -> {
             if (queued.level() != level) return false;
             CorpseEntity body = queued.body();
@@ -234,32 +250,30 @@ public class LostHeartEntity extends Entity {
     }
 
     @SubscribeEvent
+    public static void onLevelUnload(LevelEvent.Unload event) {
+        if (!(event.getLevel() instanceof ServerLevel level)) return;
+        PENDING.entrySet().removeIf(entry -> entry.getValue().level() == level);
+        QUEUE.removeIf(queued -> queued.level() == level);
+    }
+
+    @SubscribeEvent
     public static void onCorpseAttacked(AttackEntityEvent event) {
         if (!(event.getTarget() instanceof CorpseEntity body)) return;
         Player player = event.getEntity();
         if (!player.getUUID().equals(body.getOwnerUUID())) return;
-        for (LostHeartEntity heart : body.level().getEntitiesOfClass(LostHeartEntity.class,
-                body.getBoundingBox().inflate(4), candidate -> body.level().isClientSide
-                        ? candidate.corpseId() == body.getId()
-                        : body.getUUID().equals(candidate.corpse))) {
+        for (LostHeartEntity heart : body.level()
+                .getEntitiesOfClass(
+                        LostHeartEntity.class,
+                        body.getBoundingBox().inflate(4),
+                        candidate -> body.level().isClientSide
+                                ? candidate.corpseId() == body.getId()
+                                : body.getUUID().equals(candidate.corpse))) {
             event.setCanceled(true);
             break;
         }
     }
 
-    @SubscribeEvent
-    public static void onCorpseKilled(LivingDeathEvent event) {
-        if (!(event.getEntity() instanceof CorpseEntity body)
-                || !(event.getSource().getEntity() instanceof Player player)
-                || !(body.level() instanceof ServerLevel level)
-                || !player.getUUID().equals(body.getOwnerUUID())) return;
-        for (LostHeartEntity heart : level.getEntitiesOfClass(LostHeartEntity.class,
-                body.getBoundingBox().inflate(4), candidate -> body.getUUID().equals(candidate.corpse))) {
-            if (Hearts.get(player) < Hearts.MAX) heart.shatter(level, player);
-            break;
-        }
-    }
+    private record Claim(ServerPlayer player, ServerLevel level, int token, long deadline) {}
 
-    private record Claim(int token, long deadline) {}
     private record Queued(ServerLevel level, CorpseEntity body, UUID owner, int token) {}
 }

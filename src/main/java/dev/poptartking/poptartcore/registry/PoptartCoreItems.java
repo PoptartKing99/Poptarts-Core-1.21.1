@@ -6,6 +6,10 @@ import dev.poptartking.poptartcore.catalog.CatalogItemDefinition;
 import dev.poptartking.poptartcore.catalog.PoptartCatalog;
 import dev.poptartking.poptartcore.crossbow.RepeatingCrossbowItem;
 import dev.poptartking.poptartcore.hammer.HammerItem;
+import dev.poptartking.poptartcore.hammer.SledgehammerItem;
+import dev.poptartking.poptartcore.lostheart.HeartCrystalItem;
+import dev.poptartking.poptartcore.patina.PatinaItem;
+import dev.poptartking.poptartcore.scribing.ScribingToolsItem;
 import dev.poptartking.poptartcore.tool.BonePickItem;
 import dev.poptartking.poptartcore.wax.WaxItem;
 import net.minecraft.core.component.DataComponents;
@@ -26,6 +30,9 @@ import vectorwing.farmersdelight.common.item.KnifeItem;
 
 public class PoptartCoreItems {
     // Items
+    public static final CatalogItemDefinition<ScribingToolsItem> SCRIBING_TOOLS = PoptartCatalog.item(
+                    "scribing_tools", () -> new ScribingToolsItem(new Item.Properties().durability(25)))
+            .withoutGeneratedModel();
     public static final CatalogItemDefinition<ArmorItem> MINING_HELMET = PoptartCatalog.item(
                     "mining_helmet",
                     () -> new ArmorItem(
@@ -55,6 +62,14 @@ public class PoptartCoreItems {
                             new Item.Properties().durability(140)))
             .tags(ItemTags.LEG_ARMOR);
     public static final CatalogItemDefinition<Item> STEEL_INGOT = PoptartCatalog.simpleItem("steel_ingot");
+    public static final CatalogItemDefinition<Item> LIFEGEM = PoptartCatalog.item(
+                    "lifegem", () -> new Item(new Item.Properties().rarity(Rarity.EPIC)))
+            .withoutGeneratedModel();
+    public static final CatalogItemDefinition<HeartCrystalItem> HEART_CRYSTAL = PoptartCatalog.item(
+                    "heart_crystal",
+                    () -> new HeartCrystalItem(
+                            new Item.Properties().durability(4).rarity(Rarity.RARE)))
+            .withoutGeneratedModel();
     public static final CatalogItemDefinition<Item> STEEL_NUGGET = PoptartCatalog.simpleItem("steel_nugget");
     public static final CatalogItemDefinition<Item> STEEL_PLATE = PoptartCatalog.simpleItem("steel_plate");
     public static final CatalogItemDefinition<SwordItem> STEEL_SWORD = PoptartCatalog.item(
@@ -97,10 +112,53 @@ public class PoptartCoreItems {
                                     .attributes(KnifeItem.createAttributes(PoptartCoreTiers.STEEL, 1.0F, -2.0F))))
             .handheld()
             .tags(PoptartCoreTags.KNIVES);
+    public static final CatalogItemDefinition<SwordItem> RUINED_SWORD = PoptartCatalog.item(
+                    "ruined_sword",
+                    () -> new SwordItem(
+                            PoptartCoreTiers.RUINED,
+                            new Item.Properties()
+                                    .attributes(SwordItem.createAttributes(PoptartCoreTiers.RUINED, 4.5F, -2.4F))))
+            .handheld()
+            .tags(ItemTags.SWORDS);
+    public static final CatalogItemDefinition<PickaxeItem> RUINED_PICKAXE = PoptartCatalog.item(
+                    "ruined_pickaxe",
+                    () -> new PickaxeItem(
+                            PoptartCoreTiers.RUINED,
+                            new Item.Properties()
+                                    .attributes(PickaxeItem.createAttributes(PoptartCoreTiers.RUINED, 2.5F, -2.8F))))
+            .handheld()
+            .tags(ItemTags.PICKAXES);
+    public static final CatalogItemDefinition<AxeItem> RUINED_AXE = PoptartCatalog.item(
+                    "ruined_axe",
+                    () -> new AxeItem(
+                            PoptartCoreTiers.RUINED,
+                            new Item.Properties()
+                                    .attributes(PickaxeItem.createAttributes(PoptartCoreTiers.RUINED, 7.5F, -3.1F))))
+            .handheld()
+            .tags(ItemTags.AXES);
+    public static final CatalogItemDefinition<ShovelItem> RUINED_SHOVEL = PoptartCatalog.item(
+                    "ruined_shovel",
+                    () -> new ShovelItem(
+                            PoptartCoreTiers.RUINED,
+                            new Item.Properties()
+                                    .attributes(PickaxeItem.createAttributes(PoptartCoreTiers.RUINED, 3.0F, -3.0F))))
+            .handheld()
+            .tags(ItemTags.SHOVELS);
+    public static final CatalogItemDefinition<KnifeItem> RUINED_KNIFE = PoptartCatalog.item(
+                    "ruined_knife",
+                    () -> new KnifeItem(
+                            PoptartCoreTiers.RUINED,
+                            new Item.Properties()
+                                    .attributes(KnifeItem.createAttributes(PoptartCoreTiers.RUINED, 2.5F, -2.0F))))
+            .handheld()
+            .tags(PoptartCoreTags.KNIVES);
     public static final CatalogItemDefinition<Item> COAL_COKE =
             PoptartCatalog.simpleItem("coal_coke").fuelBurnTime(3200);
     public static final CatalogItemDefinition<WaxItem> WAX =
             PoptartCatalog.item("wax", () -> new WaxItem(new Item.Properties()));
+    public static final CatalogItemDefinition<PatinaItem> PATINA = PoptartCatalog.item(
+                    "patina", () -> new PatinaItem(new Item.Properties()))
+            .withoutGeneratedModel();
     public static final CatalogItemDefinition<Item> REDSTONE_CIRCUIT = PoptartCatalog.simpleItem("redstone_circuit");
     public static final CatalogItemDefinition<Item> AUDIO_CIRCUIT = PoptartCatalog.simpleItem("audio_circuit");
     public static final CatalogItemDefinition<Item> VIDEO_CIRCUIT = PoptartCatalog.simpleItem("video_circuit");
@@ -171,6 +229,14 @@ public class PoptartCoreItems {
                             .component(DataComponents.TOOL, HammerItem.createToolProperties())
                             .durability(720)))
             .handheld();
+    public static final CatalogItemDefinition<SledgehammerItem> SLEDGEHAMMER = PoptartCatalog.item(
+                    "sledgehammer",
+                    () -> new SledgehammerItem(new Item.Properties()
+                            .stacksTo(1)
+                            .attributes(SledgehammerItem.createSledgehammerAttributes())
+                            .component(DataComponents.TOOL, HammerItem.createToolProperties())
+                            .durability(1000)))
+            .withoutGeneratedModel();
     public static final CatalogItemDefinition<Item> BRONZE_INGOT = PoptartCatalog.simpleItem("bronze_ingot");
     public static final CatalogItemDefinition<Item> BRONZE_NUGGET = PoptartCatalog.simpleItem("bronze_nugget");
     public static final CatalogItemDefinition<Item> BRONZE_PLATE = PoptartCatalog.simpleItem("bronze_plate");
@@ -220,17 +286,25 @@ public class PoptartCoreItems {
     public static final CatalogItemDefinition<Item> LEAD_INGOT = PoptartCatalog.simpleItem("lead_ingot");
     public static final CatalogItemDefinition<Item> LEAD_NUGGET = PoptartCatalog.simpleItem("lead_nugget");
     public static final CatalogItemDefinition<Item> RAW_LEAD = PoptartCatalog.simpleItem("raw_lead");
+    public static final CatalogItemDefinition<Item> MAGNETITE =
+            PoptartCatalog.simpleItem("magnetite").withoutGeneratedModel();
+    public static final CatalogItemDefinition<Item> CINNABAR =
+            PoptartCatalog.simpleItem("cinnabar").withoutGeneratedModel();
+    public static final CatalogItemDefinition<Item> MERCURY_DROPLET =
+            PoptartCatalog.simpleItem("mercury_droplet").withoutGeneratedModel();
+    public static final CatalogItemDefinition<Item> MERCURY_INGOT =
+            PoptartCatalog.simpleItem("mercury_ingot").withoutGeneratedModel();
     public static final CatalogItemDefinition<Item> SILVER_INGOT = PoptartCatalog.simpleItem("silver_ingot");
     public static final CatalogItemDefinition<Item> SILVER_NUGGET = PoptartCatalog.simpleItem("silver_nugget");
     public static final CatalogItemDefinition<Item> RAW_SILVER = PoptartCatalog.simpleItem("raw_silver");
     public static final CatalogItemDefinition<Item> RAW_TITANIUM = PoptartCatalog.simpleItem("raw_titanium");
     public static final CatalogItemDefinition<Item> TITANIUM_SHARD = PoptartCatalog.simpleItem("titanium_shard");
-    public static final CatalogItemDefinition<Item> TITANIUM_INGOT = PoptartCatalog.item(
-            "titanium_ingot", () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON)));
-    public static final CatalogItemDefinition<Item> TITANIUM_NUGGET = PoptartCatalog.item(
-            "titanium_nugget", () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON)));
-    public static final CatalogItemDefinition<Item> TITANIUM_PLATE = PoptartCatalog.item(
-            "titanium_plate", () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON)));
+    public static final CatalogItemDefinition<Item> TITANIUM_INGOT =
+            PoptartCatalog.item("titanium_ingot", () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON)));
+    public static final CatalogItemDefinition<Item> TITANIUM_NUGGET =
+            PoptartCatalog.item("titanium_nugget", () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON)));
+    public static final CatalogItemDefinition<Item> TITANIUM_PLATE =
+            PoptartCatalog.item("titanium_plate", () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON)));
     public static final CatalogItemDefinition<ArmorItem> STEEL_HELMET = PoptartCatalog.item(
                     "steel_helmet",
                     () -> new ArmorItem(

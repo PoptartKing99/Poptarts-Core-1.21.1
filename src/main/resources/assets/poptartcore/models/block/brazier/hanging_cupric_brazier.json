@@ -1,0 +1,8 @@
+{
+  "parent": "poptartcore:block/brazier/template_hanging_brazier",
+  "textures": {
+    "bottom": "poptartcore:block/brazier/brazier_bottom",
+    "side": "poptartcore:block/brazier/hanging_brazier_side",
+    "top": "poptartcore:block/brazier/brazier_top"
+  }
+}

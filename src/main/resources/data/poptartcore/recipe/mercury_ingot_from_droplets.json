@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": ["MMM", "MMM", "MMM"],
+  "key": {"M": {"item": "poptartcore:mercury_droplet"}},
+  "result": {"id": "poptartcore:mercury_ingot"}
+}

@@ -1,0 +1,82 @@
+{
+  "render_type": "minecraft:solid",
+  "parent": "minecraft:block/block",
+  "textures": {
+    "1": "poptartcore:block/scribing_table_front_off",
+    "3": "poptartcore:block/scribing_table_side",
+    "5": "poptartcore:block/scribing_table_top_off",
+    "7": "poptartcore:block/scribing_table_bottom",
+    "particle": "poptartcore:block/scribing_table_back_on"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#1"
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#3"
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#3"
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#3"
+        },
+        "up": {
+          "uv": [
+            16,
+            16,
+            0,
+            0
+          ],
+          "texture": "#5"
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#7"
+        }
+      }
+    }
+  ]
+}
+

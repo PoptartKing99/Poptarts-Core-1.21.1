@@ -63,6 +63,22 @@ versionRange="[${supplementaries_version},)"
 ordering="NONE"
 side="BOTH"
 
+# Stone braziers use Abundant Atmosphere's block behavior.
+[[dependencies."${mod_id}"]]
+modId="abundant_atmosphere"
+type="required"
+versionRange="[0,)"
+ordering="NONE"
+side="BOTH"
+
+# Metal braziers use BlockBox's block behavior.
+[[dependencies."${mod_id}"]]
+modId="blockbox"
+type="required"
+versionRange="[0,)"
+ordering="NONE"
+side="BOTH"
+
 # Create: Aeronautics supplies the Simulated portable-engine implementation
 [[dependencies."${mod_id}"]]
 modId="aeronautics"

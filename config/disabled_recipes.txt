@@ -1,0 +1,20 @@
+# One recipe ID per line. The build disables each ID with a NeoForge false condition.
+# Use the actual recipe ID, not the output item ID. Lines starting with # are comments.
+
+# Replace vanilla concrete powder crafting with the Poptart Core neutral-powder recipes.
+minecraft:white_concrete_powder
+minecraft:orange_concrete_powder
+minecraft:magenta_concrete_powder
+minecraft:light_blue_concrete_powder
+minecraft:yellow_concrete_powder
+minecraft:lime_concrete_powder
+minecraft:pink_concrete_powder
+minecraft:gray_concrete_powder
+minecraft:light_gray_concrete_powder
+minecraft:cyan_concrete_powder
+minecraft:purple_concrete_powder
+minecraft:blue_concrete_powder
+minecraft:brown_concrete_powder
+minecraft:green_concrete_powder
+minecraft:red_concrete_powder
+minecraft:black_concrete_powder

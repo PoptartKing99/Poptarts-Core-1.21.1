@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "poptartcore:block/concrete",
+    "side": "poptartcore:block/concrete",
+    "top": "poptartcore:block/concrete"
+  }
+}

@@ -11,15 +11,18 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 
 public record LostHeartEmberOptions(int owner, int stage) implements ParticleOptions {
-    public static final MapCodec<LostHeartEmberOptions> CODEC = RecordCodecBuilder.mapCodec(instance ->
-            instance.group(
+    public static final MapCodec<LostHeartEmberOptions> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
                     Codec.INT.fieldOf("owner").forGetter(LostHeartEmberOptions::owner),
                     Codec.INT.fieldOf("stage").forGetter(LostHeartEmberOptions::stage))
-                    .apply(instance, LostHeartEmberOptions::new));
+            .apply(instance, LostHeartEmberOptions::new));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, LostHeartEmberOptions> STREAM_CODEC =
-            StreamCodec.composite(ByteBufCodecs.VAR_INT, LostHeartEmberOptions::owner,
-                    ByteBufCodecs.VAR_INT, LostHeartEmberOptions::stage, LostHeartEmberOptions::new);
+            StreamCodec.composite(
+                    ByteBufCodecs.VAR_INT,
+                    LostHeartEmberOptions::owner,
+                    ByteBufCodecs.VAR_INT,
+                    LostHeartEmberOptions::stage,
+                    LostHeartEmberOptions::new);
 
     @Override
     public ParticleType<?> getType() {

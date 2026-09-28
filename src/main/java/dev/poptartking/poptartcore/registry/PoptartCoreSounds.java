@@ -34,4 +34,7 @@ public class PoptartCoreSounds {
             "millstone.loop", () -> SoundEvent.createVariableRangeEvent(PoptartCore.location("millstone.loop")));
     public static final DeferredHolder<SoundEvent, SoundEvent> MILLSTONE_USE = SOUNDS.register(
             "millstone.use", () -> SoundEvent.createVariableRangeEvent(PoptartCore.location("millstone.use")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> FLESH_GEODE_BREATHING = SOUNDS.register(
+            "flesh_geode.breathing",
+            () -> SoundEvent.createVariableRangeEvent(PoptartCore.location("flesh_geode.breathing")));
 }

@@ -1,7 +1,10 @@
 {
   "values": [
+    "poptartcore:rift_campfire",
     "poptartcore:treated_wood_casing",
     "poptartcore:crucible",
-    "poptartcore:workbench"
+    "poptartcore:fluid_barrel",
+    "poptartcore:workbench",
+    "poptartcore:scribing_table"
   ]
 }

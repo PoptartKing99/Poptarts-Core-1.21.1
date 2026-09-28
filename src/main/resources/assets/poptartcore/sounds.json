@@ -33,5 +33,9 @@
         "name": "poptartcore:quern/quern"
       }
     ]
+  },
+  "flesh_geode.breathing": {
+    "sounds": ["poptartcore:flesh_geode/breathing1", "poptartcore:flesh_geode/breathing2"],
+    "subtitle": "subtitles.poptartcore.flesh_geode.breathing"
   }
 }

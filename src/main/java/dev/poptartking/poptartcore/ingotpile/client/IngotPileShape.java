@@ -13,10 +13,18 @@ import org.slf4j.Logger;
 
 /** Visual geometry only. The pile's collision shape remains defined by its block state. */
 public record IngotPileShape(
-        Bounds bottom, Bounds top, float height, float columnSpacing, float rowSpacing,
-        float layerSpacing, float alternateLayerRotation, UvMap uv) {
+        Bounds bottom,
+        Bounds top,
+        float height,
+        float columnSpacing,
+        float rowSpacing,
+        float layerSpacing,
+        float alternateLayerRotation,
+        UvMap uv) {
     public record Bounds(float minX, float maxX, float minZ, float maxZ) {}
+
     public record UvRect(float minU, float minV, float maxU, float maxV) {}
+
     public record UvMap(int width, int height, UvRect top, UvRect bottom, UvRect longSide, UvRect end) {}
 
     private static final Logger LOGGER = LogUtils.getLogger();
@@ -24,10 +32,18 @@ public record IngotPileShape(
     private static final IngotPileShape DEFAULT = new IngotPileShape(
             new Bounds(.25F, 3.5078125F, .25F, 7.5078125F),
             new Bounds(.75F, 3.0078125F, .75F, 7.0078125F),
-            2, 4, 8, 2, 90,
-            new UvMap(32, 32,
-                    new UvRect(1, 1, 9, 17), new UvRect(11, 1, 19, 17),
-                    new UvRect(1, 20, 17, 24), new UvRect(20, 20, 28, 24)));
+            2,
+            4,
+            8,
+            2,
+            90,
+            new UvMap(
+                    32,
+                    32,
+                    new UvRect(1, 1, 9, 17),
+                    new UvRect(11, 1, 19, 17),
+                    new UvRect(1, 20, 17, 24),
+                    new UvRect(20, 20, 28, 24)));
     private static volatile IngotPileShape current = DEFAULT;
 
     public static IngotPileShape current() {
@@ -58,14 +74,21 @@ public record IngotPileShape(
         int textureHeight = textureSize.get(1).getAsInt();
         if (width <= 0 || textureHeight <= 0) throw new IllegalArgumentException("Invalid texture size");
         JsonObject uv = json.getAsJsonObject("uv");
-        UvMap uvMap = new UvMap(width, textureHeight,
+        UvMap uvMap = new UvMap(
+                width,
+                textureHeight,
                 uvRect(uv.getAsJsonArray("top"), width, textureHeight),
                 uvRect(uv.getAsJsonArray("bottom"), width, textureHeight),
                 uvRect(uv.getAsJsonArray("long_side"), width, textureHeight),
                 uvRect(uv.getAsJsonArray("end"), width, textureHeight));
-        if (top.minX < bottom.minX || top.maxX > bottom.maxX
-                || top.minZ < bottom.minZ || top.maxZ > bottom.maxZ
-                || height <= 0 || height > 16 || columnSpacing <= 0 || rowSpacing <= 0
+        if (top.minX < bottom.minX
+                || top.maxX > bottom.maxX
+                || top.minZ < bottom.minZ
+                || top.maxZ > bottom.maxZ
+                || height <= 0
+                || height > 16
+                || columnSpacing <= 0
+                || rowSpacing <= 0
                 || layerSpacing <= 0) {
             throw new IllegalArgumentException("Ingot pile shape has invalid bounds or spacing");
         }

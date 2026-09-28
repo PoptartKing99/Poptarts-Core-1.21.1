@@ -1,0 +1,9 @@
+{
+  "parent": "poptartcore:block/brazier/template_brazier_lit",
+  "textures": {
+    "bottom": "poptartcore:block/brazier/brazier_bottom",
+    "fire": "caverns_and_chasms:block/cupric_campfire_fire",
+    "side": "poptartcore:block/brazier/cupric_brazier_side_lit",
+    "top": "poptartcore:block/brazier/cupric_brazier_top_lit"
+  }
+}

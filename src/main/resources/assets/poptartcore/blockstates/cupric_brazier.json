@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "hanging=false,lit=false": {
+      "model": "poptartcore:block/brazier/cupric_brazier"
+    },
+    "hanging=false,lit=true": {
+      "model": "poptartcore:block/brazier/cupric_brazier_lit"
+    },
+    "hanging=true,lit=false": {
+      "model": "poptartcore:block/brazier/hanging_cupric_brazier"
+    },
+    "hanging=true,lit=true": {
+      "model": "poptartcore:block/brazier/hanging_cupric_brazier_lit"
+    }
+  }
+}

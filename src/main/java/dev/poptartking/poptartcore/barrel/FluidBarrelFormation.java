@@ -20,23 +20,26 @@ import net.neoforged.neoforge.fluids.FluidStack;
 final class FluidBarrelFormation {
     private FluidBarrelFormation() {}
 
-    static void onPlayerPlaced(ServerLevel level, BlockPos placedPos, Player player, InteractionHand hand,
-            Item barrelItem) {
+    static void onPlayerPlaced(
+            ServerLevel level, BlockPos placedPos, Player player, InteractionHand hand, Item barrelItem) {
         for (FluidBarrelBuildPattern pattern : FluidBarrelBuildPattern.ORDERED) {
             PlanSelection selection = findPlan(level, placedPos, player, hand, pattern);
             if (selection.ambiguous()) return;
             if (selection.plan() != null) {
                 BuildPlan plan = selection.plan();
-                if (placeMissing(level, plan, placedPos, player, barrelItem))
-                    commit(level, plan.origin(), plan.size());
+                if (placeMissing(level, plan, placedPos, player, barrelItem)) commit(level, plan.origin(), plan.size());
                 return;
             }
         }
         tryFormFromPlacement(level, placedPos);
     }
 
-    private static PlanSelection findPlan(ServerLevel level, BlockPos placedPos, Player player,
-            InteractionHand hand, FluidBarrelBuildPattern pattern) {
+    private static PlanSelection findPlan(
+            ServerLevel level,
+            BlockPos placedPos,
+            Player player,
+            InteractionHand hand,
+            FluidBarrelBuildPattern pattern) {
         BuildPlan found = null;
         for (int dx = 0; dx < pattern.size(); dx++) {
             for (int dz = 0; dz < pattern.size(); dz++) {
@@ -50,13 +53,18 @@ final class FluidBarrelFormation {
         return new PlanSelection(found, false);
     }
 
-    private static BuildPlan inspectPlan(ServerLevel level, BlockPos origin, BlockPos placedPos, Player player,
-            InteractionHand hand, FluidBarrelBuildPattern pattern) {
+    private static BuildPlan inspectPlan(
+            ServerLevel level,
+            BlockPos origin,
+            BlockPos placedPos,
+            Player player,
+            InteractionHand hand,
+            FluidBarrelBuildPattern pattern) {
         BlockState barrelState = level.getBlockState(placedPos);
-        if (!(level.getBlockEntity(placedPos) instanceof FluidBarrelBlockEntity placed)
-                || placed.formationSize() != 1) return null;
-        if (pattern.size() == 3 && pattern.filledLayers() == 1
-                && hasBarrelLayer(level, origin.below(), barrelState)) return null;
+        if (!(level.getBlockEntity(placedPos) instanceof FluidBarrelBlockEntity placed) || placed.formationSize() != 1)
+            return null;
+        if (pattern.size() == 3 && pattern.filledLayers() == 1 && hasBarrelLayer(level, origin.below(), barrelState))
+            return null;
         if (pattern.size() == 2 && hasAdjacentBarrel(level, origin, 2, barrelState)) return null;
 
         FluidStack fluid = placed.storedFluid();
@@ -83,12 +91,15 @@ final class FluidBarrelFormation {
                 }
             }
         }
-        return missing.size() == pattern.missingCount() ? new BuildPlan(origin, pattern.size(), List.copyOf(missing)) : null;
+        return missing.size() == pattern.missingCount()
+                ? new BuildPlan(origin, pattern.size(), List.copyOf(missing))
+                : null;
     }
 
-    private static boolean placeMissing(ServerLevel level, BuildPlan plan, BlockPos placedPos, Player player,
-            Item barrelItem) {
-        if (!player.getAbilities().instabuild && itemCount(player, barrelItem) < plan.missing().size()) return false;
+    private static boolean placeMissing(
+            ServerLevel level, BuildPlan plan, BlockPos placedPos, Player player, Item barrelItem) {
+        if (!player.getAbilities().instabuild
+                && itemCount(player, barrelItem) < plan.missing().size()) return false;
 
         List<BlockSnapshot> snapshots = new ArrayList<>(plan.missing().size());
         BlockState barrelState = level.getBlockState(placedPos);
@@ -107,7 +118,8 @@ final class FluidBarrelFormation {
             restore(snapshots);
             return false;
         }
-        if (!player.getAbilities().instabuild) consumeItems(player, barrelItem, plan.missing().size());
+        if (!player.getAbilities().instabuild)
+            consumeItems(player, barrelItem, plan.missing().size());
         return true;
     }
 
@@ -127,19 +139,22 @@ final class FluidBarrelFormation {
                 BlockPos bottom = origin.offset(x, 0, z);
                 for (Direction direction : Direction.Plane.HORIZONTAL) {
                     BlockPos neighbor = bottom.relative(direction);
-                    if (neighbor.getX() >= origin.getX() && neighbor.getX() < origin.getX() + size
-                            && neighbor.getZ() >= origin.getZ() && neighbor.getZ() < origin.getZ() + size) continue;
-                    if (level.hasChunkAt(neighbor) && level.getBlockState(neighbor).is(barrelState.getBlock()))
-                        return true;
+                    if (neighbor.getX() >= origin.getX()
+                            && neighbor.getX() < origin.getX() + size
+                            && neighbor.getZ() >= origin.getZ()
+                            && neighbor.getZ() < origin.getZ() + size) continue;
+                    if (level.hasChunkAt(neighbor)
+                            && level.getBlockState(neighbor).is(barrelState.getBlock())) return true;
                 }
             }
         }
         return false;
     }
 
-    private static boolean canFill(ServerLevel level, BlockPos pos, BlockState barrelState, Player player,
-            InteractionHand hand) {
-        return level.hasChunkAt(pos) && level.getBlockState(pos).isAir()
+    private static boolean canFill(
+            ServerLevel level, BlockPos pos, BlockState barrelState, Player player, InteractionHand hand) {
+        return level.hasChunkAt(pos)
+                && level.getBlockState(pos).isAir()
                 && level.isInWorldBounds(pos)
                 && level.getWorldBorder().isWithinBounds(pos)
                 && player.mayInteract(level, pos)
@@ -202,8 +217,8 @@ final class FluidBarrelFormation {
     }
 
     static void onRemoved(Level level, BlockPos pos) {
-        if (!(level.getBlockEntity(pos) instanceof FluidBarrelBlockEntity removed)
-                || removed.formationSize() == 1) return;
+        if (!(level.getBlockEntity(pos) instanceof FluidBarrelBlockEntity removed) || removed.formationSize() == 1)
+            return;
         BlockPos origin = removed.formationOrigin();
         int size = removed.formationSize();
         for (BlockPos memberPos : positions(origin, size)) {
@@ -257,9 +272,12 @@ final class FluidBarrelFormation {
     }
 
     private static boolean contained(BlockPos oldOrigin, int oldSize, BlockPos newOrigin, int newSize) {
-        return oldOrigin.getX() >= newOrigin.getX() && oldOrigin.getX() + oldSize <= newOrigin.getX() + newSize
-                && oldOrigin.getY() >= newOrigin.getY() && oldOrigin.getY() + oldSize <= newOrigin.getY() + newSize
-                && oldOrigin.getZ() >= newOrigin.getZ() && oldOrigin.getZ() + oldSize <= newOrigin.getZ() + newSize;
+        return oldOrigin.getX() >= newOrigin.getX()
+                && oldOrigin.getX() + oldSize <= newOrigin.getX() + newSize
+                && oldOrigin.getY() >= newOrigin.getY()
+                && oldOrigin.getY() + oldSize <= newOrigin.getY() + newSize
+                && oldOrigin.getZ() >= newOrigin.getZ()
+                && oldOrigin.getZ() + oldSize <= newOrigin.getZ() + newSize;
     }
 
     private static void commit(Level level, BlockPos origin, int size) {
@@ -287,8 +305,13 @@ final class FluidBarrelFormation {
         }
     }
 
-    private static void setFormation(Level level, BlockPos pos, FluidBarrelBlockEntity member, BlockPos origin,
-            int size, FluidBarrelBlock.Part part) {
+    private static void setFormation(
+            Level level,
+            BlockPos pos,
+            FluidBarrelBlockEntity member,
+            BlockPos origin,
+            int size,
+            FluidBarrelBlock.Part part) {
         member.setFormation(origin, size);
         BlockState state = level.getBlockState(pos);
         if (state.getValue(FluidBarrelBlock.PART) != part)

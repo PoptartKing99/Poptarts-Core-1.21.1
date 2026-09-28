@@ -1,14 +1,15 @@
 package dev.poptartking.poptartcore.registry;
 
 import dev.poptartking.poptartcore.PoptartCore;
-import dev.poptartking.poptartcore.blastfurnace.BlastFurnaceBlockEntity;
 import dev.poptartking.poptartcore.barrel.FluidBarrelBlockEntity;
+import dev.poptartking.poptartcore.blastfurnace.BlastFurnaceBlockEntity;
 import dev.poptartking.poptartcore.bloomery.BloomeryBlockEntity;
 import dev.poptartking.poptartcore.crucible.CrucibleBlockEntity;
 import dev.poptartking.poptartcore.ingotpile.IngotPileBlockEntity;
 import dev.poptartking.poptartcore.millstone.MillstoneBlockEntity;
 import dev.poptartking.poptartcore.millstone.MillstoneRotorBlockEntity;
 import dev.poptartking.poptartcore.quern.QuernBlockEntity;
+import dev.poptartking.poptartcore.scribing.ScribingTableBlockEntity;
 import dev.poptartking.poptartcore.workbench.WorkbenchBlockEntity;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -23,7 +24,8 @@ public class PoptartCoreBlockEntities {
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<IngotPileBlockEntity>> INGOT_PILE =
             BLOCK_ENTITIES.register("ingot_pile", () -> BlockEntityType.Builder.of(
-                    IngotPileBlockEntity::new, PoptartCoreBlocks.INGOT_PILE.get()).build(null));
+                            IngotPileBlockEntity::new, PoptartCoreBlocks.INGOT_PILE.get())
+                    .build(null));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MillstoneBlockEntity>> MILLSTONE =
             BLOCK_ENTITIES.register("millstone", () -> BlockEntityType.Builder.of(
@@ -57,6 +59,11 @@ public class PoptartCoreBlockEntities {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<WorkbenchBlockEntity>> WORKBENCH =
             BLOCK_ENTITIES.register("workbench", () -> BlockEntityType.Builder.of(
                             WorkbenchBlockEntity::new, PoptartCoreBlocks.WORKBENCH.get())
+                    .build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ScribingTableBlockEntity>> SCRIBING_TABLE =
+            BLOCK_ENTITIES.register("scribing_table", () -> BlockEntityType.Builder.of(
+                            ScribingTableBlockEntity::new, PoptartCoreBlocks.SCRIBING_TABLE.get())
                     .build(null));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<QuernBlockEntity>> QUERN =

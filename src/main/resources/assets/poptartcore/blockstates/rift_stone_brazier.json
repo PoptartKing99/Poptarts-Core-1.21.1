@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "lit=false,hanging=false": {
+      "model": "poptartcore:block/brazier/rift_stone_brazier"
+    },
+    "lit=false,hanging=true": {
+      "model": "poptartcore:block/brazier/hanging_rift_stone_brazier"
+    },
+    "lit=true,hanging=false": {
+      "model": "poptartcore:block/brazier/rift_stone_brazier_lit"
+    },
+    "lit=true,hanging=true": {
+      "model": "poptartcore:block/brazier/hanging_rift_stone_brazier_lit"
+    }
+  }
+}

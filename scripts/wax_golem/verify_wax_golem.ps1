@@ -56,7 +56,7 @@ if ($metadata -notmatch 'modId="nomansland"' -or $metadata -notmatch 'versionRan
 Write-Output "Wax Golem structure and No Man's Land 2.0.0 dependency checks passed."
 
 if ($RunServer) {
-    $testMods = Join-Path $projectRoot "build\millstone-test-run\mods"
+    $testMods = Join-Path $projectRoot "build\game-test-run\mods"
     New-Item -ItemType Directory -Force -Path $testMods | Out-Null
     $requiredPatterns = @(
         "create-1.21.1-6.0.10.jar",
@@ -77,11 +77,11 @@ if ($RunServer) {
 
     Push-Location $projectRoot
     try {
-        & .\gradlew.bat runGameTestServer -PmillstoneTests --console=plain
+        & .\gradlew.bat runGameTestServer -PgameTests --console=plain
         if ($LASTEXITCODE -ne 0) {
             throw "Wax Golem GameTests failed."
         }
-        $log = Join-Path $projectRoot "build\millstone-test-run\logs\latest.log"
+        $log = Join-Path $projectRoot "build\game-test-run\logs\latest.log"
         if (Select-String -LiteralPath $log -Pattern "Mod loading failures|WaxGolemGameTests.*failed|test failed" -Quiet) {
             throw "Wax Golem GameTest log contains a failure."
         }

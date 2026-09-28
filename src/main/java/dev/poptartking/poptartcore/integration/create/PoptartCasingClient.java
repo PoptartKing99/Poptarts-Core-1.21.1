@@ -65,8 +65,7 @@ public final class PoptartCasingClient {
             ResourceLocation connectedTexture,
             ResourceLocation sideTexture,
             ResourceLocation connectedSideTexture) {
-        CTSpriteShiftEntry casing =
-                CTSpriteShifter.getCT(AllCTTypes.OMNIDIRECTIONAL, casingTexture, connectedTexture);
+        CTSpriteShiftEntry casing = CTSpriteShifter.getCT(AllCTTypes.OMNIDIRECTIONAL, casingTexture, connectedTexture);
         CTSpriteShiftEntry cogCasing = new CTSpriteShiftEntry(AllCTTypes.OMNIDIRECTIONAL);
         cogCasing.set(casingTexture, connectedTexture);
         CTSpriteShiftEntry cogSideVertical =

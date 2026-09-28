@@ -1,0 +1,6 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [{"item": "poptartcore:mercury_ingot"}],
+  "result": {"id": "poptartcore:mercury_droplet", "count": 9}
+}

@@ -27,7 +27,8 @@ public final class CatalogBlockDefinition<T extends Block> implements Supplier<T
     private ResourceLocation topTexture;
     private ResourceLocation bottomTexture;
     private int variants = 1;
-    private boolean generatedLoot = true;
+    private LootMode lootMode = LootMode.GENERATED;
+    private boolean showInCreativeTab = true;
     private int fuelBurnTime = -1;
     private boolean frozen;
 
@@ -90,8 +91,12 @@ public final class CatalogBlockDefinition<T extends Block> implements Supplier<T
         return variants;
     }
 
-    public boolean generatedLoot() {
-        return generatedLoot;
+    public LootMode lootMode() {
+        return lootMode;
+    }
+
+    public boolean showInCreativeTab() {
+        return showInCreativeTab;
     }
 
     public Set<TagKey<Block>> tags() {
@@ -170,9 +175,21 @@ public final class CatalogBlockDefinition<T extends Block> implements Supplier<T
         return configureModel(CatalogBlockModel.EXTERNAL, null, "", 1);
     }
 
-    public CatalogBlockDefinition<T> withoutGeneratedLoot() {
+    public CatalogBlockDefinition<T> customLoot() {
         requireMutable();
-        this.generatedLoot = false;
+        this.lootMode = LootMode.CUSTOM;
+        return this;
+    }
+
+    public CatalogBlockDefinition<T> noLoot() {
+        requireMutable();
+        this.lootMode = LootMode.NONE;
+        return this;
+    }
+
+    public CatalogBlockDefinition<T> hideFromCreativeTab() {
+        requireMutable();
+        this.showInCreativeTab = false;
         return this;
     }
 
@@ -239,4 +256,10 @@ public final class CatalogBlockDefinition<T extends Block> implements Supplier<T
 
     public record StorageRecipes(
             Supplier<? extends ItemLike> ingredient, String packingRecipeId, String unpackingRecipeId) {}
+
+    public enum LootMode {
+        GENERATED,
+        CUSTOM,
+        NONE
+    }
 }

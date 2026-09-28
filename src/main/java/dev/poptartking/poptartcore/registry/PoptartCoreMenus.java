@@ -3,11 +3,13 @@ package dev.poptartking.poptartcore.registry;
 import dev.poptartking.poptartcore.PoptartCore;
 import dev.poptartking.poptartcore.blastfurnace.menu.BlastFurnaceMenu;
 import dev.poptartking.poptartcore.crucible.menu.CrucibleMenu;
+import dev.poptartking.poptartcore.scribing.ScribingTableMenu;
 import dev.poptartking.poptartcore.workbench.menu.WorkbenchMenu;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.MenuType;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.common.extensions.IMenuTypeExtension;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -24,6 +26,9 @@ public class PoptartCoreMenus {
 
     public static final DeferredHolder<MenuType<?>, MenuType<WorkbenchMenu>> WORKBENCH =
             MENUS.register("workbench", () -> new MenuType<>(WorkbenchMenu::new, FeatureFlags.DEFAULT_FLAGS));
+
+    public static final DeferredHolder<MenuType<?>, MenuType<ScribingTableMenu>> SCRIBING_TABLE =
+            MENUS.register("scribing_table", () -> IMenuTypeExtension.create(ScribingTableMenu::new));
 
     public static void register(IEventBus eventBus) {
         MENUS.register(eventBus);

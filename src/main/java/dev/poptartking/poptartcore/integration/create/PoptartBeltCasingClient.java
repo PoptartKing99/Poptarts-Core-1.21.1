@@ -1,17 +1,17 @@
 package dev.poptartking.poptartcore.integration.create;
 
 import dev.poptartking.poptartcore.PoptartCore;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.client.resources.model.ModelResourceLocation;
-import net.neoforged.neoforge.client.model.data.ModelProperty;
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.client.event.ModelEvent;
+import net.neoforged.neoforge.client.model.data.ModelProperty;
 
 public final class PoptartBeltCasingClient {
     public static final ModelProperty<PoptartBeltCasing> CASING_PROPERTY = new ModelProperty<>();
     private static final String[] CASING_MODELS = {
-            "diagonal_end", "diagonal_middle", "diagonal_pulley", "diagonal_start",
-            "horizontal_end", "horizontal_middle", "horizontal_pulley", "horizontal_start",
-            "sideways_end", "sideways_middle", "sideways_pulley", "sideways_start"
+        "diagonal_end", "diagonal_middle", "diagonal_pulley", "diagonal_start",
+        "horizontal_end", "horizontal_middle", "horizontal_pulley", "horizontal_start",
+        "sideways_end", "sideways_middle", "sideways_pulley", "sideways_start"
     };
 
     private PoptartBeltCasingClient() {}

@@ -1,0 +1,10 @@
+{
+  "parent": "poptartcore:block/brazier/hanging_cupric_stone_brazier_template",
+  "textures": {
+    "top": "poptartcore:block/brazier/cupric_stone_brazier/cupric_stone_brazier_top",
+    "side": "poptartcore:block/brazier/cupric_stone_brazier/stone_brazier_side",
+    "bottom": "poptartcore:block/brazier/cupric_stone_brazier/stone_brazier_bottom",
+	"fire": "poptartcore:block/brazier/cupric_stone_brazier/cupric_hanging_stone_brazier_fire",
+	"chain": "poptartcore:block/brazier/cupric_stone_brazier/stone_brazier_chain"
+  }
+}

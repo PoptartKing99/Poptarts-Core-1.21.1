@@ -14,6 +14,7 @@ public final class CatalogItemDefinition<T extends Item> implements Supplier<T> 
     private String displayName;
     private CatalogItemModel model = CatalogItemModel.GENERATED;
     private int fuelBurnTime = -1;
+    private boolean showInCreativeTab = true;
     private boolean frozen;
 
     CatalogItemDefinition(String id, DeferredItem<T> item) {
@@ -40,6 +41,10 @@ public final class CatalogItemDefinition<T extends Item> implements Supplier<T> 
 
     public int fuelBurnTime() {
         return fuelBurnTime;
+    }
+
+    public boolean showInCreativeTab() {
+        return showInCreativeTab;
     }
 
     public DeferredItem<T> item() {
@@ -72,6 +77,12 @@ public final class CatalogItemDefinition<T extends Item> implements Supplier<T> 
 
     public CatalogItemDefinition<T> withoutGeneratedModel() {
         return model(CatalogItemModel.CUSTOM);
+    }
+
+    public CatalogItemDefinition<T> hideFromCreativeTab() {
+        requireMutable();
+        this.showInCreativeTab = false;
+        return this;
     }
 
     @SafeVarargs

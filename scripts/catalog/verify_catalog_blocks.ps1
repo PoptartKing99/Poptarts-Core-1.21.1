@@ -82,7 +82,9 @@ $expectedBlockTags = @{
     'minecraft\tags\block\mineable\axe.json' = @(
         'poptartcore:treated_wood_casing',
         'poptartcore:crucible',
-        'poptartcore:workbench'
+        'poptartcore:workbench',
+        'poptartcore:fluid_barrel',
+        'poptartcore:scribing_table'
     )
     'minecraft\tags\block\mineable\pickaxe.json' = @(
         'poptartcore:portable_engine',

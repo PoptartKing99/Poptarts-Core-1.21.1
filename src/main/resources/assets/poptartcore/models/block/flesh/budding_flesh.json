@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "poptartcore:block/flesh/fresh_flesh",
+    "side": "poptartcore:block/flesh/fresh_flesh",
+    "top": "poptartcore:block/flesh/budding_flesh"
+  }
+}

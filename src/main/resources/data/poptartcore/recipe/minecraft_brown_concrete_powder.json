@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "CCC",
+    "CDC",
+    "CCC"
+  ],
+  "key": {
+    "C": {
+      "item": "poptartcore:concrete_powder"
+    },
+    "D": {
+      "item": "minecraft:brown_dye"
+    }
+  },
+  "result": {
+    "id": "minecraft:brown_concrete_powder",
+    "count": 8
+  }
+}
