@@ -1,0 +1,6 @@
+{
+  "textures": {
+    "fire": "poptartcore:block/crucible/crucible_soul_fire"
+  },
+  "parent": "poptartcore:block/crucible/crucible_fire"
+}

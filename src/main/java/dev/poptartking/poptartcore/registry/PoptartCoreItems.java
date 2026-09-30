@@ -62,6 +62,9 @@ public class PoptartCoreItems {
                             new Item.Properties().durability(140)))
             .tags(ItemTags.LEG_ARMOR);
     public static final CatalogItemDefinition<Item> STEEL_INGOT = PoptartCatalog.simpleItem("steel_ingot");
+    public static final CatalogItemDefinition<Item> LATEX_BOTTLE = PoptartCatalog.item(
+                    "latex_bottle", () -> new Item(new Item.Properties().stacksTo(16)))
+            .withoutGeneratedModel();
     public static final CatalogItemDefinition<Item> LIFEGEM = PoptartCatalog.item(
                     "lifegem", () -> new Item(new Item.Properties().rarity(Rarity.EPIC)))
             .withoutGeneratedModel();

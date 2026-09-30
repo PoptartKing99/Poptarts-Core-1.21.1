@@ -163,6 +163,37 @@ public final class WaxGolemGameTests {
     }
 
     @GameTest(template = "millstone_test", timeoutTicks = 40)
+    public static void bottlesHoneyFromFullBeehive(GameTestHelper helper) {
+        var level = helper.getLevel();
+        BlockPos hivePos = helper.absolutePos(new BlockPos(3, 2, 4));
+        level.setBlockAndUpdate(hivePos.below(2), Blocks.CAMPFIRE.defaultBlockState());
+        level.setBlockAndUpdate(
+                hivePos,
+                Blocks.BEEHIVE.defaultBlockState()
+                        .setValue(BeehiveBlock.FACING, Direction.NORTH)
+                        .setValue(BeehiveBlock.HONEY_LEVEL, 5));
+        WaxGolem golem = createGolem(helper, new BlockPos(3, 1, 3));
+        golem.setTool(new ItemStack(Items.GLASS_BOTTLE));
+        golem.setState(WaxGolemState.ACTIVE);
+        golem.observeHive(hivePos);
+        HarvestHiveGoal goal = new HarvestHiveGoal(golem);
+        helper.assertTrue(goal.canUse(), "Wax Golem did not select a full beehive with a bottle");
+        goal.start();
+        goal.tick();
+
+        helper.assertTrue(
+                level.getBlockState(hivePos).getValue(BeehiveBlock.HONEY_LEVEL) == 0,
+                "Wax Golem did not empty the beehive");
+        int bottles = level.getEntitiesOfClass(ItemEntity.class, golem.getBoundingBox().inflate(4)).stream()
+                .filter(item -> item.getItem().is(Items.HONEY_BOTTLE))
+                .mapToInt(item -> item.getItem().getCount())
+                .sum();
+        helper.assertTrue(bottles == 1, "Wax Golem did not produce a honey bottle");
+        helper.assertTrue(golem.tool().isEmpty(), "Wax Golem did not use its glass bottle");
+        helper.succeed();
+    }
+
+    @GameTest(template = "millstone_test", timeoutTicks = 40)
     public static void depositsItemsAndUsesHoneyCauldrons(GameTestHelper helper) {
         var level = helper.getLevel();
         WaxGolem golem = createGolem(helper, new BlockPos(3, 1, 3));
@@ -181,11 +212,6 @@ public final class WaxGolemGameTests {
         helper.assertTrue(HoneyCauldrons.pourBottle(level, cauldronPos), "No Man's Land honey cauldron rejected honey");
         helper.assertTrue(
                 HoneyCauldrons.level(level.getBlockState(cauldronPos)) == 1, "Honey cauldron level was wrong");
-        helper.assertTrue(
-                HoneyCauldrons.drawBottle(level, cauldronPos).is(Items.HONEY_BOTTLE),
-                "Wax Golem could not draw honey from the cauldron");
-        helper.assertTrue(
-                level.getBlockState(cauldronPos).is(Blocks.CAULDRON), "Drained cauldron did not become empty");
         helper.succeed();
     }
 
@@ -254,29 +280,34 @@ public final class WaxGolemGameTests {
     }
 
     @GameTest(template = "millstone_test", timeoutTicks = 600)
-    public static void automaticallyFerriesTappedHoney(GameTestHelper helper) {
+    public static void automaticallyBottlesHoneyFromBeeNest(GameTestHelper helper) {
         var level = helper.getLevel();
-        BlockPos source = helper.absolutePos(new BlockPos(3, 1, 5));
-        BlockPos tap = source.above();
-        BlockPos hive = tap.south();
-        BlockPos destination = helper.absolutePos(new BlockPos(6, 1, 5));
+        BlockPos nest = helper.absolutePos(new BlockPos(3, 2, 5));
+        BlockPos destination = helper.absolutePos(new BlockPos(6, 1, 3));
+        level.setBlockAndUpdate(nest.below(2), Blocks.CAMPFIRE.defaultBlockState());
         level.setBlockAndUpdate(
-                source, NMLBlocks.HONEY_CAULDRON.get().defaultBlockState().setValue(FourLayeredCauldronBlock.LEVEL, 2));
-        level.setBlockAndUpdate(
-                tap, NMLBlocks.TAP.get().defaultBlockState().setValue(TapBlock.FACING, Direction.NORTH));
-        level.setBlockAndUpdate(hive, Blocks.BEEHIVE.defaultBlockState());
-        level.setBlockAndUpdate(destination, Blocks.CAULDRON.defaultBlockState());
+                nest,
+                Blocks.BEE_NEST.defaultBlockState()
+                        .setValue(BeehiveBlock.FACING, Direction.NORTH)
+                        .setValue(BeehiveBlock.HONEY_LEVEL, 5));
+        level.setBlockAndUpdate(destination, Blocks.CHEST.defaultBlockState());
         WaxGolem golem = createGolem(helper, new BlockPos(3, 1, 3));
-        golem.setTool(new ItemStack(Items.GLASS_BOTTLE, 2));
+        golem.setTool(new ItemStack(Items.GLASS_BOTTLE));
         golem.setState(WaxGolemState.ACTIVE);
 
         helper.succeedWhen(() -> {
             helper.assertTrue(
-                    HoneyCauldrons.level(level.getBlockState(source)) == 1,
-                    "Scheduled AI did not draw honey from the tap-fed cauldron");
+                    level.getBlockState(nest).getValue(BeehiveBlock.HONEY_LEVEL) == 0,
+                    "Scheduled AI did not empty the bee nest with a bottle");
+            Container chest = ContainerAccess.container(level, destination);
+            int bottles = 0;
+            for (int slot = 0; slot < chest.getContainerSize(); slot++) {
+                if (chest.getItem(slot).is(Items.HONEY_BOTTLE)) {
+                    bottles += chest.getItem(slot).getCount();
+                }
+            }
             helper.assertTrue(
-                    HoneyCauldrons.level(level.getBlockState(destination)) == 1,
-                    "Scheduled AI did not pour honey into the destination cauldron");
+                    bottles == 1, "Scheduled AI did not deposit the honey bottle from the bee nest");
         });
     }
 

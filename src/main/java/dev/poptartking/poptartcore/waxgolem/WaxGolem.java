@@ -66,7 +66,6 @@ public class WaxGolem extends AbstractGolem {
     private int stared;
     private int scanCooldown;
     private Player watcher;
-    private BlockPos drawnFrom;
     private BlockPos claim;
     private long restUntil;
     public static final int MIN_REACH_DROP = 0;
@@ -176,7 +175,6 @@ public class WaxGolem extends AbstractGolem {
         this.goalSelector.addGoal(2, new CollectDropsGoal(this));
         this.goalSelector.addGoal(3, new HarvestHiveGoal(this));
         this.goalSelector.addGoal(4, new DepositResultGoal(this));
-        this.goalSelector.addGoal(5, new FerryHoneyGoal(this));
         this.goalSelector.addGoal(5, new WaxGolemGoals.SitNearFriend(this));
         this.goalSelector.addGoal(6, new WaxGolemGoals.Sit(this));
         this.goalSelector.addGoal(7, new WaxGolemGoals.StareAtBlock(this, WaxGolemGoals.StareAtBlock.Kind.HIVE, 300));
@@ -269,14 +267,6 @@ public class WaxGolem extends AbstractGolem {
 
     public boolean withinHome() {
         return blockPosition().closerThan(home(), 32.0d);
-    }
-
-    public BlockPos drawnFrom() {
-        return this.drawnFrom;
-    }
-
-    public void setDrawnFrom(BlockPos pos) {
-        this.drawnFrom = pos;
     }
 
     public List<HiveMemory> hives() {
@@ -526,9 +516,6 @@ public class WaxGolem extends AbstractGolem {
 
     public void setResult(ItemStack stack) {
         setItemSlot(EquipmentSlot.OFFHAND, stack);
-        if (stack.isEmpty()) {
-            this.drawnFrom = null;
-        }
     }
 
     public boolean canWork() {

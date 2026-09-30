@@ -1,0 +1,6 @@
+{
+  "parent": "poptartcore:block/beehive/beehive_roof_template",
+  "textures": {
+    "roof": "poptartcore:block/beehive_roofs/beehive_purple_roof"
+  }
+}

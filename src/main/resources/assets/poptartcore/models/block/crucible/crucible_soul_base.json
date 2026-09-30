@@ -1,0 +1,7 @@
+{
+  "textures": {
+    "particle": "minecraft:block/campfire_log",
+    "lit_log": "minecraft:block/soul_campfire_log_lit"
+  },
+  "parent": "poptartcore:block/crucible/crucible"
+}

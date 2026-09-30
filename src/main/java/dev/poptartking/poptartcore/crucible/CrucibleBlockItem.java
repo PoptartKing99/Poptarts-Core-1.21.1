@@ -2,6 +2,8 @@ package dev.poptartking.poptartcore.crucible;
 
 import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
@@ -39,7 +41,8 @@ public class CrucibleBlockItem extends BlockItem {
         Player player = context.getPlayer();
         BlockState state = level.getBlockState(pos);
 
-        if (player == null || !state.is(Blocks.CAMPFIRE) || state.getValue(CampfireBlock.WATERLOGGED)) {
+        CrucibleBlock.CampfireType campfireType = campfireType(state);
+        if (player == null || campfireType == null || state.getValue(CampfireBlock.WATERLOGGED)) {
             return false;
         }
 
@@ -49,11 +52,23 @@ public class CrucibleBlockItem extends BlockItem {
                     PoptartCoreBlocks.CRUCIBLE
                             .get()
                             .defaultBlockState()
+                            .setValue(CrucibleBlock.CAMPFIRE_TYPE, campfireType)
                             .setValue(CrucibleBlock.FACING, state.getValue(CampfireBlock.FACING)));
 
             context.getItemInHand().consume(1, player);
         }
 
         return true;
+    }
+
+    private static CrucibleBlock.CampfireType campfireType(BlockState state) {
+        if (state.is(Blocks.CAMPFIRE)) return CrucibleBlock.CampfireType.NORMAL;
+        if (state.is(Blocks.SOUL_CAMPFIRE)) return CrucibleBlock.CampfireType.SOUL;
+        if (state.is(PoptartCoreBlocks.RIFT_CAMPFIRE.get())) return CrucibleBlock.CampfireType.RIFT;
+        if (BuiltInRegistries.BLOCK.getKey(state.getBlock())
+                .equals(ResourceLocation.fromNamespaceAndPath("caverns_and_chasms", "cupric_campfire"))) {
+            return CrucibleBlock.CampfireType.CUPRIC;
+        }
+        return null;
     }
 }

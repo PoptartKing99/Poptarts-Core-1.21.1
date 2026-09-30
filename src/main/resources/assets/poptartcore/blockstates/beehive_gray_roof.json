@@ -1,0 +1,39 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "facing": "north"
+      },
+      "apply": {
+        "model": "poptartcore:block/beehive/beehive_gray_roof"
+      }
+    },
+    {
+      "when": {
+        "facing": "east"
+      },
+      "apply": {
+        "model": "poptartcore:block/beehive/beehive_gray_roof",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south"
+      },
+      "apply": {
+        "model": "poptartcore:block/beehive/beehive_gray_roof",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "west"
+      },
+      "apply": {
+        "model": "poptartcore:block/beehive/beehive_gray_roof",
+        "y": 270
+      }
+    }
+  ]
+}

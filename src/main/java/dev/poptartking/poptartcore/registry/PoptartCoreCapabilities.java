@@ -1,6 +1,7 @@
 package dev.poptartking.poptartcore.registry;
 
 import dev.poptartking.poptartcore.quern.QuernItemHandler;
+import dev.poptartking.poptartcore.treetap.LatexBottleFluidHandler;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
@@ -19,6 +20,14 @@ public final class PoptartCoreCapabilities {
                 Capabilities.FluidHandler.BLOCK,
                 PoptartCoreBlockEntities.FLUID_BARREL.get(),
                 (barrel, side) -> barrel.fluidHandler());
+        event.registerBlockEntity(
+                Capabilities.FluidHandler.BLOCK,
+                PoptartCoreBlockEntities.TREE_TAP.get(),
+                (tap, side) -> tap.fluidHandler());
+        event.registerItem(
+                Capabilities.FluidHandler.ITEM,
+                (stack, context) -> new LatexBottleFluidHandler(stack),
+                PoptartCoreItems.LATEX_BOTTLE.get());
         event.registerBlockEntity(
                 Capabilities.ItemHandler.BLOCK,
                 PoptartCoreBlockEntities.CRUCIBLE.get(),

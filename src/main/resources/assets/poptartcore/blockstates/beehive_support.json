@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "angled=false,facing=north": { "model": "poptartcore:block/beehive/beehive_support" },
+    "angled=false,facing=east": { "model": "poptartcore:block/beehive/beehive_support", "y": 90 },
+    "angled=false,facing=south": { "model": "poptartcore:block/beehive/beehive_support", "y": 180 },
+    "angled=false,facing=west": { "model": "poptartcore:block/beehive/beehive_support", "y": 270 },
+    "angled=true,facing=north": { "model": "poptartcore:block/beehive/beehive_support_angled" },
+    "angled=true,facing=east": { "model": "poptartcore:block/beehive/beehive_support_angled", "y": 90 },
+    "angled=true,facing=south": { "model": "poptartcore:block/beehive/beehive_support_angled", "y": 180 },
+    "angled=true,facing=west": { "model": "poptartcore:block/beehive/beehive_support_angled", "y": 270 }
+  }
+}

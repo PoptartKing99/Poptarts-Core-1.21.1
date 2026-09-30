@@ -9,8 +9,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BeehiveBlock;
 import net.minecraft.world.level.block.Blocks;
@@ -62,24 +60,6 @@ public final class HoneyCauldrons {
         level.playSound((Player) null, pos, SoundEvents.BOTTLE_EMPTY, SoundSource.BLOCKS);
         level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(level.getBlockState(pos)));
         return true;
-    }
-
-    public static ItemStack drawBottle(Level level, BlockPos pos) {
-        BlockState blockStateDefaultBlockState;
-        BlockState state = level.getBlockState(pos);
-        if (!isHoney(state) || level(state) <= 0) {
-            return ItemStack.EMPTY;
-        }
-        int remaining = level(state) - 1;
-        if (remaining <= 0) {
-            blockStateDefaultBlockState = Blocks.CAULDRON.defaultBlockState();
-        } else {
-            blockStateDefaultBlockState = state.setValue(FourLayeredCauldronBlock.LEVEL, remaining);
-        }
-        level.setBlock(pos, blockStateDefaultBlockState, 3);
-        level.playSound((Player) null, pos, SoundEvents.BOTTLE_EMPTY, SoundSource.BLOCKS);
-        level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(level.getBlockState(pos)));
-        return new ItemStack(Items.HONEY_BOTTLE);
     }
 
     public static boolean fedByHiveTap(Level level, BlockPos cauldron) {

@@ -1,0 +1,3844 @@
+{
+  "variants": {
+    "dripping=false,facing=north,fill_level=0,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=0,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=1,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=1,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=2,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=2,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=3,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=3,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=4,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=4,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=5,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=5,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=0,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=0,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=1,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=1,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=2,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=2,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=3,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=3,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=4,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=4,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=5,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=5,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=0,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_level_0_dripping",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=0,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_level_0_dripping",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=1,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_level_1_dripping",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=1,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_level_1_dripping",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=2,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_level_2_dripping",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=2,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_level_2_dripping",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=3,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_level_3_dripping",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=3,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_level_3_dripping",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=4,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_level_4_dripping",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=4,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_level_4_dripping",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=5,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=5,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=0,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=0,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=1,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=1,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=2,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=2,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=3,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=3,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=4,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=4,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=5,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=5,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 0
+    },
+    "dripping=false,facing=east,fill_level=0,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=0,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=1,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=1,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=2,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=2,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=3,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=3,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=4,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=4,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=5,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=5,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=0,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=0,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=1,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=1,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=2,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=2,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=3,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=3,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=4,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=4,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=5,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=5,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=0,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_level_0_dripping",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=0,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_level_0_dripping",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=1,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_level_1_dripping",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=1,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_level_1_dripping",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=2,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_level_2_dripping",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=2,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_level_2_dripping",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=3,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_level_3_dripping",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=3,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_level_3_dripping",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=4,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_level_4_dripping",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=4,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_level_4_dripping",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=5,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=5,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=0,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=0,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=1,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=1,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=2,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=2,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=3,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=3,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=4,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=4,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=5,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=5,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 90
+    },
+    "dripping=false,facing=south,fill_level=0,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=0,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=1,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=1,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=2,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=2,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=3,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=3,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=4,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=4,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=5,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=5,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=0,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=0,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=1,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=1,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=2,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=2,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=3,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=3,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=4,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=4,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=5,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=5,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=0,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_level_0_dripping",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=0,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_level_0_dripping",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=1,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_level_1_dripping",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=1,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_level_1_dripping",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=2,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_level_2_dripping",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=2,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_level_2_dripping",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=3,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_level_3_dripping",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=3,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_level_3_dripping",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=4,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_level_4_dripping",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=4,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_level_4_dripping",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=5,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=5,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=0,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=0,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=1,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=1,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=2,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=2,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=3,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=3,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=4,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=4,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=5,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=5,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 180
+    },
+    "dripping=false,facing=west,fill_level=0,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=0,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=1,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=1,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=2,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=2,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=3,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=3,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=4,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=4,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=5,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=5,full=false,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=0,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=0,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=1,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=1,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=2,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=2,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=3,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=3,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=4,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=4,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=5,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=5,full=true,has_bucket=false,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=0,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_level_0_dripping",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=0,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_level_0_dripping",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=1,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_level_1_dripping",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=1,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_level_1_dripping",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=2,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_level_2_dripping",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=2,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_level_2_dripping",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=3,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_level_3_dripping",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=3,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_level_3_dripping",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=4,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_level_4_dripping",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=4,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_level_4_dripping",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=5,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=5,full=false,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=0,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=0,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=1,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=1,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=2,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=2,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=3,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=3,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=4,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=4,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=5,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=5,full=true,has_bucket=true,wood=maple": {
+      "model": "poptartcore:block/tree_tap/tree_tap_maple_full",
+      "y": 270
+    },
+    "dripping=false,facing=north,fill_level=0,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=0,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=1,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=1,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=2,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=2,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=3,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=3,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=4,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=4,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=5,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=5,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=0,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=0,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=1,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=1,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=2,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=2,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=3,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=3,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=4,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=4,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=5,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=5,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=0,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_level_0_dripping",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=0,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_level_0_dripping",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=1,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_level_1_dripping",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=1,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_level_1_dripping",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=2,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_level_2_dripping",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=2,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_level_2_dripping",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=3,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_level_3_dripping",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=3,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_level_3_dripping",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=4,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_level_4_dripping",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=4,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_level_4_dripping",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=5,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=5,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=0,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=0,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=1,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=1,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=2,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=2,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=3,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=3,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=4,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=4,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=5,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=5,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 0
+    },
+    "dripping=false,facing=east,fill_level=0,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=0,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=1,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=1,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=2,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=2,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=3,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=3,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=4,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=4,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=5,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=5,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=0,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=0,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=1,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=1,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=2,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=2,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=3,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=3,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=4,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=4,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=5,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=5,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=0,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_level_0_dripping",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=0,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_level_0_dripping",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=1,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_level_1_dripping",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=1,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_level_1_dripping",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=2,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_level_2_dripping",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=2,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_level_2_dripping",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=3,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_level_3_dripping",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=3,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_level_3_dripping",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=4,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_level_4_dripping",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=4,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_level_4_dripping",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=5,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=5,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=0,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=0,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=1,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=1,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=2,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=2,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=3,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=3,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=4,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=4,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=5,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=5,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 90
+    },
+    "dripping=false,facing=south,fill_level=0,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=0,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=1,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=1,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=2,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=2,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=3,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=3,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=4,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=4,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=5,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=5,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=0,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=0,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=1,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=1,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=2,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=2,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=3,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=3,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=4,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=4,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=5,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=5,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=0,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_level_0_dripping",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=0,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_level_0_dripping",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=1,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_level_1_dripping",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=1,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_level_1_dripping",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=2,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_level_2_dripping",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=2,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_level_2_dripping",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=3,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_level_3_dripping",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=3,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_level_3_dripping",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=4,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_level_4_dripping",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=4,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_level_4_dripping",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=5,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=5,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=0,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=0,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=1,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=1,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=2,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=2,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=3,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=3,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=4,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=4,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=5,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=5,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 180
+    },
+    "dripping=false,facing=west,fill_level=0,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=0,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=1,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=1,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=2,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=2,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=3,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=3,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=4,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=4,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=5,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=5,full=false,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=0,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=0,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=1,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=1,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=2,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=2,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=3,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=3,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=4,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=4,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=5,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=5,full=true,has_bucket=false,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=0,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_level_0_dripping",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=0,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_level_0_dripping",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=1,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_level_1_dripping",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=1,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_level_1_dripping",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=2,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_level_2_dripping",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=2,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_level_2_dripping",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=3,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_level_3_dripping",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=3,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_level_3_dripping",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=4,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_level_4_dripping",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=4,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_level_4_dripping",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=5,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=5,full=false,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=0,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=0,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=1,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=1,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=2,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=2,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=3,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=3,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=4,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=4,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=5,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=5,full=true,has_bucket=true,wood=spruce": {
+      "model": "poptartcore:block/tree_tap/tree_tap_spruce_full",
+      "y": 270
+    },
+    "dripping=false,facing=north,fill_level=0,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=0,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=1,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=1,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=2,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=2,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=3,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=3,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=4,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=4,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=5,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=5,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=0,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=0,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=1,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=1,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=2,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=2,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=3,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=3,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=4,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=4,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=5,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=5,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=0,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_level_0_dripping",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=0,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_level_0_dripping",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=1,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_level_1_dripping",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=1,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_level_1_dripping",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=2,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_level_2_dripping",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=2,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_level_2_dripping",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=3,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_level_3_dripping",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=3,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_level_3_dripping",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=4,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_level_4_dripping",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=4,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_level_4_dripping",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=5,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=5,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=0,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=0,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=1,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=1,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=2,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=2,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=3,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=3,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=4,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=4,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=5,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=5,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 0
+    },
+    "dripping=false,facing=east,fill_level=0,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=0,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=1,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=1,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=2,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=2,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=3,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=3,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=4,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=4,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=5,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=5,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=0,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=0,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=1,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=1,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=2,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=2,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=3,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=3,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=4,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=4,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=5,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=5,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=0,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_level_0_dripping",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=0,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_level_0_dripping",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=1,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_level_1_dripping",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=1,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_level_1_dripping",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=2,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_level_2_dripping",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=2,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_level_2_dripping",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=3,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_level_3_dripping",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=3,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_level_3_dripping",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=4,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_level_4_dripping",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=4,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_level_4_dripping",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=5,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=5,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=0,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=0,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=1,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=1,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=2,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=2,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=3,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=3,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=4,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=4,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=5,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=5,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 90
+    },
+    "dripping=false,facing=south,fill_level=0,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=0,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=1,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=1,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=2,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=2,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=3,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=3,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=4,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=4,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=5,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=5,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=0,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=0,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=1,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=1,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=2,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=2,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=3,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=3,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=4,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=4,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=5,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=5,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=0,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_level_0_dripping",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=0,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_level_0_dripping",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=1,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_level_1_dripping",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=1,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_level_1_dripping",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=2,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_level_2_dripping",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=2,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_level_2_dripping",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=3,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_level_3_dripping",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=3,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_level_3_dripping",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=4,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_level_4_dripping",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=4,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_level_4_dripping",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=5,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=5,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=0,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=0,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=1,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=1,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=2,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=2,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=3,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=3,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=4,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=4,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=5,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=5,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 180
+    },
+    "dripping=false,facing=west,fill_level=0,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=0,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=1,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=1,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=2,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=2,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=3,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=3,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=4,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=4,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=5,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=5,full=false,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=0,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=0,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=1,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=1,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=2,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=2,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=3,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=3,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=4,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=4,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=5,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=5,full=true,has_bucket=false,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=0,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_level_0_dripping",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=0,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_level_0_dripping",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=1,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_level_1_dripping",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=1,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_level_1_dripping",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=2,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_level_2_dripping",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=2,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_level_2_dripping",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=3,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_level_3_dripping",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=3,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_level_3_dripping",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=4,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_level_4_dripping",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=4,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_level_4_dripping",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=5,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=5,full=false,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=0,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=0,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=1,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=1,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=2,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=2,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=3,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=3,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=4,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=4,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=5,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=5,full=true,has_bucket=true,wood=birch": {
+      "model": "poptartcore:block/tree_tap/tree_tap_birch_full",
+      "y": 270
+    },
+    "dripping=false,facing=north,fill_level=0,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=0,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=1,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=1,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=2,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=2,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=3,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=3,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=4,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=4,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=5,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=5,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=0,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=0,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=1,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=1,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=2,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=2,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=3,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=3,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=4,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=4,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=5,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=5,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=0,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_level_0_dripping",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=0,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_level_0_dripping",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=1,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_level_1_dripping",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=1,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_level_1_dripping",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=2,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_level_2_dripping",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=2,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_level_2_dripping",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=3,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_level_3_dripping",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=3,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_level_3_dripping",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=4,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_level_4_dripping",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=4,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_level_4_dripping",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=5,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=5,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=0,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=0,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=1,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=1,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=2,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=2,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=3,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=3,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=4,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=4,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=5,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=5,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 0
+    },
+    "dripping=false,facing=east,fill_level=0,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=0,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=1,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=1,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=2,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=2,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=3,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=3,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=4,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=4,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=5,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=5,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=0,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=0,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=1,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=1,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=2,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=2,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=3,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=3,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=4,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=4,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=5,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=5,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=0,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_level_0_dripping",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=0,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_level_0_dripping",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=1,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_level_1_dripping",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=1,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_level_1_dripping",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=2,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_level_2_dripping",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=2,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_level_2_dripping",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=3,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_level_3_dripping",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=3,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_level_3_dripping",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=4,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_level_4_dripping",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=4,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_level_4_dripping",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=5,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=5,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=0,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=0,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=1,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=1,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=2,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=2,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=3,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=3,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=4,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=4,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=5,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=5,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 90
+    },
+    "dripping=false,facing=south,fill_level=0,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=0,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=1,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=1,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=2,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=2,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=3,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=3,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=4,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=4,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=5,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=5,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=0,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=0,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=1,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=1,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=2,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=2,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=3,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=3,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=4,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=4,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=5,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=5,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=0,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_level_0_dripping",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=0,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_level_0_dripping",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=1,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_level_1_dripping",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=1,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_level_1_dripping",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=2,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_level_2_dripping",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=2,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_level_2_dripping",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=3,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_level_3_dripping",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=3,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_level_3_dripping",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=4,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_level_4_dripping",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=4,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_level_4_dripping",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=5,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=5,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=0,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=0,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=1,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=1,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=2,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=2,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=3,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=3,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=4,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=4,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=5,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=5,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 180
+    },
+    "dripping=false,facing=west,fill_level=0,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=0,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=1,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=1,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=2,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=2,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=3,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=3,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=4,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=4,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=5,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=5,full=false,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=0,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=0,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=1,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=1,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=2,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=2,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=3,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=3,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=4,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=4,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=5,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=5,full=true,has_bucket=false,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=0,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_level_0_dripping",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=0,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_level_0_dripping",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=1,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_level_1_dripping",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=1,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_level_1_dripping",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=2,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_level_2_dripping",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=2,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_level_2_dripping",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=3,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_level_3_dripping",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=3,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_level_3_dripping",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=4,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_level_4_dripping",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=4,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_level_4_dripping",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=5,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=5,full=false,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=0,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=0,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=1,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=1,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=2,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=2,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=3,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=3,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=4,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=4,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=5,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=5,full=true,has_bucket=true,wood=acacia": {
+      "model": "poptartcore:block/tree_tap/tree_tap_acacia_full",
+      "y": 270
+    },
+    "dripping=false,facing=north,fill_level=0,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=0,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=1,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=1,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=2,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=2,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=3,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=3,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=4,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=4,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=5,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=5,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=0,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=0,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=1,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=1,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=2,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=2,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=3,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=3,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=4,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=4,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=5,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=5,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=0,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_level_0_dripping",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=0,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_level_0_dripping",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=1,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_level_1_dripping",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=1,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_level_1_dripping",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=2,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_level_2_dripping",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=2,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_level_2_dripping",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=3,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_level_3_dripping",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=3,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_level_3_dripping",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=4,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_level_4_dripping",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=4,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_level_4_dripping",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=5,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=5,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=0,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=0,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=1,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=1,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=2,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=2,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=3,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=3,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=4,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=4,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 0
+    },
+    "dripping=false,facing=north,fill_level=5,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 0
+    },
+    "dripping=true,facing=north,fill_level=5,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 0
+    },
+    "dripping=false,facing=east,fill_level=0,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=0,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=1,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=1,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=2,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=2,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=3,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=3,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=4,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=4,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=5,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=5,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=0,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=0,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=1,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=1,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=2,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=2,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=3,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=3,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=4,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=4,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=5,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=5,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=0,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_level_0_dripping",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=0,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_level_0_dripping",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=1,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_level_1_dripping",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=1,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_level_1_dripping",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=2,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_level_2_dripping",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=2,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_level_2_dripping",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=3,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_level_3_dripping",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=3,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_level_3_dripping",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=4,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_level_4_dripping",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=4,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_level_4_dripping",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=5,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=5,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=0,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=0,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=1,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=1,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=2,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=2,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=3,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=3,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=4,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=4,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 90
+    },
+    "dripping=false,facing=east,fill_level=5,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 90
+    },
+    "dripping=true,facing=east,fill_level=5,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 90
+    },
+    "dripping=false,facing=south,fill_level=0,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=0,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=1,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=1,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=2,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=2,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=3,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=3,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=4,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=4,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=5,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=5,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=0,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=0,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=1,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=1,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=2,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=2,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=3,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=3,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=4,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=4,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=5,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=5,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=0,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_level_0_dripping",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=0,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_level_0_dripping",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=1,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_level_1_dripping",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=1,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_level_1_dripping",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=2,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_level_2_dripping",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=2,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_level_2_dripping",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=3,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_level_3_dripping",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=3,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_level_3_dripping",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=4,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_level_4_dripping",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=4,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_level_4_dripping",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=5,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=5,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=0,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=0,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=1,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=1,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=2,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=2,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=3,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=3,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=4,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=4,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 180
+    },
+    "dripping=false,facing=south,fill_level=5,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 180
+    },
+    "dripping=true,facing=south,fill_level=5,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 180
+    },
+    "dripping=false,facing=west,fill_level=0,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=0,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=1,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=1,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=2,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=2,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=3,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=3,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=4,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=4,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=5,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=5,full=false,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=0,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=0,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=1,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=1,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=2,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=2,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=3,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=3,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=4,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=4,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=5,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=5,full=true,has_bucket=false,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=0,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_level_0_dripping",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=0,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_level_0_dripping",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=1,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_level_1_dripping",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=1,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_level_1_dripping",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=2,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_level_2_dripping",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=2,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_level_2_dripping",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=3,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_level_3_dripping",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=3,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_level_3_dripping",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=4,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_level_4_dripping",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=4,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_level_4_dripping",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=5,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=5,full=false,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=0,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=0,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=1,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=1,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=2,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=2,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=3,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=3,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=4,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=4,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 270
+    },
+    "dripping=false,facing=west,fill_level=5,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 270
+    },
+    "dripping=true,facing=west,fill_level=5,full=true,has_bucket=true,wood=jungle": {
+      "model": "poptartcore:block/tree_tap/tree_tap_jungle_full",
+      "y": 270
+    }
+  }
+}

@@ -18,6 +18,20 @@ public class PoptartCoreClientExtensions {
         registerMoltenFluid(event, "tin", PoptartCoreFluids.MOLTEN_TIN);
         registerMoltenFluid(event, "bronze", PoptartCoreFluids.MOLTEN_BRONZE);
         registerMoltenFluid(event, "steel", PoptartCoreFluids.MOLTEN_STEEL);
+        ResourceLocation latexStill = ResourceLocation.fromNamespaceAndPath(PoptartCore.MOD_ID, "block/fluid/latex_still");
+        ResourceLocation latexFlowing =
+                ResourceLocation.fromNamespaceAndPath(PoptartCore.MOD_ID, "block/fluid/latex_flowing");
+        event.registerFluidType(new IClientFluidTypeExtensions() {
+            @Override
+            public ResourceLocation getStillTexture() {
+                return latexStill;
+            }
+
+            @Override
+            public ResourceLocation getFlowingTexture() {
+                return latexFlowing;
+            }
+        }, PoptartCoreFluids.LATEX.type().get());
     }
 
     private static void registerMoltenFluid(

@@ -10,6 +10,7 @@ import dev.poptartking.poptartcore.millstone.MillstoneBlockEntity;
 import dev.poptartking.poptartcore.millstone.MillstoneRotorBlockEntity;
 import dev.poptartking.poptartcore.quern.QuernBlockEntity;
 import dev.poptartking.poptartcore.scribing.ScribingTableBlockEntity;
+import dev.poptartking.poptartcore.treetap.TreeTapBlockEntity;
 import dev.poptartking.poptartcore.workbench.WorkbenchBlockEntity;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -49,6 +50,11 @@ public class PoptartCoreBlockEntities {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<FluidBarrelBlockEntity>> FLUID_BARREL =
             BLOCK_ENTITIES.register("fluid_barrel", () -> BlockEntityType.Builder.of(
                             FluidBarrelBlockEntity::new, PoptartCoreBlocks.FLUID_BARREL.get())
+                    .build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TreeTapBlockEntity>> TREE_TAP =
+            BLOCK_ENTITIES.register("tree_tap", () -> BlockEntityType.Builder.of(
+                            TreeTapBlockEntity::new, PoptartCoreBlocks.TREE_TAP.get())
                     .build(null));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BloomeryBlockEntity>> BLOOMERY =

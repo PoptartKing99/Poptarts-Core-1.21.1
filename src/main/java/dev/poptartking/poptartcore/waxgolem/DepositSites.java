@@ -21,7 +21,6 @@ public final class DepositSites {
         boolean honey = result.is(Items.HONEY_BOTTLE);
         for (BlockPos pos : BlockPos.betweenClosed(origin.offset(-range, -4, -range), origin.offset(range, 4, range))) {
             if (honey
-                    && !pos.equals(golem.drawnFrom())
                     && HoneyCauldrons.acceptsBottle(level, pos)
                     && !HoneyCauldrons.fedByHiveTap(level, pos)) {
                 int score2 = (40 - ((int) Math.sqrt(pos.distSqr(origin))))
@@ -42,19 +41,6 @@ public final class DepositSites {
             }
         }
         return best;
-    }
-
-    public static BlockPos bestCauldron(WaxGolem golem, BlockPos exclude) {
-        Level level = golem.level();
-        BlockPos origin = golem.blockPosition();
-        for (BlockPos pos : BlockPos.betweenClosed(origin.offset(-16, -4, -16), origin.offset(16, 4, 16))) {
-            if (!pos.equals(exclude)
-                    && HoneyCauldrons.acceptsBottle(level, pos)
-                    && !HoneyCauldrons.fedByHiveTap(level, pos)) {
-                return pos.immutable();
-            }
-        }
-        return null;
     }
 
     private static boolean accepts(Container container, ItemStack result) {

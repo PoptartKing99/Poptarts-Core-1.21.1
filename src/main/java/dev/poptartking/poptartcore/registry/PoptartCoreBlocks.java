@@ -8,6 +8,8 @@ import com.teamabnormals.caverns_and_chasms.core.registry.CCSoundEvents.CCSoundT
 import dev.poptartking.poptartcore.PoptartCore;
 import dev.poptartking.poptartcore.barrel.FluidBarrelBlock;
 import dev.poptartking.poptartcore.barrel.FluidBarrelBlockItem;
+import dev.poptartking.poptartcore.beekeeping.BeehiveRoofBlock;
+import dev.poptartking.poptartcore.beekeeping.BeehiveSupportBlock;
 import dev.poptartking.poptartcore.blastfurnace.BlastFurnaceBlock;
 import dev.poptartking.poptartcore.bloomery.BloomeryBlock;
 import dev.poptartking.poptartcore.bloomery.IronBloomBlock;
@@ -43,6 +45,7 @@ import dev.poptartking.poptartcore.rift.RiftWallTorchBlock;
 import dev.poptartking.poptartcore.rift.SoulSconceLeverBlock;
 import dev.poptartking.poptartcore.scribing.ScribingTableBlock;
 import dev.poptartking.poptartcore.spider.TemporaryCobwebBlock;
+import dev.poptartking.poptartcore.treetap.TreeTapBlock;
 import dev.poptartking.poptartcore.workbench.WorkbenchBlock;
 import dev.simulated_team.simulated.content.blocks.portable_engine.PortableEngineBlock;
 import net.mehvahdjukaar.supplementaries.common.block.blocks.SconceLeverBlock;
@@ -51,6 +54,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.ColorRGBA;
 import net.minecraft.world.item.StandingAndWallBlockItem;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ColoredFallingBlock;
@@ -734,6 +738,59 @@ public class PoptartCoreBlocks {
                     () -> new Block(
                             BlockBehaviour.Properties.ofFullCopy(Blocks.MUD).strength(0.7F, 0.3F)))
             .withStorageRecipes(() -> PoptartCoreItems.WAX.get(), "wax_from_block");
+    public static final CatalogBlockDefinition<TreeTapBlock> TREE_TAP = PoptartCatalog.block(
+                    "tree_tap",
+                    () -> new TreeTapBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)
+                            .noOcclusion()
+                            .strength(0.8F)))
+            .externalModel()
+            .customLoot()
+            .mineableWithAxe();
+    public static final CatalogBlockDefinition<BeehiveSupportBlock> BEEHIVE_SUPPORT = PoptartCatalog.block(
+                    "beehive_support",
+                    () -> new BeehiveSupportBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BEEHIVE)
+                            .noOcclusion()
+                            .strength(0.8F)))
+            .externalModel()
+            .customLoot()
+            .mineableWithAxe();
+    public static final CatalogBlockDefinition<BeehiveRoofBlock> BEEHIVE_WHITE_ROOF = beehiveRoof("white");
+    public static final CatalogBlockDefinition<BeehiveRoofBlock> BEEHIVE_LIGHT_GRAY_ROOF = beehiveRoof("light_gray");
+    public static final CatalogBlockDefinition<BeehiveRoofBlock> BEEHIVE_GRAY_ROOF = beehiveRoof("gray");
+    public static final CatalogBlockDefinition<BeehiveRoofBlock> BEEHIVE_BLACK_ROOF = beehiveRoof("black");
+    public static final CatalogBlockDefinition<BeehiveRoofBlock> BEEHIVE_BROWN_ROOF = beehiveRoof("brown");
+    public static final CatalogBlockDefinition<BeehiveRoofBlock> BEEHIVE_RED_ROOF = beehiveRoof("red");
+    public static final CatalogBlockDefinition<BeehiveRoofBlock> BEEHIVE_ORANGE_ROOF = beehiveRoof("orange");
+    public static final CatalogBlockDefinition<BeehiveRoofBlock> BEEHIVE_YELLOW_ROOF = beehiveRoof("yellow");
+    public static final CatalogBlockDefinition<BeehiveRoofBlock> BEEHIVE_LIME_ROOF = beehiveRoof("lime");
+    public static final CatalogBlockDefinition<BeehiveRoofBlock> BEEHIVE_GREEN_ROOF = beehiveRoof("green");
+    public static final CatalogBlockDefinition<BeehiveRoofBlock> BEEHIVE_CYAN_ROOF = beehiveRoof("cyan");
+    public static final CatalogBlockDefinition<BeehiveRoofBlock> BEEHIVE_LIGHT_BLUE_ROOF = beehiveRoof("light_blue");
+    public static final CatalogBlockDefinition<BeehiveRoofBlock> BEEHIVE_BLUE_ROOF = beehiveRoof("blue");
+    public static final CatalogBlockDefinition<BeehiveRoofBlock> BEEHIVE_PURPLE_ROOF = beehiveRoof("purple");
+    public static final CatalogBlockDefinition<BeehiveRoofBlock> BEEHIVE_MAGENTA_ROOF = beehiveRoof("magenta");
+    public static final CatalogBlockDefinition<BeehiveRoofBlock> BEEHIVE_PINK_ROOF = beehiveRoof("pink");
+
+    public static BeehiveRoofBlock beehiveRoofForDye(DyeColor color) {
+        return switch (color) {
+            case WHITE -> BEEHIVE_WHITE_ROOF.get();
+            case LIGHT_GRAY -> BEEHIVE_LIGHT_GRAY_ROOF.get();
+            case GRAY -> BEEHIVE_GRAY_ROOF.get();
+            case BLACK -> BEEHIVE_BLACK_ROOF.get();
+            case BROWN -> BEEHIVE_BROWN_ROOF.get();
+            case RED -> BEEHIVE_RED_ROOF.get();
+            case ORANGE -> BEEHIVE_ORANGE_ROOF.get();
+            case YELLOW -> BEEHIVE_YELLOW_ROOF.get();
+            case LIME -> BEEHIVE_LIME_ROOF.get();
+            case GREEN -> BEEHIVE_GREEN_ROOF.get();
+            case CYAN -> BEEHIVE_CYAN_ROOF.get();
+            case LIGHT_BLUE -> BEEHIVE_LIGHT_BLUE_ROOF.get();
+            case BLUE -> BEEHIVE_BLUE_ROOF.get();
+            case PURPLE -> BEEHIVE_PURPLE_ROOF.get();
+            case MAGENTA -> BEEHIVE_MAGENTA_ROOF.get();
+            case PINK -> BEEHIVE_PINK_ROOF.get();
+        };
+    }
     public static final CatalogBlockDefinition<Block> COAL_COKE_BLOCK = PoptartCatalog.block(
                     "coal_coke_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.COAL_BLOCK)))
             .withStorageRecipes(() -> PoptartCoreItems.COAL_COKE.get(), "coal_coke_from_block")
@@ -812,6 +869,17 @@ public class PoptartCoreBlocks {
 
     private static BlockBehaviour.Properties clinkerProperties() {
         return BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICKS);
+    }
+
+    private static CatalogBlockDefinition<BeehiveRoofBlock> beehiveRoof(String color) {
+        return PoptartCatalog.block(
+                        "beehive_" + color + "_roof",
+                        () -> new BeehiveRoofBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BEEHIVE)
+                                .noOcclusion()
+                                .strength(0.8F)))
+                .externalModel()
+                .customLoot()
+                .mineableWithAxe();
     }
 
     private static BlockBehaviour.Properties platedBrickProperties(Block source) {

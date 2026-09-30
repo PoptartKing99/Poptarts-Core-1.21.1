@@ -1,13 +1,16 @@
 package dev.poptartking.poptartcore.crucible;
 
 import com.mojang.serialization.MapCodec;
+import com.teamabnormals.caverns_and_chasms.core.registry.CCParticleTypes;
 import dev.poptartking.poptartcore.registry.PoptartCoreBlockEntities;
+import dev.poptartking.poptartcore.registry.PoptartCoreParticles;
 import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -25,6 +28,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -36,6 +40,22 @@ public class CrucibleBlock extends BaseEntityBlock {
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final IntegerProperty FLUID_LEVEL = IntegerProperty.create("fluid_level", 0, 4);
+    public static final EnumProperty<CampfireType> CAMPFIRE_TYPE = EnumProperty.create("campfire_type", CampfireType.class);
+
+    public enum CampfireType implements StringRepresentable {
+        NORMAL("normal"), SOUL("soul"), RIFT("rift"), CUPRIC("cupric");
+
+        private final String name;
+
+        CampfireType(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public String getSerializedName() {
+            return name;
+        }
+    }
 
     protected static final VoxelShape SHAPE = Shapes.or(
             Block.box(0.0D, 0.0D, 0.0D, 16.0D, 7.0D, 16.0D), Block.box(4.0D, 7.0D, 4.0D, 12.0D, 16.0D, 12.0D));
@@ -47,12 +67,13 @@ public class CrucibleBlock extends BaseEntityBlock {
                 .any()
                 .setValue(LIT, false)
                 .setValue(FACING, net.minecraft.core.Direction.NORTH)
+                .setValue(CAMPFIRE_TYPE, CampfireType.NORMAL)
                 .setValue(FLUID_LEVEL, 0));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(LIT, FACING, FLUID_LEVEL);
+        builder.add(LIT, FACING, FLUID_LEVEL, CAMPFIRE_TYPE);
     }
 
     @Override
@@ -120,7 +141,13 @@ public class CrucibleBlock extends BaseEntityBlock {
         double offsetZ = random.nextFloat() * 0.6D - 0.3D;
 
         level.addParticle(ParticleTypes.SMOKE, x + offsetX, y + offsetY, z + offsetZ, 0.0D, 0.0D, 0.0D);
-        level.addParticle(ParticleTypes.FLAME, x + offsetX, y + offsetY, z + offsetZ, 0.0D, 0.0D, 0.0D);
+        var flame = switch (state.getValue(CAMPFIRE_TYPE)) {
+            case SOUL -> ParticleTypes.SOUL_FIRE_FLAME;
+            case RIFT -> PoptartCoreParticles.RIFT_FIRE_FLAME.get();
+            case CUPRIC -> CCParticleTypes.CUPRIC_FIRE_FLAME.get();
+            default -> ParticleTypes.FLAME;
+        };
+        level.addParticle(flame, x + offsetX, y + offsetY, z + offsetZ, 0.0D, 0.0D, 0.0D);
     }
 
     @Override

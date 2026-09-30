@@ -4,7 +4,8 @@
       "when": {
         "facing": "south",
         "fluid_level": "0",
-        "lit": "false"
+        "lit": "false",
+        "campfire_type": "normal"
       },
       "apply": {
         "model": "poptartcore:block/crucible/crucible"
@@ -14,7 +15,8 @@
       "when": {
         "facing": "south",
         "fluid_level": "0",
-        "lit": "true"
+        "lit": "true",
+        "campfire_type": "normal"
       },
       "apply": {
         "model": "poptartcore:block/crucible/crucible_hot"
@@ -23,7 +25,8 @@
     {
       "when": {
         "facing": "south",
-        "fluid_level": "1|2|3|4"
+        "fluid_level": "1|2|3|4",
+        "campfire_type": "normal"
       },
       "apply": {
         "model": "poptartcore:block/crucible/crucible_hot"
@@ -32,7 +35,8 @@
     {
       "when": {
         "facing": "south",
-        "lit": "true"
+        "lit": "true",
+        "campfire_type": "normal"
       },
       "apply": {
         "model": "poptartcore:block/crucible/crucible_fire"
@@ -41,7 +45,8 @@
     {
       "when": {
         "facing": "south",
-        "fluid_level": "1"
+        "fluid_level": "1",
+        "campfire_type": "normal"
       },
       "apply": {
         "model": "poptartcore:block/crucible/crucible_fluid_1"
@@ -50,7 +55,8 @@
     {
       "when": {
         "facing": "south",
-        "fluid_level": "2"
+        "fluid_level": "2",
+        "campfire_type": "normal"
       },
       "apply": {
         "model": "poptartcore:block/crucible/crucible_fluid_2"
@@ -59,7 +65,8 @@
     {
       "when": {
         "facing": "south",
-        "fluid_level": "3"
+        "fluid_level": "3",
+        "campfire_type": "normal"
       },
       "apply": {
         "model": "poptartcore:block/crucible/crucible_fluid_3"
@@ -68,7 +75,8 @@
     {
       "when": {
         "facing": "south",
-        "fluid_level": "4"
+        "fluid_level": "4",
+        "campfire_type": "normal"
       },
       "apply": {
         "model": "poptartcore:block/crucible/crucible_fluid_4"
@@ -78,7 +86,8 @@
       "when": {
         "facing": "west",
         "fluid_level": "0",
-        "lit": "false"
+        "lit": "false",
+        "campfire_type": "normal"
       },
       "apply": {
         "model": "poptartcore:block/crucible/crucible",
@@ -89,7 +98,8 @@
       "when": {
         "facing": "west",
         "fluid_level": "0",
-        "lit": "true"
+        "lit": "true",
+        "campfire_type": "normal"
       },
       "apply": {
         "model": "poptartcore:block/crucible/crucible_hot",
@@ -99,7 +109,8 @@
     {
       "when": {
         "facing": "west",
-        "fluid_level": "1|2|3|4"
+        "fluid_level": "1|2|3|4",
+        "campfire_type": "normal"
       },
       "apply": {
         "model": "poptartcore:block/crucible/crucible_hot",
@@ -109,7 +120,8 @@
     {
       "when": {
         "facing": "west",
-        "lit": "true"
+        "lit": "true",
+        "campfire_type": "normal"
       },
       "apply": {
         "model": "poptartcore:block/crucible/crucible_fire",
@@ -119,7 +131,8 @@
     {
       "when": {
         "facing": "west",
-        "fluid_level": "1"
+        "fluid_level": "1",
+        "campfire_type": "normal"
       },
       "apply": {
         "model": "poptartcore:block/crucible/crucible_fluid_1",
@@ -129,7 +142,8 @@
     {
       "when": {
         "facing": "west",
-        "fluid_level": "2"
+        "fluid_level": "2",
+        "campfire_type": "normal"
       },
       "apply": {
         "model": "poptartcore:block/crucible/crucible_fluid_2",
@@ -139,7 +153,8 @@
     {
       "when": {
         "facing": "west",
-        "fluid_level": "3"
+        "fluid_level": "3",
+        "campfire_type": "normal"
       },
       "apply": {
         "model": "poptartcore:block/crucible/crucible_fluid_3",
@@ -149,7 +164,8 @@
     {
       "when": {
         "facing": "west",
-        "fluid_level": "4"
+        "fluid_level": "4",
+        "campfire_type": "normal"
       },
       "apply": {
         "model": "poptartcore:block/crucible/crucible_fluid_4",
@@ -160,7 +176,8 @@
       "when": {
         "facing": "north",
         "fluid_level": "0",
-        "lit": "false"
+        "lit": "false",
+        "campfire_type": "normal"
       },
       "apply": {
         "model": "poptartcore:block/crucible/crucible",
@@ -171,7 +188,8 @@
       "when": {
         "facing": "north",
         "fluid_level": "0",
-        "lit": "true"
+        "lit": "true",
+        "campfire_type": "normal"
       },
       "apply": {
         "model": "poptartcore:block/crucible/crucible_hot",
@@ -181,7 +199,8 @@
     {
       "when": {
         "facing": "north",
-        "fluid_level": "1|2|3|4"
+        "fluid_level": "1|2|3|4",
+        "campfire_type": "normal"
       },
       "apply": {
         "model": "poptartcore:block/crucible/crucible_hot",
@@ -191,7 +210,8 @@
     {
       "when": {
         "facing": "north",
-        "lit": "true"
+        "lit": "true",
+        "campfire_type": "normal"
       },
       "apply": {
         "model": "poptartcore:block/crucible/crucible_fire",
@@ -201,7 +221,8 @@
     {
       "when": {
         "facing": "north",
-        "fluid_level": "1"
+        "fluid_level": "1",
+        "campfire_type": "normal"
       },
       "apply": {
         "model": "poptartcore:block/crucible/crucible_fluid_1",
@@ -211,7 +232,8 @@
     {
       "when": {
         "facing": "north",
-        "fluid_level": "2"
+        "fluid_level": "2",
+        "campfire_type": "normal"
       },
       "apply": {
         "model": "poptartcore:block/crucible/crucible_fluid_2",
@@ -221,7 +243,8 @@
     {
       "when": {
         "facing": "north",
-        "fluid_level": "3"
+        "fluid_level": "3",
+        "campfire_type": "normal"
       },
       "apply": {
         "model": "poptartcore:block/crucible/crucible_fluid_3",
@@ -231,7 +254,8 @@
     {
       "when": {
         "facing": "north",
-        "fluid_level": "4"
+        "fluid_level": "4",
+        "campfire_type": "normal"
       },
       "apply": {
         "model": "poptartcore:block/crucible/crucible_fluid_4",
@@ -242,7 +266,8 @@
       "when": {
         "facing": "east",
         "fluid_level": "0",
-        "lit": "false"
+        "lit": "false",
+        "campfire_type": "normal"
       },
       "apply": {
         "model": "poptartcore:block/crucible/crucible",
@@ -253,7 +278,8 @@
       "when": {
         "facing": "east",
         "fluid_level": "0",
-        "lit": "true"
+        "lit": "true",
+        "campfire_type": "normal"
       },
       "apply": {
         "model": "poptartcore:block/crucible/crucible_hot",
@@ -263,7 +289,8 @@
     {
       "when": {
         "facing": "east",
-        "fluid_level": "1|2|3|4"
+        "fluid_level": "1|2|3|4",
+        "campfire_type": "normal"
       },
       "apply": {
         "model": "poptartcore:block/crucible/crucible_hot",
@@ -273,7 +300,8 @@
     {
       "when": {
         "facing": "east",
-        "lit": "true"
+        "lit": "true",
+        "campfire_type": "normal"
       },
       "apply": {
         "model": "poptartcore:block/crucible/crucible_fire",
@@ -283,7 +311,8 @@
     {
       "when": {
         "facing": "east",
-        "fluid_level": "1"
+        "fluid_level": "1",
+        "campfire_type": "normal"
       },
       "apply": {
         "model": "poptartcore:block/crucible/crucible_fluid_1",
@@ -293,7 +322,8 @@
     {
       "when": {
         "facing": "east",
-        "fluid_level": "2"
+        "fluid_level": "2",
+        "campfire_type": "normal"
       },
       "apply": {
         "model": "poptartcore:block/crucible/crucible_fluid_2",
@@ -303,7 +333,8 @@
     {
       "when": {
         "facing": "east",
-        "fluid_level": "3"
+        "fluid_level": "3",
+        "campfire_type": "normal"
       },
       "apply": {
         "model": "poptartcore:block/crucible/crucible_fluid_3",
@@ -313,7 +344,1064 @@
     {
       "when": {
         "facing": "east",
-        "fluid_level": "4"
+        "fluid_level": "4",
+        "campfire_type": "normal"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_4",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "fluid_level": "0",
+        "lit": "false",
+        "campfire_type": "soul"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_soul_base"
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "fluid_level": "0",
+        "lit": "true",
+        "campfire_type": "soul"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_soul_hot"
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "fluid_level": "1|2|3|4",
+        "campfire_type": "soul"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_soul_hot"
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "lit": "true",
+        "campfire_type": "soul"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_soul_fire"
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "fluid_level": "1",
+        "campfire_type": "soul"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_1"
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "fluid_level": "2",
+        "campfire_type": "soul"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_2"
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "fluid_level": "3",
+        "campfire_type": "soul"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_3"
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "fluid_level": "4",
+        "campfire_type": "soul"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_4"
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "fluid_level": "0",
+        "lit": "false",
+        "campfire_type": "soul"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_soul_base",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "fluid_level": "0",
+        "lit": "true",
+        "campfire_type": "soul"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_soul_hot",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "fluid_level": "1|2|3|4",
+        "campfire_type": "soul"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_soul_hot",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "lit": "true",
+        "campfire_type": "soul"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_soul_fire",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "fluid_level": "1",
+        "campfire_type": "soul"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_1",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "fluid_level": "2",
+        "campfire_type": "soul"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_2",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "fluid_level": "3",
+        "campfire_type": "soul"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_3",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "fluid_level": "4",
+        "campfire_type": "soul"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_4",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "fluid_level": "0",
+        "lit": "false",
+        "campfire_type": "soul"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_soul_base",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "fluid_level": "0",
+        "lit": "true",
+        "campfire_type": "soul"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_soul_hot",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "fluid_level": "1|2|3|4",
+        "campfire_type": "soul"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_soul_hot",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "lit": "true",
+        "campfire_type": "soul"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_soul_fire",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "fluid_level": "1",
+        "campfire_type": "soul"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_1",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "fluid_level": "2",
+        "campfire_type": "soul"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_2",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "fluid_level": "3",
+        "campfire_type": "soul"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_3",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "fluid_level": "4",
+        "campfire_type": "soul"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_4",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "fluid_level": "0",
+        "lit": "false",
+        "campfire_type": "soul"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_soul_base",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "fluid_level": "0",
+        "lit": "true",
+        "campfire_type": "soul"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_soul_hot",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "fluid_level": "1|2|3|4",
+        "campfire_type": "soul"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_soul_hot",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "lit": "true",
+        "campfire_type": "soul"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_soul_fire",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "fluid_level": "1",
+        "campfire_type": "soul"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_1",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "fluid_level": "2",
+        "campfire_type": "soul"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_2",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "fluid_level": "3",
+        "campfire_type": "soul"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_3",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "fluid_level": "4",
+        "campfire_type": "soul"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_4",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "fluid_level": "0",
+        "lit": "false",
+        "campfire_type": "rift"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_rift_base"
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "fluid_level": "0",
+        "lit": "true",
+        "campfire_type": "rift"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_rift_hot"
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "fluid_level": "1|2|3|4",
+        "campfire_type": "rift"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_rift_hot"
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "lit": "true",
+        "campfire_type": "rift"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_rift_fire"
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "fluid_level": "1",
+        "campfire_type": "rift"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_1"
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "fluid_level": "2",
+        "campfire_type": "rift"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_2"
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "fluid_level": "3",
+        "campfire_type": "rift"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_3"
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "fluid_level": "4",
+        "campfire_type": "rift"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_4"
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "fluid_level": "0",
+        "lit": "false",
+        "campfire_type": "rift"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_rift_base",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "fluid_level": "0",
+        "lit": "true",
+        "campfire_type": "rift"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_rift_hot",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "fluid_level": "1|2|3|4",
+        "campfire_type": "rift"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_rift_hot",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "lit": "true",
+        "campfire_type": "rift"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_rift_fire",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "fluid_level": "1",
+        "campfire_type": "rift"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_1",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "fluid_level": "2",
+        "campfire_type": "rift"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_2",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "fluid_level": "3",
+        "campfire_type": "rift"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_3",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "fluid_level": "4",
+        "campfire_type": "rift"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_4",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "fluid_level": "0",
+        "lit": "false",
+        "campfire_type": "rift"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_rift_base",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "fluid_level": "0",
+        "lit": "true",
+        "campfire_type": "rift"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_rift_hot",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "fluid_level": "1|2|3|4",
+        "campfire_type": "rift"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_rift_hot",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "lit": "true",
+        "campfire_type": "rift"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_rift_fire",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "fluid_level": "1",
+        "campfire_type": "rift"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_1",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "fluid_level": "2",
+        "campfire_type": "rift"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_2",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "fluid_level": "3",
+        "campfire_type": "rift"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_3",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "fluid_level": "4",
+        "campfire_type": "rift"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_4",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "fluid_level": "0",
+        "lit": "false",
+        "campfire_type": "rift"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_rift_base",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "fluid_level": "0",
+        "lit": "true",
+        "campfire_type": "rift"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_rift_hot",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "fluid_level": "1|2|3|4",
+        "campfire_type": "rift"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_rift_hot",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "lit": "true",
+        "campfire_type": "rift"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_rift_fire",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "fluid_level": "1",
+        "campfire_type": "rift"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_1",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "fluid_level": "2",
+        "campfire_type": "rift"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_2",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "fluid_level": "3",
+        "campfire_type": "rift"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_3",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "fluid_level": "4",
+        "campfire_type": "rift"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_4",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "fluid_level": "0",
+        "lit": "false",
+        "campfire_type": "cupric"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_cupric_base"
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "fluid_level": "0",
+        "lit": "true",
+        "campfire_type": "cupric"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_cupric_hot"
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "fluid_level": "1|2|3|4",
+        "campfire_type": "cupric"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_cupric_hot"
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "lit": "true",
+        "campfire_type": "cupric"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_cupric_fire"
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "fluid_level": "1",
+        "campfire_type": "cupric"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_1"
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "fluid_level": "2",
+        "campfire_type": "cupric"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_2"
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "fluid_level": "3",
+        "campfire_type": "cupric"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_3"
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "fluid_level": "4",
+        "campfire_type": "cupric"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_4"
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "fluid_level": "0",
+        "lit": "false",
+        "campfire_type": "cupric"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_cupric_base",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "fluid_level": "0",
+        "lit": "true",
+        "campfire_type": "cupric"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_cupric_hot",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "fluid_level": "1|2|3|4",
+        "campfire_type": "cupric"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_cupric_hot",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "lit": "true",
+        "campfire_type": "cupric"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_cupric_fire",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "fluid_level": "1",
+        "campfire_type": "cupric"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_1",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "fluid_level": "2",
+        "campfire_type": "cupric"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_2",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "fluid_level": "3",
+        "campfire_type": "cupric"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_3",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "fluid_level": "4",
+        "campfire_type": "cupric"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_4",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "fluid_level": "0",
+        "lit": "false",
+        "campfire_type": "cupric"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_cupric_base",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "fluid_level": "0",
+        "lit": "true",
+        "campfire_type": "cupric"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_cupric_hot",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "fluid_level": "1|2|3|4",
+        "campfire_type": "cupric"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_cupric_hot",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "lit": "true",
+        "campfire_type": "cupric"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_cupric_fire",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "fluid_level": "1",
+        "campfire_type": "cupric"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_1",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "fluid_level": "2",
+        "campfire_type": "cupric"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_2",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "fluid_level": "3",
+        "campfire_type": "cupric"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_3",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "fluid_level": "4",
+        "campfire_type": "cupric"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_4",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "fluid_level": "0",
+        "lit": "false",
+        "campfire_type": "cupric"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_cupric_base",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "fluid_level": "0",
+        "lit": "true",
+        "campfire_type": "cupric"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_cupric_hot",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "fluid_level": "1|2|3|4",
+        "campfire_type": "cupric"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_cupric_hot",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "lit": "true",
+        "campfire_type": "cupric"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_cupric_fire",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "fluid_level": "1",
+        "campfire_type": "cupric"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_1",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "fluid_level": "2",
+        "campfire_type": "cupric"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_2",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "fluid_level": "3",
+        "campfire_type": "cupric"
+      },
+      "apply": {
+        "model": "poptartcore:block/crucible/crucible_fluid_3",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "fluid_level": "4",
+        "campfire_type": "cupric"
       },
       "apply": {
         "model": "poptartcore:block/crucible/crucible_fluid_4",
