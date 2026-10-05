@@ -3,7 +3,7 @@
   "textures": {
     "bottom": "poptartcore:block/brazier/brazier_bottom",
     "fire": "poptartcore:block/brazier/rift_brazier_fire",
-    "side": "poptartcore:block/brazier/brazier_side",
+    "side": "poptartcore:block/brazier/rift_brazier_side_lit",
     "top": "poptartcore:block/brazier/rift_brazier_top_lit"
   }
 }

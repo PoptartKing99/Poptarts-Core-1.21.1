@@ -23,13 +23,13 @@ public final class PoptartCasingClient {
             PoptartCore.location("block/industrial_plating_encased_cogwheel_side");
     private static final ResourceLocation COG_SIDE_CONNECTED =
             PoptartCore.location("block/industrial_plating_encased_cogwheel_side_connected");
-    private static final ResourceLocation TREATED_WOOD = PoptartCore.location("block/treated_wood_casing");
+    private static final ResourceLocation TREATED_WOOD = PoptartCore.location("block/treated_wood");
     private static final ResourceLocation TREATED_WOOD_CONNECTED =
-            PoptartCore.location("block/treated_wood_casing_connected");
+            PoptartCore.location("block/treated_wood_connected");
     private static final ResourceLocation TREATED_WOOD_COG_SIDE =
-            PoptartCore.location("block/treated_wood_casing_encased_cogwheel_side");
+            PoptartCore.location("block/treated_wood_encased_cogwheel_side");
     private static final ResourceLocation TREATED_WOOD_COG_SIDE_CONNECTED =
-            PoptartCore.location("block/treated_wood_casing_encased_cogwheel_side_connected");
+            PoptartCore.location("block/treated_wood_encased_cogwheel_side_connected");
 
     private PoptartCasingClient() {}
 
@@ -45,7 +45,7 @@ public final class PoptartCasingClient {
                     COG_SIDE,
                     COG_SIDE_CONNECTED);
             registerFamily(
-                    PoptartCoreBlocks.TREATED_WOOD_CASING.get(),
+                    PoptartCoreBlocks.TREATED_WOOD.get(),
                     PoptartCoreBlocks.TREATED_WOOD_ENCASED_SHAFT.get(),
                     PoptartCoreBlocks.TREATED_WOOD_ENCASED_COGWHEEL.get(),
                     PoptartCoreBlocks.TREATED_WOOD_ENCASED_LARGE_COGWHEEL.get(),

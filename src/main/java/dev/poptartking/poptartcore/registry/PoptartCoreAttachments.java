@@ -20,6 +20,10 @@ public final class PoptartCoreAttachments {
             "max_hearts",
             () -> AttachmentType.builder(() -> 10).serialize(Codec.INT).build());
 
+    public static final Supplier<AttachmentType<Long>> TOMBSTONE_ANCHOR = ATTACHMENT_TYPES.register(
+            "tombstone_anchor",
+            () -> AttachmentType.builder(() -> Long.MIN_VALUE).serialize(Codec.LONG).build());
+
     private PoptartCoreAttachments() {}
 
     public static void register(IEventBus eventBus) {

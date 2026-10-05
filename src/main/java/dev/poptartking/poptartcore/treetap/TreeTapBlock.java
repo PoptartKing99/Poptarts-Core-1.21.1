@@ -47,9 +47,10 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 
 public class TreeTapBlock extends BaseEntityBlock {
     public enum Wood implements StringRepresentable {
-        MAPLE, SPRUCE, BIRCH, ACACIA, JUNGLE;
+        MAPLE, SPRUCE, PINE, BIRCH, ACACIA, JUNGLE;
 
         private static final ResourceLocation MAPLE_LOG = ResourceLocation.fromNamespaceAndPath("nomansland", "maple_log");
+        private static final ResourceLocation PINE_LOG = ResourceLocation.fromNamespaceAndPath("nomansland", "pine_log");
 
         @Override
         public String getSerializedName() {
@@ -59,6 +60,7 @@ public class TreeTapBlock extends BaseEntityBlock {
         static Wood fromLog(BlockState state) {
             if (MAPLE_LOG.equals(BuiltInRegistries.BLOCK.getKey(state.getBlock()))) return MAPLE;
             if (state.is(Blocks.SPRUCE_LOG)) return SPRUCE;
+            if (PINE_LOG.equals(BuiltInRegistries.BLOCK.getKey(state.getBlock()))) return PINE;
             if (state.is(Blocks.BIRCH_LOG)) return BIRCH;
             if (state.is(Blocks.ACACIA_LOG)) return ACACIA;
             if (state.is(Blocks.JUNGLE_LOG)) return JUNGLE;
@@ -74,7 +76,7 @@ public class TreeTapBlock extends BaseEntityBlock {
     // Retained for taps saved by the intermittent-drip version.
     public static final BooleanProperty DRIPPING = BooleanProperty.create("dripping");
     static final int FILL_CHECK_INTERVAL = 7200;
-    private static final int RESIN_PER_SPRUCE_FILL_LEVEL = 2;
+    private static final int RESIN_PER_FILL_LEVEL = 2;
     private static final VoxelShape NORTH_SHAPE = Block.box(3, 0, 4, 13, 13, 16);
     private static final VoxelShape SOUTH_SHAPE = Block.box(3, 0, 0, 13, 13, 12);
     private static final VoxelShape EAST_SHAPE = Block.box(0, 0, 3, 12, 13, 13);
@@ -164,6 +166,23 @@ public class TreeTapBlock extends BaseEntityBlock {
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,
             Player player, InteractionHand hand, BlockHitResult hitResult) {
         if (stack.is(Items.GLASS_BOTTLE)
+                && state.getValue(WOOD) == Wood.MAPLE
+                && state.getValue(HAS_BUCKET)
+                && state.getValue(FILL_LEVEL) > 0) {
+            if (!level.isClientSide) {
+                int nextLevel = state.getValue(FILL_LEVEL) - 1;
+                boolean wasFull = state.getValue(FULL);
+                level.setBlock(pos, state.setValue(FILL_LEVEL, nextLevel)
+                        .setValue(FULL, false).setValue(DRIPPING, false), Block.UPDATE_ALL);
+                if (wasFull) level.scheduleTick(pos, this, FILL_CHECK_INTERVAL);
+                if (!player.getAbilities().instabuild) stack.shrink(1);
+                ItemStack syrup = new ItemStack(NMLItems.MAPLE_SYRUP_BOTTLE.get());
+                if (!player.addItem(syrup)) player.drop(syrup, false);
+                level.playSound((Player) null, pos, SoundEvents.BOTTLE_FILL, SoundSource.BLOCKS, 1.0F, 1.0F);
+            }
+            return ItemInteractionResult.sidedSuccess(level.isClientSide);
+        }
+        if (stack.is(Items.GLASS_BOTTLE)
                 && state.getValue(WOOD) == Wood.JUNGLE
                 && state.getValue(HAS_BUCKET)
                 && (level.isClientSide
@@ -209,8 +228,8 @@ public class TreeTapBlock extends BaseEntityBlock {
                 }
                 return InteractionResult.SUCCESS;
             }
-            if (state.getValue(WOOD) == Wood.SPRUCE && fillLevel > 0) {
-                ItemStack resin = new ItemStack(NMLItems.RESIN.get(), fillLevel * RESIN_PER_SPRUCE_FILL_LEVEL);
+            if ((state.getValue(WOOD) == Wood.SPRUCE || state.getValue(WOOD) == Wood.PINE) && fillLevel > 0) {
+                ItemStack resin = new ItemStack(NMLItems.RESIN.get(), fillLevel * RESIN_PER_FILL_LEVEL);
                 if (!player.addItem(resin)) player.drop(resin, false);
                 level.playSound((Player) null, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS);
                 level.setBlock(pos, state.setValue(FULL, false).setValue(FILL_LEVEL, 0)

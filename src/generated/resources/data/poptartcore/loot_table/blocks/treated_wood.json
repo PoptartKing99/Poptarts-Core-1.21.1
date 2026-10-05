@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "poptartcore:treated_wood_casing"
+          "name": "poptartcore:treated_wood"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "poptartcore:blocks/treated_wood_casing"
+  "random_sequence": "poptartcore:blocks/treated_wood"
 }

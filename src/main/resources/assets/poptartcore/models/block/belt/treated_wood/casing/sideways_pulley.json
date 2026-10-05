@@ -3,7 +3,7 @@
 	"parent": "block/block",
 	"textures": {
 		"3": "poptartcore:block/belt/treated_wood_belt_casing",
-		"particle": "poptartcore:block/treated_wood_casing"
+		"particle": "poptartcore:block/treated_wood"
 	},
 	"elements": [
 		{

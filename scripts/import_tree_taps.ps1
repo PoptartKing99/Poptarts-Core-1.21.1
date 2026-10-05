@@ -132,8 +132,7 @@ $mapleFull.textures.Remove('3')
     (($mapleFull | ConvertTo-Json -Depth 100 -Compress) + "`n"))
 
 foreach ($wood in $woods) {
-    $pool = if ($wood -eq 'jungle') { 'poptartcore:block/fluid/latex_still' }
-            else { "poptartcore:block/tree_tap/tree_tap_${wood}_pool" }
+    $pool = "poptartcore:block/tree_tap/tree_tap_${wood}_pool"
     $drip = "poptartcore:block/tree_tap/tree_tap_${wood}_drip"
     for ($level = 0; $level -le $poolHeights.Count; $level++) {
         $child = [ordered]@{

@@ -46,6 +46,7 @@ import dev.poptartking.poptartcore.rift.SoulSconceLeverBlock;
 import dev.poptartking.poptartcore.scribing.ScribingTableBlock;
 import dev.poptartking.poptartcore.spider.TemporaryCobwebBlock;
 import dev.poptartking.poptartcore.treetap.TreeTapBlock;
+import dev.poptartking.poptartcore.treetap.LatexCauldronBlock;
 import dev.poptartking.poptartcore.workbench.WorkbenchBlock;
 import dev.simulated_team.simulated.content.blocks.portable_engine.PortableEngineBlock;
 import net.mehvahdjukaar.supplementaries.common.block.blocks.SconceLeverBlock;
@@ -202,22 +203,22 @@ public class PoptartCoreBlocks {
     public static final DeferredBlock<EncasedCogwheelBlock> INDUSTRIAL_ENCASED_LARGE_COGWHEEL = BLOCKS.register(
             "industrial_encased_large_cogwheel",
             () -> new EncasedCogwheelBlock(industrialEncasedProperties(), true, INDUSTRIAL_PLATING::get));
-    public static final CatalogBlockDefinition<CasingBlock> TREATED_WOOD_CASING = PoptartCatalog.block(
-                    "treated_wood_casing",
+    public static final CatalogBlockDefinition<CasingBlock> TREATED_WOOD = PoptartCatalog.block(
+                    "treated_wood",
                     () -> new CasingBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_PLANKS)
                             .sound(SoundType.WOOD)
                             .strength(2.0F, 3.0F)))
-            .simpleModel(PoptartCore.location("block/treated_wood_casing"), "")
+            .simpleModel(PoptartCore.location("block/treated_wood"), "")
             .mineableWithAxe();
     public static final DeferredBlock<EncasedShaftBlock> TREATED_WOOD_ENCASED_SHAFT = BLOCKS.register(
             "treated_wood_encased_shaft",
-            () -> new EncasedShaftBlock(treatedWoodEncasedProperties(), TREATED_WOOD_CASING::get));
+            () -> new EncasedShaftBlock(treatedWoodEncasedProperties(), TREATED_WOOD::get));
     public static final DeferredBlock<EncasedCogwheelBlock> TREATED_WOOD_ENCASED_COGWHEEL = BLOCKS.register(
             "treated_wood_encased_cogwheel",
-            () -> new EncasedCogwheelBlock(treatedWoodEncasedProperties(), false, TREATED_WOOD_CASING::get));
+            () -> new EncasedCogwheelBlock(treatedWoodEncasedProperties(), false, TREATED_WOOD::get));
     public static final DeferredBlock<EncasedCogwheelBlock> TREATED_WOOD_ENCASED_LARGE_COGWHEEL = BLOCKS.register(
             "treated_wood_encased_large_cogwheel",
-            () -> new EncasedCogwheelBlock(treatedWoodEncasedProperties(), true, TREATED_WOOD_CASING::get));
+            () -> new EncasedCogwheelBlock(treatedWoodEncasedProperties(), true, TREATED_WOOD::get));
 
     public static final CatalogBlockDefinition<MillstoneBlock> MILLSTONE = PoptartCatalog.block(
                     "millstone", () -> new MillstoneBlock(millstoneProperties()), MillstoneBlockItem::new)
@@ -746,6 +747,9 @@ public class PoptartCoreBlocks {
             .externalModel()
             .customLoot()
             .mineableWithAxe();
+    public static final DeferredBlock<LatexCauldronBlock> LATEX_CAULDRON = BLOCKS.register(
+            "latex_cauldron",
+            () -> new LatexCauldronBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.WATER_CAULDRON)));
     public static final CatalogBlockDefinition<BeehiveSupportBlock> BEEHIVE_SUPPORT = PoptartCatalog.block(
                     "beehive_support",
                     () -> new BeehiveSupportBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BEEHIVE)

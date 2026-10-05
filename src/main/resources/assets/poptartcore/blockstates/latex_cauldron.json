@@ -1,0 +1,9 @@
+{
+  "multipart": [
+    { "apply": { "model": "minecraft:block/cauldron" } },
+    { "when": { "level": "1" }, "apply": { "model": "poptartcore:block/latex_cauldron_content_1" } },
+    { "when": { "level": "2" }, "apply": { "model": "poptartcore:block/latex_cauldron_content_2" } },
+    { "when": { "level": "3" }, "apply": { "model": "poptartcore:block/latex_cauldron_content_3" } },
+    { "when": { "level": "4" }, "apply": { "model": "poptartcore:block/latex_cauldron_content_4" } }
+  ]
+}

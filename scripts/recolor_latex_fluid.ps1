@@ -1,7 +1,8 @@
 param(
     [Parameter(Mandatory = $true)][string]$StillSource,
     [Parameter(Mandatory = $true)][string]$FlowingSource,
-    [Parameter(Mandatory = $true)][string]$OutputDirectory
+    [Parameter(Mandatory = $true)][string]$OutputDirectory,
+    [int]$FlowingHeight = 1024
 )
 
 Add-Type -AssemblyName System.Drawing
@@ -78,4 +79,4 @@ function Convert-Texture([string]$source, [string]$destination, [int]$width, [in
 
 New-Item -ItemType Directory -Force -Path $OutputDirectory | Out-Null
 Convert-Texture $StillSource (Join-Path $OutputDirectory 'latex_still.png') 16 512
-Convert-Texture $FlowingSource (Join-Path $OutputDirectory 'latex_flowing.png') 32 1024
+Convert-Texture $FlowingSource (Join-Path $OutputDirectory 'latex_flowing.png') 32 $FlowingHeight

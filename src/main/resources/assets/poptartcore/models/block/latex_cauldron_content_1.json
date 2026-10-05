@@ -1,0 +1,7 @@
+{
+  "ambientocclusion": false,
+  "textures": { "content": "poptartcore:block/fluid/latex_still", "particle": "poptartcore:block/fluid/latex_still" },
+  "elements": [
+    { "from": [2, 4, 2], "to": [14, 7.75, 14], "faces": { "up": { "uv": [2, 2, 14, 14], "texture": "#content" } } }
+  ]
+}

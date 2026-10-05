@@ -80,7 +80,7 @@ $mainLanguage = Get-Content -Raw -LiteralPath (Join-Path $mainRoot 'assets\popta
 
 $expectedBlockTags = @{
     'minecraft\tags\block\mineable\axe.json' = @(
-        'poptartcore:treated_wood_casing',
+        'poptartcore:treated_wood',
         'poptartcore:crucible',
         'poptartcore:workbench',
         'poptartcore:fluid_barrel',

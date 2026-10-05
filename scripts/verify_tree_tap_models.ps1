@@ -1,7 +1,7 @@
 $ErrorActionPreference = 'Stop'
 $assets = Join-Path $PSScriptRoot '../src/main/resources/assets/poptartcore'
 $models = Join-Path $assets 'models/block/tree_tap'
-$woods = @('maple', 'spruce', 'birch', 'acacia', 'jungle')
+$woods = @('maple', 'spruce', 'pine', 'birch', 'acacia', 'jungle')
 $parents = @('full') + @(0..4 | ForEach-Object { "level_${_}_dripping" })
 
 foreach ($kind in $parents) {
@@ -17,8 +17,7 @@ foreach ($kind in $parents) {
         if ($child.parent -ne "poptartcore:block/tree_tap/$parentName" -or $child.Contains('elements')) {
             throw "Expected texture-only child of $parentName`: $childPath"
         }
-        $expectedPool = if ($wood -eq 'jungle') { 'poptartcore:block/fluid/latex_still' }
-                        else { "poptartcore:block/tree_tap/tree_tap_${wood}_pool" }
+        $expectedPool = "poptartcore:block/tree_tap/tree_tap_${wood}_pool"
         if ($child.textures['3'] -ne $expectedPool) {
             throw "Wrong pool texture: $childPath"
         }
@@ -39,7 +38,7 @@ foreach ($kind in $parents) {
 }
 
 $blockstate = Get-Content -LiteralPath (Join-Path $assets 'blockstates/tree_tap.json') -Raw | ConvertFrom-Json -AsHashtable
-if ($blockstate.variants.Count -ne 960) { throw 'Expected 960 tree-tap blockstate variants.' }
+if ($blockstate.variants.Count -ne 1152) { throw 'Expected 1152 tree-tap blockstate variants.' }
 foreach ($variant in $blockstate.variants.Values) {
     $modelName = $variant.model.Replace('poptartcore:block/tree_tap/', '')
     if (!(Test-Path -LiteralPath (Join-Path $models "$modelName.json"))) {
@@ -48,7 +47,7 @@ foreach ($variant in $blockstate.variants.Values) {
 }
 
 $files = @(Get-ChildItem -LiteralPath $models -Filter '*.json')
-if ($files.Count -ne 37) { throw "Expected 37 tree-tap model files, found $($files.Count)." }
+if ($files.Count -ne 43) { throw "Expected 43 tree-tap model files, found $($files.Count)." }
 $textureDir = Join-Path $assets 'textures/block/tree_tap'
 Add-Type -AssemblyName System.Drawing
 foreach ($wood in $woods) {
@@ -92,4 +91,4 @@ if (@($obsoleteFiles).Count -ne 0) { throw 'Obsolete oak or jungle tree-tap asse
 if (@($blockstate.variants.Keys | Where-Object { $_ -like '*wood=oak*' }).Count -ne 0) {
     throw 'Obsolete oak tree-tap blockstate variants remain.'
 }
-Write-Host 'Verified 6 shared shapes, 30 texture-only children, and 960 resolvable blockstates.'
+Write-Host 'Verified 6 shared shapes, 36 texture-only children, and 1152 resolvable blockstates.'

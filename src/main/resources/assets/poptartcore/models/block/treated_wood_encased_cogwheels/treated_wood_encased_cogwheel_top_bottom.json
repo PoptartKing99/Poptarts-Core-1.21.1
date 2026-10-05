@@ -2,10 +2,10 @@
   "parent": "poptartcore:block/treated_wood_encased_cogwheels/normal/block_top_bottom",
   "render_type": "minecraft:cutout",
   "textures": {
-    "1": "poptartcore:block/treated_wood_casing",
+    "1": "poptartcore:block/treated_wood",
     "4": "create:block/gearbox",
-    "casing": "poptartcore:block/treated_wood_casing",
-    "particle": "poptartcore:block/treated_wood_casing",
-    "side": "poptartcore:block/treated_wood_casing_encased_cogwheel_side"
+    "casing": "poptartcore:block/treated_wood",
+    "particle": "poptartcore:block/treated_wood",
+    "side": "poptartcore:block/treated_wood_encased_cogwheel_side"
   }
 }

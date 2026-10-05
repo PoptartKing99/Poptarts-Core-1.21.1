@@ -41,8 +41,8 @@ public final class PoptartCasingPonders implements PonderPlugin {
         addFamily(
                 helper,
                 "treated_wood",
-                "treated_wood_casing",
-                PoptartCoreBlocks.TREATED_WOOD_CASING.get(),
+                "treated_wood",
+                PoptartCoreBlocks.TREATED_WOOD.get(),
                 PoptartCoreBlocks.TREATED_WOOD_ENCASED_SHAFT.get(),
                 PoptartCoreBlocks.TREATED_WOOD_ENCASED_COGWHEEL.get());
     }

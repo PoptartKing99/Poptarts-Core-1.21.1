@@ -1,7 +1,7 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "poptartcore:block/treated_wood_casing",
+		"0": "poptartcore:block/treated_wood",
 		"1": "poptartcore:block/belt/treated_wood_belt_cover"
 	},
 	"elements": [

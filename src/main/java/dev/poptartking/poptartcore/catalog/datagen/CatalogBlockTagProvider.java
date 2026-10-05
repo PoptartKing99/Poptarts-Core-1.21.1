@@ -26,6 +26,7 @@ public final class CatalogBlockTagProvider extends BlockTagsProvider {
         }
 
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
-                .add(PoptartCoreBlocks.MILLSTONE_STRUCTURAL.get(), PoptartCoreBlocks.MILLSTONE_ROTOR.get());
+                .add(PoptartCoreBlocks.MILLSTONE_STRUCTURAL.get(), PoptartCoreBlocks.MILLSTONE_ROTOR.get(),
+                        PoptartCoreBlocks.LATEX_CAULDRON.get());
     }
 }

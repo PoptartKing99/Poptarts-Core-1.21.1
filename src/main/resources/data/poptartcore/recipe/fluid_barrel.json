@@ -6,7 +6,7 @@
     "TTT"
   ],
   "key": {
-    "T": { "item": "poptartcore:treated_wood_casing" },
+    "T": { "item": "poptartcore:treated_wood" },
     "P": { "item": "create:iron_sheet" },
     "W": { "item": "poptartcore:wax" }
   },

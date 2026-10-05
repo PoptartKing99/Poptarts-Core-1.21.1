@@ -1,6 +1,6 @@
 $ErrorActionPreference = 'Stop'
 $target = Join-Path $PSScriptRoot '../src/main/resources/assets/poptartcore/blockstates/tree_tap.json'
-$woods = @('maple', 'spruce', 'birch', 'acacia', 'jungle')
+$woods = @('maple', 'spruce', 'pine', 'birch', 'acacia', 'jungle')
 $rotation = [ordered]@{ north = 0; east = 90; south = 180; west = 270 }
 $variants = [ordered]@{}
 foreach ($wood in $woods) {

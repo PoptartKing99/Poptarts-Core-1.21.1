@@ -138,6 +138,7 @@ public class PoptartCoreTabs {
             "wax_block",
             "tree_tap",
             "latex_bottle",
+            "rubber",
             "beehive_support",
             "beehive_white_roof",
             "beehive_light_gray_roof",
@@ -164,7 +165,7 @@ public class PoptartCoreTabs {
 
             // Casings and decorative blocks, grouped by material
             "industrial_plating",
-            "treated_wood_casing",
+            "treated_wood",
             "concrete",
             "concrete_slab",
             "concrete_stairs",

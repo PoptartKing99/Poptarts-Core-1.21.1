@@ -4,7 +4,7 @@
 	"textures": {
 		"8": "create:block/gearbox",
 		"10": "poptartcore:block/belt/treated_wood_belt_casing",
-		"particle": "poptartcore:block/treated_wood_casing"
+		"particle": "poptartcore:block/treated_wood"
 	},
 	"elements": [
 		{
