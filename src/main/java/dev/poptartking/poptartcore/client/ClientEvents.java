@@ -211,6 +211,7 @@ public class ClientEvents {
     @SubscribeEvent
     public static void registerClientReloadListeners(RegisterClientReloadListenersEvent event) {
         event.registerReloadListener((ResourceManagerReloadListener) IngotPileShape::reload);
+        event.registerReloadListener((ResourceManagerReloadListener) manager -> ConduitEyeAnimation.clearCache());
     }
 
     @SubscribeEvent

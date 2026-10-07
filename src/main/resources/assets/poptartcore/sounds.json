@@ -1,4 +1,8 @@
 {
+  "conduit.heartbeat_single": {
+    "sounds": [{"name": "poptartcore:conduit/heartbeat_single", "attenuation_distance": 8}],
+    "subtitle": "subtitles.block.conduit.ambient"
+  },
   "spider.prepare_shoot": {
     "sounds": ["poptartcore:spider/prepare_shoot1", "poptartcore:spider/prepare_shoot2", "poptartcore:spider/prepare_shoot3"],
     "subtitle": "subtitles.poptartcore.spider.prepare_shoot"

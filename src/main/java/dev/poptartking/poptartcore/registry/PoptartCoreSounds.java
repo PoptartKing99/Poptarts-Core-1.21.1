@@ -11,6 +11,10 @@ public class PoptartCoreSounds {
     public static final DeferredRegister<SoundEvent> SOUNDS =
             DeferredRegister.create(Registries.SOUND_EVENT, PoptartCore.MOD_ID);
 
+    public static final DeferredHolder<SoundEvent, SoundEvent> CONDUIT_HEARTBEAT_SINGLE = SOUNDS.register(
+            "conduit.heartbeat_single",
+            () -> SoundEvent.createVariableRangeEvent(PoptartCore.location("conduit.heartbeat_single")));
+
     public static final DeferredHolder<SoundEvent, SoundEvent> QUERN =
             SOUNDS.register("quern", () -> SoundEvent.createVariableRangeEvent(PoptartCore.location("quern")));
     public static final DeferredHolder<SoundEvent, SoundEvent> SPIDER_PREPARE_SHOOT = SOUNDS.register(

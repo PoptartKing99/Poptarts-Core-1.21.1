@@ -3,6 +3,7 @@
   "package": "dev.poptartking.poptartcore.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "conduit.ConduitHeartbeatMixin",
     "accessor.BlockEntityTypeAccessor",
     "accessor.BlockEntityPersistentDataAccessor",
     "spider.WallClimberNavigationAccessor",
@@ -36,6 +37,7 @@
     "wax.IWaxableMoonlightMixin"
   ],
   "client": [
+    "conduit.ConduitEyeAnimationMixin",
     "integration.ragdoll.ArmorPartTransformMixin",
     "integration.ragdoll.CorpseScreenArmorLayerMixin",
     "integration.ragdoll.LostHeartAttackTargetMixin",

@@ -288,7 +288,7 @@ dependencies {
     compileOnly files('run/mods/abundant_atmosphere-1.21.1-2.0.0-beta2-neoforge.jar')
     compileOnly files('run/mods/BlockBox-1.21.1-0.1.3.jar')
     compileOnly files('run/mods/supplementaries-1.21.1-3.9.8-neoforge.jar')
-    compileOnly files('run/mods/ragdoll-0.3.0.jar')
+    compileOnly files('run/mods/ragdoll-1.0.0.jar')
     compileOnly files('run/mods/newworld-neoforge-1.21.1-1.7.3.jar')
     compileOnly files(extractedSableCompanionJar).builtBy(extractSableCompanionJar)
     compileOnly 'maven.modrinth:twkfQtEc:uPJlV3eS'
