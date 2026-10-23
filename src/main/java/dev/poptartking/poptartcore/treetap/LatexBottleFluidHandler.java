@@ -1,7 +1,7 @@
 package dev.poptartking.poptartcore.treetap;
 
 import dev.poptartking.poptartcore.registry.PoptartCoreFluids;
-import dev.poptartking.poptartcore.registry.PoptartCoreItems;
+import dev.poptartking.poptartcore.registry.PoptartMaterialItems;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.fluids.FluidStack;
@@ -9,7 +9,7 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
 
 /** One latex bottle contains one fixed, indivisible serving of fluid. */
 public final class LatexBottleFluidHandler implements IFluidHandlerItem {
-    public static final int AMOUNT = 200;
+    public static final int AMOUNT = TreeTapBlockEntity.AMOUNT_PER_STAGE;
 
     private ItemStack container;
 
@@ -29,7 +29,7 @@ public final class LatexBottleFluidHandler implements IFluidHandlerItem {
 
     @Override
     public FluidStack getFluidInTank(int tank) {
-        return tank == 0 && container.is(PoptartCoreItems.LATEX_BOTTLE.get())
+        return tank == 0 && container.is(PoptartMaterialItems.LATEX_BOTTLE.get())
                 ? new FluidStack(PoptartCoreFluids.LATEX.source().get(), AMOUNT)
                 : FluidStack.EMPTY;
     }
@@ -58,8 +58,7 @@ public final class LatexBottleFluidHandler implements IFluidHandlerItem {
 
     @Override
     public FluidStack drain(int maxDrain, FluidAction action) {
-        if (maxDrain < AMOUNT || container.getCount() != 1
-                || !container.is(PoptartCoreItems.LATEX_BOTTLE.get())) {
+        if (maxDrain < AMOUNT || container.getCount() != 1 || !container.is(PoptartMaterialItems.LATEX_BOTTLE.get())) {
             return FluidStack.EMPTY;
         }
         FluidStack extracted = new FluidStack(PoptartCoreFluids.LATEX.source().get(), AMOUNT);

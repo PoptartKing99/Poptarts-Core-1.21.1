@@ -1,7 +1,7 @@
 package dev.poptartking.poptartcore.armor;
 
 import dev.poptartking.poptartcore.PoptartCore;
-import dev.poptartking.poptartcore.registry.PoptartCoreItems;
+import dev.poptartking.poptartcore.registry.PoptartArmorItems;
 import java.util.Map;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
@@ -26,31 +26,33 @@ public final class ArmorTextures {
             Map.entry(Items.IRON_CHESTPLATE, PoptartCore.location("textures/armor/iron_chestplate.png")),
             Map.entry(Items.IRON_LEGGINGS, PoptartCore.location("textures/armor/iron_leggings.png")),
             Map.entry(Items.IRON_BOOTS, PoptartCore.location("textures/armor/iron_boots.png")),
-            Map.entry(PoptartCoreItems.STEEL_HELMET.get(), PoptartCore.location("textures/armor/steel_helmet.png")),
+            Map.entry(PoptartArmorItems.STEEL_HELMET.get(), PoptartCore.location("textures/armor/steel_helmet.png")),
             Map.entry(
-                    PoptartCoreItems.STEEL_CHESTPLATE.get(),
+                    PoptartArmorItems.STEEL_CHESTPLATE.get(),
                     PoptartCore.location("textures/armor/steel_chestplate.png")),
-            Map.entry(PoptartCoreItems.STEEL_LEGGINGS.get(), PoptartCore.location("textures/armor/steel_leggings.png")),
-            Map.entry(PoptartCoreItems.STEEL_BOOTS.get(), PoptartCore.location("textures/armor/steel_boots.png")),
             Map.entry(
-                    PoptartCoreItems.BEEKEEPER_HELMET.get(),
+                    PoptartArmorItems.STEEL_LEGGINGS.get(), PoptartCore.location("textures/armor/steel_leggings.png")),
+            Map.entry(PoptartArmorItems.STEEL_BOOTS.get(), PoptartCore.location("textures/armor/steel_boots.png")),
+            Map.entry(
+                    PoptartArmorItems.BEEKEEPER_HELMET.get(),
                     PoptartCore.location("textures/armor/beekeeper_armor.png")),
             Map.entry(
-                    PoptartCoreItems.BEEKEEPER_CHESTPLATE.get(),
+                    PoptartArmorItems.BEEKEEPER_CHESTPLATE.get(),
                     PoptartCore.location("textures/armor/beekeeper_armor.png")),
             Map.entry(
-                    PoptartCoreItems.BEEKEEPER_LEGGINGS.get(),
+                    PoptartArmorItems.BEEKEEPER_LEGGINGS.get(),
                     PoptartCore.location("textures/armor/beekeeper_armor.png")),
             Map.entry(
-                    PoptartCoreItems.BEEKEEPER_BOOTS.get(), PoptartCore.location("textures/armor/beekeeper_armor.png")),
-            Map.entry(PoptartCoreItems.MINING_HELMET.get(), PoptartCore.location("textures/armor/mining_helmet.png")),
+                    PoptartArmorItems.BEEKEEPER_BOOTS.get(),
+                    PoptartCore.location("textures/armor/beekeeper_armor.png")),
+            Map.entry(PoptartArmorItems.MINING_HELMET.get(), PoptartCore.location("textures/armor/mining_helmet.png")),
             Map.entry(
-                    PoptartCoreItems.RAW_HIDE_HELMET.get(), PoptartCore.location("textures/armor/raw_hide_armor.png")),
+                    PoptartArmorItems.RAW_HIDE_HELMET.get(), PoptartCore.location("textures/armor/raw_hide_armor.png")),
             Map.entry(
-                    PoptartCoreItems.RAW_HIDE_CHESTPLATE.get(),
+                    PoptartArmorItems.RAW_HIDE_CHESTPLATE.get(),
                     PoptartCore.location("textures/armor/raw_hide_armor.png")),
             Map.entry(
-                    PoptartCoreItems.RAW_HIDE_LEGGINGS.get(),
+                    PoptartArmorItems.RAW_HIDE_LEGGINGS.get(),
                     PoptartCore.location("textures/armor/raw_hide_armor.png")));
 
     private ArmorTextures() {}

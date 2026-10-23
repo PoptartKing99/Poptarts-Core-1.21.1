@@ -1,0 +1,20 @@
+gradle.projectsEvaluated {
+    rootProject.sourceSets.gameTest.java.setIncludes([
+        '**/equipment/**', '**/treetap/**', '**/waxgolem/**', '**/beekeeping/**', '**/flesh/**'
+    ])
+    def syncMods = rootProject.tasks.register('syncNomanslandCompatibilityMods') {
+        doLast {
+            def mods = rootProject.file('build/game-test-run/mods')
+            ['nomansland-2.0.0.jar', 'sable-neoforge-1.21.1-2.0.6.jar'].each { name ->
+                def source = rootProject.file("run/mods/${name}")
+                if (!source.isFile()) throw new GradleException("Missing installed dependency: ${source}")
+                rootProject.copy { from(source); into(mods) }
+            }
+            def sableJars = rootProject.fileTree(mods).matching { include 'sable-neoforge-*.jar' }.files
+            if (sableJars.size() != 1) {
+                throw new GradleException("Archive old Sable JARs outside the test mods directory before running: ${sableJars}")
+            }
+        }
+    }
+    rootProject.tasks.named('runGameTestServer').configure { dependsOn(syncMods) }
+}

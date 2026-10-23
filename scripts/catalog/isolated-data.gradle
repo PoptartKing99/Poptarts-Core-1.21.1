@@ -1,0 +1,4 @@
+// Use build/catalog-data-run/mods instead of loading unrelated client mods from run/mods.
+gradle.projectsEvaluated {
+    rootProject.neoForge.runs.data.gameDirectory = rootProject.file('build/catalog-data-run')
+}

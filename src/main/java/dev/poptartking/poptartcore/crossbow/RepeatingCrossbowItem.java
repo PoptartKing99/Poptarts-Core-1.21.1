@@ -1,6 +1,7 @@
 package dev.poptartking.poptartcore.crossbow;
 
-import dev.poptartking.poptartcore.registry.PoptartCoreItems;
+import dev.poptartking.poptartcore.anvil.AnvilMenu;
+import dev.poptartking.poptartcore.registry.PoptartMaterialItems;
 import java.util.List;
 import java.util.Optional;
 import net.minecraft.core.component.DataComponents;
@@ -8,7 +9,9 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.ItemStack;
@@ -34,6 +37,12 @@ public class RepeatingCrossbowItem extends CrossbowItem {
     }
 
     @Override
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        ItemStack stack = player.getItemInHand(hand);
+        return AnvilMenu.isWornOut(stack) ? InteractionResultHolder.fail(stack) : super.use(level, player, hand);
+    }
+
+    @Override
     public void performShooting(
             Level level,
             LivingEntity shooter,
@@ -42,6 +51,7 @@ public class RepeatingCrossbowItem extends CrossbowItem {
             float velocity,
             float inaccuracy,
             @Nullable LivingEntity target) {
+        if (AnvilMenu.isWornOut(weapon)) return;
         super.performShooting(level, shooter, hand, weapon, velocity, inaccuracy * 2.0F, target);
     }
 
@@ -94,6 +104,7 @@ public class RepeatingCrossbowItem extends CrossbowItem {
 
     @Override
     public void releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeLeft) {
+        if (AnvilMenu.isWornOut(stack)) return;
         int usedTicks = getUseDuration(stack, entity) - timeLeft;
         if (getPowerForTime(usedTicks) == 1.0F && !isCharged(stack) && tryLoadProjectiles(entity, stack)) {
             getChargingSounds()
@@ -132,6 +143,6 @@ public class RepeatingCrossbowItem extends CrossbowItem {
 
     @Override
     public boolean isValidRepairItem(ItemStack stack, ItemStack repairCandidate) {
-        return repairCandidate.is(PoptartCoreItems.REDSTONE_CIRCUIT.get());
+        return repairCandidate.is(PoptartMaterialItems.REDSTONE_CIRCUIT.get());
     }
 }

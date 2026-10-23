@@ -1,6 +1,6 @@
 package dev.poptartking.poptartcore.mixin.bee;
 
-import dev.poptartking.poptartcore.registry.PoptartCoreItems;
+import dev.poptartking.poptartcore.registry.PoptartToolItems;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.world.InteractionHand;
@@ -36,7 +36,7 @@ public abstract class BeeSmokerArmPoseMixin {
             float netHeadYaw,
             float headPitch,
             CallbackInfo info) {
-        if (!entity.isUsingItem() || !entity.getUseItem().is(PoptartCoreItems.BEE_SMOKER.get())) {
+        if (!entity.isUsingItem() || !entity.getUseItem().is(PoptartToolItems.BEE_SMOKER.get())) {
             return;
         }
 

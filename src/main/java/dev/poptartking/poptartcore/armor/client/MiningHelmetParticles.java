@@ -1,6 +1,6 @@
 package dev.poptartking.poptartcore.armor.client;
 
-import dev.poptartking.poptartcore.registry.PoptartCoreItems;
+import dev.poptartking.poptartcore.registry.PoptartArmorItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
@@ -30,7 +30,7 @@ public final class MiningHelmetParticles {
     private static void spawn(ClientLevel level, LivingEntity wearer) {
         if (!wearer.isAlive()
                 || wearer.isSpectator()
-                || !wearer.getItemBySlot(EquipmentSlot.HEAD).is(PoptartCoreItems.MINING_HELMET.get())) {
+                || !wearer.getItemBySlot(EquipmentSlot.HEAD).is(PoptartArmorItems.MINING_HELMET.get())) {
             return;
         }
 

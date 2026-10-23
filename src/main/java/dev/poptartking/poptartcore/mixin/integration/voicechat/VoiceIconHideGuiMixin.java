@@ -24,8 +24,14 @@ public abstract class VoiceIconHideGuiMixin {
     }
 
     @Inject(method = "onRenderName", at = @At("HEAD"), cancellable = true)
-    private void poptartcore$hideNameIcons(Entity entity, Component name, PoseStack pose,
-            MultiBufferSource buffer, int light, float partialTick, CallbackInfo callback) {
+    private void poptartcore$hideNameIcons(
+            Entity entity,
+            Component name,
+            PoseStack pose,
+            MultiBufferSource buffer,
+            int light,
+            float partialTick,
+            CallbackInfo callback) {
         if (Minecraft.getInstance().options.hideGui) {
             callback.cancel();
         }

@@ -8,15 +8,12 @@ public final class ConduitHeartbeatTiming {
     public static final int FULL_TRACK_DURATION_TICKS = 91;
     public static final int SINGLE_PAIR_DURATION_TICKS = 16;
     public static final int SINGLE_PAIR_PAUSE_TICKS = TICKS_PER_SECOND;
-    public static final int SINGLE_PAIR_INTERVAL_TICKS =
-            SINGLE_PAIR_DURATION_TICKS + SINGLE_PAIR_PAUSE_TICKS;
+    public static final int SINGLE_PAIR_INTERVAL_TICKS = SINGLE_PAIR_DURATION_TICKS + SINGLE_PAIR_PAUSE_TICKS;
     public static final double HALF_PULSE_DURATION_TICKS = 4.0;
     public static final long PLAYBACK_CLEANUP_INTERVAL_NANOS = 1_000_000_000L;
 
     // Measured RMS peaks from vanilla block/conduit/ambient.ogg.
-    private static final double[] BEAT_PEAK_TICKS = {
-        1.4, 8.0, 21.4, 27.6, 41.4, 47.6, 61.2, 67.8
-    };
+    private static final double[] BEAT_PEAK_TICKS = {1.4, 8.0, 21.4, 27.6, 41.4, 47.6, 61.2, 67.8};
 
     private ConduitHeartbeatTiming() {}
 
@@ -29,7 +26,6 @@ public final class ConduitHeartbeatTiming {
     }
 
     public static long playbackDurationNanos(boolean singlePair) {
-        return (long) (singlePair ? SINGLE_PAIR_DURATION_TICKS : FULL_TRACK_DURATION_TICKS)
-                * NANOS_PER_TICK;
+        return (long) (singlePair ? SINGLE_PAIR_DURATION_TICKS : FULL_TRACK_DURATION_TICKS) * NANOS_PER_TICK;
     }
 }

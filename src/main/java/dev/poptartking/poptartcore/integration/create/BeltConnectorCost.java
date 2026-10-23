@@ -10,8 +10,10 @@ public final class BeltConnectorCost {
     private BeltConnectorCost() {}
 
     public static int length(BlockPos first, BlockPos last) {
-        return Math.max(Math.max(Math.abs(first.getX() - last.getX()),
-                Math.abs(first.getY() - last.getY())), Math.abs(first.getZ() - last.getZ())) + 1;
+        return Math.max(
+                        Math.max(Math.abs(first.getX() - last.getX()), Math.abs(first.getY() - last.getY())),
+                        Math.abs(first.getZ() - last.getZ()))
+                + 1;
     }
 
     public static int available(Player player) {

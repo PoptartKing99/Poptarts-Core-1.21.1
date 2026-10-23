@@ -5,8 +5,8 @@ import dev.poptartking.poptartcore.client.FluidTankRenderer;
 import dev.poptartking.poptartcore.crucible.CrucibleBlockEntity;
 import dev.poptartking.poptartcore.crucible.casting.CastingRecipe;
 import dev.poptartking.poptartcore.crucible.menu.CrucibleMenu;
-import dev.poptartking.poptartcore.registry.PoptartCoreItems;
 import dev.poptartking.poptartcore.registry.PoptartCoreRecipes;
+import dev.poptartking.poptartcore.registry.PoptartProcessingItems;
 import java.util.Optional;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -67,8 +67,9 @@ public class CrucibleScreen extends AbstractContainerScreen<CrucibleMenu> {
         FluidStack fluid = new FluidStack(menu.getFluid(), menu.getFluidAmount());
 
         ItemStack insertedMould = menu.getMould();
-        ItemStack mould =
-                insertedMould.isEmpty() ? PoptartCoreItems.INGOT_MOULD.get().getDefaultInstance() : insertedMould;
+        ItemStack mould = insertedMould.isEmpty()
+                ? PoptartProcessingItems.INGOT_MOULD.get().getDefaultInstance()
+                : insertedMould;
 
         Optional<CastingRecipe> castingRecipe =
                 minecraft

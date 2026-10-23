@@ -1,8 +1,8 @@
 package dev.poptartking.poptartcore.registry;
 
 import dev.poptartking.poptartcore.PoptartCore;
+import dev.poptartking.poptartcore.catalog.CreativeCatalogGroup;
 import dev.poptartking.poptartcore.catalog.PoptartCatalog;
-import java.util.List;
 import java.util.function.Supplier;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -12,225 +12,18 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class PoptartCoreTabs {
-    private static final List<String> CREATIVE_TAB_ORDER = List.of(
-            // Workstations and processing equipment
-            "workbench",
-            "scribing_table",
-            "quern",
-            "millstone",
-            "bloomery",
-            "blast_furnace",
-            "crucible",
-            "fluid_barrel",
-            "portable_engine",
-            "unfired_ingot_mould",
-            "ingot_mould",
-            "unfired_plate_mould",
-            "plate_mould",
-
-            // Tools and weapons, grouped by material
-            "firestarter",
-            "scribing_tools",
-            "bone_pick",
-            "flint_axe",
-            "flint_shovel",
-            "hammer",
-            "sledgehammer",
-            "ruined_sword",
-            "ruined_pickaxe",
-            "ruined_axe",
-            "ruined_shovel",
-            "ruined_knife",
-            "bronze_sword",
-            "bronze_pickaxe",
-            "bronze_axe",
-            "bronze_shovel",
-            "bronze_knife",
-            "steel_sword",
-            "steel_pickaxe",
-            "steel_axe",
-            "steel_shovel",
-            "steel_knife",
-            "repeating_crossbow",
-            "bee_smoker",
-
-            // Armor sets
-            "raw_hide_helmet",
-            "raw_hide_chestplate",
-            "raw_hide_leggings",
-            "beekeeper_helmet",
-            "beekeeper_chestplate",
-            "beekeeper_leggings",
-            "beekeeper_boots",
-            "mining_helmet",
-            "steel_helmet",
-            "steel_chestplate",
-            "steel_leggings",
-            "steel_boots",
-
-            // Ores and processed metals, grouped by material
-            "tin_ore",
-            "deepslate_tin_ore",
-            "raw_tin",
-            "raw_tin_block",
-            "tin_ingot",
-            "tin_nugget",
-            "tin_block",
-            "lead_ore",
-            "deepslate_lead_ore",
-            "raw_lead",
-            "raw_lead_block",
-            "lead_ingot",
-            "lead_nugget",
-            "lead_block",
-            "magnetite",
-            "magnetite_block",
-            "cinnabar",
-            "cinnabar_block",
-            "mercury_droplet",
-            "mercury_ingot",
-            "mercury_block",
-            "silver_ore",
-            "deepslate_silver_ore",
-            "raw_silver",
-            "raw_silver_block",
-            "silver_ingot",
-            "silver_nugget",
-            "silver_block",
-            "titanium_ore",
-            "deepslate_titanium_ore",
-            "cassiterite_titanium_ore",
-            "cylindrite_titanium_ore",
-            "raw_titanium",
-            "raw_titanium_block",
-            "titanium_shard",
-            "titanium_ingot",
-            "titanium_nugget",
-            "titanium_plate",
-            "bronze_ingot",
-            "bronze_nugget",
-            "bronze_plate",
-            "bronze_block",
-            "iron_bloom",
-            "steel_ingot",
-            "steel_nugget",
-            "steel_plate",
-            "steel_block",
-
-            // Other materials and components
-            "coal_coke",
-            "coal_coke_block",
-            "wax",
-            "patina",
-            "rift_torch",
-            "sconce_rift_torch",
-            "sconce_cupric_torch",
-            "rift_lantern",
-            "rift_campfire",
-            "rift_brazier",
-            "rift_stone_brazier",
-            "cupric_brazier",
-            "cupric_stone_brazier",
-            "sconce_torch_lever",
-            "sconce_rift_torch_lever",
-            "sconce_cupric_torch_lever",
-            "sconce_soul_torch_lever",
-            "wax_block",
-            "tree_tap",
-            "latex_bottle",
-            "rubber",
-            "beehive_support",
-            "beehive_white_roof",
-            "beehive_light_gray_roof",
-            "beehive_gray_roof",
-            "beehive_black_roof",
-            "beehive_brown_roof",
-            "beehive_red_roof",
-            "beehive_orange_roof",
-            "beehive_yellow_roof",
-            "beehive_lime_roof",
-            "beehive_green_roof",
-            "beehive_cyan_roof",
-            "beehive_light_blue_roof",
-            "beehive_blue_roof",
-            "beehive_purple_roof",
-            "beehive_magenta_roof",
-            "beehive_pink_roof",
-            "redstone_circuit",
-            "audio_circuit",
-            "video_circuit",
-            "radio_circuit",
-            "amethyst_crystal",
-            "quartz_crystal",
-
-            // Casings and decorative blocks, grouped by material
-            "industrial_plating",
-            "treated_wood",
-            "concrete",
-            "concrete_slab",
-            "concrete_stairs",
-            "concrete_powder",
-            "clinker_bricks",
-            "clinker_brick_slab",
-            "clinker_brick_stairs",
-            "clinker_brick_wall",
-            "clinker_tile",
-            "clinker_tile_slab",
-            "clinker_tile_stairs",
-            "clinker_tile_wall",
-            "mosaic_clinker_tile",
-            "chiseled_clinker_tile",
-            "clinker_pillar",
-            "bronze_bricks",
-            "chiseled_bronze_bricks",
-            "bronze_brick_slab",
-            "bronze_brick_stairs",
-            "bronze_brick_wall",
-            "aged_bronze_bricks",
-            "chiseled_aged_bronze_bricks",
-            "aged_bronze_brick_slab",
-            "aged_bronze_brick_stairs",
-            "aged_bronze_brick_wall",
-            "lead_bricks",
-            "chiseled_lead_bricks",
-            "lead_brick_slab",
-            "lead_brick_stairs",
-            "lead_brick_wall",
-            "mercury_bricks",
-            "chiseled_mercury_bricks",
-            "mercury_brick_slab",
-            "mercury_brick_stairs",
-            "mercury_brick_wall",
-            "steel_bricks",
-            "chiseled_steel_bricks",
-            "steel_brick_slab",
-            "steel_brick_stairs",
-            "steel_brick_wall",
-            "titanium_bricks",
-            "chiseled_titanium_bricks",
-            "titanium_brick_slab",
-            "titanium_brick_stairs",
-            "titanium_brick_wall",
-
-            // Rift and heart items
-            "rift_sediment",
-            "rift_sediment_block",
-            "budding_flesh",
-            "fresh_flesh",
-            "flesh",
-            "rotten_flesh",
-            "lifegem",
-            "heart_crystal");
-
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TAB =
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, PoptartCore.MOD_ID);
 
     public static final Supplier<CreativeModeTab> POPTARTCORE_TAB =
             CREATIVE_MODE_TAB.register("poptartcore_tab", () -> CreativeModeTab.builder()
-                    .icon(() -> new ItemStack(PoptartCoreItems.CRUCIBLE.get()))
+                    .icon(() -> new ItemStack(PoptartBlockItems.CRUCIBLE.get()))
                     .title(Component.translatable("creativetab.poptartcore.poptartcore_tab"))
-                    .displayItems(
-                            (parameters, output) -> PoptartCatalog.addCreativeTabItems(output, CREATIVE_TAB_ORDER))
+                    .displayItems((parameters, output) -> {
+                        for (var group : CreativeCatalogGroup.values()) {
+                            PoptartCatalog.addCreativeTabItems(output, CreativeItemOrder.ITEMS, group);
+                        }
+                    })
                     .build());
 
     public static void register(IEventBus eventBus) {

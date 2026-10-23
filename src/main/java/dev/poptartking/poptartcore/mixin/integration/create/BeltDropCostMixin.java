@@ -17,8 +17,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(BeltBlock.class)
 public abstract class BeltDropCostMixin {
     @Inject(method = "getDrops", at = @At("RETURN"))
-    private void poptartcore$refundConnectors(BlockState state, LootParams.Builder builder,
-            CallbackInfoReturnable<List<ItemStack>> callback) {
+    private void poptartcore$refundConnectors(
+            BlockState state, LootParams.Builder builder, CallbackInfoReturnable<List<ItemStack>> callback) {
         BlockEntity blockEntity = builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
         if (!(blockEntity instanceof BeltBlockEntity belt) || belt.beltLength <= 1) {
             return;

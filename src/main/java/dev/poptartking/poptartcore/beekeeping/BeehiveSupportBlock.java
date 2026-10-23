@@ -35,15 +35,9 @@ public class BeehiveSupportBlock extends Block {
             Block.box(0, 0, 13, 3, 13, 16),
             Block.box(13, 0, 13, 16, 13, 16));
     private static final VoxelShape ANGLED_SHAPE_X = Shapes.or(
-            TOP,
-            angledLegs(-3, 1.5, 0, 4, 1, 4),
-            angledLegs(-1.5, 3, 4, 8, 1, 4),
-            angledLegs(0, 5, 8, 13, 1, 4));
+            TOP, angledLegs(-3, 1.5, 0, 4, 1, 4), angledLegs(-1.5, 3, 4, 8, 1, 4), angledLegs(0, 5, 8, 13, 1, 4));
     private static final VoxelShape ANGLED_SHAPE_Z = Shapes.or(
-            TOP,
-            angledLegsZ(-3, 1.5, 0, 4, 1, 4),
-            angledLegsZ(-1.5, 3, 4, 8, 1, 4),
-            angledLegsZ(0, 5, 8, 13, 1, 4));
+            TOP, angledLegsZ(-3, 1.5, 0, 4, 1, 4), angledLegsZ(-1.5, 3, 4, 8, 1, 4), angledLegsZ(0, 5, 8, 13, 1, 4));
 
     public BeehiveSupportBlock(Properties properties) {
         super(properties);
@@ -52,7 +46,8 @@ public class BeehiveSupportBlock extends Block {
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
+        return defaultBlockState()
+                .setValue(FACING, context.getHorizontalDirection().getOpposite());
     }
 
     @Override
@@ -93,8 +88,7 @@ public class BeehiveSupportBlock extends Block {
         return state.getValue(FACING).getAxis() == Direction.Axis.Z ? ANGLED_SHAPE_X : ANGLED_SHAPE_Z;
     }
 
-    private static VoxelShape angledLegs(
-            double minX, double maxX, double minY, double maxY, double minZ, double maxZ) {
+    private static VoxelShape angledLegs(double minX, double maxX, double minY, double maxY, double minZ, double maxZ) {
         return Shapes.or(
                 Block.box(minX, minY, minZ, maxX, maxY, maxZ),
                 Block.box(16 - maxX, minY, minZ, 16 - minX, maxY, maxZ),

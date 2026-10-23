@@ -1,0 +1,171 @@
+{
+  "format_version": "1.21.11",
+  "credit": "Made by Farcr",
+  "parent": "block/block",
+  "textures": {
+    "0": "poptartcore:block/anvils/primitive_anvil_side",
+    "1": "poptartcore:block/anvils/primitive_anvil_front",
+    "2": "poptartcore:block/anvils/damaged_primitive_anvil_top",
+    "5": "poptartcore:block/anvils/primitive_anvil_bottom",
+    "particle": "poptartcore:block/anvils/mortar_particle"
+  },
+  "elements": [
+    {
+      "from": [
+        2,
+        0,
+        2
+      ],
+      "to": [
+        14,
+        2,
+        14
+      ],
+      "rotation": {
+        "angle": 0,
+        "axis": "y",
+        "origin": [
+          3,
+          0,
+          13
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            2,
+            14,
+            14,
+            16
+          ],
+          "texture": "#1"
+        },
+        "east": {
+          "uv": [
+            2,
+            14,
+            14,
+            16
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            2,
+            14,
+            14,
+            16
+          ],
+          "texture": "#1"
+        },
+        "west": {
+          "uv": [
+            2,
+            14,
+            14,
+            16
+          ],
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [
+            2,
+            2,
+            14,
+            14
+          ],
+          "rotation": 270,
+          "texture": "#5"
+        },
+        "down": {
+          "uv": [
+            2,
+            2,
+            14,
+            14
+          ],
+          "rotation": 90,
+          "texture": "#5"
+        }
+      }
+    },
+    {
+      "from": [
+        2,
+        2,
+        0
+      ],
+      "to": [
+        14,
+        14,
+        16
+      ],
+      "rotation": {
+        "angle": 0,
+        "axis": "y",
+        "origin": [
+          4,
+          6,
+          12
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            2,
+            2,
+            14,
+            14
+          ],
+          "texture": "#1"
+        },
+        "east": {
+          "uv": [
+            0,
+            2,
+            16,
+            14
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            2,
+            2,
+            14,
+            14
+          ],
+          "texture": "#1"
+        },
+        "west": {
+          "uv": [
+            0,
+            2,
+            16,
+            14
+          ],
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [
+            2,
+            0,
+            14,
+            16
+          ],
+          "texture": "#2"
+        },
+        "down": {
+          "uv": [
+            0,
+            2,
+            16,
+            14
+          ],
+          "rotation": 90,
+          "texture": "#5"
+        }
+      }
+    }
+  ]
+}

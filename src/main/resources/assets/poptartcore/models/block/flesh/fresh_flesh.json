@@ -1,4 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": { "all": "poptartcore:block/flesh/fresh_flesh" }
-}

@@ -1,8 +1,5 @@
 package dev.poptartking.poptartcore.waxgolem;
 
-import com.farcr.nomansland.common.block.cauldrons.FourLayeredCauldronBlock;
-import com.farcr.nomansland.common.block.tap.TapBlock;
-import com.farcr.nomansland.common.registry.blocks.NMLBlocks;
 import dev.poptartking.poptartcore.PoptartCore;
 import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
 import dev.poptartking.poptartcore.registry.PoptartCoreEntities;
@@ -34,6 +31,47 @@ import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 @PrefixGameTestTemplate(false)
 public final class WaxGolemGameTests {
     private WaxGolemGameTests() {}
+
+    @GameTest(template = "millstone_test", timeoutTicks = 40)
+    public static void recognizesHiveFedCauldronsUsingUpdatedTapApi(GameTestHelper helper) {
+        var level = helper.getLevel();
+        var cauldron = helper.absolutePos(new BlockPos(3, 1, 3));
+        for (Direction facing : Direction.Plane.HORIZONTAL) {
+            for (int height = 1; height <= 3; height++) {
+                var tapPos = cauldron.above(height);
+                var source = tapPos.relative(facing.getOpposite());
+                level.setBlockAndUpdate(cauldron, Blocks.CAULDRON.defaultBlockState());
+                level.setBlockAndUpdate(source, Blocks.BEEHIVE.defaultBlockState());
+                level.setBlockAndUpdate(
+                        tapPos,
+                        com.farcr.nomansland.common.registry.blocks.NMLBlocks.TAP
+                                .get()
+                                .defaultBlockState()
+                                .setValue(com.farcr.nomansland.common.block.tap.TapBlock.FACING, facing)
+                                .setValue(com.farcr.nomansland.common.block.tap.TapBlock.CLOSED, false));
+                helper.assertTrue(
+                        HoneyCauldrons.fedByHiveTap(level, cauldron),
+                        "Hive-fed cauldron detected at height=" + height + ", facing=" + facing);
+                if (height > 1) {
+                    level.setBlockAndUpdate(cauldron.above(), Blocks.STONE.defaultBlockState());
+                    helper.assertTrue(
+                            !HoneyCauldrons.fedByHiveTap(level, cauldron), "Solid block interrupts drip path");
+                    level.setBlockAndUpdate(cauldron.above(), Blocks.CAULDRON.defaultBlockState());
+                    helper.assertTrue(
+                            !HoneyCauldrons.fedByHiveTap(level, cauldron), "Nearer cauldron intercepts drips");
+                    helper.assertTrue(
+                            HoneyCauldrons.fedByHiveTap(level, cauldron.above()), "Intercepting cauldron is detected");
+                    level.setBlockAndUpdate(cauldron.above(), Blocks.AIR.defaultBlockState());
+                }
+                level.setBlockAndUpdate(tapPos, Blocks.AIR.defaultBlockState());
+                level.setBlockAndUpdate(source, Blocks.AIR.defaultBlockState());
+                helper.assertTrue(
+                        !HoneyCauldrons.fedByHiveTap(level, cauldron),
+                        "Removing tap releases the cauldron for golem deposits");
+            }
+        }
+        helper.succeed();
+    }
 
     @GameTest(template = "millstone_test", timeoutTicks = 40)
     public static void savesLifecycleAndHiveMemory(GameTestHelper helper) {
@@ -169,7 +207,8 @@ public final class WaxGolemGameTests {
         level.setBlockAndUpdate(hivePos.below(2), Blocks.CAMPFIRE.defaultBlockState());
         level.setBlockAndUpdate(
                 hivePos,
-                Blocks.BEEHIVE.defaultBlockState()
+                Blocks.BEEHIVE
+                        .defaultBlockState()
                         .setValue(BeehiveBlock.FACING, Direction.NORTH)
                         .setValue(BeehiveBlock.HONEY_LEVEL, 5));
         WaxGolem golem = createGolem(helper, new BlockPos(3, 1, 3));
@@ -184,7 +223,9 @@ public final class WaxGolemGameTests {
         helper.assertTrue(
                 level.getBlockState(hivePos).getValue(BeehiveBlock.HONEY_LEVEL) == 0,
                 "Wax Golem did not empty the beehive");
-        int bottles = level.getEntitiesOfClass(ItemEntity.class, golem.getBoundingBox().inflate(4)).stream()
+        int bottles = level
+                .getEntitiesOfClass(ItemEntity.class, golem.getBoundingBox().inflate(4))
+                .stream()
                 .filter(item -> item.getItem().is(Items.HONEY_BOTTLE))
                 .mapToInt(item -> item.getItem().getCount())
                 .sum();
@@ -287,7 +328,8 @@ public final class WaxGolemGameTests {
         level.setBlockAndUpdate(nest.below(2), Blocks.CAMPFIRE.defaultBlockState());
         level.setBlockAndUpdate(
                 nest,
-                Blocks.BEE_NEST.defaultBlockState()
+                Blocks.BEE_NEST
+                        .defaultBlockState()
                         .setValue(BeehiveBlock.FACING, Direction.NORTH)
                         .setValue(BeehiveBlock.HONEY_LEVEL, 5));
         level.setBlockAndUpdate(destination, Blocks.CHEST.defaultBlockState());
@@ -306,8 +348,7 @@ public final class WaxGolemGameTests {
                     bottles += chest.getItem(slot).getCount();
                 }
             }
-            helper.assertTrue(
-                    bottles == 1, "Scheduled AI did not deposit the honey bottle from the bee nest");
+            helper.assertTrue(bottles == 1, "Scheduled AI did not deposit the honey bottle from the bee nest");
         });
     }
 

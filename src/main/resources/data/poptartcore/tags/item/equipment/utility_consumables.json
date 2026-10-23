@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "nomansland:bandage", "required": false},
+    {"id": "nomansland:antidote_bandage", "required": false},
+    {"id": "nomansland:medicinal_bandage", "required": false},
+    {"id": "nomansland:warding_bandage", "required": false}
+  ]
+}

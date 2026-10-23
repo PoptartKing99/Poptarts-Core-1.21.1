@@ -30,17 +30,20 @@ public class PoptartCoreFluids {
 
     private static MoltenFluidDefinition registerLatex() {
         DeferredHolder<FluidType, FluidType> type = FLUID_TYPES.register(
-                "latex", () -> new FluidType(FluidType.Properties.create()
+                "latex",
+                () -> new FluidType(FluidType.Properties.create()
                         .viscosity(1500)
                         .density(950)
                         .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BOTTLE_EMPTY)));
         FluidReference sourceReference = new FluidReference();
         FluidReference flowingReference = new FluidReference();
         DeferredHolder<Fluid, FlowingFluid> source = FLUIDS.register(
-                "latex", () -> new BaseFlowingFluid.Source(
+                "latex",
+                () -> new BaseFlowingFluid.Source(
                         new BaseFlowingFluid.Properties(type, sourceReference, flowingReference)));
         DeferredHolder<Fluid, FlowingFluid> flowing = FLUIDS.register(
-                "flowing_latex", () -> new BaseFlowingFluid.Flowing(
+                "flowing_latex",
+                () -> new BaseFlowingFluid.Flowing(
                         new BaseFlowingFluid.Properties(type, sourceReference, flowingReference)));
         sourceReference.set(source);
         flowingReference.set(flowing);

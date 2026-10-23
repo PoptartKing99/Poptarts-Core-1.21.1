@@ -33,4 +33,9 @@ public class PoptartCoreMenus {
     public static void register(IEventBus eventBus) {
         MENUS.register(eventBus);
     }
+
+    public static final DeferredHolder<MenuType<?>, MenuType<dev.poptartking.poptartcore.anvil.AnvilMenu>>
+            PRIMITIVE_ANVIL_MENU = MENUS.register(
+                    "anvil",
+                    () -> new MenuType<>(dev.poptartking.poptartcore.anvil.AnvilMenu::new, FeatureFlags.DEFAULT_FLAGS));
 }

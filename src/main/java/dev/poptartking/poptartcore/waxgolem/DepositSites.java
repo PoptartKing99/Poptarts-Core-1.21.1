@@ -20,9 +20,7 @@ public final class DepositSites {
         int bestScore = Integer.MIN_VALUE;
         boolean honey = result.is(Items.HONEY_BOTTLE);
         for (BlockPos pos : BlockPos.betweenClosed(origin.offset(-range, -4, -range), origin.offset(range, 4, range))) {
-            if (honey
-                    && HoneyCauldrons.acceptsBottle(level, pos)
-                    && !HoneyCauldrons.fedByHiveTap(level, pos)) {
+            if (honey && HoneyCauldrons.acceptsBottle(level, pos) && !HoneyCauldrons.fedByHiveTap(level, pos)) {
                 int score2 = (40 - ((int) Math.sqrt(pos.distSqr(origin))))
                         + (HoneyCauldrons.isHoney(level.getBlockState(pos)) ? 10 : 0);
                 if (score2 > bestScore) {

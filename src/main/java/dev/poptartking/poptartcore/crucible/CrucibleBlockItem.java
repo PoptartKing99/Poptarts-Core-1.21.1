@@ -65,7 +65,8 @@ public class CrucibleBlockItem extends BlockItem {
         if (state.is(Blocks.CAMPFIRE)) return CrucibleBlock.CampfireType.NORMAL;
         if (state.is(Blocks.SOUL_CAMPFIRE)) return CrucibleBlock.CampfireType.SOUL;
         if (state.is(PoptartCoreBlocks.RIFT_CAMPFIRE.get())) return CrucibleBlock.CampfireType.RIFT;
-        if (BuiltInRegistries.BLOCK.getKey(state.getBlock())
+        if (BuiltInRegistries.BLOCK
+                .getKey(state.getBlock())
                 .equals(ResourceLocation.fromNamespaceAndPath("caverns_and_chasms", "cupric_campfire"))) {
             return CrucibleBlock.CampfireType.CUPRIC;
         }

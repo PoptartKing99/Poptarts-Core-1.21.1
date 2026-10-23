@@ -2,7 +2,7 @@ $ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.Drawing
 
 $textureDir = Join-Path $PSScriptRoot '../src/main/resources/assets/poptartcore/textures/block/tree_tap'
-foreach ($wood in @('maple', 'spruce', 'birch', 'acacia', 'jungle')) {
+foreach ($wood in @('maple', 'spruce', 'pine', 'birch', 'acacia', 'jungle')) {
     $path = Join-Path $textureDir "tree_tap_${wood}_drip.png"
     $image = [System.Drawing.Bitmap]::new($path)
     try {

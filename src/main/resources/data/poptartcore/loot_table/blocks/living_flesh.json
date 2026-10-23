@@ -1,0 +1,23 @@
+{
+  "type": "block",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:empty",
+          "weight": 20
+        },
+        {
+          "type": "empty",
+          "weight": 80
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "survives_explosion"
+        }
+      ]
+    }
+  ]
+}

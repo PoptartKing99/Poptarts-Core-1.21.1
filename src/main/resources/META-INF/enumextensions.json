@@ -1,0 +1,11 @@
+{
+  "entries": [{
+    "enum": "net/minecraft/world/item/Rarity",
+    "name": "POPTARTCORE_MALEVOLENT",
+    "constructor": "(ILjava/lang/String;Ljava/util/function/UnaryOperator;)V",
+    "parameters": {
+      "class": "dev/poptartking/poptartcore/registry/PoptartRarities",
+      "field": "MALEVOLENT"
+    }
+  }]
+}

@@ -46,7 +46,6 @@ public class LostHeartEntity extends Entity {
     private UUID owner;
     private UUID corpse;
     private int token;
-    private int ticksSinceHit;
 
     public LostHeartEntity(EntityType<? extends LostHeartEntity> type, Level level) {
         super(type, level);
@@ -101,10 +100,6 @@ public class LostHeartEntity extends Entity {
             if (corpseId() != id) entityData.set(CORPSE_ID, id);
         }
         followCorpse();
-        if (++ticksSinceHit > 60 && cracks() > 0) {
-            entityData.set(CRACKS, cracks() - 1);
-            ticksSinceHit = 0;
-        }
     }
 
     private void followCorpse() {
@@ -127,7 +122,6 @@ public class LostHeartEntity extends Entity {
                 || isRemoved()
                 || !player.getUUID().equals(owner)) return;
         if (Hearts.get(player) >= Hearts.MAX) return;
-        ticksSinceHit = 0;
         int next = cracks() + 1;
         if (next >= 4) {
             shatter(server, player);

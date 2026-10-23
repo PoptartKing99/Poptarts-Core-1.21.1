@@ -40,6 +40,11 @@ public final class PoptartCatalog {
 
     private PoptartCatalog() {}
 
+    public static void blockAlias(String oldId, String newId) {
+        BLOCKS.addAlias(PoptartCore.location(oldId), PoptartCore.location(newId));
+        ITEMS.addAlias(PoptartCore.location(oldId), PoptartCore.location(newId));
+    }
+
     public static CatalogItemDefinition<Item> simpleItem(String id) {
         return item(id, () -> new Item(new Item.Properties()));
     }
@@ -82,7 +87,8 @@ public final class PoptartCatalog {
         return List.copyOf(BLOCK_DEFINITIONS.values());
     }
 
-    public static void addCreativeTabItems(CreativeModeTab.Output output, List<String> preferredOrder) {
+    public static void addCreativeTabItems(
+            CreativeModeTab.Output output, List<String> preferredOrder, CreativeCatalogGroup group) {
         Map<String, Supplier<? extends ItemLike>> remaining = new LinkedHashMap<>();
         ITEM_DEFINITIONS.forEach((id, definition) -> {
             if (definition.showInCreativeTab()) {
@@ -107,9 +113,13 @@ public final class PoptartCatalog {
                 }
                 throw new IllegalArgumentException("Unknown Poptart Catalog creative-tab entry: " + id);
             }
-            output.accept(entry.get());
+            ItemLike item = entry.get();
+            if (CreativeCatalogGroup.forItem(id, item.asItem()) == group) output.accept(item);
         }
-        remaining.values().forEach(entry -> output.accept(entry.get()));
+        remaining.forEach((id, entry) -> {
+            ItemLike item = entry.get();
+            if (CreativeCatalogGroup.forItem(id, item.asItem()) == group) output.accept(item);
+        });
     }
 
     public static void register(IEventBus eventBus) {

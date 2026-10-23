@@ -2,7 +2,7 @@
   "render_type": "minecraft:translucent",
   "textures": {
     "0": "poptartcore:block/flesh/lifebud",
-    "1": "poptartcore:block/flesh/fresh_flesh",
+    "1": "poptartcore:block/flesh/living_flesh",
     "particle": "poptartcore:block/flesh/lifebud_particle"
   },
   "elements": [

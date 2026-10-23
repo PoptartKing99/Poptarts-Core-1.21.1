@@ -45,8 +45,8 @@ import dev.poptartking.poptartcore.rift.RiftWallTorchBlock;
 import dev.poptartking.poptartcore.rift.SoulSconceLeverBlock;
 import dev.poptartking.poptartcore.scribing.ScribingTableBlock;
 import dev.poptartking.poptartcore.spider.TemporaryCobwebBlock;
-import dev.poptartking.poptartcore.treetap.TreeTapBlock;
 import dev.poptartking.poptartcore.treetap.LatexCauldronBlock;
+import dev.poptartking.poptartcore.treetap.TreeTapBlock;
 import dev.poptartking.poptartcore.workbench.WorkbenchBlock;
 import dev.simulated_team.simulated.content.blocks.portable_engine.PortableEngineBlock;
 import net.mehvahdjukaar.supplementaries.common.block.blocks.SconceLeverBlock;
@@ -54,8 +54,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.ColorRGBA;
-import net.minecraft.world.item.StandingAndWallBlockItem;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.StandingAndWallBlockItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ColoredFallingBlock;
@@ -86,8 +86,9 @@ public class PoptartCoreBlocks {
 
     public static final DeferredBlock<TemporaryCobwebBlock> TEMPORARY_COBWEB = BLOCKS.register(
             "temporary_cobweb",
-            () -> new TemporaryCobwebBlock(
-                    BlockBehaviour.Properties.ofFullCopy(Blocks.COBWEB).noLootTable()));
+            () -> new TemporaryCobwebBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.COBWEB)
+                    .strength(0.4F)
+                    .noLootTable()));
     public static final DeferredBlock<RiftFireBlock> RIFT_FIRE = BLOCKS.register(
             "rift_fire",
             () -> new RiftFireBlock(
@@ -162,9 +163,10 @@ public class PoptartCoreBlocks {
             .mineableWithPickaxe();
     public static final CatalogBlockDefinition<SconceLeverBlock> SCONCE_TORCH_LEVER = PoptartCatalog.block(
                     "sconce_torch_lever",
-                    () -> new SconceLeverBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.LEVER)
-                            .noOcclusion()
-                            .lightLevel(state -> state.getValue(BlockStateProperties.LIT) ? 14 : 0),
+                    () -> new SconceLeverBlock(
+                            BlockBehaviour.Properties.ofFullCopy(Blocks.LEVER)
+                                    .noOcclusion()
+                                    .lightLevel(state -> state.getValue(BlockStateProperties.LIT) ? 14 : 0),
                             () -> ParticleTypes.FLAME))
             .externalModel()
             .customLoot();
@@ -332,34 +334,31 @@ public class PoptartCoreBlocks {
                             () -> PoptartCoreBlocks.ROTTEN_FLESH.get(),
                             BlockBehaviour.Properties.ofFullCopy(Blocks.SCULK)
                                     .mapColor(MapColor.NETHER)
-                                    .randomTicks()
-                                    .noLootTable()))
+                                    .randomTicks()))
             .externalModel()
-            .noLoot()
+            .customLoot()
             .tags(BlockTags.MINEABLE_WITH_HOE);
-    public static final CatalogBlockDefinition<DecayingFleshBlock> FRESH_FLESH = PoptartCatalog.block(
-                    "fresh_flesh",
+    public static final CatalogBlockDefinition<DecayingFleshBlock> LIVING_FLESH = PoptartCatalog.block(
+                    "living_flesh",
                     () -> new DecayingFleshBlock(
                             FLESH::get,
                             BlockBehaviour.Properties.ofFullCopy(Blocks.SCULK)
                                     .mapColor(MapColor.COLOR_RED)
-                                    .randomTicks()
-                                    .noLootTable()))
+                                    .randomTicks()))
             .externalModel()
-            .noLoot()
+            .customLoot()
             .tags(BlockTags.MINEABLE_WITH_HOE);
     public static final CatalogBlockDefinition<Block> ROTTEN_FLESH = PoptartCatalog.block(
                     "rotten_flesh",
-                    () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SCULK)
-                            .mapColor(MapColor.COLOR_BROWN)
-                            .noLootTable()))
+                    () -> new Block(
+                            BlockBehaviour.Properties.ofFullCopy(Blocks.SCULK).mapColor(MapColor.COLOR_BROWN)))
             .externalModel()
-            .noLoot()
+            .customLoot()
             .tags(BlockTags.MINEABLE_WITH_HOE);
     public static final CatalogBlockDefinition<DecayingFleshBlock> BUDDING_FLESH = PoptartCatalog.block(
                     "budding_flesh",
                     () -> new DecayingFleshBlock(
-                            FRESH_FLESH::get,
+                            LIVING_FLESH::get,
                             BlockBehaviour.Properties.ofFullCopy(Blocks.SCULK)
                                     .mapColor(MapColor.COLOR_RED)
                                     .randomTicks()
@@ -373,6 +372,7 @@ public class PoptartCoreBlocks {
                     .mapColor(MapColor.COLOR_RED)
                     .instabreak()
                     .sound(SoundType.HONEY_BLOCK)
+                    .randomTicks()
                     .noOcclusion()
                     .pushReaction(PushReaction.DESTROY)));
 
@@ -382,26 +382,26 @@ public class PoptartCoreBlocks {
                             .sound(SoundType.METAL)
                             .strength(1.0F, 6.0F)))
             .withName("Block of Tin")
-            .withStorageRecipes(() -> PoptartCoreItems.TIN_INGOT.get(), "tin_ingots_from_block")
+            .withStorageRecipes(() -> PoptartMaterialItems.TIN_INGOT.get(), "tin_ingots_from_block")
             .mineableWithPickaxe();
     public static final CatalogBlockDefinition<Block> TIN_ORE = PoptartCatalog.block(
                     "tin_ore",
                     () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_ORE)
                             .strength(2.0F, 6.0F)))
-            .withOreDrop(() -> PoptartCoreItems.RAW_TIN.get())
+            .withOreDrop(() -> PoptartMaterialItems.RAW_TIN.get())
             .mineableWithPickaxe();
     public static final CatalogBlockDefinition<Block> DEEPSLATE_TIN_ORE = PoptartCatalog.block(
                     "deepslate_tin_ore",
                     () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_COPPER_ORE)
                             .strength(3.0F, 6.0F)))
-            .withOreDrop(() -> PoptartCoreItems.RAW_TIN.get())
+            .withOreDrop(() -> PoptartMaterialItems.RAW_TIN.get())
             .mineableWithPickaxe();
     public static final CatalogBlockDefinition<Block> RAW_TIN_BLOCK = PoptartCatalog.block(
                     "raw_tin_block",
                     () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.RAW_COPPER_BLOCK)
                             .strength(5.0F, 6.0F)))
             .withName("Block of Raw Tin")
-            .withStorageRecipes(() -> PoptartCoreItems.RAW_TIN.get(), "raw_tin_from_block")
+            .withStorageRecipes(() -> PoptartMaterialItems.RAW_TIN.get(), "raw_tin_from_block")
             .mineableWithPickaxe();
 
     public static final CatalogBlockDefinition<Block> LEAD_BLOCK = PoptartCatalog.block(
@@ -410,7 +410,7 @@ public class PoptartCoreBlocks {
                             .sound(SoundType.METAL)
                             .strength(1.0F, 6.0F)))
             .withName("Block of Lead")
-            .withStorageRecipes(() -> PoptartCoreItems.LEAD_INGOT.get(), "lead_ingots_from_block")
+            .withStorageRecipes(() -> PoptartMaterialItems.LEAD_INGOT.get(), "lead_ingots_from_block")
             .requiresIronTool();
     public static final CatalogBlockDefinition<Block> LEAD_ORE = PoptartCatalog.block(
                     "lead_ore",
@@ -418,7 +418,7 @@ public class PoptartCoreBlocks {
                             .sound(SoundType.STONE)
                             .requiresCorrectToolForDrops()
                             .strength(2.0F, 6.0F)))
-            .withOreDrop(() -> PoptartCoreItems.RAW_LEAD.get())
+            .withOreDrop(() -> PoptartMaterialItems.RAW_LEAD.get())
             .requiresIronTool();
     public static final CatalogBlockDefinition<Block> DEEPSLATE_LEAD_ORE = PoptartCatalog.block(
                     "deepslate_lead_ore",
@@ -426,14 +426,14 @@ public class PoptartCoreBlocks {
                             .sound(SoundType.DEEPSLATE)
                             .requiresCorrectToolForDrops()
                             .strength(3.0F, 6.0F)))
-            .withOreDrop(() -> PoptartCoreItems.RAW_LEAD.get())
+            .withOreDrop(() -> PoptartMaterialItems.RAW_LEAD.get())
             .requiresIronTool();
     public static final CatalogBlockDefinition<Block> RAW_LEAD_BLOCK = PoptartCatalog.block(
                     "raw_lead_block",
                     () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.RAW_IRON_BLOCK)
                             .strength(5.0F, 6.0F)))
             .withName("Block of Raw Lead")
-            .withStorageRecipes(() -> PoptartCoreItems.RAW_LEAD.get(), "raw_lead_from_block")
+            .withStorageRecipes(() -> PoptartMaterialItems.RAW_LEAD.get(), "raw_lead_from_block")
             .requiresIronTool();
 
     public static final CatalogBlockDefinition<Block> MAGNETITE_BLOCK = PoptartCatalog.block(
@@ -470,7 +470,7 @@ public class PoptartCoreBlocks {
                             .sound(SoundType.METAL)
                             .strength(5.0F, 6.0F)))
             .withName("Block of Silver")
-            .withStorageRecipes(() -> PoptartCoreItems.SILVER_INGOT.get(), "silver_ingots_from_block")
+            .withStorageRecipes(() -> PoptartMaterialItems.SILVER_INGOT.get(), "silver_ingots_from_block")
             .requiresIronTool();
     public static final CatalogBlockDefinition<Block> SILVER_ORE = PoptartCatalog.block(
                     "silver_ore",
@@ -478,7 +478,7 @@ public class PoptartCoreBlocks {
                             .sound(SoundType.STONE)
                             .requiresCorrectToolForDrops()
                             .strength(5.0F, 6.0F)))
-            .withOreDrop(() -> PoptartCoreItems.RAW_SILVER.get())
+            .withOreDrop(() -> PoptartMaterialItems.RAW_SILVER.get())
             .requiresIronTool();
     public static final CatalogBlockDefinition<Block> DEEPSLATE_SILVER_ORE = PoptartCatalog.block(
                     "deepslate_silver_ore",
@@ -486,27 +486,27 @@ public class PoptartCoreBlocks {
                             .sound(SoundType.DEEPSLATE)
                             .requiresCorrectToolForDrops()
                             .strength(6.0F, 6.0F)))
-            .withOreDrop(() -> PoptartCoreItems.RAW_SILVER.get())
+            .withOreDrop(() -> PoptartMaterialItems.RAW_SILVER.get())
             .requiresIronTool();
     public static final CatalogBlockDefinition<Block> RAW_SILVER_BLOCK = PoptartCatalog.block(
                     "raw_silver_block",
                     () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.RAW_IRON_BLOCK)
                             .strength(5.0F, 6.0F)))
             .withName("Block of Raw Silver")
-            .withStorageRecipes(() -> PoptartCoreItems.RAW_SILVER.get(), "raw_silver_from_block")
+            .withStorageRecipes(() -> PoptartMaterialItems.RAW_SILVER.get(), "raw_silver_from_block")
             .requiresIronTool();
 
     public static final CatalogBlockDefinition<Block> TITANIUM_ORE = PoptartCatalog.block(
                     "titanium_ore",
                     () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DIAMOND_ORE)
                             .strength(3.0F, 6.0F)))
-            .withOreDrop(() -> PoptartCoreItems.RAW_TITANIUM.get())
+            .withOreDrop(() -> PoptartMaterialItems.RAW_TITANIUM.get())
             .requiresIronTool();
     public static final CatalogBlockDefinition<Block> DEEPSLATE_TITANIUM_ORE = PoptartCatalog.block(
                     "deepslate_titanium_ore",
                     () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_DIAMOND_ORE)
                             .strength(4.5F, 6.0F)))
-            .withOreDrop(() -> PoptartCoreItems.RAW_TITANIUM.get())
+            .withOreDrop(() -> PoptartMaterialItems.RAW_TITANIUM.get())
             .requiresIronTool();
     public static final CatalogBlockDefinition<Block> CASSITERITE_TITANIUM_ORE = PoptartCatalog.block(
                     "cassiterite_titanium_ore",
@@ -514,7 +514,7 @@ public class PoptartCoreBlocks {
                             .strength(3.0F, 6.0F)
                             .sound(CCSoundTypes.CASSITERITE)))
             .withName("Cassiterite Titanium Ore")
-            .withOreDrop(() -> PoptartCoreItems.RAW_TITANIUM.get())
+            .withOreDrop(() -> PoptartMaterialItems.RAW_TITANIUM.get())
             .requiresIronTool();
     public static final CatalogBlockDefinition<Block> CYLINDRITE_TITANIUM_ORE = PoptartCatalog.block(
                     "cylindrite_titanium_ore",
@@ -522,7 +522,7 @@ public class PoptartCoreBlocks {
                             .strength(4.5F, 6.0F)
                             .sound(CCSoundTypes.CYLINDRITE)))
             .withName("Cylindrite Titanium Ore")
-            .withOreDrop(() -> PoptartCoreItems.RAW_TITANIUM.get())
+            .withOreDrop(() -> PoptartMaterialItems.RAW_TITANIUM.get())
             .requiresIronTool();
     public static final CatalogBlockDefinition<Block> RAW_TITANIUM_BLOCK = PoptartCatalog.block(
                     "raw_titanium_block",
@@ -738,7 +738,7 @@ public class PoptartCoreBlocks {
                     "wax_block",
                     () -> new Block(
                             BlockBehaviour.Properties.ofFullCopy(Blocks.MUD).strength(0.7F, 0.3F)))
-            .withStorageRecipes(() -> PoptartCoreItems.WAX.get(), "wax_from_block");
+            .withStorageRecipes(() -> PoptartMaterialItems.WAX.get(), "wax_from_block");
     public static final CatalogBlockDefinition<TreeTapBlock> TREE_TAP = PoptartCatalog.block(
                     "tree_tap",
                     () -> new TreeTapBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)
@@ -795,9 +795,10 @@ public class PoptartCoreBlocks {
             case PINK -> BEEHIVE_PINK_ROOF.get();
         };
     }
+
     public static final CatalogBlockDefinition<Block> COAL_COKE_BLOCK = PoptartCatalog.block(
                     "coal_coke_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.COAL_BLOCK)))
-            .withStorageRecipes(() -> PoptartCoreItems.COAL_COKE.get(), "coal_coke_from_block")
+            .withStorageRecipes(() -> PoptartMaterialItems.COAL_COKE.get(), "coal_coke_from_block")
             .fuelBurnTime(28800)
             .mineableWithPickaxe();
     public static final CatalogBlockDefinition<Block> BRONZE_BLOCK = PoptartCatalog.block(
@@ -806,7 +807,7 @@ public class PoptartCoreBlocks {
                             .sound(SoundType.METAL)
                             .strength(3.0F, 6.0F)))
             .withName("Block of Bronze")
-            .withStorageRecipes(() -> PoptartCoreItems.BRONZE_INGOT.get(), "bronze_ingot_from_block")
+            .withStorageRecipes(() -> PoptartMaterialItems.BRONZE_INGOT.get(), "bronze_ingot_from_block")
             .requiresStoneTool();
     public static final CatalogBlockDefinition<Block> STEEL_BLOCK = PoptartCatalog.block(
                     "steel_block",
@@ -814,7 +815,7 @@ public class PoptartCoreBlocks {
                             .sound(SoundType.METAL)
                             .strength(7.0F, 8.0F)))
             .withName("Block of Steel")
-            .withStorageRecipes(() -> PoptartCoreItems.STEEL_INGOT.get(), "steel_ingot_from_block")
+            .withStorageRecipes(() -> PoptartMaterialItems.STEEL_INGOT.get(), "steel_ingot_from_block")
             .requiresIronTool();
 
     public static final CatalogBlockDefinition<Block> CLINKER_BRICKS = PoptartCatalog.block(
@@ -939,9 +940,87 @@ public class PoptartCoreBlocks {
                 .noOcclusion();
     }
 
-    public static void initialize() {}
+    public static void initialize() {
+        PoptartCatalog.blockAlias("fresh_flesh", "living_flesh");
+    }
+
+    private static CatalogBlockDefinition<dev.poptartking.poptartcore.flesh.FleshTendrilsBlock> tendrils(String id) {
+        return PoptartCatalog.block(
+                        id,
+                        () -> new dev.poptartking.poptartcore.flesh.FleshTendrilsBlock(BlockBehaviour.Properties.of()
+                                .mapColor(MapColor.COLOR_RED)
+                                .replaceable()
+                                .noCollission()
+                                .strength(.2F)
+                                .sound(SoundType.SCULK_VEIN)
+                                .pushReaction(PushReaction.DESTROY)
+                                .noLootTable()))
+                .externalModel()
+                .noLoot();
+    }
+
+    public static final CatalogBlockDefinition<dev.poptartking.poptartcore.flesh.FleshTendrilsBlock>
+            LIVING_FLESH_TENDRILS = tendrils("living_flesh_tendrils");
+    public static final CatalogBlockDefinition<dev.poptartking.poptartcore.flesh.FleshTendrilsBlock> FLESH_TENDRILS =
+            tendrils("flesh_tendrils");
+    public static final CatalogBlockDefinition<dev.poptartking.poptartcore.flesh.FleshTendrilsBlock>
+            ROTTEN_FLESH_TENDRILS = tendrils("rotten_flesh_tendrils");
+    public static final CatalogBlockDefinition<dev.poptartking.poptartcore.flesh.UlcerBlock> ULCER =
+            PoptartCatalog.block(
+                            "ulcer",
+                            () -> new dev.poptartking.poptartcore.flesh.UlcerBlock(
+                                    BlockBehaviour.Properties.ofFullCopy(Blocks.SCULK)
+                                            .mapColor(MapColor.COLOR_RED)
+                                            .noOcclusion()
+                                            .pushReaction(PushReaction.DESTROY)))
+                    .externalModel()
+                    .customLoot()
+                    .tags(BlockTags.MINEABLE_WITH_HOE);
+
+    public static final CatalogBlockDefinition<Block> RUBBER_BLOCK = PoptartCatalog.block(
+                    "rubber_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.BLACK_WOOL)))
+            .withName("Block of Rubber");
+
+    public static final CatalogBlockDefinition<net.minecraft.world.level.block.AmethystClusterBlock> QUARTZ_CRYSTAL =
+            PoptartCatalog.block(
+                            "quartz_crystal",
+                            () -> new net.minecraft.world.level.block.AmethystClusterBlock(
+                                    5,
+                                    2,
+                                    BlockBehaviour.Properties.ofFullCopy(Blocks.AMETHYST_CLUSTER)
+                                            .mapColor(MapColor.QUARTZ)
+                                            .lightLevel(state -> 0)))
+                    .externalModel()
+                    .tags(BlockTags.MINEABLE_WITH_PICKAXE);
 
     public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);
     }
+
+    private static CatalogBlockDefinition<dev.poptartking.poptartcore.anvil.AnvilBlock> anvil(
+            String id, boolean primitive) {
+        return PoptartCatalog.block(
+                        id,
+                        () -> primitive
+                                ? new dev.poptartking.poptartcore.anvil.PrimitiveAnvilBlock(
+                                        BlockBehaviour.Properties.ofFullCopy(Blocks.ANVIL))
+                                : new dev.poptartking.poptartcore.anvil.AnvilBlock(
+                                        BlockBehaviour.Properties.ofFullCopy(Blocks.ANVIL)))
+                .externalModel()
+                .customLoot()
+                .tags(BlockTags.MINEABLE_WITH_PICKAXE);
+    }
+
+    public static final CatalogBlockDefinition<dev.poptartking.poptartcore.anvil.AnvilBlock> ANVIL =
+            anvil("anvil", false);
+    public static final CatalogBlockDefinition<dev.poptartking.poptartcore.anvil.AnvilBlock> CHIPPED_ANVIL =
+            anvil("chipped_anvil", false);
+    public static final CatalogBlockDefinition<dev.poptartking.poptartcore.anvil.AnvilBlock> DAMAGED_ANVIL =
+            anvil("damaged_anvil", false);
+    public static final CatalogBlockDefinition<dev.poptartking.poptartcore.anvil.AnvilBlock> PRIMITIVE_ANVIL =
+            anvil("primitive_anvil", true);
+    public static final CatalogBlockDefinition<dev.poptartking.poptartcore.anvil.AnvilBlock> CHIPPED_PRIMITIVE_ANVIL =
+            anvil("chipped_primitive_anvil", true);
+    public static final CatalogBlockDefinition<dev.poptartking.poptartcore.anvil.AnvilBlock> DAMAGED_PRIMITIVE_ANVIL =
+            anvil("damaged_primitive_anvil", true);
 }

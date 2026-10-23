@@ -3,7 +3,7 @@ $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..\..')).Path
 $assets = Join-Path $repo 'src\main\resources\assets\poptartcore'
 $data = Join-Path $repo 'src\main\resources\data'
-$names = @('budding_flesh', 'fresh_flesh', 'flesh', 'rotten_flesh', 'lifebud')
+$names = @('budding_flesh', 'living_flesh', 'flesh', 'rotten_flesh', 'lifebud')
 
 function Require-File([string] $path) {
     if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {
@@ -83,7 +83,7 @@ foreach ($entry in @(
 
     if ($configured.type -ne 'poptartcore:flesh_geode' -or
             $configured.config.shell.state.Name -ne 'poptartcore:flesh' -or
-            $configured.config.lining.state.Name -ne 'poptartcore:fresh_flesh' -or
+            $configured.config.lining.state.Name -ne 'poptartcore:living_flesh' -or
             $configured.config.gem.state.Name -ne 'poptartcore:lifebud') {
         throw "Configured feature $name has an incorrect block or feature ID"
     }
@@ -109,8 +109,8 @@ foreach ($entry in @(
     }
 }
 
-$tab = Get-Content -LiteralPath (Join-Path $repo 'src\main\java\dev\poptartking\poptartcore\registry\PoptartCoreTabs.java') -Raw
-$order = [regex]::Match($tab, 'CREATIVE_TAB_ORDER = List\.of\((.*?)\);', 'Singleline').Groups[1].Value
+$tab = Get-Content -LiteralPath (Join-Path $repo 'src\main\java\dev\poptartking\poptartcore\registry\CreativeItemOrder.java') -Raw
+$order = [regex]::Match($tab, 'ITEMS = List\.of\((.*?)\);', 'Singleline').Groups[1].Value
 $entries = @([regex]::Matches($order, '"([^"]+)"') | ForEach-Object { $_.Groups[1].Value })
 foreach ($name in $names | Where-Object { $_ -ne 'lifebud' }) {
     if (@($entries | Where-Object { $_ -eq $name }).Count -ne 1) {
@@ -121,4 +121,19 @@ if ('lifebud' -in $entries) {
     throw 'Lifebud must not appear in the creative tab'
 }
 
-Write-Output 'Flesh assets, Lifebud drop, item visibility, and both Wayfarer-style geode placements verified.'
+foreach ($name in @('living_flesh_tendrils', 'flesh_tendrils', 'rotten_flesh_tendrils', 'ulcer')) {
+    Require-File (Join-Path $assets "blockstates/$name.json")
+    Require-File (Join-Path $assets "models/item/$name.json")
+    Require-File (Join-Path $assets "textures/block/flesh/$name.png")
+    if (@($entries | Where-Object { $_ -eq $name }).Count -ne 1) {
+        throw "Creative tab must list $name exactly once"
+    }
+}
+Require-File (Join-Path $assets 'models/item/lifesalt.json')
+Require-File (Join-Path $assets 'textures/item/lifesalt.png')
+$growth = Read-Json (Join-Path $data 'poptartcore/tags/block/supports_flesh_growth.json')
+if (@($growth.values).Count -ne 0) { throw 'Terrain conversion must remain disabled' }
+if (Get-ChildItem -LiteralPath $assets -Recurse -File | Where-Object { $_.Name -like '*fresh_flesh*' }) {
+    throw 'Obsolete fresh_flesh asset remains'
+}
+Write-Output 'Flesh assets, new items, disabled terrain conversion, migration cleanup, and geode placements verified.'

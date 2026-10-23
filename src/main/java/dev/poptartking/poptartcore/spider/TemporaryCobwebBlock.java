@@ -6,6 +6,8 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.monster.Spider;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.WebBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -34,6 +36,13 @@ public final class TemporaryCobwebBlock extends WebBlock {
     @Override
     protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         level.removeBlock(pos, false);
+    }
+
+    @Override
+    protected float getDestroyProgress(BlockState state, Player player, BlockGetter level, BlockPos pos) {
+        float progress = super.getDestroyProgress(state, player, level, pos);
+        // Being suspended in a web must not apply the usual fivefold airborne mining penalty.
+        return player.onGround() ? progress : progress * 5.0F;
     }
 
     @Override

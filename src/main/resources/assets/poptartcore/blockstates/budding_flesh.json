@@ -1,5 +1,7 @@
 {
   "variants": {
-    "": { "model": "poptartcore:block/flesh/budding_flesh" }
+    "": {
+      "model": "poptartcore:block/flesh/budding_flesh"
+    }
   }
 }

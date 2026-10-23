@@ -7,6 +7,7 @@ import dev.poptartking.poptartcore.crucible.casting.CastingRecipe;
 import dev.poptartking.poptartcore.crucible.casting.CastingRecipeSerializer;
 import dev.poptartking.poptartcore.crucible.melting.MeltingRecipe;
 import dev.poptartking.poptartcore.crucible.melting.MeltingRecipeSerializer;
+import dev.poptartking.poptartcore.equipment.CapeDyeRecipe;
 import dev.poptartking.poptartcore.millstone.recipe.MillingRecipe;
 import dev.poptartking.poptartcore.millstone.recipe.MillingRecipeSerializer;
 import dev.poptartking.poptartcore.quern.recipe.GrindingRecipe;
@@ -15,6 +16,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -26,6 +28,9 @@ public class PoptartCoreRecipes {
 
     public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES =
             DeferredRegister.create(Registries.RECIPE_TYPE, PoptartCore.MOD_ID);
+
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<CapeDyeRecipe>> CAPE_DYE_SERIALIZER =
+            RECIPE_SERIALIZERS.register("cape_dye", () -> new SimpleCraftingRecipeSerializer<>(CapeDyeRecipe::new));
 
     public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<MeltingRecipe>>
             CRUCIBLE_MELTING_SERIALIZER =

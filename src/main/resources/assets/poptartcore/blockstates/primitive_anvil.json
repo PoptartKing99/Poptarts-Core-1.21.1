@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "poptartcore:block/anvils/primitive_anvil",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "poptartcore:block/anvils/primitive_anvil",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "poptartcore:block/anvils/primitive_anvil"
+    },
+    "facing=west": {
+      "model": "poptartcore:block/anvils/primitive_anvil",
+      "y": 90
+    }
+  }
+}

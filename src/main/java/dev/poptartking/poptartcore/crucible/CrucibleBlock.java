@@ -40,10 +40,14 @@ public class CrucibleBlock extends BaseEntityBlock {
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final IntegerProperty FLUID_LEVEL = IntegerProperty.create("fluid_level", 0, 4);
-    public static final EnumProperty<CampfireType> CAMPFIRE_TYPE = EnumProperty.create("campfire_type", CampfireType.class);
+    public static final EnumProperty<CampfireType> CAMPFIRE_TYPE =
+            EnumProperty.create("campfire_type", CampfireType.class);
 
     public enum CampfireType implements StringRepresentable {
-        NORMAL("normal"), SOUL("soul"), RIFT("rift"), CUPRIC("cupric");
+        NORMAL("normal"),
+        SOUL("soul"),
+        RIFT("rift"),
+        CUPRIC("cupric");
 
         private final String name;
 
@@ -141,12 +145,13 @@ public class CrucibleBlock extends BaseEntityBlock {
         double offsetZ = random.nextFloat() * 0.6D - 0.3D;
 
         level.addParticle(ParticleTypes.SMOKE, x + offsetX, y + offsetY, z + offsetZ, 0.0D, 0.0D, 0.0D);
-        var flame = switch (state.getValue(CAMPFIRE_TYPE)) {
-            case SOUL -> ParticleTypes.SOUL_FIRE_FLAME;
-            case RIFT -> PoptartCoreParticles.RIFT_FIRE_FLAME.get();
-            case CUPRIC -> CCParticleTypes.CUPRIC_FIRE_FLAME.get();
-            default -> ParticleTypes.FLAME;
-        };
+        var flame =
+                switch (state.getValue(CAMPFIRE_TYPE)) {
+                    case SOUL -> ParticleTypes.SOUL_FIRE_FLAME;
+                    case RIFT -> PoptartCoreParticles.RIFT_FIRE_FLAME.get();
+                    case CUPRIC -> CCParticleTypes.CUPRIC_FIRE_FLAME.get();
+                    default -> ParticleTypes.FLAME;
+                };
         level.addParticle(flame, x + offsetX, y + offsetY, z + offsetZ, 0.0D, 0.0D, 0.0D);
     }
 

@@ -3,6 +3,7 @@ package dev.poptartking.poptartcore.waxgolem;
 import com.farcr.nomansland.common.block.cauldrons.FourLayeredCauldronBlock;
 import com.farcr.nomansland.common.block.cauldrons.HoneyCauldron;
 import com.farcr.nomansland.common.block.tap.TapBlock;
+import com.farcr.nomansland.common.blockentity.TapBlockEntity;
 import com.farcr.nomansland.common.registry.blocks.NMLBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
@@ -68,9 +69,9 @@ public final class HoneyCauldrons {
         for (BlockPos near : BlockPos.betweenClosed(cauldron.offset(-1, 0, -1), cauldron.offset(1, 3, 1))) {
             BlockState state = level.getBlockState(near);
             if ((state.getBlock() instanceof TapBlock)
-                    && (fed = TapBlock.getCauldronPos(level, near)) != null
+                    && (fed = TapBlockEntity.findTarget(level, near)) != null
                     && fed.equals(cauldron)
-                    && (behind = TapBlock.getBlockStateBehind(level, near, state)) != null
+                    && (behind = level.getBlockState(TapBlock.getSourcePos(near, state))) != null
                     && ((behind.getBlock() instanceof BeehiveBlock) || behind.is(BlockTags.BEEHIVES))) {
                 return true;
             }

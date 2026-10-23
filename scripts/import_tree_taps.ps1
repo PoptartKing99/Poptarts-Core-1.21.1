@@ -186,4 +186,5 @@ foreach ($removedWood in @('oak')) {
 }
 
 & (Join-Path $PSScriptRoot 'generate_tree_tap_blockstates.ps1')
+& (Join-Path $PSScriptRoot 'split_tree_tap_drip_model.ps1')
 Write-Host "Generated 6 shared fill shapes, $($woods.Count * 6) texture selectors, and $($woods.Count * 192) blockstate variants."

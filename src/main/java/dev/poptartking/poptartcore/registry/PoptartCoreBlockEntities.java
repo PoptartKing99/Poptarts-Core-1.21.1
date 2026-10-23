@@ -23,6 +23,18 @@ public class PoptartCoreBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
             DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, PoptartCore.MOD_ID);
 
+    public static final DeferredHolder<
+                    BlockEntityType<?>, BlockEntityType<dev.poptartking.poptartcore.anvil.AnvilBlockEntity>>
+            ANVIL = BLOCK_ENTITIES.register("anvil", () -> BlockEntityType.Builder.of(
+                    dev.poptartking.poptartcore.anvil.AnvilBlockEntity::new,
+                    PoptartCoreBlocks.ANVIL.get(),
+                    PoptartCoreBlocks.CHIPPED_ANVIL.get(),
+                    PoptartCoreBlocks.DAMAGED_ANVIL.get(),
+                    PoptartCoreBlocks.PRIMITIVE_ANVIL.get(),
+                    PoptartCoreBlocks.CHIPPED_PRIMITIVE_ANVIL.get(),
+                    PoptartCoreBlocks.DAMAGED_PRIMITIVE_ANVIL.get())
+            .build(null));
+
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<IngotPileBlockEntity>> INGOT_PILE =
             BLOCK_ENTITIES.register("ingot_pile", () -> BlockEntityType.Builder.of(
                             IngotPileBlockEntity::new, PoptartCoreBlocks.INGOT_PILE.get())

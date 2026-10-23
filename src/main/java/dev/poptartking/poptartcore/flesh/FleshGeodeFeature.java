@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
@@ -18,178 +19,277 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
 
-public final class FleshGeodeFeature extends Feature<FleshGeodeConfiguration> {
+public class FleshGeodeFeature extends Feature<FleshGeodeConfiguration> {
+    private static final double VERTICAL_SQUASH = 1.5625;
+    private static final double NOISE_AMPLITUDE = 1.0;
+    private static final double MAX_EXPOSED_FRACTION = 0.2;
     private static final byte NONE = 0;
     private static final byte CAVITY = 1;
-    private static final byte POOL = 2;
+    private static final byte WATER = 2;
     private static final byte FLESH = 3;
     private static final byte CASING = 4;
+    private static final Direction[] DIRECTIONS = Direction.values();
+    private static final float TENDRIL_DENSITY = 0.12F;
+    private static final int ULCER_MIN = 1;
+    private static final int ULCER_EXTRA = 1;
 
     public FleshGeodeFeature(Codec<FleshGeodeConfiguration> codec) {
         super(codec);
     }
 
-    @Override
     public boolean place(FeaturePlaceContext<FleshGeodeConfiguration> context) {
         WorldGenLevel level = context.level();
         BlockPos origin = context.origin();
         RandomSource random = context.random();
-        FleshGeodeConfiguration config = context.config();
-        int radius = 3 + random.nextInt(4);
+        FleshGeodeConfiguration config = (FleshGeodeConfiguration) context.config();
+        int radius = 4 + random.nextInt(4);
         int bounds = radius + 4;
-        if (origin.getY() - bounds <= level.getMinBuildHeight()
-                || origin.getY() + bounds >= level.getMaxBuildHeight()) {
+        if (origin.getY() - bounds > level.getMinBuildHeight() && origin.getY() + bounds < level.getMaxBuildHeight()) {
+            int localWaterY = -(radius / 2);
+            int n = 2 * bounds + 1;
+            byte[][][] grid = new byte[n][n][n];
+            int[][] creep = new int[n][n];
+
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
+                    creep[i][j] = random.nextInt(3) + 2;
+                }
+            }
+
+            NormalNoise noise = NormalNoise.create(
+                    new WorldgenRandom(new LegacyRandomSource(level.getSeed())), -3, new double[] {1.0});
+            MutableBlockPos cursor = new MutableBlockPos();
+
+            for (int dx = -bounds; dx <= bounds; dx++) {
+                for (int dy = -bounds; dy <= bounds; dy++) {
+                    for (int dz = -bounds; dz <= bounds; dz++) {
+                        cursor.setWithOffset(origin, dx, dy, dz);
+                        double d = Math.sqrt((double) (dx * dx) + (double) (dy * dy) * 1.5625 + (double) (dz * dz))
+                                + noise.getValue((double) cursor.getX(), (double) cursor.getY(), (double) cursor.getZ())
+                                        * 1.0;
+                        if (d <= (double) radius && dy >= localWaterY) {
+                            grid[dx + bounds][dy + bounds][dz + bounds] = (byte) (dy == localWaterY ? 2 : 1);
+                        }
+                    }
+                }
+            }
+
+            dilate(grid, n, (byte) 3, (byte) 1, (byte) 2);
+            if (config.casing().isPresent()) {
+                dilate(grid, n, (byte) 4, (byte) 3);
+            }
+
+            int shellCells = 0;
+            int exposed = 0;
+
+            for (int ix = 0; ix < n; ix++) {
+                for (int iy = 0; iy < n; iy++) {
+                    for (int iz = 0; iz < n; iz++) {
+                        byte v = grid[ix][iy][iz];
+                        if (v == 3 || v == 4) {
+                            shellCells++;
+                            cursor.setWithOffset(origin, ix - bounds, iy - bounds, iz - bounds);
+                            BlockState existing = level.getBlockState(cursor);
+                            if (existing.isAir() || !existing.getFluidState().isEmpty()) {
+                                exposed++;
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (shellCells != 0 && !((double) exposed > (double) shellCells * 0.2)) {
+                for (int ix = 0; ix < n; ix++) {
+                    for (int iy = 0; iy < n; iy++) {
+                        for (int izx = 0; izx < n; izx++) {
+                            byte v = grid[ix][iy][izx];
+                            if (v != 0) {
+                                cursor.setWithOffset(origin, ix - bounds, iy - bounds, izx - bounds);
+                                if (!level.getBlockState(cursor).is(BlockTags.FEATURES_CANNOT_REPLACE)) {
+                                    switch (v) {
+                                        case 1:
+                                            this.placeInterior(
+                                                    level, cursor, config.air().getState(random, cursor));
+                                            break;
+                                        case 2:
+                                            this.placeInterior(
+                                                    level,
+                                                    cursor,
+                                                    config.pool()
+                                                            .orElse(config.air())
+                                                            .getState(random, cursor));
+                                            break;
+                                        case 3:
+                                        default:
+                                            boolean lining = iy - bounds - localWaterY <= creep[ix][izx];
+                                            this.setBlock(
+                                                    level,
+                                                    cursor,
+                                                    (lining ? config.lining() : config.shell())
+                                                            .getState(random, cursor));
+                                            break;
+                                        case 4:
+                                            this.setBlock(
+                                                    level,
+                                                    cursor,
+                                                    config.casing().get().getState(random, cursor));
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                int worldWaterY = origin.getY() + localWaterY;
+                List<int[]> raised = new ArrayList<>();
+
+                for (int dx = -1; dx <= 1; dx++) {
+                    for (int dzx = -1; dzx <= 1; dzx++) {
+                        boolean center = dx == 0 && dzx == 0;
+                        if (center || !(random.nextFloat() >= 0.6F)) {
+                            boolean raise = center || random.nextFloat() < 0.5F;
+                            int topY = worldWaterY + (raise ? 1 : 0);
+
+                            for (int wy = worldWaterY; wy <= topY; wy++) {
+                                cursor.set(origin.getX() + dx, wy, origin.getZ() + dzx);
+                                this.setBlock(level, cursor, config.lining().getState(random, cursor));
+                            }
+
+                            if (raise) {
+                                raised.add(new int[] {dx, dzx});
+                            }
+                        }
+                    }
+                }
+
+                if (config.gem().isPresent() && !raised.isEmpty()) {
+                    List<int[]> offset = new ArrayList<>();
+
+                    for (int[] c : raised) {
+                        if (c[0] != 0 || c[1] != 0) {
+                            offset.add(c);
+                        }
+                    }
+
+                    int[] cell = !offset.isEmpty() && !(random.nextFloat() < 0.37F)
+                            ? offset.get(random.nextInt(offset.size()))
+                            : new int[] {0, 0};
+                    BlockPos budPos = new BlockPos(origin.getX() + cell[0], worldWaterY + 2, origin.getZ() + cell[1]);
+                    this.setBlock(
+                            level,
+                            budPos.below(),
+                            PoptartCoreBlocks.BUDDING_FLESH.get().defaultBlockState());
+                    BlockState budState = config.gem().get().getState(random, budPos);
+                    if (budState.hasProperty(LifebudBlock.ROOTED)) {
+                        budState = (BlockState) budState.setValue(
+                                LifebudBlock.ROOTED, LifebudBlock.rootsInto(level.getBlockState(budPos.below())));
+                    }
+
+                    this.setBlock(level, budPos, budState);
+                    this.decorate(level, origin, grid, n, bounds, random);
+                }
+
+                return true;
+            } else {
+                return false;
+            }
+        } else {
             return false;
         }
+    }
 
-        int localPoolY = -(radius / 2);
-        int size = 2 * bounds + 1;
-        byte[][][] cells = new byte[size][size][size];
-        int[][] liningHeight = new int[size][size];
-        for (int x = 0; x < size; x++) {
-            for (int z = 0; z < size; z++) {
-                liningHeight[x][z] = random.nextInt(3) + 2;
-            }
-        }
-
-        NormalNoise noise = NormalNoise.create(new WorldgenRandom(new LegacyRandomSource(level.getSeed())), -3, 1.0);
+    private void decorate(
+            WorldGenLevel level, BlockPos origin, byte[][][] grid, int n, int bounds, RandomSource random) {
+        List<BlockPos> walls = new ArrayList<>();
+        List<Direction> openings = new ArrayList<>();
         MutableBlockPos cursor = new MutableBlockPos();
-        for (int x = -bounds; x <= bounds; x++) {
-            for (int y = -bounds; y <= bounds; y++) {
-                for (int z = -bounds; z <= bounds; z++) {
-                    cursor.setWithOffset(origin, x, y, z);
-                    double distance = Math.sqrt(x * x + y * y * 1.5625 + z * z)
-                            + noise.getValue(cursor.getX(), cursor.getY(), cursor.getZ());
-                    if (distance <= radius && y >= localPoolY) {
-                        cells[x + bounds][y + bounds][z + bounds] = y == localPoolY ? POOL : CAVITY;
-                    }
-                }
-            }
-        }
 
-        dilate(cells, size, FLESH, CAVITY, POOL);
-        if (config.casing().isPresent()) {
-            dilate(cells, size, CASING, FLESH);
-        }
+        for (int ix = 0; ix < n; ix++) {
+            for (int iy = 0; iy < n; iy++) {
+                for (int iz = 0; iz < n; iz++) {
+                    if (grid[ix][iy][iz] == 1) {
+                        cursor.setWithOffset(origin, ix - bounds, iy - bounds, iz - bounds);
+                        if (level.getBlockState(cursor).isAir()) {
+                            for (Direction direction : DIRECTIONS) {
+                                BlockPos wall = cursor.relative(direction);
+                                BlockState wallState = level.getBlockState(wall);
+                                if (wallState.is(PoptartCoreBlocks.FLESH.get())
+                                        || wallState.is(PoptartCoreBlocks.LIVING_FLESH.get())) {
+                                    walls.add(wall);
+                                    openings.add(direction.getOpposite());
+                                }
+                            }
 
-        int shellCells = 0;
-        int exposed = 0;
-        for (int x = 0; x < size; x++) {
-            for (int y = 0; y < size; y++) {
-                for (int z = 0; z < size; z++) {
-                    byte cell = cells[x][y][z];
-                    if (cell == FLESH || cell == CASING) {
-                        shellCells++;
-                        cursor.setWithOffset(origin, x - bounds, y - bounds, z - bounds);
-                        BlockState existing = level.getBlockState(cursor);
-                        if (existing.isAir() || !existing.getFluidState().isEmpty()) {
-                            exposed++;
+                            if (random.nextFloat() < 0.12F) {
+                                FleshGrowth.sprout(level, cursor.immutable(), random, 2);
+                            }
                         }
                     }
                 }
             }
         }
-        if (shellCells == 0 || exposed > shellCells * 0.2) {
-            return false;
-        }
 
-        for (int x = 0; x < size; x++) {
-            for (int y = 0; y < size; y++) {
-                for (int z = 0; z < size; z++) {
-                    byte cell = cells[x][y][z];
-                    if (cell == NONE) continue;
-                    cursor.setWithOffset(origin, x - bounds, y - bounds, z - bounds);
-                    if (level.getBlockState(cursor).is(BlockTags.FEATURES_CANNOT_REPLACE)) continue;
-                    switch (cell) {
-                        case CAVITY -> placeInterior(level, cursor, config.air().getState(random, cursor));
-                        case POOL ->
-                            placeInterior(
-                                    level,
-                                    cursor,
-                                    config.pool().orElse(config.air()).getState(random, cursor));
-                        case FLESH -> {
-                            boolean lining = y - bounds - localPoolY <= liningHeight[x][z];
-                            setBlock(
-                                    level,
-                                    cursor,
-                                    (lining ? config.lining() : config.shell()).getState(random, cursor));
-                        }
-                        case CASING ->
-                            setBlock(
-                                    level, cursor, config.casing().orElseThrow().getState(random, cursor));
-                        default -> throw new IllegalStateException("Unknown flesh geode cell: " + cell);
+        int ulcers = 1 + random.nextInt(2);
+
+        for (int placed = 0; placed < ulcers && !walls.isEmpty(); placed++) {
+            int pick = random.nextInt(walls.size());
+            if (random.nextBoolean()) {
+                for (int index = 0; index < walls.size(); index++) {
+                    if (openings.get(index) == Direction.UP) {
+                        pick = index;
+                        break;
                     }
                 }
             }
-        }
 
-        int poolY = origin.getY() + localPoolY;
-        List<int[]> raised = new ArrayList<>();
-        for (int x = -1; x <= 1; x++) {
-            for (int z = -1; z <= 1; z++) {
-                boolean center = x == 0 && z == 0;
-                if (!center && random.nextFloat() >= 0.6F) continue;
-                boolean rise = center || random.nextFloat() < 0.5F;
-                int topY = poolY + (rise ? 1 : 0);
-                for (int y = poolY; y <= topY; y++) {
-                    cursor.set(origin.getX() + x, y, origin.getZ() + z);
-                    setBlock(level, cursor, config.lining().getState(random, cursor));
-                }
-                if (rise) raised.add(new int[] {x, z});
+            BlockPos wall = walls.remove(pick);
+            Direction opening = openings.remove(pick);
+            BlockPos spot = wall.relative(opening);
+            BlockState spotState = level.getBlockState(spot);
+            if (FleshGrowth.isOpen(spotState) || spotState.getBlock() instanceof FleshTendrilsBlock) {
+                level.setBlock(spot, FleshGrowth.ulcer(opening, spotState), 2);
             }
         }
-
-        if (config.gem().isPresent() && !raised.isEmpty()) {
-            List<int[]> offCenter =
-                    raised.stream().filter(cell -> cell[0] != 0 || cell[1] != 0).toList();
-            int[] cell = !offCenter.isEmpty() && random.nextFloat() >= 0.37F
-                    ? offCenter.get(random.nextInt(offCenter.size()))
-                    : new int[] {0, 0};
-            BlockPos budPos = new BlockPos(origin.getX() + cell[0], poolY + 2, origin.getZ() + cell[1]);
-            setBlock(
-                    level, budPos.below(), PoptartCoreBlocks.BUDDING_FLESH.get().defaultBlockState());
-            BlockState bud = config.gem().orElseThrow().getState(random, budPos);
-            if (bud.hasProperty(LifebudBlock.ROOTED)) {
-                bud = bud.setValue(LifebudBlock.ROOTED, LifebudBlock.rootsInto(level.getBlockState(budPos.below())));
-            }
-            setBlock(level, budPos, bud);
-        }
-        return true;
     }
 
     private void placeInterior(WorldGenLevel level, BlockPos pos, BlockState state) {
         if (ToxicGasBlock.isToxicGas(state)) {
-            setBlock(level, pos, Blocks.AIR.defaultBlockState());
+            this.setBlock(level, pos, Blocks.AIR.defaultBlockState());
             ToxicGasBlock.place(level, pos.immutable());
         } else {
-            setBlock(level, pos, state);
+            this.setBlock(level, pos, state);
         }
     }
 
-    private static void dilate(byte[][][] cells, int size, byte target, byte... seeds) {
-        for (int x = 0; x < size; x++) {
-            for (int y = 0; y < size; y++) {
-                for (int z = 0; z < size; z++) {
-                    if (cells[x][y][z] == NONE && hasNeighbor(cells, size, x, y, z, seeds)) {
-                        cells[x][y][z] = target;
+    private static void dilate(byte[][][] grid, int n, byte target, byte... seeds) {
+        for (int x = 0; x < n; x++) {
+            for (int y = 0; y < n; y++) {
+                for (int z = 0; z < n; z++) {
+                    if (grid[x][y][z] == 0 && hasNeighbor(grid, n, x, y, z, seeds)) {
+                        grid[x][y][z] = target;
                     }
                 }
             }
         }
     }
 
-    private static boolean hasNeighbor(byte[][][] cells, int size, int x, int y, int z, byte[] seeds) {
-        for (int neighborX = Math.max(0, x - 1); neighborX <= Math.min(size - 1, x + 1); neighborX++) {
-            for (int neighborY = Math.max(0, y - 1); neighborY <= Math.min(size - 1, y + 1); neighborY++) {
-                for (int neighborZ = Math.max(0, z - 1); neighborZ <= Math.min(size - 1, z + 1); neighborZ++) {
-                    if (neighborX == x && neighborY == y && neighborZ == z) continue;
-                    byte value = cells[neighborX][neighborY][neighborZ];
-                    for (byte seed : seeds) {
-                        if (value == seed) return true;
+    private static boolean hasNeighbor(byte[][][] grid, int n, int x, int y, int z, byte[] seeds) {
+        for (int ax = Math.max(0, x - 1); ax <= Math.min(n - 1, x + 1); ax++) {
+            for (int ay = Math.max(0, y - 1); ay <= Math.min(n - 1, y + 1); ay++) {
+                for (int az = Math.max(0, z - 1); az <= Math.min(n - 1, z + 1); az++) {
+                    if (ax != x || ay != y || az != z) {
+                        byte val = grid[ax][ay][az];
+
+                        for (byte s : seeds) {
+                            if (val == s) {
+                                return true;
+                            }
+                        }
                     }
                 }
             }
         }
+
         return false;
     }
 }

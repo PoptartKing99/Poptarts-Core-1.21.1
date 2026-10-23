@@ -2,7 +2,7 @@ package dev.poptartking.poptartcore.client;
 
 import dev.poptartking.poptartcore.PoptartCore;
 import dev.poptartking.poptartcore.crossbow.RepeatingCrossbowItem;
-import dev.poptartking.poptartcore.registry.PoptartCoreItems;
+import dev.poptartking.poptartcore.registry.PoptartToolItems;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.CrossbowItem;
@@ -23,7 +23,7 @@ public final class PoptartCoreItemProperties {
     }
 
     private static void registerRepeatingCrossbowProperties() {
-        var item = PoptartCoreItems.REPEATING_CROSSBOW.get();
+        var item = PoptartToolItems.REPEATING_CROSSBOW.get();
         ItemProperties.register(item, PoptartCore.location("pull"), (stack, level, entity, seed) -> {
             if (entity == null || CrossbowItem.isCharged(stack)) {
                 return 0.0F;

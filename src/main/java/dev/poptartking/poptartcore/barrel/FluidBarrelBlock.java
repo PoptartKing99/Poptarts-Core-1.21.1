@@ -98,7 +98,9 @@ public class FluidBarrelBlock extends BaseEntityBlock {
             Player player,
             InteractionHand hand,
             BlockHitResult hit) {
-        return !stack.isEmpty() && FluidUtil.interactWithFluidHandler(player, hand, level, pos, hit.getDirection())
+        return !stack.isEmpty()
+                        && level.getBlockEntity(pos) instanceof FluidBarrelBlockEntity barrel
+                        && FluidUtil.interactWithFluidHandler(player, hand, barrel.fluidHandler())
                 ? ItemInteractionResult.sidedSuccess(level.isClientSide)
                 : ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }

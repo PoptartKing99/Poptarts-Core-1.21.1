@@ -28,7 +28,10 @@ public final class BeltPlacementCostOverlay {
         Minecraft minecraft = Minecraft.getInstance();
         Player player = minecraft.player;
         Level level = minecraft.level;
-        if (player == null || level == null || minecraft.screen != null || player.isCreative()
+        if (player == null
+                || level == null
+                || minecraft.screen != null
+                || player.isCreative()
                 || !(minecraft.hitResult instanceof BlockHitResult hit)) {
             return;
         }
@@ -54,8 +57,8 @@ public final class BeltPlacementCostOverlay {
             if (BeltConnectorItem.validateAxis(level, selected)
                     && BeltConnectorItem.canConnect(level, first, selected)) {
                 int required = BeltConnectorCost.length(first, selected);
-                BlueprintOverlayRenderer.displayChainRequirements(held.getItem(), required,
-                        BeltConnectorCost.available(player) >= required);
+                BlueprintOverlayRenderer.displayChainRequirements(
+                        held.getItem(), required, BeltConnectorCost.available(player) >= required);
             }
             return;
         }

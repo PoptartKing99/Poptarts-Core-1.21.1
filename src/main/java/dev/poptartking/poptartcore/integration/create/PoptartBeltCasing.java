@@ -19,9 +19,7 @@ public enum PoptartBeltCasing {
     }
 
     public Block block() {
-        return this == INDUSTRIAL
-                ? PoptartCoreBlocks.INDUSTRIAL_PLATING.get()
-                : PoptartCoreBlocks.TREATED_WOOD.get();
+        return this == INDUSTRIAL ? PoptartCoreBlocks.INDUSTRIAL_PLATING.get() : PoptartCoreBlocks.TREATED_WOOD.get();
     }
 
     public static PoptartBeltCasing fromItem(ItemStack stack) {

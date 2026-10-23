@@ -1,0 +1,22 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {"layer0":"poptartcore:item/cape/white"},
+  "overrides": [
+    {"predicate":{"poptartcore:cape_color":0.0625},"model":"poptartcore:item/cape/white"},
+    {"predicate":{"poptartcore:cape_color":0.125},"model":"poptartcore:item/cape/orange"},
+    {"predicate":{"poptartcore:cape_color":0.1875},"model":"poptartcore:item/cape/magenta"},
+    {"predicate":{"poptartcore:cape_color":0.25},"model":"poptartcore:item/cape/light_blue"},
+    {"predicate":{"poptartcore:cape_color":0.3125},"model":"poptartcore:item/cape/yellow"},
+    {"predicate":{"poptartcore:cape_color":0.375},"model":"poptartcore:item/cape/lime"},
+    {"predicate":{"poptartcore:cape_color":0.4375},"model":"poptartcore:item/cape/pink"},
+    {"predicate":{"poptartcore:cape_color":0.5},"model":"poptartcore:item/cape/gray"},
+    {"predicate":{"poptartcore:cape_color":0.5625},"model":"poptartcore:item/cape/light_gray"},
+    {"predicate":{"poptartcore:cape_color":0.625},"model":"poptartcore:item/cape/cyan"},
+    {"predicate":{"poptartcore:cape_color":0.6875},"model":"poptartcore:item/cape/purple"},
+    {"predicate":{"poptartcore:cape_color":0.75},"model":"poptartcore:item/cape/blue"},
+    {"predicate":{"poptartcore:cape_color":0.8125},"model":"poptartcore:item/cape/brown"},
+    {"predicate":{"poptartcore:cape_color":0.875},"model":"poptartcore:item/cape/green"},
+    {"predicate":{"poptartcore:cape_color":0.9375},"model":"poptartcore:item/cape/red"},
+    {"predicate":{"poptartcore:cape_color":1},"model":"poptartcore:item/cape/black"}
+  ]
+}

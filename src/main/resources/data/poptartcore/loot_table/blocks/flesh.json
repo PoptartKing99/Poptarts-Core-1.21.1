@@ -1,0 +1,28 @@
+{
+  "type": "block",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:empty",
+          "weight": 10
+        },
+        {
+          "type": "item",
+          "name": "rotten_flesh",
+          "weight": 40
+        },
+        {
+          "type": "empty",
+          "weight": 50
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "survives_explosion"
+        }
+      ]
+    }
+  ]
+}

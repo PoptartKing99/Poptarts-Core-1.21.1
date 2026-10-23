@@ -65,8 +65,8 @@ public final class TombstoneCorpse {
             if (!(existing.isAir() || existing.is(NWBlockTags.TOMBSTONE_REPLACEABLE))) {
                 continue;
             }
-            BlockState marker = NWBlocks.TOMBSTONE.get().defaultBlockState()
-                    .setValue(BlockStateProperties.CRACKED, true);
+            BlockState marker =
+                    NWBlocks.TOMBSTONE.get().defaultBlockState().setValue(BlockStateProperties.CRACKED, true);
             if (level.setBlockAndUpdate(pos, marker)) {
                 items.removeItem(slot, 1);
                 corpse.setData(PoptartCoreAttachments.TOMBSTONE_ANCHOR, pos.asLong());
@@ -78,8 +78,7 @@ public final class TombstoneCorpse {
 
     @SubscribeEvent
     public static void onCorpseTick(EntityTickEvent.Post event) {
-        if (!(event.getEntity() instanceof CorpseEntity corpse)
-                || !(corpse.level() instanceof ServerLevel level)) {
+        if (!(event.getEntity() instanceof CorpseEntity corpse) || !(corpse.level() instanceof ServerLevel level)) {
             return;
         }
         long packed = corpse.getData(PoptartCoreAttachments.TOMBSTONE_ANCHOR);

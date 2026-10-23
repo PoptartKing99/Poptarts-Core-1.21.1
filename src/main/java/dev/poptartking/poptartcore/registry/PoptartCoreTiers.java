@@ -19,14 +19,14 @@ public final class PoptartCoreTiers {
             4.0F,
             1.0F,
             10,
-            () -> Ingredient.of(PoptartCoreItems.BRONZE_INGOT.get()));
+            () -> Ingredient.of(PoptartMaterialItems.BRONZE_INGOT.get()));
     public static final Tier STEEL = new SimpleTier(
             BlockTags.INCORRECT_FOR_DIAMOND_TOOL,
             1250,
             8.0F,
             3.0F,
             15,
-            () -> Ingredient.of(PoptartCoreItems.STEEL_INGOT.get()));
+            () -> Ingredient.of(PoptartMaterialItems.STEEL_INGOT.get()));
 
     private PoptartCoreTiers() {}
 }

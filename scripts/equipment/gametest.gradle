@@ -1,0 +1,4 @@
+// Isolate equipment verification from unrelated, stale GameTest source APIs.
+gradle.projectsEvaluated {
+    rootProject.sourceSets.gameTest.java.setIncludes(['**/equipment/**'])
+}

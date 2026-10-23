@@ -1,7 +1,7 @@
 package dev.poptartking.poptartcore.beekeeping;
 
 import dev.poptartking.poptartcore.PoptartCore;
-import dev.poptartking.poptartcore.registry.PoptartCoreItems;
+import dev.poptartking.poptartcore.registry.PoptartToolItems;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.world.InteractionHand;
@@ -24,7 +24,7 @@ public final class BeeSmokerGameTests {
 
     @GameTest(template = "millstone_test", timeoutTicks = 40)
     public static void smokerStopsAtEmptyInsteadOfBreaking(GameTestHelper helper) {
-        BeeSmokerItem smokerItem = PoptartCoreItems.BEE_SMOKER.get();
+        BeeSmokerItem smokerItem = PoptartToolItems.BEE_SMOKER.get();
         ItemStack smoker = new ItemStack(smokerItem);
         smoker.setDamageValue(smoker.getMaxDamage() - 2);
         Player player = helper.makeMockPlayer(GameType.SURVIVAL);
@@ -41,7 +41,7 @@ public final class BeeSmokerGameTests {
 
     @GameTest(template = "millstone_test", timeoutTicks = 40)
     public static void emptySmokerCannotBeUsed(GameTestHelper helper) {
-        BeeSmokerItem smokerItem = PoptartCoreItems.BEE_SMOKER.get();
+        BeeSmokerItem smokerItem = PoptartToolItems.BEE_SMOKER.get();
         ItemStack smoker = new ItemStack(smokerItem);
         smoker.setDamageValue(smoker.getMaxDamage() - 1);
         Player player = helper.makeMockPlayer(GameType.SURVIVAL);
@@ -58,7 +58,7 @@ public final class BeeSmokerGameTests {
 
     @GameTest(template = "millstone_test", timeoutTicks = 40)
     public static void strawRefillsEmptySmoker(GameTestHelper helper) {
-        BeeSmokerItem smokerItem = PoptartCoreItems.BEE_SMOKER.get();
+        BeeSmokerItem smokerItem = PoptartToolItems.BEE_SMOKER.get();
         ItemStack smoker = new ItemStack(smokerItem);
         smoker.setDamageValue(smoker.getMaxDamage() - 1);
         ItemStack straw = new ItemStack(ModItems.STRAW.get(), 2);
@@ -76,7 +76,7 @@ public final class BeeSmokerGameTests {
 
     @GameTest(template = "millstone_test", timeoutTicks = 40)
     public static void filledSmokerDoesNotConsumeStraw(GameTestHelper helper) {
-        BeeSmokerItem smokerItem = PoptartCoreItems.BEE_SMOKER.get();
+        BeeSmokerItem smokerItem = PoptartToolItems.BEE_SMOKER.get();
         ItemStack smoker = new ItemStack(smokerItem);
         ItemStack straw = new ItemStack(ModItems.STRAW.get(), 2);
         SimpleContainer container = new SimpleContainer(smoker);

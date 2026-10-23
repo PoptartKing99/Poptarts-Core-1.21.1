@@ -3,6 +3,7 @@ package dev.poptartking.poptartcore;
 import dev.poptartking.poptartcore.blastfurnace.BlastFurnaceCapabilities;
 import dev.poptartking.poptartcore.catalog.PoptartCatalog;
 import dev.poptartking.poptartcore.integration.create.PoptartCasingIntegration;
+import dev.poptartking.poptartcore.integration.ragdoll.AccessoryCorpseProvider;
 import dev.poptartking.poptartcore.registry.*;
 import dev.poptartking.poptartcore.scribing.ScribingNetwork;
 import dev.poptartking.poptartcore.treetap.LatexCauldronInteractions;
@@ -23,6 +24,7 @@ public class PoptartCore {
         PoptartCoreEntities.register(modEventBus);
         PoptartCoreBlockEntities.register(modEventBus);
         PoptartCoreMenus.register(modEventBus);
+        dev.poptartking.poptartcore.registry.AnvilDataComponents.register(modEventBus);
         PoptartCoreFluids.register(modEventBus);
         PoptartCoreRecipes.register(modEventBus);
         PoptartCoreLootModifiers.register(modEventBus);
@@ -38,6 +40,7 @@ public class PoptartCore {
         PoptartCasingIntegration.register(modEventBus);
         LatexCauldronInteractions.register(modEventBus);
         ScribingNetwork.register(modEventBus);
+        AccessoryCorpseProvider.register();
     }
 
     public static ResourceLocation location(String path) {

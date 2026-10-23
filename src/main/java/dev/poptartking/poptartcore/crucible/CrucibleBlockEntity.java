@@ -9,8 +9,8 @@ import dev.poptartking.poptartcore.crucible.melting.MeltingRecipe;
 import dev.poptartking.poptartcore.crucible.melting.MeltingRecipeInput;
 import dev.poptartking.poptartcore.crucible.menu.CrucibleMenu;
 import dev.poptartking.poptartcore.registry.PoptartCoreBlockEntities;
-import dev.poptartking.poptartcore.registry.PoptartCoreItems;
 import dev.poptartking.poptartcore.registry.PoptartCoreRecipes;
+import dev.poptartking.poptartcore.registry.PoptartProcessingItems;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -693,7 +693,7 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity implements Wor
             return getBurnDuration(stack) > 0;
         }
         if (slot == containerSlot) {
-            return PoptartCoreItems.isMould(stack);
+            return PoptartProcessingItems.isMould(stack);
         }
         if (slot < 0 || slot >= inputCount || level == null) {
             return false;

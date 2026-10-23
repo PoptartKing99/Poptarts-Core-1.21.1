@@ -11,6 +11,12 @@ import net.neoforged.neoforge.registries.datamaps.RegisterDataMapTypesEvent;
 import org.jetbrains.annotations.Nullable;
 
 public final class PoptartCoreDataMaps {
+    public static final DataMapType<net.minecraft.world.item.Item, dev.poptartking.poptartcore.flesh.UlcerFood>
+            ULCER_FOOD = DataMapType.builder(
+                            PoptartCore.location("ulcer_food"),
+                            Registries.ITEM,
+                            dev.poptartking.poptartcore.flesh.UlcerFood.CODEC)
+                    .build();
     public static final DataMapType<EntityType<?>, MilkRecharge> MILK_RECHARGE = DataMapType.builder(
                     PoptartCore.location("milk_recharge"), Registries.ENTITY_TYPE, MilkRecharge.CODEC)
             .build();
@@ -23,6 +29,7 @@ public final class PoptartCoreDataMaps {
 
     private static void registerDataMaps(RegisterDataMapTypesEvent event) {
         event.register(MILK_RECHARGE);
+        event.register(ULCER_FOOD);
     }
 
     @Nullable

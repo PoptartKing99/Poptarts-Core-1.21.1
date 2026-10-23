@@ -22,7 +22,8 @@ public class TombstoneGrabMixin {
         // compile dependency of this mod. Its public player() method supplies the sender.
         try {
             Class<?> packetContext = Class.forName("foundry.veil.api.network.handler.ServerPacketContext");
-            ServerPlayer player = (ServerPlayer) packetContext.getMethod("player").invoke(context);
+            ServerPlayer player =
+                    (ServerPlayer) packetContext.getMethod("player").invoke(context);
             if (player.level().getEntity(packet.entityID()) instanceof CorpseEntity corpse
                     && !TombstoneCorpse.canCarry(player, corpse)) {
                 callback.cancel();

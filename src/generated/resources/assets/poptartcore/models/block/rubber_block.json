@@ -1,0 +1,6 @@
+{
+  "textures": {
+    "all": "poptartcore:block/rubber_block"
+  },
+  "parent": "minecraft:block/cube_all"
+}

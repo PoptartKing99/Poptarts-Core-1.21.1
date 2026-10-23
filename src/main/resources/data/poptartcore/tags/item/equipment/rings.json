@@ -1,0 +1,23 @@
+{
+  "replace": false,
+  "values": [
+    "poptartcore:rusted_iron_ring",
+    "poptartcore:dull_iron_ring",
+    "poptartcore:moonlight_ring",
+    "poptartcore:ring_of_warmth",
+    "poptartcore:fireward_ring",
+    "poptartcore:silvercat_ring",
+    "poptartcore:tiny_horseshoe",
+    "poptartcore:thorn_ring",
+    "poptartcore:ring_of_the_afflicted",
+    "poptartcore:mercury_gemstone_ring",
+    "poptartcore:ancient_blessing",
+    "poptartcore:sunlight_ring",
+    "poptartcore:malevolent_ring",
+    "poptartcore:magnet_ring",
+    "poptartcore:bulwark_ring",
+    "poptartcore:ring_of_the_rat",
+    "poptartcore:sulfur_gemstone_ring",
+    "poptartcore:ring_of_silence"
+  ]
+}

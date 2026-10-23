@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "facing=up": {"model": "poptartcore:block/flesh/ulcer"},
+    "facing=down": {"model": "poptartcore:block/flesh/ulcer", "x": 180},
+    "facing=north": {"model": "poptartcore:block/flesh/ulcer", "x": 90},
+    "facing=south": {"model": "poptartcore:block/flesh/ulcer", "x": 90, "y": 180},
+    "facing=west": {"model": "poptartcore:block/flesh/ulcer", "x": 90, "y": 270},
+    "facing=east": {"model": "poptartcore:block/flesh/ulcer", "x": 90, "y": 90}
+  }
+}

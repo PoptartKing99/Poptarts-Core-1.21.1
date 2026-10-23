@@ -1,6 +1,6 @@
 package dev.poptartking.poptartcore.waxgolem;
 
-import dev.poptartking.poptartcore.registry.PoptartCoreItems;
+import dev.poptartking.poptartcore.registry.PoptartMaterialItems;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -114,7 +114,7 @@ public class WaxGolem extends AbstractGolem {
                 || stack.is(Items.HONEY_BOTTLE)
                 || stack.is(Items.GLASS_BOTTLE)
                 || (stack.getItem() instanceof ShearsItem)
-                || stack.is(PoptartCoreItems.WAX.get());
+                || stack.is(PoptartMaterialItems.WAX.get());
     }
 
     private static boolean isTool(ItemStack stack) {
@@ -786,7 +786,7 @@ public class WaxGolem extends AbstractGolem {
             extinguish();
             return InteractionResult.CONSUME;
         }
-        if (held.is(PoptartCoreItems.WAX.get()) && this.burned > 0) {
+        if (held.is(PoptartMaterialItems.WAX.get()) && this.burned > 0) {
             held.shrink(1);
             feedWax(1);
             level().playSound(

@@ -54,8 +54,13 @@ public class BeehiveRoofBlock extends Block {
 
     @Override
     protected ItemInteractionResult useItemOn(
-            ItemStack stack, BlockState state, Level level, BlockPos pos, Player player,
-            InteractionHand hand, BlockHitResult hitResult) {
+            ItemStack stack,
+            BlockState state,
+            Level level,
+            BlockPos pos,
+            Player player,
+            InteractionHand hand,
+            BlockHitResult hitResult) {
         if (!(stack.getItem() instanceof DyeItem dye) || !player.mayBuild()) {
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
@@ -65,8 +70,9 @@ public class BeehiveRoofBlock extends Block {
             return ItemInteractionResult.sidedSuccess(level.isClientSide);
         }
 
-        if (!level.isClientSide && level.setBlock(
-                pos, target.defaultBlockState().setValue(FACING, state.getValue(FACING)), Block.UPDATE_ALL)) {
+        if (!level.isClientSide
+                && level.setBlock(
+                        pos, target.defaultBlockState().setValue(FACING, state.getValue(FACING)), Block.UPDATE_ALL)) {
             level.playSound(null, pos, SoundEvents.DYE_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
             level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
             if (!player.getAbilities().instabuild) {

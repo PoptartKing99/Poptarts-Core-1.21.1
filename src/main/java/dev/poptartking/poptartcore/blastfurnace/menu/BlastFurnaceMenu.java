@@ -2,9 +2,9 @@ package dev.poptartking.poptartcore.blastfurnace.menu;
 
 import dev.poptartking.poptartcore.crucible.menu.CrucibleContainerSlot;
 import dev.poptartking.poptartcore.crucible.menu.CrucibleResultSlot;
-import dev.poptartking.poptartcore.registry.PoptartCoreItems;
 import dev.poptartking.poptartcore.registry.PoptartCoreMenus;
 import dev.poptartking.poptartcore.registry.PoptartCoreTags;
+import dev.poptartking.poptartcore.registry.PoptartProcessingItems;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Container;
@@ -91,7 +91,7 @@ public class BlastFurnaceMenu extends AbstractContainerMenu {
             if (!moveItemStackTo(stack, MACHINE_SLOTS, MACHINE_SLOTS + 36, true)) return ItemStack.EMPTY;
         } else if (PoptartCoreTags.isBlastFurnaceFuel(stack)) {
             if (!moveItemStackTo(stack, 6, 7, false)) return ItemStack.EMPTY;
-        } else if (PoptartCoreItems.isMould(stack)) {
+        } else if (PoptartProcessingItems.isMould(stack)) {
             if (!moveItemStackTo(stack, 7, 8, false)) return ItemStack.EMPTY;
         } else if (!moveItemStackTo(stack, 0, 6, false)) return ItemStack.EMPTY;
         if (stack.isEmpty()) slot.set(ItemStack.EMPTY);

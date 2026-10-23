@@ -81,6 +81,13 @@
     "poptartcore:chiseled_clinker_tile",
     "poptartcore:clinker_pillar",
     "poptartcore:millstone_structural",
-    "poptartcore:millstone_rotor"
+    "poptartcore:millstone_rotor",
+    "poptartcore:quartz_crystal",
+    "poptartcore:anvil",
+    "poptartcore:chipped_anvil",
+    "poptartcore:damaged_anvil",
+    "poptartcore:primitive_anvil",
+    "poptartcore:chipped_primitive_anvil",
+    "poptartcore:damaged_primitive_anvil"
   ]
 }

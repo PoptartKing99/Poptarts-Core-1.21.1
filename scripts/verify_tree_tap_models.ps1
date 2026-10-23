@@ -8,7 +8,7 @@ foreach ($kind in $parents) {
     $parentName = "tree_tap_$kind"
     $parentPath = Join-Path $models "$parentName.json"
     $parent = Get-Content -LiteralPath $parentPath -Raw | ConvertFrom-Json -AsHashtable
-    $expectedCount = if ($kind -eq 'full') { 16 } elseif ($kind -eq 'level_0_dripping') { 18 } else { 19 }
+    $expectedCount = if ($kind -eq 'full') { 16 } elseif ($kind -eq 'level_0_dripping') { 15 } else { 16 }
     if ($parent.elements.Count -ne $expectedCount) { throw "Wrong geometry: $parentPath" }
 
     foreach ($wood in $woods) {
@@ -21,9 +21,8 @@ foreach ($kind in $parents) {
         if ($child.textures['3'] -ne $expectedPool) {
             throw "Wrong pool texture: $childPath"
         }
-        if ($kind -ne 'full' -and
-            $child.textures['4'] -ne "poptartcore:block/tree_tap/tree_tap_${wood}_drip") {
-            throw "Wrong drip texture: $childPath"
+        if ($child.textures.ContainsKey('4')) {
+            throw "Static model must not contain globally animated drip texture: $childPath"
         }
         $textures = @{}
         foreach ($key in $parent.textures.Keys) { $textures[$key] = $parent.textures[$key] }
@@ -91,4 +90,10 @@ if (@($obsoleteFiles).Count -ne 0) { throw 'Obsolete oak or jungle tree-tap asse
 if (@($blockstate.variants.Keys | Where-Object { $_ -like '*wood=oak*' }).Count -ne 0) {
     throw 'Obsolete oak tree-tap blockstate variants remain.'
 }
-Write-Host 'Verified 6 shared shapes, 36 texture-only children, and 1152 resolvable blockstates.'
+$overlay = Get-Content -LiteralPath (Join-Path $assets 'models/block/tree_tap_drip.json') -Raw | ConvertFrom-Json -AsHashtable
+if ($overlay.elements.Count -ne 3) { throw 'Expected three original drip elements for the renderer.' }
+foreach ($model in $files) {
+    $json = Get-Content -LiteralPath $model.FullName -Raw
+    if ($json -match '"texture"\s*:\s*"#4"') { throw "Static drip geometry remains in $($model.Name)" }
+}
+Write-Host 'Verified static tap models, the separate drip overlay, and 1152 resolvable blockstates.'

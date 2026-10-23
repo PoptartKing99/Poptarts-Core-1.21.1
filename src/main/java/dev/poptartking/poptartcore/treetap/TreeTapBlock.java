@@ -1,9 +1,8 @@
 package dev.poptartking.poptartcore.treetap;
 
-import com.mojang.serialization.MapCodec;
 import com.farcr.nomansland.common.registry.items.NMLItems;
-import dev.poptartking.poptartcore.registry.PoptartCoreItems;
-import dev.poptartking.poptartcore.registry.PoptartCoreFluids;
+import com.mojang.serialization.MapCodec;
+import dev.poptartking.poptartcore.registry.PoptartMaterialItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -25,12 +24,12 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.Mirror;
-import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -42,15 +41,20 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.fluids.FluidStack;
-import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 
 public class TreeTapBlock extends BaseEntityBlock {
     public enum Wood implements StringRepresentable {
-        MAPLE, SPRUCE, PINE, BIRCH, ACACIA, JUNGLE;
+        MAPLE,
+        SPRUCE,
+        PINE,
+        BIRCH,
+        ACACIA,
+        JUNGLE;
 
-        private static final ResourceLocation MAPLE_LOG = ResourceLocation.fromNamespaceAndPath("nomansland", "maple_log");
-        private static final ResourceLocation PINE_LOG = ResourceLocation.fromNamespaceAndPath("nomansland", "pine_log");
+        private static final ResourceLocation MAPLE_LOG =
+                ResourceLocation.fromNamespaceAndPath("nomansland", "maple_log");
+        private static final ResourceLocation PINE_LOG =
+                ResourceLocation.fromNamespaceAndPath("nomansland", "pine_log");
 
         @Override
         public String getSerializedName() {
@@ -75,8 +79,20 @@ public class TreeTapBlock extends BaseEntityBlock {
     public static final IntegerProperty FILL_LEVEL = IntegerProperty.create("fill_level", 0, 5);
     // Retained for taps saved by the intermittent-drip version.
     public static final BooleanProperty DRIPPING = BooleanProperty.create("dripping");
-    static final int FILL_CHECK_INTERVAL = 7200;
-    private static final int RESIN_PER_FILL_LEVEL = 2;
+    static final int MIN_FILL_INTERVAL = 15 * 20;
+    static final int MAX_FILL_INTERVAL = 21 * 20;
+
+    static int nextFillDelay(RandomSource random) {
+        return MIN_FILL_INTERVAL + random.nextInt(MAX_FILL_INTERVAL - MIN_FILL_INTERVAL + 1);
+    }
+
+    static void scheduleNextFill(Level level, BlockPos pos) {
+        Block block = level.getBlockState(pos).getBlock();
+        if (block instanceof TreeTapBlock && !level.getBlockTicks().hasScheduledTick(pos, block)) {
+            level.scheduleTick(pos, block, nextFillDelay(level.random));
+        }
+    }
+
     private static final VoxelShape NORTH_SHAPE = Block.box(3, 0, 4, 13, 13, 16);
     private static final VoxelShape SOUTH_SHAPE = Block.box(3, 0, 0, 13, 13, 12);
     private static final VoxelShape EAST_SHAPE = Block.box(0, 0, 3, 12, 13, 13);
@@ -84,7 +100,8 @@ public class TreeTapBlock extends BaseEntityBlock {
 
     public TreeTapBlock(Properties properties) {
         super(properties);
-        registerDefaultState(stateDefinition.any()
+        registerDefaultState(stateDefinition
+                .any()
                 .setValue(FACING, Direction.NORTH)
                 .setValue(WOOD, Wood.MAPLE)
                 .setValue(HAS_BUCKET, false)
@@ -112,7 +129,8 @@ public class TreeTapBlock extends BaseEntityBlock {
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         Direction face = context.getClickedFace();
         if (!face.getAxis().isHorizontal()) return null;
-        Wood wood = Wood.fromLog(context.getLevel().getBlockState(context.getClickedPos().relative(face.getOpposite())));
+        Wood wood = Wood.fromLog(
+                context.getLevel().getBlockState(context.getClickedPos().relative(face.getOpposite())));
         return wood == null ? null : defaultBlockState().setValue(FACING, face).setValue(WOOD, wood);
     }
 
@@ -123,14 +141,21 @@ public class TreeTapBlock extends BaseEntityBlock {
 
     @Override
     protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-        return Wood.fromLog(level.getBlockState(pos.relative(state.getValue(FACING).getOpposite()))) == state.getValue(WOOD);
+        return Wood.fromLog(
+                        level.getBlockState(pos.relative(state.getValue(FACING).getOpposite())))
+                == state.getValue(WOOD);
     }
 
     @Override
-    protected BlockState updateShape(BlockState state, Direction direction, BlockState neighborState,
-            LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
+    protected BlockState updateShape(
+            BlockState state,
+            Direction direction,
+            BlockState neighborState,
+            LevelAccessor level,
+            BlockPos pos,
+            BlockPos neighborPos) {
         if (direction == state.getValue(FACING).getOpposite() && !canSurvive(state, level, pos)) {
-            level.scheduleTick(pos, this, 1);
+            return Blocks.AIR.defaultBlockState();
         }
         return super.updateShape(state, direction, neighborState, level, pos, neighborPos);
     }
@@ -142,61 +167,35 @@ public class TreeTapBlock extends BaseEntityBlock {
             return;
         }
         if (!state.getValue(HAS_BUCKET) || state.getValue(FULL)) return;
-        if (state.getValue(WOOD) == Wood.JUNGLE) {
-            if (level.getBlockEntity(pos) instanceof TreeTapBlockEntity tap) {
-                tap.fluidHandler().fill(new FluidStack(PoptartCoreFluids.LATEX.source().get(),
-                        LatexBottleFluidHandler.AMOUNT), IFluidHandler.FluidAction.EXECUTE);
-                if (tap.latexAmount() < TreeTapBlockEntity.CAPACITY) {
-                    level.scheduleTick(pos, this, FILL_CHECK_INTERVAL);
-                }
-            }
-            return;
-        }
-        int nextLevel = Math.min(5, state.getValue(FILL_LEVEL) + 1);
-        BlockState nextState = state.setValue(DRIPPING, false).setValue(FILL_LEVEL, nextLevel);
-        if (nextLevel == 5) {
-            level.setBlock(pos, nextState.setValue(FULL, true), Block.UPDATE_ALL);
-        } else {
-            level.setBlock(pos, nextState, Block.UPDATE_ALL);
-            level.scheduleTick(pos, this, FILL_CHECK_INTERVAL);
+        if (level.getBlockEntity(pos) instanceof TreeTapBlockEntity tap) {
+            tap.addDrip();
+            if (!tap.isFull()) scheduleNextFill(level, pos);
         }
     }
 
     @Override
-    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,
-            Player player, InteractionHand hand, BlockHitResult hitResult) {
+    protected ItemInteractionResult useItemOn(
+            ItemStack stack,
+            BlockState state,
+            Level level,
+            BlockPos pos,
+            Player player,
+            InteractionHand hand,
+            BlockHitResult hitResult) {
         if (stack.is(Items.GLASS_BOTTLE)
-                && state.getValue(WOOD) == Wood.MAPLE
+                && (state.getValue(WOOD) == Wood.MAPLE || state.getValue(WOOD) == Wood.JUNGLE)
                 && state.getValue(HAS_BUCKET)
                 && state.getValue(FILL_LEVEL) > 0) {
             if (!level.isClientSide) {
-                int nextLevel = state.getValue(FILL_LEVEL) - 1;
-                boolean wasFull = state.getValue(FULL);
-                level.setBlock(pos, state.setValue(FILL_LEVEL, nextLevel)
-                        .setValue(FULL, false).setValue(DRIPPING, false), Block.UPDATE_ALL);
-                if (wasFull) level.scheduleTick(pos, this, FILL_CHECK_INTERVAL);
-                if (!player.getAbilities().instabuild) stack.shrink(1);
-                ItemStack syrup = new ItemStack(NMLItems.MAPLE_SYRUP_BOTTLE.get());
-                if (!player.addItem(syrup)) player.drop(syrup, false);
-                level.playSound((Player) null, pos, SoundEvents.BOTTLE_FILL, SoundSource.BLOCKS, 1.0F, 1.0F);
-            }
-            return ItemInteractionResult.sidedSuccess(level.isClientSide);
-        }
-        if (stack.is(Items.GLASS_BOTTLE)
-                && state.getValue(WOOD) == Wood.JUNGLE
-                && state.getValue(HAS_BUCKET)
-                && (level.isClientSide
-                        ? state.getValue(FILL_LEVEL) > 0
-                        : level.getBlockEntity(pos) instanceof TreeTapBlockEntity tap
-                                && tap.latexAmount() >= LatexBottleFluidHandler.AMOUNT)) {
-            if (!level.isClientSide) {
-                TreeTapBlockEntity tap = (TreeTapBlockEntity) level.getBlockEntity(pos);
-                if (tap.collectLatexBottle() != LatexBottleFluidHandler.AMOUNT) {
+                if (!(level.getBlockEntity(pos) instanceof TreeTapBlockEntity tap) || !tap.collectServing()) {
                     return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
                 }
                 if (!player.getAbilities().instabuild) stack.shrink(1);
-                ItemStack latex = new ItemStack(PoptartCoreItems.LATEX_BOTTLE.get());
-                if (!player.addItem(latex)) player.drop(latex, false);
+                ItemStack syrup = new ItemStack(
+                        state.getValue(WOOD) == Wood.JUNGLE
+                                ? PoptartMaterialItems.LATEX_BOTTLE.get()
+                                : NMLItems.MAPLE_SYRUP_BOTTLE.get());
+                if (!player.addItem(syrup)) player.drop(syrup, false);
                 level.playSound((Player) null, pos, SoundEvents.BOTTLE_FILL, SoundSource.BLOCKS, 1.0F, 1.0F);
             }
             return ItemInteractionResult.sidedSuccess(level.isClientSide);
@@ -205,42 +204,53 @@ public class TreeTapBlock extends BaseEntityBlock {
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
         if (!level.isClientSide) {
-            level.setBlock(pos, state.setValue(HAS_BUCKET, true).setValue(FULL, false)
-                    .setValue(FILL_LEVEL, 0).setValue(DRIPPING, false), Block.UPDATE_ALL);
-            level.scheduleTick(pos, this, FILL_CHECK_INTERVAL);
+            level.setBlock(
+                    pos,
+                    state.setValue(HAS_BUCKET, true)
+                            .setValue(FULL, false)
+                            .setValue(FILL_LEVEL, 0)
+                            .setValue(DRIPPING, false),
+                    Block.UPDATE_ALL);
+            scheduleNextFill(level, pos);
             if (!player.getAbilities().instabuild) stack.shrink(1);
         }
         return ItemInteractionResult.sidedSuccess(level.isClientSide);
     }
 
     @Override
-    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos,
-            Player player, BlockHitResult hitResult) {
+    protected InteractionResult useWithoutItem(
+            BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         if (!state.getValue(HAS_BUCKET)) return InteractionResult.PASS;
         if (!level.isClientSide) {
-            int fillLevel = state.getValue(FILL_LEVEL);
+            if (!(level.getBlockEntity(pos) instanceof TreeTapBlockEntity tap)) return InteractionResult.PASS;
             if (player.isShiftKeyDown()) {
-                if (fillLevel == 0) {
-                    level.setBlock(pos, state.setValue(HAS_BUCKET, false).setValue(FULL, false)
-                            .setValue(DRIPPING, false), Block.UPDATE_ALL);
+                if (tap.collectedAmount() == 0) {
+                    level.setBlock(
+                            pos,
+                            state.setValue(HAS_BUCKET, false)
+                                    .setValue(FULL, false)
+                                    .setValue(DRIPPING, false),
+                            Block.UPDATE_ALL);
                     ItemStack bucket = new ItemStack(Items.BUCKET);
                     if (!player.addItem(bucket)) player.drop(bucket, false);
                 }
                 return InteractionResult.SUCCESS;
             }
-            if ((state.getValue(WOOD) == Wood.SPRUCE || state.getValue(WOOD) == Wood.PINE) && fillLevel > 0) {
-                ItemStack resin = new ItemStack(NMLItems.RESIN.get(), fillLevel * RESIN_PER_FILL_LEVEL);
+            int resinCount = tap.collectResin();
+            if (resinCount > 0) {
+                ItemStack resin = new ItemStack(NMLItems.RESIN.get(), resinCount);
                 if (!player.addItem(resin)) player.drop(resin, false);
                 level.playSound((Player) null, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS);
-                level.setBlock(pos, state.setValue(FULL, false).setValue(FILL_LEVEL, 0)
-                        .setValue(DRIPPING, false), Block.UPDATE_ALL);
-                level.scheduleTick(pos, this, FILL_CHECK_INTERVAL);
+                scheduleNextFill(level, pos);
                 return InteractionResult.SUCCESS;
             }
             if (state.getValue(FULL)) {
-                player.displayClientMessage(Component.translatable(state.getValue(WOOD) == Wood.JUNGLE
-                        ? "message.poptartcore.tree_tap.latex_bottle"
-                        : "message.poptartcore.tree_tap.full"), true);
+                player.displayClientMessage(
+                        Component.translatable(
+                                state.getValue(WOOD) == Wood.JUNGLE
+                                        ? "message.poptartcore.tree_tap.latex_bottle"
+                                        : "message.poptartcore.tree_tap.full"),
+                        true);
                 return InteractionResult.SUCCESS;
             }
         }

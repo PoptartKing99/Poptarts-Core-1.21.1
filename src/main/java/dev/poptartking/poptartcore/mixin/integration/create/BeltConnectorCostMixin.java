@@ -17,19 +17,37 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(BeltConnectorItem.class)
 public abstract class BeltConnectorCostMixin {
-    @Inject(method = "useOn", at = @At(value = "INVOKE", target =
-            "Lcom/simibubi/create/content/kinetics/belt/item/BeltConnectorItem;createBelts(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/BlockPos;)V"), cancellable = true)
-    private void poptartcore$checkCost(UseOnContext context, CallbackInfoReturnable<InteractionResult> callback,
-            @Local Player player, @Local(ordinal = 0) BlockPos last, @Local(ordinal = 1) BlockPos first) {
-        if (player != null && !player.isCreative()
+    @Inject(
+            method = "useOn",
+            at =
+                    @At(
+                            value = "INVOKE",
+                            target =
+                                    "Lcom/simibubi/create/content/kinetics/belt/item/BeltConnectorItem;createBelts(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/BlockPos;)V"),
+            cancellable = true)
+    private void poptartcore$checkCost(
+            UseOnContext context,
+            CallbackInfoReturnable<InteractionResult> callback,
+            @Local Player player,
+            @Local(ordinal = 0) BlockPos last,
+            @Local(ordinal = 1) BlockPos first) {
+        if (player != null
+                && !player.isCreative()
                 && BeltConnectorCost.available(player) < BeltConnectorCost.length(first, last)) {
             callback.setReturnValue(InteractionResult.FAIL);
         }
     }
 
-    @WrapOperation(method = "useOn", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;shrink(I)V"))
-    private void poptartcore$consumeCost(ItemStack held, int originalAmount, Operation<Void> original,
-            @Local Player player, @Local(ordinal = 0) BlockPos last, @Local(ordinal = 1) BlockPos first) {
+    @WrapOperation(
+            method = "useOn",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;shrink(I)V"))
+    private void poptartcore$consumeCost(
+            ItemStack held,
+            int originalAmount,
+            Operation<Void> original,
+            @Local Player player,
+            @Local(ordinal = 0) BlockPos last,
+            @Local(ordinal = 1) BlockPos first) {
         BeltConnectorCost.consume(player, held, BeltConnectorCost.length(first, last));
     }
 }

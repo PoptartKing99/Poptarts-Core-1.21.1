@@ -1,6 +1,6 @@
 package dev.poptartking.poptartcore.mixin.wax;
 
-import dev.poptartking.poptartcore.registry.PoptartCoreItems;
+import dev.poptartking.poptartcore.registry.PoptartMaterialItems;
 import net.mehvahdjukaar.moonlight.api.block.IWaxable;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -19,7 +19,7 @@ public interface IWaxableMoonlightMixin<T> {
                             target = "Lnet/minecraft/world/item/ItemStack;getItem()Lnet/minecraft/world/item/Item;",
                             ordinal = 0))
     private Item poptartcore$substituteWax(ItemStack stack) {
-        if (stack.is(PoptartCoreItems.WAX.get())) {
+        if (stack.is(PoptartMaterialItems.WAX.get())) {
             return Items.HONEYCOMB;
         }
         return stack.is(Items.HONEYCOMB) ? Items.BARRIER : stack.getItem();
@@ -33,6 +33,6 @@ public interface IWaxableMoonlightMixin<T> {
                             target = "Lnet/minecraft/world/item/ItemStack;getItem()Lnet/minecraft/world/item/Item;",
                             ordinal = 1))
     private Item poptartcore$returnWaxItem(ItemStack stack) {
-        return PoptartCoreItems.WAX.get();
+        return PoptartMaterialItems.WAX.get();
     }
 }

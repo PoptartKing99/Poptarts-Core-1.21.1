@@ -1,8 +1,11 @@
 package dev.poptartking.poptartcore.catalog;
 
 import dev.poptartking.poptartcore.PoptartCore;
+import dev.poptartking.poptartcore.registry.PoptartArmorItems;
 import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
-import dev.poptartking.poptartcore.registry.PoptartCoreItems;
+import dev.poptartking.poptartcore.registry.PoptartMaterialItems;
+import dev.poptartking.poptartcore.registry.PoptartProcessingItems;
+import dev.poptartking.poptartcore.registry.PoptartToolItems;
 import java.util.Map;
 import java.util.Set;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -242,134 +245,135 @@ public final class PoptartCatalogGameTests {
                 PoptartCoreBlocks.WAX_BLOCK.item().get().getBlock() == PoptartCoreBlocks.WAX_BLOCK.get(),
                 "Catalog block item does not point to its registered block");
         helper.assertTrue(
-                PoptartCoreItems.TIN_NUGGET.item().get() == PoptartCoreItems.TIN_NUGGET.get(),
+                PoptartMaterialItems.TIN_NUGGET.item().get() == PoptartMaterialItems.TIN_NUGGET.get(),
                 "Catalog definition does not return its registered item");
         helper.assertTrue(
-                PoptartCoreItems.INGOT_MOULD.get().getDefaultInstance().getMaxDamage() == 32
-                        && PoptartCoreItems.PLATE_MOULD
+                PoptartProcessingItems.INGOT_MOULD.get().getDefaultInstance().getMaxDamage() == 32
+                        && PoptartProcessingItems.PLATE_MOULD
                                         .get()
                                         .getDefaultInstance()
                                         .getMaxDamage()
                                 == 32,
                 "Catalog moulds do not preserve their durability");
         helper.assertTrue(
-                PoptartCoreItems.WAX.get() instanceof dev.poptartking.poptartcore.wax.WaxItem,
+                PoptartMaterialItems.WAX.get() instanceof dev.poptartking.poptartcore.wax.WaxItem,
                 "Catalog wax does not preserve its custom item class");
         helper.assertTrue(
-                PoptartCoreItems.FIRESTARTER.get().getDefaultInstance().getMaxDamage() == 3,
+                PoptartToolItems.FIRESTARTER.get().getDefaultInstance().getMaxDamage() == 3,
                 "Catalog firestarter does not preserve its durability");
         helper.assertTrue(
-                PoptartCoreItems.HAMMER.get().getDefaultInstance().getMaxDamage() == 720
-                        && PoptartCoreItems.HAMMER.get().getDefaultMaxStackSize() == 1,
+                PoptartToolItems.HAMMER.get().getDefaultInstance().getMaxDamage() == 720
+                        && PoptartToolItems.HAMMER.get().getDefaultMaxStackSize() == 1,
                 "Catalog hammer does not preserve its durability and stack size");
         helper.assertTrue(
-                PoptartCoreItems.BEE_SMOKER.get().getDefaultInstance().getMaxDamage() == 360
-                        && PoptartCoreItems.BEE_SMOKER.get().getDefaultMaxStackSize() == 1,
+                PoptartToolItems.BEE_SMOKER.get().getDefaultInstance().getMaxDamage() == 360
+                        && PoptartToolItems.BEE_SMOKER.get().getDefaultMaxStackSize() == 1,
                 "Catalog Bee Smoker does not preserve its durability and stack size");
         helper.assertTrue(
-                PoptartCoreItems.REPEATING_CROSSBOW.get().getDefaultInstance().getMaxDamage() == 300
-                        && PoptartCoreItems.REPEATING_CROSSBOW.get().getDefaultMaxStackSize() == 1
+                PoptartToolItems.REPEATING_CROSSBOW.get().getDefaultInstance().getMaxDamage() == 300
+                        && PoptartToolItems.REPEATING_CROSSBOW.get().getDefaultMaxStackSize() == 1
                         && net.minecraft.world.item.component.ChargedProjectiles.EMPTY.equals(
-                                PoptartCoreItems.REPEATING_CROSSBOW
+                                PoptartToolItems.REPEATING_CROSSBOW
                                         .get()
                                         .getDefaultInstance()
                                         .get(net.minecraft.core.component.DataComponents.CHARGED_PROJECTILES)),
                 "Catalog Repeating Crossbow does not preserve its durability, stack size, and charge data");
         helper.assertTrue(
-                PoptartCoreItems.MINING_HELMET.get().getType() == net.minecraft.world.item.ArmorItem.Type.HELMET
-                        && PoptartCoreItems.MINING_HELMET.get().getMaterial()
+                PoptartArmorItems.MINING_HELMET.get().getType() == net.minecraft.world.item.ArmorItem.Type.HELMET
+                        && PoptartArmorItems.MINING_HELMET.get().getMaterial()
                                 == dev.poptartking.poptartcore.registry.PoptartCoreArmorMaterials.MINING_ARMOR_MATERIAL
-                        && PoptartCoreItems.MINING_HELMET
+                        && PoptartArmorItems.MINING_HELMET
                                         .get()
                                         .getDefaultInstance()
                                         .getMaxDamage()
                                 == 100,
                 "Catalog Mining Helmet does not preserve its slot, material, and durability");
         helper.assertTrue(
-                PoptartCoreItems.RAW_HIDE_HELMET.get().getType() == net.minecraft.world.item.ArmorItem.Type.HELMET
-                        && PoptartCoreItems.RAW_HIDE_CHESTPLATE.get().getType()
+                PoptartArmorItems.RAW_HIDE_HELMET.get().getType() == net.minecraft.world.item.ArmorItem.Type.HELMET
+                        && PoptartArmorItems.RAW_HIDE_CHESTPLATE.get().getType()
                                 == net.minecraft.world.item.ArmorItem.Type.CHESTPLATE
-                        && PoptartCoreItems.RAW_HIDE_LEGGINGS.get().getType()
+                        && PoptartArmorItems.RAW_HIDE_LEGGINGS.get().getType()
                                 == net.minecraft.world.item.ArmorItem.Type.LEGGINGS
-                        && PoptartCoreItems.RAW_HIDE_HELMET.get().getMaterial()
+                        && PoptartArmorItems.RAW_HIDE_HELMET.get().getMaterial()
                                 == dev.poptartking.poptartcore.registry.PoptartCoreArmorMaterials
                                         .RAW_HIDE_ARMOR_MATERIAL
-                        && PoptartCoreItems.RAW_HIDE_CHESTPLATE.get().getMaterial()
+                        && PoptartArmorItems.RAW_HIDE_CHESTPLATE.get().getMaterial()
                                 == dev.poptartking.poptartcore.registry.PoptartCoreArmorMaterials
                                         .RAW_HIDE_ARMOR_MATERIAL
-                        && PoptartCoreItems.RAW_HIDE_LEGGINGS.get().getMaterial()
+                        && PoptartArmorItems.RAW_HIDE_LEGGINGS.get().getMaterial()
                                 == dev.poptartking.poptartcore.registry.PoptartCoreArmorMaterials
                                         .RAW_HIDE_ARMOR_MATERIAL
-                        && PoptartCoreItems.RAW_HIDE_HELMET
+                        && PoptartArmorItems.RAW_HIDE_HELMET
                                         .get()
                                         .getDefaultInstance()
                                         .getMaxDamage()
                                 == 140
-                        && PoptartCoreItems.RAW_HIDE_CHESTPLATE
+                        && PoptartArmorItems.RAW_HIDE_CHESTPLATE
                                         .get()
                                         .getDefaultInstance()
                                         .getMaxDamage()
                                 == 140
-                        && PoptartCoreItems.RAW_HIDE_LEGGINGS
+                        && PoptartArmorItems.RAW_HIDE_LEGGINGS
                                         .get()
                                         .getDefaultInstance()
                                         .getMaxDamage()
                                 == 140,
                 "Catalog Raw Hide armor does not preserve its slots, material, and durability");
         helper.assertTrue(
-                PoptartCoreItems.BEEKEEPER_HELMET.get().getType() == net.minecraft.world.item.ArmorItem.Type.HELMET
-                        && PoptartCoreItems.BEEKEEPER_CHESTPLATE.get().getType()
+                PoptartArmorItems.BEEKEEPER_HELMET.get().getType() == net.minecraft.world.item.ArmorItem.Type.HELMET
+                        && PoptartArmorItems.BEEKEEPER_CHESTPLATE.get().getType()
                                 == net.minecraft.world.item.ArmorItem.Type.CHESTPLATE
-                        && PoptartCoreItems.BEEKEEPER_LEGGINGS.get().getType()
+                        && PoptartArmorItems.BEEKEEPER_LEGGINGS.get().getType()
                                 == net.minecraft.world.item.ArmorItem.Type.LEGGINGS
-                        && PoptartCoreItems.BEEKEEPER_BOOTS.get().getType()
+                        && PoptartArmorItems.BEEKEEPER_BOOTS.get().getType()
                                 == net.minecraft.world.item.ArmorItem.Type.BOOTS
-                        && PoptartCoreItems.BEEKEEPER_HELMET
+                        && PoptartArmorItems.BEEKEEPER_HELMET
                                         .get()
                                         .getDefaultInstance()
                                         .getMaxDamage()
                                 == 200
-                        && PoptartCoreItems.BEEKEEPER_CHESTPLATE
+                        && PoptartArmorItems.BEEKEEPER_CHESTPLATE
                                         .get()
                                         .getDefaultInstance()
                                         .getMaxDamage()
                                 == 300
-                        && PoptartCoreItems.BEEKEEPER_LEGGINGS
+                        && PoptartArmorItems.BEEKEEPER_LEGGINGS
                                         .get()
                                         .getDefaultInstance()
                                         .getMaxDamage()
                                 == 260
-                        && PoptartCoreItems.BEEKEEPER_BOOTS
+                        && PoptartArmorItems.BEEKEEPER_BOOTS
                                         .get()
                                         .getDefaultInstance()
                                         .getMaxDamage()
                                 == 200,
                 "Catalog Beekeeper armor does not preserve its slots and durability");
         helper.assertTrue(
-                PoptartCoreItems.STEEL_HELMET.get().getType() == net.minecraft.world.item.ArmorItem.Type.HELMET
-                        && PoptartCoreItems.STEEL_CHESTPLATE.get().getType()
+                PoptartArmorItems.STEEL_HELMET.get().getType() == net.minecraft.world.item.ArmorItem.Type.HELMET
+                        && PoptartArmorItems.STEEL_CHESTPLATE.get().getType()
                                 == net.minecraft.world.item.ArmorItem.Type.CHESTPLATE
-                        && PoptartCoreItems.STEEL_LEGGINGS.get().getType()
+                        && PoptartArmorItems.STEEL_LEGGINGS.get().getType()
                                 == net.minecraft.world.item.ArmorItem.Type.LEGGINGS
-                        && PoptartCoreItems.STEEL_BOOTS.get().getType() == net.minecraft.world.item.ArmorItem.Type.BOOTS
-                        && PoptartCoreItems.STEEL_HELMET.get().getMaterial()
+                        && PoptartArmorItems.STEEL_BOOTS.get().getType()
+                                == net.minecraft.world.item.ArmorItem.Type.BOOTS
+                        && PoptartArmorItems.STEEL_HELMET.get().getMaterial()
                                 == dev.poptartking.poptartcore.registry.PoptartCoreArmorMaterials.STEEL_ARMOR_MATERIAL
-                        && PoptartCoreItems.STEEL_CHESTPLATE
+                        && PoptartArmorItems.STEEL_CHESTPLATE
                                         .get()
                                         .getDefaultInstance()
                                         .getMaxDamage()
                                 == 400
-                        && PoptartCoreItems.STEEL_LEGGINGS
+                        && PoptartArmorItems.STEEL_LEGGINGS
                                         .get()
                                         .getDefaultInstance()
                                         .getMaxDamage()
                                 == 375
-                        && PoptartCoreItems.STEEL_BOOTS
+                        && PoptartArmorItems.STEEL_BOOTS
                                         .get()
                                         .getDefaultInstance()
                                         .getMaxDamage()
                                 == 325
-                        && PoptartCoreItems.STEEL_HELMET
+                        && PoptartArmorItems.STEEL_HELMET
                                         .get()
                                         .getDefaultInstance()
                                         .getMaxDamage()

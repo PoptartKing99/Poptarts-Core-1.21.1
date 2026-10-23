@@ -44,8 +44,8 @@ public abstract class BeltModelMixin {
         if (data.has(PoptartBeltCasingClient.CASING_PROPERTY)) {
             PoptartBeltCasing casing = data.get(PoptartBeltCasingClient.CASING_PROPERTY);
             if (casing != null) {
-                callback.setReturnValue(sprite(PoptartCore.location("block/"
-                        + (casing == PoptartBeltCasing.INDUSTRIAL ? "industrial_plating" : "treated_wood"))));
+                callback.setReturnValue(sprite(PoptartCore.location(
+                        "block/" + (casing == PoptartBeltCasing.INDUSTRIAL ? "industrial_plating" : "treated_wood"))));
             }
         }
     }

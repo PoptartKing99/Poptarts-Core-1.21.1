@@ -10,6 +10,16 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 
 public final class PoptartCoreTags {
+    public static final TagKey<Item> UPGRADEABLE = TagKey.create(Registries.ITEM, PoptartCore.location("upgradeable"));
+    public static final TagKey<Item> UPGRADE_MINING =
+            TagKey.create(Registries.ITEM, PoptartCore.location("upgrade_mining"));
+    public static final TagKey<Item> UPGRADE_ATTACK =
+            TagKey.create(Registries.ITEM, PoptartCore.location("upgrade_attack"));
+    public static final TagKey<Item> CANNOT_UPGRADE_WITH =
+            TagKey.create(Registries.ITEM, PoptartCore.location("cannot_upgrade_with"));
+    public static final TagKey<Block> FLESH = TagKey.create(Registries.BLOCK, PoptartCore.location("flesh"));
+    public static final TagKey<Block> SUPPORTS_FLESH_GROWTH =
+            TagKey.create(Registries.BLOCK, PoptartCore.location("supports_flesh_growth"));
     public static final TagKey<Item> HAMMERS =
             TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "tools/hammers"));
     public static final TagKey<Item> KNIVES =

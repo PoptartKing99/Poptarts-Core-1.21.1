@@ -16,14 +16,31 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(ConduitRenderer.class)
 public abstract class ConduitEyeAnimationMixin {
-    @Shadow @Final private ModelPart eye;
+    @Shadow
+    @Final
+    private ModelPart eye;
 
-    @WrapOperation(method = "render(Lnet/minecraft/world/level/block/entity/ConduitBlockEntity;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;II)V",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/model/geom/ModelPart;render(Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;II)V"))
-    private void poptartcore$syncEyePulse(ModelPart part, PoseStack poses,
-            VertexConsumer vertices, int light, int overlay, Operation<Void> original,
-            ConduitBlockEntity conduit, float partialTick, PoseStack renderPoses,
-            MultiBufferSource buffers, int renderLight, int renderOverlay) {
+    @WrapOperation(
+            method =
+                    "render(Lnet/minecraft/world/level/block/entity/ConduitBlockEntity;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;II)V",
+            at =
+                    @At(
+                            value = "INVOKE",
+                            target =
+                                    "Lnet/minecraft/client/model/geom/ModelPart;render(Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;II)V"))
+    private void poptartcore$syncEyePulse(
+            ModelPart part,
+            PoseStack poses,
+            VertexConsumer vertices,
+            int light,
+            int overlay,
+            Operation<Void> original,
+            ConduitBlockEntity conduit,
+            float partialTick,
+            PoseStack renderPoses,
+            MultiBufferSource buffers,
+            int renderLight,
+            int renderOverlay) {
         if (part == eye) {
             ConduitEyeAnimation.render(conduit, poses, buffers, light, overlay);
         } else {

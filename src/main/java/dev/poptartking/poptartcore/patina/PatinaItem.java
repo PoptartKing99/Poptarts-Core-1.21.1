@@ -1,7 +1,7 @@
 package dev.poptartking.poptartcore.patina;
 
 import dev.poptartking.poptartcore.PoptartCore;
-import dev.poptartking.poptartcore.registry.PoptartCoreItems;
+import dev.poptartking.poptartcore.registry.PoptartMaterialItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
@@ -89,7 +89,7 @@ public final class PatinaItem extends Item {
             UseOnContext context = event.getContext();
             if (!context.getLevel().isClientSide()) {
                 Block.popResource(
-                        context.getLevel(), context.getClickedPos(), new ItemStack(PoptartCoreItems.PATINA.get()));
+                        context.getLevel(), context.getClickedPos(), new ItemStack(PoptartMaterialItems.PATINA.get()));
             }
         }
     }

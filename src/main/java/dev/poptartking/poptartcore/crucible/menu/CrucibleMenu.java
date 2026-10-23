@@ -1,8 +1,8 @@
 package dev.poptartking.poptartcore.crucible.menu;
 
 import dev.poptartking.poptartcore.crucible.CrucibleBlockEntity;
-import dev.poptartking.poptartcore.registry.PoptartCoreItems;
 import dev.poptartking.poptartcore.registry.PoptartCoreMenus;
+import dev.poptartking.poptartcore.registry.PoptartProcessingItems;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Container;
@@ -170,6 +170,6 @@ public class CrucibleMenu extends AbstractContainerMenu {
     }
 
     protected boolean isMould(ItemStack stack) {
-        return PoptartCoreItems.isMould(stack);
+        return PoptartProcessingItems.isMould(stack);
     }
 }

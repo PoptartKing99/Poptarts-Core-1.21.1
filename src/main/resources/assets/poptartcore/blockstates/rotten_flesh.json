@@ -1,5 +1,7 @@
 {
   "variants": {
-    "": { "model": "poptartcore:block/flesh/rotten_flesh" }
+    "": {
+      "model": "poptartcore:block/flesh/rotten_flesh"
+    }
   }
 }

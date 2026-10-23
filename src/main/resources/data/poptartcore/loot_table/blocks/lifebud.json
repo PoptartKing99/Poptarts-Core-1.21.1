@@ -2,9 +2,12 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "rolls": 1,
+      "rolls": 1.0,
       "entries": [
-        { "type": "minecraft:item", "name": "poptartcore:lifegem" }
+        {
+          "type": "minecraft:item",
+          "name": "poptartcore:lifegem"
+        }
       ]
     }
   ]

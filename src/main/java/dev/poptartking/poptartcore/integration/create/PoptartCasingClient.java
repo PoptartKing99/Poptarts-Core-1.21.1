@@ -24,8 +24,7 @@ public final class PoptartCasingClient {
     private static final ResourceLocation COG_SIDE_CONNECTED =
             PoptartCore.location("block/industrial_plating_encased_cogwheel_side_connected");
     private static final ResourceLocation TREATED_WOOD = PoptartCore.location("block/treated_wood");
-    private static final ResourceLocation TREATED_WOOD_CONNECTED =
-            PoptartCore.location("block/treated_wood_connected");
+    private static final ResourceLocation TREATED_WOOD_CONNECTED = PoptartCore.location("block/treated_wood_connected");
     private static final ResourceLocation TREATED_WOOD_COG_SIDE =
             PoptartCore.location("block/treated_wood_encased_cogwheel_side");
     private static final ResourceLocation TREATED_WOOD_COG_SIDE_CONNECTED =

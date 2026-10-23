@@ -1,6 +1,6 @@
 package dev.poptartking.poptartcore.crucible.menu;
 
-import dev.poptartking.poptartcore.registry.PoptartCoreItems;
+import dev.poptartking.poptartcore.registry.PoptartProcessingItems;
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
@@ -13,6 +13,6 @@ public class CrucibleContainerSlot extends Slot {
 
     @Override
     public boolean mayPlace(ItemStack stack) {
-        return PoptartCoreItems.isMould(stack);
+        return PoptartProcessingItems.isMould(stack);
     }
 }

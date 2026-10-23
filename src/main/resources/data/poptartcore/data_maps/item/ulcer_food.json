@@ -1,0 +1,16 @@
+{
+  "values": {
+    "#c:foods/raw_meat": {
+      "close_chance": 0.2
+    },
+    "#c:foods/cooked_meat": {
+      "close_chance": 0.2
+    },
+    "rotten_flesh": {
+      "close_chance": 0.8
+    },
+    "bone": {
+      "close_chance": 0.4
+    }
+  }
+}

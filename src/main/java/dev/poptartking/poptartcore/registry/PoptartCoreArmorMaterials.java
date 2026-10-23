@@ -34,7 +34,7 @@ public class PoptartCoreArmorMaterials {
             ARMOR_EQUIP_IRON,
             1.5F,
             0.0F,
-            () -> Ingredient.of(PoptartCoreItems.STEEL_INGOT.get()));
+            () -> Ingredient.of(PoptartMaterialItems.STEEL_INGOT.get()));
 
     private static EnumMap<ArmorItem.Type, Integer> protection(int helmet, int chestplate, int leggings, int boots) {
         return Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {

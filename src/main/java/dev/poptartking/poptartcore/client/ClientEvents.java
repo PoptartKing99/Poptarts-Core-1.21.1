@@ -15,11 +15,12 @@ import dev.poptartking.poptartcore.integration.ragdoll.RagdollArmorCompat;
 import dev.poptartking.poptartcore.lostheart.client.LostHeartEmberParticle;
 import dev.poptartking.poptartcore.lostheart.client.LostHeartRenderer;
 import dev.poptartking.poptartcore.quern.client.QuernRenderer;
+import dev.poptartking.poptartcore.registry.PoptartArmorItems;
 import dev.poptartking.poptartcore.registry.PoptartCoreBlockEntities;
 import dev.poptartking.poptartcore.registry.PoptartCoreEntities;
-import dev.poptartking.poptartcore.registry.PoptartCoreItems;
 import dev.poptartking.poptartcore.registry.PoptartCoreMenus;
 import dev.poptartking.poptartcore.registry.PoptartCoreParticles;
+import dev.poptartking.poptartcore.registry.PoptartToolItems;
 import dev.poptartking.poptartcore.rift.client.RiftFlameParticle;
 import dev.poptartking.poptartcore.scribing.ScribingTableScreen;
 import dev.poptartking.poptartcore.spider.client.WebProjectileRenderer;
@@ -82,24 +83,24 @@ public class ClientEvents {
 
     @SubscribeEvent
     public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
-        event.registerItem(new BeeSmokerClientExtensions(), PoptartCoreItems.BEE_SMOKER.get());
+        event.registerItem(new BeeSmokerClientExtensions(), PoptartToolItems.BEE_SMOKER.get());
 
         event.registerItem(
                 new ArmorClientItemExtensions(() -> PoptartCoreModelLayers.BEEKEEPER_ARMOR_MODEL),
-                PoptartCoreItems.BEEKEEPER_HELMET.get(),
-                PoptartCoreItems.BEEKEEPER_CHESTPLATE.get(),
-                PoptartCoreItems.BEEKEEPER_LEGGINGS.get(),
-                PoptartCoreItems.BEEKEEPER_BOOTS.get());
+                PoptartArmorItems.BEEKEEPER_HELMET.get(),
+                PoptartArmorItems.BEEKEEPER_CHESTPLATE.get(),
+                PoptartArmorItems.BEEKEEPER_LEGGINGS.get(),
+                PoptartArmorItems.BEEKEEPER_BOOTS.get());
 
         event.registerItem(
                 new ArmorClientItemExtensions(() -> PoptartCoreModelLayers.MINING_HELMET_MODEL),
-                PoptartCoreItems.MINING_HELMET.get());
+                PoptartArmorItems.MINING_HELMET.get());
 
         event.registerItem(
                 new ArmorClientItemExtensions(() -> PoptartCoreModelLayers.RAW_HIDE_ARMOR_MODEL),
-                PoptartCoreItems.RAW_HIDE_HELMET.get(),
-                PoptartCoreItems.RAW_HIDE_CHESTPLATE.get(),
-                PoptartCoreItems.RAW_HIDE_LEGGINGS.get());
+                PoptartArmorItems.RAW_HIDE_HELMET.get(),
+                PoptartArmorItems.RAW_HIDE_CHESTPLATE.get(),
+                PoptartArmorItems.RAW_HIDE_LEGGINGS.get());
 
         event.registerItem(new LeatherArmorClientExtensions(), new Item[] {
             Items.LEATHER_HELMET, Items.LEATHER_CHESTPLATE, Items.LEATHER_LEGGINGS, Items.LEATHER_BOOTS
@@ -111,10 +112,10 @@ public class ClientEvents {
 
         event.registerItem(
                 ArmorClientExtensions.steel(),
-                PoptartCoreItems.STEEL_HELMET.get(),
-                PoptartCoreItems.STEEL_CHESTPLATE.get(),
-                PoptartCoreItems.STEEL_LEGGINGS.get(),
-                PoptartCoreItems.STEEL_BOOTS.get());
+                PoptartArmorItems.STEEL_HELMET.get(),
+                PoptartArmorItems.STEEL_CHESTPLATE.get(),
+                PoptartArmorItems.STEEL_LEGGINGS.get(),
+                PoptartArmorItems.STEEL_BOOTS.get());
     }
 
     @SubscribeEvent
@@ -189,6 +190,7 @@ public class ClientEvents {
 
     @SubscribeEvent
     public static void registerScreens(RegisterMenuScreensEvent event) {
+        event.register(PoptartCoreMenus.PRIMITIVE_ANVIL_MENU.get(), dev.poptartking.poptartcore.anvil.AnvilScreen::new);
         event.register(PoptartCoreMenus.CRUCIBLE.get(), CrucibleScreen::new);
         event.register(PoptartCoreMenus.BLAST_FURNACE.get(), BlastFurnaceScreen::new);
         event.register(PoptartCoreMenus.WORKBENCH.get(), WorkbenchScreen::new);
@@ -197,6 +199,12 @@ public class ClientEvents {
 
     @SubscribeEvent
     public static void registerBlockEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerBlockEntityRenderer(
+                PoptartCoreBlockEntities.TREE_TAP.get(),
+                context -> new dev.poptartking.poptartcore.treetap.client.TreeTapDripRenderer());
+        event.registerBlockEntityRenderer(
+                PoptartCoreBlockEntities.ANVIL.get(),
+                dev.poptartking.poptartcore.anvil.client.AnvilHammerRenderer::new);
         event.registerBlockEntityRenderer(
                 PoptartCoreBlockEntities.INGOT_PILE.get(), context -> new IngotPileRenderer());
         event.registerEntityRenderer(PoptartCoreEntities.WAX_GOLEM.get(), WaxGolemRenderer::new);
@@ -216,6 +224,7 @@ public class ClientEvents {
 
     @SubscribeEvent
     public static void registerAdditionalModels(RegisterAdditional event) {
+        event.register(dev.poptartking.poptartcore.treetap.client.TreeTapDripRenderer.MODEL);
         PoptartBeltCasingClient.registerModels(event);
         event.register(dev.poptartking.poptartcore.millstone.client.MillstoneRenderer.ROTOR_MODEL);
         event.register(QuernRenderer.ROTOR_MODEL);

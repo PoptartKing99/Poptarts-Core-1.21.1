@@ -10,7 +10,7 @@
     "lining": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "poptartcore:fresh_flesh"
+        "Name": "poptartcore:living_flesh"
       }
     },
     "air": {
