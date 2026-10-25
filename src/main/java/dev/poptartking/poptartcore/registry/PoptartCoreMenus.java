@@ -18,6 +18,24 @@ public class PoptartCoreMenus {
     public static final DeferredRegister<MenuType<?>> MENUS =
             DeferredRegister.create(Registries.MENU, PoptartCore.MOD_ID);
 
+    public static final DeferredHolder<MenuType<?>, MenuType<dev.poptartking.poptartcore.backpack.BackpackColorMenu>>
+            BACKPACK_COLORS = MENUS.register(
+                    "backpack_colors",
+                    () -> new MenuType<>(
+                            dev.poptartking.poptartcore.backpack.BackpackColorMenu::new, FeatureFlags.DEFAULT_FLAGS));
+
+    public static final DeferredHolder<MenuType<?>, MenuType<dev.poptartking.poptartcore.backpack.BackpackMenu>>
+            RUCKSACK = MENUS.register(
+                    "rucksack",
+                    () -> new MenuType<>(
+                            dev.poptartking.poptartcore.backpack.BackpackMenu::rucksack, FeatureFlags.DEFAULT_FLAGS));
+
+    public static final DeferredHolder<MenuType<?>, MenuType<dev.poptartking.poptartcore.backpack.BackpackMenu>>
+            BACKPACK = MENUS.register(
+                    "backpack",
+                    () -> new MenuType<>(
+                            dev.poptartking.poptartcore.backpack.BackpackMenu::new, FeatureFlags.DEFAULT_FLAGS));
+
     public static final DeferredHolder<MenuType<?>, MenuType<CrucibleMenu>> CRUCIBLE =
             MENUS.register("crucible", () -> new MenuType<>(CrucibleMenu::new, FeatureFlags.DEFAULT_FLAGS));
 

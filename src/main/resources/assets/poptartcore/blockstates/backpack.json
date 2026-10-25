@@ -1,0 +1,68 @@
+{
+  "variants": {
+    "facing=east,dyed=false,body_dyed=true": {
+      "y": 270,
+      "model": "poptartcore:block/backpack_body_dyed"
+    },
+    "facing=north,dyed=true,body_dyed=false": {
+      "y": 180,
+      "model": "poptartcore:block/backpack_dyed"
+    },
+    "facing=south,dyed=true,body_dyed=true": {
+      "y": 0,
+      "model": "poptartcore:block/backpack_both_dyed"
+    },
+    "facing=west,dyed=false,body_dyed=true": {
+      "y": 90,
+      "model": "poptartcore:block/backpack_body_dyed"
+    },
+    "facing=north,dyed=false,body_dyed=false": {
+      "y": 180,
+      "model": "poptartcore:block/backpack"
+    },
+    "facing=west,dyed=false,body_dyed=false": {
+      "y": 90,
+      "model": "poptartcore:block/backpack"
+    },
+    "facing=north,dyed=false,body_dyed=true": {
+      "y": 180,
+      "model": "poptartcore:block/backpack_body_dyed"
+    },
+    "facing=west,dyed=true,body_dyed=false": {
+      "y": 90,
+      "model": "poptartcore:block/backpack_dyed"
+    },
+    "facing=west,dyed=true,body_dyed=true": {
+      "y": 90,
+      "model": "poptartcore:block/backpack_both_dyed"
+    },
+    "facing=south,dyed=false,body_dyed=false": {
+      "y": 0,
+      "model": "poptartcore:block/backpack"
+    },
+    "facing=east,dyed=true,body_dyed=false": {
+      "y": 270,
+      "model": "poptartcore:block/backpack_dyed"
+    },
+    "facing=north,dyed=true,body_dyed=true": {
+      "y": 180,
+      "model": "poptartcore:block/backpack_both_dyed"
+    },
+    "facing=south,dyed=false,body_dyed=true": {
+      "y": 0,
+      "model": "poptartcore:block/backpack_body_dyed"
+    },
+    "facing=east,dyed=true,body_dyed=true": {
+      "y": 270,
+      "model": "poptartcore:block/backpack_both_dyed"
+    },
+    "facing=south,dyed=true,body_dyed=false": {
+      "y": 0,
+      "model": "poptartcore:block/backpack_dyed"
+    },
+    "facing=east,dyed=false,body_dyed=false": {
+      "y": 270,
+      "model": "poptartcore:block/backpack"
+    }
+  }
+}

@@ -1,1 +1,1 @@
-{"replace": false, "values": ["create:copper_backtank", "create:netherite_backtank", {"id": "reliable_backpacks:backpack", "required": false}]}
+{"replace": false, "values": ["poptartcore:backpack", "poptartcore:rucksack", "create:copper_backtank", "create:netherite_backtank", {"id": "reliable_backpacks:backpack", "required": false}]}

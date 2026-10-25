@@ -20,8 +20,16 @@ public abstract class UtilityTotemMixin {
         if (heldTotem != null || !((Object) this instanceof Player player)) return heldTotem;
         var inventory = AccessoryInventory.get(player);
         var totem = inventory.getStackInSlot(AccessoryInventory.UTILITY_SLOT);
-        if (!totem.is(Items.TOTEM_OF_UNDYING)
-                || !CommonHooks.onLivingUseTotem(player, source, totem, InteractionHand.OFF_HAND)) return null;
+        if (!totem.is(Items.TOTEM_OF_UNDYING)) {
+            var bag = dev.poptartking.poptartcore.backpack.BackpackAttachments.worn(player);
+            int slot = dev.poptartking.poptartcore.backpack.BackpackAttachments.find(bag, "minecraft:totem_of_undying");
+            if (slot < 0) return null;
+            totem = dev.poptartking.poptartcore.backpack.BackpackAttachments.get(bag, slot);
+            if (!CommonHooks.onLivingUseTotem(player, source, totem, InteractionHand.OFF_HAND)) return null;
+            dev.poptartking.poptartcore.backpack.BackpackAttachments.set(bag, slot, ItemStack.EMPTY);
+            return totem;
+        }
+        if (!CommonHooks.onLivingUseTotem(player, source, totem, InteractionHand.OFF_HAND)) return null;
         var used = totem.copy();
         inventory.extractItem(AccessoryInventory.UTILITY_SLOT, 1, false);
         return used;

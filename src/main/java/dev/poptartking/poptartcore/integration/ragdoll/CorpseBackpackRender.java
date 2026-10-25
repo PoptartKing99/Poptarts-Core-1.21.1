@@ -20,23 +20,13 @@ public final class CorpseBackpackRender {
         return DRAWING.get();
     }
 
-    public static void render(
-            ModelPart model,
-            ModelPart body,
-            PoseStack stack,
-            VertexConsumer vertices,
-            int light,
-            int overlay,
-            int color) {
+    /** Applies the corpse's torso pose, removing the GUI preview anchor only outside world rendering. */
+    public static boolean poseCorpseTorso(ModelPart body, PoseStack stack) {
         var geometry = RagdollRenderManager.findMatchingGeometry("body");
         if (!(RagdollRenderManager.getBoundEntity() instanceof RagdollPlayer)
                 || !RagdollRenderManager.isRenderingLayerOverride()
                 || geometry == null
-                || !geometry.hasRenderableBox()) {
-            model.render(stack, vertices, light, overlay, color);
-            return;
-        }
-        stack.pushPose();
+                || !geometry.hasRenderableBox()) return false;
         var center = RagdollRenderManager.isRenderLevel()
                 ? new Vector3f()
                 : ModelPartHelper.findCenter(RagdollRenderManager.getBoundEntity());
@@ -47,6 +37,23 @@ public final class CorpseBackpackRender {
             stack.last().normal().mul(new Matrix3f(anchor.last().normal()).invert());
         }
         ModelPartHelper.translateAndRotate(stack, geometry, (ModelPartAccessor) (Object) body, center);
+        return true;
+    }
+
+    public static void render(
+            ModelPart model,
+            ModelPart body,
+            PoseStack stack,
+            VertexConsumer vertices,
+            int light,
+            int overlay,
+            int color) {
+        stack.pushPose();
+        if (!poseCorpseTorso(body, stack)) {
+            stack.popPose();
+            model.render(stack, vertices, light, overlay, color);
+            return;
+        }
         var pose = model.storePose();
         float sx = model.xScale, sy = model.yScale, sz = model.zScale;
         boolean previous = DRAWING.get();

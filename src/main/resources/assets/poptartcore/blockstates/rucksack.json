@@ -1,0 +1,116 @@
+{
+  "variants": {
+    "facing=north,dyed=true,body_dyed=false,half=lower": {
+      "y": 180,
+      "model": "poptartcore:block/rucksack_dyed_placed"
+    },
+    "facing=west,dyed=false,body_dyed=true,half=upper": {
+      "model": "poptartcore:block/rucksack_upper"
+    },
+    "facing=east,dyed=false,body_dyed=false,half=lower": {
+      "y": 270,
+      "model": "poptartcore:block/rucksack_placed"
+    },
+    "facing=west,dyed=true,body_dyed=true,half=lower": {
+      "y": 90,
+      "model": "poptartcore:block/rucksack_both_dyed_placed"
+    },
+    "facing=north,dyed=false,body_dyed=true,half=lower": {
+      "y": 180,
+      "model": "poptartcore:block/rucksack_body_dyed_placed"
+    },
+    "facing=east,dyed=false,body_dyed=false,half=upper": {
+      "model": "poptartcore:block/rucksack_upper"
+    },
+    "facing=north,dyed=false,body_dyed=false,half=upper": {
+      "model": "poptartcore:block/rucksack_upper"
+    },
+    "facing=west,dyed=false,body_dyed=true,half=lower": {
+      "y": 90,
+      "model": "poptartcore:block/rucksack_body_dyed_placed"
+    },
+    "facing=north,dyed=false,body_dyed=true,half=upper": {
+      "model": "poptartcore:block/rucksack_upper"
+    },
+    "facing=west,dyed=true,body_dyed=true,half=upper": {
+      "model": "poptartcore:block/rucksack_upper"
+    },
+    "facing=east,dyed=true,body_dyed=false,half=upper": {
+      "model": "poptartcore:block/rucksack_upper"
+    },
+    "facing=south,dyed=true,body_dyed=true,half=lower": {
+      "y": 0,
+      "model": "poptartcore:block/rucksack_both_dyed_placed"
+    },
+    "facing=east,dyed=true,body_dyed=false,half=lower": {
+      "y": 270,
+      "model": "poptartcore:block/rucksack_dyed_placed"
+    },
+    "facing=south,dyed=true,body_dyed=true,half=upper": {
+      "model": "poptartcore:block/rucksack_upper"
+    },
+    "facing=east,dyed=true,body_dyed=true,half=lower": {
+      "y": 270,
+      "model": "poptartcore:block/rucksack_both_dyed_placed"
+    },
+    "facing=east,dyed=false,body_dyed=true,half=upper": {
+      "model": "poptartcore:block/rucksack_upper"
+    },
+    "facing=south,dyed=false,body_dyed=true,half=lower": {
+      "y": 0,
+      "model": "poptartcore:block/rucksack_body_dyed_placed"
+    },
+    "facing=south,dyed=true,body_dyed=false,half=lower": {
+      "y": 0,
+      "model": "poptartcore:block/rucksack_dyed_placed"
+    },
+    "facing=north,dyed=true,body_dyed=true,half=lower": {
+      "y": 180,
+      "model": "poptartcore:block/rucksack_both_dyed_placed"
+    },
+    "facing=west,dyed=false,body_dyed=false,half=upper": {
+      "model": "poptartcore:block/rucksack_upper"
+    },
+    "facing=east,dyed=false,body_dyed=true,half=lower": {
+      "y": 270,
+      "model": "poptartcore:block/rucksack_body_dyed_placed"
+    },
+    "facing=south,dyed=false,body_dyed=false,half=upper": {
+      "model": "poptartcore:block/rucksack_upper"
+    },
+    "facing=west,dyed=false,body_dyed=false,half=lower": {
+      "y": 90,
+      "model": "poptartcore:block/rucksack_placed"
+    },
+    "facing=north,dyed=true,body_dyed=true,half=upper": {
+      "model": "poptartcore:block/rucksack_upper"
+    },
+    "facing=west,dyed=true,body_dyed=false,half=upper": {
+      "model": "poptartcore:block/rucksack_upper"
+    },
+    "facing=north,dyed=true,body_dyed=false,half=upper": {
+      "model": "poptartcore:block/rucksack_upper"
+    },
+    "facing=north,dyed=false,body_dyed=false,half=lower": {
+      "y": 180,
+      "model": "poptartcore:block/rucksack_placed"
+    },
+    "facing=south,dyed=false,body_dyed=false,half=lower": {
+      "y": 0,
+      "model": "poptartcore:block/rucksack_placed"
+    },
+    "facing=west,dyed=true,body_dyed=false,half=lower": {
+      "y": 90,
+      "model": "poptartcore:block/rucksack_dyed_placed"
+    },
+    "facing=east,dyed=true,body_dyed=true,half=upper": {
+      "model": "poptartcore:block/rucksack_upper"
+    },
+    "facing=south,dyed=false,body_dyed=true,half=upper": {
+      "model": "poptartcore:block/rucksack_upper"
+    },
+    "facing=south,dyed=true,body_dyed=false,half=upper": {
+      "model": "poptartcore:block/rucksack_upper"
+    }
+  }
+}

@@ -1,11 +1,11 @@
 # Targeted equivalent of the standard catalog providers for environments where
 # Caverns & Chasms datagen cannot load its unpublished Gallery dependency.
-# Registrations remain in PoptartCatalog; custom crystal geometry stays in main resources.
+# Registrations remain in PoptartCatalog; quartz crystal is a material item.
 $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path "$PSScriptRoot/../..").Path
 $generated = "$root/src/generated/resources"
 $registry = Get-Content -Raw "$root/src/main/java/dev/poptartking/poptartcore/registry/PoptartCoreBlocks.java"
-foreach ($id in @('rubber_block', 'quartz_crystal')) {
+foreach ($id in @('rubber_block')) {
     if ($registry -notmatch ('PoptartCatalog.block\(\s*"' + $id + '"')) { throw "Missing catalog block $id" }
 }
 function Write-Resource($path, $value) {
@@ -16,7 +16,7 @@ function Write-Resource($path, $value) {
 Write-Resource 'assets/poptartcore/blockstates/rubber_block.json' @{variants=@{''=@{model='poptartcore:block/rubber_block'}}}
 Write-Resource 'assets/poptartcore/models/block/rubber_block.json' @{parent='minecraft:block/cube_all';textures=@{all='poptartcore:block/rubber_block'}}
 Write-Resource 'assets/poptartcore/models/item/rubber_block.json' @{parent='poptartcore:block/rubber_block'}
-foreach ($id in @('rubber_block','quartz_crystal')) {
+foreach ($id in @('rubber_block')) {
     Write-Resource "data/poptartcore/loot_table/blocks/$id.json" @{
         type='minecraft:block'
         pools=@(@{rolls=1;entries=@(@{type='minecraft:item';name="poptartcore:$id"});conditions=@(@{condition='minecraft:survives_explosion'})})
@@ -24,12 +24,12 @@ foreach ($id in @('rubber_block','quartz_crystal')) {
 }
 $tagPath = 'data/minecraft/tags/block/mineable/pickaxe.json'
 $tag = Get-Content -Raw "$generated/$tagPath" | ConvertFrom-Json -AsHashtable
-if ($tag.values -notcontains 'poptartcore:quartz_crystal') { $tag.values += 'poptartcore:quartz_crystal' }
+$tag.values = @($tag.values | Where-Object { $_ -ne 'poptartcore:quartz_crystal' })
 Write-Resource $tagPath $tag
 $langPath = 'assets/poptart_catalog/lang/en_us.json'
 $lang = Get-Content -Raw "$generated/$langPath" | ConvertFrom-Json -AsHashtable
-$lang.Remove('item.poptartcore.quartz_crystal')
-$lang['block.poptartcore.quartz_crystal'] = 'Quartz Crystal'
+$lang.Remove('block.poptartcore.quartz_crystal')
+$lang['item.poptartcore.quartz_crystal'] = 'Quartz Crystal'
 $lang['block.poptartcore.rubber_block'] = 'Block of Rubber'
 $lang['item.poptartcore.magnet_ring'] = 'Magnet Ring'
 Write-Resource $langPath $lang

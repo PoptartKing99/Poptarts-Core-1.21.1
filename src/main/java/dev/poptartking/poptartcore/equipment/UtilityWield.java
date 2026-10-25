@@ -1,8 +1,9 @@
 package dev.poptartking.poptartcore.equipment;
 
 import dev.poptartking.poptartcore.PoptartCore;
+import java.util.Collections;
+import java.util.IdentityHashMap;
 import java.util.Map;
-import java.util.WeakHashMap;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -12,19 +13,24 @@ import net.neoforged.neoforge.event.entity.living.LivingSwapItemsEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
-/** Wayfarer-style working hand. Real hand inventory slots are never moved or overwritten. */
+/** Working hand shared by utility items and primary backpack attachments. Real hand slots are never overwritten. */
 @EventBusSubscriber(modid = PoptartCore.MOD_ID)
 public final class UtilityWield {
-    private static final Map<Player, Session> SESSIONS = new WeakHashMap<>();
+    // Client and integrated-server players compare equal by entity ID, but own different bags and use sessions.
+    private static final Map<Player, Session> SESSIONS = Collections.synchronizedMap(new IdentityHashMap<>());
 
     private static final class Session {
         ItemStack working;
         ItemStack base;
         int lease = 30;
+        final boolean attachment;
+        ItemStack bag;
 
-        Session(ItemStack stack) {
+        Session(ItemStack stack, boolean attachment, ItemStack bag) {
             working = stack.copy();
             base = stack.copy();
+            this.attachment = attachment;
+            this.bag = bag;
         }
     }
 
@@ -48,35 +54,89 @@ public final class UtilityWield {
     }
 
     public static boolean start(Player player) {
-        if (isWielding(player)) return true;
-        if (!UtilityActions.canWield(player) || player.isUsingItem()) return false;
-        SESSIONS.put(player, new Session(UtilityActions.stack(player)));
+        return start(player, false);
+    }
+
+    public static boolean isAttachmentWielding(Player player) {
+        var session = SESSIONS.get(player);
+        return session != null && session.attachment;
+    }
+
+    public static boolean startAttachment(Player player) {
+        return start(player, true);
+    }
+
+    private static boolean start(Player player, boolean attachment) {
+        if (isWielding(player)) return SESSIONS.get(player).attachment == attachment;
+        if (player.isUsingItem()
+                || !(attachment
+                        ? dev.poptartking.poptartcore.backpack.BackpackAttachments.canUse(player)
+                        : UtilityActions.canWield(player))) return false;
+        var bag = attachment ? dev.poptartking.poptartcore.backpack.BackpackAttachments.worn(player) : ItemStack.EMPTY;
+        var stack = attachment
+                ? dev.poptartking.poptartcore.backpack.BackpackAttachments.get(bag, 1)
+                : UtilityActions.stack(player);
+        SESSIONS.put(player, new Session(stack, attachment, bag));
         return true;
+    }
+
+    private static ItemStack source(Player player, Session session) {
+        if (!session.attachment) return UtilityActions.stack(player);
+        var current = dev.poptartking.poptartcore.backpack.BackpackAttachments.worn(player);
+        if (!sameAttachmentSource(session.bag, current, player.level().isClientSide)) return ItemStack.EMPTY;
+        session.bag = current;
+        return dev.poptartking.poptartcore.backpack.BackpackAttachments.get(current, 1);
+    }
+
+    public static boolean sameAttachmentSource(ItemStack bound, ItemStack current, boolean clientSide) {
+        // Inventory synchronization recreates client stacks. The server still requires the original bag object.
+        return bound == current || clientSide && !current.isEmpty() && ItemStack.matches(bound, current);
+    }
+
+    private static void setSource(Player player, Session session, ItemStack stack) {
+        if (session.attachment) dev.poptartking.poptartcore.backpack.BackpackAttachments.set(session.bag, 1, stack);
+        else UtilityActions.setStack(player, stack);
     }
 
     /** Vanilla use-item packets perform use; this packet only establishes the virtual hand. */
     public static void input(Player player, boolean held) {
+        input(player, held, false);
+    }
+
+    public static void input(Player player, boolean held, boolean attachment) {
         if (player.level().isClientSide) return;
         if (!held) {
-            stop(player);
+            if (isWielding(player) && SESSIONS.get(player).attachment == attachment) stop(player);
             return;
         }
-        if (start(player)) SESSIONS.get(player).lease = 30;
+        if (start(player, attachment)) SESSIONS.get(player).lease = 30;
     }
 
     private static boolean reconcile(Player player) {
         var session = SESSIONS.get(player);
         if (session == null) return false;
         // An external inventory edit wins. Never write a stale working copy over a replacement.
-        if (!ItemStack.matches(UtilityActions.stack(player), session.base)) return false;
+        if (!ItemStack.matches(source(player, session), session.base)) {
+            if (session.attachment)
+                com.mojang.logging.LogUtils.getLogger()
+                        .debug(
+                                "Backpack attachment use stopped: source changed on {}",
+                                player.level().isClientSide ? "client" : "server");
+            return false;
+        }
         if (!player.level().isClientSide && !ItemStack.matches(session.working, session.base)) {
-            UtilityActions.setStack(player, session.working.copy());
+            setSource(player, session, session.working.copy());
             session.base = session.working.copy();
         }
         if (session.working.isEmpty()) return false;
-        if (!AccessoryType.UTILITY.accepts(session.working)) {
+        if (!(session.attachment
+                ? dev.poptartking.poptartcore.backpack.BackpackAttachments.fits(
+                        dev.poptartking.poptartcore.backpack.BackpackAttachments.rucksack(session.bag),
+                        1,
+                        session.working)
+                : AccessoryType.UTILITY.accepts(session.working))) {
             if (!player.level().isClientSide) {
-                UtilityActions.setStack(player, ItemStack.EMPTY);
+                setSource(player, session, ItemStack.EMPTY);
                 player.getInventory().placeItemBackInInventory(session.working.copy());
             }
             return false;

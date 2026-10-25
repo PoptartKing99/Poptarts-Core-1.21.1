@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class UtilityReleaseMixin {
     @Inject(method = "releaseUsingItem", at = @At("HEAD"), cancellable = true)
     private void poptartcore$holdUtility(Player player, CallbackInfo ci) {
-        if (UtilityClient.isHolding()) ci.cancel();
+        if (UtilityClient.isHolding()
+                || dev.poptartking.poptartcore.backpack.client.BackpackAttachmentClient.isHolding()) ci.cancel();
     }
 }

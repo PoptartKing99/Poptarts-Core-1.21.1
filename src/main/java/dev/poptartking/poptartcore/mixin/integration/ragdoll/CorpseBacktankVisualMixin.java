@@ -44,5 +44,9 @@ public abstract class CorpseBacktankVisualMixin {
         if (!ItemStack.matches(backpack, player.getData(PoptartCoreAttachments.BACKPACK_VISUAL))) {
             player.setData(PoptartCoreAttachments.BACKPACK_VISUAL, backpack);
         }
+        var basicBackpack = dev.poptartking.poptartcore.backpack.BackpackVisual.corpseVisualStack(items);
+        if (!ItemStack.matches(basicBackpack, player.getData(PoptartCoreAttachments.BASIC_BACKPACK_VISUAL))) {
+            player.setData(PoptartCoreAttachments.BASIC_BACKPACK_VISUAL, basicBackpack);
+        }
     }
 }

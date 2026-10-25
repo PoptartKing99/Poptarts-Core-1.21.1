@@ -46,6 +46,9 @@ public final class PoptartMaterialItems {
 
     public static final CatalogItemDefinition<Item> AMETHYST_CRYSTAL = PoptartCatalog.simpleItem("amethyst_crystal");
 
+    public static final CatalogItemDefinition<Item> QUARTZ_CRYSTAL =
+            PoptartCatalog.simpleItem("quartz_crystal").withoutGeneratedModel();
+
     public static final CatalogItemDefinition<Item> BRONZE_INGOT = PoptartCatalog.simpleItem("bronze_ingot");
 
     public static final CatalogItemDefinition<Item> BRONZE_NUGGET = PoptartCatalog.simpleItem("bronze_nugget");

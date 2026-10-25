@@ -1,4 +1,9 @@
 {
+  "block.poptartcore.backpack": "Backpack",
+  "block.poptartcore.rucksack": "Rucksack",
+  "key.poptartcore.open_backpack": "Open Backpack",
+  "gesture.poptartcore.place_backpack": "Hold to place",
+  "gesture.poptartcore.pick_up_backpack": "Hold to pick up",
   "block.poptartcore.living_flesh_tendrils": "Living Flesh Tendrils",
   "block.poptartcore.flesh_tendrils": "Flesh Tendrils",
   "block.poptartcore.rotten_flesh_tendrils": "Rotten Flesh Tendrils",
@@ -179,5 +184,17 @@
   "modification.poptartcore.fire_resistant": "Fire Resistant",
   "modification.poptartcore.invisible": "Invisible",
   "modification.poptartcore.sticky": "Sticky",
-  "item.poptartcore.worn_out": "Worn Out - repair to restore function"
+  "item.poptartcore.worn_out": "Worn Out - repair to restore function",
+  "menu.poptartcore.backpack_colors": "Backpack Colors",
+  "menu.poptartcore.colors": "Colors",
+  "menu.poptartcore.body": "Body",
+  "menu.poptartcore.flaps": "Flaps",
+  "menu.poptartcore.apply": "Apply",
+  "menu.poptartcore.back": "Back",
+  "menu.poptartcore.dye": "Dye",
+  "menu.poptartcore.rucksack_colors": "Rucksack Colors",
+  "key.poptartcore.use_attachment": "Use Backpack Attachment",
+  "menu.poptartcore.attachment_top": "Banner mount (rucksack only)",
+  "menu.poptartcore.attachment_primary": "Primary attachment",
+  "menu.poptartcore.attachment_side": "Side attachment"
 }

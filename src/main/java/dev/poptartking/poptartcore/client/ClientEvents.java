@@ -190,6 +190,15 @@ public class ClientEvents {
 
     @SubscribeEvent
     public static void registerScreens(RegisterMenuScreensEvent event) {
+        event.register(
+                PoptartCoreMenus.RUCKSACK.get(),
+                dev.poptartking.poptartcore.backpack.client.BackpackStorageScreen::new);
+        event.register(
+                PoptartCoreMenus.BACKPACK.get(),
+                dev.poptartking.poptartcore.backpack.client.BackpackStorageScreen::new);
+        event.register(
+                PoptartCoreMenus.BACKPACK_COLORS.get(),
+                dev.poptartking.poptartcore.backpack.client.BackpackColorScreen::new);
         event.register(PoptartCoreMenus.PRIMITIVE_ANVIL_MENU.get(), dev.poptartking.poptartcore.anvil.AnvilScreen::new);
         event.register(PoptartCoreMenus.CRUCIBLE.get(), CrucibleScreen::new);
         event.register(PoptartCoreMenus.BLAST_FURNACE.get(), BlastFurnaceScreen::new);
@@ -199,6 +208,9 @@ public class ClientEvents {
 
     @SubscribeEvent
     public static void registerBlockEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerBlockEntityRenderer(
+                PoptartCoreBlockEntities.BACKPACK.get(),
+                dev.poptartking.poptartcore.backpack.client.BackpackBlockRenderer::new);
         event.registerBlockEntityRenderer(
                 PoptartCoreBlockEntities.TREE_TAP.get(),
                 context -> new dev.poptartking.poptartcore.treetap.client.TreeTapDripRenderer());

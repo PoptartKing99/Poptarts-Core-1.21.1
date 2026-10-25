@@ -172,7 +172,7 @@
   "item.poptartcore.unfired_plate_mould": "Unfired Plate Mould",
   "item.poptartcore.video_circuit": "Video Circuit",
   "item.poptartcore.wax": "Wax",
-  "block.poptartcore.quartz_crystal": "Quartz Crystal",
   "block.poptartcore.rubber_block": "Block of Rubber",
-  "item.poptartcore.magnet_ring": "Magnet Ring"
+  "item.poptartcore.magnet_ring": "Magnet Ring",
+  "item.poptartcore.quartz_crystal": "Quartz Crystal"
 }

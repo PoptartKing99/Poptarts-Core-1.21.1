@@ -19,6 +19,17 @@ public final class PoptartCoreAttachments {
                     .build());
 
     // Visual/air snapshot only; authoritative storage remains in ACCESSORIES.
+    public static final Supplier<AttachmentType<Boolean>> BACKPACK_ATTACHMENT_WIELDING =
+            ATTACHMENT_TYPES.register("backpack_attachment_wielding", () -> AttachmentType.builder(() -> false)
+                    .sync(net.minecraft.network.codec.ByteBufCodecs.BOOL)
+                    .build());
+
+    public static final Supplier<AttachmentType<net.minecraft.world.item.ItemStack>> BASIC_BACKPACK_VISUAL =
+            ATTACHMENT_TYPES.register("basic_backpack_visual", () -> AttachmentType.builder(
+                            () -> net.minecraft.world.item.ItemStack.EMPTY)
+                    .sync(net.minecraft.world.item.ItemStack.OPTIONAL_STREAM_CODEC)
+                    .build());
+
     public static final Supplier<AttachmentType<net.minecraft.world.item.ItemStack>> BACKTANK_VISUAL =
             ATTACHMENT_TYPES.register(
                     "backtank_visual", () -> AttachmentType.builder(() -> net.minecraft.world.item.ItemStack.EMPTY)

@@ -21,13 +21,19 @@ public abstract class BeltQuiverMixin {
         if (entity instanceof Player player) {
             var stack = AccessoryInventory.get(player).getStackInSlot(5);
             if (stack.getItem() instanceof QuiverItem) cir.setReturnValue(stack);
+            else {
+                var attached = dev.poptartking.poptartcore.backpack.BackpackAttachmentEffects.quiver(player);
+                if (!attached.isEmpty()) cir.setReturnValue(attached);
+            }
         }
     }
 
     @Inject(method = "findActiveQuiverSlot", at = @At("HEAD"), cancellable = true)
     private static void poptartcore$beltReference(LivingEntity entity, CallbackInfoReturnable<SlotReference> cir) {
         if (entity instanceof Player player
-                && AccessoryInventory.get(player).getStackInSlot(5).getItem() instanceof QuiverItem) {
+                && (AccessoryInventory.get(player).getStackInSlot(5).getItem() instanceof QuiverItem
+                        || !dev.poptartking.poptartcore.backpack.BackpackAttachmentEffects.quiver(player)
+                                .isEmpty())) {
             // Supplementaries' existing serializable quiver reference resolves through findActiveQuiver.
             cir.setReturnValue(SlotReference.quiver((IQuiverEntity) player));
         }

@@ -1,0 +1,77 @@
+{
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "0": "poptartcore:block/backpack",
+    "particle": "poptartcore:block/backpack"
+  },
+  "elements": [
+    {
+      "from": [
+        3.68,
+        0.68,
+        1.68
+      ],
+      "to": [
+        12.32,
+        13.32,
+        6.32
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            9.0,
+            1.0,
+            11.0,
+            4.0
+          ],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [
+            8.0,
+            1.0,
+            9.0,
+            4.0
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            12.0,
+            1.0,
+            14.0,
+            4.0
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            11.0,
+            1.0,
+            12.0,
+            4.0
+          ],
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [
+            11.0,
+            1.0,
+            9.0,
+            0.0
+          ],
+          "texture": "#0"
+        },
+        "down": {
+          "uv": [
+            13.0,
+            0.0,
+            11.0,
+            1.0
+          ],
+          "texture": "#0"
+        }
+      }
+    }
+  ]
+}

@@ -74,6 +74,26 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class PoptartCoreBlocks {
+    public static final CatalogBlockDefinition<dev.poptartking.poptartcore.backpack.RucksackBlock> RUCKSACK =
+            PoptartCatalog.block(
+                            "rucksack",
+                            () -> new dev.poptartking.poptartcore.backpack.RucksackBlock(
+                                    BlockBehaviour.Properties.ofFullCopy(Blocks.BROWN_WOOL)
+                                            .strength(0.8F)
+                                            .noOcclusion()),
+                            dev.poptartking.poptartcore.backpack.BackpackItem::new)
+                    .externalModel()
+                    .customLoot();
+    public static final CatalogBlockDefinition<dev.poptartking.poptartcore.backpack.BackpackBlock> BACKPACK =
+            PoptartCatalog.block(
+                            "backpack",
+                            () -> new dev.poptartking.poptartcore.backpack.BackpackBlock(
+                                    BlockBehaviour.Properties.ofFullCopy(Blocks.BROWN_WOOL)
+                                            .strength(0.8F)
+                                            .noOcclusion()),
+                            dev.poptartking.poptartcore.backpack.BackpackItem::new)
+                    .externalModel()
+                    .customLoot();
 
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(PoptartCore.MOD_ID);
 
@@ -980,18 +1000,6 @@ public class PoptartCoreBlocks {
     public static final CatalogBlockDefinition<Block> RUBBER_BLOCK = PoptartCatalog.block(
                     "rubber_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.BLACK_WOOL)))
             .withName("Block of Rubber");
-
-    public static final CatalogBlockDefinition<net.minecraft.world.level.block.AmethystClusterBlock> QUARTZ_CRYSTAL =
-            PoptartCatalog.block(
-                            "quartz_crystal",
-                            () -> new net.minecraft.world.level.block.AmethystClusterBlock(
-                                    5,
-                                    2,
-                                    BlockBehaviour.Properties.ofFullCopy(Blocks.AMETHYST_CLUSTER)
-                                            .mapColor(MapColor.QUARTZ)
-                                            .lightLevel(state -> 0)))
-                    .externalModel()
-                    .tags(BlockTags.MINEABLE_WITH_PICKAXE);
 
     public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);

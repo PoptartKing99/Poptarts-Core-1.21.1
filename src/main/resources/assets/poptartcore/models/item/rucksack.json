@@ -1,0 +1,144 @@
+{
+  "parent": "poptartcore:block/rucksack",
+  "display": {
+    "gui": {
+      "translation": [
+        -0.2848,
+        -2.6551,
+        0
+      ],
+      "scale": [
+        0.5696,
+        0.5696,
+        0.5696
+      ],
+      "rotation": [
+        20,
+        30,
+        0
+      ]
+    },
+    "ground": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        3,
+        0
+      ],
+      "scale": [
+        0.25,
+        0.25,
+        0.25
+      ]
+    },
+    "fixed": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    "thirdperson_righthand": {
+      "translation": [
+        0,
+        1.5,
+        -2
+      ],
+      "scale": [
+        0.39,
+        0.39,
+        0.39
+      ],
+      "rotation": [
+        75,
+        225,
+        0
+      ]
+    },
+    "thirdperson_lefthand": {
+      "translation": [
+        0,
+        1.5,
+        -2
+      ],
+      "scale": [
+        0.39,
+        0.39,
+        0.39
+      ],
+      "rotation": [
+        75,
+        225,
+        0
+      ]
+    },
+    "firstperson_righthand": {
+      "translation": [
+        0,
+        0,
+        -2
+      ],
+      "scale": [
+        0.415,
+        0.415,
+        0.415
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ]
+    },
+    "firstperson_lefthand": {
+      "translation": [
+        0,
+        0,
+        -2
+      ],
+      "scale": [
+        0.415,
+        0.415,
+        0.415
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "poptartcore:dyed": 1
+      },
+      "model": "poptartcore:item/rucksack_dyed"
+    },
+    {
+      "predicate": {
+        "poptartcore:dyed": 2
+      },
+      "model": "poptartcore:item/rucksack_body_dyed"
+    },
+    {
+      "predicate": {
+        "poptartcore:dyed": 3
+      },
+      "model": "poptartcore:item/rucksack_both_dyed"
+    }
+  ]
+}

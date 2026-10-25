@@ -5,14 +5,12 @@ import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
 import dev.poptartking.poptartcore.registry.PoptartMaterialItems;
 import dev.poptartking.poptartcore.registry.PoptartRingItems;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameType;
-import net.minecraft.world.level.block.AmethystClusterBlock;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.gametest.GameTestHolder;
@@ -66,23 +64,16 @@ public final class WayfarerAdditionsGameTests {
     }
 
     @GameTest(template = "millstone_test", timeoutTicks = 40)
-    public static void crystalIsPlaceableWaterloggableAndRubberMatchesWool(GameTestHelper helper) {
-        var crystal = PoptartCoreBlocks.QUARTZ_CRYSTAL.get();
+    public static void crystalIsMaterialAndRubberMatchesWool(GameTestHelper helper) {
+        var crystal = PoptartMaterialItems.QUARTZ_CRYSTAL.get();
         helper.assertTrue(
-                new ItemStack(crystal).getItem() instanceof net.minecraft.world.item.BlockItem,
-                "Existing quartz crystal ID is now a block item");
-        var state = crystal.defaultBlockState();
+                !(crystal instanceof net.minecraft.world.item.BlockItem),
+                "Quartz crystal remains a material item, not a placeable block");
         helper.assertTrue(
-                state.getLightEmission() == 0 && state.hasProperty(AmethystClusterBlock.WATERLOGGED),
-                "Crystal supports waterlogging without light");
-        for (var direction : Direction.values()) {
-            var pos = helper.absolutePos(new BlockPos(4, 3, 4));
-            helper.getLevel()
-                    .setBlockAndUpdate(pos.relative(direction.getOpposite()), Blocks.STONE.defaultBlockState());
-            helper.assertTrue(
-                    state.setValue(AmethystClusterBlock.FACING, direction).canSurvive(helper.getLevel(), pos),
-                    "Crystal supports all six attachment directions");
-        }
+                !net.minecraft.core.registries.BuiltInRegistries.BLOCK.containsKey(
+                        net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(
+                                PoptartCore.MOD_ID, "quartz_crystal")),
+                "Quartz crystal block registration is removed");
         helper.assertTrue(
                 PoptartCoreBlocks.RUBBER_BLOCK.get().getFriction() == Blocks.BLACK_WOOL.getFriction(),
                 "Rubber uses Wayfarer wool-like properties");

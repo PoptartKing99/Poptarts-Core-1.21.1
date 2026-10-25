@@ -10,10 +10,18 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 
 @EventBusSubscriber(modid = PoptartCore.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
-public record UtilityInputPayload(boolean held) implements CustomPacketPayload {
+public record UtilityInputPayload(boolean held, boolean attachment) implements CustomPacketPayload {
+    public UtilityInputPayload(boolean held) {
+        this(held, false);
+    }
+
     public static final Type<UtilityInputPayload> TYPE = new Type<>(PoptartCore.location("utility_input"));
-    public static final StreamCodec<RegistryFriendlyByteBuf, UtilityInputPayload> STREAM_CODEC =
-            StreamCodec.composite(ByteBufCodecs.BOOL, UtilityInputPayload::held, UtilityInputPayload::new);
+    public static final StreamCodec<RegistryFriendlyByteBuf, UtilityInputPayload> STREAM_CODEC = StreamCodec.composite(
+            ByteBufCodecs.BOOL,
+            UtilityInputPayload::held,
+            ByteBufCodecs.BOOL,
+            UtilityInputPayload::attachment,
+            UtilityInputPayload::new);
 
     @Override
     public Type<UtilityInputPayload> type() {
@@ -26,7 +34,7 @@ public record UtilityInputPayload(boolean held) implements CustomPacketPayload {
                 .playToServer(
                         TYPE,
                         STREAM_CODEC,
-                        (payload, context) ->
-                                context.enqueueWork(() -> UtilityWield.input(context.player(), payload.held())));
+                        (payload, context) -> context.enqueueWork(
+                                () -> UtilityWield.input(context.player(), payload.held(), payload.attachment())));
     }
 }

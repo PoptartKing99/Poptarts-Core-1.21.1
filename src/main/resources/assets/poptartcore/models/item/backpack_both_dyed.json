@@ -1,0 +1,124 @@
+{
+  "display": {
+    "gui": {
+      "translation": [
+        -0.3301,
+        0.7013,
+        0
+      ],
+      "scale": [
+        0.6602,
+        0.6602,
+        0.6602
+      ],
+      "rotation": [
+        20,
+        30,
+        0
+      ]
+    },
+    "ground": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        3,
+        0
+      ],
+      "scale": [
+        0.25,
+        0.25,
+        0.25
+      ]
+    },
+    "fixed": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    "thirdperson_righthand": {
+      "translation": [
+        0,
+        2,
+        -1
+      ],
+      "scale": [
+        0.39,
+        0.39,
+        0.39
+      ],
+      "rotation": [
+        75,
+        225,
+        0
+      ]
+    },
+    "thirdperson_lefthand": {
+      "translation": [
+        0,
+        2,
+        -1
+      ],
+      "scale": [
+        0.39,
+        0.39,
+        0.39
+      ],
+      "rotation": [
+        75,
+        225,
+        0
+      ]
+    },
+    "firstperson_righthand": {
+      "translation": [
+        0,
+        2,
+        -1
+      ],
+      "scale": [
+        0.415,
+        0.415,
+        0.415
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ]
+    },
+    "firstperson_lefthand": {
+      "translation": [
+        0,
+        2,
+        -1
+      ],
+      "scale": [
+        0.415,
+        0.415,
+        0.415
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "parent": "poptartcore:block/backpack_both_dyed"
+}

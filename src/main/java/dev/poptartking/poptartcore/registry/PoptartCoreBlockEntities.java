@@ -24,6 +24,14 @@ public class PoptartCoreBlockEntities {
             DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, PoptartCore.MOD_ID);
 
     public static final DeferredHolder<
+                    BlockEntityType<?>, BlockEntityType<dev.poptartking.poptartcore.backpack.BackpackBlockEntity>>
+            BACKPACK = BLOCK_ENTITIES.register("backpack", () -> BlockEntityType.Builder.of(
+                    dev.poptartking.poptartcore.backpack.BackpackBlockEntity::new,
+                    PoptartCoreBlocks.BACKPACK.get(),
+                    PoptartCoreBlocks.RUCKSACK.get())
+            .build(null));
+
+    public static final DeferredHolder<
                     BlockEntityType<?>, BlockEntityType<dev.poptartking.poptartcore.anvil.AnvilBlockEntity>>
             ANVIL = BLOCK_ENTITIES.register("anvil", () -> BlockEntityType.Builder.of(
                     dev.poptartking.poptartcore.anvil.AnvilBlockEntity::new,

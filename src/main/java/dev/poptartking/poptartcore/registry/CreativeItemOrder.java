@@ -61,6 +61,8 @@ public final class CreativeItemOrder {
             "steel_chestplate",
             "steel_leggings",
             "steel_boots",
+            "backpack",
+            "rucksack",
 
             // Ores and processed metals, grouped by material
             "tin_ore",

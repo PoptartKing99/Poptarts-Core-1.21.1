@@ -117,7 +117,10 @@ public enum CreativeCatalogGroup {
             "rift_sediment_block");
 
     public static CreativeCatalogGroup forItem(String id, Item item) {
-        if (item instanceof ArmorItem || item instanceof EquipmentRing || id.endsWith("_cape")) return EQUIPMENT;
+        if (item instanceof ArmorItem
+                || item instanceof EquipmentRing
+                || id.endsWith("_cape")
+                || item instanceof dev.poptartking.poptartcore.backpack.BackpackItem) return EQUIPMENT;
         if (TOOLS_IDS.contains(id)
                 || id.startsWith("beehive_")
                 || item instanceof TieredItem

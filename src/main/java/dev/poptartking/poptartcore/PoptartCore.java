@@ -25,6 +25,8 @@ public class PoptartCore {
         PoptartCoreBlockEntities.register(modEventBus);
         PoptartCoreMenus.register(modEventBus);
         dev.poptartking.poptartcore.registry.AnvilDataComponents.register(modEventBus);
+        dev.poptartking.poptartcore.backpack.BackpackColors.register(modEventBus);
+        dev.poptartking.poptartcore.backpack.BackpackAttachments.register(modEventBus);
         PoptartCoreFluids.register(modEventBus);
         PoptartCoreRecipes.register(modEventBus);
         PoptartCoreLootModifiers.register(modEventBus);
