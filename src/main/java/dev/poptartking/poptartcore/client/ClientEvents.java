@@ -58,6 +58,14 @@ public class ClientEvents {
 
     @SubscribeEvent
     public static void registerParticles(RegisterParticleProvidersEvent event) {
+        event.registerSpriteSet(
+                PoptartCoreParticles.TAPPER_RESIN_DRIP.get(),
+                sprites -> new dev.poptartking.poptartcore.decoration.client.TapperDripParticle.Provider(
+                        sprites, dev.poptartking.poptartcore.decoration.client.TapperDripPalettes.RESIN));
+        event.registerSpriteSet(
+                PoptartCoreParticles.TAPPER_SYRUP_DRIP.get(),
+                sprites -> new dev.poptartking.poptartcore.decoration.client.TapperDripParticle.Provider(
+                        sprites, dev.poptartking.poptartcore.decoration.client.TapperDripPalettes.MAPLE_SYRUP));
         event.registerSpriteSet(PoptartCoreParticles.RIFT_FIRE_FLAME.get(), RiftFlameParticle.Provider::new);
         event.registerSpriteSet(PoptartCoreParticles.LOST_HEART_EMBER.get(), LostHeartEmberParticle.Provider::new);
     }
@@ -209,11 +217,11 @@ public class ClientEvents {
     @SubscribeEvent
     public static void registerBlockEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(
+                PoptartCoreBlockEntities.TREE_TAPPER.get(),
+                dev.poptartking.poptartcore.decoration.client.TreeTapperRenderer::new);
+        event.registerBlockEntityRenderer(
                 PoptartCoreBlockEntities.BACKPACK.get(),
                 dev.poptartking.poptartcore.backpack.client.BackpackBlockRenderer::new);
-        event.registerBlockEntityRenderer(
-                PoptartCoreBlockEntities.TREE_TAP.get(),
-                context -> new dev.poptartking.poptartcore.treetap.client.TreeTapDripRenderer());
         event.registerBlockEntityRenderer(
                 PoptartCoreBlockEntities.ANVIL.get(),
                 dev.poptartking.poptartcore.anvil.client.AnvilHammerRenderer::new);
@@ -236,7 +244,6 @@ public class ClientEvents {
 
     @SubscribeEvent
     public static void registerAdditionalModels(RegisterAdditional event) {
-        event.register(dev.poptartking.poptartcore.treetap.client.TreeTapDripRenderer.MODEL);
         PoptartBeltCasingClient.registerModels(event);
         event.register(dev.poptartking.poptartcore.millstone.client.MillstoneRenderer.ROTOR_MODEL);
         event.register(QuernRenderer.ROTOR_MODEL);

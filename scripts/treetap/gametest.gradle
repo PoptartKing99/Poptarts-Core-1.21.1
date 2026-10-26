@@ -1,3 +1,0 @@
-gradle.projectsEvaluated {
-    rootProject.sourceSets.gameTest.java.setIncludes(['**/equipment/**', '**/treetap/**'])
-}

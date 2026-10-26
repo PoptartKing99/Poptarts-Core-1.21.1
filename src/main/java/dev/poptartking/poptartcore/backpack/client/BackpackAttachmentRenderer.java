@@ -32,6 +32,10 @@ public final class BackpackAttachmentRenderer {
     @SubscribeEvent
     public static void models(ModelEvent.RegisterAdditional event) {
         for (var name : java.util.List.of(
+                "depth_meter",
+                "depth_meter_high",
+                "depth_meter_low",
+                "depth_meter_error",
                 "compass",
                 "clock_day",
                 "clock_night",
@@ -50,6 +54,7 @@ public final class BackpackAttachmentRenderer {
             int light,
             int overlay,
             Level level,
+            double referenceY,
             boolean hidePrimary) {
         var items = BackpackAttachments.items(contents);
         var renderer = Minecraft.getInstance().getItemRenderer();
@@ -58,6 +63,11 @@ public final class BackpackAttachmentRenderer {
             if (!BackpackAttachments.fits(rucksack, i, stack) || hidePrimary && i == 1) continue;
             String special =
                     switch (BackpackAttachments.id(stack)) {
+                        case "poptartcore:depth_meter" ->
+                            level == null
+                                    ? "depth_meter"
+                                    : dev.poptartking.poptartcore.depthmeter.DepthMeter.attachmentState(
+                                            level, referenceY);
                         case "minecraft:compass" -> "compass";
                         case "minecraft:recovery_compass" -> "recovery_compass";
                         case "minecraft:clock" ->

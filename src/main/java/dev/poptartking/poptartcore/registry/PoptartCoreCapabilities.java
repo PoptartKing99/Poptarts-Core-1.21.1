@@ -1,8 +1,6 @@
 package dev.poptartking.poptartcore.registry;
 
 import dev.poptartking.poptartcore.quern.QuernItemHandler;
-import dev.poptartking.poptartcore.treetap.LatexBottleFluidHandler;
-import dev.poptartking.poptartcore.treetap.TreeTapBlock;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
@@ -19,14 +17,8 @@ public final class PoptartCoreCapabilities {
     private static void registerCapabilities(RegisterCapabilitiesEvent event) {
         event.registerBlockEntity(
                 Capabilities.FluidHandler.BLOCK,
-                PoptartCoreBlockEntities.TREE_TAP.get(),
-                (tap, side) -> tap.getBlockState().getValue(TreeTapBlock.WOOD) == TreeTapBlock.Wood.JUNGLE
-                        ? tap.fluidHandler()
-                        : null);
-        event.registerItem(
-                Capabilities.FluidHandler.ITEM,
-                (stack, context) -> new LatexBottleFluidHandler(stack),
-                PoptartMaterialItems.LATEX_BOTTLE.get());
+                PoptartCoreBlockEntities.TREE_TAPPER.get(),
+                (tapper, side) -> tapper.drainHandler());
         event.registerBlockEntity(
                 Capabilities.ItemHandler.BLOCK,
                 PoptartCoreBlockEntities.CRUCIBLE.get(),

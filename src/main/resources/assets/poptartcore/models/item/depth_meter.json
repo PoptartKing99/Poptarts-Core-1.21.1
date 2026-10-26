@@ -1,0 +1,134 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "poptartcore:item/depth_meter/depth_meter"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "poptartcore:depth": 0.02
+      },
+      "model": "poptartcore:item/depth_meter/depth_meter_low_0"
+    },
+    {
+      "predicate": {
+        "poptartcore:depth": 0.06
+      },
+      "model": "poptartcore:item/depth_meter/depth_meter_low_1"
+    },
+    {
+      "predicate": {
+        "poptartcore:depth": 0.1
+      },
+      "model": "poptartcore:item/depth_meter/depth_meter_low_2"
+    },
+    {
+      "predicate": {
+        "poptartcore:depth": 0.14
+      },
+      "model": "poptartcore:item/depth_meter/depth_meter_low_3"
+    },
+    {
+      "predicate": {
+        "poptartcore:depth": 0.18
+      },
+      "model": "poptartcore:item/depth_meter/depth_meter_low_4"
+    },
+    {
+      "predicate": {
+        "poptartcore:depth": 0.22
+      },
+      "model": "poptartcore:item/depth_meter/depth_meter_low_5"
+    },
+    {
+      "predicate": {
+        "poptartcore:depth": 0.26
+      },
+      "model": "poptartcore:item/depth_meter/depth_meter_low_6"
+    },
+    {
+      "predicate": {
+        "poptartcore:depth": 0.3
+      },
+      "model": "poptartcore:item/depth_meter/depth_meter_low_7"
+    },
+    {
+      "predicate": {
+        "poptartcore:depth": 0.34
+      },
+      "model": "poptartcore:item/depth_meter/depth_meter_low_8"
+    },
+    {
+      "predicate": {
+        "poptartcore:depth": 0.38
+      },
+      "model": "poptartcore:item/depth_meter/depth_meter_low_9"
+    },
+    {
+      "predicate": {
+        "poptartcore:depth": 0.42
+      },
+      "model": "poptartcore:item/depth_meter/depth_meter_high_0"
+    },
+    {
+      "predicate": {
+        "poptartcore:depth": 0.46
+      },
+      "model": "poptartcore:item/depth_meter/depth_meter_high_1"
+    },
+    {
+      "predicate": {
+        "poptartcore:depth": 0.5
+      },
+      "model": "poptartcore:item/depth_meter/depth_meter_high_2"
+    },
+    {
+      "predicate": {
+        "poptartcore:depth": 0.54
+      },
+      "model": "poptartcore:item/depth_meter/depth_meter_high_3"
+    },
+    {
+      "predicate": {
+        "poptartcore:depth": 0.58
+      },
+      "model": "poptartcore:item/depth_meter/depth_meter_high_4"
+    },
+    {
+      "predicate": {
+        "poptartcore:depth": 0.62
+      },
+      "model": "poptartcore:item/depth_meter/depth_meter_high_5"
+    },
+    {
+      "predicate": {
+        "poptartcore:depth": 0.66
+      },
+      "model": "poptartcore:item/depth_meter/depth_meter_high_6"
+    },
+    {
+      "predicate": {
+        "poptartcore:depth": 0.7
+      },
+      "model": "poptartcore:item/depth_meter/depth_meter_high_7"
+    },
+    {
+      "predicate": {
+        "poptartcore:depth": 0.74
+      },
+      "model": "poptartcore:item/depth_meter/depth_meter_high_8"
+    },
+    {
+      "predicate": {
+        "poptartcore:depth": 0.78
+      },
+      "model": "poptartcore:item/depth_meter/depth_meter_high_9"
+    },
+    {
+      "predicate": {
+        "poptartcore:depth": 0.82
+      },
+      "model": "poptartcore:item/depth_meter/depth_meter_error"
+    }
+  ]
+}

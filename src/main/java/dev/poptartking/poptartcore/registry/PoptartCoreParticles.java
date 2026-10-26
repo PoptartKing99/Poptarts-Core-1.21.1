@@ -19,6 +19,11 @@ public final class PoptartCoreParticles {
     public static final Supplier<LostHeartEmberType> LOST_HEART_EMBER =
             PARTICLE_TYPES.register("lost_heart_ember", LostHeartEmberType::new);
 
+    public static final Supplier<SimpleParticleType> TAPPER_RESIN_DRIP =
+            PARTICLE_TYPES.register("tapper_resin_drip", () -> new SimpleParticleType(false));
+    public static final Supplier<SimpleParticleType> TAPPER_SYRUP_DRIP =
+            PARTICLE_TYPES.register("tapper_syrup_drip", () -> new SimpleParticleType(false));
+
     private PoptartCoreParticles() {}
 
     public static void register(IEventBus eventBus) {

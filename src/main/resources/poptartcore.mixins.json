@@ -3,6 +3,17 @@
   "package": "dev.poptartking.poptartcore.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "integration.simulated.CompassNavigationTargetMixin",
+    "integration.ragdoll.CorpseDeathMarkerMixin",
+    "timekeeping.SupplementariesClockUseMixin",
+    "timekeeping.ClockUseMixin",
+    "navigation.NavigationSableAssemblyMixin",
+    "navigation.NavigationCompassItemMixin",
+    "navigation.NavigationItemMixin",
+    "navigation.NavigationBlockBehaviourMixin",
+    "navigation.NavigationBlockMixin",
+    "navigation.NavigationServerLevelMixin",
+
     "anvil.WornUpgradeMixin",
     "anvil.StickyItemDropMixin",
     "equipment.UtilityWieldHandMixin",
@@ -58,6 +69,18 @@
     "wax.IWaxableMoonlightMixin"
   ],
   "client": [
+    "spyglass.SpyglassFovMixin",
+    "spyglass.SpyglassMinimumFovMixin",
+    "spyglass.SpyglassCrosshairMixin",
+    "spyglass.SpyglassScrollMixin",
+
+    "navigation.NavigationCavernsCompassMixin",
+    "navigation.NavigationCompassItemPropertyFunctionMixin",
+    "navigation.NavigationUseMixin",
+    "navigation.NavigationMouseMixin",
+    "navigation.NavigationTabOverlayAccessor",
+
+    "accessor.DepthMeterGuiAccessor",
     "anvil.InvisibleArmorLayerMixin",
     "anvil.PreventStickyDropMixin",
     "equipment.UtilityReleaseMixin",

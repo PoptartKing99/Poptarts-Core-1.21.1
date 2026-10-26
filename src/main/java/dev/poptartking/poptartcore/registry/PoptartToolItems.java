@@ -24,6 +24,9 @@ import vectorwing.farmersdelight.common.item.KnifeItem;
 public final class PoptartToolItems {
     private PoptartToolItems() {}
 
+    public static final CatalogItemDefinition<Item> DEPTH_METER =
+            PoptartCatalog.simpleItem("depth_meter").withoutGeneratedModel();
+
     public static final CatalogItemDefinition<ScribingToolsItem> SCRIBING_TOOLS = PoptartCatalog.item(
                     "scribing_tools", () -> new ScribingToolsItem(new Item.Properties().durability(25)))
             .withoutGeneratedModel();

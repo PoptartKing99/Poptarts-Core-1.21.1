@@ -1,6 +1,6 @@
 gradle.projectsEvaluated {
     rootProject.sourceSets.gameTest.java.setIncludes([
-        '**/equipment/**', '**/treetap/**', '**/waxgolem/**', '**/beekeeping/**', '**/flesh/**', '**/backpack/**'
+        '**/equipment/**', '**/waxgolem/**', '**/beekeeping/**', '**/flesh/**', '**/backpack/**'
     ])
     def syncMods = rootProject.tasks.register('syncNomanslandCompatibilityMods') {
         doLast {

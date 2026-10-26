@@ -6,7 +6,6 @@ import dev.poptartking.poptartcore.integration.create.PoptartCasingIntegration;
 import dev.poptartking.poptartcore.integration.ragdoll.AccessoryCorpseProvider;
 import dev.poptartking.poptartcore.registry.*;
 import dev.poptartking.poptartcore.scribing.ScribingNetwork;
-import dev.poptartking.poptartcore.treetap.LatexCauldronInteractions;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
@@ -27,6 +26,8 @@ public class PoptartCore {
         dev.poptartking.poptartcore.registry.AnvilDataComponents.register(modEventBus);
         dev.poptartking.poptartcore.backpack.BackpackColors.register(modEventBus);
         dev.poptartking.poptartcore.backpack.BackpackAttachments.register(modEventBus);
+        dev.poptartking.poptartcore.navigation.NavigationComponents.register(modEventBus);
+        dev.poptartking.poptartcore.timekeeping.TimekeepingComponents.register(modEventBus);
         PoptartCoreFluids.register(modEventBus);
         PoptartCoreRecipes.register(modEventBus);
         PoptartCoreLootModifiers.register(modEventBus);
@@ -40,7 +41,6 @@ public class PoptartCore {
         BlastFurnaceCapabilities.register(modEventBus);
         PoptartCoreCapabilities.register(modEventBus);
         PoptartCasingIntegration.register(modEventBus);
-        LatexCauldronInteractions.register(modEventBus);
         ScribingNetwork.register(modEventBus);
         AccessoryCorpseProvider.register();
     }

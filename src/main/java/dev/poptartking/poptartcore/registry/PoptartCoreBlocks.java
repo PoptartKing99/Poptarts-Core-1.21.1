@@ -45,8 +45,6 @@ import dev.poptartking.poptartcore.rift.RiftWallTorchBlock;
 import dev.poptartking.poptartcore.rift.SoulSconceLeverBlock;
 import dev.poptartking.poptartcore.scribing.ScribingTableBlock;
 import dev.poptartking.poptartcore.spider.TemporaryCobwebBlock;
-import dev.poptartking.poptartcore.treetap.LatexCauldronBlock;
-import dev.poptartking.poptartcore.treetap.TreeTapBlock;
 import dev.poptartking.poptartcore.workbench.WorkbenchBlock;
 import dev.simulated_team.simulated.content.blocks.portable_engine.PortableEngineBlock;
 import net.mehvahdjukaar.supplementaries.common.block.blocks.SconceLeverBlock;
@@ -94,6 +92,18 @@ public class PoptartCoreBlocks {
                             dev.poptartking.poptartcore.backpack.BackpackItem::new)
                     .externalModel()
                     .customLoot();
+
+    public static final CatalogBlockDefinition<dev.poptartking.poptartcore.decoration.WoodenBucketBlock> WOODEN_BUCKET =
+            PoptartCatalog.block(
+                            "wooden_bucket",
+                            () -> new dev.poptartking.poptartcore.decoration.WoodenBucketBlock(
+                                    BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS)
+                                            .strength(1.0F)
+                                            .noOcclusion()))
+                    .withName("Tree Tapper")
+                    .externalModel()
+                    .customLoot()
+                    .tags(BlockTags.MINEABLE_WITH_AXE);
 
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(PoptartCore.MOD_ID);
 
@@ -759,17 +769,6 @@ public class PoptartCoreBlocks {
                     () -> new Block(
                             BlockBehaviour.Properties.ofFullCopy(Blocks.MUD).strength(0.7F, 0.3F)))
             .withStorageRecipes(() -> PoptartMaterialItems.WAX.get(), "wax_from_block");
-    public static final CatalogBlockDefinition<TreeTapBlock> TREE_TAP = PoptartCatalog.block(
-                    "tree_tap",
-                    () -> new TreeTapBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)
-                            .noOcclusion()
-                            .strength(0.8F)))
-            .externalModel()
-            .customLoot()
-            .mineableWithAxe();
-    public static final DeferredBlock<LatexCauldronBlock> LATEX_CAULDRON = BLOCKS.register(
-            "latex_cauldron",
-            () -> new LatexCauldronBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.WATER_CAULDRON)));
     public static final CatalogBlockDefinition<BeehiveSupportBlock> BEEHIVE_SUPPORT = PoptartCatalog.block(
                     "beehive_support",
                     () -> new BeehiveSupportBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BEEHIVE)

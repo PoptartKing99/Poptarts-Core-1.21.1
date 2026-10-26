@@ -35,6 +35,7 @@ public enum CreativeCatalogGroup {
             "ingot_mould",
             "unfired_plate_mould",
             "plate_mould",
+            "depth_meter",
             "firestarter",
             "scribing_tools",
             "bone_pick",
@@ -59,7 +60,6 @@ public enum CreativeCatalogGroup {
             "steel_knife",
             "repeating_crossbow",
             "bee_smoker",
-            "tree_tap",
             "beehive_support",
             "lifegem",
             "heart_crystal");

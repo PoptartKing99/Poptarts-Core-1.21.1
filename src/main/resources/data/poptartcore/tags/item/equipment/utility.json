@@ -1,1 +1,1 @@
-{"replace": false, "values": ["#poptartcore:equipment/accessories", "minecraft:spyglass", "minecraft:totem_of_undying", "#poptartcore:equipment/utility_consumables"]}
+{"replace": false, "values": ["minecraft:clock", "minecraft:compass", "minecraft:recovery_compass", "poptartcore:depth_meter", "#poptartcore:equipment/accessories", "minecraft:spyglass", "minecraft:totem_of_undying", "#poptartcore:equipment/utility_consumables"]}

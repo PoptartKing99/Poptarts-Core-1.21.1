@@ -39,7 +39,15 @@ public final class BackpackBlockRenderer implements BlockEntityRenderer<Backpack
         boolean rucksack = backpack.getContainerSize() == 54;
         if (rucksack) pose.translate(0, -3.0 / 16, 0);
         BackpackAttachmentRenderer.render(
-                rucksack, backpack.attachments(), pose, buffers, light, overlay, backpack.getLevel(), false);
+                rucksack,
+                backpack.attachments(),
+                pose,
+                buffers,
+                light,
+                overlay,
+                backpack.getLevel(),
+                backpack.getBlockPos().getY(),
+                false);
         pose.popPose();
     }
 }

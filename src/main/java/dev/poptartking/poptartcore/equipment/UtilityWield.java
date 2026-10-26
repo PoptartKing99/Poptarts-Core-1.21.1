@@ -90,7 +90,33 @@ public final class UtilityWield {
 
     public static boolean sameAttachmentSource(ItemStack bound, ItemStack current, boolean clientSide) {
         // Inventory synchronization recreates client stacks. The server still requires the original bag object.
-        return bound == current || clientSide && !current.isEmpty() && ItemStack.matches(bound, current);
+        return bound == current
+                || clientSide
+                        && !current.isEmpty()
+                        && (ItemStack.matches(bound, current) || sameBagExceptPrimaryPassiveData(bound, current));
+    }
+
+    private static boolean sameExceptPassiveData(ItemStack first, ItemStack second) {
+        net.minecraft.core.component.DataComponentType<?> component;
+        if (first.is(net.minecraft.world.item.Items.COMPASS) && second.is(net.minecraft.world.item.Items.COMPASS))
+            component = dev.poptartking.poptartcore.navigation.NavigationComponents.WAYPOINTS.get();
+        else if (first.is(net.minecraft.world.item.Items.CLOCK) && second.is(net.minecraft.world.item.Items.CLOCK))
+            component = dev.poptartking.poptartcore.timekeeping.TimekeepingComponents.STOPWATCH.get();
+        else return false;
+        var a = first.copy();
+        var b = second.copy();
+        a.remove(component);
+        b.remove(component);
+        return ItemStack.matches(a, b);
+    }
+
+    private static boolean sameBagExceptPrimaryPassiveData(ItemStack first, ItemStack second) {
+        var a = dev.poptartking.poptartcore.backpack.BackpackAttachments.get(first, 1);
+        var b = dev.poptartking.poptartcore.backpack.BackpackAttachments.get(second, 1);
+        if (!sameExceptPassiveData(a, b)) return false;
+        var copy = first.copy();
+        dev.poptartking.poptartcore.backpack.BackpackAttachments.set(copy, 1, b);
+        return ItemStack.matches(copy, second);
     }
 
     private static void setSource(Player player, Session session, ItemStack stack) {
@@ -116,7 +142,21 @@ public final class UtilityWield {
         var session = SESSIONS.get(player);
         if (session == null) return false;
         // An external inventory edit wins. Never write a stale working copy over a replacement.
-        if (!ItemStack.matches(source(player, session), session.base)) {
+        var source = source(player, session);
+        if (player.level().isClientSide
+                && sameExceptPassiveData(source, session.base)
+                && !ItemStack.matches(source, session.base)) {
+            if (source.is(net.minecraft.world.item.Items.COMPASS))
+                session.working.set(
+                        dev.poptartking.poptartcore.navigation.NavigationComponents.WAYPOINTS.get(),
+                        source.get(dev.poptartking.poptartcore.navigation.NavigationComponents.WAYPOINTS.get()));
+            else
+                session.working.set(
+                        dev.poptartking.poptartcore.timekeeping.TimekeepingComponents.STOPWATCH.get(),
+                        source.get(dev.poptartking.poptartcore.timekeeping.TimekeepingComponents.STOPWATCH.get()));
+            session.base = source.copy();
+        }
+        if (!ItemStack.matches(source, session.base)) {
             if (session.attachment)
                 com.mojang.logging.LogUtils.getLogger()
                         .debug(
@@ -142,6 +182,11 @@ public final class UtilityWield {
             return false;
         }
         return true;
+    }
+
+    /** Commit a server-side edit of the working item without ending its use session. */
+    public static void commit(Player player) {
+        if (!player.level().isClientSide && !reconcile(player)) stop(player);
     }
 
     public static void stop(Player player) {

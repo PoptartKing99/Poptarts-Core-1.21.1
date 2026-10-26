@@ -18,6 +18,11 @@ public final class PoptartCoreAttachments {
             "accessories", () -> AttachmentType.<CompoundTag, AccessoryInventory>serializable(AccessoryInventory::new)
                     .build());
 
+    public static final Supplier<AttachmentType<Boolean>> CORPSE_DEATH_MARKER_REMOVED =
+            ATTACHMENT_TYPES.register("corpse_death_marker_removed", () -> AttachmentType.builder(() -> false)
+                    .sync(net.minecraft.network.codec.ByteBufCodecs.BOOL)
+                    .build());
+
     // Visual/air snapshot only; authoritative storage remains in ACCESSORIES.
     public static final Supplier<AttachmentType<Boolean>> BACKPACK_ATTACHMENT_WIELDING =
             ATTACHMENT_TYPES.register("backpack_attachment_wielding", () -> AttachmentType.builder(() -> false)

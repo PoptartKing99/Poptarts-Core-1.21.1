@@ -1,0 +1,37 @@
+package dev.poptartking.poptartcore.navigation;
+
+import dev.poptartking.poptartcore.PoptartCore;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Pattern;
+import net.minecraft.resources.ResourceLocation;
+
+public final class WaypointIcons {
+    public static final String DEFAULT = "default";
+    public static final String FOLDER = "waypoints/";
+    public static final String SELECTED_SUFFIX = "_selected";
+    private static final Pattern NAME = Pattern.compile("[a-z0-9_]{1,64}");
+    private static final Map<String, ResourceLocation[]> SPRITES = new HashMap<>();
+
+    private WaypointIcons() {}
+
+    public static boolean isValid(String icon) {
+        return NAME.matcher(icon).matches();
+    }
+
+    public static String sanitize(String icon) {
+        return isValid(icon) ? icon : "default";
+    }
+
+    public static ResourceLocation getSprite(String icon, boolean selected) {
+        ResourceLocation[] sprites = SPRITES.get(icon);
+        if (sprites == null) {
+            sprites = new ResourceLocation[] {
+                PoptartCore.location("waypoints/" + icon), PoptartCore.location("waypoints/" + icon + "_selected")
+            };
+            SPRITES.put(icon, sprites);
+        }
+
+        return sprites[selected ? 1 : 0];
+    }
+}

@@ -99,6 +99,7 @@ public final class BackpackLayer extends RenderLayer<AbstractClientPlayer, Playe
                 light,
                 OverlayTexture.NO_OVERLAY,
                 player.level(),
+                player.getY(),
                 dev.poptartking.poptartcore.equipment.UtilityWield.isAttachmentWielding(player)
                         || player.getData(PoptartCoreAttachments.BACKPACK_ATTACHMENT_WIELDING));
         var model = Minecraft.getInstance().getModelManager().getModel(rucksack ? RUCKSACK_STRAPS : STRAPS);

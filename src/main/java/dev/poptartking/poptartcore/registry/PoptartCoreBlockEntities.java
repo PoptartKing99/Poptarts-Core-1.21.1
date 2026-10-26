@@ -10,7 +10,6 @@ import dev.poptartking.poptartcore.millstone.MillstoneBlockEntity;
 import dev.poptartking.poptartcore.millstone.MillstoneRotorBlockEntity;
 import dev.poptartking.poptartcore.quern.QuernBlockEntity;
 import dev.poptartking.poptartcore.scribing.ScribingTableBlockEntity;
-import dev.poptartking.poptartcore.treetap.TreeTapBlockEntity;
 import dev.poptartking.poptartcore.workbench.WorkbenchBlockEntity;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -72,11 +71,6 @@ public class PoptartCoreBlockEntities {
                             FluidBarrelBlockEntity::new, PoptartCoreBlocks.FLUID_BARREL.get())
                     .build(null));
 
-    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TreeTapBlockEntity>> TREE_TAP =
-            BLOCK_ENTITIES.register("tree_tap", () -> BlockEntityType.Builder.of(
-                            TreeTapBlockEntity::new, PoptartCoreBlocks.TREE_TAP.get())
-                    .build(null));
-
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BloomeryBlockEntity>> BLOOMERY =
             BLOCK_ENTITIES.register("bloomery", () -> BlockEntityType.Builder.of(
                             BloomeryBlockEntity::new, PoptartCoreBlocks.BLOOMERY.get())
@@ -96,6 +90,13 @@ public class PoptartCoreBlockEntities {
             BLOCK_ENTITIES.register(
                     "quern", () -> BlockEntityType.Builder.of(QuernBlockEntity::new, PoptartCoreBlocks.QUERN.get())
                             .build(null));
+
+    public static final DeferredHolder<
+                    BlockEntityType<?>, BlockEntityType<dev.poptartking.poptartcore.decoration.TreeTapperBlockEntity>>
+            TREE_TAPPER = BLOCK_ENTITIES.register("tree_tapper", () -> BlockEntityType.Builder.of(
+                    dev.poptartking.poptartcore.decoration.TreeTapperBlockEntity::new,
+                    PoptartCoreBlocks.WOODEN_BUCKET.get())
+            .build(null));
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);

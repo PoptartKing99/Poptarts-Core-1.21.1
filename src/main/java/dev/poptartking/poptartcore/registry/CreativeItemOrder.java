@@ -23,6 +23,7 @@ public final class CreativeItemOrder {
             "plate_mould",
 
             // Tools and weapons, grouped by material
+            "depth_meter",
             "firestarter",
             "scribing_tools",
             "bone_pick",
@@ -132,7 +133,6 @@ public final class CreativeItemOrder {
             "sconce_cupric_torch_lever",
             "sconce_soul_torch_lever",
             "wax_block",
-            "tree_tap",
             "latex_bottle",
             "rubber",
             "rubber_block",

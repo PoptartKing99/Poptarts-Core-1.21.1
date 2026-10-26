@@ -5,6 +5,7 @@
     "poptartcore:crucible",
     "poptartcore:fluid_barrel",
     "poptartcore:workbench",
-    "poptartcore:scribing_table"
+    "poptartcore:scribing_table",
+    "poptartcore:wooden_bucket"
   ]
 }

@@ -30,6 +30,22 @@ public class PoptartCoreSounds {
             "bee_smoker.retract",
             () -> SoundEvent.createVariableRangeEvent(PoptartCore.location("bee_smoker.retract")));
 
+    public static final DeferredHolder<SoundEvent, SoundEvent> COMPASS_FULL = SOUNDS.register(
+            "compass_full", () -> SoundEvent.createVariableRangeEvent(PoptartCore.location("compass_full")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> WAYPOINT_SELECT = SOUNDS.register(
+            "waypoint_select", () -> SoundEvent.createVariableRangeEvent(PoptartCore.location("waypoint_select")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> WAYPOINT_HIDE = SOUNDS.register(
+            "waypoint_hide", () -> SoundEvent.createVariableRangeEvent(PoptartCore.location("waypoint_hide")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> NAVIGATION_TOGGLE = SOUNDS.register(
+            "navigation_toggle", () -> SoundEvent.createVariableRangeEvent(PoptartCore.location("navigation_toggle")));
+
+    public static final DeferredHolder<SoundEvent, SoundEvent> STOPWATCH_START = SOUNDS.register(
+            "stopwatch_start", () -> SoundEvent.createVariableRangeEvent(PoptartCore.location("stopwatch_start")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> STOPWATCH_STOP = SOUNDS.register(
+            "stopwatch_stop", () -> SoundEvent.createVariableRangeEvent(PoptartCore.location("stopwatch_stop")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> STOPWATCH_TICK = SOUNDS.register(
+            "stopwatch_tick", () -> SoundEvent.createVariableRangeEvent(PoptartCore.location("stopwatch_tick")));
+
     public static void register(IEventBus eventBus) {
         SOUNDS.register(eventBus);
     }

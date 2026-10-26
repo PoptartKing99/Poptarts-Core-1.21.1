@@ -47,7 +47,8 @@ public final class BackpackAttachments {
         if (stack.isEmpty() || slot < 0 || slot >= slots(rucksack)) return false;
         if (slot == 0) return rucksack && stack.getItem() instanceof BannerItem;
         return switch (id(stack)) {
-            case "minecraft:compass",
+            case "poptartcore:depth_meter",
+                    "minecraft:compass",
                     "minecraft:clock",
                     "minecraft:recovery_compass",
                     "minecraft:spyglass",

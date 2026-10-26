@@ -51,6 +51,11 @@ public abstract class BackpackAttachmentItemMixin {
                 light,
                 overlay,
                 Minecraft.getInstance().level,
+                stack.getEntityRepresentation() != null
+                        ? stack.getEntityRepresentation().getY()
+                        : Minecraft.getInstance().player == null
+                                ? 0
+                                : Minecraft.getInstance().player.getY(),
                 false);
         pose.popPose();
         ci.cancel();

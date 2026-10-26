@@ -4,11 +4,9 @@ import dev.poptartking.poptartcore.PoptartCore;
 import dev.poptartking.poptartcore.fluid.MoltenFluidDefinition;
 import java.util.function.Supplier;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.common.SoundActions;
 import net.neoforged.neoforge.fluids.BaseFlowingFluid;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -26,32 +24,15 @@ public class PoptartCoreFluids {
     public static final MoltenFluidDefinition MOLTEN_TIN = registerMoltenMetal("tin");
     public static final MoltenFluidDefinition MOLTEN_BRONZE = registerMoltenMetal("bronze");
     public static final MoltenFluidDefinition MOLTEN_STEEL = registerMoltenMetal("steel");
-    public static final MoltenFluidDefinition LATEX = registerLatex();
 
-    private static MoltenFluidDefinition registerLatex() {
-        DeferredHolder<FluidType, FluidType> type = FLUID_TYPES.register(
-                "latex",
-                () -> new FluidType(FluidType.Properties.create()
-                        .viscosity(1500)
-                        .density(950)
-                        .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BOTTLE_EMPTY)));
-        FluidReference sourceReference = new FluidReference();
-        FluidReference flowingReference = new FluidReference();
-        DeferredHolder<Fluid, FlowingFluid> source = FLUIDS.register(
-                "latex",
-                () -> new BaseFlowingFluid.Source(
-                        new BaseFlowingFluid.Properties(type, sourceReference, flowingReference)));
-        DeferredHolder<Fluid, FlowingFluid> flowing = FLUIDS.register(
-                "flowing_latex",
-                () -> new BaseFlowingFluid.Flowing(
-                        new BaseFlowingFluid.Properties(type, sourceReference, flowingReference)));
-        sourceReference.set(source);
-        flowingReference.set(flowing);
-        return new MoltenFluidDefinition(type, source, flowing);
-    }
+    public static final MoltenFluidDefinition RESIN = registerTankFluid("resin");
+    public static final MoltenFluidDefinition MAPLE_SYRUP = registerTankFluid("maple_syrup");
 
     private static MoltenFluidDefinition registerMoltenMetal(String name) {
-        String fluidName = "molten_" + name;
+        return registerTankFluid("molten_" + name);
+    }
+
+    private static MoltenFluidDefinition registerTankFluid(String fluidName) {
 
         DeferredHolder<FluidType, FluidType> type = FLUID_TYPES.register(
                 fluidName,
