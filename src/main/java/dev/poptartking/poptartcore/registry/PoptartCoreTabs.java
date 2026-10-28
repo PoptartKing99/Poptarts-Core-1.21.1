@@ -1,7 +1,6 @@
 package dev.poptartking.poptartcore.registry;
 
 import dev.poptartking.poptartcore.PoptartCore;
-import dev.poptartking.poptartcore.catalog.CreativeCatalogGroup;
 import dev.poptartking.poptartcore.catalog.PoptartCatalog;
 import java.util.function.Supplier;
 import net.minecraft.core.registries.Registries;
@@ -17,13 +16,10 @@ public class PoptartCoreTabs {
 
     public static final Supplier<CreativeModeTab> POPTARTCORE_TAB =
             CREATIVE_MODE_TAB.register("poptartcore_tab", () -> CreativeModeTab.builder()
-                    .icon(() -> new ItemStack(PoptartBlockItems.CRUCIBLE.get()))
+                    .icon(() -> new ItemStack(
+                            PoptartWorkstationBlocks.CRUCIBLE.item().get()))
                     .title(Component.translatable("creativetab.poptartcore.poptartcore_tab"))
-                    .displayItems((parameters, output) -> {
-                        for (var group : CreativeCatalogGroup.values()) {
-                            PoptartCatalog.addCreativeTabItems(output, CreativeItemOrder.ITEMS, group);
-                        }
-                    })
+                    .displayItems((parameters, output) -> PoptartCatalog.addCreativeTabItems(output))
                     .build());
 
     public static void register(IEventBus eventBus) {

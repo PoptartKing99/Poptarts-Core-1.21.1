@@ -1,0 +1,106 @@
+{
+  "items": {
+    "rusted_iron_ring": {
+      "ring": true,
+      "referenceTexture": "rusted_iron_ring.png"
+    },
+    "dull_iron_ring": {
+      "ring": true,
+      "referenceTexture": "dull_iron_ring.png"
+    },
+    "moonlight_ring": {
+      "ring": true,
+      "referenceTexture": "moonlight_ring.png"
+    },
+    "ring_of_warmth": {
+      "ring": true,
+      "referenceTexture": "ring_of_warmth.png"
+    },
+    "fireward_ring": {
+      "ring": true,
+      "referenceTexture": "fireward_ring.png"
+    },
+    "silvercat_ring": {
+      "ring": true,
+      "referenceTexture": "silvercat_ring.png"
+    },
+    "tiny_horseshoe": {
+      "ring": true,
+      "referenceTexture": "tiny_horseshoe.png",
+      "noRecipeReferences": "poptartcore"
+    },
+    "thorn_ring": {
+      "ring": true,
+      "referenceTexture": "thorn_ring.png",
+      "noRecipeReferences": "poptartcore"
+    },
+    "ring_of_the_afflicted": {
+      "ring": true,
+      "referenceTexture": "ring_of_the_afflicted.png",
+      "noRecipeReferences": "poptartcore"
+    },
+    "mercury_gemstone_ring": {
+      "ring": true,
+      "referenceTexture": "mercury_gemstone_ring.png",
+      "noRecipeReferences": "poptartcore"
+    },
+    "ancient_blessing": {
+      "ring": true,
+      "referenceTexture": "ancient_blessing.png",
+      "noRecipeReferences": "poptartcore"
+    },
+    "sunlight_ring": {
+      "ring": true,
+      "referenceTexture": "sunlight_ring.png",
+      "noRecipeReferences": "poptartcore"
+    },
+    "malevolent_ring": {
+      "ring": true,
+      "referenceTexture": "malevolent_ring.png",
+      "noRecipeReferences": "poptartcore"
+    },
+    "bulwark_ring": {
+      "ring": true,
+      "referenceTexture": "bulwark_ring.png",
+      "noRecipeReferences": "*",
+      "matchPackagedBytes": true
+    },
+    "ring_of_the_rat": {
+      "ring": true,
+      "referenceTexture": "ring_of_the_rat.png",
+      "noRecipeReferences": "*",
+      "matchPackagedBytes": true
+    },
+    "sulfur_gemstone_ring": {
+      "ring": true,
+      "referenceTexture": "sulfur_gemstone_ring.png",
+      "noRecipeReferences": "*",
+      "matchPackagedBytes": true
+    },
+    "ring_of_silence": {
+      "ring": true,
+      "referenceTexture": "ring_of_silence.png",
+      "noRecipeReferences": "*",
+      "matchPackagedBytes": true
+    },
+    "bone_ash": {
+      "ring": false,
+      "referenceTexture": "../bone_ash.png",
+      "noRecipeReferences": "poptartcore"
+    },
+    "chthonic_calculus": {
+      "ring": false,
+      "referenceTexture": "../chthonic_calculus.png",
+      "noRecipeReferences": "poptartcore"
+    }
+  },
+  "rarityExtension": {
+    "enum": "net/minecraft/world/item/Rarity",
+    "name": "POPTARTCORE_MALEVOLENT",
+    "constructor": "(ILjava/lang/String;Ljava/util/function/UnaryOperator;)V",
+    "parameters": {
+      "class": "dev/poptartking/poptartcore/registry/PoptartRarities",
+      "field": "MALEVOLENT"
+    }
+  }
+}

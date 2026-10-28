@@ -6,7 +6,7 @@ import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.WidgetHolder;
 import dev.poptartking.poptartcore.PoptartCore;
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
+import dev.poptartking.poptartcore.registry.PoptartWorkstationBlocks;
 import java.util.List;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.material.Fluid;
@@ -74,7 +74,9 @@ final class ProcessingEmiRecipe extends BasicEmiRecipe {
         layout.slot(widgets, outputs.getFirst(), 114, 54).recipeContext(this);
         if (outputs.size() > 1) widgets.addSlot(outputs.get(1), 137, 45).recipeContext(this);
         EmiIngredient tool = EmiStack.of(
-                process.equals("milling") ? PoptartCoreBlocks.MILLSTONE.get() : PoptartCoreBlocks.QUERN.get());
+                process.equals("milling")
+                        ? PoptartWorkstationBlocks.MILLSTONE.get()
+                        : PoptartWorkstationBlocks.QUERN.get());
         layout.slot(widgets, tool, 80, 21).catalyst(true);
         widgets.addTexture(
                 PoptartCore.location("textures/gui/emi/grinding_progress.png"), 72, 45, 24, 16, 0, 0, 24, 16, 24, 16);

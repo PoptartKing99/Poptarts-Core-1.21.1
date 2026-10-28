@@ -4,7 +4,7 @@ import com.simibubi.create.AllBlockEntityTypes;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.decoration.encasing.EncasingRegistry;
 import dev.poptartking.poptartcore.mixin.accessor.BlockEntityTypeAccessor;
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
+import dev.poptartking.poptartcore.registry.PoptartCreateBlocks;
 import java.util.HashSet;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -20,28 +20,31 @@ public final class PoptartCasingIntegration {
 
     private static void commonSetup(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
-            EncasingRegistry.addVariant(AllBlocks.SHAFT.get(), PoptartCoreBlocks.INDUSTRIAL_ENCASED_SHAFT.get());
-            EncasingRegistry.addVariant(AllBlocks.COGWHEEL.get(), PoptartCoreBlocks.INDUSTRIAL_ENCASED_COGWHEEL.get());
+            EncasingRegistry.addVariant(AllBlocks.SHAFT.get(), PoptartCreateBlocks.INDUSTRIAL_ENCASED_SHAFT.get());
             EncasingRegistry.addVariant(
-                    AllBlocks.LARGE_COGWHEEL.get(), PoptartCoreBlocks.INDUSTRIAL_ENCASED_LARGE_COGWHEEL.get());
-            EncasingRegistry.addVariant(AllBlocks.SHAFT.get(), PoptartCoreBlocks.TREATED_WOOD_ENCASED_SHAFT.get());
+                    AllBlocks.COGWHEEL.get(), PoptartCreateBlocks.INDUSTRIAL_ENCASED_COGWHEEL.get());
             EncasingRegistry.addVariant(
-                    AllBlocks.COGWHEEL.get(), PoptartCoreBlocks.TREATED_WOOD_ENCASED_COGWHEEL.get());
+                    AllBlocks.LARGE_COGWHEEL.get(), PoptartCreateBlocks.INDUSTRIAL_ENCASED_LARGE_COGWHEEL.get());
+            EncasingRegistry.addVariant(AllBlocks.SHAFT.get(), PoptartCreateBlocks.TREATED_WOOD_ENCASED_SHAFT.get());
             EncasingRegistry.addVariant(
-                    AllBlocks.LARGE_COGWHEEL.get(), PoptartCoreBlocks.TREATED_WOOD_ENCASED_LARGE_COGWHEEL.get());
+                    AllBlocks.COGWHEEL.get(), PoptartCreateBlocks.TREATED_WOOD_ENCASED_COGWHEEL.get());
+            EncasingRegistry.addVariant(
+                    AllBlocks.LARGE_COGWHEEL.get(), PoptartCreateBlocks.TREATED_WOOD_ENCASED_LARGE_COGWHEEL.get());
 
-            addValidBlock(AllBlockEntityTypes.ENCASED_SHAFT.get(), PoptartCoreBlocks.INDUSTRIAL_ENCASED_SHAFT.get());
+            addValidBlock(AllBlockEntityTypes.ENCASED_SHAFT.get(), PoptartCreateBlocks.INDUSTRIAL_ENCASED_SHAFT.get());
             addValidBlock(
-                    AllBlockEntityTypes.ENCASED_COGWHEEL.get(), PoptartCoreBlocks.INDUSTRIAL_ENCASED_COGWHEEL.get());
-            addValidBlock(
-                    AllBlockEntityTypes.ENCASED_LARGE_COGWHEEL.get(),
-                    PoptartCoreBlocks.INDUSTRIAL_ENCASED_LARGE_COGWHEEL.get());
-            addValidBlock(AllBlockEntityTypes.ENCASED_SHAFT.get(), PoptartCoreBlocks.TREATED_WOOD_ENCASED_SHAFT.get());
-            addValidBlock(
-                    AllBlockEntityTypes.ENCASED_COGWHEEL.get(), PoptartCoreBlocks.TREATED_WOOD_ENCASED_COGWHEEL.get());
+                    AllBlockEntityTypes.ENCASED_COGWHEEL.get(), PoptartCreateBlocks.INDUSTRIAL_ENCASED_COGWHEEL.get());
             addValidBlock(
                     AllBlockEntityTypes.ENCASED_LARGE_COGWHEEL.get(),
-                    PoptartCoreBlocks.TREATED_WOOD_ENCASED_LARGE_COGWHEEL.get());
+                    PoptartCreateBlocks.INDUSTRIAL_ENCASED_LARGE_COGWHEEL.get());
+            addValidBlock(
+                    AllBlockEntityTypes.ENCASED_SHAFT.get(), PoptartCreateBlocks.TREATED_WOOD_ENCASED_SHAFT.get());
+            addValidBlock(
+                    AllBlockEntityTypes.ENCASED_COGWHEEL.get(),
+                    PoptartCreateBlocks.TREATED_WOOD_ENCASED_COGWHEEL.get());
+            addValidBlock(
+                    AllBlockEntityTypes.ENCASED_LARGE_COGWHEEL.get(),
+                    PoptartCreateBlocks.TREATED_WOOD_ENCASED_LARGE_COGWHEEL.get());
         });
     }
 

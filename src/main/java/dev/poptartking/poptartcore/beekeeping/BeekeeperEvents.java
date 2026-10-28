@@ -36,7 +36,8 @@ public final class BeekeeperEvents {
             return;
         }
 
-        int shortenedDuration = (int) (event.getEffectInstance().getDuration() * (1.0F - 0.15F * pieces));
+        int shortenedDuration =
+                event.getEffectInstance().mapDuration(duration -> (int) (duration * (1.0F - 0.15F * pieces)));
         ((MobEffectInstanceAccessor) (Object) event.getEffectInstance()).poptartcore$setDuration(shortenedDuration);
     }
 }

@@ -32,6 +32,7 @@ import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.component.ItemAttributeModifiers.Entry;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.Tags.Items;
+import org.jetbrains.annotations.Nullable;
 
 public class AnvilMenu extends ItemCombinerMenu {
     private static final int MAX_UPGRADES = 3;
@@ -205,6 +206,10 @@ public class AnvilMenu extends ItemCombinerMenu {
 
     public static void applyUpgrades(ItemStack stack, int count) {
         count = Mth.clamp(count, 0, 3);
+        boolean armor = isArmor(stack);
+        UpgradeDurability durability = durabilityReference(stack, armor);
+        int oldMax = stack.getMaxDamage();
+        int oldDamage = stack.getDamageValue();
         ItemAttributeModifiers built = buildUpgradedModifiers(stack, count);
         CompoundTag data = getCustomData(stack);
         data.remove(LEGACY_UPGRADE_KEY);
@@ -214,20 +219,17 @@ public class AnvilMenu extends ItemCombinerMenu {
 
         if (count <= 0) {
             stack.remove(AnvilDataComponents.UPGRADE_COUNT.get());
-            stack.remove(DataComponents.MAX_DAMAGE);
+            stack.remove(AnvilDataComponents.UPGRADE_DURABILITY.get());
         } else {
             stack.set(AnvilDataComponents.UPGRADE_COUNT.get(), count);
-            {
-                int newMax = upgradedMaxDamage(stack, count);
-                if (newMax > 0) {
-                    int oldMax = stack.getMaxDamage();
-                    stack.set(DataComponents.MAX_DAMAGE, newMax);
-                    if (stack.isDamaged() && oldMax > 0) {
-                        double remaining = (double) (oldMax - stack.getDamageValue()) / (double) oldMax;
-                        stack.setDamageValue(
-                                Mth.clamp(newMax - (int) Math.round(remaining * (double) newMax), 0, newMax - 1));
-                    }
-                }
+            if (durability != null) stack.set(AnvilDataComponents.UPGRADE_DURABILITY.get(), durability);
+        }
+        if (durability != null) {
+            int newMax = durability.atLevel(count, armor);
+            stack.set(DataComponents.MAX_DAMAGE, newMax);
+            if (stack.isDamaged() && oldMax > 0) {
+                double remaining = (double) (oldMax - oldDamage) / oldMax;
+                stack.setDamageValue(Mth.clamp(newMax - (int) Math.round(remaining * newMax), 0, newMax - 1));
             }
         }
     }
@@ -241,14 +243,25 @@ public class AnvilMenu extends ItemCombinerMenu {
         return max > 1 && isUpgraded(stack) && stack.getDamageValue() >= max - 1;
     }
 
-    public static int upgradedMaxDamage(ItemStack stack, int count) {
-        int base = (Integer) stack.getItem().components().getOrDefault(DataComponents.MAX_DAMAGE, 0);
-        if (base > 0 && count > 0) {
-            double rate = isArmor(stack) ? 0.15 : 0.2;
-            return Math.max(1, (int) Math.round((double) base * (1.0 + rate * (double) count)));
-        } else {
-            return base;
+    @Nullable
+    private static UpgradeDurability durabilityReference(ItemStack stack, boolean armor) {
+        int current = stack.getMaxDamage();
+        if (current <= 0) return null;
+        int count = getUpgradeCount(stack);
+        UpgradeDurability saved = stack.get(AnvilDataComponents.UPGRADE_DURABILITY.get());
+        if (saved != null) {
+            return saved.atLevel(count, armor) == current ? saved : new UpgradeDurability(current, count);
         }
+        if (count == 0) return new UpgradeDurability(current, 0);
+
+        // Recognize old normal-item upgrades exactly, preserving their original rounding.
+        int prototype = stack.getItem().components().getOrDefault(DataComponents.MAX_DAMAGE, 0);
+        if (prototype > 0) {
+            var original = new UpgradeDurability(prototype, 0);
+            if (current == prototype || original.atLevel(count, armor) == current) return original;
+        }
+        // Older custom items and later external edits retain their current maximum at the current level.
+        return new UpgradeDurability(current, count);
     }
 
     public static boolean isArmor(ItemStack stack) {

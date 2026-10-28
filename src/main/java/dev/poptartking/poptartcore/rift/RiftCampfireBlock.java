@@ -1,7 +1,7 @@
 package dev.poptartking.poptartcore.rift;
 
 import dev.poptartking.poptartcore.PoptartCore;
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
+import dev.poptartking.poptartcore.registry.PoptartRiftBlocks;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -20,6 +20,6 @@ public class RiftCampfireBlock extends CampfireBlock {
     public static void addCampfireBlockEntity(BlockEntityTypeAddBlocksEvent event) {
         event.modify(
                 ResourceKey.create(Registries.BLOCK_ENTITY_TYPE, ResourceLocation.withDefaultNamespace("campfire")),
-                PoptartCoreBlocks.RIFT_CAMPFIRE.get());
+                PoptartRiftBlocks.RIFT_CAMPFIRE.get());
     }
 }

@@ -32,6 +32,8 @@ public final class RingEffects {
     public static final float MAGNET_RANGE = 4F;
     private static final ResourceLocation SUNLIGHT = PoptartCore.location("sunlight_ring_absorption");
     private static final ResourceLocation HORSESHOE = PoptartCore.location("tiny_horseshoe_speed");
+    private static final AttributeModifier RAT_SNEAK_SPEED = new AttributeModifier(
+            PoptartCore.location("ring_of_the_rat_sneak"), .15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
     private static final String CHARGED = "poptartcore:sunlight_charged";
     private static final Map<Player, ItemStack> WORN_SUNLIGHT = new WeakHashMap<>();
     private static final Map<Player, LivingEntity> MOUNTS = new WeakHashMap<>();
@@ -45,11 +47,15 @@ public final class RingEffects {
         magnet(player);
         mount(player);
         var speed = player.getAttribute(Attributes.MOVEMENT_SPEED);
-        var rat = PoptartCore.location("ring_of_the_rat_sneak");
-        speed.removeModifier(rat);
-        if (EquipmentRing.has(player, EquipmentRing.Kind.RAT) && player.isCrouching())
-            speed.addTransientModifier(
-                    new AttributeModifier(rat, .15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+        var rat = speed.getModifier(RAT_SNEAK_SPEED.id());
+        if (player.isCrouching() && EquipmentRing.has(player, EquipmentRing.Kind.RAT)) {
+            if (!RAT_SNEAK_SPEED.equals(rat)) {
+                if (rat != null) speed.removeModifier(RAT_SNEAK_SPEED.id());
+                speed.addTransientModifier(RAT_SNEAK_SPEED);
+            }
+        } else if (rat != null) {
+            speed.removeModifier(RAT_SNEAK_SPEED.id());
+        }
         int ticks = (PASSIVE_TICKS.getOrDefault(player, 0) + 1) % 400;
         PASSIVE_TICKS.put(player, ticks);
         if (ticks == 0 && EquipmentRing.has(player, EquipmentRing.Kind.ANCIENT_BLESSING)) player.heal(1);
@@ -192,7 +198,8 @@ public final class RingEffects {
                 || !EquipmentRing.has(player, EquipmentRing.Kind.AFFLICTED)) return;
         var effect = event.getEffectInstance();
         if (effect.getEffect().value().getCategory() == MobEffectCategory.HARMFUL)
-            ((MobEffectInstanceAccessor) effect).poptartcore$setDuration((int) (effect.getDuration() * .7F));
+            ((MobEffectInstanceAccessor) effect)
+                    .poptartcore$setDuration(effect.mapDuration(duration -> (int) (duration * .7F)));
     }
 
     @SubscribeEvent

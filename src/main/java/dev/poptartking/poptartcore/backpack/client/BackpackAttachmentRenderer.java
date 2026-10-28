@@ -56,11 +56,11 @@ public final class BackpackAttachmentRenderer {
             Level level,
             double referenceY,
             boolean hidePrimary) {
-        var items = BackpackAttachments.items(contents);
         var renderer = Minecraft.getInstance().getItemRenderer();
         for (int i = 0; i < BackpackAttachments.slots(rucksack); i++) {
-            var stack = items.get(i);
-            if (!BackpackAttachments.fits(rucksack, i, stack) || hidePrimary && i == 1) continue;
+            if (hidePrimary && i == 1) continue;
+            var stack = BackpackAttachments.get(contents, i);
+            if (!BackpackAttachments.fits(rucksack, i, stack)) continue;
             String special =
                     switch (BackpackAttachments.id(stack)) {
                         case "poptartcore:depth_meter" ->

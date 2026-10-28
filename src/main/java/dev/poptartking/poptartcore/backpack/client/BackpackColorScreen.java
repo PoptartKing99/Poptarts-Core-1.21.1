@@ -53,7 +53,7 @@ public final class BackpackColorScreen extends AbstractContainerScreen<BackpackC
     protected void renderBg(GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
         graphics.blit(BACKGROUND, leftPos, topPos, 0, 0, imageWidth, imageHeight, 250, 232);
         var preview = menu.preview();
-        boolean rucksack = preview.is(dev.poptartking.poptartcore.registry.PoptartCoreBlocks.RUCKSACK
+        boolean rucksack = preview.is(dev.poptartking.poptartcore.registry.PoptartEquipmentBlocks.RUCKSACK
                 .get()
                 .asItem());
         if (!mouseOriginSet) {

@@ -15,14 +15,9 @@ import net.minecraft.world.item.ItemStack;
 
 public class AnvilHammerRenderer implements BlockEntityRenderer<AnvilBlockEntity> {
     private static final float TOP = 1.0F;
-    private static final float SCALE = 0.55F;
-    private static final float THICKNESS = 0.0625F;
     private static final float SIDEWAYS = -0.15F;
-    private final Context context;
 
-    public AnvilHammerRenderer(Context context) {
-        this.context = context;
-    }
+    public AnvilHammerRenderer(Context context) {}
 
     public void render(
             AnvilBlockEntity anvil,

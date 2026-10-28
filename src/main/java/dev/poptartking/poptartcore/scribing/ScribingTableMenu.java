@@ -22,12 +22,7 @@ import net.minecraft.world.item.component.ItemLore;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
 public class ScribingTableMenu extends AbstractContainerMenu {
-    public static final int SLOT_INPUT = 0;
     public static final int SLOT_TOOLS = 1;
-    public static final int SLOT_RESULT = 2;
-    private static final int INVENTORY_START = 3;
-    private static final int INVENTORY_END = 39;
-    public static final int LORE_LINES = 5;
     private final Container tools;
     private final Container input = new SimpleContainer(1);
     private final ResultContainer resultSlots = new ResultContainer();
@@ -128,10 +123,6 @@ public class ScribingTableMenu extends AbstractContainerMenu {
     public boolean hasWorkingTools() {
         ItemStack stack = this.tools.getItem(0);
         return stack.getItem() instanceof ScribingToolsItem && stack.getDamageValue() < stack.getMaxDamage();
-    }
-
-    public boolean hasResult() {
-        return !this.resultSlots.getItem(0).isEmpty();
     }
 
     private static List<Component> loreLines(String lore) {

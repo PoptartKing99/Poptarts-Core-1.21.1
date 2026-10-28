@@ -51,13 +51,7 @@ import net.minecraft.world.phys.Vec3;
 public class WaxGolem extends AbstractGolem {
     public static final int LIFETIME_TICKS = 48000;
     public static final int STAGES = 4;
-    public static final int HARVEST_COST = 600;
-    public static final int HOME_RADIUS = 32;
-    public static final int LOST_PATIENCE = 6000;
-    public static final int RAIN_TOLERANCE = 400;
-    public static final int WAX_UNITS = 16;
     public static final int TICKS_PER_WAX = 3000;
-    public static final int STARE_TICKS = 100;
     private final List<HiveMemory> hives;
     private BlockPos home;
     private int burned;
@@ -68,21 +62,10 @@ public class WaxGolem extends AbstractGolem {
     private Player watcher;
     private BlockPos claim;
     private long restUntil;
-    public static final int MIN_REACH_DROP = 0;
-    public static final int MAX_REACH_DROP = 2;
-    public static final double LIVE_RANGE = 10.0d;
     private Vec3 wickAnchor;
     public static final int REST_MIN = 160;
     public static final int REST_SPREAD = 320;
     public static final int REACH = 3;
-    public static final double WICK_FORWARD = 0.0625d;
-    public static final float SIT_DROP = 0.5f;
-    public static final float HEAD_PIVOT = 1.375f;
-    public static final float DEAD_HEAD_PIVOT = 1.25f;
-    public static final int SCAN_INTERVAL = 40;
-    public static final int SCAN_RADIUS = 8;
-    public static final int SCAN_HEIGHT = 4;
-    public static final int MAX_REMEMBERED = 48;
     private static final EntityDimensions[] SIZES = {
         EntityDimensions.scalable(0.8f, 1.94f).withEyeHeight(1.59f),
         EntityDimensions.scalable(0.8f, 1.88f).withEyeHeight(1.56f),

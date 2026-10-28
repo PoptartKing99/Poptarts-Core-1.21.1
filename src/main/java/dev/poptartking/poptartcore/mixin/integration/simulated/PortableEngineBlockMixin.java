@@ -1,6 +1,6 @@
 package dev.poptartking.poptartcore.mixin.integration.simulated;
 
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
+import dev.poptartking.poptartcore.registry.PoptartCreateBlocks;
 import dev.simulated_team.simulated.content.blocks.portable_engine.PortableEngineBlock;
 import net.mehvahdjukaar.moonlight.api.block.IWashable;
 import net.minecraft.core.BlockPos;
@@ -22,7 +22,7 @@ public abstract class PortableEngineBlockMixin implements IWashable {
     @Inject(method = "onRemove", at = @At("HEAD"), cancellable = true)
     private void poptartcore$keepInventoryOnStateChange(
             BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving, CallbackInfo callback) {
-        if (newState.is(PoptartCoreBlocks.PORTABLE_ENGINE.get())) {
+        if (newState.is(PoptartCreateBlocks.PORTABLE_ENGINE.get())) {
             callback.cancel();
         }
     }
@@ -33,7 +33,8 @@ public abstract class PortableEngineBlockMixin implements IWashable {
             return false;
         }
         if (!level.isClientSide()) {
-            level.setBlockAndUpdate(pos, PoptartCoreBlocks.PORTABLE_ENGINE.get().withPropertiesOf(state));
+            level.setBlockAndUpdate(
+                    pos, PoptartCreateBlocks.PORTABLE_ENGINE.get().withPropertiesOf(state));
         }
         return true;
     }

@@ -1,8 +1,8 @@
 package dev.poptartking.poptartcore.spider;
 
 import dev.poptartking.poptartcore.mixin.spider.WallClimberNavigationAccessor;
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
 import dev.poptartking.poptartcore.registry.PoptartCoreSounds;
+import dev.poptartking.poptartcore.registry.PoptartSpiderBlocks;
 import java.util.EnumSet;
 import java.util.UUID;
 import net.minecraft.util.Mth;
@@ -42,8 +42,8 @@ public final class SpiderWebAttackGoal extends Goal {
                 && !animation.poptartcore$isPursuingWebbedTarget(target)
                 && target.level()
                         .getBlockStates(target.getBoundingBox().deflate(0.001))
-                        .noneMatch(
-                                state -> state.is(Blocks.COBWEB) || state.is(PoptartCoreBlocks.TEMPORARY_COBWEB.get()));
+                        .noneMatch(state ->
+                                state.is(Blocks.COBWEB) || state.is(PoptartSpiderBlocks.TEMPORARY_COBWEB.get()));
     }
 
     @Override

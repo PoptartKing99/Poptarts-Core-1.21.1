@@ -2,7 +2,7 @@ package dev.poptartking.poptartcore.backpack;
 
 import dev.poptartking.poptartcore.PoptartCore;
 import dev.poptartking.poptartcore.equipment.AccessoryInventory;
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
+import dev.poptartking.poptartcore.registry.PoptartEquipmentBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
@@ -35,7 +35,7 @@ public final class BackpackGameTests {
         items.set(index, original);
         var visual = BackpackVisual.corpseVisualStack(items);
         helper.assertTrue(
-                visual.is(PoptartCoreBlocks.BACKPACK.get().asItem())
+                visual.is(PoptartEquipmentBlocks.BACKPACK.get().asItem())
                         && visual.getHoverName().getString().equals("Trail pack"),
                 "Corpse snapshot keeps backpack identity and name");
         helper.assertTrue(
@@ -144,7 +144,7 @@ public final class BackpackGameTests {
     }
 
     private static ItemStack loaded() {
-        var stack = new ItemStack(PoptartCoreBlocks.BACKPACK.get());
+        var stack = new ItemStack(PoptartEquipmentBlocks.BACKPACK.get());
         stack.set(DataComponents.CUSTOM_NAME, Component.literal("Trail pack"));
         BackpackMenu.contents(stack).setItem(26, new ItemStack(Items.DIAMOND, 12));
         return stack;

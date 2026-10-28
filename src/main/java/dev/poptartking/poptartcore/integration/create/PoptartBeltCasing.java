@@ -1,6 +1,6 @@
 package dev.poptartking.poptartcore.integration.create;
 
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
+import dev.poptartking.poptartcore.registry.PoptartCreateBlocks;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 
@@ -19,7 +19,9 @@ public enum PoptartBeltCasing {
     }
 
     public Block block() {
-        return this == INDUSTRIAL ? PoptartCoreBlocks.INDUSTRIAL_PLATING.get() : PoptartCoreBlocks.TREATED_WOOD.get();
+        return this == INDUSTRIAL
+                ? PoptartCreateBlocks.INDUSTRIAL_PLATING.get()
+                : PoptartCreateBlocks.TREATED_WOOD.get();
     }
 
     public static PoptartBeltCasing fromItem(ItemStack stack) {

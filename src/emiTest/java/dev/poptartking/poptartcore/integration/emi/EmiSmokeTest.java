@@ -8,8 +8,8 @@ import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.Widget;
 import dev.emi.emi.api.widget.WidgetHolder;
 import dev.poptartking.poptartcore.PoptartCore;
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
 import dev.poptartking.poptartcore.registry.PoptartCoreRecipes;
+import dev.poptartking.poptartcore.registry.PoptartWorkstationBlocks;
 import dev.poptartking.poptartcore.workbench.menu.WorkbenchMenu;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -136,8 +136,8 @@ public final class EmiSmokeTest {
             }
             require(
                     manager.getWorkstations(VanillaEmiRecipeCategories.CRAFTING).stream()
-                            .anyMatch(stack ->
-                                    stack.getEmiStacks().contains(EmiStack.of(PoptartCoreBlocks.WORKBENCH.get()))),
+                            .anyMatch(stack -> stack.getEmiStacks()
+                                    .contains(EmiStack.of(PoptartWorkstationBlocks.WORKBENCH.get()))),
                     "Workbench not registered");
             WorkbenchMenu menu = new WorkbenchMenu(0, minecraft.player.getInventory());
             WorkbenchEmiRecipeHandler handler = new WorkbenchEmiRecipeHandler();

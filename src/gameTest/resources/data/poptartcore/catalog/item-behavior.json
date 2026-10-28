@@ -1,0 +1,397 @@
+{
+  "recipes": [
+    {
+      "id": "bronze_sword",
+      "type": "minecraft:crafting_shaped",
+      "pattern": [
+        "B",
+        "B",
+        "S"
+      ],
+      "key": {
+        "B": {
+          "item": "poptartcore:bronze_ingot"
+        },
+        "S": {
+          "item": "minecraft:stick"
+        }
+      },
+      "result": {
+        "id": "poptartcore:bronze_sword",
+        "count": 1
+      }
+    },
+    {
+      "id": "bronze_pickaxe",
+      "type": "minecraft:crafting_shaped",
+      "pattern": [
+        "BBB",
+        " S ",
+        " S "
+      ],
+      "key": {
+        "B": {
+          "item": "poptartcore:bronze_ingot"
+        },
+        "S": {
+          "item": "minecraft:stick"
+        }
+      },
+      "result": {
+        "id": "poptartcore:bronze_pickaxe",
+        "count": 1
+      }
+    },
+    {
+      "id": "bronze_axe",
+      "type": "minecraft:crafting_shaped",
+      "pattern": [
+        "BB",
+        "BS",
+        " S"
+      ],
+      "key": {
+        "B": {
+          "item": "poptartcore:bronze_ingot"
+        },
+        "S": {
+          "item": "minecraft:stick"
+        }
+      },
+      "result": {
+        "id": "poptartcore:bronze_axe",
+        "count": 1
+      }
+    },
+    {
+      "id": "bronze_shovel",
+      "type": "minecraft:crafting_shaped",
+      "pattern": [
+        "B",
+        "S",
+        "S"
+      ],
+      "key": {
+        "B": {
+          "item": "poptartcore:bronze_ingot"
+        },
+        "S": {
+          "item": "minecraft:stick"
+        }
+      },
+      "result": {
+        "id": "poptartcore:bronze_shovel",
+        "count": 1
+      }
+    },
+    {
+      "id": "bronze_knife",
+      "type": "minecraft:crafting_shaped",
+      "pattern": [
+        "B",
+        "S"
+      ],
+      "key": {
+        "B": {
+          "item": "poptartcore:bronze_ingot"
+        },
+        "S": {
+          "item": "minecraft:stick"
+        }
+      },
+      "result": {
+        "id": "poptartcore:bronze_knife",
+        "count": 1
+      }
+    },
+    {
+      "id": "steel_sword",
+      "type": "minecraft:crafting_shaped",
+      "pattern": [
+        "I",
+        "I",
+        "S"
+      ],
+      "key": {
+        "I": {
+          "item": "poptartcore:steel_ingot"
+        },
+        "S": {
+          "item": "minecraft:stick"
+        }
+      },
+      "result": {
+        "id": "poptartcore:steel_sword",
+        "count": 1
+      }
+    },
+    {
+      "id": "steel_pickaxe",
+      "type": "minecraft:crafting_shaped",
+      "pattern": [
+        "III",
+        " S ",
+        " S "
+      ],
+      "key": {
+        "I": {
+          "item": "poptartcore:steel_ingot"
+        },
+        "S": {
+          "item": "minecraft:stick"
+        }
+      },
+      "result": {
+        "id": "poptartcore:steel_pickaxe",
+        "count": 1
+      }
+    },
+    {
+      "id": "steel_axe",
+      "type": "minecraft:crafting_shaped",
+      "pattern": [
+        "II",
+        "IS",
+        " S"
+      ],
+      "key": {
+        "I": {
+          "item": "poptartcore:steel_ingot"
+        },
+        "S": {
+          "item": "minecraft:stick"
+        }
+      },
+      "result": {
+        "id": "poptartcore:steel_axe",
+        "count": 1
+      }
+    },
+    {
+      "id": "steel_shovel",
+      "type": "minecraft:crafting_shaped",
+      "pattern": [
+        "I",
+        "S",
+        "S"
+      ],
+      "key": {
+        "I": {
+          "item": "poptartcore:steel_ingot"
+        },
+        "S": {
+          "item": "minecraft:stick"
+        }
+      },
+      "result": {
+        "id": "poptartcore:steel_shovel",
+        "count": 1
+      }
+    },
+    {
+      "id": "steel_knife",
+      "type": "minecraft:crafting_shaped",
+      "pattern": [
+        "I",
+        "S"
+      ],
+      "key": {
+        "I": {
+          "item": "poptartcore:steel_ingot"
+        },
+        "S": {
+          "item": "minecraft:stick"
+        }
+      },
+      "result": {
+        "id": "poptartcore:steel_knife",
+        "count": 1
+      }
+    },
+    {
+      "id": "bone_pick",
+      "type": "minecraft:crafting_shaped",
+      "pattern": [
+        "BBB",
+        " S ",
+        " S "
+      ],
+      "key": {
+        "B": {
+          "item": "minecraft:bone"
+        },
+        "S": {
+          "item": "minecraft:stick"
+        }
+      },
+      "result": {
+        "id": "poptartcore:bone_pick",
+        "count": 1
+      }
+    },
+    {
+      "id": "flint_axe",
+      "type": "minecraft:crafting_shaped",
+      "pattern": [
+        "FF",
+        "FS",
+        " S"
+      ],
+      "key": {
+        "F": {
+          "item": "minecraft:flint"
+        },
+        "S": {
+          "item": "minecraft:stick"
+        }
+      },
+      "result": {
+        "id": "poptartcore:flint_axe",
+        "count": 1
+      }
+    },
+    {
+      "id": "flint_shovel",
+      "type": "minecraft:crafting_shaped",
+      "pattern": [
+        "F",
+        "S",
+        "S"
+      ],
+      "key": {
+        "F": {
+          "item": "minecraft:flint"
+        },
+        "S": {
+          "item": "minecraft:stick"
+        }
+      },
+      "result": {
+        "id": "poptartcore:flint_shovel",
+        "count": 1
+      }
+    },
+    {
+      "id": "firestarter",
+      "type": "minecraft:crafting_shapeless",
+      "ingredients": [
+        {
+          "item": "minecraft:flint"
+        },
+        {
+          "item": "minecraft:stick"
+        }
+      ],
+      "result": {
+        "id": "poptartcore:firestarter",
+        "count": 1
+      }
+    },
+    {
+      "id": "redstone_circuit",
+      "type": "minecraft:crafting_shaped",
+      "pattern": [
+        " R ",
+        "RCR",
+        " R "
+      ],
+      "key": {
+        "C": {
+          "item": "minecraft:copper_ingot"
+        },
+        "R": {
+          "item": "minecraft:redstone"
+        }
+      },
+      "result": {
+        "id": "poptartcore:redstone_circuit",
+        "count": 1
+      }
+    },
+    {
+      "id": "repeating_crossbow",
+      "type": "minecraft:crafting_shapeless",
+      "ingredients": [
+        {
+          "item": "minecraft:crossbow"
+        },
+        {
+          "item": "poptartcore:redstone_circuit"
+        }
+      ],
+      "result": {
+        "id": "poptartcore:repeating_crossbow",
+        "count": 1
+      }
+    },
+    {
+      "type": "minecraft:crafting_shaped",
+      "category": "equipment",
+      "pattern": [
+        " I ",
+        "IFC",
+        " I "
+      ],
+      "key": {
+        "I": {
+          "item": "minecraft:iron_ingot"
+        },
+        "F": {
+          "item": "minecraft:campfire"
+        },
+        "C": {
+          "item": "farmersdelight:canvas"
+        }
+      },
+      "result": {
+        "id": "poptartcore:bee_smoker",
+        "count": 1
+      },
+      "id": "bee_smoker"
+    }
+  ],
+  "modelOverrides": [
+    {
+      "id": "repeating_crossbow",
+      "parent": "minecraft:item/crossbow",
+      "textures": {
+        "layer0": "poptartcore:item/crossbows/repeating_crossbow_standby"
+      },
+      "overrides": [
+        {
+          "predicate": {
+            "poptartcore:pulling": 1
+          },
+          "model": "poptartcore:item/crossbows/repeating_crossbow_pulling_0"
+        },
+        {
+          "predicate": {
+            "poptartcore:pulling": 1,
+            "poptartcore:pull": 0.58
+          },
+          "model": "poptartcore:item/crossbows/repeating_crossbow_pulling_1"
+        },
+        {
+          "predicate": {
+            "poptartcore:pulling": 1,
+            "poptartcore:pull": 1.0
+          },
+          "model": "poptartcore:item/crossbows/repeating_crossbow_pulling_2"
+        },
+        {
+          "predicate": {
+            "poptartcore:charged": 1
+          },
+          "model": "poptartcore:item/crossbows/repeating_crossbow_arrow"
+        },
+        {
+          "predicate": {
+            "poptartcore:charged": 1,
+            "poptartcore:firework": 1
+          },
+          "model": "minecraft:item/crossbow_firework"
+        }
+      ]
+    }
+  ]
+}

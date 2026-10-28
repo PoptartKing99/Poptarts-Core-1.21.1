@@ -2,8 +2,8 @@ package dev.poptartking.poptartcore.anvil;
 
 import com.mojang.authlib.GameProfile;
 import dev.poptartking.poptartcore.PoptartCore;
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
 import dev.poptartking.poptartcore.registry.PoptartToolItems;
+import dev.poptartking.poptartcore.registry.PoptartWorkstationBlocks;
 import java.util.UUID;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTest;
@@ -69,9 +69,15 @@ public final class AnvilWearGameTests {
         var player = new WearPlayer(helper);
         var pos = helper.absolutePos(new BlockPos(1, 2, 1));
         helper.getLevel().setBlockAndUpdate(pos.below(), Blocks.STONE.defaultBlockState());
-        Block normal = (primitive ? PoptartCoreBlocks.PRIMITIVE_ANVIL : PoptartCoreBlocks.ANVIL).get();
-        Block chipped = (primitive ? PoptartCoreBlocks.CHIPPED_PRIMITIVE_ANVIL : PoptartCoreBlocks.CHIPPED_ANVIL).get();
-        Block damaged = (primitive ? PoptartCoreBlocks.DAMAGED_PRIMITIVE_ANVIL : PoptartCoreBlocks.DAMAGED_ANVIL).get();
+        Block normal = (primitive ? PoptartWorkstationBlocks.PRIMITIVE_ANVIL : PoptartWorkstationBlocks.ANVIL).get();
+        Block chipped = (primitive
+                        ? PoptartWorkstationBlocks.CHIPPED_PRIMITIVE_ANVIL
+                        : PoptartWorkstationBlocks.CHIPPED_ANVIL)
+                .get();
+        Block damaged = (primitive
+                        ? PoptartWorkstationBlocks.DAMAGED_PRIMITIVE_ANVIL
+                        : PoptartWorkstationBlocks.DAMAGED_ANVIL)
+                .get();
         helper.getLevel().setBlockAndUpdate(pos, normal.defaultBlockState());
         var menu = new AnvilMenu(1, player.getInventory(), ContainerLevelAccess.create(helper.getLevel(), pos));
         menu.getSlot(2).set(new ItemStack(PoptartToolItems.HAMMER.get()));
@@ -139,14 +145,16 @@ public final class AnvilWearGameTests {
             RandomSource random = RandomSource.create(81923L);
             int worn = 0;
             for (int i = 0; i < 1000; i++) {
-                var state = (primitive ? PoptartCoreBlocks.PRIMITIVE_ANVIL : PoptartCoreBlocks.ANVIL)
+                var state = (primitive ? PoptartWorkstationBlocks.PRIMITIVE_ANVIL : PoptartWorkstationBlocks.ANVIL)
                         .get()
                         .defaultBlockState();
                 helper.getLevel().setBlockAndUpdate(pos, state);
                 ((AnvilBlock) state.getBlock()).maybeDamage(helper.getLevel(), pos, state, random);
                 if (helper.getLevel()
                         .getBlockState(pos)
-                        .is((primitive ? PoptartCoreBlocks.CHIPPED_PRIMITIVE_ANVIL : PoptartCoreBlocks.CHIPPED_ANVIL)
+                        .is((primitive
+                                        ? PoptartWorkstationBlocks.CHIPPED_PRIMITIVE_ANVIL
+                                        : PoptartWorkstationBlocks.CHIPPED_ANVIL)
                                 .get())) worn++;
             }
             int expected = primitive ? 250 : 50;

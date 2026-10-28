@@ -2,6 +2,7 @@ package dev.poptartking.poptartcore.registry;
 
 import com.mojang.serialization.Codec;
 import dev.poptartking.poptartcore.PoptartCore;
+import dev.poptartking.poptartcore.anvil.UpgradeDurability;
 import java.util.function.Supplier;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
@@ -16,6 +17,11 @@ public final class AnvilDataComponents {
             TYPES.register("upgrade_count", () -> DataComponentType.<Integer>builder()
                     .persistent(Codec.intRange(1, 3))
                     .networkSynchronized(ByteBufCodecs.VAR_INT)
+                    .build());
+    public static final Supplier<DataComponentType<UpgradeDurability>> UPGRADE_DURABILITY =
+            TYPES.register("upgrade_durability", () -> DataComponentType.<UpgradeDurability>builder()
+                    .persistent(UpgradeDurability.CODEC)
+                    .networkSynchronized(UpgradeDurability.STREAM_CODEC)
                     .build());
 
     private AnvilDataComponents() {}

@@ -106,10 +106,6 @@ public class CrucibleMenu extends AbstractContainerMenu {
         return Mth.clamp((float) data.get(6) / castingTimeTotal, 0.0F, 1.0F);
     }
 
-    public float getFluidProgress() {
-        return Mth.clamp((float) getFluidAmount() / CrucibleBlockEntity.TANK_CAPACITY, 0.0F, 1.0F);
-    }
-
     @Override
     public boolean stillValid(Player player) {
         return container.stillValid(player);

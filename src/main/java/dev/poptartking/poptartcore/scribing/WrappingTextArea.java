@@ -21,8 +21,6 @@ import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class WrappingTextArea extends AbstractWidget {
-    private static final int SELECTION_COLOUR = -2143592705;
-    private static final int PACKED_LINES = 2;
     private final Font font;
     private final int lineHeight;
     private final int maxLines;
@@ -43,10 +41,6 @@ public class WrappingTextArea extends AbstractWidget {
         this.maxLines = maxLines;
         this.maxLength = maxLength;
         this.rebuild();
-    }
-
-    public void setTextColour(int colour) {
-        this.textColour = colour;
     }
 
     public void setStyle(Style style) {

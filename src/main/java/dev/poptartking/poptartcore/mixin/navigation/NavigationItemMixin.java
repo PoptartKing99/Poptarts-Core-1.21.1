@@ -18,8 +18,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin({Item.class})
 public abstract class NavigationItemMixin {
     @Unique
-    private static final int WAYWARD$SELECTOR_DURATION = 72000;
-
     @Inject(
             method = {"use"},
             at = {@At("HEAD")},

@@ -1,7 +1,7 @@
 package dev.poptartking.poptartcore.rift;
 
 import dev.poptartking.poptartcore.PoptartCore;
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
+import dev.poptartking.poptartcore.registry.PoptartRiftBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -50,7 +50,7 @@ public final class RiftPortalEvents {
             Block.popResource(
                     level,
                     pos,
-                    new ItemStack(PoptartCoreBlocks.RIFT_SEDIMENT.item().get()));
+                    new ItemStack(PoptartRiftBlocks.RIFT_SEDIMENT.item().get()));
             level.playSound(null, pos, SoundEvents.GRINDSTONE_USE, SoundSource.BLOCKS, 0.7F, 1.2F);
             level.playSound(null, pos, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.BLOCKS, 0.35F, 0.7F);
 

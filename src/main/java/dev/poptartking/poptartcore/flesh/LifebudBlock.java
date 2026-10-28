@@ -29,9 +29,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public class LifebudBlock extends Block implements SimpleWaterloggedBlock {
     public static final BooleanProperty ROOTED = BooleanProperty.create("rooted");
     private static final VoxelShape SHAPE = Block.box(5.0, 0.0, 5.0, 11.0, 6.0, 11.0);
-    private static final int TENDRIL_CHANCE = 4;
-    private static final double TENDRILS_PER_EXPOSED_FLESH = 0.25;
-    private static final int TENDRIL_SAMPLES = 6;
     private static final Direction[] DIRECTIONS = Direction.values();
 
     public LifebudBlock(Properties properties) {

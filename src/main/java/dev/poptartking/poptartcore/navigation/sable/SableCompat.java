@@ -32,7 +32,6 @@ import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3d;
 
 public final class SableCompat implements WaypointAnchors.Tracker {
-    private static final int SWEEP_INTERVAL = 20;
 
     private SableCompat() {}
 

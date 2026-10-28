@@ -1,6 +1,0 @@
-// Run: .\gradlew.bat runClient -PnavigationTests -I scripts/wooden-bucket/visual-check.gradle
-// Uses only the existing isolated navigation-smoke world, captures drip frames, and exits.
-gradle.projectsEvaluated {
-    rootProject.sourceSets.navigationTest.java.srcDir(rootProject.file('scripts/wooden-bucket/client-check'))
-    rootProject.sourceSets.navigationTest.java.setIncludes(['**/TapperVisualSmoke.java'])
-}

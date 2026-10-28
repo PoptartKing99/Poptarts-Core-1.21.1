@@ -11,8 +11,6 @@ import net.minecraft.world.item.ItemStack;
 public record ScribingTextPayload(
         int containerId, ItemStack input, String name, String lore, boolean editName, boolean editLore)
         implements CustomPacketPayload {
-    public static final int MAX_NAME = 50;
-    public static final int MAX_LORE = 256;
     public static final Type<ScribingTextPayload> TYPE = new Type<>(PoptartCore.location("scribing_text"));
     public static final StreamCodec<RegistryFriendlyByteBuf, ScribingTextPayload> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.VAR_INT,

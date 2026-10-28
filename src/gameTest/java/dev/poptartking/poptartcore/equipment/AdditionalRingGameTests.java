@@ -118,6 +118,28 @@ public final class AdditionalRingGameTests {
     }
 
     @GameTest(template = "millstone_test", timeoutTicks = 40)
+    public static void afflictedPreservesInfiniteEffects(GameTestHelper helper) {
+        for (boolean equipped : new boolean[] {false, true}) {
+            var player = helper.makeMockPlayer(GameType.SURVIVAL);
+            if (equipped) {
+                new PlayerAccessoryHandler(player)
+                        .setStackInSlot(0, new ItemStack(PoptartRingItems.RING_OF_THE_AFFLICTED.get()));
+            }
+            for (var effect : java.util.List.of(MobEffects.POISON, MobEffects.MOVEMENT_SPEED)) {
+                player.addEffect(new MobEffectInstance(effect, MobEffectInstance.INFINITE_DURATION));
+                var instance = player.getEffect(effect);
+                helper.assertTrue(
+                        instance != null && instance.isInfiniteDuration(),
+                        "Infinite effects keep their duration with or without the ring");
+                helper.assertTrue(
+                        instance.tick(player, () -> {}) && instance.isInfiniteDuration(),
+                        "Infinite effects remain active after ticking");
+            }
+        }
+        helper.succeed();
+    }
+
+    @GameTest(template = "millstone_test", timeoutTicks = 40)
     public static void mercuryWitherUsesHungerBeforeDeath(GameTestHelper helper) {
         var player = helper.makeMockPlayer(GameType.SURVIVAL);
         new PlayerAccessoryHandler(player)

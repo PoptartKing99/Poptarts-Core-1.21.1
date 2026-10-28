@@ -3,7 +3,7 @@ package dev.poptartking.poptartcore.backpack;
 import dev.poptartking.poptartcore.PoptartCore;
 import dev.poptartking.poptartcore.equipment.AccessoryInventory;
 import dev.poptartking.poptartcore.equipment.UtilityWield;
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
+import dev.poptartking.poptartcore.registry.PoptartEquipmentBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -21,6 +21,79 @@ import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 @GameTestHolder(PoptartCore.MOD_ID)
 @PrefixGameTestTemplate(false)
 public final class BackpackAttachmentGameTests {
+    @GameTest(template = "millstone_test", timeoutTicks = 40)
+    public static void attachmentReadsRemainIndependentAndKeepSparseSlotIndices(GameTestHelper helper) {
+        var player = helper.makeMockPlayer(GameType.SURVIVAL);
+        for (boolean rucksack : new boolean[] {false, true}) {
+            var bag = bag(rucksack);
+            int last = BackpackAttachments.slots(rucksack) - 1;
+            var compass = new ItemStack(Items.COMPASS);
+            compass.set(DataComponents.CUSTOM_NAME, net.minecraft.network.chat.Component.literal("Original compass"));
+            BackpackAttachments.set(bag, last, compass);
+            AccessoryInventory.get(player).setStackInSlot(AccessoryInventory.BACK_SLOT, bag);
+            var before = bag.copy();
+            var contents = BackpackAttachments.contents(bag);
+            helper.assertTrue(
+                    BackpackAttachments.get(bag, 1).isEmpty()
+                            && BackpackAttachments.find(bag, "minecraft:compass") == last
+                            && BackpackAttachments.has(player, "minecraft:compass")
+                            && !BackpackAttachments.has(player, "minecraft:clock"),
+                    "Sparse attachment slots retain their indices and presence checks");
+            var read = BackpackAttachments.get(bag, last);
+            read.set(DataComponents.CUSTOM_NAME, net.minecraft.network.chat.Component.literal("Uncommitted edit"));
+            read.shrink(1);
+            var snapshotRead = BackpackAttachments.get(contents, last);
+            snapshotRead.setCount(3);
+            compass.set(DataComponents.CUSTOM_NAME, net.minecraft.network.chat.Component.literal("Changed input"));
+            helper.assertTrue(
+                    ItemStack.matches(bag, before)
+                            && BackpackAttachments.contents(bag) == contents
+                            && BackpackAttachments.get(bag, last).getCount() == 1
+                            && BackpackAttachments.get(bag, last)
+                                    .getHoverName()
+                                    .getString()
+                                    .equals("Original compass"),
+                    "Reading or editing detached stacks cannot change stored attachments or the source bag");
+            BackpackAttachments.set(bag, last, snapshotRead);
+            snapshotRead.setCount(7);
+            helper.assertTrue(
+                    BackpackAttachments.get(bag, last).getCount() == 3
+                            && BackpackAttachments.get(contents, last).getCount() == 1,
+                    "Explicit writes commit independently and preserve earlier snapshots");
+        }
+        helper.succeed();
+    }
+
+    @GameTest(template = "millstone_test", timeoutTicks = 40)
+    public static void attachmentQueriesKeepSlotLimitsAndHandleEmptyBags(GameTestHelper helper) {
+        var player = helper.makeMockPlayer(GameType.SURVIVAL);
+        helper.assertTrue(
+                BackpackAttachments.get(ItemStack.EMPTY, 4).isEmpty()
+                        && BackpackAttachments.find(ItemStack.EMPTY, "minecraft:clock") == -1
+                        && !BackpackAttachments.has(player, "minecraft:clock"),
+                "Missing bags have no attachments and absent trailing slots read empty");
+        for (boolean rucksack : new boolean[] {false, true}) {
+            var bag = bag(rucksack);
+            BackpackAttachments.set(bag, 4, new ItemStack(Items.CLOCK));
+            BackpackAttachments.set(bag, 1, new ItemStack(Items.SPYGLASS));
+            BackpackAttachments.set(bag, 2, new ItemStack(Items.SPYGLASS));
+            AccessoryInventory.get(player).setStackInSlot(AccessoryInventory.BACK_SLOT, bag);
+            helper.assertTrue(
+                    BackpackAttachments.find(bag, "minecraft:spyglass") == 1
+                            && BackpackAttachments.has(player, "minecraft:spyglass"),
+                    "Duplicate attachments still select the first matching slot");
+            helper.assertTrue(
+                    BackpackAttachments.has(player, "minecraft:clock") == rucksack
+                            && BackpackAttachments.find(bag, "minecraft:clock") == (rucksack ? 4 : -1),
+                    "Unused lower mounts on backpacks cannot activate saved attachments");
+            helper.assertTrue(
+                    BackpackAttachments.find(bag, "minecraft:air") == 0
+                            && BackpackAttachments.has(player, "minecraft:air"),
+                    "Empty-slot queries retain their existing behavior");
+        }
+        helper.succeed();
+    }
+
     @GameTest(template = "millstone_test", timeoutTicks = 40)
     public static void equalEntityIdsDoNotShareUseSessionsOrQuiverCaches(GameTestHelper helper) {
         var first = helper.makeMockPlayer(GameType.SURVIVAL);
@@ -113,7 +186,8 @@ public final class BackpackAttachmentGameTests {
     }
 
     private static ItemStack bag(boolean rucksack) {
-        var bag = new ItemStack(rucksack ? PoptartCoreBlocks.RUCKSACK.get() : PoptartCoreBlocks.BACKPACK.get());
+        var bag =
+                new ItemStack(rucksack ? PoptartEquipmentBlocks.RUCKSACK.get() : PoptartEquipmentBlocks.BACKPACK.get());
         BackpackMenu.contents(bag).setItem(rucksack ? 53 : 26, new ItemStack(Items.DIAMOND, 9));
         BackpackColors.set(bag, BackpackColors.Part.BODY, 0x123456);
         return bag;
@@ -127,7 +201,7 @@ public final class BackpackAttachmentGameTests {
             player.getInventory().setItem(0, stack);
             player.getInventory().setItem(1, new ItemStack(Items.COMPASS, 3));
             var pos = helper.absolutePos(new BlockPos(4, 2, 4));
-            var state = (rucksack ? PoptartCoreBlocks.RUCKSACK.get() : PoptartCoreBlocks.BACKPACK.get())
+            var state = (rucksack ? PoptartEquipmentBlocks.RUCKSACK.get() : PoptartEquipmentBlocks.BACKPACK.get())
                     .defaultBlockState();
             helper.getLevel().setBlockAndUpdate(pos, state);
             player.setPos(pos.getX() + .5, pos.getY(), pos.getZ() + 1);
@@ -181,7 +255,7 @@ public final class BackpackAttachmentGameTests {
             BackpackAttachments.set(stack, 1, new ItemStack(Items.SPYGLASS));
             if (rucksack) BackpackAttachments.set(stack, 0, new ItemStack(Items.RED_BANNER));
             var pos = helper.absolutePos(new BlockPos(4, 2, 4));
-            var state = (rucksack ? PoptartCoreBlocks.RUCKSACK.get() : PoptartCoreBlocks.BACKPACK.get())
+            var state = (rucksack ? PoptartEquipmentBlocks.RUCKSACK.get() : PoptartEquipmentBlocks.BACKPACK.get())
                     .defaultBlockState();
             helper.getLevel().setBlockAndUpdate(pos, state);
             var entity = (BackpackBlockEntity) helper.getLevel().getBlockEntity(pos);

@@ -57,17 +57,14 @@ public final class BackpackMenu extends ChestMenu {
             slots.set(i, restricted);
         }
         boolean rucksack = capacity == 54;
-        var mounted = new SimpleContainer(BackpackAttachments.slots(rucksack));
-        var installed = portable
-                ? BackpackAttachments.contents(source)
-                : contents instanceof BackpackBlockEntity entity ? entity.attachments() : ItemContainerContents.EMPTY;
-        installed.copyInto(mounted.getItems());
-        mounted.addListener(changed -> {
-            if (!stillValid(owner) || !canEditAttachments()) return;
-            var updated = ItemContainerContents.fromItems(mounted.getItems());
-            if (portable) source.set(BackpackAttachments.CONTENTS.get(), updated);
-            else if (contents instanceof BackpackBlockEntity entity) entity.setAttachments(updated);
-        });
+        Container mounted;
+        if (!portable && contents instanceof BackpackBlockEntity entity) {
+            mounted = entity.attachmentInventory();
+        } else {
+            var preview = new SimpleContainer(BackpackAttachments.slots(rucksack));
+            if (portable) BackpackAttachments.contents(source).copyInto(preview.getItems());
+            mounted = preview;
+        }
         for (int i = 0; i < mounted.getContainerSize(); i++) {
             final int mount = i;
             int x = -27;

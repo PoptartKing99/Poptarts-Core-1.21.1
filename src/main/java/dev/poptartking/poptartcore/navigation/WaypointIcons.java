@@ -8,8 +8,6 @@ import net.minecraft.resources.ResourceLocation;
 
 public final class WaypointIcons {
     public static final String DEFAULT = "default";
-    public static final String FOLDER = "waypoints/";
-    public static final String SELECTED_SUFFIX = "_selected";
     private static final Pattern NAME = Pattern.compile("[a-z0-9_]{1,64}");
     private static final Map<String, ResourceLocation[]> SPRITES = new HashMap<>();
 

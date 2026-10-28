@@ -7,7 +7,6 @@ import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.item.ItemEntity;
 
 public class CollectDropsGoal extends Goal {
-    public static final double SEEK_RANGE = 5.0d;
     private final WaxGolem golem;
     private ItemEntity target;
     private int patience;

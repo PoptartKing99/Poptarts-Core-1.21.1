@@ -1,7 +1,7 @@
 package dev.poptartking.poptartcore.anvil;
 
 import com.mojang.serialization.MapCodec;
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
+import dev.poptartking.poptartcore.registry.PoptartWorkstationBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
@@ -49,10 +49,10 @@ public class PrimitiveAnvilBlock extends AnvilBlock {
     @Override
     public void maybeDamage(Level level, BlockPos pos, BlockState state, RandomSource random) {
         if (random.nextFloat() >= 0.25F) return;
-        Block newBlock = state.is((Block) PoptartCoreBlocks.PRIMITIVE_ANVIL.get())
-                ? (Block) PoptartCoreBlocks.CHIPPED_PRIMITIVE_ANVIL.get()
-                : (state.is((Block) PoptartCoreBlocks.CHIPPED_PRIMITIVE_ANVIL.get())
-                        ? (Block) PoptartCoreBlocks.DAMAGED_PRIMITIVE_ANVIL.get()
+        Block newBlock = state.is((Block) PoptartWorkstationBlocks.PRIMITIVE_ANVIL.get())
+                ? (Block) PoptartWorkstationBlocks.CHIPPED_PRIMITIVE_ANVIL.get()
+                : (state.is((Block) PoptartWorkstationBlocks.CHIPPED_PRIMITIVE_ANVIL.get())
+                        ? (Block) PoptartWorkstationBlocks.DAMAGED_PRIMITIVE_ANVIL.get()
                         : null);
         if (newBlock == null) {
             level.setBlockAndUpdate(pos, (state.getValue(WATERLOGGED) ? Blocks.WATER : Blocks.AIR).defaultBlockState());

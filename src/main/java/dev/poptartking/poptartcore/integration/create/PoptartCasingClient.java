@@ -8,7 +8,7 @@ import com.simibubi.create.foundation.block.connected.CTModel;
 import com.simibubi.create.foundation.block.connected.CTSpriteShiftEntry;
 import com.simibubi.create.foundation.block.connected.CTSpriteShifter;
 import dev.poptartking.poptartcore.PoptartCore;
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
+import dev.poptartking.poptartcore.registry.PoptartCreateBlocks;
 import net.createmod.catnip.data.Couple;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -35,19 +35,19 @@ public final class PoptartCasingClient {
     public static void setup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
             registerFamily(
-                    PoptartCoreBlocks.INDUSTRIAL_PLATING.get(),
-                    PoptartCoreBlocks.INDUSTRIAL_ENCASED_SHAFT.get(),
-                    PoptartCoreBlocks.INDUSTRIAL_ENCASED_COGWHEEL.get(),
-                    PoptartCoreBlocks.INDUSTRIAL_ENCASED_LARGE_COGWHEEL.get(),
+                    PoptartCreateBlocks.INDUSTRIAL_PLATING.get(),
+                    PoptartCreateBlocks.INDUSTRIAL_ENCASED_SHAFT.get(),
+                    PoptartCreateBlocks.INDUSTRIAL_ENCASED_COGWHEEL.get(),
+                    PoptartCreateBlocks.INDUSTRIAL_ENCASED_LARGE_COGWHEEL.get(),
                     PLATING,
                     PLATING_CONNECTED,
                     COG_SIDE,
                     COG_SIDE_CONNECTED);
             registerFamily(
-                    PoptartCoreBlocks.TREATED_WOOD.get(),
-                    PoptartCoreBlocks.TREATED_WOOD_ENCASED_SHAFT.get(),
-                    PoptartCoreBlocks.TREATED_WOOD_ENCASED_COGWHEEL.get(),
-                    PoptartCoreBlocks.TREATED_WOOD_ENCASED_LARGE_COGWHEEL.get(),
+                    PoptartCreateBlocks.TREATED_WOOD.get(),
+                    PoptartCreateBlocks.TREATED_WOOD_ENCASED_SHAFT.get(),
+                    PoptartCreateBlocks.TREATED_WOOD_ENCASED_COGWHEEL.get(),
+                    PoptartCreateBlocks.TREATED_WOOD_ENCASED_LARGE_COGWHEEL.get(),
                     TREATED_WOOD,
                     TREATED_WOOD_CONNECTED,
                     TREATED_WOOD_COG_SIDE,

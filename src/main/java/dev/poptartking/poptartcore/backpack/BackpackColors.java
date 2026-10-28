@@ -2,7 +2,7 @@ package dev.poptartking.poptartcore.backpack;
 
 import com.mojang.serialization.Codec;
 import dev.poptartking.poptartcore.PoptartCore;
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
+import dev.poptartking.poptartcore.registry.PoptartEquipmentBlocks;
 import java.util.List;
 import java.util.function.Supplier;
 import net.minecraft.core.component.DataComponentType;
@@ -37,8 +37,8 @@ public final class BackpackColors {
     }
 
     public static boolean supports(ItemStack stack) {
-        return stack.is(PoptartCoreBlocks.BACKPACK.get().asItem())
-                || stack.is(PoptartCoreBlocks.RUCKSACK.get().asItem());
+        return stack.is(PoptartEquipmentBlocks.BACKPACK.get().asItem())
+                || stack.is(PoptartEquipmentBlocks.RUCKSACK.get().asItem());
     }
 
     public static boolean has(ItemStack stack, Part part) {

@@ -24,14 +24,8 @@ import net.neoforged.neoforge.network.PacketDistributor;
 @OnlyIn(Dist.CLIENT)
 public class ScribingTableScreen extends AbstractContainerScreen<ScribingTableMenu> {
     private static final ResourceLocation BACKGROUND = PoptartCore.location("textures/gui/scribing_table.png");
-    private static final int TEXT_X = 46;
-    private static final int TEXT_W = 85;
-    private static final int NAME_Y = 54;
-    private static final int LORE_Y = 70;
-    private static final int LINE_H = 9;
     private static final Style LORE_STYLE =
             Style.EMPTY.withColor(ChatFormatting.DARK_GRAY).withItalic(true);
-    private static final int HINT_COLOUR = -11184811;
     private static final Component NAME_HINT = Component.translatable("menu.hint.poptartcore.item_name");
     private static final Component LORE_HINT = Component.translatable("menu.hint.poptartcore.item_description");
     private EditBox nameField;

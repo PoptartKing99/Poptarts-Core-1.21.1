@@ -1,7 +1,6 @@
 package dev.poptartking.poptartcore.beekeeping;
 
 import dev.poptartking.poptartcore.registry.PoptartCoreSounds;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.WeakHashMap;
 import net.minecraft.core.BlockPos;
@@ -27,6 +26,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
@@ -41,7 +41,7 @@ public class BeeSmokerItem extends Item {
     private static final int PARTICLE_DURATION_TICKS = 30;
     private static final int RETRACT_DELAY_TICKS = 15;
     private static final Map<Bee, Integer> BEE_PROGRESS = new WeakHashMap<>();
-    private static final Map<Level, Map<Long, Integer>> HIVE_PROGRESS = new WeakHashMap<>();
+    private static final Map<BlockEntity, Integer> HIVE_PROGRESS = new WeakHashMap<>();
 
     public BeeSmokerItem(Properties properties) {
         super(properties);
@@ -165,23 +165,28 @@ public class BeeSmokerItem extends Item {
         if (blockHit.getType() == HitResult.Type.BLOCK
                 && level.getBlockState(blockHit.getBlockPos()).is(BlockTags.BEEHIVES)) {
             BlockPos pos = blockHit.getBlockPos();
-            Map<Long, Integer> progress = HIVE_PROGRESS.computeIfAbsent(level, key -> new HashMap<>());
-            int ticks = progress.merge(pos.asLong(), 1, Integer::sum);
-            if (ticks >= HIVE_SMOKE_TICKS) {
+            BlockEntity hive = level.getBlockEntity(pos);
+            if (hive == null) return;
+            if (SmokedHives.isSmoked(level, pos)) {
+                // Continued spray refreshes the effect without building progress for another application.
                 SmokedHives.mark(level, pos);
-                if (ticks == HIVE_SMOKE_TICKS) {
-                    level.playSound(null, pos, SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.BLOCKS, 0.3F, 1.0F);
-                    serverLevel.sendParticles(
-                            ParticleTypes.HEART,
-                            pos.getX() + 0.5D,
-                            pos.getY() + 0.65D,
-                            pos.getZ() + 0.5D,
-                            7,
-                            0.5D,
-                            0.5D,
-                            0.5D,
-                            0.02D);
-                }
+                return;
+            }
+            int ticks = HIVE_PROGRESS.merge(hive, 1, Integer::sum);
+            if (ticks == HIVE_SMOKE_TICKS) {
+                HIVE_PROGRESS.remove(hive);
+                SmokedHives.mark(level, pos);
+                level.playSound(null, pos, SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.BLOCKS, 0.3F, 1.0F);
+                serverLevel.sendParticles(
+                        ParticleTypes.HEART,
+                        pos.getX() + 0.5D,
+                        pos.getY() + 0.65D,
+                        pos.getZ() + 0.5D,
+                        7,
+                        0.5D,
+                        0.5D,
+                        0.5D,
+                        0.02D);
             }
         }
     }

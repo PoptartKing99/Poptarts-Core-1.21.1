@@ -1,7 +1,7 @@
 package dev.poptartking.poptartcore.spider;
 
 import dev.poptartking.poptartcore.PoptartCore;
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
+import dev.poptartking.poptartcore.registry.PoptartSpiderBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
@@ -18,7 +18,7 @@ public final class TemporaryCobwebGameTests {
     public static void bareHandEscapeTakesFortyTicksOnGroundOrSuspended(GameTestHelper helper) {
         var player = helper.makeMockPlayer(net.minecraft.world.level.GameType.SURVIVAL);
         var pos = helper.absolutePos(new BlockPos(2, 2, 2));
-        var state = PoptartCoreBlocks.TEMPORARY_COBWEB.get().defaultBlockState();
+        var state = PoptartSpiderBlocks.TEMPORARY_COBWEB.get().defaultBlockState();
         helper.getLevel().setBlockAndUpdate(pos, state);
         player.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, net.minecraft.world.item.ItemStack.EMPTY);
         for (boolean grounded : new boolean[] {true, false}) {
@@ -45,9 +45,10 @@ public final class TemporaryCobwebGameTests {
     public static void expiresWithoutChangingNaturalCobweb(GameTestHelper helper) {
         BlockPos temporary = new BlockPos(2, 2, 2);
         BlockPos natural = new BlockPos(4, 2, 2);
-        helper.setBlock(temporary, PoptartCoreBlocks.TEMPORARY_COBWEB.get());
+        helper.setBlock(temporary, PoptartSpiderBlocks.TEMPORARY_COBWEB.get());
         helper.setBlock(natural, Blocks.COBWEB);
-        helper.runAtTickTime(99, () -> helper.assertBlockPresent(PoptartCoreBlocks.TEMPORARY_COBWEB.get(), temporary));
+        helper.runAtTickTime(
+                99, () -> helper.assertBlockPresent(PoptartSpiderBlocks.TEMPORARY_COBWEB.get(), temporary));
         helper.runAtTickTime(101, () -> {
             helper.assertBlockPresent(Blocks.AIR, temporary);
             helper.assertBlockPresent(Blocks.COBWEB, natural);
@@ -58,7 +59,7 @@ public final class TemporaryCobwebGameTests {
     @GameTest(template = "millstone_test", timeoutTicks = 120)
     public static void expiryDoesNotRemoveReplacementBlock(GameTestHelper helper) {
         BlockPos pos = new BlockPos(2, 2, 2);
-        helper.setBlock(pos, PoptartCoreBlocks.TEMPORARY_COBWEB.get());
+        helper.setBlock(pos, PoptartSpiderBlocks.TEMPORARY_COBWEB.get());
         helper.runAtTickTime(20, () -> helper.setBlock(pos, Blocks.STONE));
         helper.runAtTickTime(101, () -> {
             helper.assertBlockPresent(Blocks.STONE, pos);

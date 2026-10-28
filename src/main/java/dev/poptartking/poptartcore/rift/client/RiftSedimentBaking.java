@@ -1,7 +1,7 @@
 package dev.poptartking.poptartcore.rift.client;
 
 import dev.poptartking.poptartcore.PoptartCore;
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
+import dev.poptartking.poptartcore.registry.PoptartRiftBlocks;
 import java.util.Map;
 import net.minecraft.client.renderer.block.BlockModelShaper;
 import net.minecraft.client.resources.model.BakedModel;
@@ -40,7 +40,7 @@ public final class RiftSedimentBaking {
             return;
         }
 
-        Block block = PoptartCoreBlocks.RIFT_SEDIMENT.get();
+        Block block = PoptartRiftBlocks.RIFT_SEDIMENT.get();
         ResourceLocation id = BuiltInRegistries.BLOCK.getKey(block);
         RiftSedimentModel connectedModel = new RiftSedimentModel(dot, arm);
         for (BlockState state : block.getStateDefinition().getPossibleStates()) {

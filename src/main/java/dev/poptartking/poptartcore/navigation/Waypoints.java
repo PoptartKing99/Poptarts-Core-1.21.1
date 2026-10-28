@@ -10,6 +10,7 @@ import java.util.function.Consumer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.GlobalPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.contents.PlainTextContents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -22,7 +23,6 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 public final class Waypoints {
-    public static final int REFRESH_INTERVAL = 10;
 
     private Waypoints() {}
 
@@ -42,16 +42,16 @@ public final class Waypoints {
 
     public static boolean refresh(ItemStack compass, ServerPlayer player) {
         CompassWaypoints current = get(compass);
-        List<Waypoint> rebuilt = new ArrayList<>();
         ServerLevel level = player.serverLevel();
+        LodestoneRegistry lodestones = LodestoneRegistry.get(level.getServer());
+        if (isCurrent(current, player, lodestones)) return false;
+        List<Waypoint> rebuilt = new ArrayList<>();
         rebuilt.add(new Waypoint(
                 GlobalPos.of(Level.OVERWORLD, level.getServer().overworld().getSharedSpawnPos()), WaypointType.ORIGIN));
         BlockPos respawn = player.getRespawnPosition();
         if (respawn != null) {
             rebuilt.add(new Waypoint(GlobalPos.of(player.getRespawnDimension(), respawn), WaypointType.RESPAWN));
         }
-
-        LodestoneRegistry lodestones = LodestoneRegistry.get(level.getServer());
 
         for (Waypoint waypoint : current.waypoints()) {
             if (waypoint.type() == WaypointType.LODESTONE) {
@@ -86,6 +86,55 @@ public final class Waypoints {
             NavigationComponents.write(compass, updated);
             return true;
         }
+    }
+
+    private static boolean isCurrent(CompassWaypoints current, ServerPlayer player, LodestoneRegistry lodestones) {
+        var waypoints = current.waypoints();
+        var level = player.serverLevel();
+        if (waypoints.isEmpty()
+                || !matchesPlain(
+                        waypoints.getFirst(),
+                        WaypointType.ORIGIN,
+                        GlobalPos.of(
+                                Level.OVERWORLD, level.getServer().overworld().getSharedSpawnPos()))) return false;
+        int next = 1;
+        var respawn = player.getRespawnPosition();
+        if (respawn != null) {
+            if (next >= waypoints.size()
+                    || !matchesPlain(
+                            waypoints.get(next++),
+                            WaypointType.RESPAWN,
+                            GlobalPos.of(player.getRespawnDimension(), respawn))) return false;
+        }
+        for (; next < waypoints.size(); next++) {
+            var waypoint = waypoints.get(next);
+            if (waypoint.type() != WaypointType.LODESTONE) return false;
+            var pos = lodestones.resolve(waypoint.pos());
+            var mark = lodestones.get(pos);
+            if (!pos.equals(waypoint.pos())
+                    || !mark.isNamed()
+                    || !lodestoneExists(level, pos)
+                    || waypoint.icon().isEmpty()
+                    || !waypoint.icon().get().equals(mark.icon())
+                    || waypoint.name().isEmpty()) return false;
+            var name = waypoint.name().get();
+            if (!(name.getContents() instanceof PlainTextContents.LiteralContents literal)
+                    || !literal.text().equals(mark.name())
+                    || !name.getStyle().isEmpty()
+                    || !name.getSiblings().isEmpty()) return false;
+        }
+        int selected = current.getSelectedIndex();
+        if (current.selected() != selected) return false;
+        for (int index = 0; index < selected; index++)
+            if (waypoints.get(index).isSameAs(waypoints.get(selected))) return false;
+        return true;
+    }
+
+    private static boolean matchesPlain(Waypoint waypoint, WaypointType type, GlobalPos pos) {
+        return waypoint.type() == type
+                && waypoint.pos().equals(pos)
+                && waypoint.name().isEmpty()
+                && waypoint.icon().isEmpty();
     }
 
     public static void onSelect(SelectWaypoint packet, ServerPlayer player) {

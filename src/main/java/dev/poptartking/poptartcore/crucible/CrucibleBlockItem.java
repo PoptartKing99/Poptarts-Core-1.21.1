@@ -1,6 +1,7 @@
 package dev.poptartking.poptartcore.crucible;
 
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
+import dev.poptartking.poptartcore.registry.PoptartRiftBlocks;
+import dev.poptartking.poptartcore.registry.PoptartWorkstationBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -49,7 +50,7 @@ public class CrucibleBlockItem extends BlockItem {
         if (!level.isClientSide) {
             level.setBlockAndUpdate(
                     pos,
-                    PoptartCoreBlocks.CRUCIBLE
+                    PoptartWorkstationBlocks.CRUCIBLE
                             .get()
                             .defaultBlockState()
                             .setValue(CrucibleBlock.CAMPFIRE_TYPE, campfireType)
@@ -64,7 +65,7 @@ public class CrucibleBlockItem extends BlockItem {
     private static CrucibleBlock.CampfireType campfireType(BlockState state) {
         if (state.is(Blocks.CAMPFIRE)) return CrucibleBlock.CampfireType.NORMAL;
         if (state.is(Blocks.SOUL_CAMPFIRE)) return CrucibleBlock.CampfireType.SOUL;
-        if (state.is(PoptartCoreBlocks.RIFT_CAMPFIRE.get())) return CrucibleBlock.CampfireType.RIFT;
+        if (state.is(PoptartRiftBlocks.RIFT_CAMPFIRE.get())) return CrucibleBlock.CampfireType.RIFT;
         if (BuiltInRegistries.BLOCK
                 .getKey(state.getBlock())
                 .equals(ResourceLocation.fromNamespaceAndPath("caverns_and_chasms", "cupric_campfire"))) {

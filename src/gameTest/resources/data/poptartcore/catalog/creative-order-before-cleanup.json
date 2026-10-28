@@ -1,0 +1,926 @@
+[
+  {
+    "id": "rift_torch",
+    "group": "BUILDING"
+  },
+  {
+    "id": "sconce_rift_torch",
+    "group": "BUILDING"
+  },
+  {
+    "id": "sconce_cupric_torch",
+    "group": "BUILDING"
+  },
+  {
+    "id": "rift_lantern",
+    "group": "BUILDING"
+  },
+  {
+    "id": "rift_campfire",
+    "group": "BUILDING"
+  },
+  {
+    "id": "rift_brazier",
+    "group": "BUILDING"
+  },
+  {
+    "id": "rift_stone_brazier",
+    "group": "BUILDING"
+  },
+  {
+    "id": "cupric_brazier",
+    "group": "BUILDING"
+  },
+  {
+    "id": "cupric_stone_brazier",
+    "group": "BUILDING"
+  },
+  {
+    "id": "sconce_torch_lever",
+    "group": "BUILDING"
+  },
+  {
+    "id": "sconce_rift_torch_lever",
+    "group": "BUILDING"
+  },
+  {
+    "id": "sconce_cupric_torch_lever",
+    "group": "BUILDING"
+  },
+  {
+    "id": "sconce_soul_torch_lever",
+    "group": "BUILDING"
+  },
+  {
+    "id": "rubber_block",
+    "group": "BUILDING"
+  },
+  {
+    "id": "industrial_plating",
+    "group": "BUILDING"
+  },
+  {
+    "id": "treated_wood",
+    "group": "BUILDING"
+  },
+  {
+    "id": "concrete",
+    "group": "BUILDING"
+  },
+  {
+    "id": "concrete_slab",
+    "group": "BUILDING"
+  },
+  {
+    "id": "concrete_stairs",
+    "group": "BUILDING"
+  },
+  {
+    "id": "concrete_powder",
+    "group": "BUILDING"
+  },
+  {
+    "id": "clinker_bricks",
+    "group": "BUILDING"
+  },
+  {
+    "id": "clinker_brick_slab",
+    "group": "BUILDING"
+  },
+  {
+    "id": "clinker_brick_stairs",
+    "group": "BUILDING"
+  },
+  {
+    "id": "clinker_brick_wall",
+    "group": "BUILDING"
+  },
+  {
+    "id": "clinker_tile",
+    "group": "BUILDING"
+  },
+  {
+    "id": "clinker_tile_slab",
+    "group": "BUILDING"
+  },
+  {
+    "id": "clinker_tile_stairs",
+    "group": "BUILDING"
+  },
+  {
+    "id": "clinker_tile_wall",
+    "group": "BUILDING"
+  },
+  {
+    "id": "mosaic_clinker_tile",
+    "group": "BUILDING"
+  },
+  {
+    "id": "chiseled_clinker_tile",
+    "group": "BUILDING"
+  },
+  {
+    "id": "clinker_pillar",
+    "group": "BUILDING"
+  },
+  {
+    "id": "bronze_bricks",
+    "group": "BUILDING"
+  },
+  {
+    "id": "chiseled_bronze_bricks",
+    "group": "BUILDING"
+  },
+  {
+    "id": "bronze_brick_slab",
+    "group": "BUILDING"
+  },
+  {
+    "id": "bronze_brick_stairs",
+    "group": "BUILDING"
+  },
+  {
+    "id": "bronze_brick_wall",
+    "group": "BUILDING"
+  },
+  {
+    "id": "aged_bronze_bricks",
+    "group": "BUILDING"
+  },
+  {
+    "id": "chiseled_aged_bronze_bricks",
+    "group": "BUILDING"
+  },
+  {
+    "id": "aged_bronze_brick_slab",
+    "group": "BUILDING"
+  },
+  {
+    "id": "aged_bronze_brick_stairs",
+    "group": "BUILDING"
+  },
+  {
+    "id": "aged_bronze_brick_wall",
+    "group": "BUILDING"
+  },
+  {
+    "id": "lead_bricks",
+    "group": "BUILDING"
+  },
+  {
+    "id": "chiseled_lead_bricks",
+    "group": "BUILDING"
+  },
+  {
+    "id": "lead_brick_slab",
+    "group": "BUILDING"
+  },
+  {
+    "id": "lead_brick_stairs",
+    "group": "BUILDING"
+  },
+  {
+    "id": "lead_brick_wall",
+    "group": "BUILDING"
+  },
+  {
+    "id": "mercury_bricks",
+    "group": "BUILDING"
+  },
+  {
+    "id": "chiseled_mercury_bricks",
+    "group": "BUILDING"
+  },
+  {
+    "id": "mercury_brick_slab",
+    "group": "BUILDING"
+  },
+  {
+    "id": "mercury_brick_stairs",
+    "group": "BUILDING"
+  },
+  {
+    "id": "mercury_brick_wall",
+    "group": "BUILDING"
+  },
+  {
+    "id": "steel_bricks",
+    "group": "BUILDING"
+  },
+  {
+    "id": "chiseled_steel_bricks",
+    "group": "BUILDING"
+  },
+  {
+    "id": "steel_brick_slab",
+    "group": "BUILDING"
+  },
+  {
+    "id": "steel_brick_stairs",
+    "group": "BUILDING"
+  },
+  {
+    "id": "steel_brick_wall",
+    "group": "BUILDING"
+  },
+  {
+    "id": "titanium_bricks",
+    "group": "BUILDING"
+  },
+  {
+    "id": "chiseled_titanium_bricks",
+    "group": "BUILDING"
+  },
+  {
+    "id": "titanium_brick_slab",
+    "group": "BUILDING"
+  },
+  {
+    "id": "titanium_brick_stairs",
+    "group": "BUILDING"
+  },
+  {
+    "id": "titanium_brick_wall",
+    "group": "BUILDING"
+  },
+  {
+    "id": "budding_flesh",
+    "group": "BUILDING"
+  },
+  {
+    "id": "living_flesh",
+    "group": "BUILDING"
+  },
+  {
+    "id": "living_flesh_tendrils",
+    "group": "BUILDING"
+  },
+  {
+    "id": "flesh_tendrils",
+    "group": "BUILDING"
+  },
+  {
+    "id": "rotten_flesh_tendrils",
+    "group": "BUILDING"
+  },
+  {
+    "id": "ulcer",
+    "group": "BUILDING"
+  },
+  {
+    "id": "flesh",
+    "group": "BUILDING"
+  },
+  {
+    "id": "rotten_flesh",
+    "group": "BUILDING"
+  },
+  {
+    "id": "wooden_bucket",
+    "group": "BUILDING"
+  },
+  {
+    "id": "workbench",
+    "group": "TOOLS"
+  },
+  {
+    "id": "scribing_table",
+    "group": "TOOLS"
+  },
+  {
+    "id": "quern",
+    "group": "TOOLS"
+  },
+  {
+    "id": "millstone",
+    "group": "TOOLS"
+  },
+  {
+    "id": "bloomery",
+    "group": "TOOLS"
+  },
+  {
+    "id": "blast_furnace",
+    "group": "TOOLS"
+  },
+  {
+    "id": "crucible",
+    "group": "TOOLS"
+  },
+  {
+    "id": "fluid_barrel",
+    "group": "TOOLS"
+  },
+  {
+    "id": "portable_engine",
+    "group": "TOOLS"
+  },
+  {
+    "id": "unfired_ingot_mould",
+    "group": "TOOLS"
+  },
+  {
+    "id": "ingot_mould",
+    "group": "TOOLS"
+  },
+  {
+    "id": "unfired_plate_mould",
+    "group": "TOOLS"
+  },
+  {
+    "id": "plate_mould",
+    "group": "TOOLS"
+  },
+  {
+    "id": "depth_meter",
+    "group": "TOOLS"
+  },
+  {
+    "id": "firestarter",
+    "group": "TOOLS"
+  },
+  {
+    "id": "scribing_tools",
+    "group": "TOOLS"
+  },
+  {
+    "id": "bone_pick",
+    "group": "TOOLS"
+  },
+  {
+    "id": "flint_axe",
+    "group": "TOOLS"
+  },
+  {
+    "id": "flint_shovel",
+    "group": "TOOLS"
+  },
+  {
+    "id": "hammer",
+    "group": "TOOLS"
+  },
+  {
+    "id": "sledgehammer",
+    "group": "TOOLS"
+  },
+  {
+    "id": "ruined_sword",
+    "group": "TOOLS"
+  },
+  {
+    "id": "ruined_pickaxe",
+    "group": "TOOLS"
+  },
+  {
+    "id": "ruined_axe",
+    "group": "TOOLS"
+  },
+  {
+    "id": "ruined_shovel",
+    "group": "TOOLS"
+  },
+  {
+    "id": "ruined_knife",
+    "group": "TOOLS"
+  },
+  {
+    "id": "bronze_sword",
+    "group": "TOOLS"
+  },
+  {
+    "id": "bronze_pickaxe",
+    "group": "TOOLS"
+  },
+  {
+    "id": "bronze_axe",
+    "group": "TOOLS"
+  },
+  {
+    "id": "bronze_shovel",
+    "group": "TOOLS"
+  },
+  {
+    "id": "bronze_knife",
+    "group": "TOOLS"
+  },
+  {
+    "id": "steel_sword",
+    "group": "TOOLS"
+  },
+  {
+    "id": "steel_pickaxe",
+    "group": "TOOLS"
+  },
+  {
+    "id": "steel_axe",
+    "group": "TOOLS"
+  },
+  {
+    "id": "steel_shovel",
+    "group": "TOOLS"
+  },
+  {
+    "id": "steel_knife",
+    "group": "TOOLS"
+  },
+  {
+    "id": "repeating_crossbow",
+    "group": "TOOLS"
+  },
+  {
+    "id": "bee_smoker",
+    "group": "TOOLS"
+  },
+  {
+    "id": "beehive_support",
+    "group": "TOOLS"
+  },
+  {
+    "id": "beehive_white_roof",
+    "group": "TOOLS"
+  },
+  {
+    "id": "beehive_light_gray_roof",
+    "group": "TOOLS"
+  },
+  {
+    "id": "beehive_gray_roof",
+    "group": "TOOLS"
+  },
+  {
+    "id": "beehive_black_roof",
+    "group": "TOOLS"
+  },
+  {
+    "id": "beehive_brown_roof",
+    "group": "TOOLS"
+  },
+  {
+    "id": "beehive_red_roof",
+    "group": "TOOLS"
+  },
+  {
+    "id": "beehive_orange_roof",
+    "group": "TOOLS"
+  },
+  {
+    "id": "beehive_yellow_roof",
+    "group": "TOOLS"
+  },
+  {
+    "id": "beehive_lime_roof",
+    "group": "TOOLS"
+  },
+  {
+    "id": "beehive_green_roof",
+    "group": "TOOLS"
+  },
+  {
+    "id": "beehive_cyan_roof",
+    "group": "TOOLS"
+  },
+  {
+    "id": "beehive_light_blue_roof",
+    "group": "TOOLS"
+  },
+  {
+    "id": "beehive_blue_roof",
+    "group": "TOOLS"
+  },
+  {
+    "id": "beehive_purple_roof",
+    "group": "TOOLS"
+  },
+  {
+    "id": "beehive_magenta_roof",
+    "group": "TOOLS"
+  },
+  {
+    "id": "beehive_pink_roof",
+    "group": "TOOLS"
+  },
+  {
+    "id": "lifegem",
+    "group": "TOOLS"
+  },
+  {
+    "id": "heart_crystal",
+    "group": "TOOLS"
+  },
+  {
+    "id": "anvil",
+    "group": "TOOLS"
+  },
+  {
+    "id": "chipped_anvil",
+    "group": "TOOLS"
+  },
+  {
+    "id": "damaged_anvil",
+    "group": "TOOLS"
+  },
+  {
+    "id": "primitive_anvil",
+    "group": "TOOLS"
+  },
+  {
+    "id": "chipped_primitive_anvil",
+    "group": "TOOLS"
+  },
+  {
+    "id": "damaged_primitive_anvil",
+    "group": "TOOLS"
+  },
+  {
+    "id": "raw_hide_helmet",
+    "group": "EQUIPMENT"
+  },
+  {
+    "id": "raw_hide_chestplate",
+    "group": "EQUIPMENT"
+  },
+  {
+    "id": "raw_hide_leggings",
+    "group": "EQUIPMENT"
+  },
+  {
+    "id": "beekeeper_helmet",
+    "group": "EQUIPMENT"
+  },
+  {
+    "id": "beekeeper_chestplate",
+    "group": "EQUIPMENT"
+  },
+  {
+    "id": "beekeeper_leggings",
+    "group": "EQUIPMENT"
+  },
+  {
+    "id": "beekeeper_boots",
+    "group": "EQUIPMENT"
+  },
+  {
+    "id": "mining_helmet",
+    "group": "EQUIPMENT"
+  },
+  {
+    "id": "steel_helmet",
+    "group": "EQUIPMENT"
+  },
+  {
+    "id": "steel_chestplate",
+    "group": "EQUIPMENT"
+  },
+  {
+    "id": "steel_leggings",
+    "group": "EQUIPMENT"
+  },
+  {
+    "id": "steel_boots",
+    "group": "EQUIPMENT"
+  },
+  {
+    "id": "backpack",
+    "group": "EQUIPMENT"
+  },
+  {
+    "id": "rucksack",
+    "group": "EQUIPMENT"
+  },
+  {
+    "id": "rusted_iron_ring",
+    "group": "EQUIPMENT"
+  },
+  {
+    "id": "dull_iron_ring",
+    "group": "EQUIPMENT"
+  },
+  {
+    "id": "moonlight_ring",
+    "group": "EQUIPMENT"
+  },
+  {
+    "id": "ring_of_warmth",
+    "group": "EQUIPMENT"
+  },
+  {
+    "id": "fireward_ring",
+    "group": "EQUIPMENT"
+  },
+  {
+    "id": "silvercat_ring",
+    "group": "EQUIPMENT"
+  },
+  {
+    "id": "tiny_horseshoe",
+    "group": "EQUIPMENT"
+  },
+  {
+    "id": "thorn_ring",
+    "group": "EQUIPMENT"
+  },
+  {
+    "id": "ring_of_the_afflicted",
+    "group": "EQUIPMENT"
+  },
+  {
+    "id": "mercury_gemstone_ring",
+    "group": "EQUIPMENT"
+  },
+  {
+    "id": "ancient_blessing",
+    "group": "EQUIPMENT"
+  },
+  {
+    "id": "sunlight_ring",
+    "group": "EQUIPMENT"
+  },
+  {
+    "id": "malevolent_ring",
+    "group": "EQUIPMENT"
+  },
+  {
+    "id": "magnet_ring",
+    "group": "EQUIPMENT"
+  },
+  {
+    "id": "bulwark_ring",
+    "group": "EQUIPMENT"
+  },
+  {
+    "id": "ring_of_the_rat",
+    "group": "EQUIPMENT"
+  },
+  {
+    "id": "sulfur_gemstone_ring",
+    "group": "EQUIPMENT"
+  },
+  {
+    "id": "ring_of_silence",
+    "group": "EQUIPMENT"
+  },
+  {
+    "id": "agility_cape",
+    "group": "EQUIPMENT"
+  },
+  {
+    "id": "tin_ore",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "deepslate_tin_ore",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "raw_tin",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "raw_tin_block",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "tin_ingot",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "tin_nugget",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "tin_block",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "lead_ore",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "deepslate_lead_ore",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "raw_lead",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "raw_lead_block",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "lead_ingot",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "lead_nugget",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "lead_block",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "magnetite",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "magnetite_block",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "cinnabar",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "cinnabar_block",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "mercury_droplet",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "mercury_ingot",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "mercury_block",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "silver_ore",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "deepslate_silver_ore",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "raw_silver",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "raw_silver_block",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "silver_ingot",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "silver_nugget",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "silver_block",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "titanium_ore",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "deepslate_titanium_ore",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "cassiterite_titanium_ore",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "cylindrite_titanium_ore",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "raw_titanium",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "raw_titanium_block",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "titanium_shard",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "titanium_ingot",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "titanium_nugget",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "titanium_plate",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "bronze_ingot",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "bronze_nugget",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "bronze_plate",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "bronze_block",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "iron_bloom",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "steel_ingot",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "steel_nugget",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "steel_plate",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "steel_block",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "coal_coke",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "coal_coke_block",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "wax",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "patina",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "wax_block",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "latex_bottle",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "rubber",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "redstone_circuit",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "audio_circuit",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "video_circuit",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "radio_circuit",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "amethyst_crystal",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "quartz_crystal",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "bone_ash",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "chthonic_calculus",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "rift_sediment",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "rift_sediment_block",
+    "group": "MATERIALS"
+  },
+  {
+    "id": "lifesalt",
+    "group": "MATERIALS"
+  }
+]

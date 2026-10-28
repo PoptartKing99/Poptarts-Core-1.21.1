@@ -2,7 +2,7 @@ package dev.poptartking.poptartcore.flesh;
 
 import com.farcr.nomansland.common.block.ToxicGasBlock;
 import com.mojang.serialization.Codec;
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
+import dev.poptartking.poptartcore.registry.PoptartFleshBlocks;
 import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.core.BlockPos;
@@ -20,18 +20,10 @@ import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
 
 public class FleshGeodeFeature extends Feature<FleshGeodeConfiguration> {
-    private static final double VERTICAL_SQUASH = 1.5625;
-    private static final double NOISE_AMPLITUDE = 1.0;
-    private static final double MAX_EXPOSED_FRACTION = 0.2;
     private static final byte NONE = 0;
-    private static final byte CAVITY = 1;
     private static final byte WATER = 2;
     private static final byte FLESH = 3;
-    private static final byte CASING = 4;
     private static final Direction[] DIRECTIONS = Direction.values();
-    private static final float TENDRIL_DENSITY = 0.12F;
-    private static final int ULCER_MIN = 1;
-    private static final int ULCER_EXTRA = 1;
 
     public FleshGeodeFeature(Codec<FleshGeodeConfiguration> codec) {
         super(codec);
@@ -178,7 +170,7 @@ public class FleshGeodeFeature extends Feature<FleshGeodeConfiguration> {
                     this.setBlock(
                             level,
                             budPos.below(),
-                            PoptartCoreBlocks.BUDDING_FLESH.get().defaultBlockState());
+                            PoptartFleshBlocks.BUDDING_FLESH.get().defaultBlockState());
                     BlockState budState = config.gem().get().getState(random, budPos);
                     if (budState.hasProperty(LifebudBlock.ROOTED)) {
                         budState = (BlockState) budState.setValue(
@@ -213,8 +205,8 @@ public class FleshGeodeFeature extends Feature<FleshGeodeConfiguration> {
                             for (Direction direction : DIRECTIONS) {
                                 BlockPos wall = cursor.relative(direction);
                                 BlockState wallState = level.getBlockState(wall);
-                                if (wallState.is(PoptartCoreBlocks.FLESH.get())
-                                        || wallState.is(PoptartCoreBlocks.LIVING_FLESH.get())) {
+                                if (wallState.is(PoptartFleshBlocks.FLESH.get())
+                                        || wallState.is(PoptartFleshBlocks.LIVING_FLESH.get())) {
                                     walls.add(wall);
                                     openings.add(direction.getOpposite());
                                 }

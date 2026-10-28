@@ -2,7 +2,7 @@ package dev.poptartking.poptartcore.bloomery;
 
 import com.mojang.serialization.MapCodec;
 import dev.poptartking.poptartcore.registry.PoptartCoreBlockEntities;
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
+import dev.poptartking.poptartcore.registry.PoptartWorkstationBlocks;
 import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -179,7 +179,10 @@ public class BloomeryBlock extends BaseEntityBlock {
             bloomery.clearContent();
             return level.setBlockAndUpdate(
                     pos,
-                    PoptartCoreBlocks.IRON_BLOOM.get().defaultBlockState().setValue(IronBloomBlock.BLOOMS, blooms));
+                    PoptartWorkstationBlocks.IRON_BLOOM
+                            .get()
+                            .defaultBlockState()
+                            .setValue(IronBloomBlock.BLOOMS, blooms));
         }
         return super.onDestroyedByPlayer(state, level, pos, player, willHarvest, fluid);
     }
@@ -189,7 +192,7 @@ public class BloomeryBlock extends BaseEntityBlock {
         if (!state.is(newState.getBlock()) && level.getBlockEntity(pos) instanceof BloomeryBlockEntity bloomery) {
             if (bloomery.isDone() && bloomery.bloomCount() > 0) {
                 int blooms = Mth.clamp(bloomery.bloomCount(), 1, IronBloomBlock.MAX_BLOOMS);
-                popResource(level, pos, new ItemStack(PoptartCoreBlocks.IRON_BLOOM.get(), blooms));
+                popResource(level, pos, new ItemStack(PoptartWorkstationBlocks.IRON_BLOOM.get(), blooms));
             } else if (bloomery.hasStarted()) {
                 ItemStack iron = bloomery.getItem(BloomeryBlockEntity.IRON_SLOT);
                 if (!iron.isEmpty()) {

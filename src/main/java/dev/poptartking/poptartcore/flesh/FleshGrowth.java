@@ -2,10 +2,10 @@ package dev.poptartking.poptartcore.flesh;
 
 import com.farcr.nomansland.common.block.ToxicGasBlock;
 import com.teamabnormals.caverns_and_chasms.core.registry.CCItems;
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
 import dev.poptartking.poptartcore.registry.PoptartCoreDataMaps;
 import dev.poptartking.poptartcore.registry.PoptartCoreSounds;
 import dev.poptartking.poptartcore.registry.PoptartCoreTags;
+import dev.poptartking.poptartcore.registry.PoptartFleshBlocks;
 import dev.poptartking.poptartcore.registry.PoptartMaterialItems;
 import it.unimi.dsi.fastutil.longs.LongIterator;
 import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
@@ -38,25 +38,6 @@ import org.jetbrains.annotations.Nullable;
 
 public final class FleshGrowth {
     private static final Direction[] DIRECTIONS = Direction.values();
-    private static final int GROWTH_MIN = 1;
-    private static final int GROWTH_EXTRA = 2;
-    private static final int GROWTH_RADIUS = 8;
-    private static final int GROWTH_REACH = 2;
-    private static final int GROWTH_ATTEMPTS = 24;
-    private static final int BALANCE_SAMPLES = 6;
-    private static final int GAS_MIN = 3;
-    private static final int GAS_EXTRA = 2;
-    private static final int QUICKSILVER_GAS_MIN = 8;
-    private static final int QUICKSILVER_GAS_EXTRA = 5;
-    private static final float ULCER_CHANCE = 0.1F;
-    private static final int TENDRIL_GROWTH = 2;
-    private static final int TENDRIL_ATTEMPTS = 8;
-    private static final int CLUSTER_LIMIT = 4;
-    private static final double CLUSTER_WEIGHT = 0.5;
-    private static final int GEODE_REACH = 16;
-    private static final int GEODE_LIMIT = 4096;
-    private static final float REVIVE_CHANCE = 0.8F;
-    private static final int WITHER_SPARED_RADIUS = 2;
 
     private FleshGrowth() {}
 
@@ -127,7 +108,7 @@ public final class FleshGrowth {
     }
 
     public static BlockState ulcer(Direction opening, BlockState replaced) {
-        return (BlockState) ((BlockState) ((UlcerBlock) PoptartCoreBlocks.ULCER.get())
+        return (BlockState) ((BlockState) ((UlcerBlock) PoptartFleshBlocks.ULCER.get())
                         .defaultBlockState()
                         .setValue(DirectionalBlock.FACING, opening))
                 .setValue(
@@ -244,12 +225,12 @@ public final class FleshGrowth {
     }
 
     public static Block tendrilsFor(BlockState support) {
-        if (support.is(PoptartCoreBlocks.LIVING_FLESH.get()) || support.is(PoptartCoreBlocks.BUDDING_FLESH.get())) {
-            return (Block) PoptartCoreBlocks.LIVING_FLESH_TENDRILS.get();
+        if (support.is(PoptartFleshBlocks.LIVING_FLESH.get()) || support.is(PoptartFleshBlocks.BUDDING_FLESH.get())) {
+            return (Block) PoptartFleshBlocks.LIVING_FLESH_TENDRILS.get();
         } else {
-            return support.is(PoptartCoreBlocks.ROTTEN_FLESH.get())
-                    ? (Block) PoptartCoreBlocks.ROTTEN_FLESH_TENDRILS.get()
-                    : (Block) PoptartCoreBlocks.FLESH_TENDRILS.get();
+            return support.is(PoptartFleshBlocks.ROTTEN_FLESH.get())
+                    ? (Block) PoptartFleshBlocks.ROTTEN_FLESH_TENDRILS.get()
+                    : (Block) PoptartFleshBlocks.FLESH_TENDRILS.get();
         }
     }
 
@@ -336,7 +317,7 @@ public final class FleshGrowth {
             BlockPos best = choose(level, options, organism, ulcer, false);
             if (best != null) {
                 level.setBlockAndUpdate(
-                        best, PoptartCoreBlocks.LIVING_FLESH.get().defaultBlockState());
+                        best, PoptartFleshBlocks.LIVING_FLESH.get().defaultBlockState());
                 retintAround(level, best);
                 FleshOrganisms.grew(level, best);
                 living.add(best);
@@ -403,7 +384,7 @@ public final class FleshGrowth {
 
     private static void collect(
             ServerLevel level, BlockPos pos, List<BlockPos> living, List<BlockPos> surface, RandomSource random) {
-        if (level.getBlockState(pos).is(PoptartCoreBlocks.LIVING_FLESH.get())) {
+        if (level.getBlockState(pos).is(PoptartFleshBlocks.LIVING_FLESH.get())) {
             living.add(pos);
             if (openSide(level, pos, random) != null) {
                 surface.add(pos);
@@ -481,28 +462,28 @@ public final class FleshGrowth {
 
     public static void revive(ServerLevel level, BlockPos pos, RandomSource random) {
         BlockState state = level.getBlockState(pos);
-        if (state.is(PoptartCoreBlocks.ROTTEN_FLESH.get())) {
-            level.setBlockAndUpdate(pos, PoptartCoreBlocks.FLESH.get().defaultBlockState());
+        if (state.is(PoptartFleshBlocks.ROTTEN_FLESH.get())) {
+            level.setBlockAndUpdate(pos, PoptartFleshBlocks.FLESH.get().defaultBlockState());
             retintAround(level, pos);
-        } else if (state.is(PoptartCoreBlocks.FLESH.get()) && random.nextFloat() < 0.8F) {
-            level.setBlockAndUpdate(pos, PoptartCoreBlocks.LIVING_FLESH.get().defaultBlockState());
+        } else if (state.is(PoptartFleshBlocks.FLESH.get()) && random.nextFloat() < 0.8F) {
+            level.setBlockAndUpdate(pos, PoptartFleshBlocks.LIVING_FLESH.get().defaultBlockState());
             retintAround(level, pos);
         }
     }
 
     public static void wither(ServerLevel level, BlockPos pos) {
         BlockState state = level.getBlockState(pos);
-        if (state.is(PoptartCoreBlocks.FLESH.get()) || state.is(PoptartCoreBlocks.LIVING_FLESH.get())) {
+        if (state.is(PoptartFleshBlocks.FLESH.get()) || state.is(PoptartFleshBlocks.LIVING_FLESH.get())) {
             int spared = 4;
 
             for (BlockPos near : BlockPos.betweenClosed(pos.offset(-2, -2, -2), pos.offset(2, 2, 2))) {
                 if (near.distSqr(pos) <= (double) spared
-                        && level.getBlockState(near).is(PoptartCoreBlocks.BUDDING_FLESH.get())) {
+                        && level.getBlockState(near).is(PoptartFleshBlocks.BUDDING_FLESH.get())) {
                     return;
                 }
             }
 
-            level.setBlockAndUpdate(pos, PoptartCoreBlocks.ROTTEN_FLESH.get().defaultBlockState());
+            level.setBlockAndUpdate(pos, PoptartFleshBlocks.ROTTEN_FLESH.get().defaultBlockState());
             retintAround(level, pos);
         }
     }

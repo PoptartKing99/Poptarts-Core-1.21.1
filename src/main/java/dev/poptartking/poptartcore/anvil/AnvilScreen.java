@@ -35,8 +35,8 @@ public class AnvilScreen extends ItemCombinerScreen<AnvilMenu> {
     }
 
     protected void slotClicked(Slot slot, int slotId, int mouseButton, ClickType type) {
-        if (slotId == 3 && slot != null && slot.hasItem() && !((AnvilMenu) this.menu).hasWorkingHammer()) {
-            this.warningUntil = Util.getMillis() + 1000L;
+        if (slotId == RESULT_SLOT && slot != null && slot.hasItem() && !((AnvilMenu) this.menu).hasWorkingHammer()) {
+            this.warningUntil = Util.getMillis() + WARNING_DURATION;
         }
 
         super.slotClicked(slot, slotId, mouseButton, type);
@@ -44,7 +44,8 @@ public class AnvilScreen extends ItemCombinerScreen<AnvilMenu> {
 
     protected void renderErrorIcon(GuiGraphics guiGraphics, int x, int y) {
         if (Util.getMillis() < this.warningUntil) {
-            this.drawTextBox(guiGraphics, Component.translatable("menu.message.poptartcore.needs_hammer"), 16736352);
+            this.drawTextBox(
+                    guiGraphics, Component.translatable("menu.message.poptartcore.needs_hammer"), WARNING_COLOUR);
         } else if (((AnvilMenu) this.menu).getSlot(0).hasItem()) {
             ItemStack stack = ((AnvilMenu) this.menu).getSlot(0).getItem();
             String message = "not_upgradeable";
@@ -62,7 +63,7 @@ public class AnvilScreen extends ItemCombinerScreen<AnvilMenu> {
                     guiGraphics,
                     Component.translatable("menu.message.poptartcore." + message)
                             .append(count),
-                    14737632);
+                    NORMAL_COLOUR);
         }
     }
 
@@ -70,9 +71,5 @@ public class AnvilScreen extends ItemCombinerScreen<AnvilMenu> {
         guiGraphics.blitSprite(TEXTBOX, this.leftPos + 51, this.topPos + 23, 100, 11);
         guiGraphics.drawString(
                 this.font, component, this.leftPos + 101 - this.font.width(component) / 2, this.topPos + 25, colour);
-    }
-
-    protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
-        super.renderLabels(guiGraphics, mouseX, mouseY);
     }
 }

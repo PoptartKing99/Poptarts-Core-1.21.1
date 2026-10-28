@@ -6,7 +6,9 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
@@ -17,18 +19,14 @@ public final class BackpackBlockEntity extends BaseContainerBlockEntity {
     private NonNullList<ItemStack> items;
     private net.minecraft.world.item.component.DyedItemColor dye;
     private Integer bodyDye;
-    private net.minecraft.world.item.component.ItemContainerContents attachments =
-            net.minecraft.world.item.component.ItemContainerContents.EMPTY;
+    private final SimpleContainer attachments;
 
     public net.minecraft.world.item.component.ItemContainerContents attachments() {
-        return attachments;
+        return net.minecraft.world.item.component.ItemContainerContents.fromItems(attachments.getItems());
     }
 
-    public void setAttachments(net.minecraft.world.item.component.ItemContainerContents contents) {
-        attachments = contents;
-        setChanged();
-        if (level != null && !level.isClientSide)
-            level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 2);
+    Container attachmentInventory() {
+        return attachments;
     }
 
     public int dyeColor(int index) {
@@ -58,8 +56,10 @@ public final class BackpackBlockEntity extends BaseContainerBlockEntity {
         super.applyImplicitComponents(input);
         dye = input.get(net.minecraft.core.component.DataComponents.DYED_COLOR);
         bodyDye = input.get(BackpackColors.BODY.get());
-        attachments = input.getOrDefault(
-                BackpackAttachments.CONTENTS.get(), net.minecraft.world.item.component.ItemContainerContents.EMPTY);
+        input.getOrDefault(
+                        BackpackAttachments.CONTENTS.get(),
+                        net.minecraft.world.item.component.ItemContainerContents.EMPTY)
+                .copyInto(attachments.getItems());
         if (level != null && !level.isClientSide)
             level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 2);
     }
@@ -69,7 +69,7 @@ public final class BackpackBlockEntity extends BaseContainerBlockEntity {
         super.collectImplicitComponents(builder);
         if (dye != null) builder.set(net.minecraft.core.component.DataComponents.DYED_COLOR, dye);
         if (bodyDye != null) builder.set(BackpackColors.BODY.get(), bodyDye);
-        builder.set(BackpackAttachments.CONTENTS.get(), attachments);
+        builder.set(BackpackAttachments.CONTENTS.get(), attachments());
     }
 
     @Override
@@ -105,12 +105,12 @@ public final class BackpackBlockEntity extends BaseContainerBlockEntity {
                 "Attachments",
                 net.minecraft.world.item.component.ItemContainerContents.CODEC
                         .encodeStart(
-                                registries.createSerializationContext(net.minecraft.nbt.NbtOps.INSTANCE), attachments)
+                                registries.createSerializationContext(net.minecraft.nbt.NbtOps.INSTANCE), attachments())
                         .getOrThrow());
     }
 
     private void loadAttachments(CompoundTag tag, HolderLookup.Provider registries) {
-        attachments = tag.contains("Attachments")
+        var contents = tag.contains("Attachments")
                 ? net.minecraft.world.item.component.ItemContainerContents.CODEC
                         .parse(
                                 registries.createSerializationContext(net.minecraft.nbt.NbtOps.INSTANCE),
@@ -118,6 +118,7 @@ public final class BackpackBlockEntity extends BaseContainerBlockEntity {
                         .result()
                         .orElse(net.minecraft.world.item.component.ItemContainerContents.EMPTY)
                 : net.minecraft.world.item.component.ItemContainerContents.EMPTY;
+        contents.copyInto(attachments.getItems());
     }
 
     private void loadColors(CompoundTag tag) {
@@ -130,6 +131,12 @@ public final class BackpackBlockEntity extends BaseContainerBlockEntity {
     public BackpackBlockEntity(BlockPos pos, BlockState state) {
         super(PoptartCoreBlockEntities.BACKPACK.get(), pos, state);
         items = NonNullList.withSize(getContainerSize(), ItemStack.EMPTY);
+        attachments = new SimpleContainer(BackpackAttachments.slots(getContainerSize() == 54));
+        attachments.addListener(container -> {
+            setChanged();
+            if (level != null && !level.isClientSide)
+                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 2);
+        });
     }
 
     @Override

@@ -1,6 +1,7 @@
 package dev.poptartking.poptartcore.catalog;
 
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Supplier;
 import net.minecraft.tags.TagKey;
@@ -15,6 +16,8 @@ public final class CatalogItemDefinition<T extends Item> implements Supplier<T> 
     private CatalogItemModel model = CatalogItemModel.GENERATED;
     private int fuelBurnTime = -1;
     private boolean showInCreativeTab = true;
+    private CreativeCatalogGroup creativeGroup;
+    private int creativeOrder = Integer.MAX_VALUE;
     private boolean frozen;
 
     CatalogItemDefinition(String id, DeferredItem<T> item) {
@@ -45,6 +48,29 @@ public final class CatalogItemDefinition<T extends Item> implements Supplier<T> 
 
     public boolean showInCreativeTab() {
         return showInCreativeTab;
+    }
+
+    public CreativeCatalogGroup creativeGroup() {
+        return creativeGroup != null ? creativeGroup : CreativeCatalogGroup.forItem(get());
+    }
+
+    public int creativeOrder() {
+        return creativeOrder;
+    }
+
+    /** Appends this entry to a category without maintaining a separate item list. */
+    public CatalogItemDefinition<T> creative(CreativeCatalogGroup group) {
+        return creative(group, Integer.MAX_VALUE);
+    }
+
+    /** Lower positions appear first within the category; equal positions keep registration order. */
+    public CatalogItemDefinition<T> creative(CreativeCatalogGroup group, int order) {
+        requireMutable();
+        Objects.requireNonNull(group, "Creative category");
+        if (order < 0) throw new IllegalArgumentException("Creative order cannot be negative");
+        this.creativeGroup = group;
+        this.creativeOrder = order;
+        return this;
     }
 
     public DeferredItem<T> item() {

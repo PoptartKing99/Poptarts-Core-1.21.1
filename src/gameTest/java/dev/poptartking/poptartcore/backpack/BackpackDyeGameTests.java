@@ -2,7 +2,7 @@ package dev.poptartking.poptartcore.backpack;
 
 import dev.poptartking.poptartcore.PoptartCore;
 import dev.poptartking.poptartcore.equipment.AccessoryInventory;
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
+import dev.poptartking.poptartcore.registry.PoptartEquipmentBlocks;
 import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -30,7 +30,7 @@ import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 @PrefixGameTestTemplate(false)
 public final class BackpackDyeGameTests {
     private static ItemStack pack() {
-        var stack = new ItemStack(PoptartCoreBlocks.BACKPACK.get());
+        var stack = new ItemStack(PoptartEquipmentBlocks.BACKPACK.get());
         stack.set(DataComponents.CUSTOM_NAME, net.minecraft.network.chat.Component.literal("Colored pack"));
         BackpackMenu.contents(stack).setItem(26, new ItemStack(Items.DIAMOND, 5));
         return stack;
@@ -39,7 +39,7 @@ public final class BackpackDyeGameTests {
     @GameTest(template = "millstone_test", timeoutTicks = 40)
     public static void bagsRejectCraftingDyesButColorScreenSupportsAllColors(GameTestHelper helper) {
         var recipe = new ArmorDyeRecipe(CraftingBookCategory.MISC);
-        for (var block : List.of(PoptartCoreBlocks.BACKPACK.get(), PoptartCoreBlocks.RUCKSACK.get())) {
+        for (var block : List.of(PoptartEquipmentBlocks.BACKPACK.get(), PoptartEquipmentBlocks.RUCKSACK.get())) {
             var colors = new java.util.HashSet<Integer>();
             for (var dye : DyeColor.values()) {
                 var stack = new ItemStack(block);

@@ -40,7 +40,6 @@ import org.jetbrains.annotations.Nullable;
 public class UlcerBlock extends DirectionalBlock implements SimpleWaterloggedBlock {
     public static final MapCodec<UlcerBlock> CODEC = simpleCodec(UlcerBlock::new);
     private static final Map<Direction, VoxelShape> SHAPES = buildShapes();
-    private static final int FEED_INTERVAL = 10;
 
     public UlcerBlock(Properties properties) {
         super(properties);

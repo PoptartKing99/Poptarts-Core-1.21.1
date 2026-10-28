@@ -3,7 +3,7 @@ package dev.poptartking.poptartcore.catalog.datagen;
 import dev.poptartking.poptartcore.PoptartCore;
 import dev.poptartking.poptartcore.catalog.CatalogBlockDefinition;
 import dev.poptartking.poptartcore.catalog.PoptartCatalog;
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
+import dev.poptartking.poptartcore.registry.PoptartWorkstationBlocks;
 import java.util.concurrent.CompletableFuture;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -26,6 +26,8 @@ public final class CatalogBlockTagProvider extends BlockTagsProvider {
         }
 
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
-                .add(PoptartCoreBlocks.MILLSTONE_STRUCTURAL.get(), PoptartCoreBlocks.MILLSTONE_ROTOR.get());
+                .add(
+                        PoptartWorkstationBlocks.MILLSTONE_STRUCTURAL.get(),
+                        PoptartWorkstationBlocks.MILLSTONE_ROTOR.get());
     }
 }

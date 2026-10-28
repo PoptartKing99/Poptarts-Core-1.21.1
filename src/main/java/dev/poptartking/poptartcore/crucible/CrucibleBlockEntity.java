@@ -1,5 +1,6 @@
 package dev.poptartking.poptartcore.crucible;
 
+import dev.poptartking.poptartcore.PoptartCore;
 import dev.poptartking.poptartcore.crucible.alloying.AlloyingRecipe;
 import dev.poptartking.poptartcore.crucible.alloying.AlloyingRecipeInput;
 import dev.poptartking.poptartcore.crucible.alloying.CrucibleIngredient;
@@ -11,9 +12,11 @@ import dev.poptartking.poptartcore.crucible.menu.CrucibleMenu;
 import dev.poptartking.poptartcore.registry.PoptartCoreBlockEntities;
 import dev.poptartking.poptartcore.registry.PoptartCoreRecipes;
 import dev.poptartking.poptartcore.registry.PoptartProcessingItems;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicLong;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -39,11 +42,17 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.TagsUpdatedEvent;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 
+@EventBusSubscriber(modid = PoptartCore.MOD_ID)
 public class CrucibleBlockEntity extends BaseContainerBlockEntity implements WorldlyContainer {
+
+    private static final AtomicLong ALLOYING_TAGS_VERSION = new AtomicLong();
 
     public static final int INPUT_SLOT_1 = 0;
     public static final int INPUT_SLOT_2 = 1;
@@ -59,7 +68,6 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity implements Wor
     protected final int fuelSlot;
     protected final int containerSlot;
     protected final int resultSlot;
-    protected final int tankCapacity;
     protected NonNullList<ItemStack> items;
     protected final FluidTank tank;
     private final CachedCheck<MeltingRecipeInput, MeltingRecipe> meltingCheck =
@@ -79,6 +87,13 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity implements Wor
     private int castingTimeTotal = CASTING_TIME;
     private ResourceLocation cookingRecipeId;
     private ResourceLocation castingRecipeId;
+    private AlloyingCache alloyingCache;
+
+    @SubscribeEvent
+    public static void tagsUpdated(TagsUpdatedEvent event) {
+        if (event.getUpdateCause() == TagsUpdatedEvent.UpdateCause.SERVER_DATA_LOAD)
+            ALLOYING_TAGS_VERSION.incrementAndGet();
+    }
 
     protected final ContainerData dataAccess = new ContainerData() {
 
@@ -129,7 +144,6 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity implements Wor
         this.fuelSlot = inputCount;
         this.containerSlot = inputCount + 1;
         this.resultSlot = inputCount + 2;
-        this.tankCapacity = tankCapacity;
         this.items = NonNullList.withSize(inputCount + 3, ItemStack.EMPTY);
         this.tank = new FluidTank(tankCapacity) {
             @Override
@@ -142,12 +156,10 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity implements Wor
     public static void serverTick(Level level, BlockPos pos, BlockState state, CrucibleBlockEntity blockEntity) {
         boolean changed = false;
 
-        RecipeHolder<AlloyingRecipe> alloyingHolder =
-                blockEntity.getAlloyingRecipe(level).orElse(null);
+        AlloyingCache alloying = blockEntity.getAlloyingState(level);
+        RecipeHolder<AlloyingRecipe> alloyingHolder = alloying.recipe();
         AlloyingRecipe alloyingRecipe = alloyingHolder == null ? null : alloyingHolder.value();
-        int alloyBatchLimit = alloyingHolder == null ? 0 : blockEntity.activeBatches(alloyingHolder.id());
-        AlloyPlan alloyPlan =
-                alloyingRecipe == null ? null : blockEntity.planAlloying(level, alloyingRecipe, alloyBatchLimit);
+        AlloyPlan alloyPlan = alloying.plan();
 
         MeltingRecipe meltingRecipe = null;
         RecipeHolder<MeltingRecipe> meltingHolder = null;
@@ -208,7 +220,7 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity implements Wor
                 blockEntity.cookTime = 0;
 
                 boolean completed = alloyPlan != null
-                        ? blockEntity.performAlloying(alloyingRecipe, alloyPlan)
+                        ? blockEntity.performAlloying(level, alloyingRecipe, alloyPlan)
                         : blockEntity.performMelting(meltingRecipe, meltingBatches);
                 blockEntity.cookingBatches = 0;
 
@@ -411,6 +423,46 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity implements Wor
         return cookTime > 0 && Objects.equals(cookingRecipeId, recipeId) ? cookingBatches : 0;
     }
 
+    private AlloyingCache getAlloyingState(Level level) {
+        // RecipeManager replaces its immutable recipe collection on reload, including melting-only changes.
+        var recipes = level.getRecipeManager().getRecipes();
+        long tagsVersion = ALLOYING_TAGS_VERSION.get();
+        ResourceLocation activeRecipe = cookTime > 0 ? cookingRecipeId : null;
+        int activeBatches = cookTime > 0 ? cookingBatches : 0;
+        var cached = alloyingCache;
+        if (cached != null
+                && cached.recipes() == recipes
+                && cached.tagsVersion() == tagsVersion
+                && Objects.equals(cached.activeRecipe(), activeRecipe)
+                && cached.activeBatches() == activeBatches
+                && cached.capacity() == tank.getCapacity()
+                && FluidStack.matches(cached.fluid(), tank.getFluid())
+                && ItemStack.matches(cached.output(), items.get(resultSlot))
+                && inputsMatch(cached.inputs())) return cached;
+
+        var recipe = getAlloyingRecipe(level).orElse(null);
+        var plan = recipe == null ? null : planAlloying(level, recipe.value(), activeBatches(recipe.id()));
+        alloyingCache = new AlloyingCache(
+                recipes,
+                tagsVersion,
+                activeRecipe,
+                activeBatches,
+                tank.getCapacity(),
+                getInputStacks().stream().map(ItemStack::copy).toList(),
+                tank.getFluid().copy(),
+                items.get(resultSlot).copy(),
+                recipe,
+                plan);
+        return alloyingCache;
+    }
+
+    private boolean inputsMatch(List<ItemStack> snapshot) {
+        // Containers and integrations can edit stacks in place without calling setChanged().
+        for (int slot = 0; slot < inputCount; slot++)
+            if (!ItemStack.matches(snapshot.get(slot), items.get(slot))) return false;
+        return true;
+    }
+
     private AlloyPlan planAlloying(Level level, AlloyingRecipe recipe, int requiredBatches) {
         FluidStack tankFluid = tank.getFluid();
         int availableBatches = recipe.batchCount(getAlloyingInput(), level);
@@ -581,7 +633,11 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity implements Wor
         return produced.getAmount() + fluidRemaining <= tank.getCapacity();
     }
 
-    private boolean performAlloying(AlloyingRecipe recipe, AlloyPlan plan) {
+    private boolean performAlloying(Level level, AlloyingRecipe recipe, AlloyPlan plan) {
+        // Rebuild at consumption so cached work never substitutes for checking the current materials and output.
+        plan = planAlloying(level, recipe, plan.batches());
+        if (plan == null) return false;
+
         if (plan.tankToDrain() > 0) {
             tank.drain(plan.tankToDrain(), IFluidHandler.FluidAction.EXECUTE);
         }
@@ -773,6 +829,7 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity implements Wor
     @Override
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
+        alloyingCache = null;
 
         items = NonNullList.withSize(getContainerSize(), ItemStack.EMPTY);
 
@@ -803,6 +860,18 @@ public class CrucibleBlockEntity extends BaseContainerBlockEntity implements Wor
             tank.setFluid(FluidStack.EMPTY);
         }
     }
+
+    private record AlloyingCache(
+            Collection<RecipeHolder<?>> recipes,
+            long tagsVersion,
+            ResourceLocation activeRecipe,
+            int activeBatches,
+            int capacity,
+            List<ItemStack> inputs,
+            FluidStack fluid,
+            ItemStack output,
+            RecipeHolder<AlloyingRecipe> recipe,
+            AlloyPlan plan) {}
 
     private record AlloyPlan(int batches, int tankToDrain, int[] itemsToConsume, FluidStack produced) {}
 }

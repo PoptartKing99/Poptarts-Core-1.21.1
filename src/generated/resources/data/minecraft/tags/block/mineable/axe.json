@@ -1,11 +1,28 @@
 {
   "values": [
+    "poptartcore:wooden_bucket",
     "poptartcore:rift_campfire",
     "poptartcore:treated_wood",
     "poptartcore:crucible",
     "poptartcore:fluid_barrel",
     "poptartcore:workbench",
     "poptartcore:scribing_table",
-    "poptartcore:wooden_bucket"
+    "poptartcore:beehive_support",
+    "poptartcore:beehive_white_roof",
+    "poptartcore:beehive_light_gray_roof",
+    "poptartcore:beehive_gray_roof",
+    "poptartcore:beehive_black_roof",
+    "poptartcore:beehive_brown_roof",
+    "poptartcore:beehive_red_roof",
+    "poptartcore:beehive_orange_roof",
+    "poptartcore:beehive_yellow_roof",
+    "poptartcore:beehive_lime_roof",
+    "poptartcore:beehive_green_roof",
+    "poptartcore:beehive_cyan_roof",
+    "poptartcore:beehive_light_blue_roof",
+    "poptartcore:beehive_blue_roof",
+    "poptartcore:beehive_purple_roof",
+    "poptartcore:beehive_magenta_roof",
+    "poptartcore:beehive_pink_roof"
   ]
 }

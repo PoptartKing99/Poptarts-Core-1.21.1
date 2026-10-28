@@ -1,0 +1,7 @@
+gradle.projectsEvaluated {
+    // Legacy opt-in smoke profile. Full verification is ./gradlew -PgameTests build, without this init script.
+    rootProject.sourceSets.gameTest.java.setIncludes([
+        '**/equipment/**', '**/waxgolem/**', '**/beekeeping/**', '**/flesh/**', '**/backpack/**', '**/rift/**', '**/anvil/**', '**/crossbow/**', '**/crucible/**'
+    ])
+    rootProject.logger.lifecycle('Running the reduced compatibility smoke suite; use -PgameTests build without -I for the full suite.')
+}

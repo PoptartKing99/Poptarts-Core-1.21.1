@@ -2,7 +2,7 @@ package dev.poptartking.poptartcore.backpack;
 
 import dev.poptartking.poptartcore.PoptartCore;
 import dev.poptartking.poptartcore.equipment.AccessoryInventory;
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
+import dev.poptartking.poptartcore.registry.PoptartEquipmentBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
@@ -23,7 +23,7 @@ import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 @PrefixGameTestTemplate(false)
 public final class RucksackGameTests {
     private static ItemStack loaded() {
-        var stack = new ItemStack(PoptartCoreBlocks.RUCKSACK.get());
+        var stack = new ItemStack(PoptartEquipmentBlocks.RUCKSACK.get());
         BackpackMenu.contents(stack).setItem(53, new ItemStack(Items.DIAMOND, 12));
         return stack;
     }
@@ -40,7 +40,7 @@ public final class RucksackGameTests {
         menu.getSlot(53).set(new ItemStack(Items.EMERALD, 9));
         helper.assertTrue(BackpackMenu.contents(stack).getItem(53).getCount() == 9, "Slot 54 edits persist");
         helper.assertTrue(
-                !menu.getSlot(0).mayPlace(new ItemStack(PoptartCoreBlocks.BACKPACK.get()))
+                !menu.getSlot(0).mayPlace(new ItemStack(PoptartEquipmentBlocks.BACKPACK.get()))
                         && !menu.getSlot(0).mayPlace(loaded()),
                 "Neither size can be nested");
         player.getInventory().setItem(0, ItemStack.EMPTY);
@@ -48,7 +48,7 @@ public final class RucksackGameTests {
         var visual =
                 BackpackVisual.renderStack(AccessoryInventory.get(player).getStackInSlot(AccessoryInventory.BACK_SLOT));
         helper.assertTrue(
-                visual.is(PoptartCoreBlocks.RUCKSACK.get().asItem()) && !visual.has(DataComponents.CONTAINER),
+                visual.is(PoptartEquipmentBlocks.RUCKSACK.get().asItem()) && !visual.has(DataComponents.CONTAINER),
                 "Rucksack model snapshot excludes private inventory");
         helper.succeed();
     }
@@ -70,7 +70,8 @@ public final class RucksackGameTests {
         helper.getLevel().setBlockAndUpdate(pos.above(), Blocks.AIR.defaultBlockState());
         helper.assertTrue(BackpackGestures.place(player, hit), "Place tall rucksack");
         helper.assertTrue(
-                helper.getLevel().getBlockState(pos.above()).is(PoptartCoreBlocks.RUCKSACK.get()), "Upper half exists");
+                helper.getLevel().getBlockState(pos.above()).is(PoptartEquipmentBlocks.RUCKSACK.get()),
+                "Upper half exists");
         var entity = (BackpackBlockEntity) helper.getLevel().getBlockEntity(pos);
         helper.assertTrue(
                 entity.getContainerSize() == 54 && entity.getItem(53).getCount() == 12,
@@ -90,7 +91,7 @@ public final class RucksackGameTests {
         var drops = helper.getLevel()
                 .getEntitiesOfClass(ItemEntity.class, new AABB(pos).inflate(2), entityItem -> entityItem
                         .getItem()
-                        .is(PoptartCoreBlocks.RUCKSACK.get().asItem()));
+                        .is(PoptartEquipmentBlocks.RUCKSACK.get().asItem()));
         helper.assertTrue(
                 drops.size() == 1
                         && BackpackMenu.contents(drops.getFirst().getItem())

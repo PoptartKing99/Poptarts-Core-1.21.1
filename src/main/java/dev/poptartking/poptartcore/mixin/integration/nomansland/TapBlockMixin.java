@@ -1,7 +1,7 @@
 package dev.poptartking.poptartcore.mixin.integration.nomansland;
 
 import com.farcr.nomansland.common.block.tap.TapBlock;
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
+import dev.poptartking.poptartcore.registry.PoptartWorkstationBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.LevelReader;
@@ -17,7 +17,7 @@ public class TapBlockMixin {
     private void poptartcore$allowFluidBarrelSupport(
             BlockState state, LevelReader level, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
         Direction supportDirection = state.getValue(TapBlock.FACING).getOpposite();
-        if (level.getBlockState(pos.relative(supportDirection)).is(PoptartCoreBlocks.FLUID_BARREL.get())) {
+        if (level.getBlockState(pos.relative(supportDirection)).is(PoptartWorkstationBlocks.FLUID_BARREL.get())) {
             cir.setReturnValue(true);
         }
     }

@@ -37,8 +37,15 @@ public final class ClockHud {
             if (dev.poptartking.poptartcore.depthmeter.DepthMeter.carries(player, Items.CLOCK)) {
                 long timeOfDay = getTimeOfDay(level);
                 Font font = minecraft.font;
-                Draw.sprite(graphics, timeOfDay < 12000L ? SUN : MOON, 4, 4, 12, 12);
-                Draw.text(graphics, font, Component.literal(format(timeOfDay)), 19, 4 + (12 - 9) / 2, -1, true);
+                Draw.sprite(graphics, timeOfDay < NIGHTFALL ? SUN : MOON, MARGIN, MARGIN, ICON, ICON);
+                Draw.text(
+                        graphics,
+                        font,
+                        Component.literal(format(timeOfDay)),
+                        MARGIN + ICON + GAP,
+                        MARGIN + (ICON - 9) / 2,
+                        -1,
+                        true);
             }
         }
     }
@@ -56,11 +63,11 @@ public final class ClockHud {
     }
 
     private static long getTimeOfDay(ClientLevel level) {
-        return Math.floorMod(level.getDayTime(), 24000L);
+        return Math.floorMod(level.getDayTime(), DAY_LENGTH);
     }
 
     public static String format(long timeOfDay) {
-        timeOfDay = Math.floorMod(timeOfDay, 24000L);
+        timeOfDay = Math.floorMod(timeOfDay, DAY_LENGTH);
         long hours = (timeOfDay / 1000L + 6L) % 24L;
         long minutes = timeOfDay % 1000L * 60L / 1000L;
         return String.format(java.util.Locale.ROOT, "%02d:%02d", hours, minutes);

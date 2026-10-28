@@ -1,7 +1,7 @@
 package dev.poptartking.poptartcore.millstone;
 
 import dev.poptartking.poptartcore.PoptartCore;
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
+import dev.poptartking.poptartcore.registry.PoptartWorkstationBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -37,7 +37,7 @@ public final class MillstoneGameTests {
     public static void processingAutomationAndTeardown(GameTestHelper helper) {
         BlockPos pos = helper.absolutePos(new BlockPos(3, 1, 3));
         var level = helper.getLevel();
-        level.setBlockAndUpdate(pos, PoptartCoreBlocks.MILLSTONE.get().defaultBlockState());
+        level.setBlockAndUpdate(pos, PoptartWorkstationBlocks.MILLSTONE.get().defaultBlockState());
         helper.runAfterDelay(4, () -> {
             for (BlockPos offset : MillstoneStructure.ALL_OFFSETS) {
                 helper.assertTrue(
@@ -98,8 +98,8 @@ public final class MillstoneGameTests {
                     net.minecraft.world.entity.item.ItemEntity.class,
                     new net.minecraft.world.phys.AABB(pos).inflate(2));
             int blockDrops = drops.stream()
-                    .filter(drop ->
-                            drop.getItem().is(PoptartCoreBlocks.MILLSTONE.get().asItem()))
+                    .filter(drop -> drop.getItem()
+                            .is(PoptartWorkstationBlocks.MILLSTONE.get().asItem()))
                     .mapToInt(drop -> drop.getItem().getCount())
                     .sum();
             int wheatDrops = drops.stream()
@@ -115,7 +115,7 @@ public final class MillstoneGameTests {
     public static void createMotorDrivesGrinding(GameTestHelper helper) {
         BlockPos pos = helper.absolutePos(new BlockPos(3, 1, 3));
         var level = helper.getLevel();
-        level.setBlockAndUpdate(pos, PoptartCoreBlocks.MILLSTONE.get().defaultBlockState());
+        level.setBlockAndUpdate(pos, PoptartWorkstationBlocks.MILLSTONE.get().defaultBlockState());
         helper.runAfterDelay(4, () -> {
             var motorBlock = BuiltInRegistries.BLOCK.get(
                     net.minecraft.resources.ResourceLocation.parse("create:creative_motor"));

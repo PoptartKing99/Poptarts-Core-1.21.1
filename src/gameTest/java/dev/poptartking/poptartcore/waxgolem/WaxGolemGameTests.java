@@ -1,8 +1,8 @@
 package dev.poptartking.poptartcore.waxgolem;
 
 import dev.poptartking.poptartcore.PoptartCore;
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
 import dev.poptartking.poptartcore.registry.PoptartCoreEntities;
+import dev.poptartking.poptartcore.registry.PoptartMaterialBlocks;
 import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -102,8 +102,8 @@ public final class WaxGolemGameTests {
         BlockPos lower = helper.absolutePos(relativeLower);
         BlockPos upper = lower.above();
         BlockPos head = upper.above();
-        level.setBlockAndUpdate(lower, PoptartCoreBlocks.WAX_BLOCK.get().defaultBlockState());
-        level.setBlockAndUpdate(upper, PoptartCoreBlocks.WAX_BLOCK.get().defaultBlockState());
+        level.setBlockAndUpdate(lower, PoptartMaterialBlocks.WAX_BLOCK.get().defaultBlockState());
+        level.setBlockAndUpdate(upper, PoptartMaterialBlocks.WAX_BLOCK.get().defaultBlockState());
         var player = helper.makeMockPlayer(GameType.SURVIVAL);
         BlockSnapshot snapshot = BlockSnapshot.create(level.dimension(), level, head);
         level.setBlockAndUpdate(head, Blocks.CARVED_PUMPKIN.defaultBlockState());

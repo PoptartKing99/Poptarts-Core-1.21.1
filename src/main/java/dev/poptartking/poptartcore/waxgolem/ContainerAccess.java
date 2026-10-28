@@ -15,8 +15,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
 public final class ContainerAccess {
-    public static final int OPEN_DELAY = 30;
-    public static final int FACE_REACH = 2;
 
     private ContainerAccess() {}
 

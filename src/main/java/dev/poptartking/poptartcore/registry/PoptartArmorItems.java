@@ -1,5 +1,7 @@
 package dev.poptartking.poptartcore.registry;
 
+import static dev.poptartking.poptartcore.catalog.CreativeCatalogGroup.EQUIPMENT;
+
 import dev.poptartking.poptartcore.beekeeping.BeekeeperArmorItem;
 import dev.poptartking.poptartcore.catalog.CatalogItemDefinition;
 import dev.poptartking.poptartcore.catalog.PoptartCatalog;
@@ -16,7 +18,8 @@ public final class PoptartArmorItems {
                             PoptartCoreArmorMaterials.MINING_ARMOR_MATERIAL,
                             ArmorItem.Type.HELMET,
                             new Item.Properties().durability(100)))
-            .tags(ItemTags.HEAD_ARMOR);
+            .tags(ItemTags.HEAD_ARMOR)
+            .creative(EQUIPMENT, 80);
 
     public static final CatalogItemDefinition<ArmorItem> RAW_HIDE_HELMET = PoptartCatalog.item(
                     "raw_hide_helmet",
@@ -24,7 +27,8 @@ public final class PoptartArmorItems {
                             PoptartCoreArmorMaterials.RAW_HIDE_ARMOR_MATERIAL,
                             ArmorItem.Type.HELMET,
                             new Item.Properties().durability(140)))
-            .tags(ItemTags.HEAD_ARMOR);
+            .tags(ItemTags.HEAD_ARMOR)
+            .creative(EQUIPMENT, 10);
 
     public static final CatalogItemDefinition<ArmorItem> RAW_HIDE_CHESTPLATE = PoptartCatalog.item(
                     "raw_hide_chestplate",
@@ -32,7 +36,8 @@ public final class PoptartArmorItems {
                             PoptartCoreArmorMaterials.RAW_HIDE_ARMOR_MATERIAL,
                             ArmorItem.Type.CHESTPLATE,
                             new Item.Properties().durability(140)))
-            .tags(ItemTags.CHEST_ARMOR);
+            .tags(ItemTags.CHEST_ARMOR)
+            .creative(EQUIPMENT, 20);
 
     public static final CatalogItemDefinition<ArmorItem> RAW_HIDE_LEGGINGS = PoptartCatalog.item(
                     "raw_hide_leggings",
@@ -40,30 +45,35 @@ public final class PoptartArmorItems {
                             PoptartCoreArmorMaterials.RAW_HIDE_ARMOR_MATERIAL,
                             ArmorItem.Type.LEGGINGS,
                             new Item.Properties().durability(140)))
-            .tags(ItemTags.LEG_ARMOR);
+            .tags(ItemTags.LEG_ARMOR)
+            .creative(EQUIPMENT, 30);
 
     public static final CatalogItemDefinition<BeekeeperArmorItem> BEEKEEPER_HELMET = PoptartCatalog.item(
                     "beekeeper_helmet",
                     () -> new BeekeeperArmorItem(ArmorItem.Type.HELMET, new Item.Properties().durability(200)))
             .withName("Beekeeper Hood")
-            .tags(ItemTags.HEAD_ARMOR);
+            .tags(ItemTags.HEAD_ARMOR)
+            .creative(EQUIPMENT, 40);
 
     public static final CatalogItemDefinition<BeekeeperArmorItem> BEEKEEPER_CHESTPLATE = PoptartCatalog.item(
                     "beekeeper_chestplate",
                     () -> new BeekeeperArmorItem(ArmorItem.Type.CHESTPLATE, new Item.Properties().durability(300)))
             .withName("Beekeeper Tunic")
-            .tags(ItemTags.CHEST_ARMOR);
+            .tags(ItemTags.CHEST_ARMOR)
+            .creative(EQUIPMENT, 50);
 
     public static final CatalogItemDefinition<BeekeeperArmorItem> BEEKEEPER_LEGGINGS = PoptartCatalog.item(
                     "beekeeper_leggings",
                     () -> new BeekeeperArmorItem(ArmorItem.Type.LEGGINGS, new Item.Properties().durability(260)))
             .withName("Beekeeper Skirt")
-            .tags(ItemTags.LEG_ARMOR);
+            .tags(ItemTags.LEG_ARMOR)
+            .creative(EQUIPMENT, 60);
 
     public static final CatalogItemDefinition<BeekeeperArmorItem> BEEKEEPER_BOOTS = PoptartCatalog.item(
                     "beekeeper_boots",
                     () -> new BeekeeperArmorItem(ArmorItem.Type.BOOTS, new Item.Properties().durability(200)))
-            .tags(ItemTags.FOOT_ARMOR);
+            .tags(ItemTags.FOOT_ARMOR)
+            .creative(EQUIPMENT, 70);
 
     public static final CatalogItemDefinition<ArmorItem> STEEL_HELMET = PoptartCatalog.item(
                     "steel_helmet",
@@ -71,7 +81,8 @@ public final class PoptartArmorItems {
                             PoptartCoreArmorMaterials.STEEL_ARMOR_MATERIAL,
                             ArmorItem.Type.HELMET,
                             new Item.Properties().durability(275)))
-            .tags(ItemTags.HEAD_ARMOR);
+            .tags(ItemTags.HEAD_ARMOR)
+            .creative(EQUIPMENT, 90);
 
     public static final CatalogItemDefinition<ArmorItem> STEEL_CHESTPLATE = PoptartCatalog.item(
                     "steel_chestplate",
@@ -79,7 +90,8 @@ public final class PoptartArmorItems {
                             PoptartCoreArmorMaterials.STEEL_ARMOR_MATERIAL,
                             ArmorItem.Type.CHESTPLATE,
                             new Item.Properties().durability(400)))
-            .tags(ItemTags.CHEST_ARMOR);
+            .tags(ItemTags.CHEST_ARMOR)
+            .creative(EQUIPMENT, 100);
 
     public static final CatalogItemDefinition<ArmorItem> STEEL_LEGGINGS = PoptartCatalog.item(
                     "steel_leggings",
@@ -87,7 +99,8 @@ public final class PoptartArmorItems {
                             PoptartCoreArmorMaterials.STEEL_ARMOR_MATERIAL,
                             ArmorItem.Type.LEGGINGS,
                             new Item.Properties().durability(375)))
-            .tags(ItemTags.LEG_ARMOR);
+            .tags(ItemTags.LEG_ARMOR)
+            .creative(EQUIPMENT, 110);
 
     public static final CatalogItemDefinition<ArmorItem> STEEL_BOOTS = PoptartCatalog.item(
                     "steel_boots",
@@ -95,7 +108,8 @@ public final class PoptartArmorItems {
                             PoptartCoreArmorMaterials.STEEL_ARMOR_MATERIAL,
                             ArmorItem.Type.BOOTS,
                             new Item.Properties().durability(325)))
-            .tags(ItemTags.FOOT_ARMOR);
+            .tags(ItemTags.FOOT_ARMOR)
+            .creative(EQUIPMENT, 120);
 
     public static void initialize() {}
 }

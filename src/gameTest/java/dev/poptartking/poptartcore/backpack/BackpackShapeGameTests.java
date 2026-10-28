@@ -1,7 +1,7 @@
 package dev.poptartking.poptartcore.backpack;
 
 import dev.poptartking.poptartcore.PoptartCore;
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
+import dev.poptartking.poptartcore.registry.PoptartEquipmentBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTest;
@@ -24,7 +24,8 @@ public final class BackpackShapeGameTests {
     public static void outlinesAndCollisionMatchPouchesInEveryDirection(GameTestHelper helper) {
         var level = helper.getLevel();
         var pos = helper.absolutePos(new BlockPos(4, 2, 4));
-        for (var block : java.util.List.of(PoptartCoreBlocks.BACKPACK.get(), PoptartCoreBlocks.RUCKSACK.get())) {
+        for (var block :
+                java.util.List.of(PoptartEquipmentBlocks.BACKPACK.get(), PoptartEquipmentBlocks.RUCKSACK.get())) {
             for (var facing : Direction.Plane.HORIZONTAL) {
                 var state = block.defaultBlockState().setValue(BackpackBlock.FACING, facing);
                 var outline = state.getShape(level, pos);
@@ -65,8 +66,10 @@ public final class BackpackShapeGameTests {
     @GameTest(template = "millstone_test", timeoutTicks = 40)
     public static void playerLandsOnRucksackSidePouch(GameTestHelper helper) {
         var pos = helper.absolutePos(new BlockPos(4, 2, 4));
-        var state =
-                PoptartCoreBlocks.RUCKSACK.get().defaultBlockState().setValue(BackpackBlock.FACING, Direction.SOUTH);
+        var state = PoptartEquipmentBlocks.RUCKSACK
+                .get()
+                .defaultBlockState()
+                .setValue(BackpackBlock.FACING, Direction.SOUTH);
         helper.getLevel().setBlockAndUpdate(pos, state);
         helper.getLevel().setBlockAndUpdate(pos.above(), state.setValue(RucksackBlock.HALF, DoubleBlockHalf.UPPER));
         var player = helper.makeMockPlayer(GameType.SURVIVAL);

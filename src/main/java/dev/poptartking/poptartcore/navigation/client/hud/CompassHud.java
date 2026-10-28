@@ -34,21 +34,6 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 
 public final class CompassHud {
-    private static final float OUTER_RADIUS = 96.0F;
-    private static final float INNER_RADIUS = 42.0F;
-    private static final int SPRITE_SIZE = 15;
-    private static final int SPRITE_HOT_SIZE = 20;
-    private static final float BAR_HALF_WIDTH = 100.0F;
-    private static final int BAR_MARKER_SIZE = 12;
-    private static final int BAR_TOP = 4;
-    private static final float BAR_HALF_SPAN = 70.0F;
-    private static final float TICK_SPACING = 15.0F;
-    private static final float FIT_REFERENCE_HEIGHT = 270.0F;
-    private static final int TAP_TICKS = 4;
-    private static final long PREDICTION_TICKS = 20L;
-    private static final long LOCAL_USE_TICKS = 2L;
-    private static final float OPEN_SPEED = 0.45F;
-    private static final float VISIBLE = 0.01F;
     private static final ResourceLocation DEATH_MARKER = PoptartCore.location("waypoints/default");
     private static float open;
     private static float shown;

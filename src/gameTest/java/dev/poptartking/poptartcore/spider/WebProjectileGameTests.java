@@ -1,8 +1,8 @@
 package dev.poptartking.poptartcore.spider;
 
 import dev.poptartking.poptartcore.PoptartCore;
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
 import dev.poptartking.poptartcore.registry.PoptartCoreEntities;
+import dev.poptartking.poptartcore.registry.PoptartSpiderBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTest;
@@ -54,7 +54,7 @@ public final class WebProjectileGameTests {
         helper.setBlock(floor.above(), Blocks.AIR);
         WebProjectile projectile = helper.spawn(PoptartCoreEntities.WEB_PROJECTILE.get(), new BlockPos(2, 4, 2));
         helper.runAtTickTime(30, () -> {
-            helper.assertBlockPresent(PoptartCoreBlocks.TEMPORARY_COBWEB.get(), floor.above());
+            helper.assertBlockPresent(PoptartSpiderBlocks.TEMPORARY_COBWEB.get(), floor.above());
             helper.assertBlockPresent(Blocks.STONE, floor);
             helper.assertTrue(projectile.isRemoved(), "Projectile remained after impact");
         });

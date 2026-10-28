@@ -3,7 +3,7 @@ package dev.poptartking.poptartcore.millstone;
 import com.mojang.serialization.MapCodec;
 import com.simibubi.create.api.equipment.goggles.IProxyHoveringInformation;
 import dev.poptartking.poptartcore.registry.PoptartCoreBlockEntities;
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
+import dev.poptartking.poptartcore.registry.PoptartWorkstationBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -17,7 +17,6 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -103,7 +102,7 @@ public class MillstoneBlock extends BaseEntityBlock implements IProxyHoveringInf
         }
         for (BlockPos offset : MillstoneStructure.BASE_OFFSETS) {
             BlockPos target = pos.offset(offset);
-            BlockState expected = (((PoptartCoreBlocks.MILLSTONE_STRUCTURAL.get())
+            BlockState expected = (((PoptartWorkstationBlocks.MILLSTONE_STRUCTURAL.get())
                                     .defaultBlockState()
                                     .setValue(MillstoneStructuralBlock.FACING, MillstoneStructure.baseFacing(offset)))
                             .setValue(MillstoneStructuralBlock.TOP, false))
@@ -114,11 +113,12 @@ public class MillstoneBlock extends BaseEntityBlock implements IProxyHoveringInf
         }
 
         BlockPos rotorPos = pos.offset(MillstoneStructure.ROTOR_OFFSET);
-        if (this.placePiece(level, pos, rotorPos, (PoptartCoreBlocks.MILLSTONE_ROTOR.get()).defaultBlockState())) {
+        if (this.placePiece(
+                level, pos, rotorPos, (PoptartWorkstationBlocks.MILLSTONE_ROTOR.get()).defaultBlockState())) {
             for (BlockPos offset : MillstoneStructure.TOP_OFFSETS) {
                 BlockPos target = pos.offset(offset);
                 BlockPos baseOffset = offset.below();
-                BlockState expected = (((PoptartCoreBlocks.MILLSTONE_STRUCTURAL.get())
+                BlockState expected = (((PoptartWorkstationBlocks.MILLSTONE_STRUCTURAL.get())
                                         .defaultBlockState()
                                         .setValue(
                                                 MillstoneStructuralBlock.FACING,
@@ -179,8 +179,8 @@ public class MillstoneBlock extends BaseEntityBlock implements IProxyHoveringInf
                     continue;
                 }
                 BlockState piece = level.getBlockState(target);
-                if (piece.is(PoptartCoreBlocks.MILLSTONE_STRUCTURAL.get())
-                        || piece.is(PoptartCoreBlocks.MILLSTONE_ROTOR.get())) {
+                if (piece.is(PoptartWorkstationBlocks.MILLSTONE_STRUCTURAL.get())
+                        || piece.is(PoptartWorkstationBlocks.MILLSTONE_ROTOR.get())) {
                     level.setBlockAndUpdate(target, Blocks.AIR.defaultBlockState());
                 }
             }
@@ -191,14 +191,5 @@ public class MillstoneBlock extends BaseEntityBlock implements IProxyHoveringInf
 
     public BlockPos getInformationSource(Level level, BlockPos pos, BlockState state) {
         return pos.offset(MillstoneStructure.ROTOR_OFFSET);
-    }
-
-    public static void destroyController(Level level, BlockPos controllerPos, Player player) {
-        if (!level.isClientSide) {
-            Block block = level.getBlockState(controllerPos).getBlock();
-            if (block instanceof MillstoneBlock) {
-                level.destroyBlock(controllerPos, player == null || !player.isCreative());
-            }
-        }
     }
 }

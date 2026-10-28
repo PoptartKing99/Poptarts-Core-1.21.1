@@ -1,7 +1,7 @@
 package dev.poptartking.poptartcore.backpack;
 
 import dev.poptartking.poptartcore.PoptartCore;
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
+import dev.poptartking.poptartcore.registry.PoptartEquipmentBlocks;
 import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
@@ -24,7 +24,7 @@ public final class BackpackColorGameTests {
     public static void rucksackColorsMenuKeepsAll54SlotsAndMixesBothParts(GameTestHelper helper) {
         var packets = new java.util.ArrayList<net.minecraft.network.protocol.Packet<?>>();
         var player = menuPlayer(helper, packets);
-        var stack = new ItemStack(PoptartCoreBlocks.RUCKSACK.get());
+        var stack = new ItemStack(PoptartEquipmentBlocks.RUCKSACK.get());
         stack.set(DataComponents.CUSTOM_NAME, net.minecraft.network.chat.Component.literal("My rucksack"));
         BackpackMenu.contents(stack).setItem(53, new ItemStack(Items.EMERALD, 12));
         player.getInventory().setItem(0, stack);
@@ -86,7 +86,7 @@ public final class BackpackColorGameTests {
         helper.getLevel().setBlockAndUpdate(pos, net.minecraft.world.level.block.Blocks.AIR.defaultBlockState());
         helper.getLevel()
                 .setBlockAndUpdate(pos.above(), net.minecraft.world.level.block.Blocks.AIR.defaultBlockState());
-        var stack = new ItemStack(PoptartCoreBlocks.RUCKSACK.get());
+        var stack = new ItemStack(PoptartEquipmentBlocks.RUCKSACK.get());
         BackpackMenu.contents(stack).setItem(53, new ItemStack(Items.DIAMOND, 9));
         BackpackColors.set(stack, BackpackColors.Part.BODY, 0x123456);
         BackpackColors.set(stack, BackpackColors.Part.FLAPS, 0x654321);
@@ -137,7 +137,7 @@ public final class BackpackColorGameTests {
 
     @GameTest(template = "millstone_test", timeoutTicks = 40)
     public static void colorPacketsRefreshBothColorsWithoutReloadingStorage(GameTestHelper helper) {
-        var state = PoptartCoreBlocks.BACKPACK.get().defaultBlockState();
+        var state = PoptartEquipmentBlocks.BACKPACK.get().defaultBlockState();
         var sender = new BackpackBlockEntity(BlockPos.ZERO, state);
         var receiver = new BackpackBlockEntity(BlockPos.ZERO, state);
         receiver.setItem(0, new ItemStack(Items.DIAMOND, 5));
@@ -192,7 +192,7 @@ public final class BackpackColorGameTests {
     }
 
     private static ItemStack pack() {
-        var stack = new ItemStack(PoptartCoreBlocks.BACKPACK.get());
+        var stack = new ItemStack(PoptartEquipmentBlocks.BACKPACK.get());
         stack.set(DataComponents.CUSTOM_NAME, net.minecraft.network.chat.Component.literal("My pack"));
         BackpackMenu.contents(stack).setItem(26, new ItemStack(Items.DIAMOND, 5));
         BackpackColors.set(stack, BackpackColors.Part.FLAPS, 0xAE0000);
@@ -221,7 +221,7 @@ public final class BackpackColorGameTests {
                         && second.getHoverName().getString().equals("My pack"),
                 "Storage and name survive");
         helper.assertTrue(
-                BackpackColors.supports(new ItemStack(PoptartCoreBlocks.RUCKSACK.get())), "Rucksack supported");
+                BackpackColors.supports(new ItemStack(PoptartEquipmentBlocks.RUCKSACK.get())), "Rucksack supported");
         helper.succeed();
     }
 
@@ -280,7 +280,7 @@ public final class BackpackColorGameTests {
     public static void placedColorsPersistAndDropsKeepBothParts(GameTestHelper helper) {
         var pos = helper.absolutePos(new BlockPos(4, 2, 4));
         helper.getLevel()
-                .setBlockAndUpdate(pos, PoptartCoreBlocks.BACKPACK.get().defaultBlockState());
+                .setBlockAndUpdate(pos, PoptartEquipmentBlocks.BACKPACK.get().defaultBlockState());
         var entity = (BackpackBlockEntity) helper.getLevel().getBlockEntity(pos);
         entity.applyComponentsFromItemStack(pack());
         entity.setColor(BackpackColors.Part.BODY, 0x123456);

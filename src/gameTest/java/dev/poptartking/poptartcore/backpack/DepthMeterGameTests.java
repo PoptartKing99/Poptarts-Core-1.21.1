@@ -3,7 +3,7 @@ package dev.poptartking.poptartcore.backpack;
 import dev.poptartking.poptartcore.PoptartCore;
 import dev.poptartking.poptartcore.depthmeter.DepthMeter;
 import dev.poptartking.poptartcore.equipment.AccessoryInventory;
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
+import dev.poptartking.poptartcore.registry.PoptartEquipmentBlocks;
 import dev.poptartking.poptartcore.registry.PoptartToolItems;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
@@ -52,7 +52,7 @@ public final class DepthMeterGameTests {
         h.assertTrue(DepthMeter.carries(player, meter), "Utility slot enables readout");
         accessories.setStackInSlot(AccessoryInventory.UTILITY_SLOT, ItemStack.EMPTY);
         for (boolean ruck : new boolean[] {false, true}) {
-            var bag = new ItemStack((ruck ? PoptartCoreBlocks.RUCKSACK : PoptartCoreBlocks.BACKPACK)
+            var bag = new ItemStack((ruck ? PoptartEquipmentBlocks.RUCKSACK : PoptartEquipmentBlocks.BACKPACK)
                     .get()
                     .asItem());
             for (int slot = 1; slot < BackpackAttachments.slots(ruck); slot++) {

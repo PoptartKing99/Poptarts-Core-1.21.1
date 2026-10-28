@@ -26,76 +26,76 @@ public class PoptartCoreBlockEntities {
                     BlockEntityType<?>, BlockEntityType<dev.poptartking.poptartcore.backpack.BackpackBlockEntity>>
             BACKPACK = BLOCK_ENTITIES.register("backpack", () -> BlockEntityType.Builder.of(
                     dev.poptartking.poptartcore.backpack.BackpackBlockEntity::new,
-                    PoptartCoreBlocks.BACKPACK.get(),
-                    PoptartCoreBlocks.RUCKSACK.get())
+                    PoptartEquipmentBlocks.BACKPACK.get(),
+                    PoptartEquipmentBlocks.RUCKSACK.get())
             .build(null));
 
     public static final DeferredHolder<
                     BlockEntityType<?>, BlockEntityType<dev.poptartking.poptartcore.anvil.AnvilBlockEntity>>
             ANVIL = BLOCK_ENTITIES.register("anvil", () -> BlockEntityType.Builder.of(
                     dev.poptartking.poptartcore.anvil.AnvilBlockEntity::new,
-                    PoptartCoreBlocks.ANVIL.get(),
-                    PoptartCoreBlocks.CHIPPED_ANVIL.get(),
-                    PoptartCoreBlocks.DAMAGED_ANVIL.get(),
-                    PoptartCoreBlocks.PRIMITIVE_ANVIL.get(),
-                    PoptartCoreBlocks.CHIPPED_PRIMITIVE_ANVIL.get(),
-                    PoptartCoreBlocks.DAMAGED_PRIMITIVE_ANVIL.get())
+                    PoptartWorkstationBlocks.ANVIL.get(),
+                    PoptartWorkstationBlocks.CHIPPED_ANVIL.get(),
+                    PoptartWorkstationBlocks.DAMAGED_ANVIL.get(),
+                    PoptartWorkstationBlocks.PRIMITIVE_ANVIL.get(),
+                    PoptartWorkstationBlocks.CHIPPED_PRIMITIVE_ANVIL.get(),
+                    PoptartWorkstationBlocks.DAMAGED_PRIMITIVE_ANVIL.get())
             .build(null));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<IngotPileBlockEntity>> INGOT_PILE =
             BLOCK_ENTITIES.register("ingot_pile", () -> BlockEntityType.Builder.of(
-                            IngotPileBlockEntity::new, PoptartCoreBlocks.INGOT_PILE.get())
+                            IngotPileBlockEntity::new, PoptartMaterialBlocks.INGOT_PILE.get())
                     .build(null));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MillstoneBlockEntity>> MILLSTONE =
             BLOCK_ENTITIES.register("millstone", () -> BlockEntityType.Builder.of(
-                            MillstoneBlockEntity::new, PoptartCoreBlocks.MILLSTONE.get())
+                            MillstoneBlockEntity::new, PoptartWorkstationBlocks.MILLSTONE.get())
                     .build(null));
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MillstoneRotorBlockEntity>> MILLSTONE_ROTOR =
             BLOCK_ENTITIES.register("millstone_rotor", () -> BlockEntityType.Builder.of(
-                            MillstoneRotorBlockEntity::new, PoptartCoreBlocks.MILLSTONE_ROTOR.get())
+                            MillstoneRotorBlockEntity::new, PoptartWorkstationBlocks.MILLSTONE_ROTOR.get())
                     .build(null));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<CrucibleBlockEntity>> CRUCIBLE =
             BLOCK_ENTITIES.register("crucible", () -> BlockEntityType.Builder.of(
-                            CrucibleBlockEntity::new, PoptartCoreBlocks.CRUCIBLE.get())
+                            CrucibleBlockEntity::new, PoptartWorkstationBlocks.CRUCIBLE.get())
                     .build(null));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BlastFurnaceBlockEntity>> BLAST_FURNACE =
             BLOCK_ENTITIES.register("blast_furnace", () -> BlockEntityType.Builder.of(
-                            BlastFurnaceBlockEntity::new, PoptartCoreBlocks.BLAST_FURNACE.get())
+                            BlastFurnaceBlockEntity::new, PoptartWorkstationBlocks.BLAST_FURNACE.get())
                     .build(null));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<FluidBarrelBlockEntity>> FLUID_BARREL =
             BLOCK_ENTITIES.register("fluid_barrel", () -> BlockEntityType.Builder.of(
-                            FluidBarrelBlockEntity::new, PoptartCoreBlocks.FLUID_BARREL.get())
+                            FluidBarrelBlockEntity::new, PoptartWorkstationBlocks.FLUID_BARREL.get())
                     .build(null));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BloomeryBlockEntity>> BLOOMERY =
             BLOCK_ENTITIES.register("bloomery", () -> BlockEntityType.Builder.of(
-                            BloomeryBlockEntity::new, PoptartCoreBlocks.BLOOMERY.get())
+                            BloomeryBlockEntity::new, PoptartWorkstationBlocks.BLOOMERY.get())
                     .build(null));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<WorkbenchBlockEntity>> WORKBENCH =
             BLOCK_ENTITIES.register("workbench", () -> BlockEntityType.Builder.of(
-                            WorkbenchBlockEntity::new, PoptartCoreBlocks.WORKBENCH.get())
+                            WorkbenchBlockEntity::new, PoptartWorkstationBlocks.WORKBENCH.get())
                     .build(null));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ScribingTableBlockEntity>> SCRIBING_TABLE =
             BLOCK_ENTITIES.register("scribing_table", () -> BlockEntityType.Builder.of(
-                            ScribingTableBlockEntity::new, PoptartCoreBlocks.SCRIBING_TABLE.get())
+                            ScribingTableBlockEntity::new, PoptartWorkstationBlocks.SCRIBING_TABLE.get())
                     .build(null));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<QuernBlockEntity>> QUERN =
-            BLOCK_ENTITIES.register(
-                    "quern", () -> BlockEntityType.Builder.of(QuernBlockEntity::new, PoptartCoreBlocks.QUERN.get())
-                            .build(null));
+            BLOCK_ENTITIES.register("quern", () -> BlockEntityType.Builder.of(
+                            QuernBlockEntity::new, PoptartWorkstationBlocks.QUERN.get())
+                    .build(null));
 
     public static final DeferredHolder<
                     BlockEntityType<?>, BlockEntityType<dev.poptartking.poptartcore.decoration.TreeTapperBlockEntity>>
             TREE_TAPPER = BLOCK_ENTITIES.register("tree_tapper", () -> BlockEntityType.Builder.of(
                     dev.poptartking.poptartcore.decoration.TreeTapperBlockEntity::new,
-                    PoptartCoreBlocks.WOODEN_BUCKET.get())
+                    PoptartWorkstationBlocks.WOODEN_BUCKET.get())
             .build(null));
 
     public static void register(IEventBus eventBus) {

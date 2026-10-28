@@ -1,0 +1,791 @@
+{
+  "blockTags": {
+    "minecraft:mineable/axe": [
+      "poptartcore:crucible",
+      "poptartcore:fluid_barrel",
+      "poptartcore:scribing_table",
+      "poptartcore:treated_wood",
+      "poptartcore:workbench"
+    ],
+    "minecraft:mineable/pickaxe": [
+      "poptartcore:aged_bronze_brick_slab",
+      "poptartcore:aged_bronze_brick_stairs",
+      "poptartcore:aged_bronze_brick_wall",
+      "poptartcore:aged_bronze_bricks",
+      "poptartcore:blast_furnace",
+      "poptartcore:bloomery",
+      "poptartcore:bronze_block",
+      "poptartcore:bronze_brick_slab",
+      "poptartcore:bronze_brick_stairs",
+      "poptartcore:bronze_brick_wall",
+      "poptartcore:bronze_bricks",
+      "poptartcore:cassiterite_titanium_ore",
+      "poptartcore:chiseled_aged_bronze_bricks",
+      "poptartcore:chiseled_bronze_bricks",
+      "poptartcore:chiseled_clinker_tile",
+      "poptartcore:chiseled_lead_bricks",
+      "poptartcore:chiseled_mercury_bricks",
+      "poptartcore:chiseled_steel_bricks",
+      "poptartcore:chiseled_titanium_bricks",
+      "poptartcore:clinker_brick_slab",
+      "poptartcore:clinker_brick_stairs",
+      "poptartcore:clinker_brick_wall",
+      "poptartcore:clinker_bricks",
+      "poptartcore:clinker_pillar",
+      "poptartcore:clinker_tile",
+      "poptartcore:clinker_tile_slab",
+      "poptartcore:clinker_tile_stairs",
+      "poptartcore:clinker_tile_wall",
+      "poptartcore:coal_coke_block",
+      "poptartcore:crucible",
+      "poptartcore:cylindrite_titanium_ore",
+      "poptartcore:deepslate_lead_ore",
+      "poptartcore:deepslate_silver_ore",
+      "poptartcore:deepslate_tin_ore",
+      "poptartcore:deepslate_titanium_ore",
+      "poptartcore:industrial_plating",
+      "poptartcore:iron_bloom",
+      "poptartcore:lead_block",
+      "poptartcore:lead_brick_slab",
+      "poptartcore:lead_brick_stairs",
+      "poptartcore:lead_brick_wall",
+      "poptartcore:lead_bricks",
+      "poptartcore:lead_ore",
+      "poptartcore:mercury_brick_slab",
+      "poptartcore:mercury_brick_stairs",
+      "poptartcore:mercury_brick_wall",
+      "poptartcore:mercury_bricks",
+      "poptartcore:millstone",
+      "poptartcore:millstone_rotor",
+      "poptartcore:millstone_structural",
+      "poptartcore:mosaic_clinker_tile",
+      "poptartcore:portable_engine",
+      "poptartcore:quern",
+      "poptartcore:raw_lead_block",
+      "poptartcore:raw_silver_block",
+      "poptartcore:raw_tin_block",
+      "poptartcore:raw_titanium_block",
+      "poptartcore:silver_block",
+      "poptartcore:silver_ore",
+      "poptartcore:steel_block",
+      "poptartcore:steel_brick_slab",
+      "poptartcore:steel_brick_stairs",
+      "poptartcore:steel_brick_wall",
+      "poptartcore:steel_bricks",
+      "poptartcore:tin_block",
+      "poptartcore:tin_ore",
+      "poptartcore:titanium_brick_slab",
+      "poptartcore:titanium_brick_stairs",
+      "poptartcore:titanium_brick_wall",
+      "poptartcore:titanium_bricks",
+      "poptartcore:titanium_ore"
+    ],
+    "minecraft:needs_iron_tool": [
+      "poptartcore:cassiterite_titanium_ore",
+      "poptartcore:cylindrite_titanium_ore",
+      "poptartcore:deepslate_lead_ore",
+      "poptartcore:deepslate_silver_ore",
+      "poptartcore:deepslate_titanium_ore",
+      "poptartcore:lead_block",
+      "poptartcore:lead_ore",
+      "poptartcore:raw_lead_block",
+      "poptartcore:raw_silver_block",
+      "poptartcore:raw_titanium_block",
+      "poptartcore:silver_block",
+      "poptartcore:silver_ore",
+      "poptartcore:steel_block",
+      "poptartcore:titanium_ore"
+    ],
+    "minecraft:needs_stone_tool": [
+      "poptartcore:bronze_block"
+    ],
+    "minecraft:walls": [
+      "poptartcore:aged_bronze_brick_wall",
+      "poptartcore:bronze_brick_wall",
+      "poptartcore:clinker_brick_wall",
+      "poptartcore:clinker_tile_wall",
+      "poptartcore:lead_brick_wall",
+      "poptartcore:mercury_brick_wall",
+      "poptartcore:steel_brick_wall",
+      "poptartcore:titanium_brick_wall"
+    ]
+  },
+  "blocks": {
+    "aged_bronze_brick_slab": {
+      "model": "SLAB",
+      "name": "Aged Bronze Plated Brick Slab"
+    },
+    "aged_bronze_brick_stairs": {
+      "model": "STAIRS",
+      "name": "Aged Bronze Plated Brick Stairs"
+    },
+    "aged_bronze_brick_wall": {
+      "model": "WALL",
+      "name": "Aged Bronze Plated Brick Wall"
+    },
+    "aged_bronze_bricks": {
+      "model": "SIMPLE",
+      "name": "Aged Bronze Plated Bricks"
+    },
+    "blast_furnace": {
+      "model": "EXTERNAL",
+      "name": "Blast Furnace"
+    },
+    "bloomery": {
+      "model": "EXTERNAL",
+      "name": "Bloomery"
+    },
+    "bronze_block": {
+      "model": "SIMPLE",
+      "name": "Block of Bronze",
+      "storage": {
+        "ingredient": "poptartcore:bronze_ingot",
+        "packing": "bronze_block",
+        "unpacking": "bronze_ingot_from_block"
+      }
+    },
+    "bronze_brick_slab": {
+      "model": "SLAB",
+      "name": "Bronze Plated Brick Slab"
+    },
+    "bronze_brick_stairs": {
+      "model": "STAIRS",
+      "name": "Bronze Plated Brick Stairs"
+    },
+    "bronze_brick_wall": {
+      "model": "WALL",
+      "name": "Bronze Plated Brick Wall"
+    },
+    "bronze_bricks": {
+      "model": "SIMPLE",
+      "name": "Bronze Plated Bricks"
+    },
+    "cassiterite_titanium_ore": {
+      "model": "SIMPLE",
+      "name": "Cassiterite Titanium Ore",
+      "oreDrop": "poptartcore:raw_titanium"
+    },
+    "chiseled_aged_bronze_bricks": {
+      "model": "SIMPLE",
+      "name": "Chiseled Aged Bronze Plated Bricks"
+    },
+    "chiseled_bronze_bricks": {
+      "model": "SIMPLE",
+      "name": "Chiseled Bronze Plated Bricks"
+    },
+    "chiseled_clinker_tile": {
+      "model": "SIMPLE",
+      "name": "Chiseled Clinker Tile"
+    },
+    "chiseled_lead_bricks": {
+      "model": "SIMPLE",
+      "name": "Chiseled Lead Plated Bricks"
+    },
+    "chiseled_mercury_bricks": {
+      "model": "SIMPLE",
+      "name": "Chiseled Mercury Plated Bricks"
+    },
+    "chiseled_steel_bricks": {
+      "model": "SIMPLE",
+      "name": "Chiseled Steel Plated Bricks"
+    },
+    "chiseled_titanium_bricks": {
+      "model": "SIMPLE",
+      "name": "Chiseled Titanium Plated Bricks"
+    },
+    "clinker_brick_slab": {
+      "model": "SLAB",
+      "name": "Clinker Brick Slab"
+    },
+    "clinker_brick_stairs": {
+      "model": "STAIRS",
+      "name": "Clinker Brick Stairs"
+    },
+    "clinker_brick_wall": {
+      "model": "WALL",
+      "name": "Clinker Brick Wall"
+    },
+    "clinker_bricks": {
+      "model": "RANDOM_CUBE",
+      "name": "Clinker Bricks",
+      "variants": 12
+    },
+    "clinker_pillar": {
+      "model": "EXTERNAL",
+      "name": "Clinker Pillar"
+    },
+    "clinker_tile": {
+      "model": "SIMPLE",
+      "name": "Clinker Tile"
+    },
+    "clinker_tile_slab": {
+      "model": "SLAB",
+      "name": "Clinker Tile Slab"
+    },
+    "clinker_tile_stairs": {
+      "model": "STAIRS",
+      "name": "Clinker Tile Stairs"
+    },
+    "clinker_tile_wall": {
+      "model": "WALL",
+      "name": "Clinker Tile Wall"
+    },
+    "coal_coke_block": {
+      "model": "SIMPLE",
+      "name": "Coal Coke Block",
+      "storage": {
+        "ingredient": "poptartcore:coal_coke",
+        "packing": "coal_coke_block",
+        "unpacking": "coal_coke_from_block"
+      }
+    },
+    "crucible": {
+      "model": "EXTERNAL",
+      "name": "Crucible"
+    },
+    "cylindrite_titanium_ore": {
+      "model": "SIMPLE",
+      "name": "Cylindrite Titanium Ore",
+      "oreDrop": "poptartcore:raw_titanium"
+    },
+    "deepslate_lead_ore": {
+      "model": "SIMPLE",
+      "name": "Deepslate Lead Ore",
+      "oreDrop": "poptartcore:raw_lead"
+    },
+    "deepslate_silver_ore": {
+      "model": "SIMPLE",
+      "name": "Deepslate Silver Ore",
+      "oreDrop": "poptartcore:raw_silver"
+    },
+    "deepslate_tin_ore": {
+      "model": "SIMPLE",
+      "name": "Deepslate Tin Ore",
+      "oreDrop": "poptartcore:raw_tin"
+    },
+    "deepslate_titanium_ore": {
+      "model": "SIMPLE",
+      "name": "Deepslate Titanium Ore",
+      "oreDrop": "poptartcore:raw_titanium"
+    },
+    "iron_bloom": {
+      "model": "EXTERNAL",
+      "name": "Iron Bloom"
+    },
+    "lead_block": {
+      "model": "SIMPLE",
+      "name": "Block of Lead",
+      "storage": {
+        "ingredient": "poptartcore:lead_ingot",
+        "packing": "lead_block",
+        "unpacking": "lead_ingots_from_block"
+      }
+    },
+    "lead_brick_slab": {
+      "model": "SLAB",
+      "name": "Lead Plated Brick Slab"
+    },
+    "lead_brick_stairs": {
+      "model": "STAIRS",
+      "name": "Lead Plated Brick Stairs"
+    },
+    "lead_brick_wall": {
+      "model": "WALL",
+      "name": "Lead Plated Brick Wall"
+    },
+    "lead_bricks": {
+      "model": "SIMPLE",
+      "name": "Lead Plated Bricks"
+    },
+    "lead_ore": {
+      "model": "SIMPLE",
+      "name": "Lead Ore",
+      "oreDrop": "poptartcore:raw_lead"
+    },
+    "mercury_brick_slab": {
+      "model": "SLAB",
+      "name": "Mercury Plated Brick Slab"
+    },
+    "mercury_brick_stairs": {
+      "model": "STAIRS",
+      "name": "Mercury Plated Brick Stairs"
+    },
+    "mercury_brick_wall": {
+      "model": "WALL",
+      "name": "Mercury Plated Brick Wall"
+    },
+    "mercury_bricks": {
+      "model": "SIMPLE",
+      "name": "Mercury Plated Bricks"
+    },
+    "millstone": {
+      "model": "EXTERNAL",
+      "name": "Millstone"
+    },
+    "mosaic_clinker_tile": {
+      "model": "RANDOM_BOTTOM_TOP",
+      "name": "Mosaic Clinker Tile",
+      "variants": 4
+    },
+    "portable_engine": {
+      "model": "EXTERNAL",
+      "name": "Portable Engine"
+    },
+    "quern": {
+      "model": "EXTERNAL",
+      "name": "Quern"
+    },
+    "raw_lead_block": {
+      "model": "SIMPLE",
+      "name": "Block of Raw Lead",
+      "storage": {
+        "ingredient": "poptartcore:raw_lead",
+        "packing": "raw_lead_block",
+        "unpacking": "raw_lead_from_block"
+      }
+    },
+    "raw_silver_block": {
+      "model": "SIMPLE",
+      "name": "Block of Raw Silver",
+      "storage": {
+        "ingredient": "poptartcore:raw_silver",
+        "packing": "raw_silver_block",
+        "unpacking": "raw_silver_from_block"
+      }
+    },
+    "raw_tin_block": {
+      "model": "SIMPLE",
+      "name": "Block of Raw Tin",
+      "storage": {
+        "ingredient": "poptartcore:raw_tin",
+        "packing": "raw_tin_block",
+        "unpacking": "raw_tin_from_block"
+      }
+    },
+    "raw_titanium_block": {
+      "model": "SIMPLE",
+      "name": "Block of Raw Titanium"
+    },
+    "silver_block": {
+      "model": "SIMPLE",
+      "name": "Block of Silver",
+      "storage": {
+        "ingredient": "poptartcore:silver_ingot",
+        "packing": "silver_block",
+        "unpacking": "silver_ingots_from_block"
+      }
+    },
+    "silver_ore": {
+      "model": "SIMPLE",
+      "name": "Silver Ore",
+      "oreDrop": "poptartcore:raw_silver"
+    },
+    "steel_block": {
+      "model": "SIMPLE",
+      "name": "Block of Steel",
+      "storage": {
+        "ingredient": "poptartcore:steel_ingot",
+        "packing": "steel_block",
+        "unpacking": "steel_ingot_from_block"
+      }
+    },
+    "steel_brick_slab": {
+      "model": "SLAB",
+      "name": "Steel Plated Brick Slab"
+    },
+    "steel_brick_stairs": {
+      "model": "STAIRS",
+      "name": "Steel Plated Brick Stairs"
+    },
+    "steel_brick_wall": {
+      "model": "WALL",
+      "name": "Steel Plated Brick Wall"
+    },
+    "steel_bricks": {
+      "model": "SIMPLE",
+      "name": "Steel Plated Bricks"
+    },
+    "tin_block": {
+      "model": "SIMPLE",
+      "name": "Block of Tin",
+      "storage": {
+        "ingredient": "poptartcore:tin_ingot",
+        "packing": "tin_block",
+        "unpacking": "tin_ingots_from_block"
+      }
+    },
+    "tin_ore": {
+      "model": "SIMPLE",
+      "name": "Tin Ore",
+      "oreDrop": "poptartcore:raw_tin"
+    },
+    "titanium_brick_slab": {
+      "model": "SLAB",
+      "name": "Titanium Plated Brick Slab"
+    },
+    "titanium_brick_stairs": {
+      "model": "STAIRS",
+      "name": "Titanium Plated Brick Stairs"
+    },
+    "titanium_brick_wall": {
+      "model": "WALL",
+      "name": "Titanium Plated Brick Wall"
+    },
+    "titanium_bricks": {
+      "model": "SIMPLE",
+      "name": "Titanium Plated Bricks"
+    },
+    "titanium_ore": {
+      "model": "SIMPLE",
+      "name": "Titanium Ore",
+      "oreDrop": "poptartcore:raw_titanium"
+    },
+    "wax_block": {
+      "model": "SIMPLE",
+      "name": "Wax Block",
+      "storage": {
+        "ingredient": "poptartcore:wax",
+        "packing": "wax_block",
+        "unpacking": "wax_from_block"
+      }
+    },
+    "workbench": {
+      "model": "EXTERNAL",
+      "name": "Workbench"
+    }
+  },
+  "forbiddenResourceNamespaces": [
+    "wayfarer_core"
+  ],
+  "fuels": {
+    "poptartcore:coal_coke": 3200,
+    "poptartcore:coal_coke_block": 28800
+  },
+  "itemTags": {
+    "farmersdelight:tools/knives": [
+      "poptartcore:bronze_knife",
+      "poptartcore:steel_knife"
+    ],
+    "minecraft:axes": [
+      "poptartcore:bronze_axe",
+      "poptartcore:flint_axe",
+      "poptartcore:steel_axe"
+    ],
+    "minecraft:chest_armor": [
+      "poptartcore:beekeeper_chestplate",
+      "poptartcore:raw_hide_chestplate",
+      "poptartcore:steel_chestplate"
+    ],
+    "minecraft:creeper_igniters": [
+      "poptartcore:firestarter"
+    ],
+    "minecraft:enchantable/crossbow": [
+      "poptartcore:repeating_crossbow"
+    ],
+    "minecraft:foot_armor": [
+      "poptartcore:beekeeper_boots",
+      "poptartcore:steel_boots"
+    ],
+    "minecraft:head_armor": [
+      "poptartcore:beekeeper_helmet",
+      "poptartcore:mining_helmet",
+      "poptartcore:raw_hide_helmet",
+      "poptartcore:steel_helmet"
+    ],
+    "minecraft:hoes": [
+      "poptartcore:bone_pick"
+    ],
+    "minecraft:leg_armor": [
+      "poptartcore:beekeeper_leggings",
+      "poptartcore:raw_hide_leggings",
+      "poptartcore:steel_leggings"
+    ],
+    "minecraft:pickaxes": [
+      "poptartcore:bone_pick",
+      "poptartcore:bronze_pickaxe",
+      "poptartcore:steel_pickaxe"
+    ],
+    "minecraft:shovels": [
+      "poptartcore:bronze_shovel",
+      "poptartcore:flint_shovel",
+      "poptartcore:steel_shovel"
+    ],
+    "minecraft:swords": [
+      "poptartcore:bronze_sword",
+      "poptartcore:steel_sword"
+    ]
+  },
+  "items": {
+    "bee_smoker": {
+      "model": "CUSTOM",
+      "name": "Bee Smoker"
+    },
+    "beekeeper_boots": {
+      "model": "GENERATED",
+      "name": "Beekeeper Boots"
+    },
+    "beekeeper_chestplate": {
+      "model": "GENERATED",
+      "name": "Beekeeper Tunic"
+    },
+    "beekeeper_helmet": {
+      "model": "GENERATED",
+      "name": "Beekeeper Hood"
+    },
+    "beekeeper_leggings": {
+      "model": "GENERATED",
+      "name": "Beekeeper Skirt"
+    },
+    "bone_pick": {
+      "model": "HANDHELD",
+      "name": "Bone Pick"
+    },
+    "bronze_axe": {
+      "model": "HANDHELD",
+      "name": "Bronze Axe"
+    },
+    "bronze_ingot": {
+      "model": "GENERATED",
+      "name": "Bronze Ingot"
+    },
+    "bronze_knife": {
+      "model": "HANDHELD",
+      "name": "Bronze Knife"
+    },
+    "bronze_nugget": {
+      "model": "GENERATED",
+      "name": "Bronze Nugget"
+    },
+    "bronze_pickaxe": {
+      "model": "HANDHELD",
+      "name": "Bronze Pickaxe"
+    },
+    "bronze_plate": {
+      "model": "GENERATED",
+      "name": "Bronze Plate"
+    },
+    "bronze_shovel": {
+      "model": "HANDHELD",
+      "name": "Bronze Shovel"
+    },
+    "bronze_sword": {
+      "model": "HANDHELD",
+      "name": "Bronze Sword"
+    },
+    "coal_coke": {
+      "model": "GENERATED",
+      "name": "Coal Coke"
+    },
+    "firestarter": {
+      "model": "GENERATED",
+      "name": "Firestarter"
+    },
+    "flint_axe": {
+      "model": "HANDHELD",
+      "name": "Flint Axe"
+    },
+    "flint_shovel": {
+      "model": "HANDHELD",
+      "name": "Flint Shovel"
+    },
+    "hammer": {
+      "model": "HANDHELD",
+      "name": "Hammer"
+    },
+    "ingot_mould": {
+      "model": "GENERATED",
+      "name": "Ingot Mould"
+    },
+    "lead_ingot": {
+      "model": "GENERATED",
+      "name": "Lead Ingot"
+    },
+    "lead_nugget": {
+      "model": "GENERATED",
+      "name": "Lead Nugget"
+    },
+    "mining_helmet": {
+      "model": "GENERATED",
+      "name": "Mining Helmet"
+    },
+    "plate_mould": {
+      "model": "GENERATED",
+      "name": "Plate Mould"
+    },
+    "raw_hide_chestplate": {
+      "model": "GENERATED",
+      "name": "Raw Hide Chestplate"
+    },
+    "raw_hide_helmet": {
+      "model": "GENERATED",
+      "name": "Raw Hide Helmet"
+    },
+    "raw_hide_leggings": {
+      "model": "GENERATED",
+      "name": "Raw Hide Leggings"
+    },
+    "raw_lead": {
+      "model": "GENERATED",
+      "name": "Raw Lead"
+    },
+    "raw_silver": {
+      "model": "GENERATED",
+      "name": "Raw Silver"
+    },
+    "raw_tin": {
+      "model": "GENERATED",
+      "name": "Raw Tin"
+    },
+    "raw_titanium": {
+      "model": "GENERATED",
+      "name": "Raw Titanium"
+    },
+    "redstone_circuit": {
+      "model": "GENERATED",
+      "name": "Redstone Circuit"
+    },
+    "repeating_crossbow": {
+      "model": "CUSTOM",
+      "name": "Repeating Crossbow"
+    },
+    "silver_ingot": {
+      "model": "GENERATED",
+      "name": "Silver Ingot"
+    },
+    "silver_nugget": {
+      "model": "GENERATED",
+      "name": "Silver Nugget"
+    },
+    "steel_axe": {
+      "model": "HANDHELD",
+      "name": "Steel Axe"
+    },
+    "steel_boots": {
+      "model": "GENERATED",
+      "name": "Steel Boots"
+    },
+    "steel_chestplate": {
+      "model": "GENERATED",
+      "name": "Steel Chestplate"
+    },
+    "steel_helmet": {
+      "model": "GENERATED",
+      "name": "Steel Helmet"
+    },
+    "steel_ingot": {
+      "model": "GENERATED",
+      "name": "Steel Ingot"
+    },
+    "steel_knife": {
+      "model": "HANDHELD",
+      "name": "Steel Knife"
+    },
+    "steel_leggings": {
+      "model": "GENERATED",
+      "name": "Steel Leggings"
+    },
+    "steel_nugget": {
+      "model": "GENERATED",
+      "name": "Steel Nugget"
+    },
+    "steel_pickaxe": {
+      "model": "HANDHELD",
+      "name": "Steel Pickaxe"
+    },
+    "steel_plate": {
+      "model": "GENERATED",
+      "name": "Steel Plate"
+    },
+    "steel_shovel": {
+      "model": "HANDHELD",
+      "name": "Steel Shovel"
+    },
+    "steel_sword": {
+      "model": "HANDHELD",
+      "name": "Steel Sword"
+    },
+    "tin_ingot": {
+      "model": "GENERATED",
+      "name": "Tin Ingot"
+    },
+    "tin_nugget": {
+      "model": "GENERATED",
+      "name": "Tin Nugget"
+    },
+    "titanium_ingot": {
+      "model": "GENERATED",
+      "name": "Titanium Ingot"
+    },
+    "titanium_nugget": {
+      "model": "GENERATED",
+      "name": "Titanium Nugget"
+    },
+    "titanium_plate": {
+      "model": "GENERATED",
+      "name": "Titanium Plate"
+    },
+    "titanium_shard": {
+      "model": "GENERATED",
+      "name": "Titanium Shard"
+    },
+    "unfired_ingot_mould": {
+      "model": "GENERATED",
+      "name": "Unfired Ingot Mould"
+    },
+    "unfired_plate_mould": {
+      "model": "GENERATED",
+      "name": "Unfired Plate Mould"
+    },
+    "wax": {
+      "model": "GENERATED",
+      "name": "Wax"
+    }
+  },
+  "requiredMixins": [
+    "wax.HoneycombWaxingMixin",
+    "wax.IWaxableMoonlightMixin"
+  ],
+  "requiredResources": [
+    "assets/poptartcore/blockstates/cupric_brazier.json",
+    "assets/poptartcore/blockstates/cupric_stone_brazier.json",
+    "assets/poptartcore/blockstates/rift_brazier.json",
+    "assets/poptartcore/blockstates/rift_campfire.json",
+    "assets/poptartcore/blockstates/rift_lantern.json",
+    "assets/poptartcore/blockstates/rift_stone_brazier.json",
+    "assets/poptartcore/blockstates/rift_torch.json",
+    "assets/poptartcore/blockstates/rubber_block.json",
+    "assets/poptartcore/blockstates/sconce_cupric_torch.json",
+    "assets/poptartcore/blockstates/sconce_cupric_torch_lever.json",
+    "assets/poptartcore/blockstates/sconce_rift_torch.json",
+    "assets/poptartcore/blockstates/sconce_rift_torch_lever.json",
+    "assets/poptartcore/blockstates/sconce_soul_torch_lever.json",
+    "assets/poptartcore/blockstates/sconce_torch_lever.json",
+    "assets/poptartcore/models/item/cupric_brazier.json",
+    "assets/poptartcore/models/item/cupric_stone_brazier.json",
+    "assets/poptartcore/models/item/magnet_ring.json",
+    "assets/poptartcore/models/item/quartz_crystal.json",
+    "assets/poptartcore/models/item/rift_brazier.json",
+    "assets/poptartcore/models/item/rift_campfire.json",
+    "assets/poptartcore/models/item/rift_lantern.json",
+    "assets/poptartcore/models/item/rift_stone_brazier.json",
+    "assets/poptartcore/models/item/rift_torch.json",
+    "assets/poptartcore/models/item/sconce_cupric_torch.json",
+    "assets/poptartcore/models/item/sconce_cupric_torch_lever.json",
+    "assets/poptartcore/models/item/sconce_rift_torch.json",
+    "assets/poptartcore/models/item/sconce_rift_torch_lever.json",
+    "assets/poptartcore/models/item/sconce_soul_torch_lever.json",
+    "assets/poptartcore/models/item/sconce_torch_lever.json",
+    "data/poptartcore/loot_table/blocks/rubber_block.json"
+  ],
+  "translations": {
+    "block.poptartcore.millstone_rotor": "Millstone",
+    "block.poptartcore.millstone_structural": "Millstone",
+    "container.poptartcore.blast_furnace": "Blast Furnace",
+    "container.poptartcore.crucible": "Crucible"
+  },
+  "wayfarerReferenceTextures": {
+    "assets/poptartcore/textures/block/rubber_block.png": "assets/wayfarer/textures/block/rubber_block.png",
+    "assets/poptartcore/textures/item/magnet_ring.png": "assets/wayfarer/textures/item/rings/magnet_ring.png",
+    "assets/poptartcore/textures/item/quartz_crystal.png": "assets/wayfarer/textures/item/quartz_crystal.png"
+  }
+}

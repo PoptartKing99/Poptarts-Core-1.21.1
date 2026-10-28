@@ -14,9 +14,9 @@ import dev.poptartking.poptartcore.crucible.casting.CastingRecipe;
 import dev.poptartking.poptartcore.crucible.melting.MeltingRecipe;
 import dev.poptartking.poptartcore.millstone.recipe.MillingRecipe;
 import dev.poptartking.poptartcore.quern.recipe.GrindingRecipe;
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
 import dev.poptartking.poptartcore.registry.PoptartCoreMenus;
 import dev.poptartking.poptartcore.registry.PoptartCoreRecipes;
+import dev.poptartking.poptartcore.registry.PoptartWorkstationBlocks;
 import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.resources.ResourceLocation;
@@ -29,18 +29,18 @@ import net.minecraft.world.level.ItemLike;
 public final class PoptartCoreEmiPlugin implements EmiPlugin {
     @Override
     public void register(EmiRegistry registry) {
-        EmiRecipeCategory melting = category(registry, "crucible_melting", PoptartCoreBlocks.CRUCIBLE.get());
+        EmiRecipeCategory melting = category(registry, "crucible_melting", PoptartWorkstationBlocks.CRUCIBLE.get());
         EmiRecipeCategory blastMelting =
-                category(registry, "blast_furnace_melting", PoptartCoreBlocks.BLAST_FURNACE.get());
-        EmiRecipeCategory alloying = category(registry, "crucible_alloying", PoptartCoreBlocks.CRUCIBLE.get());
+                category(registry, "blast_furnace_melting", PoptartWorkstationBlocks.BLAST_FURNACE.get());
+        EmiRecipeCategory alloying = category(registry, "crucible_alloying", PoptartWorkstationBlocks.CRUCIBLE.get());
         EmiRecipeCategory blastAlloying =
-                category(registry, "blast_furnace_alloying", PoptartCoreBlocks.BLAST_FURNACE.get());
-        EmiRecipeCategory casting = category(registry, "casting", PoptartCoreBlocks.CRUCIBLE.get());
-        registry.addWorkstation(melting, EmiStack.of(PoptartCoreBlocks.BLAST_FURNACE.get()));
-        registry.addWorkstation(alloying, EmiStack.of(PoptartCoreBlocks.BLAST_FURNACE.get()));
-        registry.addWorkstation(casting, EmiStack.of(PoptartCoreBlocks.BLAST_FURNACE.get()));
-        EmiRecipeCategory grinding = category(registry, "grinding", PoptartCoreBlocks.QUERN.get());
-        EmiRecipeCategory milling = category(registry, "milling", PoptartCoreBlocks.MILLSTONE.get());
+                category(registry, "blast_furnace_alloying", PoptartWorkstationBlocks.BLAST_FURNACE.get());
+        EmiRecipeCategory casting = category(registry, "casting", PoptartWorkstationBlocks.CRUCIBLE.get());
+        registry.addWorkstation(melting, EmiStack.of(PoptartWorkstationBlocks.BLAST_FURNACE.get()));
+        registry.addWorkstation(alloying, EmiStack.of(PoptartWorkstationBlocks.BLAST_FURNACE.get()));
+        registry.addWorkstation(casting, EmiStack.of(PoptartWorkstationBlocks.BLAST_FURNACE.get()));
+        EmiRecipeCategory grinding = category(registry, "grinding", PoptartWorkstationBlocks.QUERN.get());
+        EmiRecipeCategory milling = category(registry, "milling", PoptartWorkstationBlocks.MILLSTONE.get());
 
         var recipes = registry.getRecipeManager();
         for (var holder : recipes.getAllRecipesFor(PoptartCoreRecipes.CRUCIBLE_MELTING_TYPE.get())) {
@@ -64,7 +64,8 @@ public final class PoptartCoreEmiPlugin implements EmiPlugin {
         for (var holder : recipes.getAllRecipesFor(PoptartCoreRecipes.MILLING_TYPE.get())) {
             addMilling(registry, milling, holder);
         }
-        registry.addWorkstation(VanillaEmiRecipeCategories.CRAFTING, EmiStack.of(PoptartCoreBlocks.WORKBENCH.get()));
+        registry.addWorkstation(
+                VanillaEmiRecipeCategories.CRAFTING, EmiStack.of(PoptartWorkstationBlocks.WORKBENCH.get()));
         registry.addRecipeHandler(PoptartCoreMenus.WORKBENCH.get(), new WorkbenchEmiRecipeHandler());
     }
 

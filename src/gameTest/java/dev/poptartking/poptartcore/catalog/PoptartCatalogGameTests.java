@@ -2,13 +2,13 @@ package dev.poptartking.poptartcore.catalog;
 
 import dev.poptartking.poptartcore.PoptartCore;
 import dev.poptartking.poptartcore.registry.PoptartArmorItems;
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
+import dev.poptartking.poptartcore.registry.PoptartBuildingBlocks;
+import dev.poptartking.poptartcore.registry.PoptartCreateBlocks;
+import dev.poptartking.poptartcore.registry.PoptartMaterialBlocks;
 import dev.poptartking.poptartcore.registry.PoptartMaterialItems;
 import dev.poptartking.poptartcore.registry.PoptartProcessingItems;
 import dev.poptartking.poptartcore.registry.PoptartToolItems;
-import java.util.Map;
-import java.util.Set;
-import net.minecraft.core.registries.BuiltInRegistries;
+import dev.poptartking.poptartcore.registry.PoptartWorkstationBlocks;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.neoforged.neoforge.gametest.GameTestHolder;
@@ -20,229 +20,93 @@ public final class PoptartCatalogGameTests {
     private PoptartCatalogGameTests() {}
 
     @GameTest(template = "millstone_test", timeoutTicks = 40)
-    public static void ordinaryMetalIngredientsUseCatalogRegistration(GameTestHelper helper) {
-        Map<String, String> expectedNames = Map.ofEntries(
-                Map.entry("mining_helmet", "Mining Helmet"),
-                Map.entry("raw_hide_helmet", "Raw Hide Helmet"),
-                Map.entry("raw_hide_chestplate", "Raw Hide Chestplate"),
-                Map.entry("raw_hide_leggings", "Raw Hide Leggings"),
-                Map.entry("beekeeper_helmet", "Beekeeper Hood"),
-                Map.entry("beekeeper_chestplate", "Beekeeper Tunic"),
-                Map.entry("beekeeper_leggings", "Beekeeper Skirt"),
-                Map.entry("beekeeper_boots", "Beekeeper Boots"),
-                Map.entry("steel_helmet", "Steel Helmet"),
-                Map.entry("steel_chestplate", "Steel Chestplate"),
-                Map.entry("steel_leggings", "Steel Leggings"),
-                Map.entry("steel_boots", "Steel Boots"),
-                Map.entry("steel_ingot", "Steel Ingot"),
-                Map.entry("steel_nugget", "Steel Nugget"),
-                Map.entry("steel_plate", "Steel Plate"),
-                Map.entry("coal_coke", "Coal Coke"),
-                Map.entry("wax", "Wax"),
-                Map.entry("redstone_circuit", "Redstone Circuit"),
-                Map.entry("firestarter", "Firestarter"),
-                Map.entry("bee_smoker", "Bee Smoker"),
-                Map.entry("repeating_crossbow", "Repeating Crossbow"),
-                Map.entry("hammer", "Hammer"),
-                Map.entry("unfired_ingot_mould", "Unfired Ingot Mould"),
-                Map.entry("ingot_mould", "Ingot Mould"),
-                Map.entry("unfired_plate_mould", "Unfired Plate Mould"),
-                Map.entry("plate_mould", "Plate Mould"),
-                Map.entry("bronze_ingot", "Bronze Ingot"),
-                Map.entry("bronze_nugget", "Bronze Nugget"),
-                Map.entry("bronze_plate", "Bronze Plate"),
-                Map.entry("bronze_sword", "Bronze Sword"),
-                Map.entry("bronze_pickaxe", "Bronze Pickaxe"),
-                Map.entry("bronze_axe", "Bronze Axe"),
-                Map.entry("bronze_shovel", "Bronze Shovel"),
-                Map.entry("bronze_knife", "Bronze Knife"),
-                Map.entry("steel_sword", "Steel Sword"),
-                Map.entry("steel_pickaxe", "Steel Pickaxe"),
-                Map.entry("steel_axe", "Steel Axe"),
-                Map.entry("steel_shovel", "Steel Shovel"),
-                Map.entry("steel_knife", "Steel Knife"),
-                Map.entry("bone_pick", "Bone Pick"),
-                Map.entry("flint_axe", "Flint Axe"),
-                Map.entry("flint_shovel", "Flint Shovel"),
-                Map.entry("tin_ingot", "Tin Ingot"),
-                Map.entry("tin_nugget", "Tin Nugget"),
-                Map.entry("raw_tin", "Raw Tin"),
-                Map.entry("lead_ingot", "Lead Ingot"),
-                Map.entry("lead_nugget", "Lead Nugget"),
-                Map.entry("raw_lead", "Raw Lead"),
-                Map.entry("silver_ingot", "Silver Ingot"),
-                Map.entry("silver_nugget", "Silver Nugget"),
-                Map.entry("raw_silver", "Raw Silver"));
-        Set<String> handheldItems = Set.of(
-                "bronze_sword",
-                "bronze_pickaxe",
-                "bronze_axe",
-                "bronze_shovel",
-                "bronze_knife",
-                "steel_sword",
-                "steel_pickaxe",
-                "steel_axe",
-                "steel_shovel",
-                "steel_knife",
-                "bone_pick",
-                "flint_axe",
-                "flint_shovel",
-                "hammer");
-        Set<String> customModelItems = Set.of("bee_smoker", "repeating_crossbow");
+    public static void catalogTagDeclarationsMatchLoadedResources(GameTestHelper helper) {
+        var missing = new java.util.ArrayList<String>();
+        for (var definition : PoptartCatalog.blocks()) {
+            for (var tag : definition.tags())
+                if (!definition.get().defaultBlockState().is(tag))
+                    missing.add(definition.id() + " block tag " + tag.location());
+            for (var tag : definition.itemTags())
+                if (!definition.item().get().getDefaultInstance().is(tag))
+                    missing.add(definition.id() + " block item tag " + tag.location());
+        }
+        for (var definition : PoptartCatalog.items()) {
+            for (var tag : definition.tags())
+                if (!definition.get().getDefaultInstance().is(tag))
+                    missing.add(definition.id() + " item tag " + tag.location());
+        }
+        helper.assertTrue(missing.isEmpty(), "Missing declared catalog tags: " + missing);
+        helper.succeed();
+    }
 
+    @GameTest(template = "millstone_test", timeoutTicks = 40)
+    public static void exportRegisteredCatalogForPackagedResourceChecks(GameTestHelper helper) throws Exception {
+        CatalogVerificationData.writeManifest();
+        helper.succeed();
+    }
+
+    @GameTest(template = "millstone_test", timeoutTicks = 40)
+    public static void specialCatalogItemsAndBlocksRetainTheirBehavior(GameTestHelper helper) {
         helper.assertTrue(
-                PoptartCatalog.items().size() == expectedNames.size(),
-                "Poptart Catalog does not contain exactly the expected metal ingredients");
-        for (CatalogItemDefinition<?> definition : PoptartCatalog.items()) {
-            helper.assertTrue(
-                    expectedNames.containsKey(definition.id()), "Unexpected catalog item: " + definition.id());
-            helper.assertTrue(
-                    expectedNames.get(definition.id()).equals(definition.displayName()),
-                    "Catalog has the wrong name for " + definition.id());
-            CatalogItemModel expectedModel = customModelItems.contains(definition.id())
-                    ? CatalogItemModel.CUSTOM
-                    : handheldItems.contains(definition.id()) ? CatalogItemModel.HANDHELD : CatalogItemModel.GENERATED;
-            helper.assertTrue(
-                    definition.model() == expectedModel, "Catalog has the wrong model type for " + definition.id());
-            helper.assertTrue(
-                    PoptartCore.location(definition.id()).equals(BuiltInRegistries.ITEM.getKey(definition.get())),
-                    "Catalog item has the wrong registry ID: " + definition.id());
-        }
-        Map<String, String> expectedBlockNames = Map.ofEntries(
-                Map.entry("tin_block", "Block of Tin"),
-                Map.entry("raw_tin_block", "Block of Raw Tin"),
-                Map.entry("lead_block", "Block of Lead"),
-                Map.entry("raw_lead_block", "Block of Raw Lead"),
-                Map.entry("silver_block", "Block of Silver"),
-                Map.entry("raw_silver_block", "Block of Raw Silver"),
-                Map.entry("wax_block", "Wax Block"),
-                Map.entry("coal_coke_block", "Coal Coke Block"),
-                Map.entry("bronze_block", "Block of Bronze"),
-                Map.entry("steel_block", "Block of Steel"),
-                Map.entry("tin_ore", "Tin Ore"),
-                Map.entry("deepslate_tin_ore", "Deepslate Tin Ore"),
-                Map.entry("lead_ore", "Lead Ore"),
-                Map.entry("deepslate_lead_ore", "Deepslate Lead Ore"),
-                Map.entry("silver_ore", "Silver Ore"),
-                Map.entry("deepslate_silver_ore", "Deepslate Silver Ore"),
-                Map.entry("clinker_bricks", "Clinker Bricks"),
-                Map.entry("clinker_brick_slab", "Clinker Brick Slab"),
-                Map.entry("clinker_brick_stairs", "Clinker Brick Stairs"),
-                Map.entry("clinker_brick_wall", "Clinker Brick Wall"),
-                Map.entry("clinker_tile", "Clinker Tile"),
-                Map.entry("clinker_tile_slab", "Clinker Tile Slab"),
-                Map.entry("clinker_tile_stairs", "Clinker Tile Stairs"),
-                Map.entry("clinker_tile_wall", "Clinker Tile Wall"),
-                Map.entry("mosaic_clinker_tile", "Mosaic Clinker Tile"),
-                Map.entry("chiseled_clinker_tile", "Chiseled Clinker Tile"),
-                Map.entry("clinker_pillar", "Clinker Pillar"),
-                Map.entry("iron_bloom", "Iron Bloom"),
-                Map.entry("workbench", "Workbench"),
-                Map.entry("quern", "Quern"),
-                Map.entry("bloomery", "Bloomery"),
-                Map.entry("portable_engine", "Portable Engine"),
-                Map.entry("crucible", "Crucible"),
-                Map.entry("millstone", "Millstone"));
-        Set<String> oreBlocks = Set.of(
-                "tin_ore", "deepslate_tin_ore", "lead_ore", "deepslate_lead_ore", "silver_ore", "deepslate_silver_ore");
-        helper.assertTrue(
-                PoptartCatalog.blocks().size() == expectedBlockNames.size(),
-                "Poptart Catalog does not contain exactly the expected blocks");
-        for (CatalogBlockDefinition<?> definition : PoptartCatalog.blocks()) {
-            helper.assertTrue(
-                    expectedBlockNames.get(definition.id()).equals(definition.displayName()),
-                    "Catalog has the wrong block name for " + definition.id());
-            helper.assertTrue(
-                    PoptartCore.location(definition.id()).equals(BuiltInRegistries.BLOCK.getKey(definition.get())),
-                    "Catalog block has the wrong registry ID: " + definition.id());
-            helper.assertTrue(
-                    PoptartCore.location(definition.id())
-                            .equals(BuiltInRegistries.ITEM.getKey(
-                                    definition.item().get())),
-                    "Catalog block item has the wrong registry ID: " + definition.id());
-            if (oreBlocks.contains(definition.id())) {
-                helper.assertTrue(
-                        definition.oreDrop() != null && definition.storageRecipes() == null,
-                        "Catalog ore is missing its ore drop: " + definition.id());
-            } else if (definition.storageRecipes() != null) {
-                helper.assertTrue(
-                        definition.storageRecipes() != null && definition.oreDrop() == null,
-                        "Catalog storage block is missing its packing recipes: " + definition.id());
-            } else {
-                helper.assertTrue(
-                        (definition.id().contains("clinker")
-                                        || definition.id().equals("iron_bloom")
-                                        || definition.id().equals("workbench")
-                                        || definition.id().equals("quern")
-                                        || definition.id().equals("bloomery")
-                                        || definition.id().equals("portable_engine")
-                                        || definition.id().equals("crucible")
-                                        || definition.id().equals("millstone"))
-                                && definition.oreDrop() == null
-                                && definition.storageRecipes() == null,
-                        "Unexpected ordinary Catalog block: " + definition.id());
-            }
-        }
-        helper.assertTrue(
-                PoptartCoreBlocks.CLINKER_BRICK_SLAB.model() == CatalogBlockModel.SLAB
-                        && PoptartCoreBlocks.CLINKER_BRICK_STAIRS.model() == CatalogBlockModel.STAIRS
-                        && PoptartCoreBlocks.CLINKER_BRICK_WALL.model() == CatalogBlockModel.WALL
-                        && PoptartCoreBlocks.CLINKER_TILE_SLAB.model() == CatalogBlockModel.SLAB
-                        && PoptartCoreBlocks.CLINKER_TILE_STAIRS.model() == CatalogBlockModel.STAIRS
-                        && PoptartCoreBlocks.CLINKER_TILE_WALL.model() == CatalogBlockModel.WALL
-                        && PoptartCoreBlocks.CLINKER_PILLAR.model() == CatalogBlockModel.EXTERNAL,
+                PoptartBuildingBlocks.CLINKER_BRICK_SLAB.model() == CatalogBlockModel.SLAB
+                        && PoptartBuildingBlocks.CLINKER_BRICK_STAIRS.model() == CatalogBlockModel.STAIRS
+                        && PoptartBuildingBlocks.CLINKER_BRICK_WALL.model() == CatalogBlockModel.WALL
+                        && PoptartBuildingBlocks.CLINKER_TILE_SLAB.model() == CatalogBlockModel.SLAB
+                        && PoptartBuildingBlocks.CLINKER_TILE_STAIRS.model() == CatalogBlockModel.STAIRS
+                        && PoptartBuildingBlocks.CLINKER_TILE_WALL.model() == CatalogBlockModel.WALL
+                        && PoptartBuildingBlocks.CLINKER_PILLAR.model() == CatalogBlockModel.EXTERNAL,
                 "Catalog clinker blocks do not preserve their model types");
         helper.assertTrue(
-                PoptartCoreBlocks.IRON_BLOOM.model() == CatalogBlockModel.EXTERNAL
-                        && !PoptartCoreBlocks.IRON_BLOOM.generatedLoot()
-                        && PoptartCoreBlocks.IRON_BLOOM
+                PoptartWorkstationBlocks.IRON_BLOOM.model() == CatalogBlockModel.EXTERNAL
+                        && PoptartWorkstationBlocks.IRON_BLOOM.lootMode() == CatalogBlockDefinition.LootMode.NONE
+                        && PoptartWorkstationBlocks.IRON_BLOOM
                                         .get()
                                         .defaultBlockState()
                                         .getValue(dev.poptartking.poptartcore.bloomery.IronBloomBlock.BLOOMS)
                                 == 1,
                 "Catalog Iron Bloom does not preserve its custom model, loot, and initial stack state");
         helper.assertTrue(
-                PoptartCoreBlocks.WORKBENCH.model() == CatalogBlockModel.EXTERNAL
-                        && PoptartCoreBlocks.WORKBENCH.generatedLoot()
-                        && PoptartCoreBlocks.WORKBENCH.get()
+                PoptartWorkstationBlocks.WORKBENCH.model() == CatalogBlockModel.EXTERNAL
+                        && PoptartWorkstationBlocks.WORKBENCH.lootMode() == CatalogBlockDefinition.LootMode.GENERATED
+                        && PoptartWorkstationBlocks.WORKBENCH.get()
                                 instanceof dev.poptartking.poptartcore.workbench.WorkbenchBlock,
                 "Catalog Workbench does not preserve its custom block class, model, and self-drop loot");
         helper.assertTrue(
-                PoptartCoreBlocks.QUERN.model() == CatalogBlockModel.EXTERNAL
-                        && PoptartCoreBlocks.QUERN.generatedLoot()
-                        && PoptartCoreBlocks.QUERN.get() instanceof dev.poptartking.poptartcore.quern.QuernBlock,
+                PoptartWorkstationBlocks.QUERN.model() == CatalogBlockModel.EXTERNAL
+                        && PoptartWorkstationBlocks.QUERN.lootMode() == CatalogBlockDefinition.LootMode.GENERATED
+                        && PoptartWorkstationBlocks.QUERN.get() instanceof dev.poptartking.poptartcore.quern.QuernBlock,
                 "Catalog Quern does not preserve its custom block class, model, and self-drop loot");
         helper.assertTrue(
-                PoptartCoreBlocks.BLOOMERY.model() == CatalogBlockModel.EXTERNAL
-                        && PoptartCoreBlocks.BLOOMERY.generatedLoot()
-                        && PoptartCoreBlocks.BLOOMERY.get()
+                PoptartWorkstationBlocks.BLOOMERY.model() == CatalogBlockModel.EXTERNAL
+                        && PoptartWorkstationBlocks.BLOOMERY.lootMode() == CatalogBlockDefinition.LootMode.GENERATED
+                        && PoptartWorkstationBlocks.BLOOMERY.get()
                                 instanceof dev.poptartking.poptartcore.bloomery.BloomeryBlock,
                 "Catalog Bloomery does not preserve its custom block class, model, and self-drop loot");
         helper.assertTrue(
-                PoptartCoreBlocks.PORTABLE_ENGINE.model() == CatalogBlockModel.EXTERNAL
-                        && PoptartCoreBlocks.PORTABLE_ENGINE.generatedLoot()
-                        && PoptartCoreBlocks.PORTABLE_ENGINE.get()
+                PoptartCreateBlocks.PORTABLE_ENGINE.model() == CatalogBlockModel.EXTERNAL
+                        && PoptartCreateBlocks.PORTABLE_ENGINE.lootMode() == CatalogBlockDefinition.LootMode.GENERATED
+                        && PoptartCreateBlocks.PORTABLE_ENGINE.get()
                                 instanceof
                                 dev.simulated_team.simulated.content.blocks.portable_engine.PortableEngineBlock,
                 "Catalog Portable Engine does not preserve its Aeronautics block class, model, and self-drop loot");
         helper.assertTrue(
-                PoptartCoreBlocks.CRUCIBLE.model() == CatalogBlockModel.EXTERNAL
-                        && PoptartCoreBlocks.CRUCIBLE.generatedLoot()
-                        && PoptartCoreBlocks.CRUCIBLE.get()
+                PoptartWorkstationBlocks.CRUCIBLE.model() == CatalogBlockModel.EXTERNAL
+                        && PoptartWorkstationBlocks.CRUCIBLE.lootMode() == CatalogBlockDefinition.LootMode.GENERATED
+                        && PoptartWorkstationBlocks.CRUCIBLE.get()
                                 instanceof dev.poptartking.poptartcore.crucible.CrucibleBlock
-                        && PoptartCoreBlocks.CRUCIBLE.item().get()
+                        && PoptartWorkstationBlocks.CRUCIBLE.item().get()
                                 instanceof dev.poptartking.poptartcore.crucible.CrucibleBlockItem,
                 "Catalog Crucible does not preserve its custom block, BlockItem, model, and self-drop loot");
         helper.assertTrue(
-                PoptartCoreBlocks.MILLSTONE.model() == CatalogBlockModel.EXTERNAL
-                        && PoptartCoreBlocks.MILLSTONE.generatedLoot()
-                        && PoptartCoreBlocks.MILLSTONE.get()
+                PoptartWorkstationBlocks.MILLSTONE.model() == CatalogBlockModel.EXTERNAL
+                        && PoptartWorkstationBlocks.MILLSTONE.lootMode() == CatalogBlockDefinition.LootMode.GENERATED
+                        && PoptartWorkstationBlocks.MILLSTONE.get()
                                 instanceof dev.poptartking.poptartcore.millstone.MillstoneBlock
-                        && PoptartCoreBlocks.MILLSTONE.item().get()
+                        && PoptartWorkstationBlocks.MILLSTONE.item().get()
                                 instanceof dev.poptartking.poptartcore.millstone.MillstoneBlockItem,
                 "Catalog Millstone does not preserve its custom block, BlockItem, model, and self-drop loot");
         helper.assertTrue(
-                PoptartCoreBlocks.WAX_BLOCK.item().get().getBlock() == PoptartCoreBlocks.WAX_BLOCK.get(),
+                PoptartMaterialBlocks.WAX_BLOCK.item().get().getBlock() == PoptartMaterialBlocks.WAX_BLOCK.get(),
                 "Catalog block item does not point to its registered block");
         helper.assertTrue(
                 PoptartMaterialItems.TIN_NUGGET.item().get() == PoptartMaterialItems.TIN_NUGGET.get(),

@@ -35,15 +35,7 @@ public final class LeatherArmorModels {
                 });
     }
 
-    public static LayerDefinition tunic() {
-        return tunic(true);
-    }
-
     public static LayerDefinition tunicSkirtless() {
-        return tunic(false);
-    }
-
-    private static LayerDefinition tunic(boolean skirt) {
         return PoptartCoreArmorModel.createArmorModel(
                 (mesh,
                         root,
@@ -59,10 +51,6 @@ public final class LeatherArmorModels {
                     CubeListBuilder chest = CubeListBuilder.create()
                             .texOffs(62, 61)
                             .addBox(-4.0f, 0.0f, -2.0f, 8.0f, 12.0f, 4.0f, new CubeDeformation(0.35f));
-
-                    if (skirt) {
-                        chest.texOffs(90, 0).addBox(-4.0f, 9.5f, -2.0f, 8.0f, 7.0f, 4.0f, new CubeDeformation(0.7f));
-                    }
 
                     body.addOrReplaceChild("tunic", chest, PartPose.ZERO);
 

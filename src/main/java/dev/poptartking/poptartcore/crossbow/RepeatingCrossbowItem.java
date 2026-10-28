@@ -12,7 +12,6 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ChargedProjectiles;
@@ -52,19 +51,7 @@ public class RepeatingCrossbowItem extends CrossbowItem {
             float inaccuracy,
             @Nullable LivingEntity target) {
         if (AnvilMenu.isWornOut(weapon)) return;
-        super.performShooting(level, shooter, hand, weapon, velocity, inaccuracy * 2.0F, target);
-    }
-
-    @Override
-    protected void shootProjectile(
-            LivingEntity shooter,
-            Projectile projectile,
-            int index,
-            float velocity,
-            float inaccuracy,
-            float angle,
-            @Nullable LivingEntity target) {
-        super.shootProjectile(shooter, projectile, index, velocity, inaccuracy * 2.0F, angle, target);
+        super.performShooting(level, shooter, hand, weapon, velocity, inaccuracy, target);
     }
 
     @Override

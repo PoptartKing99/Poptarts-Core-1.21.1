@@ -10,6 +10,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 
 public final class PoptartCoreTags {
+    public static final TagKey<Item> BACKPACKS = TagKey.create(Registries.ITEM, PoptartCore.location("backpacks"));
     public static final TagKey<Item> UPGRADEABLE = TagKey.create(Registries.ITEM, PoptartCore.location("upgradeable"));
     public static final TagKey<Item> UPGRADE_MINING =
             TagKey.create(Registries.ITEM, PoptartCore.location("upgrade_mining"));

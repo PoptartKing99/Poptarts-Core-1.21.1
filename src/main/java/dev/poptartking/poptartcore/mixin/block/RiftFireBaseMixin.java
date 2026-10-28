@@ -1,6 +1,6 @@
 package dev.poptartking.poptartcore.mixin.block;
 
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
+import dev.poptartking.poptartcore.registry.PoptartRiftBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.BaseFireBlock;
@@ -15,8 +15,8 @@ public class RiftFireBaseMixin {
     @Inject(method = "getState", at = @At("HEAD"), cancellable = true)
     private static void poptartcore$useRiftFire(
             BlockGetter level, BlockPos pos, CallbackInfoReturnable<BlockState> callback) {
-        if (level.getBlockState(pos.below()).is(PoptartCoreBlocks.RIFT_SEDIMENT_BLOCK.get())) {
-            callback.setReturnValue(PoptartCoreBlocks.RIFT_FIRE.get().defaultBlockState());
+        if (level.getBlockState(pos.below()).is(PoptartRiftBlocks.RIFT_SEDIMENT_BLOCK.get())) {
+            callback.setReturnValue(PoptartRiftBlocks.RIFT_FIRE.get().defaultBlockState());
         }
     }
 }

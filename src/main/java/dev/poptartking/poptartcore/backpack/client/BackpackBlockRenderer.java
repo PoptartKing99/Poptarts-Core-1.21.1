@@ -11,8 +11,7 @@ public final class BackpackBlockRenderer implements BlockEntityRenderer<Backpack
 
     @Override
     public net.minecraft.world.phys.AABB getRenderBoundingBox(BackpackBlockEntity backpack) {
-        boolean banner = dev.poptartking.poptartcore.backpack.BackpackAttachments.items(backpack.attachments())
-                        .getFirst()
+        boolean banner = dev.poptartking.poptartcore.backpack.BackpackAttachments.get(backpack.attachments(), 0)
                         .getItem()
                 instanceof net.minecraft.world.item.BannerItem;
         return new net.minecraft.world.phys.AABB(backpack.getBlockPos())

@@ -14,7 +14,6 @@ import net.minecraft.world.level.Level;
 
 public final class Stopwatch {
     public static final int MAX_TICKS = 20000;
-    private static final int TICK_INTERVAL = 10;
     private static final int TICKS_PER_SECOND = 20;
 
     private Stopwatch() {}

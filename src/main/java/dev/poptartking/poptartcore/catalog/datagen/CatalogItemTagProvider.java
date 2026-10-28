@@ -29,5 +29,9 @@ public final class CatalogItemTagProvider extends ItemTagsProvider {
         for (CatalogItemDefinition<?> definition : PoptartCatalog.items()) {
             definition.tags().forEach(itemTag -> tag(itemTag).add(definition.get()));
         }
+        for (var definition : PoptartCatalog.blocks()) {
+            definition.itemTags().forEach(itemTag -> tag(itemTag)
+                    .add(definition.item().get()));
+        }
     }
 }

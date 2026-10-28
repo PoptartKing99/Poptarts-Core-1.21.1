@@ -20,16 +20,8 @@ import net.neoforged.neoforge.network.PacketDistributor;
 public final class LodestoneScreen extends Screen {
     private static final Component TITLE = Component.translatable("poptartcore.lodestone.title");
     private static final Component NAME = Component.translatable("poptartcore.lodestone.name");
-    private static final String ICON_DIRECTORY = "textures/gui/sprites/waypoints";
-    private static final String PNG = ".png";
-    private static final int COLUMNS = 10;
-    private static final int CELL = 24;
     private static final int ICON = 20;
-    private static final int FIELD_WIDTH = 200;
-    private static final int WIDGET_HEIGHT = 20;
     private static final int GAP = 8;
-    private static final int HOVERED = 822083583;
-    private static final int SELECTED = 1627389951;
     private final BlockPos pos;
     private final List<String> icons;
     private String name;

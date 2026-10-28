@@ -1,8 +1,8 @@
 package dev.poptartking.poptartcore.waxgolem;
 
 import dev.poptartking.poptartcore.PoptartCore;
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
 import dev.poptartking.poptartcore.registry.PoptartCoreEntities;
+import dev.poptartking.poptartcore.registry.PoptartMaterialBlocks;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -67,6 +67,6 @@ public final class WaxGolemConstruction {
     }
 
     private static boolean isWax(Level level, BlockPos pos) {
-        return level.getBlockState(pos).is(PoptartCoreBlocks.WAX_BLOCK.get());
+        return level.getBlockState(pos).is(PoptartMaterialBlocks.WAX_BLOCK.get());
     }
 }

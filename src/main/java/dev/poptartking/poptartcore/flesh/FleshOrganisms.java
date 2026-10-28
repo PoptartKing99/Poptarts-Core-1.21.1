@@ -1,8 +1,8 @@
 package dev.poptartking.poptartcore.flesh;
 
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
 import dev.poptartking.poptartcore.registry.PoptartCorePoiTypes;
 import dev.poptartking.poptartcore.registry.PoptartCoreTags;
+import dev.poptartking.poptartcore.registry.PoptartFleshBlocks;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.longs.LongArrayFIFOQueue;
 import it.unimi.dsi.fastutil.longs.LongArrayList;
@@ -33,8 +33,6 @@ import org.jetbrains.annotations.Nullable;
 
 @EventBusSubscriber(modid = "poptartcore")
 public final class FleshOrganisms {
-    private static final int REBUILD_INTERVAL = 600;
-    private static final int LIFEBUD_SEARCH = 16;
     private static final Map<ResourceKey<Level>, Long2ObjectOpenHashMap<FleshOrganisms.Organism>> ORGANISMS =
             new HashMap<>();
 
@@ -48,7 +46,7 @@ public final class FleshOrganisms {
         FleshOrganisms.Organism cached = (FleshOrganisms.Organism) organisms.get(key);
         if (cached != null && !cached.isStale(level)) {
             return cached;
-        } else if (level.isLoaded(bud) && level.getBlockState(bud).is(PoptartCoreBlocks.LIFEBUD.get())) {
+        } else if (level.isLoaded(bud) && level.getBlockState(bud).is(PoptartFleshBlocks.LIFEBUD.get())) {
             FleshOrganisms.Organism built = FleshOrganisms.Organism.build(level, bud.immutable());
             organisms.put(key, built);
             return built;
@@ -155,7 +153,7 @@ public final class FleshOrganisms {
     }
 
     private static boolean isPart(BlockState state) {
-        return state.is(PoptartCoreTags.FLESH) || state.is(PoptartCoreBlocks.LIFEBUD.get());
+        return state.is(PoptartCoreTags.FLESH) || state.is(PoptartFleshBlocks.LIFEBUD.get());
     }
 
     public static final class Organism {

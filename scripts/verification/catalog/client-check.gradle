@@ -1,0 +1,8 @@
+// Reuse the opt-in client source set, selecting only the shared verification suite.
+gradle.projectsEvaluated {
+    if (!rootProject.providers.gradleProperty('navigationTests').isPresent()) {
+        throw new GradleException('Catalog client verification requires -PnavigationTests')
+    }
+    rootProject.sourceSets.navigationTest.java.setIncludes(['**/CatalogClientSmoke.java', '**/BeekeeperClientChecks.java'])
+    rootProject.neoForge.runs.client.gameDirectory = rootProject.file('build/catalog-client-run')
+}

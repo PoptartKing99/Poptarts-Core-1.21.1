@@ -1,6 +1,6 @@
 package dev.poptartking.poptartcore.beekeeping;
 
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
+import dev.poptartking.poptartcore.registry.PoptartBeekeepingBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
@@ -65,7 +65,7 @@ public class BeehiveRoofBlock extends Block {
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
 
-        BeehiveRoofBlock target = PoptartCoreBlocks.beehiveRoofForDye(dye.getDyeColor());
+        BeehiveRoofBlock target = PoptartBeekeepingBlocks.beehiveRoofForDye(dye.getDyeColor());
         if (state.is(target)) {
             return ItemInteractionResult.sidedSuccess(level.isClientSide);
         }

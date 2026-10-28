@@ -2,7 +2,7 @@ package dev.poptartking.poptartcore.quern.client;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import dev.poptartking.poptartcore.PoptartCore;
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
+import dev.poptartking.poptartcore.registry.PoptartWorkstationBlocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.RenderType;
@@ -26,7 +26,7 @@ public final class QuernHighlightRenderer {
     public static void renderBlockHighlight(RenderHighlightEvent.Block event) {
         Level level = Minecraft.getInstance().level;
         BlockPos pos = event.getTarget().getBlockPos();
-        if (level == null || !level.getBlockState(pos).is(PoptartCoreBlocks.QUERN.get())) {
+        if (level == null || !level.getBlockState(pos).is(PoptartWorkstationBlocks.QUERN.get())) {
             return;
         }
 

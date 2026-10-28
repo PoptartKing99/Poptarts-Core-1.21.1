@@ -45,7 +45,7 @@ public final class SpyglassZoom {
             track(player);
             int next = Mth.clamp(step + (amount > 0.0 ? -1 : 1), 0, STEPS.length - 1);
             if (next != step) {
-                player.playSound(SoundEvents.SPYGLASS_USE, 1.0F, next < step ? 1.25F : 0.8F);
+                player.playSound(SoundEvents.SPYGLASS_USE, 1.0F, next < step ? ZOOM_IN_PITCH : ZOOM_OUT_PITCH);
                 step = next;
             }
 

@@ -1,8 +1,8 @@
 package dev.poptartking.poptartcore.anvil;
 
 import com.mojang.serialization.MapCodec;
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
 import dev.poptartking.poptartcore.registry.PoptartCoreTags;
+import dev.poptartking.poptartcore.registry.PoptartWorkstationBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
@@ -91,12 +91,12 @@ public class AnvilBlock extends FallingBlock implements EntityBlock {
             }
 
             return ItemInteractionResult.sidedSuccess(level.isClientSide);
-        } else if ((state.is((Block) PoptartCoreBlocks.CHIPPED_ANVIL.get())
-                        || state.is((Block) PoptartCoreBlocks.DAMAGED_ANVIL.get()))
+        } else if ((state.is((Block) PoptartWorkstationBlocks.CHIPPED_ANVIL.get())
+                        || state.is((Block) PoptartWorkstationBlocks.DAMAGED_ANVIL.get()))
                 && stack.is(Items.IRON_INGOT)) {
-            Block newBlock = state.is((Block) PoptartCoreBlocks.DAMAGED_ANVIL.get())
-                    ? (Block) PoptartCoreBlocks.CHIPPED_ANVIL.get()
-                    : (Block) PoptartCoreBlocks.ANVIL.get();
+            Block newBlock = state.is((Block) PoptartWorkstationBlocks.DAMAGED_ANVIL.get())
+                    ? (Block) PoptartWorkstationBlocks.CHIPPED_ANVIL.get()
+                    : (Block) PoptartWorkstationBlocks.ANVIL.get();
             replace(level, pos, newBlock.withPropertiesOf(state));
             level.levelEvent(1030, pos, 0);
             level.levelEvent(2011, pos, 5);
@@ -172,10 +172,10 @@ public class AnvilBlock extends FallingBlock implements EntityBlock {
 
     public void maybeDamage(Level level, BlockPos pos, BlockState state, RandomSource random) {
         if (random.nextFloat() < 0.05F) {
-            Block newBlock = state.is((Block) PoptartCoreBlocks.ANVIL.get())
-                    ? (Block) PoptartCoreBlocks.CHIPPED_ANVIL.get()
-                    : (state.is((Block) PoptartCoreBlocks.CHIPPED_ANVIL.get())
-                            ? (Block) PoptartCoreBlocks.DAMAGED_ANVIL.get()
+            Block newBlock = state.is((Block) PoptartWorkstationBlocks.ANVIL.get())
+                    ? (Block) PoptartWorkstationBlocks.CHIPPED_ANVIL.get()
+                    : (state.is((Block) PoptartWorkstationBlocks.CHIPPED_ANVIL.get())
+                            ? (Block) PoptartWorkstationBlocks.DAMAGED_ANVIL.get()
                             : null);
             if (newBlock == null) {
                 level.setBlockAndUpdate(

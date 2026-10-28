@@ -76,7 +76,7 @@ public final class BackpackColorMenu extends AbstractContainerMenu {
                         (id, inventory, opener) -> new BackpackColorMenu(id, inventory, target),
                         Component.translatable(
                                 target.snapshot()
-                                                .is(dev.poptartking.poptartcore.registry.PoptartCoreBlocks.RUCKSACK
+                                                .is(dev.poptartking.poptartcore.registry.PoptartEquipmentBlocks.RUCKSACK
                                                         .get()
                                                         .asItem())
                                         ? "menu.poptartcore.rucksack_colors"

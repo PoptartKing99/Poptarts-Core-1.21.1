@@ -3,7 +3,7 @@ package dev.poptartking.poptartcore.millstone;
 import com.simibubi.create.content.kinetics.base.KineticBlock;
 import com.simibubi.create.foundation.block.IBE;
 import dev.poptartking.poptartcore.registry.PoptartCoreBlockEntities;
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
+import dev.poptartking.poptartcore.registry.PoptartWorkstationBlocks;
 import net.createmod.catnip.math.VecHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -108,7 +108,7 @@ public class MillstoneRotorBlock extends KineticBlock implements IBE<MillstoneRo
 
     public ItemStack getCloneItemStack(
             BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
-        return new ItemStack(PoptartCoreBlocks.MILLSTONE.get());
+        return new ItemStack(PoptartWorkstationBlocks.MILLSTONE.get());
     }
 
     protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {

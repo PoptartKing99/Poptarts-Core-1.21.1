@@ -15,8 +15,10 @@ public final class PoptartCorePoiTypes {
     public static final DeferredHolder<PoiType, PoiType> LIFEBUD = POI_TYPES.register(
             "lifebud",
             () -> new PoiType(
-                    Set.copyOf(
-                            PoptartCoreBlocks.LIFEBUD.get().getStateDefinition().getPossibleStates()),
+                    Set.copyOf(PoptartFleshBlocks.LIFEBUD
+                            .get()
+                            .getStateDefinition()
+                            .getPossibleStates()),
                     0,
                     1));
 

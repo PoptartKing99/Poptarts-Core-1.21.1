@@ -1,0 +1,18 @@
+[
+  "scripts/verification/verify-project-layout.ps1",
+  "scripts/verification/verify-script-layout.ps1",
+  "scripts/verification/armor/verify-ragdoll-armor-mappings.ps1",
+  "scripts/verification/backpack/verify-backpack-facing.ps1",
+  "scripts/verification/backpack/verify-dye-layers.ps1",
+  "scripts/verification/backpack/verify-wayward-models.ps1",
+  "scripts/verification/bee-behavior/verify-bee-behavior.ps1",
+  "scripts/verification/bee-smoker/verify-bee-smoker.ps1",
+  "scripts/verification/catalog/verify-packaged-catalog.ps1",
+  "scripts/verification/equipment/verify-cape-assets.ps1",
+  "scripts/verification/flesh/verify-flesh.ps1",
+  "scripts/verification/hammer/verify-hammer-area-mining.ps1",
+  "scripts/verification/hammer/verify-persistent-block-damage.ps1",
+  "scripts/verification/portable-engine/verify-portable-engine.ps1",
+  "scripts/verification/quern/verify-quern.ps1",
+  "scripts/verification/worldgen/verify-ore-worldgen.ps1"
+]

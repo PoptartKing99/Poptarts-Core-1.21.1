@@ -6,7 +6,7 @@ import dev.poptartking.poptartcore.backpack.BackpackAttachments;
 import dev.poptartking.poptartcore.backpack.client.BackpackAttachmentClient;
 import dev.poptartking.poptartcore.equipment.AccessoryInventory;
 import dev.poptartking.poptartcore.navigation.client.hud.CompassHud;
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
+import dev.poptartking.poptartcore.registry.PoptartEquipmentBlocks;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.GlobalPos;
@@ -73,9 +73,10 @@ public final class NavigationControlsSmoke {
                     if (source == 0) player.setItemInHand(InteractionHand.MAIN_HAND, meter);
                     else {
                         player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.APPLE));
-                        var bag = new ItemStack((source == 1 ? PoptartCoreBlocks.BACKPACK : PoptartCoreBlocks.RUCKSACK)
-                                .get()
-                                .asItem());
+                        var bag = new ItemStack(
+                                (source == 1 ? PoptartEquipmentBlocks.BACKPACK : PoptartEquipmentBlocks.RUCKSACK)
+                                        .get()
+                                        .asItem());
                         BackpackAttachments.set(bag, 1, meter);
                         AccessoryInventory.get(player).setStackInSlot(AccessoryInventory.BACK_SLOT, bag);
                     }

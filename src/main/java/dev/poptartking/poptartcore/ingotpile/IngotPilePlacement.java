@@ -1,7 +1,7 @@
 package dev.poptartking.poptartcore.ingotpile;
 
 import dev.poptartking.poptartcore.PoptartCore;
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
+import dev.poptartking.poptartcore.registry.PoptartMaterialBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -24,7 +24,7 @@ public final class IngotPilePlacement {
         Level level = event.getLevel();
         BlockPos clicked = event.getPos();
         BlockState clickedState = level.getBlockState(clicked);
-        if (clickedState.is(PoptartCoreBlocks.INGOT_PILE.get())) {
+        if (clickedState.is(PoptartMaterialBlocks.INGOT_PILE.get())) {
             if (clickedState.getValue(IngotPileBlock.COUNT) < 64) {
                 event.setCanceled(true);
                 event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide));
@@ -37,7 +37,7 @@ public final class IngotPilePlacement {
         }
         BlockPos target = clickedState.canBeReplaced() ? clicked : clicked.relative(event.getFace());
         if (!level.getBlockState(target).canBeReplaced()) return;
-        BlockState state = PoptartCoreBlocks.INGOT_PILE.get().defaultBlockState();
+        BlockState state = PoptartMaterialBlocks.INGOT_PILE.get().defaultBlockState();
         if (!state.canSurvive(level, target)
                 || !level.isUnobstructed(state, target, net.minecraft.world.phys.shapes.CollisionContext.of(player)))
             return;

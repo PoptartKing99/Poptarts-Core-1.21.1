@@ -4,7 +4,6 @@ package dev.poptartking.poptartcore.conduit;
 public final class ConduitHeartbeatTiming {
     public static final int TICKS_PER_SECOND = 20;
     public static final long NANOS_PER_TICK = 50_000_000L;
-    public static final int FULL_TRACK_INTERVAL_TICKS = 4 * TICKS_PER_SECOND;
     public static final int FULL_TRACK_DURATION_TICKS = 91;
     public static final int SINGLE_PAIR_DURATION_TICKS = 16;
     public static final int SINGLE_PAIR_PAUSE_TICKS = TICKS_PER_SECOND;

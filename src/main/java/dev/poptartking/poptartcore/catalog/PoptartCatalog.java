@@ -10,18 +10,19 @@ import dev.poptartking.poptartcore.catalog.datagen.CatalogItemTagProvider;
 import dev.poptartking.poptartcore.catalog.datagen.CatalogLanguageProvider;
 import dev.poptartking.poptartcore.catalog.datagen.CatalogRecipeProvider;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.BiFunction;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.data.loot.LootTableProvider.SubProviderEntry;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.bus.api.IEventBus;
@@ -87,40 +88,21 @@ public final class PoptartCatalog {
         return List.copyOf(BLOCK_DEFINITIONS.values());
     }
 
-    public static void addCreativeTabItems(
-            CreativeModeTab.Output output, List<String> preferredOrder, CreativeCatalogGroup group) {
-        Map<String, Supplier<? extends ItemLike>> remaining = new LinkedHashMap<>();
-        ITEM_DEFINITIONS.forEach((id, definition) -> {
-            if (definition.showInCreativeTab()) {
-                remaining.put(id, definition);
-            }
-        });
-        BLOCK_DEFINITIONS.forEach((id, definition) -> {
-            if (definition.showInCreativeTab()) {
-                remaining.put(id, definition.item());
-            }
-        });
-
-        Set<String> orderedIds = new java.util.HashSet<>();
-        for (String id : preferredOrder) {
-            if (!orderedIds.add(id)) {
-                throw new IllegalArgumentException("Duplicate Poptart Catalog creative-tab entry: " + id);
-            }
-            Supplier<? extends ItemLike> entry = remaining.remove(id);
-            if (entry == null) {
-                if (ITEM_DEFINITIONS.containsKey(id) || BLOCK_DEFINITIONS.containsKey(id)) {
-                    continue;
-                }
-                throw new IllegalArgumentException("Unknown Poptart Catalog creative-tab entry: " + id);
-            }
-            ItemLike item = entry.get();
-            if (CreativeCatalogGroup.forItem(id, item.asItem()) == group) output.accept(item);
-        }
-        remaining.forEach((id, entry) -> {
-            ItemLike item = entry.get();
-            if (CreativeCatalogGroup.forItem(id, item.asItem()) == group) output.accept(item);
-        });
+    public static void addCreativeTabItems(CreativeModeTab.Output output) {
+        var items = ITEM_DEFINITIONS.values().stream()
+                .filter(CatalogItemDefinition::showInCreativeTab)
+                .map(definition ->
+                        new CreativeEntry(definition.get(), definition.creativeGroup(), definition.creativeOrder()));
+        var blocks = BLOCK_DEFINITIONS.values().stream()
+                .filter(CatalogBlockDefinition::showInCreativeTab)
+                .map(definition -> new CreativeEntry(
+                        definition.item().get(), definition.creativeGroup(), definition.creativeOrder()));
+        Stream.concat(items, blocks)
+                .sorted(Comparator.comparing(CreativeEntry::group).thenComparingInt(CreativeEntry::order))
+                .forEach(entry -> output.accept(entry.item()));
     }
+
+    private record CreativeEntry(Item item, CreativeCatalogGroup group, int order) {}
 
     public static void register(IEventBus eventBus) {
         ITEM_DEFINITIONS.values().forEach(CatalogItemDefinition::freeze);

@@ -1,7 +1,6 @@
 package dev.poptartking.poptartcore.millstone;
 
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
-import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import dev.poptartking.poptartcore.registry.PoptartCoreBlockEntities;
 import java.util.List;
 import net.minecraft.ChatFormatting;
@@ -21,13 +20,9 @@ public class MillstoneRotorBlockEntity extends KineticBlockEntity {
         super(PoptartCoreBlockEntities.MILLSTONE_ROTOR.get(), pos, state);
     }
 
-    public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
-        super.addBehaviours(behaviours);
-    }
-
     public float calculateStressApplied() {
-        this.lastStressApplied = 16.0F;
-        return 16.0F;
+        this.lastStressApplied = STRESS_IMPACT;
+        return STRESS_IMPACT;
     }
 
     public boolean isOverspeed() {

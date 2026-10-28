@@ -1,7 +1,7 @@
 package dev.poptartking.poptartcore.mixin.integration.simulated;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
+import dev.poptartking.poptartcore.registry.PoptartCreateBlocks;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -16,6 +16,6 @@ public class PortableEngineDyeingJeiMixin {
                             target =
                                     "Lcom/tterrag/registrate/util/entry/BlockEntry;asStack()Lnet/minecraft/world/item/ItemStack;"))
     private static ItemStack poptartcore$showPoptartEngine(ItemStack original) {
-        return new ItemStack(PoptartCoreBlocks.PORTABLE_ENGINE.get());
+        return new ItemStack(PoptartCreateBlocks.PORTABLE_ENGINE.get());
     }
 }

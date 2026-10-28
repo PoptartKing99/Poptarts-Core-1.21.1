@@ -1,6 +1,6 @@
 package dev.poptartking.poptartcore.mixin.integration.simulated;
 
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
+import dev.poptartking.poptartcore.registry.PoptartCreateBlocks;
 import dev.simulated_team.simulated.data.neoforge.PortableEngineDyeingRecipe;
 import dev.simulated_team.simulated.index.SimBlocks;
 import net.minecraft.core.HolderLookup;
@@ -36,7 +36,7 @@ public class PortableEngineDyeingMixin {
             CraftingInput input, HolderLookup.Provider registries, CallbackInfoReturnable<ItemStack> callback) {
         ItemStack result = callback.getReturnValue();
         if (!result.isEmpty() && result.is(SimBlocks.RED_PORTABLE_ENGINE.asItem())) {
-            ItemStack replacement = new ItemStack(PoptartCoreBlocks.PORTABLE_ENGINE.get());
+            ItemStack replacement = new ItemStack(PoptartCreateBlocks.PORTABLE_ENGINE.get());
             if (!result.isComponentsPatchEmpty()) {
                 replacement.applyComponents(result.getComponentsPatch());
             }

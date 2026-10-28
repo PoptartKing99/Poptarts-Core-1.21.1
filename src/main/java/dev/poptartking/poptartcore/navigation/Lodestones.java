@@ -19,8 +19,6 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 public final class Lodestones {
     private static final double EDIT_DISTANCE_SQUARED = 64.0;
-    private static final char FORMATTING = '§';
-    private static final char DELETE = '\u007f';
     private static int moving;
 
     private Lodestones() {}
@@ -48,9 +46,12 @@ public final class Lodestones {
     public static void onUpdate(UpdateLodestone packet, ServerPlayer player) {
         ServerLevel level = getLevel(player);
         BlockPos pos = packet.pos();
-        if (!player.isSpectator()
-                && is(level.getBlockState(pos))
-                && !(player.distanceToSqr(WaypointAnchors.getWorldPosition(level, pos)) > 64.0)
+        if (player.isSpectator() || !level.isInWorldBounds(pos)) return;
+        // Never load a chunk for a client-supplied position; Sable also supports this lookup for loaded plots.
+        var chunk = level.getChunkSource().getChunkNow(pos.getX() >> 4, pos.getZ() >> 4);
+        if (chunk != null
+                && is(chunk.getBlockState(pos))
+                && player.distanceToSqr(WaypointAnchors.getWorldPosition(level, pos)) <= EDIT_DISTANCE_SQUARED
                 && level.mayInteract(player, pos)) {
             LodestoneMark mark = new LodestoneMark(clean(packet.name()), WaypointIcons.sanitize(packet.icon()));
             GlobalPos key = GlobalPos.of(level.dimension(), pos);

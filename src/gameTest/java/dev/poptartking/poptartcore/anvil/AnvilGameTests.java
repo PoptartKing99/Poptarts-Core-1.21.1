@@ -1,9 +1,9 @@
 package dev.poptartking.poptartcore.anvil;
 
 import dev.poptartking.poptartcore.PoptartCore;
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
 import dev.poptartking.poptartcore.registry.PoptartCoreTags;
 import dev.poptartking.poptartcore.registry.PoptartToolItems;
+import dev.poptartking.poptartcore.registry.PoptartWorkstationBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
@@ -74,7 +74,9 @@ public final class AnvilGameTests {
         loaded.loadWithComponents(saved, helper.getLevel().registryAccess());
         helper.assertTrue(loaded.hammer().getDamageValue() == 7, "Stored hammer persists");
         AnvilBlock.replace(
-                helper.getLevel(), pos, PoptartCoreBlocks.DAMAGED_ANVIL.get().defaultBlockState());
+                helper.getLevel(),
+                pos,
+                PoptartWorkstationBlocks.DAMAGED_ANVIL.get().defaultBlockState());
         helper.assertTrue(
                 menu.hasWorkingHammer() && menu.getSlot(2).getItem().getDamageValue() == 7,
                 "Open menu follows damage-stage replacement");
@@ -96,7 +98,7 @@ public final class AnvilGameTests {
                                     false));
         }
         helper.assertTrue(
-                helper.getLevel().getBlockState(pos).is(PoptartCoreBlocks.ANVIL.get()) && iron.isEmpty(),
+                helper.getLevel().getBlockState(pos).is(PoptartWorkstationBlocks.ANVIL.get()) && iron.isEmpty(),
                 "One iron repairs each damage stage");
         helper.assertTrue(menu.getSlot(2).getItem().getDamageValue() == 7, "Block repair preserves hammer");
         helper.succeed();
@@ -108,7 +110,7 @@ public final class AnvilGameTests {
         helper.getLevel()
                 .setBlockAndUpdate(
                         pos,
-                        (primitive ? PoptartCoreBlocks.PRIMITIVE_ANVIL : PoptartCoreBlocks.ANVIL)
+                        (primitive ? PoptartWorkstationBlocks.PRIMITIVE_ANVIL : PoptartWorkstationBlocks.ANVIL)
                                 .get()
                                 .defaultBlockState());
         return new AnvilMenu(1, player.getInventory(), ContainerLevelAccess.create(helper.getLevel(), pos));

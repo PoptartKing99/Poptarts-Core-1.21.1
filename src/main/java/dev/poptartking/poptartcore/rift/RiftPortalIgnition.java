@@ -33,6 +33,7 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
+import org.jetbrains.annotations.Nullable;
 
 @EventBusSubscriber(modid = PoptartCore.MOD_ID)
 public final class RiftPortalIgnition {
@@ -83,9 +84,7 @@ public final class RiftPortalIgnition {
     }
 
     private static boolean ringComplete(ServerLevel level, Set<BlockPos> interior, Axis axis) {
-        Direction[] plane = axis == Axis.X
-                ? new Direction[] {Direction.EAST, Direction.WEST, Direction.UP, Direction.DOWN}
-                : new Direction[] {Direction.SOUTH, Direction.NORTH, Direction.UP, Direction.DOWN};
+        Direction[] plane = plane(axis);
 
         for (BlockPos pos : interior) {
             for (Direction direction : plane) {
@@ -134,7 +133,7 @@ public final class RiftPortalIgnition {
             List<List<BlockPos>> rings = rings(interior);
             if (!rings.isEmpty()) {
                 Vec3 center = center(interior);
-                ACTIVE.add(new Ignition(level, axis, rings, center));
+                ACTIVE.add(new Ignition(level, axis, interior, rings, center));
                 level.playSound(null, seed, SoundEvents.RESPAWN_ANCHOR_CHARGE, SoundSource.BLOCKS, 0.9F, 0.45F);
                 level.playSound(null, seed, SoundEvents.BEACON_ACTIVATE, SoundSource.BLOCKS, 0.35F, 1.8F);
                 return true;
@@ -151,9 +150,7 @@ public final class RiftPortalIgnition {
     }
 
     private static Set<BlockPos> interior(ServerLevel level, BlockPos seed, Axis axis) {
-        Direction[] plane = axis == Axis.X
-                ? new Direction[] {Direction.EAST, Direction.WEST, Direction.UP, Direction.DOWN}
-                : new Direction[] {Direction.SOUTH, Direction.NORTH, Direction.UP, Direction.DOWN};
+        Direction[] plane = plane(axis);
         Set<BlockPos> found = new HashSet<>();
         Deque<BlockPos> queue = new ArrayDeque<>();
         queue.add(seed.immutable());
@@ -181,6 +178,12 @@ public final class RiftPortalIgnition {
             }
         }
         return found;
+    }
+
+    private static Direction[] plane(Axis axis) {
+        return axis == Axis.X
+                ? new Direction[] {Direction.EAST, Direction.WEST, Direction.UP, Direction.DOWN}
+                : new Direction[] {Direction.SOUTH, Direction.NORTH, Direction.UP, Direction.DOWN};
     }
 
     private static boolean passable(BlockState state) {
@@ -259,6 +262,10 @@ public final class RiftPortalIgnition {
     }
 
     private static boolean advance(Ignition ignition) {
+        if (!valid(ignition)) {
+            cancel(ignition);
+            return true;
+        }
         ServerLevel level = ignition.level();
         RandomSource random = level.random;
         ignition.tick++;
@@ -280,7 +287,11 @@ public final class RiftPortalIgnition {
                 .setValue(BlockStateProperties.HORIZONTAL_AXIS, ignition.axis());
         for (BlockPos pos : ring) {
             if (!level.getBlockState(pos).is(Blocks.NETHER_PORTAL)) {
-                level.setBlock(pos, portal, Block.UPDATE_CLIENTS);
+                if (!level.setBlock(pos, portal, Block.UPDATE_CLIENTS)) {
+                    cancel(ignition);
+                    return true;
+                }
+                ignition.created.add(pos);
             }
             for (int index = 0; index < 4; index++) {
                 level.sendParticles(
@@ -311,6 +322,43 @@ public final class RiftPortalIgnition {
         level.playSound(null, sound, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.BLOCKS, 0.5F, pitch);
         level.playSound(null, sound, SoundEvents.SCULK_CATALYST_BLOOM, SoundSource.BLOCKS, 0.35F, pitch);
         return false;
+    }
+
+    private static boolean valid(Ignition ignition) {
+        Direction[] plane = plane(ignition.axis());
+        for (BlockPos pos : ignition.interior) {
+            BlockState state = loadedState(ignition.level(), pos);
+            if (state == null || !passable(state)) return false;
+            if (ignition.created.contains(pos)
+                    && (!state.is(Blocks.NETHER_PORTAL)
+                            || state.getValue(BlockStateProperties.HORIZONTAL_AXIS) != ignition.axis())) return false;
+            for (Direction direction : plane) {
+                BlockPos neighbor = pos.relative(direction);
+                if (!ignition.interior.contains(neighbor)) {
+                    BlockState frame = loadedState(ignition.level(), neighbor);
+                    if (frame == null || !frame.is(Blocks.OBSIDIAN)) return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    private static void cancel(Ignition ignition) {
+        for (BlockPos pos : ignition.created) {
+            BlockState state = loadedState(ignition.level(), pos);
+            // Clean up only this animation's portal blocks, preserving any player replacements.
+            if (state != null
+                    && state.is(Blocks.NETHER_PORTAL)
+                    && state.getValue(BlockStateProperties.HORIZONTAL_AXIS) == ignition.axis()) {
+                ignition.level().setBlock(pos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
+            }
+        }
+    }
+
+    @Nullable
+    private static BlockState loadedState(ServerLevel level, BlockPos pos) {
+        var chunk = level.getChunkSource().getChunkNow(pos.getX() >> 4, pos.getZ() >> 4);
+        return chunk == null ? null : chunk.getBlockState(pos);
     }
 
     private static void gather(Ignition ignition, RandomSource random) {
@@ -363,14 +411,18 @@ public final class RiftPortalIgnition {
     private static final class Ignition {
         private final ServerLevel level;
         private final Axis axis;
+        private final Set<BlockPos> interior;
+        private final Set<BlockPos> created = new HashSet<>();
         private final List<List<BlockPos>> rings;
         private final Vec3 center;
         private int tick;
         private int ring;
 
-        private Ignition(ServerLevel level, Axis axis, List<List<BlockPos>> rings, Vec3 center) {
+        private Ignition(
+                ServerLevel level, Axis axis, Set<BlockPos> interior, List<List<BlockPos>> rings, Vec3 center) {
             this.level = level;
             this.axis = axis;
+            this.interior = Set.copyOf(interior);
             this.rings = rings;
             this.center = center;
         }

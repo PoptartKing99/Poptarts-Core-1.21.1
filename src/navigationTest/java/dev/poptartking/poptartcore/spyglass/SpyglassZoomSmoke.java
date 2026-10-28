@@ -6,7 +6,7 @@ import dev.poptartking.poptartcore.backpack.BackpackAttachments;
 import dev.poptartking.poptartcore.backpack.client.BackpackAttachmentClient;
 import dev.poptartking.poptartcore.equipment.AccessoryInventory;
 import dev.poptartking.poptartcore.equipment.client.UtilityClient;
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
+import dev.poptartking.poptartcore.registry.PoptartEquipmentBlocks;
 import dev.poptartking.poptartcore.spyglass.client.SpyglassZoom;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
@@ -73,9 +73,10 @@ public final class SpyglassZoomSmoke {
                             InteractionHand.MAIN_HAND, target == 0 ? spyglass : new ItemStack(Items.APPLE));
                     if (target == 3) slots.setStackInSlot(AccessoryInventory.UTILITY_SLOT, spyglass);
                     else if (target > 0) {
-                        var bag = new ItemStack((target == 1 ? PoptartCoreBlocks.BACKPACK : PoptartCoreBlocks.RUCKSACK)
-                                .get()
-                                .asItem());
+                        var bag = new ItemStack(
+                                (target == 1 ? PoptartEquipmentBlocks.BACKPACK : PoptartEquipmentBlocks.RUCKSACK)
+                                        .get()
+                                        .asItem());
                         BackpackAttachments.set(bag, 1, spyglass);
                         slots.setStackInSlot(AccessoryInventory.BACK_SLOT, bag);
                     }

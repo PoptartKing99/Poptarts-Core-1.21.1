@@ -5,7 +5,7 @@ import com.simibubi.create.api.contraption.BlockMovementChecks.CheckResult;
 import com.simibubi.create.api.stress.BlockStressValues;
 import com.simibubi.create.foundation.item.KineticStats;
 import com.simibubi.create.foundation.item.TooltipModifier;
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
+import dev.poptartking.poptartcore.registry.PoptartWorkstationBlocks;
 import java.util.function.DoubleSupplier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -25,9 +25,10 @@ public class MillstoneEvents {
     @SubscribeEvent
     public static void registerStress(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
-            Block rotor = PoptartCoreBlocks.MILLSTONE_ROTOR.get();
+            Block rotor = PoptartWorkstationBlocks.MILLSTONE_ROTOR.get();
             BlockStressValues.IMPACTS.register(rotor, (DoubleSupplier) () -> 16.0);
-            TooltipModifier.REGISTRY.register((PoptartCoreBlocks.MILLSTONE.get()).asItem(), new KineticStats(rotor));
+            TooltipModifier.REGISTRY.register(
+                    (PoptartWorkstationBlocks.MILLSTONE.get()).asItem(), new KineticStats(rotor));
         });
     }
 
@@ -66,9 +67,9 @@ public class MillstoneEvents {
     @SubscribeEvent
     public static void registerCapabilities(RegisterCapabilitiesEvent event) {
         event.registerBlock(
-                ItemHandler.BLOCK,
-                (level, pos, state, be, side) -> resolve(level, pos, state),
-                new Block[] {PoptartCoreBlocks.MILLSTONE.get(), PoptartCoreBlocks.MILLSTONE_STRUCTURAL.get()});
+                ItemHandler.BLOCK, (level, pos, state, be, side) -> resolve(level, pos, state), new Block[] {
+                    PoptartWorkstationBlocks.MILLSTONE.get(), PoptartWorkstationBlocks.MILLSTONE_STRUCTURAL.get()
+                });
     }
 
     @Nullable

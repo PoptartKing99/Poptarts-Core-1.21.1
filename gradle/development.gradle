@@ -1,0 +1,89 @@
+// Exact local integration binaries; the full test runtime also has a locked, isolated mod set.
+def lockFile = layout.projectDirectory.file('gradle/development/mods-lock.json')
+def lockData = new groovy.json.JsonSlurper().parseText(providers.fileContents(lockFile).asText.get())
+if (lockData.schemaVersion != 1) throw new GradleException('Unsupported development mod lock format')
+def lockedMods = lockData.mods.collect { [id: it.id.toString(), file: it.file.toString(), sha256: it.sha256.toString()] }
+if (lockedMods.collect { it.id }.toSet().size() != lockedMods.size()) {
+    throw new GradleException('Development mod IDs must be unique')
+}
+def modsDirectory = file(providers.gradleProperty('devModsDir').getOrElse('run/mods'))
+def localMods = lockedMods.collectEntries { entry ->
+    if (new File(entry.file).name != entry.file || entry.file.contains('\\') || !entry.file.endsWith('.jar')) {
+        throw new GradleException("Invalid development mod filename: ${entry.file}")
+    }
+    [(entry.id): new File(modsDirectory, entry.file)]
+}
+ext.developmentMod = { String id ->
+    def mod = localMods[id]
+    if (mod == null) throw new GradleException("Unknown locked development mod: ${id}")
+    mod
+}
+
+def registerModCheck = { String taskName, List entries ->
+    def stamp = layout.buildDirectory.file("verification/${taskName}.txt").get().asFile
+    tasks.register(taskName) {
+        group = 'verification'
+        description = 'Checks local mod versions and SHA-256 hashes against the tested dependency lock.'
+        inputs.file(lockFile)
+        inputs.files(entries.collect { localMods[it.id] })
+        outputs.file(stamp)
+        doLast {
+            entries.each { entry ->
+                def jar = localMods[entry.id]
+                if (!jar.isFile()) throw new GradleException(
+                        "Missing development mod ${jar}. Run scripts/setup-dev-mods.ps1 with the exact existing mod files; see docs/development.md.")
+                def digest = java.security.MessageDigest.getInstance('SHA-256')
+                jar.withInputStream { stream ->
+                    byte[] buffer = new byte[65536]
+                    int count
+                    while ((count = stream.read(buffer)) != -1) digest.update(buffer, 0, count)
+                }
+                def actual = digest.digest().encodeHex().toString()
+                if (actual != entry.sha256) throw new GradleException(
+                        "Development mod checksum mismatch for ${jar.name}. Expected ${entry.sha256}, got ${actual}. Restore the locked binary or intentionally update the lock after a compatibility review.")
+            }
+            stamp.parentFile.mkdirs()
+            stamp.text = entries.collect { "${it.id} ${it.sha256}" }.join('\n') + '\n'
+            logger.lifecycle("Verified ${entries.size()} locked development mods.")
+        }
+    }
+}
+
+def compileIds = ['nomansland', 'abundant_atmosphere', 'blockbox', 'supplementaries',
+                  'ragdoll', 'reliable_backpacks', 'newworld', 'sable'] as Set
+def verifyCompileMods = registerModCheck('verifyCompileModDependencies', lockedMods.findAll { it.id in compileIds })
+def verifyAllMods = registerModCheck('verifyDevelopmentMods', lockedMods)
+tasks.named('compileJava').configure { dependsOn(verifyCompileMods) }
+
+def datagenMods = configurations.create('datagenMods')
+repositories.maven {
+    url = 'https://maven.teamabnormals.com/'
+    content { includeGroup 'com.teamabnormals' }
+}
+dependencies.add('datagenMods', "com.teamabnormals:gallery:1.21.1-${project.gallery_datagen_version}") {
+    transitive = false
+}
+def syncDataMods = tasks.register('syncDataMods', Sync) {
+    dependsOn(verifyAllMods)
+    from(localMods.values())
+    from(datagenMods)
+    into(layout.buildDirectory.dir('data-run/mods'))
+    outputs.upToDateWhen { Sync sync ->
+        sync.destinationDir.isDirectory() && sync.destinationDir.list().toList().toSet() == sync.source.files.collect { it.name }.toSet()
+    }
+}
+tasks.matching { it.name == 'runData' }.configureEach { dependsOn(syncDataMods) }
+
+if (providers.gradleProperty('gameTests').isPresent()) {
+    def syncMods = tasks.register('syncGameTestMods', Sync) {
+        dependsOn(verifyAllMods)
+        from(localMods.values())
+        into(layout.buildDirectory.dir('game-test-run/mods'))
+        outputs.upToDateWhen { Sync sync ->
+            sync.destinationDir.isDirectory() && sync.destinationDir.list().toList().toSet() == sync.source.files.collect { it.name }.toSet()
+        }
+        description = 'Synchronizes only the locked mods into the isolated GameTest runtime.'
+    }
+    tasks.matching { it.name == 'runGameTestServer' }.configureEach { dependsOn(syncMods, 'jar') }
+    tasks.named('check').configure { dependsOn('runGameTestServer') }
+}

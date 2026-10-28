@@ -7,7 +7,7 @@ import dev.poptartking.poptartcore.backpack.client.BackpackAttachmentClient;
 import dev.poptartking.poptartcore.equipment.AccessoryInventory;
 import dev.poptartking.poptartcore.equipment.client.UtilityClient;
 import dev.poptartking.poptartcore.navigation.CompassAccess;
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
+import dev.poptartking.poptartcore.registry.PoptartEquipmentBlocks;
 import dev.poptartking.poptartcore.timekeeping.client.ClockHud;
 import dev.poptartking.poptartcore.timekeeping.client.TimekeepingClient;
 import net.minecraft.client.KeyMapping;
@@ -64,9 +64,10 @@ public final class TimekeepingControlsSmoke {
                     if (target == 3)
                         AccessoryInventory.get(player).setStackInSlot(AccessoryInventory.UTILITY_SLOT, clock);
                     else if (target > 0) {
-                        var bag = new ItemStack((target == 1 ? PoptartCoreBlocks.BACKPACK : PoptartCoreBlocks.RUCKSACK)
-                                .get()
-                                .asItem());
+                        var bag = new ItemStack(
+                                (target == 1 ? PoptartEquipmentBlocks.BACKPACK : PoptartEquipmentBlocks.RUCKSACK)
+                                        .get()
+                                        .asItem());
                         BackpackAttachments.set(bag, 1, clock);
                         AccessoryInventory.get(player).setStackInSlot(AccessoryInventory.BACK_SLOT, bag);
                     }

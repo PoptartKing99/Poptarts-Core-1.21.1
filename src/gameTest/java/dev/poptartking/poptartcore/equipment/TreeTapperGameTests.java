@@ -2,7 +2,7 @@ package dev.poptartking.poptartcore.equipment;
 
 import dev.poptartking.poptartcore.PoptartCore;
 import dev.poptartking.poptartcore.decoration.WoodenBucketBlock;
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
+import dev.poptartking.poptartcore.registry.PoptartWorkstationBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTest;
@@ -82,7 +82,9 @@ public final class TreeTapperGameTests {
                         "Both parts removed");
                 int count = level.getEntitiesOfClass(ItemEntity.class, new AABB(pos).inflate(2)).stream()
                         .filter(e -> e.getItem()
-                                .is(PoptartCoreBlocks.WOODEN_BUCKET.item().get()))
+                                .is(PoptartWorkstationBlocks.WOODEN_BUCKET
+                                        .item()
+                                        .get()))
                         .mapToInt(e -> e.getItem().getCount())
                         .sum();
                 helper.assertTrue(count == 1, "Exactly one tapper dropped; got " + count);
@@ -249,7 +251,7 @@ public final class TreeTapperGameTests {
 
     private static boolean place(GameTestHelper helper, BlockPos pos, Direction face) {
         var player = helper.makeMockPlayer(GameType.SURVIVAL);
-        var stack = new ItemStack(PoptartCoreBlocks.WOODEN_BUCKET.item().get());
+        var stack = new ItemStack(PoptartWorkstationBlocks.WOODEN_BUCKET.item().get());
         var hit = new BlockHitResult(
                 Vec3.atCenterOf(pos.relative(face.getOpposite())), face, pos.relative(face.getOpposite()), false);
         var context = new BlockPlaceContext(helper.getLevel(), player, InteractionHand.MAIN_HAND, stack, hit);

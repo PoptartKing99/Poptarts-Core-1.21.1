@@ -1,12 +1,15 @@
 package dev.poptartking.poptartcore.catalog;
 
 import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Supplier;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -17,6 +20,7 @@ public final class CatalogBlockDefinition<T extends Block> implements Supplier<T
     private final DeferredBlock<T> block;
     private final DeferredItem<BlockItem> item;
     private final Set<TagKey<Block>> tags = new LinkedHashSet<>();
+    private final Set<TagKey<Item>> itemTags = new LinkedHashSet<>();
     private String displayName;
     private StorageRecipes storageRecipes;
     private Supplier<? extends ItemLike> oreDrop;
@@ -29,6 +33,8 @@ public final class CatalogBlockDefinition<T extends Block> implements Supplier<T
     private int variants = 1;
     private LootMode lootMode = LootMode.GENERATED;
     private boolean showInCreativeTab = true;
+    private CreativeCatalogGroup creativeGroup;
+    private int creativeOrder = Integer.MAX_VALUE;
     private int fuelBurnTime = -1;
     private boolean frozen;
 
@@ -37,6 +43,29 @@ public final class CatalogBlockDefinition<T extends Block> implements Supplier<T
         this.block = block;
         this.item = item;
         this.displayName = PoptartCatalog.createDisplayName(id);
+    }
+
+    public CreativeCatalogGroup creativeGroup() {
+        return creativeGroup != null ? creativeGroup : CreativeCatalogGroup.forItem(item.get());
+    }
+
+    public int creativeOrder() {
+        return creativeOrder;
+    }
+
+    /** Appends this entry to a category without maintaining a separate item list. */
+    public CatalogBlockDefinition<T> creative(CreativeCatalogGroup group) {
+        return creative(group, Integer.MAX_VALUE);
+    }
+
+    /** Lower positions appear first within the category; equal positions keep registration order. */
+    public CatalogBlockDefinition<T> creative(CreativeCatalogGroup group, int order) {
+        requireMutable();
+        Objects.requireNonNull(group, "Creative category");
+        if (order < 0) throw new IllegalArgumentException("Creative order cannot be negative");
+        this.creativeGroup = group;
+        this.creativeOrder = order;
+        return this;
     }
 
     public String id() {
@@ -101,6 +130,10 @@ public final class CatalogBlockDefinition<T extends Block> implements Supplier<T
 
     public Set<TagKey<Block>> tags() {
         return Set.copyOf(tags);
+    }
+
+    public Set<TagKey<Item>> itemTags() {
+        return Set.copyOf(itemTags);
     }
 
     public int fuelBurnTime() {
@@ -197,6 +230,14 @@ public final class CatalogBlockDefinition<T extends Block> implements Supplier<T
     public final CatalogBlockDefinition<T> tags(TagKey<Block>... tags) {
         requireMutable();
         this.tags.addAll(java.util.List.of(tags));
+        return this;
+    }
+
+    /** Tags the inventory item independently of the placed block's tags. */
+    @SafeVarargs
+    public final CatalogBlockDefinition<T> itemTags(TagKey<Item>... tags) {
+        requireMutable();
+        this.itemTags.addAll(List.of(tags));
         return this;
     }
 

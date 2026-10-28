@@ -1,0 +1,441 @@
+{
+  "clientMixins": [
+    "armor.FirstPersonBeekeeperSleeveMixin",
+    "bee.BeeSmokerArmPoseMixin",
+    "bee.BeeSmokerReequipMixin"
+  ],
+  "commonMixins": [
+    "bee.BeeStingMixin",
+    "bee.BeehiveSmokedMixin",
+    "bee.SmokedBeeMixin",
+    "effect.MobEffectInstanceAccessor",
+    "equipment.ArmorStandCapeMixin",
+    "integration.simulated.PortableEngineBlockMixin",
+    "integration.simulated.PortableEngineDyeingMixin",
+    "integration.simulated.PortableEngineFuelInventoryMixin",
+    "integration.simulated.PortableEngineFuelMixin"
+  ],
+  "features": [
+    "beekeeping",
+    "automation",
+    "workbench",
+    "hammer",
+    "bloomery",
+    "backpack-assets",
+    "armor-stand-capes"
+  ],
+  "forbiddenRecipeFilenames": [
+    "beekeeper_helmet",
+    "beekeeper_chestplate",
+    "beekeeper_leggings",
+    "beekeeper_boots"
+  ],
+  "jsonRules": [
+    {
+      "expected": 8,
+      "mode": "count",
+      "path": "assets/poptartcore/blockstates/bloomery.json",
+      "pointer": "/variants"
+    },
+    {
+      "expected": 9,
+      "mode": "count",
+      "path": "assets/poptartcore/blockstates/iron_bloom.json",
+      "pointer": "/variants"
+    },
+    {
+      "expected": {
+        "facing=east,dyed=false,body_dyed=false,half=lower": {
+          "model": "poptartcore:block/rucksack_placed",
+          "y": 270
+        },
+        "facing=east,dyed=false,body_dyed=false,half=upper": {
+          "model": "poptartcore:block/rucksack_upper"
+        },
+        "facing=east,dyed=false,body_dyed=true,half=lower": {
+          "model": "poptartcore:block/rucksack_body_dyed_placed",
+          "y": 270
+        },
+        "facing=east,dyed=false,body_dyed=true,half=upper": {
+          "model": "poptartcore:block/rucksack_upper"
+        },
+        "facing=east,dyed=true,body_dyed=false,half=lower": {
+          "model": "poptartcore:block/rucksack_dyed_placed",
+          "y": 270
+        },
+        "facing=east,dyed=true,body_dyed=false,half=upper": {
+          "model": "poptartcore:block/rucksack_upper"
+        },
+        "facing=east,dyed=true,body_dyed=true,half=lower": {
+          "model": "poptartcore:block/rucksack_both_dyed_placed",
+          "y": 270
+        },
+        "facing=east,dyed=true,body_dyed=true,half=upper": {
+          "model": "poptartcore:block/rucksack_upper"
+        },
+        "facing=north,dyed=false,body_dyed=false,half=lower": {
+          "model": "poptartcore:block/rucksack_placed",
+          "y": 180
+        },
+        "facing=north,dyed=false,body_dyed=false,half=upper": {
+          "model": "poptartcore:block/rucksack_upper"
+        },
+        "facing=north,dyed=false,body_dyed=true,half=lower": {
+          "model": "poptartcore:block/rucksack_body_dyed_placed",
+          "y": 180
+        },
+        "facing=north,dyed=false,body_dyed=true,half=upper": {
+          "model": "poptartcore:block/rucksack_upper"
+        },
+        "facing=north,dyed=true,body_dyed=false,half=lower": {
+          "model": "poptartcore:block/rucksack_dyed_placed",
+          "y": 180
+        },
+        "facing=north,dyed=true,body_dyed=false,half=upper": {
+          "model": "poptartcore:block/rucksack_upper"
+        },
+        "facing=north,dyed=true,body_dyed=true,half=lower": {
+          "model": "poptartcore:block/rucksack_both_dyed_placed",
+          "y": 180
+        },
+        "facing=north,dyed=true,body_dyed=true,half=upper": {
+          "model": "poptartcore:block/rucksack_upper"
+        },
+        "facing=south,dyed=false,body_dyed=false,half=lower": {
+          "model": "poptartcore:block/rucksack_placed",
+          "y": 0
+        },
+        "facing=south,dyed=false,body_dyed=false,half=upper": {
+          "model": "poptartcore:block/rucksack_upper"
+        },
+        "facing=south,dyed=false,body_dyed=true,half=lower": {
+          "model": "poptartcore:block/rucksack_body_dyed_placed",
+          "y": 0
+        },
+        "facing=south,dyed=false,body_dyed=true,half=upper": {
+          "model": "poptartcore:block/rucksack_upper"
+        },
+        "facing=south,dyed=true,body_dyed=false,half=lower": {
+          "model": "poptartcore:block/rucksack_dyed_placed",
+          "y": 0
+        },
+        "facing=south,dyed=true,body_dyed=false,half=upper": {
+          "model": "poptartcore:block/rucksack_upper"
+        },
+        "facing=south,dyed=true,body_dyed=true,half=lower": {
+          "model": "poptartcore:block/rucksack_both_dyed_placed",
+          "y": 0
+        },
+        "facing=south,dyed=true,body_dyed=true,half=upper": {
+          "model": "poptartcore:block/rucksack_upper"
+        },
+        "facing=west,dyed=false,body_dyed=false,half=lower": {
+          "model": "poptartcore:block/rucksack_placed",
+          "y": 90
+        },
+        "facing=west,dyed=false,body_dyed=false,half=upper": {
+          "model": "poptartcore:block/rucksack_upper"
+        },
+        "facing=west,dyed=false,body_dyed=true,half=lower": {
+          "model": "poptartcore:block/rucksack_body_dyed_placed",
+          "y": 90
+        },
+        "facing=west,dyed=false,body_dyed=true,half=upper": {
+          "model": "poptartcore:block/rucksack_upper"
+        },
+        "facing=west,dyed=true,body_dyed=false,half=lower": {
+          "model": "poptartcore:block/rucksack_dyed_placed",
+          "y": 90
+        },
+        "facing=west,dyed=true,body_dyed=false,half=upper": {
+          "model": "poptartcore:block/rucksack_upper"
+        },
+        "facing=west,dyed=true,body_dyed=true,half=lower": {
+          "model": "poptartcore:block/rucksack_both_dyed_placed",
+          "y": 90
+        },
+        "facing=west,dyed=true,body_dyed=true,half=upper": {
+          "model": "poptartcore:block/rucksack_upper"
+        }
+      },
+      "mode": "exact",
+      "path": "assets/poptartcore/blockstates/rucksack.json",
+      "pointer": "/variants"
+    },
+    {
+      "expected": "poptartcore:",
+      "mode": "values-prefix",
+      "path": "assets/poptartcore/models/item/backpack_attachments/compass.json",
+      "pointer": "/textures"
+    },
+    {
+      "expected": "poptartcore:",
+      "mode": "values-prefix",
+      "path": "assets/poptartcore/models/item/backpack_attachments/clock_day.json",
+      "pointer": "/textures"
+    },
+    {
+      "expected": "poptartcore:",
+      "mode": "values-prefix",
+      "path": "assets/poptartcore/models/item/backpack_attachments/clock_night.json",
+      "pointer": "/textures"
+    },
+    {
+      "expected": "poptartcore:",
+      "mode": "values-prefix",
+      "path": "assets/poptartcore/models/item/backpack_attachments/recovery_compass.json",
+      "pointer": "/textures"
+    },
+    {
+      "expected": "poptartcore:",
+      "mode": "values-prefix",
+      "path": "assets/poptartcore/models/item/backpack_attachments/heavy_core.json",
+      "pointer": "/textures"
+    },
+    {
+      "expected": "poptartcore:",
+      "mode": "values-prefix",
+      "path": "assets/poptartcore/models/item/backpack_attachments/bundle.json",
+      "pointer": "/textures"
+    },
+    {
+      "expected": "poptartcore:",
+      "mode": "values-prefix",
+      "path": "assets/poptartcore/models/item/backpack_attachments/rucksack_banner.json",
+      "pointer": "/textures"
+    },
+    {
+      "expected": "poptartcore:",
+      "mode": "values-prefix",
+      "path": "assets/poptartcore/models/item/backpack_attachments/spyglass.json",
+      "pointer": "/textures"
+    },
+    {
+      "mode": "not-empty",
+      "path": "assets/poptartcore/models/item/backpack_attachments/spyglass.json",
+      "pointer": "/elements"
+    },
+    {
+      "mode": "exists",
+      "path": "assets/poptartcore/models/item/backpack_attachments/spyglass.json",
+      "pointer": "/display/head"
+    },
+    {
+      "expected": [
+        "poptartcore:backpack_attachments"
+      ],
+      "mode": "contains",
+      "path": "data/poptartcore/loot_table/blocks/backpack.json",
+      "pointer": "/pools/0/entries/0/functions/0/include"
+    },
+    {
+      "expected": [
+        "poptartcore:backpack_attachments"
+      ],
+      "mode": "contains",
+      "path": "data/poptartcore/loot_table/blocks/rucksack.json",
+      "pointer": "/pools/0/entries/0/functions/0/include"
+    },
+    {
+      "expected": {
+        "category": "misc",
+        "key": {
+          "B": {
+            "item": "aeronautics:adjustable_burner"
+          },
+          "I": {
+            "item": "minecraft:iron_ingot"
+          },
+          "P": {
+            "tag": "minecraft:planks"
+          },
+          "S": {
+            "item": "create:iron_sheet"
+          },
+          "T": {
+            "item": "poptartcore:steel_ingot"
+          }
+        },
+        "pattern": [
+          "ISI",
+          "IBI",
+          "PTP"
+        ],
+        "result": {
+          "count": 1,
+          "id": "poptartcore:portable_engine"
+        },
+        "type": "minecraft:crafting_shaped"
+      },
+      "mode": "exact",
+      "path": "data/poptartcore/recipe/portable_engine.json",
+      "pointer": ""
+    },
+    {
+      "expected": {
+        "sounds": [
+          "poptartcore:bee_smoker/blow"
+        ],
+        "subtitle": "subtitles.poptartcore.bee_smoker.blow"
+      },
+      "mode": "exact",
+      "path": "assets/poptartcore/sounds.json",
+      "pointer": "/bee_smoker.blow"
+    },
+    {
+      "expected": {
+        "sounds": [
+          "poptartcore:bee_smoker/retract"
+        ],
+        "subtitle": "subtitles.poptartcore.bee_smoker.retract"
+      },
+      "mode": "exact",
+      "path": "assets/poptartcore/sounds.json",
+      "pointer": "/bee_smoker.retract"
+    }
+  ],
+  "referenceTextures": {
+    "assets/poptartcore/textures/block/workbench/workbench_bottom.png": "assets/wayfarer_core/textures/block/workbench_bottom.png",
+    "assets/poptartcore/textures/block/workbench/workbench_side_1.png": "assets/wayfarer_core/textures/block/workbench_side_1.png",
+    "assets/poptartcore/textures/block/workbench/workbench_side_2.png": "assets/wayfarer_core/textures/block/workbench_side_2.png",
+    "assets/poptartcore/textures/block/workbench/workbench_top.png": "assets/wayfarer_core/textures/block/workbench_top.png",
+    "assets/poptartcore/textures/gui/workbench/workbench.png": "assets/wayfarer_core/textures/gui/workbench.png"
+  },
+  "requiredResources": [
+    "assets/poptartcore/blockstates/bloomery.json",
+    "assets/poptartcore/blockstates/iron_bloom.json",
+    "assets/poptartcore/blockstates/portable_engine.json",
+    "assets/poptartcore/blockstates/quern.json",
+    "assets/poptartcore/blockstates/rucksack.json",
+    "assets/poptartcore/blockstates/workbench.json",
+    "assets/poptartcore/lang/en_us.json",
+    "assets/poptartcore/models/block/bloomery/bloomery.json",
+    "assets/poptartcore/models/block/bloomery/bloomery_lit.json",
+    "assets/poptartcore/models/block/iron_bloom/iron_bloom_1.json",
+    "assets/poptartcore/models/block/iron_bloom/iron_bloom_2.json",
+    "assets/poptartcore/models/block/iron_bloom/iron_bloom_3.json",
+    "assets/poptartcore/models/block/iron_bloom/iron_bloom_4.json",
+    "assets/poptartcore/models/block/iron_bloom/iron_bloom_5.json",
+    "assets/poptartcore/models/block/iron_bloom/iron_bloom_6.json",
+    "assets/poptartcore/models/block/iron_bloom/iron_bloom_7.json",
+    "assets/poptartcore/models/block/iron_bloom/iron_bloom_8.json",
+    "assets/poptartcore/models/block/iron_bloom/iron_bloom_9.json",
+    "assets/poptartcore/models/block/portable_engine.json",
+    "assets/poptartcore/models/block/quern/quern_flour.json",
+    "assets/poptartcore/models/block/quern/quern_inventory.json",
+    "assets/poptartcore/models/block/quern/quern_stone.json",
+    "assets/poptartcore/models/block/quern/quern_stone_base.json",
+    "assets/poptartcore/models/block/rucksack.json",
+    "assets/poptartcore/models/block/rucksack_placed.json",
+    "assets/poptartcore/models/block/rucksack_straps.json",
+    "assets/poptartcore/models/block/rucksack_upper.json",
+    "assets/poptartcore/models/block/workbench/workbench.json",
+    "assets/poptartcore/models/item/backpack_attachments/bundle.json",
+    "assets/poptartcore/models/item/backpack_attachments/clock_day.json",
+    "assets/poptartcore/models/item/backpack_attachments/clock_night.json",
+    "assets/poptartcore/models/item/backpack_attachments/compass.json",
+    "assets/poptartcore/models/item/backpack_attachments/heavy_core.json",
+    "assets/poptartcore/models/item/backpack_attachments/recovery_compass.json",
+    "assets/poptartcore/models/item/backpack_attachments/rucksack_banner.json",
+    "assets/poptartcore/models/item/backpack_attachments/spyglass.json",
+    "assets/poptartcore/models/item/bee_smoker.json",
+    "assets/poptartcore/models/item/bee_smoker_3d.json",
+    "assets/poptartcore/models/item/bee_smoker_gui.json",
+    "assets/poptartcore/models/item/beekeeper_boots.json",
+    "assets/poptartcore/models/item/beekeeper_chestplate.json",
+    "assets/poptartcore/models/item/beekeeper_helmet.json",
+    "assets/poptartcore/models/item/beekeeper_leggings.json",
+    "assets/poptartcore/models/item/bloomery.json",
+    "assets/poptartcore/models/item/hammer.json",
+    "assets/poptartcore/models/item/iron_bloom.json",
+    "assets/poptartcore/models/item/portable_engine.json",
+    "assets/poptartcore/models/item/quern.json",
+    "assets/poptartcore/models/item/rucksack.json",
+    "assets/poptartcore/models/item/workbench.json",
+    "assets/poptartcore/sounds.json",
+    "assets/poptartcore/sounds/bee_smoker/blow.ogg",
+    "assets/poptartcore/sounds/bee_smoker/retract.ogg",
+    "assets/poptartcore/sounds/quern/quern.ogg",
+    "assets/poptartcore/textures/armor/beekeeper_armor.png",
+    "assets/poptartcore/textures/block/bloomery/bloomery_bottom.png",
+    "assets/poptartcore/textures/block/bloomery/bloomery_bottom_lit.png",
+    "assets/poptartcore/textures/block/bloomery/bloomery_front.png",
+    "assets/poptartcore/textures/block/bloomery/bloomery_front_lit.png",
+    "assets/poptartcore/textures/block/bloomery/bloomery_front_lit.png.mcmeta",
+    "assets/poptartcore/textures/block/bloomery/bloomery_side.png",
+    "assets/poptartcore/textures/block/bloomery/bloomery_side_lit.png",
+    "assets/poptartcore/textures/block/bloomery/bloomery_top.png",
+    "assets/poptartcore/textures/block/bloomery/bloomery_top_lit.png",
+    "assets/poptartcore/textures/block/bloomery/bloomery_top_lit.png.mcmeta",
+    "assets/poptartcore/textures/block/iron_bloom/iron_bloom.png",
+    "assets/poptartcore/textures/block/iron_bloom/iron_bloom_base.png",
+    "assets/poptartcore/textures/block/portable_engine.png",
+    "assets/poptartcore/textures/block/quern/flour.png",
+    "assets/poptartcore/textures/block/rucksack.png",
+    "assets/poptartcore/textures/block/workbench/workbench_bottom.png",
+    "assets/poptartcore/textures/block/workbench/workbench_side_1.png",
+    "assets/poptartcore/textures/block/workbench/workbench_side_2.png",
+    "assets/poptartcore/textures/block/workbench/workbench_top.png",
+    "assets/poptartcore/textures/gui/backpack/backpack_attachments_panel.png",
+    "assets/poptartcore/textures/gui/backpack/rucksack_attachments_panel.png",
+    "assets/poptartcore/textures/gui/workbench/workbench.png",
+    "assets/poptartcore/textures/item/bee_smoker.png",
+    "assets/poptartcore/textures/item/bee_smoker_model.png",
+    "assets/poptartcore/textures/item/beekeeper_boots.png",
+    "assets/poptartcore/textures/item/beekeeper_chestplate.png",
+    "assets/poptartcore/textures/item/beekeeper_helmet.png",
+    "assets/poptartcore/textures/item/beekeeper_leggings.png",
+    "assets/poptartcore/textures/item/hammer.png",
+    "assets/poptartcore/textures/item/iron_bloom.png",
+    "data/c/tags/item/tools/hammers.json",
+    "data/minecraft/tags/block/mineable/axe.json",
+    "data/poptartcore/loot_table/blocks/bloomery.json",
+    "data/poptartcore/loot_table/blocks/portable_engine.json",
+    "data/poptartcore/loot_table/blocks/quern.json",
+    "data/poptartcore/loot_table/blocks/rucksack.json",
+    "data/poptartcore/loot_table/blocks/workbench.json",
+    "data/poptartcore/recipe/bee_smoker.json",
+    "data/poptartcore/recipe/grinding/flour_from_wheat.json",
+    "data/poptartcore/recipe/portable_engine.json",
+    "data/poptartcore/tags/item/hammer_repair_materials.json",
+    "data/poptartcore/tags/item/portable_engine_allowed_fuel.json",
+    "dev/poptartking/poptartcore/armor/client/BeekeeperArmorModel.class",
+    "dev/poptartking/poptartcore/beekeeping/BeekeeperEvents.class",
+    "dev/poptartking/poptartcore/bloomery/BloomeryBlock.class",
+    "dev/poptartking/poptartcore/bloomery/BloomeryBlockEntity.class",
+    "dev/poptartking/poptartcore/bloomery/IronBloomBlock.class",
+    "dev/poptartking/poptartcore/client/ClientEvents.class",
+    "dev/poptartking/poptartcore/equipment/ArmorStandCape.class",
+    "dev/poptartking/poptartcore/equipment/client/ArmorStandCapeLayer.class",
+    "dev/poptartking/poptartcore/hammer/HammerItem.class",
+    "dev/poptartking/poptartcore/mixin/armor/FirstPersonBeekeeperSleeveMixin.class",
+    "dev/poptartking/poptartcore/mixin/bee/BeeStingMixin.class",
+    "dev/poptartking/poptartcore/mixin/equipment/ArmorStandCapeMixin.class",
+    "dev/poptartking/poptartcore/quern/QuernBlock.class",
+    "dev/poptartking/poptartcore/quern/QuernBlockEntity.class",
+    "dev/poptartking/poptartcore/quern/client/QuernHighlightRenderer.class",
+    "dev/poptartking/poptartcore/quern/client/QuernRenderer.class",
+    "dev/poptartking/poptartcore/quern/client/QuernSoundInstance.class",
+    "dev/poptartking/poptartcore/quern/recipe/GrindingRecipe.class",
+    "dev/poptartking/poptartcore/registry/PoptartArmorItems.class",
+    "dev/poptartking/poptartcore/registry/PoptartCoreArmorMaterials.class",
+    "dev/poptartking/poptartcore/registry/PoptartCoreBlockEntities.class",
+    "dev/poptartking/poptartcore/registry/PoptartCoreMenus.class",
+    "dev/poptartking/poptartcore/registry/PoptartCoreSounds.class",
+    "dev/poptartking/poptartcore/registry/PoptartToolItems.class",
+    "dev/poptartking/poptartcore/registry/PoptartWorkstationBlocks.class",
+    "dev/poptartking/poptartcore/workbench/WorkbenchBlockEntity.class",
+    "dev/poptartking/poptartcore/workbench/menu/WorkbenchCraftingContainer.class",
+    "dev/poptartking/poptartcore/workbench/menu/WorkbenchMenu.class"
+  ],
+  "requiredText": [
+    {
+      "path": "META-INF/neoforge.mods.toml",
+      "text": "modId=\"aeronautics\""
+    },
+    {
+      "path": "META-INF/neoforge.mods.toml",
+      "text": "versionRange=\"[1.3.1,)\""
+    }
+  ]
+}

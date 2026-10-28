@@ -3,11 +3,9 @@ package dev.poptartking.poptartcore.waxgolem;
 import net.minecraft.core.BlockPos;
 
 public final class HiveMemory {
-    public static final int UNKNOWN = -1;
     public static final long SMOKE_MEMORY = 2400;
     private final BlockPos pos;
     private long smokeCheckedAt;
-    private long checkedAt;
     private long nextCheck;
     private int honeyLevel = -1;
     private int smoke = -1;
@@ -66,13 +64,11 @@ public final class HiveMemory {
     public void seen(int level, long time) {
         int previous = this.honeyLevel;
         this.honeyLevel = level;
-        this.checkedAt = time;
         this.nextCheck = time + interval(previous, level);
     }
 
     public void harvested(long time) {
         this.honeyLevel = 0;
-        this.checkedAt = time;
         this.nextCheck = time + 1200;
     }
 
@@ -87,9 +83,5 @@ public final class HiveMemory {
             return 300L;
         }
         return 600 - (((long) level) * 80);
-    }
-
-    public long checkedAt() {
-        return this.checkedAt;
     }
 }

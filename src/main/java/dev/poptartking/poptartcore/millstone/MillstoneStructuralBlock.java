@@ -2,7 +2,7 @@ package dev.poptartking.poptartcore.millstone;
 
 import com.mojang.serialization.MapCodec;
 import com.simibubi.create.api.equipment.goggles.IProxyHoveringInformation;
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
+import dev.poptartking.poptartcore.registry.PoptartWorkstationBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -205,7 +205,7 @@ public class MillstoneStructuralBlock extends DirectionalBlock implements IProxy
 
     public ItemStack getCloneItemStack(
             BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
-        return new ItemStack(PoptartCoreBlocks.MILLSTONE.get());
+        return new ItemStack(PoptartWorkstationBlocks.MILLSTONE.get());
     }
 
     protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {

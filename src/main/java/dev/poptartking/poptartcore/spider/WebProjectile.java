@@ -1,8 +1,8 @@
 package dev.poptartking.poptartcore.spider;
 
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
 import dev.poptartking.poptartcore.registry.PoptartCoreEntities;
 import dev.poptartking.poptartcore.registry.PoptartCoreSounds;
+import dev.poptartking.poptartcore.registry.PoptartSpiderBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -79,7 +79,7 @@ public final class WebProjectile extends ThrowableItemProjectile {
             BlockState state = level().getBlockState(pos);
             if (state.canBeReplaced() && state.getFluidState().isEmpty() && !state.hasBlockEntity()) {
                 boolean placed = level().setBlock(
-                                pos, PoptartCoreBlocks.TEMPORARY_COBWEB.get().defaultBlockState(), 3);
+                                pos, PoptartSpiderBlocks.TEMPORARY_COBWEB.get().defaultBlockState(), 3);
                 if (placed && getOwner() instanceof Mob owner && owner instanceof WebShootingSpider spider) {
                     LivingEntity target = owner.getTarget();
                     if (target != null && target.getBoundingBox().intersects(new AABB(pos))) {

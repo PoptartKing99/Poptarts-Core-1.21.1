@@ -3,7 +3,7 @@ package dev.poptartking.poptartcore.backpack.client;
 import dev.poptartking.poptartcore.PoptartCore;
 import dev.poptartking.poptartcore.backpack.BackpackBlockEntity;
 import dev.poptartking.poptartcore.backpack.BackpackColors;
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
+import dev.poptartking.poptartcore.registry.PoptartEquipmentBlocks;
 import net.minecraft.core.component.DataComponents;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -18,7 +18,8 @@ public final class BackpackDyeClient {
     @SubscribeEvent
     public static void setup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
-            for (var block : java.util.List.of(PoptartCoreBlocks.BACKPACK.get(), PoptartCoreBlocks.RUCKSACK.get())) {
+            for (var block :
+                    java.util.List.of(PoptartEquipmentBlocks.BACKPACK.get(), PoptartEquipmentBlocks.RUCKSACK.get())) {
                 net.minecraft.client.renderer.item.ItemProperties.register(
                         block.asItem(),
                         PoptartCore.location("dyed"),
@@ -36,8 +37,8 @@ public final class BackpackDyeClient {
                                 | BackpackColors.color(
                                         stack, index == 1 ? BackpackColors.Part.BODY : BackpackColors.Part.FLAPS)
                         : -1,
-                PoptartCoreBlocks.BACKPACK.get().asItem(),
-                PoptartCoreBlocks.RUCKSACK.get().asItem());
+                PoptartEquipmentBlocks.BACKPACK.get().asItem(),
+                PoptartEquipmentBlocks.RUCKSACK.get().asItem());
     }
 
     @SubscribeEvent
@@ -48,7 +49,7 @@ public final class BackpackDyeClient {
                                 && level.getBlockEntity(pos) instanceof BackpackBlockEntity backpack
                         ? backpack.dyeColor(index)
                         : 0xFFFFFF,
-                PoptartCoreBlocks.BACKPACK.get(),
-                PoptartCoreBlocks.RUCKSACK.get());
+                PoptartEquipmentBlocks.BACKPACK.get(),
+                PoptartEquipmentBlocks.RUCKSACK.get());
     }
 }

@@ -39,10 +39,6 @@ public class MillstoneBlockEntity extends BlockEntity {
     private final CachedCheck<MillingRecipeInput, MillingRecipe> quickCheck =
             RecipeManager.createCheck(PoptartCoreRecipes.MILLING_TYPE.get());
 
-    public ItemStack getGrindingStack() {
-        return this.grindingStack;
-    }
-
     private void setGrindingStack(ItemStack stack) {
         if (!ItemStack.isSameItemSameComponents(this.grindingStack, stack)) {
             this.grindingStack = stack;

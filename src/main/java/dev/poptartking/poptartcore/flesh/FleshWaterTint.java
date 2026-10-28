@@ -1,6 +1,6 @@
 package dev.poptartking.poptartcore.flesh;
 
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
+import dev.poptartking.poptartcore.registry.PoptartFleshBlocks;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
@@ -26,7 +26,6 @@ import org.jetbrains.annotations.Nullable;
         modid = "poptartcore",
         value = {Dist.CLIENT})
 public final class FleshWaterTint {
-    private static final int TINT_COLOR = 9049108;
     private static final int MAX_RADIUS = FleshWaterTint.Source.BUDDING.radius;
     private static final Map<Long, Map<Long, FleshWaterTint.Source>> SOURCES = new ConcurrentHashMap<>();
 
@@ -183,10 +182,10 @@ public final class FleshWaterTint {
 
         @Nullable
         private static FleshWaterTint.Source of(BlockState state) {
-            if (state.is(PoptartCoreBlocks.BUDDING_FLESH.get())) {
+            if (state.is(PoptartFleshBlocks.BUDDING_FLESH.get())) {
                 return BUDDING;
             } else {
-                return state.is(PoptartCoreBlocks.LIVING_FLESH.get()) ? LIVING : null;
+                return state.is(PoptartFleshBlocks.LIVING_FLESH.get()) ? LIVING : null;
             }
         }
     }

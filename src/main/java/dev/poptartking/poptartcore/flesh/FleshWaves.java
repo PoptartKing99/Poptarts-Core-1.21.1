@@ -15,7 +15,6 @@ import net.neoforged.neoforge.event.tick.LevelTickEvent.Post;
 
 @EventBusSubscriber(modid = "poptartcore")
 public final class FleshWaves {
-    private static final float SPREAD_CHANCE = 0.25F;
     private static final List<FleshWaves.Wave> WAVES = new ArrayList<>();
 
     private FleshWaves() {}

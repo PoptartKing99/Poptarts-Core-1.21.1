@@ -3,7 +3,7 @@ package dev.poptartking.poptartcore.integration.create;
 import com.simibubi.create.content.kinetics.simpleRelays.encased.EncasedCogwheelBlock;
 import com.simibubi.create.content.kinetics.simpleRelays.encased.EncasedShaftBlock;
 import dev.poptartking.poptartcore.PoptartCore;
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
+import dev.poptartking.poptartcore.registry.PoptartCreateBlocks;
 import net.createmod.catnip.math.Pointing;
 import net.createmod.ponder.api.registration.PonderPlugin;
 import net.createmod.ponder.api.registration.PonderSceneRegistrationHelper;
@@ -35,16 +35,16 @@ public final class PoptartCasingPonders implements PonderPlugin {
                 helper,
                 "industrial_plating",
                 "industrial_plating",
-                PoptartCoreBlocks.INDUSTRIAL_PLATING.get(),
-                PoptartCoreBlocks.INDUSTRIAL_ENCASED_SHAFT.get(),
-                PoptartCoreBlocks.INDUSTRIAL_ENCASED_COGWHEEL.get());
+                PoptartCreateBlocks.INDUSTRIAL_PLATING.get(),
+                PoptartCreateBlocks.INDUSTRIAL_ENCASED_SHAFT.get(),
+                PoptartCreateBlocks.INDUSTRIAL_ENCASED_COGWHEEL.get());
         addFamily(
                 helper,
                 "treated_wood",
                 "treated_wood",
-                PoptartCoreBlocks.TREATED_WOOD.get(),
-                PoptartCoreBlocks.TREATED_WOOD_ENCASED_SHAFT.get(),
-                PoptartCoreBlocks.TREATED_WOOD_ENCASED_COGWHEEL.get());
+                PoptartCreateBlocks.TREATED_WOOD.get(),
+                PoptartCreateBlocks.TREATED_WOOD_ENCASED_SHAFT.get(),
+                PoptartCreateBlocks.TREATED_WOOD_ENCASED_COGWHEEL.get());
     }
 
     private static void addFamily(

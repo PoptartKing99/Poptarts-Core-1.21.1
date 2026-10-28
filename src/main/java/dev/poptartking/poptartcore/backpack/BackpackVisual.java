@@ -3,6 +3,7 @@ package dev.poptartking.poptartcore.backpack;
 import dev.poptartking.poptartcore.PoptartCore;
 import dev.poptartking.poptartcore.equipment.AccessoryInventory;
 import dev.poptartking.poptartcore.registry.PoptartCoreAttachments;
+import java.util.Objects;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -22,6 +23,27 @@ public final class BackpackVisual {
         return visual;
     }
 
+    private static boolean matchesVisual(ItemStack source, ItemStack visual) {
+        if (!(source.getItem() instanceof BackpackItem)) return visual.isEmpty();
+        return visual.getCount() == 1
+                && ItemStack.isSameItem(source, visual)
+                && !visual.has(DataComponents.CONTAINER)
+                && !visual.has(DataComponents.BLOCK_ENTITY_DATA)
+                && sameVisualChanges(source, visual)
+                && sameVisualChanges(visual, source);
+    }
+
+    private static boolean sameVisualChanges(ItemStack source, ItemStack other) {
+        // Equal item types share prototype components; compare only changes from those defaults.
+        for (var entry : source.getComponentsPatch().entrySet()) {
+            var type = entry.getKey();
+            if (type != DataComponents.CONTAINER
+                    && type != DataComponents.BLOCK_ENTITY_DATA
+                    && !Objects.equals(source.get(type), other.get(type))) return false;
+        }
+        return true;
+    }
+
     public static ItemStack corpseVisualStack(java.util.List<ItemStack> items) {
         int base = com.farcr.ragdoll.api.inventory.CorpseSlots.baseSlot(
                 dev.poptartking.poptartcore.integration.ragdoll.AccessoryCorpseProvider.ID);
@@ -37,9 +59,8 @@ public final class BackpackVisual {
         if (player.getData(PoptartCoreAttachments.BACKPACK_ATTACHMENT_WIELDING) != wielding)
             player.setData(PoptartCoreAttachments.BACKPACK_ATTACHMENT_WIELDING, wielding);
         var back = AccessoryInventory.get(player).getStackInSlot(AccessoryInventory.BACK_SLOT);
-        var visual = renderStack(back);
-        if (!ItemStack.matches(visual, player.getData(PoptartCoreAttachments.BASIC_BACKPACK_VISUAL))) {
-            player.setData(PoptartCoreAttachments.BASIC_BACKPACK_VISUAL, visual);
+        if (!matchesVisual(back, player.getData(PoptartCoreAttachments.BASIC_BACKPACK_VISUAL))) {
+            player.setData(PoptartCoreAttachments.BASIC_BACKPACK_VISUAL, renderStack(back));
         }
     }
 }

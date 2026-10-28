@@ -1,7 +1,7 @@
 package dev.poptartking.poptartcore.equipment;
 
 import dev.poptartking.poptartcore.PoptartCore;
-import dev.poptartking.poptartcore.registry.PoptartCoreBlocks;
+import dev.poptartking.poptartcore.registry.PoptartBuildingBlocks;
 import dev.poptartking.poptartcore.registry.PoptartMaterialItems;
 import dev.poptartking.poptartcore.registry.PoptartRingItems;
 import net.minecraft.core.BlockPos;
@@ -75,7 +75,7 @@ public final class WayfarerAdditionsGameTests {
                                 PoptartCore.MOD_ID, "quartz_crystal")),
                 "Quartz crystal block registration is removed");
         helper.assertTrue(
-                PoptartCoreBlocks.RUBBER_BLOCK.get().getFriction() == Blocks.BLACK_WOOL.getFriction(),
+                PoptartBuildingBlocks.RUBBER_BLOCK.get().getFriction() == Blocks.BLACK_WOOL.getFriction(),
                 "Rubber uses Wayfarer wool-like properties");
         helper.succeed();
     }

@@ -10,7 +10,6 @@ public final class PoptartCoreItems {
         PoptartToolItems.initialize();
         PoptartArmorItems.initialize();
         PoptartMaterialItems.initialize();
-        PoptartBlockItems.initialize();
         PoptartProcessingItems.initialize();
     }
 }
