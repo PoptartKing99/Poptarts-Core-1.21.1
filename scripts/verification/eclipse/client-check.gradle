@@ -1,0 +1,9 @@
+// Opt-in runtime probe; excluded from the distributed mod.
+gradle.projectsEvaluated {
+    if (!rootProject.providers.gradleProperty('navigationTests').isPresent()) {
+        throw new GradleException('Eclipse client verification requires -PnavigationTests')
+    }
+    rootProject.sourceSets.navigationTest.java.srcDir(rootProject.file('scripts/verification/eclipse/client-check'))
+    rootProject.sourceSets.navigationTest.java.setIncludes(['**/EclipseVisualSmoke.java'])
+    rootProject.neoForge.runs.client.gameDirectory = rootProject.file('build/eclipse-client-run')
+}

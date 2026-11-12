@@ -16,6 +16,7 @@ public final class PoptartCoreBlocks {
         PoptartFleshBlocks.initialize();
         PoptartBuildingBlocks.initialize();
         PoptartBeekeepingBlocks.initialize();
+        PoptartFruitBlocks.initialize();
     }
 
     public static void register(IEventBus eventBus) {
@@ -25,5 +26,6 @@ public final class PoptartCoreBlocks {
         PoptartRiftBlocks.register(eventBus);
         PoptartCreateBlocks.register(eventBus);
         PoptartFleshBlocks.register(eventBus);
+        PoptartFruitBlocks.register(eventBus);
     }
 }

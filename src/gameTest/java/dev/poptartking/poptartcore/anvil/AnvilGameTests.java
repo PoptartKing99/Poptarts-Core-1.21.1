@@ -230,7 +230,7 @@ public final class AnvilGameTests {
                             entry.slot());
                 })
                 .toList();
-        armor.set(dev.poptartking.poptartcore.registry.AnvilDataComponents.UPGRADE_COUNT.get(), 2);
+        armor.set(dev.poptartking.poptartcore.registry.AnvilComponents.UPGRADE_COUNT.get(), 2);
         armor.set(
                 net.minecraft.core.component.DataComponents.ATTRIBUTE_MODIFIERS,
                 new net.minecraft.world.item.component.ItemAttributeModifiers(oldEntries, true));

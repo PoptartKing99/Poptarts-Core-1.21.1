@@ -44,7 +44,7 @@ public final class LodestoneRegistry implements Persistent {
 
     private LodestoneRegistry(List<LodestoneRegistry.Entry> entries, List<LodestoneRegistry.Relocation> relocations) {
         for (LodestoneRegistry.Entry entry : entries) {
-            this.marks.put(entry.pos(), new LodestoneMark(entry.name(), entry.icon()));
+            this.marks.put(entry.pos(), new LodestoneMark(entry.name(), WaypointIcons.sanitize(entry.icon())));
         }
 
         for (LodestoneRegistry.Relocation relocation : relocations) {

@@ -1,8 +1,8 @@
 package dev.poptartking.poptartcore.navigation;
 
-import dev.poptartking.poptartcore.navigation.network.HideWaypoint;
-import dev.poptartking.poptartcore.navigation.network.SelectWaypoint;
-import dev.poptartking.poptartcore.navigation.network.ToggleNavigation;
+import dev.poptartking.poptartcore.navigation.network.HideWaypointPayload;
+import dev.poptartking.poptartcore.navigation.network.SelectWaypointPayload;
+import dev.poptartking.poptartcore.navigation.network.ToggleNavigationPayload;
 import dev.poptartking.poptartcore.registry.PoptartCoreSounds;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +18,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.ai.village.poi.PoiTypes;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
@@ -137,7 +138,7 @@ public final class Waypoints {
                 && waypoint.icon().isEmpty();
     }
 
-    public static void onSelect(SelectWaypoint packet, ServerPlayer player) {
+    public static void onSelect(SelectWaypointPayload packet, ServerPlayer player) {
         if (!player.isSpectator()) {
             mutateCompass(player, packet.source(), compass -> {
                 CompassWaypoints current = get(compass);
@@ -152,7 +153,7 @@ public final class Waypoints {
         }
     }
 
-    public static void onHide(HideWaypoint packet, ServerPlayer player) {
+    public static void onHide(HideWaypointPayload packet, ServerPlayer player) {
         if (!player.isSpectator()) {
             mutateCompass(player, packet.source(), compass -> {
                 CompassWaypoints current = get(compass);
@@ -175,7 +176,7 @@ public final class Waypoints {
         }
     }
 
-    public static void onToggleNavigation(ToggleNavigation packet, ServerPlayer player) {
+    public static void onToggleNavigation(ToggleNavigationPayload packet, ServerPlayer player) {
         if (!player.isSpectator()) {
             mutateCompass(player, packet.source(), compass -> {
                 CompassWaypoints current = get(compass);
@@ -246,6 +247,39 @@ public final class Waypoints {
                             current.navigationHidden()));
             play(player, pos.pos(), SoundEvents.LODESTONE_COMPASS_LOCK, 1.0F, 1.0F);
         }
+    }
+
+    public static void unbindLodestone(ItemStack compass, ServerPlayer player, GlobalPos pos) {
+        CompassWaypoints current = get(compass);
+        LodestoneRegistry lodestones = LodestoneRegistry.get(player.getServer());
+        for (int index = 0; index < current.size(); index++) {
+            Waypoint waypoint = current.get(index);
+            if (waypoint.type() != WaypointType.LODESTONE
+                    || !(waypoint.pos().equals(pos)
+                            || lodestones.resolve(waypoint.pos()).equals(pos))) continue;
+            List<Waypoint> remaining = new ArrayList<>(current.waypoints());
+            remaining.remove(index);
+            List<GlobalPos> hidden = new ArrayList<>(current.hidden());
+            hidden.removeIf(anchor -> anchor.equals(waypoint.pos()) || anchor.equals(pos));
+            int selected = current.getSelectedIndex();
+            CompassWaypoints updated = new CompassWaypoints(
+                    remaining, selected > index ? selected - 1 : selected, hidden, current.navigationHidden());
+            if (selected == index) {
+                int origin = updated.indexOf(WaypointType.ORIGIN);
+                updated = updated.withSelected(
+                        origin >= 0 && !updated.isHidden(origin) ? origin : updated.getFirstVisible());
+            }
+            NavigationComponents.write(compass, updated);
+            play(player, pos.pos(), SoundEvents.LODESTONE_COMPASS_LOCK, 1.0F, 0.7F);
+            return;
+        }
+    }
+
+    public static boolean isMarkedCompass(ItemStack stack) {
+        if (!stack.is(Items.COMPASS)) return false;
+        CompassWaypoints waypoints = get(stack);
+        return !waypoints.hidden().isEmpty()
+                || waypoints.waypoints().stream().anyMatch(waypoint -> waypoint.type() == WaypointType.LODESTONE);
     }
 
     private static void mutateCompass(ServerPlayer player, CompassSource source, Consumer<ItemStack> mutation) {

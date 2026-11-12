@@ -1,6 +1,7 @@
 package dev.poptartking.poptartcore.mixin.navigation;
 
 import dev.poptartking.poptartcore.navigation.Lodestones;
+import dev.poptartking.poptartcore.navigation.Waypoints;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.GlobalPos;
 import net.minecraft.server.level.ServerPlayer;
@@ -28,7 +29,12 @@ public abstract class NavigationCompassItemMixin {
         BlockPos pos = context.getClickedPos();
         if ((player == null || !player.isSpectator()) && Lodestones.is(level.getBlockState(pos))) {
             if (player instanceof ServerPlayer serverPlayer) {
-                Lodestones.bindCompass(context.getItemInHand(), serverPlayer, GlobalPos.of(level.dimension(), pos));
+                GlobalPos lodestone = GlobalPos.of(level.dimension(), pos);
+                if (serverPlayer.isSecondaryUseActive()) {
+                    Waypoints.unbindLodestone(context.getItemInHand(), serverPlayer, lodestone);
+                } else {
+                    Lodestones.bindCompass(context.getItemInHand(), serverPlayer, lodestone);
+                }
             }
 
             cir.setReturnValue(InteractionResult.sidedSuccess(level.isClientSide));

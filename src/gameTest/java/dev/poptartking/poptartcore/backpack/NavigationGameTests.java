@@ -36,6 +36,46 @@ import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 @PrefixGameTestTemplate(false)
 public final class NavigationGameTests {
     @GameTest(template = "millstone_test", timeoutTicks = 40)
+    public static void removedIconsPreserveSavedLocationsWithDefaultSprites(GameTestHelper h) {
+        var registry = new LodestoneRegistry();
+        var icons = new String[] {"alchemist", "friend", "bed"};
+        var legacyWaypoints = new java.util.ArrayList<Waypoint>();
+        for (int index = 0; index < icons.length; index++) {
+            var pos = GlobalPos.of(Level.OVERWORLD, new BlockPos(index, 70, 10));
+            var mark = new LodestoneMark("Saved location " + index, icons[index]);
+            registry.set(pos, mark);
+            legacyWaypoints.add(Waypoint.lodestone(pos, mark));
+        }
+        var legacyCompass = new CompassWaypoints(
+                legacyWaypoints, 1, java.util.List.of(legacyWaypoints.getFirst().pos()), true);
+        var ops = h.getLevel().registryAccess().createSerializationContext(NbtOps.INSTANCE);
+        var loadedRegistry = LodestoneRegistry.CODEC
+                .parse(ops, LodestoneRegistry.CODEC.encodeStart(ops, registry).getOrThrow())
+                .getOrThrow();
+        var loadedCompass = CompassWaypoints.CODEC
+                .parse(
+                        ops,
+                        CompassWaypoints.CODEC.encodeStart(ops, legacyCompass).getOrThrow())
+                .getOrThrow();
+        h.assertTrue(loadedCompass.equals(legacyCompass), "Saved locations, selection and hidden state stay intact");
+        for (int index = 0; index < icons.length; index++) {
+            var waypoint = loadedCompass.get(index);
+            var mark = loadedRegistry.get(waypoint.pos());
+            var expectedIcon = index < 2 ? WaypointIcons.DEFAULT : "bed";
+            h.assertTrue(
+                    mark.name().equals(waypoint.label().getString())
+                            && mark.icon().equals(expectedIcon),
+                    "Loaded lodestones retain their names and positions with supported icons");
+            for (boolean selected : new boolean[] {false, true}) {
+                h.assertTrue(
+                        waypoint.getSprite(selected).equals(WaypointIcons.getSprite(expectedIcon, selected)),
+                        "Legacy compasses resolve both sprite states without missing textures");
+            }
+        }
+        h.succeed();
+    }
+
+    @GameTest(template = "millstone_test", timeoutTicks = 40)
     public static void unchangedNavigationStillDetectsRespawnNamesAndDestroyedStones(GameTestHelper h) {
         var player = player(h);
         var compass = new ItemStack(Items.COMPASS);
@@ -154,7 +194,7 @@ public final class NavigationGameTests {
                     .asItem());
             for (int i = 1; i < BackpackAttachments.slots(ruck); i++) BackpackAttachments.set(bag, i, compass.get());
             accessories.setStackInSlot(AccessoryInventory.BACK_SLOT, bag);
-            Lodestones.onUpdate(new UpdateLodestone(next.pos(), "New location", "default"), player);
+            Lodestones.onUpdate(new UpdateLodestonePayload(next.pos(), "New location", "default"), player);
             var actual = new java.util.ArrayList<ItemStack>();
             actual.add(player.getMainHandItem());
             actual.add(player.getOffhandItem());
@@ -170,7 +210,7 @@ public final class NavigationGameTests {
                         data.getSelected().pos().equals(prior) && data.navigationHidden(),
                         "Existing selected red destination and display preferences preserved");
             }
-            Lodestones.onUpdate(new UpdateLodestone(next.pos(), "Renamed", "default"), player);
+            Lodestones.onUpdate(new UpdateLodestonePayload(next.pos(), "Renamed", "default"), player);
             h.assertTrue(Waypoints.get(player.getMainHandItem()).size() == 3, "Renaming does not duplicate markers");
             h.assertTrue(
                     Waypoints.get(player.getMainHandItem())
@@ -193,7 +233,7 @@ public final class NavigationGameTests {
         BackpackAttachments.set(bag, 1, compass);
         AccessoryInventory.get(player).setStackInSlot(AccessoryInventory.BACK_SLOT, bag);
         h.assertTrue(UtilityWield.startAttachment(player), "Compass is in use");
-        Lodestones.onUpdate(new UpdateLodestone(next.pos(), "Auto saved", "default"), player);
+        Lodestones.onUpdate(new UpdateLodestonePayload(next.pos(), "Auto saved", "default"), player);
         UtilityWield.tick(player);
         var data = Waypoints.get(BackpackAttachments.get(bag, 1));
         h.assertTrue(
@@ -207,14 +247,14 @@ public final class NavigationGameTests {
     public static void lodestoneNamesValidateReachAndSave(GameTestHelper h) {
         var player = player(h);
         var key = stone(h, new BlockPos(1, 2, 1), "Before");
-        Lodestones.onUpdate(new UpdateLodestone(key.pos(), "  Home\n\u00a7Base ", "../invalid"), player);
+        Lodestones.onUpdate(new UpdateLodestonePayload(key.pos(), "  Home\n\u00a7Base ", "../invalid"), player);
         var registry = LodestoneRegistry.get(h.getLevel().getServer());
         var mark = registry.get(key);
         h.assertTrue(
                 mark.name().equals("HomeBase") && mark.icon().equals("default"),
                 "Names and icons sanitized at network boundary");
         player.setPos(player.position().add(50, 0, 0));
-        Lodestones.onUpdate(new UpdateLodestone(key.pos(), "Forbidden", "bed"), player);
+        Lodestones.onUpdate(new UpdateLodestonePayload(key.pos(), "Forbidden", "bed"), player);
         h.assertTrue(registry.get(key).equals(mark), "Far away edits rejected");
         var ops = h.getLevel().registryAccess().createSerializationContext(NbtOps.INSTANCE);
         var saved = LodestoneRegistry.CODEC.encodeStart(ops, registry).getOrThrow();
@@ -233,7 +273,7 @@ public final class NavigationGameTests {
         int chunkZ = target.getZ() >> 4;
         h.assertTrue(level.getChunkSource().getChunkNow(chunkX, chunkZ) == null, "Target chunk starts unloaded");
 
-        Lodestones.onUpdate(new UpdateLodestone(target, "Distant request", "default"), player);
+        Lodestones.onUpdate(new UpdateLodestonePayload(target, "Distant request", "default"), player);
 
         h.assertTrue(
                 level.getChunkSource().getChunkNow(chunkX, chunkZ) == null,
@@ -253,19 +293,19 @@ public final class NavigationGameTests {
         var registry = LodestoneRegistry.get(h.getLevel().getServer());
         player.setPos(Vec3.atCenterOf(key.pos()));
         player.setGameMode(GameType.SPECTATOR);
-        Lodestones.onUpdate(new UpdateLodestone(key.pos(), "Forbidden", "bed"), player);
+        Lodestones.onUpdate(new UpdateLodestonePayload(key.pos(), "Forbidden", "bed"), player);
         h.assertTrue(registry.get(key).name().equals("Before"), "Spectators cannot edit lodestones");
 
         player.setGameMode(GameType.SURVIVAL);
         player.setPos(Vec3.atCenterOf(key.pos()).add(8, 0, 0));
-        Lodestones.onUpdate(new UpdateLodestone(key.pos(), "At reach", "bed"), player);
+        Lodestones.onUpdate(new UpdateLodestonePayload(key.pos(), "At reach", "bed"), player);
         h.assertTrue(registry.get(key).name().equals("At reach"), "Existing eight-block editing reach is inclusive");
         player.setPos(player.position().add(.01, 0, 0));
-        Lodestones.onUpdate(new UpdateLodestone(key.pos(), "Too far", "default"), player);
+        Lodestones.onUpdate(new UpdateLodestonePayload(key.pos(), "Too far", "default"), player);
         h.assertTrue(registry.get(key).name().equals("At reach"), "Edits outside reach are rejected");
         h.setBlock(new BlockPos(2, 2, 1), Blocks.STONE);
         player.setPos(Vec3.atCenterOf(key.pos()));
-        Lodestones.onUpdate(new UpdateLodestone(key.pos(), "Not a lodestone", "default"), player);
+        Lodestones.onUpdate(new UpdateLodestonePayload(key.pos(), "Not a lodestone", "default"), player);
         h.assertTrue(!registry.get(key).isNamed(), "Non-lodestone blocks cannot be named through this packet");
         h.succeed();
     }
@@ -288,7 +328,7 @@ public final class NavigationGameTests {
             }
         });
         try {
-            Lodestones.onUpdate(new UpdateLodestone(key.pos(), "On deck", "default"), player);
+            Lodestones.onUpdate(new UpdateLodestonePayload(key.pos(), "On deck", "default"), player);
             h.assertTrue(
                     LodestoneRegistry.get(h.getLevel().getServer())
                             .get(key)
@@ -336,16 +376,16 @@ public final class NavigationGameTests {
             if (i == 11) last = key;
         }
         h.assertTrue(Waypoints.get(stack).size() == 13, "Exactly twelve lodestones plus origin");
-        Waypoints.onSelect(new SelectWaypoint(1, CompassSource.HELD), player);
+        Waypoints.onSelect(new SelectWaypointPayload(1, CompassSource.HELD), player);
         h.assertTrue(Waypoints.get(stack).getSelectedIndex() == 1, "Server selects requested target");
-        Waypoints.onHide(new HideWaypoint(1, 0, CompassSource.HELD), player);
+        Waypoints.onHide(new HideWaypointPayload(1, 0, CompassSource.HELD), player);
         h.assertTrue(
                 Waypoints.get(stack).isHidden(1) && Waypoints.get(stack).getSelectedIndex() == 0,
                 "Hiding selected target falls back to origin");
-        Waypoints.onSelect(new SelectWaypoint(1, CompassSource.HELD), player);
+        Waypoints.onSelect(new SelectWaypointPayload(1, CompassSource.HELD), player);
         h.assertTrue(Waypoints.get(stack).getSelectedIndex() == 0, "Hidden target cannot be selected");
-        Waypoints.onHide(new HideWaypoint(1, 0, CompassSource.HELD), player);
-        Waypoints.onToggleNavigation(new ToggleNavigation(CompassSource.HELD), player);
+        Waypoints.onHide(new HideWaypointPayload(1, 0, CompassSource.HELD), player);
+        Waypoints.onToggleNavigation(new ToggleNavigationPayload(CompassSource.HELD), player);
         h.assertTrue(
                 !Waypoints.get(stack).isHidden(1) && Waypoints.get(stack).navigationHidden(),
                 "Visibility settings independent");
@@ -370,8 +410,8 @@ public final class NavigationGameTests {
             AccessoryInventory.get(player).setStackInSlot(AccessoryInventory.BACK_SLOT, bag);
             h.assertTrue(UtilityWield.startAttachment(player), "Mounted compass enters virtual hand");
             Items.COMPASS.use(h.getLevel(), player, InteractionHand.MAIN_HAND);
-            Waypoints.onSelect(new SelectWaypoint(0, CompassSource.ATTACHED), player);
-            Waypoints.onHide(new HideWaypoint(1, 0, CompassSource.ATTACHED), player);
+            Waypoints.onSelect(new SelectWaypointPayload(0, CompassSource.ATTACHED), player);
+            Waypoints.onHide(new HideWaypointPayload(1, 0, CompassSource.ATTACHED), player);
             UtilityWield.tick(player);
             h.assertTrue(
                     UtilityWield.isAttachmentWielding(player) && player.isUsingItem(),

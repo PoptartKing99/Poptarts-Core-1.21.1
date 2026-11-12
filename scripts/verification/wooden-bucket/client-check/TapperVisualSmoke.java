@@ -9,7 +9,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
-import dev.poptartking.poptartcore.decoration.WoodenBucketBlock;
+import dev.poptartking.poptartcore.decoration.TreeTapperBlock;
 import dev.poptartking.poptartcore.registry.PoptartWorkstationBlocks;
 import dev.poptartking.poptartcore.registry.PoptartCoreParticles;
 
@@ -33,9 +33,9 @@ public final class TapperVisualSmoke {
       level.setBlock(new BlockPos(x,y,z),Blocks.AIR.defaultBlockState(),3);
      level.setBlock(pos.north(),Blocks.OAK_LOG.defaultBlockState(),3);
      level.setBlock(pos.north().above(),Blocks.OAK_LOG.defaultBlockState(),3);
-     var state=PoptartWorkstationBlocks.WOODEN_BUCKET.get().defaultBlockState().setValue(WoodenBucketBlock.FACING,Direction.NORTH).setValue(WoodenBucketBlock.OPEN,true);
+     var state=PoptartWorkstationBlocks.TREE_TAPPER.get().defaultBlockState().setValue(TreeTapperBlock.FACING,Direction.NORTH).setValue(TreeTapperBlock.OPEN,true);
      level.setBlock(pos,state,3);
-     level.setBlock(pos.above(),state.setValue(WoodenBucketBlock.HALF,DoubleBlockHalf.UPPER),3);
+     level.setBlock(pos.above(),state.setValue(TreeTapperBlock.HALF,DoubleBlockHalf.UPPER),3);
      level.setDayTime(6000);
      var player=mc.getSingleplayerServer().getPlayerList().getPlayer(mc.player.getUUID());
      player.setGameMode(net.minecraft.world.level.GameType.SPECTATOR);

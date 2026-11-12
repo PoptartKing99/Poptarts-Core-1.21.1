@@ -22,6 +22,7 @@ public class PoptartCoreFluids {
 
     public static final MoltenFluidDefinition MOLTEN_COPPER = registerMoltenMetal("copper");
     public static final MoltenFluidDefinition MOLTEN_TIN = registerMoltenMetal("tin");
+    public static final MoltenFluidDefinition MOLTEN_LEAD = registerMoltenMetal("lead");
     public static final MoltenFluidDefinition MOLTEN_BRONZE = registerMoltenMetal("bronze");
     public static final MoltenFluidDefinition MOLTEN_STEEL = registerMoltenMetal("steel");
 

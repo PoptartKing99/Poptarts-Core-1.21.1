@@ -4,8 +4,8 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import dev.poptartking.poptartcore.PoptartCore;
+import dev.poptartking.poptartcore.decoration.TreeTapperBlock;
 import dev.poptartking.poptartcore.decoration.TreeTapperBlockEntity;
-import dev.poptartking.poptartcore.decoration.WoodenBucketBlock;
 import dev.poptartking.poptartcore.registry.PoptartCoreFluids;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -31,7 +31,7 @@ public final class TreeTapperRenderer implements BlockEntityRenderer<TreeTapperB
         pose.pushPose();
         pose.translate(.5, 0, .5);
         float angle =
-                switch (entity.getBlockState().getValue(WoodenBucketBlock.FACING)) {
+                switch (entity.getBlockState().getValue(TreeTapperBlock.FACING)) {
                     case NORTH -> 0;
                     case EAST -> -90;
                     case SOUTH -> 180;

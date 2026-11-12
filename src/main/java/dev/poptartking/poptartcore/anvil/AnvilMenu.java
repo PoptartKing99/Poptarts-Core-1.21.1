@@ -1,7 +1,7 @@
 package dev.poptartking.poptartcore.anvil;
 
 import dev.poptartking.poptartcore.PoptartCore;
-import dev.poptartking.poptartcore.registry.AnvilDataComponents;
+import dev.poptartking.poptartcore.registry.AnvilComponents;
 import dev.poptartking.poptartcore.registry.PoptartCoreMenus;
 import dev.poptartking.poptartcore.registry.PoptartCoreTags;
 import java.util.ArrayList;
@@ -218,11 +218,11 @@ public class AnvilMenu extends ItemCombinerMenu {
         stack.set(DataComponents.ATTRIBUTE_MODIFIERS, built);
 
         if (count <= 0) {
-            stack.remove(AnvilDataComponents.UPGRADE_COUNT.get());
-            stack.remove(AnvilDataComponents.UPGRADE_DURABILITY.get());
+            stack.remove(AnvilComponents.UPGRADE_COUNT.get());
+            stack.remove(AnvilComponents.UPGRADE_DURABILITY.get());
         } else {
-            stack.set(AnvilDataComponents.UPGRADE_COUNT.get(), count);
-            if (durability != null) stack.set(AnvilDataComponents.UPGRADE_DURABILITY.get(), durability);
+            stack.set(AnvilComponents.UPGRADE_COUNT.get(), count);
+            if (durability != null) stack.set(AnvilComponents.UPGRADE_DURABILITY.get(), durability);
         }
         if (durability != null) {
             int newMax = durability.atLevel(count, armor);
@@ -235,7 +235,7 @@ public class AnvilMenu extends ItemCombinerMenu {
     }
 
     public static boolean isUpgraded(ItemStack stack) {
-        return stack.has(AnvilDataComponents.UPGRADE_COUNT.get());
+        return stack.has(AnvilComponents.UPGRADE_COUNT.get());
     }
 
     public static boolean isWornOut(ItemStack stack) {
@@ -248,7 +248,7 @@ public class AnvilMenu extends ItemCombinerMenu {
         int current = stack.getMaxDamage();
         if (current <= 0) return null;
         int count = getUpgradeCount(stack);
-        UpgradeDurability saved = stack.get(AnvilDataComponents.UPGRADE_DURABILITY.get());
+        UpgradeDurability saved = stack.get(AnvilComponents.UPGRADE_DURABILITY.get());
         if (saved != null) {
             return saved.atLevel(count, armor) == current ? saved : new UpgradeDurability(current, count);
         }
@@ -343,7 +343,7 @@ public class AnvilMenu extends ItemCombinerMenu {
     }
 
     public static void healUpgradedModifiers(ItemStack stack) {
-        Integer count = (Integer) stack.get(AnvilDataComponents.UPGRADE_COUNT.get());
+        Integer count = (Integer) stack.get(AnvilComponents.UPGRADE_COUNT.get());
         if (count != null && count > 0) {
             ItemAttributeModifiers built = buildUpgradedModifiers(stack, count);
             if (!built.equals(stack.get(DataComponents.ATTRIBUTE_MODIFIERS))) {
@@ -428,7 +428,7 @@ public class AnvilMenu extends ItemCombinerMenu {
     }
 
     public static int getUpgradeCount(ItemStack stack) {
-        Integer count = (Integer) stack.get(AnvilDataComponents.UPGRADE_COUNT.get());
+        Integer count = (Integer) stack.get(AnvilComponents.UPGRADE_COUNT.get());
         return count != null ? Mth.clamp(count, 0, 3) : getLegacyUpgradeCount(stack);
     }
 

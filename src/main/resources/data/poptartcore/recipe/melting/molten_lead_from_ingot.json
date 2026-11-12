@@ -1,0 +1,11 @@
+{
+  "type": "poptartcore:crucible_melting",
+  "ingredient": {
+    "item": "poptartcore:lead_ingot"
+  },
+  "duration": 500,
+  "result": {
+    "id": "poptartcore:molten_lead",
+    "amount": 250
+  }
+}

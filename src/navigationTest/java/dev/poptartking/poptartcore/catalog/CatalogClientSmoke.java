@@ -2,10 +2,13 @@ package dev.poptartking.poptartcore.catalog;
 
 import com.mojang.logging.LogUtils;
 import dev.poptartking.poptartcore.PoptartCore;
+import dev.poptartking.poptartcore.registry.PoptartCoreSounds;
 import dev.poptartking.poptartcore.registry.PoptartToolItems;
+import java.util.List;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
@@ -81,9 +84,29 @@ public final class CatalogClientSmoke {
                     "Clearing projectiles must reset the properties");
             sprite(weapon, actor, "poptartcore:item/crossbows/repeating_crossbow_standby");
             BeekeeperClientChecks.verify(mc);
+            sprite(
+                    new ItemStack(PoptartToolItems.ALLAY_CALLING_BELL.get()),
+                    actor,
+                    "poptartcore:item/allay_calling_bell");
+            sprite(new ItemStack(PoptartToolItems.VEX_CALLING_BELL.get()), actor, "poptartcore:item/vex_calling_bell");
+            check(
+                    I18n.get("item.poptartcore.allay_calling_bell").equals("Allay-Calling Bell"),
+                    "Allay bell name must load");
+            check(I18n.get("item.poptartcore.vex_calling_bell").equals("Vex-Calling Bell"), "Vex bell name must load");
+            for (var sound : List.of(
+                    PoptartCoreSounds.ALLAY_SUMMON.get(),
+                    PoptartCoreSounds.VEX_SUMMON.get(),
+                    PoptartCoreSounds.PIXIE_PHASE.get(),
+                    PoptartCoreSounds.PIXIE_VANISH.get(),
+                    PoptartCoreSounds.PIXIE_SHIMMER.get())) {
+                var eventSounds = mc.getSoundManager().getSoundEvent(sound.getLocation());
+                check(
+                        eventSounds != null && eventSounds.getWeight() > 0,
+                        "Bell sound must resolve: " + sound.getLocation());
+            }
             LogUtils.getLogger()
                     .info(
-                            "CATALOG_CLIENT_PASS: crossbow models, beekeeper model/sleeves and workbench screen verified");
+                            "CATALOG_CLIENT_PASS: crossbow models, beekeeper model/sleeves, workbench screen and calling bell models/sounds verified");
         } catch (Throwable failure) {
             LogUtils.getLogger().error("CATALOG_CLIENT_FAIL", failure);
         } finally {

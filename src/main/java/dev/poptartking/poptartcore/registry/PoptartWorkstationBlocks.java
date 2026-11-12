@@ -34,10 +34,10 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public final class PoptartWorkstationBlocks {
     private static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(PoptartCore.MOD_ID);
 
-    public static final CatalogBlockDefinition<dev.poptartking.poptartcore.decoration.WoodenBucketBlock> WOODEN_BUCKET =
+    public static final CatalogBlockDefinition<dev.poptartking.poptartcore.decoration.TreeTapperBlock> TREE_TAPPER =
             PoptartCatalog.block(
                             "wooden_bucket",
-                            () -> new dev.poptartking.poptartcore.decoration.WoodenBucketBlock(
+                            () -> new dev.poptartking.poptartcore.decoration.TreeTapperBlock(
                                     BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS)
                                             .strength(1.0F)
                                             .noOcclusion()))

@@ -1,0 +1,11 @@
+{
+  "type": "poptartcore:blast_furnace_melting",
+  "ingredient": {
+    "item": "poptartcore:steel_ingot"
+  },
+  "duration": 500,
+  "result": {
+    "id": "poptartcore:molten_steel",
+    "amount": 250
+  }
+}

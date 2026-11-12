@@ -21,7 +21,6 @@ import net.minecraft.world.entity.ai.village.poi.PoiManager.Occupancy;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.level.BlockEvent.BreakEvent;
@@ -260,10 +259,6 @@ public final class FleshOrganisms {
             return this.members.contains(pos.asLong());
         }
 
-        public BlockPos getBud() {
-            return this.bud;
-        }
-
         public int size() {
             return this.members.size();
         }
@@ -283,15 +278,6 @@ public final class FleshOrganisms {
             double y = (this.sumY + (double) added.getY() + 0.5) / (double) count - ((double) this.bud.getY() + 0.5);
             double z = (this.sumZ + (double) added.getZ() + 0.5) / (double) count - ((double) this.bud.getZ() + 0.5);
             return x * x + y * y + z * z;
-        }
-
-        public Vec3 getCentre() {
-            if (this.members.isEmpty()) {
-                return Vec3.atCenterOf(this.bud);
-            } else {
-                int count = this.members.size();
-                return new Vec3(this.sumX / (double) count, this.sumY / (double) count, this.sumZ / (double) count);
-            }
         }
     }
 }

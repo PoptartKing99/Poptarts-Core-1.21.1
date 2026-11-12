@@ -37,6 +37,6 @@ These tools are explicit authoring operations. Imports and generators can overwr
 
 Examples include `assets/wooden-bucket/generate-wooden-bucket.py`, `assets/backpack/build-dye-models.ps1`, and `assets/cape/build-cape-colors.ps1`. Cape generation supports `-VerifyOnly`; the regular cape check calls that read-only mode. Other tools have their own parameters and should not be assumed to have a preview mode.
 
-`python scripts/migrations/catalog/migrate-creative-placement.py --check` verifies the historical creative-order migration without editing declarations. The beehive-model migration reorganizes existing resource paths and updates their references.
+`python scripts/migrations/catalog/migrate-creative-placement.py --check` verifies the historical creative-order migration without editing declarations.
 
 `verification/verify-script-layout.ps1` checks folder and naming rules, PowerShell syntax, the feature-check list, and concrete script references in source and documentation. The full verification command runs it automatically.

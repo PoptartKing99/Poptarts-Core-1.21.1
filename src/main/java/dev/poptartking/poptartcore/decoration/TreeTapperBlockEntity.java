@@ -86,14 +86,14 @@ public final class TreeTapperBlockEntity extends BlockEntity {
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, TreeTapperBlockEntity entity) {
-        if (!state.getValue(WoodenBucketBlock.OPEN) || entity.tank.getFluidAmount() >= CAPACITY) return;
+        if (!state.getValue(TreeTapperBlock.OPEN) || entity.tank.getFluidAmount() >= CAPACITY) return;
         entity.dripWhileCollecting(level, pos, state);
         if (entity.remainingTicks <= 0) {
             entity.remainingTicks = nextInterval(level.random);
             entity.setChanged();
         }
         if (--entity.remainingTicks > 0) return;
-        var fluid = TapperTreeRules.fluidAt(level, pos.above().relative(state.getValue(WoodenBucketBlock.FACING)));
+        var fluid = TapperTreeRules.fluidAt(level, pos.above().relative(state.getValue(TreeTapperBlock.FACING)));
         if (fluid != Fluids.EMPTY) {
             entity.tank.fill(new FluidStack(fluid, FILL_AMOUNT), IFluidHandler.FluidAction.EXECUTE);
         }
@@ -106,7 +106,7 @@ public final class TreeTapperBlockEntity extends BlockEntity {
         if (nextDripTicks <= 0) nextDripTicks = TapperDripShape.FORM_TICKS + 15 + level.random.nextInt(41);
         if (--nextDripTicks > 0) return;
         nextDripTicks = TapperDripShape.FORM_TICKS + 15 + level.random.nextInt(41);
-        var facing = state.getValue(WoodenBucketBlock.FACING);
+        var facing = state.getValue(TreeTapperBlock.FACING);
         var fluid = TapperTreeRules.fluidAt(level, pos.above().relative(facing));
         if (fluid == Fluids.EMPTY
                 || tank.fill(new FluidStack(fluid, FILL_AMOUNT), IFluidHandler.FluidAction.SIMULATE) == 0) return;

@@ -1,7 +1,7 @@
 package dev.poptartking.poptartcore.navigation;
 
-import dev.poptartking.poptartcore.navigation.network.OpenLodestone;
-import dev.poptartking.poptartcore.navigation.network.UpdateLodestone;
+import dev.poptartking.poptartcore.navigation.network.OpenLodestonePayload;
+import dev.poptartking.poptartcore.navigation.network.UpdateLodestonePayload;
 import java.util.Map;
 import java.util.Map.Entry;
 import net.minecraft.core.BlockPos;
@@ -30,7 +30,7 @@ public final class Lodestones {
     public static void open(ServerPlayer player, BlockPos pos) {
         ServerLevel level = getLevel(player);
         LodestoneMark mark = LodestoneRegistry.get(level.getServer()).get(GlobalPos.of(level.dimension(), pos));
-        PacketDistributor.sendToPlayer(player, new OpenLodestone(pos, mark.name(), mark.icon()));
+        PacketDistributor.sendToPlayer(player, new OpenLodestonePayload(pos, mark.name(), mark.icon()));
     }
 
     public static void bindCompass(ItemStack compass, ServerPlayer player, GlobalPos pos) {
@@ -43,7 +43,7 @@ public final class Lodestones {
         }
     }
 
-    public static void onUpdate(UpdateLodestone packet, ServerPlayer player) {
+    public static void onUpdate(UpdateLodestonePayload packet, ServerPlayer player) {
         ServerLevel level = getLevel(player);
         BlockPos pos = packet.pos();
         if (player.isSpectator() || !level.isInWorldBounds(pos)) return;

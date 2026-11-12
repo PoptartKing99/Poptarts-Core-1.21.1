@@ -10,6 +10,8 @@ import dev.poptartking.poptartcore.hammer.HammerItem;
 import dev.poptartking.poptartcore.hammer.SledgehammerItem;
 import dev.poptartking.poptartcore.lostheart.HeartCrystalItem;
 import dev.poptartking.poptartcore.scribing.ScribingToolsItem;
+import dev.poptartking.poptartcore.summoning.AllayCallingBellItem;
+import dev.poptartking.poptartcore.summoning.VexCallingBellItem;
 import dev.poptartking.poptartcore.tool.BonePickItem;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.tags.ItemTags;
@@ -28,6 +30,18 @@ public final class PoptartToolItems {
 
     public static final CatalogItemDefinition<Item> DEPTH_METER =
             PoptartCatalog.simpleItem("depth_meter").withoutGeneratedModel().creative(TOOLS, 140);
+
+    public static final CatalogItemDefinition<AllayCallingBellItem> ALLAY_CALLING_BELL = PoptartCatalog.item(
+                    "allay_calling_bell", () -> new AllayCallingBellItem(new Item.Properties().stacksTo(1), 0, 3))
+            .withName("Allay-Calling Bell")
+            .handheld()
+            .creative(TOOLS, 640);
+
+    public static final CatalogItemDefinition<VexCallingBellItem> VEX_CALLING_BELL = PoptartCatalog.item(
+                    "vex_calling_bell", () -> new VexCallingBellItem(new Item.Properties().stacksTo(1), 0, 5))
+            .withName("Vex-Calling Bell")
+            .handheld()
+            .creative(TOOLS, 650);
 
     public static final CatalogItemDefinition<ScribingToolsItem> SCRIBING_TOOLS = PoptartCatalog.item(
                     "scribing_tools", () -> new ScribingToolsItem(new Item.Properties().durability(25)))

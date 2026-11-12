@@ -1,7 +1,7 @@
 package dev.poptartking.poptartcore.navigation.client;
 
 import dev.poptartking.poptartcore.navigation.WaypointAnchors;
-import dev.poptartking.poptartcore.navigation.network.WaypointLocations;
+import dev.poptartking.poptartcore.navigation.network.WaypointLocationsPayload;
 import java.util.HashMap;
 import java.util.Map;
 import net.minecraft.core.BlockPos;
@@ -19,10 +19,10 @@ public final class ClientWaypoints {
 
     private ClientWaypoints() {}
 
-    public static void accept(WaypointLocations packet) {
+    public static void accept(WaypointLocationsPayload packet) {
         LOCATIONS.clear();
 
-        for (WaypointLocations.Location location : packet.locations()) {
+        for (WaypointLocationsPayload.Location location : packet.locations()) {
             LOCATIONS.put(location.anchor(), location.position());
         }
     }

@@ -7,9 +7,9 @@ import dev.poptartking.poptartcore.navigation.CompassWaypoints;
 import dev.poptartking.poptartcore.navigation.Waypoint;
 import dev.poptartking.poptartcore.navigation.Waypoints;
 import dev.poptartking.poptartcore.navigation.client.ClientWaypoints;
-import dev.poptartking.poptartcore.navigation.network.HideWaypoint;
-import dev.poptartking.poptartcore.navigation.network.SelectWaypoint;
-import dev.poptartking.poptartcore.navigation.network.ToggleNavigation;
+import dev.poptartking.poptartcore.navigation.network.HideWaypointPayload;
+import dev.poptartking.poptartcore.navigation.network.SelectWaypointPayload;
+import dev.poptartking.poptartcore.navigation.network.ToggleNavigationPayload;
 import dev.poptartking.poptartcore.registry.PoptartCoreSounds;
 import java.util.ArrayList;
 import java.util.List;
@@ -191,14 +191,14 @@ public final class CompassHud {
                             .getSoundManager()
                             .play(SimpleSoundInstance.forUI(
                                     PoptartCoreSounds.NAVIGATION_TOGGLE.get(), predictedHidden ? 0.8F : 1.1F, 0.5F));
-                    PacketDistributor.sendToServer(new ToggleNavigation(source));
+                    PacketDistributor.sendToServer(new ToggleNavigationPayload(source));
                 } else if (wasUsing
                         && !using
                         && previousOpen > 0.4F
                         && highlighted >= 0
                         && highlighted != data.getSelectedIndex()
                         && !data.isHidden(highlighted)) {
-                    PacketDistributor.sendToServer(new SelectWaypoint(highlighted, source));
+                    PacketDistributor.sendToServer(new SelectWaypointPayload(highlighted, source));
                 }
 
                 wasUsing = using;
@@ -227,7 +227,7 @@ public final class CompassHud {
     public static boolean tryHide() {
         if (!(open <= 0.01F) && wasUsing && highlighted >= 0) {
             PacketDistributor.sendToServer(
-                    new HideWaypoint(highlighted, highlighted == committed ? priorSelection : -1, source));
+                    new HideWaypointPayload(highlighted, highlighted == committed ? priorSelection : -1, source));
             return true;
         } else {
             return false;

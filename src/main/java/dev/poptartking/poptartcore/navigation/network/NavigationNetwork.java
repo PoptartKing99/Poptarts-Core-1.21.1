@@ -16,29 +16,29 @@ public final class NavigationNetwork {
     public static void register(RegisterPayloadHandlersEvent event) {
         var registrar = event.registrar(PoptartCore.MOD_ID);
         registrar.playToServer(
-                UpdateLodestone.TYPE,
-                UpdateLodestone.CODEC,
+                UpdateLodestonePayload.TYPE,
+                UpdateLodestonePayload.CODEC,
                 (p, c) -> c.enqueueWork(() -> Lodestones.onUpdate(p, (ServerPlayer) c.player())));
         registrar.playToServer(
-                SelectWaypoint.TYPE,
-                SelectWaypoint.CODEC,
+                SelectWaypointPayload.TYPE,
+                SelectWaypointPayload.CODEC,
                 (p, c) -> c.enqueueWork(() -> Waypoints.onSelect(p, (ServerPlayer) c.player())));
         registrar.playToServer(
-                HideWaypoint.TYPE,
-                HideWaypoint.CODEC,
+                HideWaypointPayload.TYPE,
+                HideWaypointPayload.CODEC,
                 (p, c) -> c.enqueueWork(() -> Waypoints.onHide(p, (ServerPlayer) c.player())));
         registrar.playToServer(
-                ToggleNavigation.TYPE,
-                ToggleNavigation.CODEC,
+                ToggleNavigationPayload.TYPE,
+                ToggleNavigationPayload.CODEC,
                 (p, c) -> c.enqueueWork(() -> Waypoints.onToggleNavigation(p, (ServerPlayer) c.player())));
         registrar.playToClient(
-                OpenLodestone.TYPE,
-                OpenLodestone.CODEC,
+                OpenLodestonePayload.TYPE,
+                OpenLodestonePayload.CODEC,
                 (p, c) -> c.enqueueWork(
                         () -> dev.poptartking.poptartcore.navigation.client.screen.LodestoneScreen.open(p)));
         registrar.playToClient(
-                WaypointLocations.TYPE,
-                WaypointLocations.CODEC,
+                WaypointLocationsPayload.TYPE,
+                WaypointLocationsPayload.CODEC,
                 (p, c) -> c.enqueueWork(() -> dev.poptartking.poptartcore.navigation.client.ClientWaypoints.accept(p)));
     }
 }

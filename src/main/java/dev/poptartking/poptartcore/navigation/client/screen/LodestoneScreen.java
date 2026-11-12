@@ -2,8 +2,8 @@ package dev.poptartking.poptartcore.navigation.client.screen;
 
 import dev.poptartking.poptartcore.navigation.WaypointIcons;
 import dev.poptartking.poptartcore.navigation.client.hud.Draw;
-import dev.poptartking.poptartcore.navigation.network.OpenLodestone;
-import dev.poptartking.poptartcore.navigation.network.UpdateLodestone;
+import dev.poptartking.poptartcore.navigation.network.OpenLodestonePayload;
+import dev.poptartking.poptartcore.navigation.network.UpdateLodestonePayload;
 import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.client.Minecraft;
@@ -30,7 +30,7 @@ public final class LodestoneScreen extends Screen {
     private int gridLeft;
     private int gridTop;
 
-    private LodestoneScreen(OpenLodestone packet) {
+    private LodestoneScreen(OpenLodestonePayload packet) {
         super(TITLE);
         this.pos = packet.pos();
         this.name = packet.name();
@@ -38,7 +38,7 @@ public final class LodestoneScreen extends Screen {
         this.icons = findIcons();
     }
 
-    public static void open(OpenLodestone packet) {
+    public static void open(OpenLodestonePayload packet) {
         Minecraft minecraft = Minecraft.getInstance();
         minecraft.setScreen(new LodestoneScreen(packet));
     }
@@ -69,7 +69,7 @@ public final class LodestoneScreen extends Screen {
 
     public void removed() {
         if (this.minecraft != null && this.minecraft.getConnection() != null) {
-            PacketDistributor.sendToServer(new UpdateLodestone(this.pos, this.name.trim(), this.icon));
+            PacketDistributor.sendToServer(new UpdateLodestonePayload(this.pos, this.name.trim(), this.icon));
         }
     }
 

@@ -1,12 +1,12 @@
 {
   "values": [
     "poptartcore:wooden_bucket",
-    "poptartcore:rift_campfire",
-    "poptartcore:treated_wood",
     "poptartcore:crucible",
     "poptartcore:fluid_barrel",
     "poptartcore:workbench",
     "poptartcore:scribing_table",
+    "poptartcore:rift_campfire",
+    "poptartcore:treated_wood",
     "poptartcore:beehive_support",
     "poptartcore:beehive_white_roof",
     "poptartcore:beehive_light_gray_roof",

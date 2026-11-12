@@ -3,6 +3,10 @@ package dev.poptartking.poptartcore.registry;
 import com.mojang.serialization.Codec;
 import dev.poptartking.poptartcore.PoptartCore;
 import dev.poptartking.poptartcore.equipment.AccessoryInventory;
+import dev.poptartking.poptartcore.summoning.AllayData;
+import dev.poptartking.poptartcore.summoning.PhaseState;
+import dev.poptartking.poptartcore.summoning.PixieData;
+import dev.poptartking.poptartcore.summoning.PixieSummonerData;
 import java.util.function.Supplier;
 import net.minecraft.nbt.CompoundTag;
 import net.neoforged.bus.api.IEventBus;
@@ -13,6 +17,17 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 public final class PoptartCoreAttachments {
     public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES =
             DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, PoptartCore.MOD_ID);
+
+    public static final Supplier<AttachmentType<AllayData>> ALLAY_DATA = ATTACHMENT_TYPES.register(
+            "allay_data", () -> AttachmentType.serializable(AllayData::new).build());
+    public static final Supplier<AttachmentType<PixieData>> VEX_DATA = ATTACHMENT_TYPES.register(
+            "vex_data", () -> AttachmentType.serializable(PixieData::new).build());
+    public static final Supplier<AttachmentType<PixieSummonerData>> PIXIE_SUMMONER_DATA =
+            ATTACHMENT_TYPES.register("pixie_summoner_data", () -> AttachmentType.serializable(PixieSummonerData::new)
+                    .copyOnDeath()
+                    .build());
+    public static final Supplier<AttachmentType<PhaseState>> PHASE_STATE = ATTACHMENT_TYPES.register(
+            "phase_state", () -> AttachmentType.serializable(PhaseState::new).build());
 
     public static final Supplier<AttachmentType<AccessoryInventory>> ACCESSORIES = ATTACHMENT_TYPES.register(
             "accessories", () -> AttachmentType.<CompoundTag, AccessoryInventory>serializable(AccessoryInventory::new)

@@ -1,23 +1,30 @@
 package dev.poptartking.poptartcore.equipment;
 
+import com.farcr.nomansland.common.registry.items.NMLItems;
 import dev.poptartking.poptartcore.PoptartCore;
-import dev.poptartking.poptartcore.decoration.WoodenBucketBlock;
+import dev.poptartking.poptartcore.decoration.TreeTapperBlock;
+import dev.poptartking.poptartcore.decoration.TreeTapperBlockEntity;
+import dev.poptartking.poptartcore.registry.PoptartCoreFluids;
 import dev.poptartking.poptartcore.registry.PoptartWorkstationBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 
@@ -70,10 +77,9 @@ public final class TreeTapperGameTests {
                 level.setBlock(pos.relative(direction).above(), Blocks.OAK_LOG.defaultBlockState(), 3);
                 helper.assertTrue(place(helper, pos, direction.getOpposite()), "Place against " + direction);
                 helper.assertTrue(
-                        level.getBlockState(pos).getValue(WoodenBucketBlock.FACING) == direction,
-                        "Faces supporting log");
+                        level.getBlockState(pos).getValue(TreeTapperBlock.FACING) == direction, "Faces supporting log");
                 helper.assertTrue(
-                        level.getBlockState(pos.above()).getValue(WoodenBucketBlock.HALF) == DoubleBlockHalf.UPPER,
+                        level.getBlockState(pos.above()).getValue(TreeTapperBlock.HALF) == DoubleBlockHalf.UPPER,
                         "Tap occupies upper cell");
                 level.destroyBlock(breakUpper ? pos.above() : pos, true);
                 helper.assertTrue(
@@ -82,9 +88,7 @@ public final class TreeTapperGameTests {
                         "Both parts removed");
                 int count = level.getEntitiesOfClass(ItemEntity.class, new AABB(pos).inflate(2)).stream()
                         .filter(e -> e.getItem()
-                                .is(PoptartWorkstationBlocks.WOODEN_BUCKET
-                                        .item()
-                                        .get()))
+                                .is(PoptartWorkstationBlocks.TREE_TAPPER.item().get()))
                         .mapToInt(e -> e.getItem().getCount())
                         .sum();
                 helper.assertTrue(count == 1, "Exactly one tapper dropped; got " + count);
@@ -151,8 +155,7 @@ public final class TreeTapperGameTests {
             var player = helper.makeMockPlayer(GameType.SURVIVAL);
             var hit = new BlockHitResult(Vec3.atCenterOf(pos.above()), Direction.SOUTH, pos.above(), false);
             level.getBlockState(pos.above()).useWithoutItem(level, player, hit);
-            helper.assertTrue(
-                    level.getBlockState(pos).getValue(WoodenBucketBlock.OPEN), "Turning tap opens both parts");
+            helper.assertTrue(level.getBlockState(pos).getValue(TreeTapperBlock.OPEN), "Turning tap opens both parts");
             for (int event = 0; event < 100; event++) {
                 var tag = entity.getUpdateTag(level.registryAccess());
                 tag.putInt("RemainingTicks", 1);
@@ -249,9 +252,191 @@ public final class TreeTapperGameTests {
         helper.succeed();
     }
 
+    @GameTest(template = "tree_tapper_test", timeoutTicks = 40)
+    public static void resinHarvestEmptiesFullTankInFiveClicksAndKeepsRemainder(GameTestHelper helper) {
+        var level = helper.getLevel();
+        for (int amount : new int[] {90, 100, 199, 200, 250, 450, 1000}) {
+            var tapper = filledTapper(helper, PoptartCoreFluids.RESIN.source().get(), amount);
+            var pos = tapper.getBlockPos();
+            var player = helper.makeMockPlayer(GameType.SURVIVAL);
+            var state = level.getBlockState(pos);
+            for (int click = 1; click <= amount / 200; click++) {
+                var result = state.useItemOn(
+                        player.getMainHandItem(), level, player, InteractionHand.MAIN_HAND, bucketHit(pos));
+                helper.assertTrue(
+                        result == ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION,
+                        "Empty hand and held resin reach the bucket interaction");
+                helper.assertTrue(
+                        state.useWithoutItem(level, player, bucketHit(pos)).consumesAction(),
+                        "Can keep harvesting after the first resin piece lands in the hand");
+                helper.assertTrue(
+                        player.getInventory().countItem(NMLItems.RESIN.get()) == click * 2,
+                        "Each click gives two resin pieces, with ten pieces collected in five clicks");
+                helper.assertTrue(
+                        player.getMainHandItem().is(NMLItems.RESIN.get()), "Harvested resin can stay in the hand");
+                helper.assertTrue(
+                        tapper.storedFluid().getAmount() == amount - click * 200,
+                        "Each click drains exactly 200 mB and leaves the rest");
+            }
+            helper.assertTrue(tapper.storedFluid().getAmount() == amount % 200, "Partial resin stays in the tank");
+            helper.assertTrue(
+                    !level.getBlockState(pos).getValue(TreeTapperBlock.OPEN), "Harvest does not turn the tap");
+            int before = player.getInventory().countItem(NMLItems.RESIN.get());
+            state.useWithoutItem(level, player, bucketHit(pos));
+            helper.assertTrue(
+                    player.getInventory().countItem(NMLItems.RESIN.get()) == before
+                            && tapper.storedFluid().getAmount() == amount % 200,
+                    "Repeated clicks cannot harvest the same resin twice");
+            var restored = new TreeTapperBlockEntity(pos, state);
+            restored.loadWithComponents(tapper.getUpdateTag(level.registryAccess()), level.registryAccess());
+            helper.assertTrue(
+                    restored.storedFluid().getAmount() == amount % 200, "Harvested balance survives save/load");
+        }
+        helper.succeed();
+    }
+
+    @GameTest(template = "tree_tapper_test", timeoutTicks = 40)
+    public static void syrupBottlesUseEitherHandAndLeavePartialFluid(GameTestHelper helper) {
+        var level = helper.getLevel();
+        for (InteractionHand hand : InteractionHand.values()) {
+            var tapper =
+                    filledTapper(helper, PoptartCoreFluids.MAPLE_SYRUP.source().get(), 450);
+            var pos = tapper.getBlockPos();
+            var player = helper.makeMockPlayer(GameType.SURVIVAL);
+            player.setItemInHand(hand, new ItemStack(Items.GLASS_BOTTLE, 3));
+            for (int bottle = 1; bottle <= 2; bottle++) {
+                var result = level.getBlockState(pos)
+                        .useItemOn(player.getItemInHand(hand), level, player, hand, bucketHit(pos));
+                helper.assertTrue(result.consumesAction(), "Syrup can be bottled using " + hand);
+                helper.assertTrue(
+                        tapper.storedFluid().getAmount() == 450 - bottle * 200,
+                        "Each syrup bottle drains exactly 200 mB");
+                helper.assertTrue(
+                        player.getItemInHand(hand).is(Items.GLASS_BOTTLE)
+                                && player.getItemInHand(hand).getCount() == 3 - bottle
+                                && player.getInventory().countItem(NMLItems.MAPLE_SYRUP_BOTTLE.get()) == bottle,
+                        "One glass bottle becomes one syrup bottle");
+            }
+            var result =
+                    level.getBlockState(pos).useItemOn(player.getItemInHand(hand), level, player, hand, bucketHit(pos));
+            helper.assertTrue(
+                    !result.consumesAction() && tapper.storedFluid().getAmount() == 50,
+                    "Cannot bottle a partial serving");
+            helper.assertTrue(player.getItemInHand(hand).is(Items.GLASS_BOTTLE), "Insufficient syrup keeps the bottle");
+            helper.assertTrue(
+                    !level.getBlockState(pos.above()).getValue(TreeTapperBlock.OPEN), "Bottling leaves tap closed");
+            var tag = tapper.getUpdateTag(level.registryAccess());
+            tag.put(
+                    "Fluid",
+                    new FluidStack(PoptartCoreFluids.MAPLE_SYRUP.source().get(), 200).save(level.registryAccess()));
+            tapper.loadWithComponents(tag, level.registryAccess());
+            level.getBlockState(pos).useItemOn(player.getItemInHand(hand), level, player, hand, bucketHit(pos));
+            helper.assertTrue(
+                    player.getItemInHand(hand).is(NMLItems.MAPLE_SYRUP_BOTTLE.get()),
+                    "Last glass bottle is replaced in the same hand");
+            helper.assertTrue(tapper.storedFluid().isEmpty(), "Exact serving empties the tank");
+        }
+        helper.succeed();
+    }
+
+    @GameTest(template = "tree_tapper_test", timeoutTicks = 40)
+    public static void harvestingRejectsWrongItemsAndKeepsTapControlSeparate(GameTestHelper helper) {
+        var level = helper.getLevel();
+        var tapper = filledTapper(helper, PoptartCoreFluids.RESIN.source().get(), 300);
+        var pos = tapper.getBlockPos();
+        var player = helper.makeMockPlayer(GameType.SURVIVAL);
+        for (var item : new net.minecraft.world.item.Item[] {Items.GLASS_BOTTLE, Items.STICK}) {
+            player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(item));
+            var result = level.getBlockState(pos)
+                    .useItemOn(player.getMainHandItem(), level, player, InteractionHand.MAIN_HAND, bucketHit(pos));
+            helper.assertTrue(
+                    result == ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION, "Wrong items pass through");
+            level.getBlockState(pos).useWithoutItem(level, player, bucketHit(pos));
+            helper.assertTrue(tapper.storedFluid().getAmount() == 300, "Held items cannot accidentally harvest resin");
+        }
+        player.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
+        var upper = pos.above();
+        level.getBlockState(upper).useWithoutItem(level, player, bucketHit(upper));
+        helper.assertTrue(
+                level.getBlockState(pos).getValue(TreeTapperBlock.OPEN)
+                        && tapper.storedFluid().getAmount() == 300,
+                "Upper tap turns on without harvesting");
+        level.getBlockState(pos).useWithoutItem(level, player, bucketHit(pos));
+        helper.assertTrue(
+                tapper.storedFluid().getAmount() == 100
+                        && level.getBlockState(upper).getValue(TreeTapperBlock.OPEN),
+                "Bucket harvest leaves the tap on");
+        level.getBlockState(upper).useWithoutItem(level, player, bucketHit(upper));
+        helper.assertTrue(
+                !level.getBlockState(pos).getValue(TreeTapperBlock.OPEN), "Tap can still turn off after harvesting");
+        helper.succeed();
+    }
+
+    @GameTest(template = "tree_tapper_test", timeoutTicks = 40)
+    public static void creativeBottlingKeepsGlassAndDrainsOneServing(GameTestHelper helper) {
+        var level = helper.getLevel();
+        var tapper = filledTapper(helper, PoptartCoreFluids.MAPLE_SYRUP.source().get(), 400);
+        var pos = tapper.getBlockPos();
+        var player = helper.makeMockPlayer(GameType.CREATIVE);
+        GameType.CREATIVE.updatePlayerAbilities(player.getAbilities());
+        player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.GLASS_BOTTLE, 3));
+        for (int bottle = 0; bottle < 2; bottle++) {
+            level.getBlockState(pos)
+                    .useItemOn(player.getMainHandItem(), level, player, InteractionHand.MAIN_HAND, bucketHit(pos));
+        }
+        helper.assertTrue(player.getMainHandItem().getCount() == 3, "Creative keeps the glass bottles");
+        helper.assertTrue(tapper.storedFluid().isEmpty(), "Creative still drains the collected fluid");
+        helper.assertTrue(
+                player.getInventory().countItem(NMLItems.MAPLE_SYRUP_BOTTLE.get()) == 1,
+                "Creative uses vanilla filled-container duplicate prevention");
+        helper.succeed();
+    }
+
+    @GameTest(template = "tree_tapper_test", timeoutTicks = 40)
+    public static void fullInventoryDropsBottledSyrupWithoutLosingIt(GameTestHelper helper) {
+        var level = helper.getLevel();
+        var tapper = filledTapper(helper, PoptartCoreFluids.MAPLE_SYRUP.source().get(), 200);
+        var pos = tapper.getBlockPos();
+        var player = helper.makeMockPlayer(GameType.SURVIVAL);
+        for (int slot = 0; slot < player.getInventory().items.size(); slot++) {
+            player.getInventory().setItem(slot, new ItemStack(Items.STONE, 64));
+        }
+        player.moveTo(Vec3.atCenterOf(pos.south(2)));
+        player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.GLASS_BOTTLE, 2));
+        level.getBlockState(pos)
+                .useItemOn(player.getMainHandItem(), level, player, InteractionHand.MAIN_HAND, bucketHit(pos));
+        int dropped = level.getEntitiesOfClass(ItemEntity.class, new AABB(pos).inflate(5)).stream()
+                .filter(item -> item.getItem().is(NMLItems.MAPLE_SYRUP_BOTTLE.get()))
+                .mapToInt(item -> item.getItem().getCount())
+                .sum();
+        helper.assertTrue(
+                dropped == 1 && tapper.storedFluid().isEmpty(), "Full inventory drops exactly the harvested bottle");
+        helper.assertTrue(player.getMainHandItem().getCount() == 1, "Exactly one glass bottle is consumed");
+        helper.succeed();
+    }
+
+    private static TreeTapperBlockEntity filledTapper(GameTestHelper helper, Fluid fluid, int amount) {
+        var level = helper.getLevel();
+        var pos = helper.absolutePos(new BlockPos(4, 2, 4));
+        level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
+        level.setBlock(pos.above(), Blocks.AIR.defaultBlockState(), 3);
+        level.setBlock(pos.north(), Blocks.OAK_LOG.defaultBlockState(), 3);
+        level.setBlock(pos.north().above(), Blocks.OAK_LOG.defaultBlockState(), 3);
+        helper.assertTrue(place(helper, pos, Direction.SOUTH), "Valid tapper mount");
+        var tapper = (TreeTapperBlockEntity) level.getBlockEntity(pos);
+        var tag = tapper.getUpdateTag(level.registryAccess());
+        tag.put("Fluid", new FluidStack(fluid, amount).save(level.registryAccess()));
+        tapper.loadWithComponents(tag, level.registryAccess());
+        return tapper;
+    }
+
+    private static BlockHitResult bucketHit(BlockPos pos) {
+        return new BlockHitResult(Vec3.atCenterOf(pos), Direction.SOUTH, pos, false);
+    }
+
     private static boolean place(GameTestHelper helper, BlockPos pos, Direction face) {
         var player = helper.makeMockPlayer(GameType.SURVIVAL);
-        var stack = new ItemStack(PoptartWorkstationBlocks.WOODEN_BUCKET.item().get());
+        var stack = new ItemStack(PoptartWorkstationBlocks.TREE_TAPPER.item().get());
         var hit = new BlockHitResult(
                 Vec3.atCenterOf(pos.relative(face.getOpposite())), face, pos.relative(face.getOpposite()), false);
         var context = new BlockPlaceContext(helper.getLevel(), player, InteractionHand.MAIN_HAND, stack, hit);

@@ -95,7 +95,7 @@ public class PoptartCoreBlockEntities {
                     BlockEntityType<?>, BlockEntityType<dev.poptartking.poptartcore.decoration.TreeTapperBlockEntity>>
             TREE_TAPPER = BLOCK_ENTITIES.register("tree_tapper", () -> BlockEntityType.Builder.of(
                     dev.poptartking.poptartcore.decoration.TreeTapperBlockEntity::new,
-                    PoptartWorkstationBlocks.WOODEN_BUCKET.get())
+                    PoptartWorkstationBlocks.TREE_TAPPER.get())
             .build(null));
 
     public static void register(IEventBus eventBus) {

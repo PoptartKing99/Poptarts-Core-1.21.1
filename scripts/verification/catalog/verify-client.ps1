@@ -43,6 +43,6 @@ try {
         if ($log -notmatch 'CATALOG_CLIENT_PASS' -or $log -match 'CATALOG_CLIENT_FAIL') {
             throw "Catalog client assertions failed. See $run/logs/latest.log"
         }
-        Write-Output 'Catalog client crossbow models, beekeeper geometry and first-person sleeves, and workbench screen registration passed.'
+        Write-Output 'Catalog client crossbow models, beekeeper geometry and first-person sleeves, workbench screen, and calling bell models, names and sounds passed.'
     }
 } finally { Pop-Location }

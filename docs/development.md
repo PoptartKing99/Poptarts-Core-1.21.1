@@ -37,3 +37,29 @@ Data generation also uses an isolated `build/data-run` instance. To inspect gene
 After an isolated generation run, compare all generated resources with the checked-in owners using: python scripts/verification/catalog/verify-generated-resources.py build/catalog-generated-check. The check rejects stale output, duplicate file ownership, duplicate English names, and changed generated content. Handwritten names take precedence during generation. Custom loot tables belong in src/main/resources; the tapper and rubber-block tables retain their exact authored contents there.
 
 [Verification ownership](verification-cleanup.md) records the consolidated checks, retained specialized audits and the isolated client command.
+
+## Optional Better Days development settings
+
+The local development run can load `betterdays-1.21.1-3.3.6.3-NEOFORGE.jar` from `run/mods`. Its required WhiteNoise library is bundled inside that JAR. Better Days is optional; neither it nor its settings are included in the PoptartCore JAR.
+
+The local `run/config/betterdays-common.toml` uses:
+
+```toml
+[time]
+    speedMethod = "MINUTES"
+    daySpeedMinutes = 90.0
+    nightSpeedMinutes = 30.0
+    dayStart = 24000.0
+    nightStart = 12000.0
+
+[sleep]
+    enableSleepFeature = false
+```
+
+The speed boundaries use two equal 12,000-tick halves of the world clock, so the configured minutes give actual 90-minute days and 30-minute nights. Better Days' sleep acceleration is disabled; beds retain vanilla sleeping and skip to morning. No respawn-only bed restriction is added to PoptartCore. These local files are under the ignored `run` directory and must be supplied separately when sharing a modpack. Restart the game after changing the time profile.
+
+Run the isolated compatibility check with:
+
+```powershell
+./scripts/verification/eclipse/verify-client.ps1 -RunClient -WithClientRenderMods -WithBetterDays
+```

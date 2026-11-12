@@ -70,6 +70,15 @@
     ],
     "subtitle": "subtitles.poptartcore.flesh_geode.breathing"
   },
+  "blood_moon": {
+    "sounds": [
+      {
+        "name": "poptartcore:lunar/blood_moon",
+        "volume": 3.0,
+        "pitch": 3.0
+      }
+    ]
+  },
   "compass_full": {
     "subtitle": "poptartcore.subtitle.compass_full",
     "sounds": [
@@ -131,5 +140,49 @@
         "type": "event"
       }
     ]
+  },
+  "pixie.allay_summon": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "minecraft:entity.allay.item_thrown"
+      }
+    ],
+    "subtitle": "subtitles.poptartcore.pixie.allay_summon"
+  },
+  "pixie.phase": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "minecraft:entity.enderman.teleport"
+      }
+    ],
+    "subtitle": "subtitles.poptartcore.pixie.phase"
+  },
+  "pixie.shimmer": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "minecraft:block.amethyst_block.chime"
+      }
+    ]
+  },
+  "pixie.vanish": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "minecraft:entity.illusioner.mirror_move"
+      }
+    ],
+    "subtitle": "subtitles.poptartcore.pixie.vanish"
+  },
+  "pixie.vex_summon": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "minecraft:entity.evoker.prepare_summon"
+      }
+    ],
+    "subtitle": "subtitles.poptartcore.pixie.vex_summon"
   }
 }

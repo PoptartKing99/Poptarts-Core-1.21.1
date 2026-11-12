@@ -13,6 +13,9 @@ public final class PoptartMaterialItems {
     public static final CatalogItemDefinition<Item> LIFESALT =
             PoptartCatalog.simpleItem("lifesalt").withoutGeneratedModel().creative(MATERIALS, 650);
 
+    public static final CatalogItemDefinition<Item> LEMON =
+            PoptartCatalog.simpleItem("lemon").creative(MATERIALS, 660);
+
     private PoptartMaterialItems() {}
 
     public static final CatalogItemDefinition<Item> STEEL_INGOT =

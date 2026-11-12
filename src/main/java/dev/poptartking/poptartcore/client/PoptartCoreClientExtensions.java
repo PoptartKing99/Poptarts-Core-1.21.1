@@ -18,6 +18,7 @@ public class PoptartCoreClientExtensions {
         registerTankFluid(event, "maple_syrup_layer", PoptartCoreFluids.MAPLE_SYRUP);
         registerMoltenFluid(event, "copper", PoptartCoreFluids.MOLTEN_COPPER);
         registerMoltenFluid(event, "tin", PoptartCoreFluids.MOLTEN_TIN);
+        registerMoltenFluid(event, "lead", PoptartCoreFluids.MOLTEN_LEAD);
         registerMoltenFluid(event, "bronze", PoptartCoreFluids.MOLTEN_BRONZE);
         registerMoltenFluid(event, "steel", PoptartCoreFluids.MOLTEN_STEEL);
     }

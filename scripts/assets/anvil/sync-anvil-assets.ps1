@@ -25,13 +25,15 @@ foreach ($name in $names) {
 [IO.Directory]::CreateDirectory("$resources/assets/poptartcore/textures/block/anvils") | Out-Null
 Copy-Item "$Reference/assets/wayfarer/textures/block/anvils/*.png" "$resources/assets/poptartcore/textures/block/anvils/"
 Copy-Item "$Reference/assets/wayfarer/textures/block/mortar/mortar_particle.png" "$resources/assets/poptartcore/textures/block/anvils/mortar_particle.png"
-foreach ($relative in @('textures/gui/anvil.png','textures/gui/primitive_anvil.png','textures/gui/sprites/anvil_textbox.png')) {
+foreach ($relative in @('textures/gui/anvil.png','textures/gui/sprites/anvil_textbox.png')) {
     [IO.Directory]::CreateDirectory((Split-Path "$resources/assets/poptartcore/$relative")) | Out-Null
     Copy-Item -LiteralPath "$Reference/assets/wayfarer/$relative" -Destination "$resources/assets/poptartcore/$relative"
 }
 $lang = Get-Content "$resources/assets/poptartcore/lang/en_us.json" -Raw | ConvertFrom-Json -AsHashtable
 $referenceLang = Get-Content "$Reference/assets/wayfarer_core/lang/en_us.json" -Raw | ConvertFrom-Json -AsHashtable
+$duplicateItemNames = @($names | ForEach-Object { "item.wayfarer_core.$_" })
 foreach ($key in $referenceLang.Keys) {
+    if ($key -in $duplicateItemNames) { continue }
     if ($key -match 'anvil|menu.message.wayfarer_core.(needs_hammer|upgrade_cost|not_upgradeable|upgraded)|modification.wayfarer_core|message.wayfarer_core.sticky') {
         $lang[$key.Replace('wayfarer_core','poptartcore')] = $referenceLang[$key]
     }

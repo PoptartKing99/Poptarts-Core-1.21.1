@@ -11,6 +11,16 @@ public class PoptartCoreSounds {
     public static final DeferredRegister<SoundEvent> SOUNDS =
             DeferredRegister.create(Registries.SOUND_EVENT, PoptartCore.MOD_ID);
 
+    public static final DeferredHolder<SoundEvent, SoundEvent> PIXIE_PHASE = registerSound("pixie.phase");
+    public static final DeferredHolder<SoundEvent, SoundEvent> PIXIE_VANISH = registerSound("pixie.vanish");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ALLAY_SUMMON = registerSound("pixie.allay_summon");
+    public static final DeferredHolder<SoundEvent, SoundEvent> VEX_SUMMON = registerSound("pixie.vex_summon");
+    public static final DeferredHolder<SoundEvent, SoundEvent> PIXIE_SHIMMER = registerSound("pixie.shimmer");
+
+    private static DeferredHolder<SoundEvent, SoundEvent> registerSound(String name) {
+        return SOUNDS.register(name, () -> SoundEvent.createVariableRangeEvent(PoptartCore.location(name)));
+    }
+
     public static final DeferredHolder<SoundEvent, SoundEvent> CONDUIT_HEARTBEAT_SINGLE = SOUNDS.register(
             "conduit.heartbeat_single",
             () -> SoundEvent.createVariableRangeEvent(PoptartCore.location("conduit.heartbeat_single")));
@@ -57,4 +67,5 @@ public class PoptartCoreSounds {
     public static final DeferredHolder<SoundEvent, SoundEvent> FLESH_GEODE_BREATHING = SOUNDS.register(
             "flesh_geode.breathing",
             () -> SoundEvent.createVariableRangeEvent(PoptartCore.location("flesh_geode.breathing")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> BLOOD_MOON_MUSIC = registerSound("blood_moon");
 }

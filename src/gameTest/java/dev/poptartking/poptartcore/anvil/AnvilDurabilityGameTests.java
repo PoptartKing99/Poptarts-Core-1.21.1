@@ -1,7 +1,7 @@
 package dev.poptartking.poptartcore.anvil;
 
 import dev.poptartking.poptartcore.PoptartCore;
-import dev.poptartking.poptartcore.registry.AnvilDataComponents;
+import dev.poptartking.poptartcore.registry.AnvilComponents;
 import dev.poptartking.poptartcore.registry.PoptartToolItems;
 import io.netty.buffer.Unpooled;
 import net.minecraft.core.component.DataComponents;
@@ -142,7 +142,7 @@ public final class AnvilDurabilityGameTests {
         var data = new CompoundTag();
         data.putBoolean("poptartcore:separate_upgrade_bonuses", true);
         if (legacy) data.putInt("poptartcore:upgrade_count", 1);
-        else stack.set(AnvilDataComponents.UPGRADE_COUNT.get(), 1);
+        else stack.set(AnvilComponents.UPGRADE_COUNT.get(), 1);
         stack.set(DataComponents.CUSTOM_DATA, CustomData.of(data));
         return stack;
     }

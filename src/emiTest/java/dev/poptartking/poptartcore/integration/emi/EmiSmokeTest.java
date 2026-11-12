@@ -2,13 +2,18 @@ package dev.poptartking.poptartcore.integration.emi;
 
 import com.mojang.logging.LogUtils;
 import dev.emi.emi.api.EmiApi;
+import dev.emi.emi.api.neoforge.NeoForgeEmiStack;
 import dev.emi.emi.api.recipe.EmiRecipe;
+import dev.emi.emi.api.recipe.EmiRecipeManager;
 import dev.emi.emi.api.recipe.VanillaEmiRecipeCategories;
 import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.Widget;
 import dev.emi.emi.api.widget.WidgetHolder;
 import dev.poptartking.poptartcore.PoptartCore;
+import dev.poptartking.poptartcore.fluid.MoltenFluidDefinition;
+import dev.poptartking.poptartcore.registry.PoptartCoreFluids;
 import dev.poptartking.poptartcore.registry.PoptartCoreRecipes;
+import dev.poptartking.poptartcore.registry.PoptartMaterialItems;
 import dev.poptartking.poptartcore.registry.PoptartWorkstationBlocks;
 import dev.poptartking.poptartcore.workbench.menu.WorkbenchMenu;
 import java.util.ArrayList;
@@ -21,10 +26,13 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
+import net.neoforged.neoforge.fluids.FluidStack;
 
 /** Opt-in client test, never included in the distributable JAR. */
 @EventBusSubscriber(modid = PoptartCore.MOD_ID, value = Dist.CLIENT)
@@ -109,11 +117,7 @@ public final class EmiSmokeTest {
             }
             require(categories.equals(expectedCategories), "Missing category: " + categories);
             var data = minecraft.level.getRecipeManager();
-            int expected = data.getAllRecipesFor(PoptartCoreRecipes.CRUCIBLE_MELTING_TYPE.get())
-                            .size()
-                    + data.getAllRecipesFor(PoptartCoreRecipes.BLAST_FURNACE_MELTING_TYPE.get())
-                            .size()
-                    + data.getAllRecipesFor(PoptartCoreRecipes.CRUCIBLE_ALLOYING_TYPE.get())
+            int expected = data.getAllRecipesFor(PoptartCoreRecipes.CRUCIBLE_ALLOYING_TYPE.get())
                             .size()
                     + data.getAllRecipesFor(PoptartCoreRecipes.BLAST_FURNACE_ALLOYING_TYPE.get())
                             .size()
@@ -123,7 +127,34 @@ public final class EmiSmokeTest {
                             .size()
                     + data.getAllRecipesFor(PoptartCoreRecipes.MILLING_TYPE.get())
                             .size();
-            require(recipes.size() == expected, "Missing recipes: " + recipes.size() + " expected " + expected);
+            long otherCards = recipes.stream()
+                    .filter(recipe -> !recipe.getCategory().getId().getPath().endsWith("_melting"))
+                    .count();
+            require(otherCards == expected, "Missing recipes: " + otherCards + " expected " + expected);
+            requireMeltingCard(
+                    manager, "crucible_melting", PoptartCoreFluids.MOLTEN_COPPER, Items.RAW_COPPER, Items.COPPER_INGOT);
+            requireMeltingCard(
+                    manager,
+                    "crucible_melting",
+                    PoptartCoreFluids.MOLTEN_TIN,
+                    PoptartMaterialItems.RAW_TIN.get(),
+                    PoptartMaterialItems.TIN_INGOT.get());
+            requireMeltingCard(
+                    manager,
+                    "crucible_melting",
+                    PoptartCoreFluids.MOLTEN_LEAD,
+                    PoptartMaterialItems.RAW_LEAD.get(),
+                    PoptartMaterialItems.LEAD_INGOT.get());
+            requireMeltingCard(
+                    manager,
+                    "crucible_melting",
+                    PoptartCoreFluids.MOLTEN_BRONZE,
+                    PoptartMaterialItems.BRONZE_INGOT.get());
+            requireMeltingCard(
+                    manager,
+                    "blast_furnace_melting",
+                    PoptartCoreFluids.MOLTEN_STEEL,
+                    PoptartMaterialItems.STEEL_INGOT.get());
             for (String shared : List.of("crucible_melting", "crucible_alloying")) {
                 var category = recipes.stream()
                         .map(EmiRecipe::getCategory)
@@ -160,6 +191,25 @@ public final class EmiSmokeTest {
 
     private static void require(boolean condition, String message) {
         if (!condition) throw new AssertionError(message);
+    }
+
+    private static void requireMeltingCard(
+            EmiRecipeManager manager, String category, MoltenFluidDefinition metal, Item... items) {
+        var output = NeoForgeEmiStack.of(new FluidStack(metal.source().get(), 250));
+        var cards = manager.getRecipesByOutput(output).stream()
+                .filter(recipe -> recipe.getCategory().getId().equals(PoptartCore.location(category)))
+                .toList();
+        require(
+                cards.size() == 1,
+                "Expected one " + category + " card for " + metal.source().getId());
+        var card = cards.getFirst();
+        require(card.getOutputs().getFirst().getAmount() == 250, "Expected 250 mB on the melting card");
+        require(card.getInputs().size() == 1, "Melting alternatives should share one input slot");
+        for (Item item : items) {
+            var input = EmiStack.of(item);
+            require(card.getInputs().getFirst().getEmiStacks().contains(input), "Missing melting input " + item);
+            require(manager.getRecipesByInput(input).contains(card), "Melting card not indexed for " + item);
+        }
     }
 
     private static final class PreviewScreen extends Screen {

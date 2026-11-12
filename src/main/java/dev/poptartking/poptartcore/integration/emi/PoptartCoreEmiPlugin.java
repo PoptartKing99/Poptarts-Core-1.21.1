@@ -18,11 +18,16 @@ import dev.poptartking.poptartcore.registry.PoptartCoreMenus;
 import dev.poptartking.poptartcore.registry.PoptartCoreRecipes;
 import dev.poptartking.poptartcore.registry.PoptartWorkstationBlocks;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.material.Fluid;
 
 /** Discovered by EMI only. Common mod startup must not reference this optional integration. */
 @EmiEntrypoint
@@ -43,12 +48,9 @@ public final class PoptartCoreEmiPlugin implements EmiPlugin {
         EmiRecipeCategory milling = category(registry, "milling", PoptartWorkstationBlocks.MILLSTONE.get());
 
         var recipes = registry.getRecipeManager();
-        for (var holder : recipes.getAllRecipesFor(PoptartCoreRecipes.CRUCIBLE_MELTING_TYPE.get())) {
-            addMelting(registry, melting, holder);
-        }
-        for (var holder : recipes.getAllRecipesFor(PoptartCoreRecipes.BLAST_FURNACE_MELTING_TYPE.get())) {
-            addMelting(registry, blastMelting, holder);
-        }
+        addMelting(registry, melting, recipes.getAllRecipesFor(PoptartCoreRecipes.CRUCIBLE_MELTING_TYPE.get()));
+        addMelting(
+                registry, blastMelting, recipes.getAllRecipesFor(PoptartCoreRecipes.BLAST_FURNACE_MELTING_TYPE.get()));
         for (var holder : recipes.getAllRecipesFor(PoptartCoreRecipes.CRUCIBLE_ALLOYING_TYPE.get())) {
             addAlloying(registry, alloying, holder);
         }
@@ -77,16 +79,33 @@ public final class PoptartCoreEmiPlugin implements EmiPlugin {
     }
 
     private static void addMelting(
-            EmiRegistry registry, EmiRecipeCategory category, RecipeHolder<MeltingRecipe> holder) {
-        MeltingRecipe recipe = holder.value();
-        registry.addRecipe(new ProcessingEmiRecipe(
-                category,
-                displayId(category, holder.id()),
-                List.of(EmiIngredient.of(recipe.ingredient())),
-                List.of(NeoForgeEmiStack.of(recipe.result())),
-                List.of(),
-                true));
+            EmiRegistry registry, EmiRecipeCategory category, List<RecipeHolder<MeltingRecipe>> recipes) {
+        Map<MeltingDisplayKey, List<RecipeHolder<MeltingRecipe>>> groups = new LinkedHashMap<>();
+        for (var holder :
+                recipes.stream().sorted(Comparator.comparing(RecipeHolder::id)).toList()) {
+            var recipe = holder.value();
+            var result = recipe.result();
+            var key = new MeltingDisplayKey(
+                    result.getFluid(), result.getComponentsPatch(), result.getAmount(), recipe.getCookingTime());
+            groups.computeIfAbsent(key, ignored -> new ArrayList<>()).add(holder);
+        }
+
+        for (var group : groups.values()) {
+            var first = group.getFirst();
+            var alternatives = group.stream()
+                    .map(holder -> EmiIngredient.of(holder.value().ingredient()))
+                    .toList();
+            registry.addRecipe(new ProcessingEmiRecipe(
+                    category,
+                    displayId(category, first.id()),
+                    List.of(EmiIngredient.of(alternatives)),
+                    List.of(NeoForgeEmiStack.of(first.value().result())),
+                    List.of(),
+                    true));
+        }
     }
+
+    private record MeltingDisplayKey(Fluid fluid, DataComponentPatch components, int amount, int duration) {}
 
     private static void addAlloying(
             EmiRegistry registry, EmiRecipeCategory category, RecipeHolder<AlloyingRecipe> holder) {

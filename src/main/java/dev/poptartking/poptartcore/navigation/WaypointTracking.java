@@ -1,6 +1,6 @@
 package dev.poptartking.poptartcore.navigation;
 
-import dev.poptartking.poptartcore.navigation.network.WaypointLocations;
+import dev.poptartking.poptartcore.navigation.network.WaypointLocationsPayload;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -41,13 +41,13 @@ public final class WaypointTracking {
             Map<GlobalPos, Vec3> previous = SENT.get(player);
             if (!located.equals(previous) && (!located.isEmpty() || previous != null)) {
                 SENT.put(player, located);
-                List<WaypointLocations.Location> locations = new ArrayList<>(located.size());
+                List<WaypointLocationsPayload.Location> locations = new ArrayList<>(located.size());
 
                 for (Entry<GlobalPos, Vec3> entry : located.entrySet()) {
-                    locations.add(new WaypointLocations.Location(entry.getKey(), entry.getValue()));
+                    locations.add(new WaypointLocationsPayload.Location(entry.getKey(), entry.getValue()));
                 }
 
-                PacketDistributor.sendToPlayer(player, new WaypointLocations(locations));
+                PacketDistributor.sendToPlayer(player, new WaypointLocationsPayload(locations));
             }
         }
     }
